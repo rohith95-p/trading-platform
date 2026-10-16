@@ -1,236 +1,107 @@
-# Ultra Core — Algorithmic Trading Platform
+# Ultra Core — gold-first MT5 trading research platform
 
-> **Status: DEMO / PAPER-TRADING VALIDATION** | Platform: MetaTrader 5 | Symbol: `XAUUSDm` (Gold Spot CFD) | Python 3.11  
-> **Active Portfolio:** Portfolio V5 (4-Leg Pruned Core) | **Config Fingerprint:** `14b5467a4f969b25` | **Enforce Circuit Breakers:** `True`
+> **Status (2026-10-16): research + demo. NOT validated for real money.**
+> The live demo bot runs a 4-leg XAUUSD portfolio on an Exness **demo** account (`Exness-MT5Trial11`).
+> On the corrected backtest engine that portfolio loses money (2022-08→2026-07: PF 0.88). No strategy tested in
+> this repository has yet shown a statistically significant, repeatable edge after costs. See §7 and
+> `docs/FINAL_AUDIT_2026-10-16.md` for the evidence and the blockers.
 
----
-
-## 1. Executive Summary & Institutional Reality Check
-
-Ultra Core is an automated quantitative trading platform engineered for gold spot CFD trading (`XAUUSDm`) on MetaTrader 5. It integrates a multi-strategy portfolio, intraday time-of-day session regimes, D1 trend filtering, automated tick-level cost simulation, pre-trade risk veto gates, and an external watchdog process.
-
-### Institutional Readiness Verdict: `NOT READY FOR REAL-MONEY` | `PAPER-TRADING & AUDIT VALIDATED`
-
-While historical backtests in coarse environments claimed astronomical returns (e.g., $8,000+ profit and 3.3+ profit factors under a theoretical 0.1 ATR micro-stop), comprehensive forensic audits revealed that **0.1 ATR stop loss (~$0.35 on gold) is physically unviable in live market execution** due to gold spreads ($0.20–$0.30) and slippage consuming over 60% of the stop distance immediately upon entry. Furthermore, coarse 15-minute historical backtests suffered from intra-bar execution artifacts where wicks were not checked on the entry candle.
-
-Under realistic ECN cost models (spread + slippage + commission) and validated tick/minute execution, the live 4-leg Portfolio V5 (`sl_atr_mult=0.5, tp_atr_mult=1.5`) exhibits:
-- **Profit Factor:** **1.112** (Long-run 4.2-year validation)
-- **Net Profit:** +$3,963.03 (on 4.2 years of historical data)
-- **Max Drawdown:** **$1,846.81 (33.88%)** with a duration of **314.9 days**
-- **Max Consecutive Losses:** **38 trades**
-
-> [!CAUTION]
-> **Account Survival Warning:** A 38-trade consecutive loss streak will wipe out an unconstrained small account (<$200) trading 0.02 lots. The built-in **Sizing Ladder** strictly enforces **0.01 lots and maximum 1 concurrent position** for account balances under $200. Real-money capital must NOT be deployed until paper trading demonstrates live execution alignment and alpha durability.
+This README describes what the code actually does today. Older performance claims (PF 1.1–1.3, "live holdout PF 2.0",
+Monte-Carlo ruin figures) came from a backtest engine that did not test a new position on its entry bar when 1-minute
+data was missing; they are superseded by the corrected results below.
 
 ---
 
-## 2. Validated Performance Baseline
-
-The baseline configuration is hashed and recorded in `research/validation_ledger.json` under fingerprint `14b5467a4f969b25`. The live engine enforces that this configuration fingerprint matches recorded backtest evidence before initiating execution.
-
-### Multi-Year Ledger Metrics (July 2022 – October 2026)
-
-| Metric | Validated Baseline | Institutional Standard | Status |
-|:---|:---|:---|:---|
-| **Evaluation Window** | 2022-07-01 → 2026-10-02 (4.2 years) | ≥ 3 years across cycles | PASS |
-| **Total Trades** | 9,121 | ≥ 1,000 | PASS |
-| **Win Rate** | 28.5% | Dependent on Payoff | Contextual |
-| **Profit Factor** | **1.112** | ≥ 1.30 | MARGINAL |
-| **Max Drawdown** | 33.88% ($1,846.81) | ≤ 20.0% | ELEVATED |
-| **Max Consec. Losses**| 38 trades | ≤ 15 trades | CRITICAL RISK |
-| **Monte Carlo P(ruin)**| **48.6%** ($100 bal / $50 floor) | < 1.0% | CRITICAL RISK |
-| **Recovery Factor** | 2.15 | ≥ 2.0 | PASS |
-| **Sortino Ratio** | 0.104 | ≥ 1.5 | LOW |
-| **Omega Ratio** | 1.112 | ≥ 1.30 | MARGINAL |
-
-### Leg-by-Leg Attribution
-
-Forensic analysis of all 6 tracked strategies (4 active + 2 retired) reveals that portfolio alpha is concentrated in 4 core strategies. The 2 drag legs were retired from the live `PORTFOLIO` list and moved to `RETIRED_LEGS` for audit traceability:
-
-| Strategy | Magic | Session (IST) | Trades | Win Rate | Net P&L | Profit Factor | Status |
-|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| `BB_MEAN_REVERSION_V5` | 5002 | 17:30–21:30 | 1,442 | 31.4% | **+$1,921.25** | **1.317** | **Core Alpha** |
-| `TREND_PULLBACK_V5` | 5001 | 11:30–21:30 | 4,584 | 27.7% | **+$1,427.19** | **1.089** | Positive |
-| `FVG_NY_TIGHT_V5` | 5005 | 17:30–21:30 | 2,196 | 28.9% | **+$1,139.63** | **1.125** | Positive |
-| `NVMR_TARGET_10_V5` | 5003 | 00:00–24:00 | 69 | 30.4% | **+$131.39** | **1.456** | High Payoff |
-| `NY_LIQUIDITY_EXPANSION_V5` | 5009 | 17:30–21:30 | 209 | 31.1% | **-$39.08** | **0.953** | Negative |
-| `PDHLR_STRATEGY_V5` | 5008 | 00:00–24:00 | 621 | 25.4% | **-$617.35** | **0.795** | Severe Drag |
-
-### Out-of-Sample (OOS) Holdout Validation (2025-01-01 → 2026-05-20)
-
-Per validation protocol Gate I.1 (`python -m scripts.validation.part1_suite holdout`), the authoritative 4-leg Portfolio V5 (`14b5467a4f969b25`) was evaluated on an untouched out-of-sample holdout period of 505 days (2,319 trades). The training period was 2022-06-07 to 2024-12-31 (PF 1.182, net +$732.72).
-
-| Metric | Out-of-Sample Result | Benchmark Requirement | Status |
-|:---|:---|:---|:---|
-| **Holdout Window** | 2025-01-01 → 2026-05-20 (16.6 months) | ≥ 12 months untouched OOS | **PASS** |
-| **Trade Count ($N$)** | 2,319 trades | ≥ 1,000 trades | **PASS** |
-| **Win Rate** | 31.05% | Contextual (1:3 target payoff) | **PASS** |
-| **Profit Factor** | **1.2991** | ≥ 1.15 OOS (Institutional ≥ 1.30) | **PASS** |
-| **Net Profit** | **+$1,692.76** (from $100 starting balance) | Profitable after ECN friction | **PASS** |
-| **Max Drawdown** | **24.82%** | ≤ 30.0% holdout cap | **PASS** |
-| **Min Account Balance** | **$99.13** (never breached $50 floor) | > $50.00 | **PASS** |
-| **Average Win / Loss** | +$10.21 / -$3.54 (Payoff: 2.88) | Payoff > 2.0 | **PASS** |
-| **Gate I.1 Verdict** | **CLEAN PASS** | All criteria satisfied | **PASS** |
-
-> [!NOTE]
-> The holdout profit factor (1.299) exceeds the multi-year full-history baseline (1.112) because the pruned 4-leg core eliminates drag legs (`PDHLR_STRATEGY_V5` and `NY_LIQUIDITY_EXPANSION_V5`), concentrating capital on the highest-conviction intraday alpha regimes (`BB_MEAN_REVERSION_V5` and `NVMR_TARGET_10_V5`).
-
-### Recent Live Holdout Validation (2026-10-03 → 2026-10-14)
-
-As the most recent strictly out-of-sample test window following the multi-year baseline cutoff (2026-10-02), the 4-leg Portfolio V5 was backtested against freshly synced broker M15 candles from the live Exness terminal across 9 trading sessions:
-
-| Metric | Live OOS Result (Oct 3–14, 2026) | Benchmark / Expectation | Status |
-|:---|:---:|:---:|:---:|
-| **Sample Window** | 2026-10-03 → 2026-10-14 (10 calendar days) | Untouched post-cutoff data | **PASS** |
-| **Trades Executed** | 30 trades | Micro-sample | **PASS** |
-| **Win Rate** | **40.0%** (12 wins / 18 losses) | Baseline ~28–31% | **PASS** |
-| **Profit Factor** | **2.0181** | Target ≥ 1.15 | **PASS** |
-| **Net Profit** | **+$56.05** (+$105 starting balance) | +53.0% on capital | **PASS** |
-| **Ending Balance** | **$161.79** | Starting $105.74 | **PASS** |
-| **Max Drawdown** | **13.26%** | Cap ≤ 30.0% | **PASS** |
-| **Min Balance Reached** | **$102.51** (never touched $50 floor) | Floor $50.00 | **PASS** |
-| **Average Win / Loss** | +$9.26 / -$3.06 (Payoff: 3.03) | Payoff > 2.0 | **PASS** |
-
-*Persisted under `research/validation/part1_holdout_oct2026.json`.*
-
----
-
-## 3. Architecture & Core Subsystems
+## 1. What is in the repository
 
 ```
-ultra_core/
-├── src/
-│   ├── core/                   # Production engine orchestration
-│   │   ├── main_loop.py        # Core execution loop & Highlander signal arbiter
-│   │   ├── risk_manager.py     # ATR stop calculation, session multipliers, daily limits
-│   │   ├── execution_handler.py# MT5 order routing & 6-layer PreTradeVeto gate
-│   │   ├── sizing_ladder.py    # Balance-based position sizing & exposure caps
-│   │   ├── risk_rules.py       # Circuit breakers & streak monitors (ENFORCE=True)
-│   │   ├── market_hours.py     # Session filters & weekend flattening
-│   │   ├── news_filter.py      # Tier-1 macroeconomic blackout filter (±15m)
-│   │   ├── resilience.py       # Lockfile, heartbeat, kill-switch, state persistence
-│   │   ├── validation_ledger.py# SystemConfig SHA-256 fingerprint validation
-│   │   └── alerts.py           # Telegram bot & webhook dispatch
-│   ├── strategies/             # Strategy implementations
-│   │   ├── portfolio_v5_6_leg.py # Active 4-leg portfolio (PORTFOLIO) + RETIRED_LEGS + PORTFOLIO_6_LEG audit ref
-│   │   ├── grid_strategies.py  # TrendPullback & BBMeanReversion
-│   │   ├── bible_strategies.py # NVMR & PDHLR (repaired date math)
-│   │   └── ny_liquidity_expansion.py
-│   └── backtesting/            # Realistic simulation engine
-│       ├── engine.py           # Multi-timeframe backtester with ECN costs
-│       ├── costs.py            # Spread, commission, and slippage models
-│       └── data.py             # MT5-native bar caching & SHA-256 provenance
-├── scripts/
-│   ├── watchdog.py             # Process keep-alive & hang detector (psutil)
-│   ├── check_account.py        # Account & open position diagnostic
-│   ├── validation/             # Quantitative validation suite
-│   │   ├── monte_carlo_ruin.py # Resampled bootstrap ruin analysis
-│   │   ├── walk_forward_validate.py # Rolling IS/OOS efficiency testing
-│   │   ├── validate_current_portfolio.py # 3-gate compliance runner
-│   │   └── full_metrics_report.py
-│   └── archive/                # Preserved historical research & one-off scripts
-├── tests/                      # Unit & regression test suite
-└── research/                   # Historical data manifests & validation ledger
+src/
+  core/          live demo bot: main_loop, risk_manager, execution_handler, sizing_ladder, risk_rules,
+                 pre_trade_veto, market_hours, news_filter, resilience, trade_log, alerts, validation_ledger
+  strategies/    live legs (portfolio_v5_core), retired/archived strategies, research candidates
+                 (h1_donchian, new_*), shared BaseStrategy
+  backtesting/   engine (corrected, multi-asset aware), costs, data (hashed broker bars), metrics
+  instruments/   instrument metadata + per-asset cost models + risk-based lot sizing (XAU, EUR, GBP, JPY, BTC, ETH)
+  portfolio/     portfolio-level risk layer: stop-loss risk, currency/USD exposure aggregation, limits, kill switch
+  atlas/         Atlas Funded "Access" rule engine (pure logic, config in config/atlas_access.json)
+  research/      feature library, candidate libraries, screener
+scripts/         watchdog, monitors, validation runners, research/ (all studies are re-runnable scripts)
+research/        cached broker bars (git-ignored .npy + committed manifests), validation ledger, registry/
+docs/            audit, research and operating documents
+tests/           pytest suite
 ```
 
----
+## 2. Supported markets (data + cost models)
 
-## 4. Key Engineering Fixes & Structural Alignment
+| Instrument | Class | Bars cached | Notes |
+|---|---|---|---|
+| XAUUSDm | gold | M15 2022-07→, H1/D1, M1 from 2026-07 | the live bot trades only this |
+| EURUSDm, GBPUSDm, USDJPYm | forex | H1/H4/D1 (EUR/GBP intraday from 2017-03), M15 ~4 yr | research only |
+| BTCUSDm, ETHUSDm | crypto | H1/H4/D1 from 2021-10, M15 ~2.9 yr | research only; trades 7 days |
 
-1. **Highlander Conviction Arbiter Alignment**:
-   `src/core/main_loop.py` and `src/backtesting/engine.py` were using legacy portfolio keys in `rank_order`. Both now map all tracked strategies (`NVMR_TARGET_10_V5`, `BB_MEAN_REVERSION_V5`, `FVG_NY_TIGHT_V5`, `TREND_PULLBACK_V5`, and aliases), correctly executing only the highest risk-adjusted conviction signal per candle.
+Data comes from the Exness MT5 terminal (cap: 100,000 bars per M15/M5/M1 series). Coverage, specs and gaps:
+`docs/research/DATA_COVERAGE_2026-10-16.md`. **No live adapter exists for non-gold instruments.**
 
-2. **Candle Deduplication Clock Independence**:
-   Replaced local system epoch eviction with broker-candle timestamp math (`signal_candle - 7200`), completely eliminating clock drift and premature signal re-firing.
+## 3. How the live demo bot works (`python -m src.core.main_loop`, normally via `scripts/watchdog.py`)
 
-3. **PDHLR Previous-Day Boundary Repair**:
-   Corrected integer floor division in `bible_strategies.py` to calculate IST day boundaries (`((cur_ts + 19800) // 86400) * 86400 - 19800`), eliminating a 24-to-48-hour lookback distortion during evening trading hours.
+60-second loop, IST clock, symbol `XAUUSDm`, fixed SL/TP in ATR14 multiples, no trailing/pyramiding.
+1. Safety gates: single-instance lock, `STOP` file kill switch, Friday 22:30 IST flatten, spread, ±15-min news blackout, daily-loss cap, data freshness.
+2. Direction: **D1 EMA20 gate** (on) plus an intraday override (threshold 1.0× — not backtested).
+3. Entries only 06:00–21:30 IST; evaluation skipped 15:30–17:30 IST (`LONDON_NY_OVERLAP`).
+4. Legs (SL/TP = 0.5/1.5 ATR): `TREND_PULLBACK_V5`, `BB_MEAN_REVERSION_V5`, `NVMR_TARGET_10_V5`, `FVG_NY_TIGHT_V5`; one signal per candle (Highlander ranking).
+5. Order path: `SizingLadder` (0.01 lot below $800) → `PreTradeVeto` (floor, circuit breakers, caps, macro override, news) → `risk_rules` (ENFORCE=True: daily 3 %/6 %, 2 losing trades/day below $400, 3-loss pause, week/month caps, 30 % peak-drawdown halt) → market order with SL/TP attached.
+6. Separate process `scripts/protect_profit.py` may close green positions early (not backtested).
 
-4. **News Filter Macroeconomic Calendar Correction**:
-   Corrected hardcoded tier-1 event dates from weekend dates to actual weekday release schedules (NFP, CPI, PCE, GDP, FOMC). Enhanced `is_near_news_event` with strict UTC datetime comparison and added operator override schema at `docs/plans/news_calendar.json`.
+Operations: `STOP` file in the repo root flattens and halts; `logs/trades/YYYY-MM-DD.jsonl` is the structured log; `logs/heartbeat` is the liveness file.
+Known weakness: the Windows scheduled task has failed to start the bot after sleep (see audit).
 
-5. **Cross-Platform Watchdog & Process Keep-Alive**:
-   Replaced deprecated Windows `wmic` subprocess calls with `psutil` process iteration, ensuring robust monitoring on Windows 11, Windows Server, and Linux environments.
+## 4. Backtesting
 
-6. **Position Sizing & Capital Protection**:
-   `ExecutionHandler` strictly applies `SizingLadder.get_sizing(balance)`. For small balances ($100–$200), lots are hard-capped at 0.01 with at most 1 concurrent position.
+`BacktestEngine` replays the live loop. Fills use M1 bars where cached, otherwise M15 with the entry bar now tested
+(`EngineConfig.walk_entry_bar_coarse=True`), stop-first on ambiguous bars, bid/ask spread from the bar field, per-asset swap,
+D1 gate, live trading window, dedup, Highlander ranking. Per-asset costs: `src.instruments.cost_model_for(symbol, scenario)`.
+Known gaps: `risk_rules`, `protect_profit`, the FVG per-leg spread cap and the D1 intraday override are **not** simulated.
 
-7. **Secrets Isolation & Security Hardening**:
-   Sanitized `check_account.py` to read credentials from environment variables (`MT5_LOGIN`, `MT5_PASSWORD`, `MT5_SERVER`). Ensured `.env.local` remains strictly ignored by Git while providing `.env.example`.
+## 5. Portfolio risk layer and Atlas rules (pure logic, no broker calls)
 
-8. **Headless & Cross-Platform CI/CD Testing**:
-   Added a lightweight `MetaTrader5` fallback stub in `tests/conftest.py` so test suites pass reliably across Linux CI runners, developer laptops, and headless virtual environments.
+- `src/portfolio/risk.py` — stop-loss risk from real contract specs, currency/USD exposure aggregation, correlated-group caps, margin and stale-data checks, soft/hard kill-switch state. Fails closed.
+- `src/atlas/rules.py` + `config/atlas_access.json` — Atlas Funded **Access** rules (3 % target, 10 %/6 % trailing equity drawdown, 5 %/3 % daily loss, protector, news ±5 min, 3-minute hold, margin 80 %, weekend entries, consistency 40 %, payout eligibility) with source URL, retrieval date and a `verified-official` / `conflict` / `unverified` status per rule. Unresolved rules (gold symbol/leverage, funded-fee amount, bot-approval wording) block enforcement until confirmed.
+- Neither module places orders. **There is no live Atlas execution adapter**; building one is a separate, not-yet-started step.
 
----
+## 6. Research methodology
 
-## 5. Risk Controls & Safety Mechanisms
+- Hypotheses are registered before testing (`research/registry/REGISTRY.md`), split chronologically into DEV / VALIDATE / HOLDOUT, corrected for multiple testing (Benjamini–Hochberg, Bonferroni), costs from broker spread and swap.
+- Stage 1 (13 rules × 6 instruments, H1) and Stage 1b (61 slow D1/H4 tests incl. momentum, carry proxy, portfolios): **no significant positive result**; fades of H1 extremes on crypto/EURUSD/USDJPY are significantly negative.
+- Earlier gold work: 322 candidates, 42 strategy classes, SL/TP geometry sweeps (`docs/DEEP_AUDIT_2026-10-16.md` §6).
 
-- **Circuit Breakers (`src/core/risk_rules.py`)**: `ENFORCE = True`. Daily loss limit of 6% immediately halts trading for the day. Consecutive loss limits trigger automatic cool-down periods.
-- **Sizing Ladder (`src/core/sizing_ladder.py`)**: Dynamically scales lot sizes from balance. Trading completely halts if balance falls below the $50 hard floor.
-- **D1 EMA20 Bias Gate**: Daily candle trend filter prevents opening trades against the macro trend.
-- **Session Trading Windows**: Restricts entries to validated liquid hours (11:30–21:30 IST) and enforces Friday evening weekend flattening.
-- **News Blackout Window**: Blocks entries ±15 minutes around tier-1 US releases (NFP, CPI, PCE, GDP, FOMC).
-- **Hard Kill Switch**: Creating a file named `STOP` in the root repository directory immediately flattens all open positions and safely shuts down the orchestrator.
+## 7. Results that matter
 
----
+| Question | Answer |
+|---|---|
+| Live 4-leg portfolio, corrected engine, 2022-08→2026-07, 0.01 lot | PF 0.88, win 22 %, −$1,340 |
+| Same, 2026 only, from $186 | PF 0.74, account reaches $0; without TrendPullback PF 1.09 (+$185) |
+| Demo account, broker history since 2026-09-28 (V5 legs) | 34 trades, +$6.13, PF 1.11 — too small to infer an edge |
+| Best candidate for a prop account | H1 Donchian-100 (SL4/TP12): PF 1.56 over 2023-08→2026-10, but 2025–26 only; ~+7.5 %/yr at bar-compliant risk |
+| Statistical evidence of an edge in any tested rule | none after multiple-testing correction |
 
-## 6. Setup & Operational Runbook
-
-### Prerequisites
-- Python 3.11+
-- MetaTrader 5 Terminal installed with an active demo account (`XAUUSDm` symbol available).
-
-### Installation
+## 8. Setup
 
 ```bash
-# 1. Clone repository
-git clone https://github.com/rohith95-p/trading-platform.git
-cd trading-platform
-
-# 2. Install dependencies
-pip install -r requirements.txt
-
-# 3. Configure environment
-cp .env.example .env.local
-# Edit .env.local with your MT5 account number, password, server, and Telegram token
+python -m venv venv && venv\Scripts\activate
+pip install -r requirements.txt          # includes scipy (src.research.metrics needs it)
+copy .env.example .env.local             # MT5_LOGIN / MT5_PASSWORD / MT5_SERVER, ULTRA_ALERT_* — never commit
+python -m pytest tests -q                # full suite (316 tests)
+python -m scripts.watchdog               # demo bot + keep-alive
 ```
 
-### Running Validation Tests
+Re-run studies: `scripts/research/multi_asset_screen.py`, `multi_asset_slow.py`, `all_strategies_2026.py`, `geometry_sweep.py`, `atlas_score.py`.
 
-```bash
-# Run unit and regression suite (56 tests)
-pytest tests/ -v
+## 9. Security
 
-# Run walk-forward out-of-sample validation
-python -m scripts.validation.walk_forward_validate
+- Credentials only via environment / `.env.local` (git-ignored). A Telegram bot token exists in older git history and should be revoked; a trading-bot MCP process exposed an account login on its command line — move it to environment variables.
+- `scripts/daily_stats.py` reads `MT5_LOGIN`/`MT5_PASSWORD`/`MT5_SERVER` from the environment.
 
-# Run Monte Carlo ruin probability simulation
-python -m scripts.validation.monte_carlo_ruin
+## 10. Known limitations / blockers (summary)
 
-# Run full portfolio metrics report
-python -m scripts.validation.full_metrics_report
-```
-
-### Launching the Trading Engine
-
-```bash
-# Terminal 1: Launch main orchestrator
-python -m src.core.main_loop
-
-# Terminal 2: Launch resilience watchdog
-python -m scripts.watchdog
-```
-
----
-
-## 7. Operational Guidelines & Verification
-
-1. **Check Live Fingerprint**:
-   On startup, `main_loop.py` prints `CONFIG VALIDATED: fingerprint 17a0b9e6f716de82`. If any configuration parameter or strategy multiplier is modified without updating `validation_ledger.json`, the bot safely refuses to trade.
-2. **Emergency Flatten**:
-   To immediately close all open trades and halt the system:
-   ```bash
-   echo. > STOP
-   ```
-3. **Daily Monitoring**:
-   Monitor the daily P&L report sent to Telegram and verify that daily losses never exceed 6% of equity.
+No proven edge · M1 history only from 2026-07 (gold) · risk/validation gate hollow (`export_final_backtest.py` stamps the live fingerprint) · live-only logic unbacktested · no non-gold live adapter · Atlas rules partly unverified · scheduler/uptime issue · crypto swap units unverified.
+Full list with scores: `docs/FINAL_AUDIT_2026-10-16.md`.
