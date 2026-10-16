@@ -10,7 +10,7 @@ models, a portfolio risk layer and a verified-source Atlas rule engine. But **no
 significant, repeatable edge after costs**, the live gold portfolio loses money on the corrected engine, and several
 operational/validation blockers remain (§10).
 
-## 2. Repository changes (this engagement; 21 local commits, see `git log`)
+## 2. Repository changes (this engagement; commits through 8c0e982 were pushed, 5 newer commits are local only, see `git log`)
 - Corrected backtest engine (entry-bar test in coarse mode; per-asset costs/margin/P&L; weekend trading for crypto).
 - `src/instruments/` metadata registry (6 instruments), `cost_model_for`, `risk_lots`.
 - `src/portfolio/risk.py` — pure portfolio risk layer (90 tests).
