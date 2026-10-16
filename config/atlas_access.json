@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "programme": "Atlas Funded - Access",
+  "retrieved": "2026-10-16",
+  "notes": "Machine-readable encoding of the Atlas Funded Access account rules gathered from official Atlas pages on 2026-10-16. status is one of verified-official | conflict | unverified. A rule with needed_for_enforcement=true and status != verified-official is REFUSED by src.atlas.rules.load_rules unless the caller explicitly lists it in allow_unverified. Fractions are expressed as decimals (0.10 = 10%).",
+  "rules": {
+    "entry_fee_usd": {
+      "value": 5, "source": "https://help.atlasfunded.com/access", "retrieved": "2026-10-16",
+      "status": "verified-official", "needed_for_enforcement": false,
+      "note": "Access programme entry fee."
+    },
+    "account_sizes_usd": {
+      "value": {"min": 5000, "max": 400000}, "source": "https://help.atlasfunded.com/access", "retrieved": "2026-10-16",
+      "status": "verified-official", "needed_for_enforcement": false,
+      "note": "Sizes from $5K to $400K."
+    },
+    "profit_target_pct": {
+      "value": {"evaluation": 0.03, "funded": null}, "source": "https://help.atlasfunded.com/access", "retrieved": "2026-10-16",
+      "status": "verified-official", "needed_for_enforcement": true,
+      "note": "Evaluation target = 3% of start balance, measured on CLOSED balance. No target when funded."
+    },
+    "max_drawdown_pct": {
+      "value": {"evaluation": 0.10, "funded": 0.06}, "source": "https://help.atlasfunded.com/max-drawdown", "retrieved": "2026-10-16",
+      "status": "verified-official", "needed_for_enforcement": true,
+      "note": "TRAILING on EQUITY. Floor rises as soon as equity (incl. unrealized profit) makes a new high, never moves down; breach if equity < floor at any moment. Expressed as a fraction of the initial balance."
+    },
+    "daily_loss_pct": {
+      "value": {"evaluation": 0.05, "funded": 0.03}, "source": "https://help.atlasfunded.com/access", "retrieved": "2026-10-16",
+      "status": "verified-official", "needed_for_enforcement": true,
+      "note": "Trailing, end-of-day. Funded base = previous day's highest equity/balance. Resets 00:00 UTC."
+    },
+    "daily_loss_reset_utc": {
+      "value": "00:00", "source": "https://help.atlasfunded.com/access", "retrieved": "2026-10-16",
+      "status": "verified-official", "needed_for_enforcement": true,
+      "note": "Daily loss limit resets at 00:00 UTC."
+    },
+    "daily_loss_eod_computation": {
+      "value": "conservative: ref = previous UTC day's highest equity/balance; limit_usd = daily_loss_pct * min(initial_balance, ref); floor = ref - limit_usd",
+      "source": "https://help.atlasfunded.com/access", "retrieved": "2026-10-16",
+      "status": "unverified", "needed_for_enforcement": true,
+      "note": "Atlas does not state exactly how the 'trailing end-of-day' daily loss is computed (base balance vs base equity, percentage of initial vs of reference). The engine uses the TIGHTEST plausible interpretation. Caller must acknowledge via allow_unverified=['daily_loss_eod_computation']."
+    },
+    "min_trading_days_evaluation": {
+      "value": 0, "source": "https://help.atlasfunded.com/access", "retrieved": "2026-10-16",
+      "status": "verified-official", "needed_for_enforcement": false,
+      "note": "No minimum trading days in the evaluation. No consistency rule in the evaluation."
+    },
+    "activation_window_days": {
+      "value": 30, "source": "https://help.atlasfunded.com/access", "retrieved": "2026-10-16",
+      "status": "verified-official", "needed_for_enforcement": false,
+      "note": "Must activate (pay funded fee) within 30 days of passing."
+    },
+    "payout_min_profit_days": {
+      "value": {"days": 3, "min_day_profit_pct": 0.5}, "source": "https://atlasfunded.com/trading-rules", "retrieved": "2026-10-16",
+      "status": "verified-official", "needed_for_enforcement": true,
+      "note": "Funded: at least 3 trading days each with >= 0.5% profit per payout cycle. min_day_profit_pct is in PERCENT units (0.5 = 0.5%)."
+    },
+    "payout_consistency_best_day_max_share": {
+      "value": 0.40, "source": "https://atlasfunded.com/trading-rules", "retrieved": "2026-10-16",
+      "status": "verified-official", "needed_for_enforcement": true,
+      "note": "Best day <= 40% of cycle profit at payout request. Breach delays the payout; it does not breach the account."
+    },
+    "profit_split": {
+      "value": 0.90, "source": "https://help.atlasfunded.com/access", "retrieved": "2026-10-16",
+      "status": "verified-official", "needed_for_enforcement": false,
+      "note": "90% split (Access page)."
+    },
+    "first_on_demand_payout_split": {
+      "value": 0.90, "source": "https://atlasfunded.com/terms", "retrieved": "2026-10-16",
+      "status": "unverified", "needed_for_enforcement": false,
+      "note": "Access page says 90%; Terms are read as capping the first on-demand payout at 50%. Unresolved - ask Atlas support in writing. Do not budget with 90% for the first on-demand payout."
+    },
+    "payout_schedule": {
+      "value": {"first_after_days": 28, "interval_days": 14, "min_profit_usd": 100}, "source": "https://help.atlasfunded.com/access", "retrieved": "2026-10-16",
+      "status": "verified-official", "needed_for_enforcement": false,
+      "note": "First payout after 28 days then every 14 days; $100 profit threshold."
+    },
+    "atlas_protector": {
+      "value": {"floating_loss_pct_of_initial": 0.02, "reduced_split": 0.5, "breach_on_strike": 2}, "source": "https://atlasfunded.com/trading-rules", "retrieved": "2026-10-16",
+      "status": "verified-official", "needed_for_enforcement": true,
+      "note": "Net floating loss of 2% of INITIAL balance closes all positions and cuts the split to 50% for that cycle; second occurrence = breach. Documented under funded; the engine applies it in both phases (stricter)."
+    },
+    "news_window_minutes": {
+      "value": 5, "source": "https://atlasfunded.com/trading-rules", "retrieved": "2026-10-16",
+      "status": "verified-official", "needed_for_enforcement": true,
+      "note": "+/-5 min around high-impact events: profit of trades opened/closed inside the window is deducted (funded)."
+    },
+    "min_hold_seconds": {
+      "value": 180, "source": "https://atlasfunded.com/trading-rules", "retrieved": "2026-10-16",
+      "status": "verified-official", "needed_for_enforcement": true,
+      "note": "Trades held < 3 minutes: profit deducted (funded)."
+    },
+    "margin_usage_close_pct": {
+      "value": 0.80, "source": "https://help.atlasfunded.com/margin-usage", "retrieved": "2026-10-16",
+      "status": "verified-official", "needed_for_enforcement": true,
+      "note": "margin/(margin+free margin) >= 80% closes all positions and deducts profit on those closed in profit (funded)."
+    },
+    "inactivity_limit_days": {
+      "value": 30, "source": "https://atlasfunded.com/trading-rules", "retrieved": "2026-10-16",
+      "status": "verified-official", "needed_for_enforcement": true,
+      "note": "At least one trade within 30 days."
+    },
+    "weekend_new_positions_allowed": {
+      "value": false, "source": "https://atlasfunded.com/trading-rules", "retrieved": "2026-10-16",
+      "status": "verified-official", "needed_for_enforcement": true,
+      "note": "No NEW positions on Saturday/Sunday (UTC); holding across the weekend is allowed."
+    },
+    "per_instrument_risk_max_share_of_daily_limit": {
+      "value": 0.50, "source": "https://atlasfunded.com/trading-rules", "retrieved": "2026-10-16",
+      "status": "verified-official", "needed_for_enforcement": true,
+      "note": "Funded: risk on a single instrument <= 50% of the daily-loss limit."
+    },
+    "max_leverage_rule": {
+      "value": 100, "source": "https://help.atlasfunded.com/access", "retrieved": "2026-10-16",
+      "status": "verified-official", "needed_for_enforcement": false,
+      "note": "Leverage up to 1:100 per the rules pages."
+    },
+    "mt5_server_leverage": {
+      "value": null, "source": "https://help.atlasfunded.com/access", "retrieved": "2026-10-16",
+      "status": "unverified", "needed_for_enforcement": false,
+      "note": "Actual leverage on the Atlas MT5 server is not published; confirm on the real account."
+    },
+    "gold_symbol": {
+      "value": null, "source": "https://help.atlasfunded.com/access", "retrieved": "2026-10-16",
+      "status": "unverified", "needed_for_enforcement": false,
+      "note": "Gold symbol name on the Atlas MT5 server (XAUUSD / XAUUSD.x / GOLD) is not published."
+    },
+    "funded_fee_usd_by_size": {
+      "value": null, "source": "https://help.atlasfunded.com/access", "retrieved": "2026-10-16",
+      "status": "unverified", "needed_for_enforcement": false,
+      "note": "Funded activation fee per account size not captured."
+    },
+    "eas_allowed": {
+      "value": true, "source": "https://help.atlasfunded.com/prohibited-practices", "retrieved": "2026-10-16",
+      "status": "verified-official", "needed_for_enforcement": false,
+      "note": "EAs / algorithmic trading are allowed per the Prohibited-practices page."
+    },
+    "ea_approval_required": {
+      "value": "obtain written approval before running the EA", "source": "https://atlasfunded.com/terms", "retrieved": "2026-10-16",
+      "status": "conflict", "needed_for_enforcement": true,
+      "note": "Prohibited-practices page allows EAs; Terms say some EAs require approval. Must obtain WRITTEN approval from Atlas before automated trading. Caller must acknowledge via allow_unverified=['ea_approval_required'] only after that approval exists."
+    },
+    "vpn_policy": {
+      "value": "allowed with advance disclosure of location changes", "source": "https://help.atlasfunded.com/prohibited-practices", "retrieved": "2026-10-16",
+      "status": "verified-official", "needed_for_enforcement": false,
+      "note": "Disclose location changes in advance."
+    },
+    "prohibited_practices": {
+      "value": ["hedging across accounts/firms", "latency/tick arbitrage", "account sharing", "order flooding"],
+      "source": "https://help.atlasfunded.com/prohibited-practices", "retrieved": "2026-10-16",
+      "status": "verified-official", "needed_for_enforcement": false,
+      "note": "Not enforceable from account data alone; operational policy."
+    },
+    "fee_refund": {
+      "value": {"refunded_fee_usd": 5, "with_consecutive_payout": 3, "funded_fee_refunded": false}, "source": "https://help.atlasfunded.com/access", "retrieved": "2026-10-16",
+      "status": "verified-official", "needed_for_enforcement": false,
+      "note": "The $5 fee is refunded with the 3rd consecutive payout; the funded fee is not refunded."
+    }
+  }
+}
