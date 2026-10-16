@@ -1,12 +1,12 @@
 {
   "symbol": "EURUSDm",
   "timeframe": "M5",
-  "bars": 99613,
-  "first_time": "2025-05-26 05:55:00",
-  "last_time": "2026-09-24 12:40:00",
-  "sha256": "413cf88b3fc8e3cb7ac9516b1175485351e3677534277f011b9a04b866f5eb1f",
+  "bars": 100000,
+  "first_time": "2025-06-13 19:30:00",
+  "last_time": "2026-10-16 11:05:00",
+  "sha256": "ec773e54bc91cb9582936502c8a3967c57f19f7f46d34e41eec6459aa09a8c22",
   "server": "Exness-MT5Trial11",
-  "downloaded_utc": "2026-09-27 13:57:41",
+  "downloaded_utc": "2026-10-16 11:09:07",
   "spec": {
     "symbol": "EURUSDm",
     "digits": 5,
@@ -19,18 +19,6 @@
     "contract_size": 100000.0
   },
   "gaps": [
-    {
-      "after_utc": "2025-05-30 20:55",
-      "missing_bars": 577,
-      "seconds": 173400,
-      "weekend": true
-    },
-    {
-      "after_utc": "2025-06-06 20:55",
-      "missing_bars": 577,
-      "seconds": 173400,
-      "weekend": true
-    },
     {
       "after_utc": "2025-06-13 20:55",
       "missing_bars": 577,
@@ -681,6 +669,54 @@
     },
     {
       "after_utc": "2026-09-23 20:55",
+      "missing_bars": 1,
+      "seconds": 600,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-09-25 20:55",
+      "missing_bars": 577,
+      "seconds": 173400,
+      "weekend": true
+    },
+    {
+      "after_utc": "2026-09-30 20:55",
+      "missing_bars": 1,
+      "seconds": 600,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-10-01 20:55",
+      "missing_bars": 1,
+      "seconds": 600,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-10-02 20:55",
+      "missing_bars": 577,
+      "seconds": 173400,
+      "weekend": true
+    },
+    {
+      "after_utc": "2026-10-06 20:55",
+      "missing_bars": 1,
+      "seconds": 600,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-10-08 21:00",
+      "missing_bars": 2,
+      "seconds": 900,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-10-09 20:55",
+      "missing_bars": 577,
+      "seconds": 173400,
+      "weekend": true
+    },
+    {
+      "after_utc": "2026-10-14 20:55",
       "missing_bars": 1,
       "seconds": 600,
       "weekend": false

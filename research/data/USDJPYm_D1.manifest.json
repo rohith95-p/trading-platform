@@ -1,18 +1,18 @@
 {
   "symbol": "USDJPYm",
   "timeframe": "D1",
-  "bars": 1537,
+  "bars": 1555,
   "first_time": "2021-10-27 00:00:00",
-  "last_time": "2026-09-25 00:00:00",
-  "sha256": "6e00790fbee2e10b15aa08c4ceb5f0ff220e18cf8e362868829a41d7692bbc5a",
+  "last_time": "2026-10-16 00:00:00",
+  "sha256": "c1e4a5910cb4b7af742bc1cfca03633cb3666b0fa3dd95be79f6deb54dcb35d7",
   "server": "Exness-MT5Trial11",
-  "downloaded_utc": "2026-09-27 14:01:12",
+  "downloaded_utc": "2026-10-16 11:09:08",
   "spec": {
     "symbol": "USDJPYm",
     "digits": 3,
     "point": 0.001,
     "trade_tick_size": 0.001,
-    "trade_tick_value": 0.6357036603816765,
+    "trade_tick_value": 0.6330075454499418,
     "volume_min": 0.01,
     "volume_max": 300.0,
     "volume_step": 0.01,
@@ -1551,6 +1551,24 @@
     },
     {
       "after_utc": "2026-09-18 00:00",
+      "missing_bars": 1,
+      "seconds": 172800,
+      "weekend": true
+    },
+    {
+      "after_utc": "2026-09-25 00:00",
+      "missing_bars": 1,
+      "seconds": 172800,
+      "weekend": true
+    },
+    {
+      "after_utc": "2026-10-02 00:00",
+      "missing_bars": 1,
+      "seconds": 172800,
+      "weekend": true
+    },
+    {
+      "after_utc": "2026-10-09 00:00",
       "missing_bars": 1,
       "seconds": 172800,
       "weekend": true

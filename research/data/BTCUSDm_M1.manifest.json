@@ -1,0 +1,79 @@
+{
+  "symbol": "BTCUSDm",
+  "timeframe": "M1",
+  "bars": 100000,
+  "first_time": "2026-08-07 23:39:00",
+  "last_time": "2026-10-16 11:09:00",
+  "sha256": "5e7d06ec458919fe1f852a45d78c97d07aebc91da83bdbfd15ccaa66635e72ce",
+  "server": "Exness-MT5Trial11",
+  "downloaded_utc": "2026-10-16 11:09:11",
+  "spec": {
+    "symbol": "BTCUSDm",
+    "digits": 2,
+    "point": 0.01,
+    "trade_tick_size": 0.01,
+    "trade_tick_value": 0.01,
+    "volume_min": 0.01,
+    "volume_max": 200.0,
+    "volume_step": 0.01,
+    "contract_size": 1.0
+  },
+  "gaps": [
+    {
+      "after_utc": "2026-08-08 04:02",
+      "missing_bars": 4,
+      "seconds": 300,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-08-16 07:16",
+      "missing_bars": 6,
+      "seconds": 420,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-08-16 07:23",
+      "missing_bars": 1,
+      "seconds": 120,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-08-29 03:54",
+      "missing_bars": 2,
+      "seconds": 180,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-09-12 03:42",
+      "missing_bars": 3,
+      "seconds": 240,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-09-12 06:49",
+      "missing_bars": 12,
+      "seconds": 780,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-09-13 07:16",
+      "missing_bars": 11,
+      "seconds": 720,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-09-13 07:29",
+      "missing_bars": 1,
+      "seconds": 120,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-09-20 07:31",
+      "missing_bars": 11,
+      "seconds": 720,
+      "weekend": false
+    }
+  ],
+  "zero_volume_bars": 0,
+  "notes": "Bar timestamps are broker server time as delivered by MT5."
+}

@@ -1,0 +1,55 @@
+{
+  "symbol": "ETHUSDm",
+  "timeframe": "M15",
+  "bars": 100000,
+  "first_time": "2023-12-09 17:00:00",
+  "last_time": "2026-10-16 11:00:00",
+  "sha256": "eb7e7be87920fd00998c34618a611bf57d8e94f9dd893518662fce921393306c",
+  "server": "Exness-MT5Trial11",
+  "downloaded_utc": "2026-10-16 11:14:48",
+  "spec": {
+    "symbol": "ETHUSDm",
+    "digits": 2,
+    "point": 0.01,
+    "trade_tick_size": 0.01,
+    "trade_tick_value": 0.01,
+    "volume_min": 0.1,
+    "volume_max": 2000.0,
+    "volume_step": 0.01,
+    "contract_size": 1.0
+  },
+  "gaps": [
+    {
+      "after_utc": "2023-12-21 02:00",
+      "missing_bars": 1,
+      "seconds": 1800,
+      "weekend": false
+    },
+    {
+      "after_utc": "2024-01-13 04:45",
+      "missing_bars": 4,
+      "seconds": 4500,
+      "weekend": false
+    },
+    {
+      "after_utc": "2024-01-31 19:45",
+      "missing_bars": 2,
+      "seconds": 2700,
+      "weekend": false
+    },
+    {
+      "after_utc": "2025-12-06 06:00",
+      "missing_bars": 1,
+      "seconds": 1800,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-07-18 05:00",
+      "missing_bars": 1,
+      "seconds": 1800,
+      "weekend": false
+    }
+  ],
+  "zero_volume_bars": 0,
+  "notes": "Bar timestamps are broker server time as delivered by MT5."
+}
