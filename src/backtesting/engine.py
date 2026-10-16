@@ -36,6 +36,7 @@ import numpy as np
 
 from src.backtesting.costs import CostModel
 from src.backtesting.data import BarSet, SymbolSpec
+from src.instruments.registry import find_meta
 from src.research.market_study import atr as _flat_atr
 import src.core.market_hours as market_hours
 
@@ -359,6 +360,27 @@ class EngineConfig:
     use_time_of_day_atr: bool = False
     tod_atr_bucket_minutes: int = 60
 
+    # -- asset-agnostic switches (2026-10-16). Every default below reproduces the
+    # pre-existing gold behaviour exactly; see src/instruments/registry.py.
+    # weekend_trading: True for 24/7 markets (crypto). Skips the Friday flatten,
+    # the weekend closed-market block and the Friday no-new-entries cutoff from
+    # src/core/market_hours.py (which is not edited -- the bypass is engine-side).
+    # The rollover window (+/-10 min around 00:00 UTC) still blocks entries.
+    weekend_trading: bool = False
+    # Only consulted when weekend_trading is True: whether the owner's 06:00-21:30
+    # IST global trading window still applies. (False = trade around the clock.)
+    enforce_trading_window: bool = True
+    account_currency: str = "USD"
+    # USD-base pairs (USDJPY) quote P&L in the other currency; convert at the
+    # exit price instead of the single tick_value snapshot taken at fetch time.
+    dynamic_quote_conversion: bool = True
+    # When spread_gate_points is left at the gold default (350) and the symbol is
+    # a non-gold registry instrument, use that instrument's registry gate instead.
+    auto_spread_gate: bool = True
+    # True: raise (instead of warn) when the CostModel was calibrated for a
+    # different symbol, or carries the untagged gold defaults on a non-gold symbol.
+    strict_instrument: bool = False
+
     def as_dict(self) -> Dict[str, Any]:
         return dict(self.__dict__)
 
@@ -396,6 +418,18 @@ class BacktestEngine:
         self._d1_t = self.d1["time"].astype(np.int64) if self.d1 is not None else None
         self._h4_t = self.h4["time"].astype(np.int64) if self.h4 is not None else None
 
+        # Instrument identity comes from the DATA spec (the cfg.symbol default is
+        # XAUUSDm and many callers never set it for other symbols).
+        self.symbol = self.spec.symbol
+        self.meta = find_meta(self.symbol)
+        self._check_cost_matches_symbol()
+        self._spread_gate = config.spread_gate_points
+        if (config.auto_spread_gate and self.meta is not None
+                and self.meta.asset_class != "gold"
+                and self.meta.spread_gate_points is not None
+                and config.spread_gate_points == 350.0):
+            self._spread_gate = float(self.meta.spread_gate_points)
+
         self.stub = _Mt5Stub(self.spec)
         self.balance = config.starting_balance
         self.stub.balance = self.balance
@@ -421,6 +455,7 @@ class BacktestEngine:
             "same_candle_refires": 0,
             "swap_nights_charged": 0,
             "swap_paid": 0.0,
+            "cost_symbol_mismatch": self._cost_mismatch,
         }
 
     # -- helpers ---------------------------------------------------------
@@ -430,7 +465,49 @@ class BacktestEngine:
         self._ticket += 1
         return t
 
-    def _value_per_price(self, lots: float) -> float:
+    def _check_cost_matches_symbol(self) -> None:
+        """Flag a CostModel whose numbers were set for a different instrument.
+
+        A caller-supplied cost is always honoured; this only makes the mismatch
+        loud (log warning + diagnostics flag, or ValueError in strict mode).
+        """
+        c = self.cost
+        msg = None
+        tag = getattr(c, "calibrated_for", None)
+        if tag is not None and tag != self.symbol:
+            msg = (f"CostModel is calibrated for {tag} but the data is {self.symbol}; "
+                   f"build one with src.instruments.cost_model_for({self.symbol!r}, ...)")
+        elif (tag is None and self.symbol != "XAUUSDm"
+              and c.swap_long_points == -515.5 and c.swap_short_points == 0.0
+              and c.fixed_spread_points == 260.0):
+            msg = (f"untagged CostModel carries the XAUUSDm default swap/spread on "
+                   f"{self.symbol}; use src.instruments.cost_model_for({self.symbol!r}, ...)")
+        self._cost_mismatch = msg
+        if msg:
+            if self.cfg.strict_instrument:
+                raise ValueError(msg)
+            log.warning(msg)
+
+    def _converts_quote(self) -> bool:
+        m = self.meta
+        return bool(self.cfg.dynamic_quote_conversion and m is not None
+                    and m.quote_currency != self.cfg.account_currency
+                    and m.base_currency == self.cfg.account_currency)
+
+    def _vpp_per_lot(self, price: Optional[float] = None) -> float:
+        """Account currency per 1.0 price unit per 1.0 lot at `price`.
+
+        Same as the spec snapshot for every symbol quoted in the account
+        currency (gold, EURUSD, GBPUSD, crypto). USD-base pairs (USDJPY) are
+        converted at `price` since the P&L currency is the quote currency.
+        """
+        if price and self._converts_quote():
+            return self.spec.contract_size / price
+        return self.spec.value_per_price_unit_per_lot
+
+    def _value_per_price(self, lots: float, price: Optional[float] = None) -> float:
+        if price and self._converts_quote():
+            return self.spec.contract_size / price * lots
         return self.spec.value_per_price_unit_per_lot * lots
 
     # -- margin ----------------------------------------------------------
@@ -444,6 +521,11 @@ class BacktestEngine:
         lev = self.cfg.leverage
         if not lev or lev <= 0:
             return 0.0
+        m = self.meta
+        if m is not None and m.base_currency == self.cfg.account_currency:
+            # USD-base pair (USDJPY): a lot's notional IS contract_size USD;
+            # multiplying by the quote price would overstate margin ~150x.
+            return self.spec.contract_size * lots / lev
         return self.spec.contract_size * price * lots / lev
 
     def used_margin(self) -> float:
@@ -453,7 +535,7 @@ class BacktestEngine:
     def floating_pl(self) -> float:
         return sum(
             (p.price_current - p.entry_price) * (1.0 if p.is_buy else -1.0)
-            * self._value_per_price(p.lots)
+            * self._value_per_price(p.lots, p.price_current)
             for p in self.positions
         )
 
@@ -465,6 +547,22 @@ class BacktestEngine:
         if not self.cfg.enforce_margin:
             return True
         return self.free_margin() >= self.margin_required(lots, price)
+
+    def _allow_new_entry(self, current_ist: datetime):
+        """market_hours.allow_new_entry, with an engine-side 24/7 opt-out.
+
+        Default (weekend_trading False) is the unmodified production check. For
+        24/7 markets the weekend and Friday-cutoff rules are skipped; the
+        06:00-21:30 IST window (configurable) and the rollover window remain.
+        """
+        if not self.cfg.weekend_trading:
+            return market_hours.allow_new_entry(current_ist)
+        if (self.cfg.enforce_trading_window and market_hours.ENFORCE_TRADING_WINDOW
+                and not market_hours.in_trading_window(current_ist)):
+            return False, "outside the trading window"
+        if market_hours.in_rollover_window(current_ist):
+            return False, "rollover window"
+        return True, ""
 
     def _forming_bar(self, arr: np.ndarray, last_closed_idx: int, next_time: int) -> np.ndarray:
         """Build the partially-formed bar the live bot sees at index [-1].
@@ -693,13 +791,13 @@ class BacktestEngine:
 
     def _close(self, pos: Position, exit_price: float, ts: int, reason: str) -> None:
         direction = 1.0 if pos.is_buy else -1.0
-        vpp = self._value_per_price(pos.lots)
+        vpp = self._value_per_price(pos.lots, exit_price)
         gross = (exit_price - pos.entry_price) * direction * vpp
         comm = self.cost.commission(pos.lots)
         # Overnight financing. Signed as the broker reports it, so a long's swap
         # is negative and adds to the cost; a short's is zero on this symbol.
         swap = self.cost.swap(pos.lots, pos.is_buy, pos.entry_time, ts,
-                              self.spec.point, self.spec.value_per_price_unit_per_lot)
+                              self.spec.point, self._vpp_per_lot(exit_price))
         nights = self.cost.nights_held(pos.entry_time, ts)
         net = gross - comm + swap
         self.diag["swap_nights_charged"] += nights
@@ -946,7 +1044,7 @@ class BacktestEngine:
                 current_ist = datetime.fromtimestamp(ts, tz=timezone.utc).astimezone(IST)
 
                 # Friday Kill Switch
-                if market_hours.should_flatten_for_weekend(current_ist):
+                if not cfg.weekend_trading and market_hours.should_flatten_for_weekend(current_ist):
                     for pos in list(self.positions):
                         self._close(pos, pos.price_current, ts, "Weekend Gap Avoidance")
 
@@ -966,7 +1064,7 @@ class BacktestEngine:
                 if m != 0 and (ts - bar_open) % cfg.loop_interval_sec != 0:
                     continue
 
-                spread_ok = spread_pts is None or spread_pts <= cfg.spread_gate_points
+                spread_ok = spread_pts is None or spread_pts <= self._spread_gate
                 if not spread_ok:
                     self.diag["entries_blocked_spread"] += 1
                     if cfg.spread_gate_blocks_management:
@@ -1018,7 +1116,7 @@ class BacktestEngine:
 
                 # 5. Entries (with Highlander Rule)
                 if spread_ok:
-                    mh_ok, _ = market_hours.allow_new_entry(current_ist)
+                    mh_ok, _ = self._allow_new_entry(current_ist)
                     if not mh_ok:
                         # Time lock or rollover blocked entry
                         continue
