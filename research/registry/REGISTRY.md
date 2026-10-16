@@ -49,3 +49,30 @@ Script: `scripts/research/multi_asset_screen.py` · raw results: `research/regis
 - Swap units assumed points/lot/night for every symbol (`swap_mode` 1 reported by the broker; crypto units unverified); weekend triple swap not modeled.
 - Exness prices only; Atlas prices/spreads may differ.
 - 13 hypotheses are a deliberately small set: the absence of an edge here does not prove none exists, only that these standard rules do not show one.
+
+---
+
+# Stage 1b — slow (H4/D1) screen, 2026-10-16
+
+Script `scripts/research/multi_asset_slow.py` · results `research/registry/slow_2026-10-16.json`. Same splits and BH/Bonferroni protocol. Volatility-targeted (1 %/day per asset), next-open execution, half-spread per unit of turnover, broker swap per night. **61 pre-registered tests** (9 hypotheses × 6 assets, broker-swap carry proxy on 3 FX pairs, 4 portfolio-level tests).
+
+| id | hypothesis |
+|---|---|
+| S1a–S1d | time-series momentum 20/60/120/250 days (D1) |
+| S2a/S2b | EMA 20/100 and 50/200 cross trend (D1) |
+| S3a/S3b | Donchian 50/25 (D1) and 120/60 (H4), long+short |
+| S4a | TS momentum 60d gated by Kaufman efficiency ratio > 0.25 |
+| C1 | broker-swap carry proxy (FX; weak proxy for true interest carry) |
+| P1a/P1b | equal-weight portfolio of TS momentum 60d / 120d across the 6 assets |
+| P2a/P2b | cross-sectional momentum 60d / 120d: long top-2, short bottom-2 of 6 |
+
+Outcome
+- **No test is significant**: minimum Benjamini–Hochberg q across all 61 tests is **0.98**.
+- Most significant DEV results are USDJPY (carry proxy t = +2.2, S3b t = +1.9, S1a t = +1.8); all fail VALIDATE/HOLDOUT (USDJPY holdout Sharpe −1.6 to −1.9) and are rejected.
+- Median DEV Sharpe by asset: USDJPY +0.73, BTC +0.42, PORTFOLIO +0.29, XAU +0.20, GBP +0.05, ETH +0.02, EUR −0.07: all within noise.
+- Gold trend/momentum variants had VALIDATE Sharpe 1.6–2.6 (2025–26 rally) but DEV Sharpe 0.1–0.5 and HOLDOUT −0.2 to −2.4 (Jul–Oct 2026). They are the same regime-dependent trend exposure seen before; **not accepted**.
+- Only two items are positive on DEV (Sharpe > 0.3), VALIDATE (> 0.3) and HOLDOUT (> 0): **ETHUSDm S1b** (TS momentum 60d) and **PORTFOLIO P2a** (cross-sectional momentum 60d; DEV t = +0.8, VALIDATE t = +1.4, HOLDOUT Sharpe +0.04 on 92 days). Neither is statistically distinguishable from zero → **awaiting evidence**.
+- The July–Oct 2026 holdout (≈ 3.5 months) is negative for almost all trend/momentum variants (equal-weight TS momentum portfolio P1b: Sharpe −3.9, t = −2.2): trend-following has been losing recently.
+
+Decisions: Accepted — none. Awaiting evidence — ETHUSDm S1b, PORTFOLIO P2a. Rejected — all other Stage 1b tests.
+Limits: swap carry is a broker-markup proxy, not interest-rate carry; D1 histories are short for gold/JPY/crypto (from 2021-10); daily returns assumed independent in the t-statistics; Exness prices only.
