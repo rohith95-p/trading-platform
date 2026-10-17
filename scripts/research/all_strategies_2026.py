@@ -23,8 +23,6 @@ SPECS = [  # (label, module, class, kwargs)
  ("PDHLR", S+"bible_strategies", "PDHLRStrategy", {}),
  ("NVMR_raw", S+"bible_strategies", "NVMRStrategy", {}),
  ("SESSION_BREAKOUT", S+"grid_strategies", "SessionBreakoutStrat", {}),
- ("EURUSD_ASIAN_RANGE", S+"eurusd_asian_range", "EURUSDAsianRange", {}),
- ("FOREX_SESSION_MOMENTUM", S+"forex_session_momentum", "ForexSessionMomentum", {}),
  ("LIQ_SWEEP_REVERSAL", S+"liquidity_sweep_reversal", "LiquiditySweepReversal", {}),
  ("NY_LIQ_EXPANSION", S+"ny_liquidity_expansion", "NYLiquidityExpansion", {}),
  ("NY_LONDON_SWEEP_REV", S+"ny_session_suite", "NYLondonSweepReversal", {}),

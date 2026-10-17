@@ -443,8 +443,6 @@ PORTFOLIO_V4 = [NVMRPortfolio, LARSPortfolio]
 # --- PORTFOLIO V5 (New Hyper-Tight Masterpiece - 2026-09-27) ---
 # Super Portfolio combining the top 9 uncorrelated hyper-tight winners.
 from src.strategies.grid_strategies import TrendPullbackStrat, BBMeanReversionStrat
-from src.strategies.eurusd_asian_range import EURUSDAsianRange
-from src.strategies.forex_session_momentum import ForexSessionMomentum
 from src.strategies.liquidity_sweep_reversal import LiquiditySweepReversal
 from src.strategies.bible_strategies import PDHLRStrategy
 from src.strategies.ny_liquidity_expansion import NYLiquidityExpansion
@@ -467,24 +465,12 @@ class NVMRPortfolioV5(_NVMRStrategy):
     sl_atr_mult = 0.1
     tp_atr_mult = 1.0
 
-class EURUSDAsianRangeV5(EURUSDAsianRange):
-    name = 'EURUSD_ASIAN_RANGE_V5'
-    magic = 5004
-    sl_atr_mult = 0.1
-    tp_atr_mult = 1.0
-
 class FVGNYTightV5(_LiquidityFilteredFVG):
     name = 'FVG_NY_TIGHT_V5'
     magic = 5005
     sl_atr_mult = 0.1
     tp_atr_mult = 1.0
     
-class ForexSessionMomentumV5(ForexSessionMomentum):
-    name = 'FOREX_SESSION_MOMENTUM_V5'
-    magic = 5006
-    sl_atr_mult = 0.1
-    tp_atr_mult = 1.0
-
 class LiquiditySweepReversalV5(LiquiditySweepReversal):
     name = 'LIQUIDITY_SWEEP_REVERSAL_V5'
     magic = 5007
@@ -507,9 +493,7 @@ PORTFOLIO_V5 = [
     TrendPullbackV5, 
     BBMeanReversionV5, 
     NVMRPortfolioV5,
-    EURUSDAsianRangeV5,
     FVGNYTightV5,
-    ForexSessionMomentumV5,
     LiquiditySweepReversalV5,
     PDHLRStrategyV5,
     NYLiquidityExpansionV5

@@ -13,7 +13,7 @@ modelled explicitly with a stated assumption.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, replace
+from dataclasses import dataclass
 from typing import Optional
 
 import numpy as np
@@ -49,12 +49,6 @@ class CostModel:
         triple_swap_weekday: Weekday (Mon=0) on which brokers book three nights
             to cover the weekend. None disables it; it is off by default because
             it was not verified on this account.
-        calibrated_for: Symbol these numbers were set for. The field DEFAULTS
-            below (swap -515.5, fixed spread 260) are XAUUSDm values kept only so
-            existing gold results reproduce bit-for-bit; for any other symbol
-            build the model with `src.instruments.cost_model_for(symbol, ...)`.
-            The engine warns (or raises with `EngineConfig.strict_instrument`)
-            when a model calibrated for one symbol is run on another.
     """
 
     spread_source: str = "bar"
@@ -69,9 +63,6 @@ class CostModel:
     enable_swap: bool = True
     rollover_hour_utc: float = 0.0
     triple_swap_weekday: Optional[int] = None
-
-    # Provenance tag, see docstring. None = untagged (legacy gold defaults apply).
-    calibrated_for: Optional[str] = None
 
     def spread_price(self, point: float, bar_spread_points: Optional[float]) -> float:
         """Spread for one bar, in price units."""
@@ -167,10 +158,6 @@ SCENARIOS = {
     "observed_no_swap": CostModel(spread_source="bar", slippage_points=0.0,
                                   enable_swap=False),
 }
-
-
-# The named scenarios above are GOLD scenarios; tag them so the engine can tell.
-SCENARIOS = {k: replace(v, calibrated_for="XAUUSDm") for k, v in SCENARIOS.items()}
 
 
 def spread_stats(rates: np.ndarray, point: float) -> dict:
