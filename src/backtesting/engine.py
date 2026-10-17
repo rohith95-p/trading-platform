@@ -427,6 +427,9 @@ class EngineConfig:
     # and 1.0 since; the bot traded 2026-10-05..15 on 2.0.
     d1_intraday_override: bool = False
     d1_intraday_override_mult: float = 1.0
+    # Owner rule 2026-10-17 (main_loop._override_may_apply): the override may only tighten
+    # (BULLISH -> BEARISH), never turn a BEARISH daily trend bullish. Default False = as-ran history.
+    d1_override_tighten_only: bool = False
 
     # (6) scripts/protect_profit.py (separate process, polls every 20s): closes
     # a GREEN position (profit >= MIN_GREEN) on (a) giveback: peak >= GIVEBACK_PEAK
@@ -645,7 +648,8 @@ class BacktestEngine:
             move = closes[-1] - opens[-1]
             if atr > 0 and abs(move) / atr >= self.cfg.d1_intraday_override_mult:
                 intraday = "BULLISH" if move > 0 else "BEARISH"
-                if intraday != bias:
+                if intraday != bias and (not self.cfg.d1_override_tighten_only
+                                         or (bias == "BULLISH" and intraday == "BEARISH")):
                     self.diag["d1_intraday_overrides"] = self.diag.get("d1_intraday_overrides", 0) + 1
                     bias = intraday
         return bias

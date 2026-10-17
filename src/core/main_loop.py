@@ -425,7 +425,17 @@ def _run_guarded():
                             _move_ratio = abs(_intraday_move) / _d1_atr
                             if _move_ratio >= _D1_INTRADAY_OVERRIDE_MULT:
                                 _intraday_bias = "BULLISH" if _intraday_move > 0 else "BEARISH"
-                                if _intraday_bias != d1_bias:
+                                if _intraday_bias != d1_bias and not _override_may_apply(d1_bias, _intraday_bias):
+                                    # 2026-10-17 (owner rule): a BEARISH daily trend must keep blocking buys.
+                                    # The override may only TIGHTEN (bullish -> bearish on a crash day), never
+                                    # loosen (bearish -> bullish), which is how counter-trend buys got through
+                                    # on 2026-10-15.
+                                    log.warning(
+                                        f"D1 INTRADAY OVERRIDE SUPPRESSED: live bar {_intraday_move:+.1f} pts "
+                                        f"({_move_ratio:.1f}×ATR) points {_intraday_bias} but the daily trend is "
+                                        f"{d1_bias}; bias stays {d1_bias}."
+                                    )
+                                elif _intraday_bias != d1_bias:
                                     log.warning(
                                         f"D1 INTRADAY OVERRIDE: live bar moved "
                                         f"{_intraday_move:+.1f} pts ({_move_ratio:.1f}×ATR). "
@@ -721,13 +731,25 @@ def _check_vi3_tripwire(fetcher):
         log.warning(f"Could not check VI.3 tripwire: {e}")
 
 
+def _override_may_apply(closed_bias: str, intraday_bias: str) -> bool:
+    """The intraday override may only make the gate STRICTER: a bullish daily trend turning
+    bearish on a crash day. A bearish daily trend is never flipped to bullish (owner rule 2026-10-17)."""
+    return closed_bias == "BULLISH" and intraday_bias == "BEARISH"
+
+
 def _d1_bias_allows(signal, d1_bias, strategy_name: str) -> bool:
     """Daily-trend gate, shared by the fresh and confirmed signal paths.
 
     Previously only fresh signals were gated; confirmed pending signals executed
     without ever consulting the daily bias.
+
+    Fails CLOSED (2026-10-17): with the gate enabled, no bias (short/failed D1 fetch, NaN EMA)
+    means no new entry, instead of silently trading both directions.
     """
     if not d1_bias:
+        if ENABLE_D1_GATE:
+            log.warning(f"[{strategy_name}] entry blocked: D1 gate enabled but the daily bias could not be computed.")
+            return False
         return True
     if signal.is_buy and d1_bias == "BEARISH":
         log.info(f"[{strategy_name}] BUY blocked by D1 BEARISH bias.")

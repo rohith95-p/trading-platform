@@ -39,7 +39,7 @@ per M15/M5/M1 series). Before 2026-07 the engine runs at M15 resolution; the ent
 
 60-second loop, IST clock, symbol `XAUUSDm`, fixed SL/TP in ATR14 multiples, no trailing/pyramiding.
 1. Safety gates: single-instance lock, `STOP` file kill switch, Friday 22:30 IST flatten, spread, ±15-min news blackout, daily-loss cap, data freshness.
-2. Direction: **D1 EMA20 gate** (on, by design) plus an intraday override (threshold 1.0× — not backtested).
+2. Direction: **D1 EMA20 gate** (on, by design): a BEARISH daily trend blocks buys, a BULLISH one blocks sells. The intraday override (threshold 1.0×, not backtested) may only **tighten** the gate (bullish→bearish on a crash day), never turn a bearish trend bullish; and if the daily bias cannot be computed the gate **fails closed** (no new entries). (Changed 2026-10-17 after two counter-trend buys got through on 2026-10-15.)
 3. Entries only 06:00–21:30 IST; evaluation skipped 15:30–17:30 IST (`LONDON_NY_OVERLAP`).
 4. Legs (SL/TP = 0.5/1.5 ATR): `TREND_PULLBACK_V5`, `BB_MEAN_REVERSION_V5`, `NVMR_TARGET_10_V5`, `FVG_NY_TIGHT_V5`; one signal per candle (Highlander ranking).
 5. Order path: `SizingLadder` (0.01 lot below $800) → `PreTradeVeto` → `risk_rules` (ENFORCE=True: daily 3 %/6 %, 2 losing trades/day below $400, 3-loss pause, week/month caps, 30 % peak-drawdown halt) → market order with SL/TP attached.
