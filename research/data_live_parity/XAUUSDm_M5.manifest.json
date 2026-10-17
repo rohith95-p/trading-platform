@@ -1,0 +1,223 @@
+{
+  "symbol": "XAUUSDm",
+  "timeframe": "M5",
+  "bars": 9329,
+  "first_time": "2026-09-01 00:00:00",
+  "last_time": "2026-10-16 20:55:00",
+  "sha256": "2cda51f1f3ced8bcba54715d38b9348a83a7eb16bafd2ae3b240acb5fa7f7767",
+  "server": "Exness-MT5Trial11",
+  "downloaded_utc": "2026-10-17 13:41:00",
+  "spec": {
+    "symbol": "XAUUSDm",
+    "digits": 3,
+    "point": 0.001,
+    "trade_tick_size": 0.001,
+    "trade_tick_value": 0.1,
+    "volume_min": 0.01,
+    "volume_max": 200.0,
+    "volume_step": 0.01,
+    "contract_size": 100.0
+  },
+  "gaps": [
+    {
+      "after_utc": "2026-09-01 20:55",
+      "missing_bars": 12,
+      "seconds": 3900,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-09-02 20:55",
+      "missing_bars": 12,
+      "seconds": 3900,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-09-03 20:55",
+      "missing_bars": 12,
+      "seconds": 3900,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-09-04 20:55",
+      "missing_bars": 588,
+      "seconds": 176700,
+      "weekend": true
+    },
+    {
+      "after_utc": "2026-09-07 18:25",
+      "missing_bars": 42,
+      "seconds": 12900,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-09-08 20:55",
+      "missing_bars": 12,
+      "seconds": 3900,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-09-09 20:55",
+      "missing_bars": 12,
+      "seconds": 3900,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-09-10 20:55",
+      "missing_bars": 12,
+      "seconds": 3900,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-09-11 20:55",
+      "missing_bars": 589,
+      "seconds": 177000,
+      "weekend": true
+    },
+    {
+      "after_utc": "2026-09-14 20:55",
+      "missing_bars": 12,
+      "seconds": 3900,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-09-15 20:55",
+      "missing_bars": 12,
+      "seconds": 3900,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-09-16 20:55",
+      "missing_bars": 12,
+      "seconds": 3900,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-09-17 20:55",
+      "missing_bars": 12,
+      "seconds": 3900,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-09-18 20:55",
+      "missing_bars": 588,
+      "seconds": 176700,
+      "weekend": true
+    },
+    {
+      "after_utc": "2026-09-21 20:55",
+      "missing_bars": 12,
+      "seconds": 3900,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-09-22 20:55",
+      "missing_bars": 12,
+      "seconds": 3900,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-09-23 20:55",
+      "missing_bars": 12,
+      "seconds": 3900,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-09-24 20:55",
+      "missing_bars": 12,
+      "seconds": 3900,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-09-25 20:55",
+      "missing_bars": 588,
+      "seconds": 176700,
+      "weekend": true
+    },
+    {
+      "after_utc": "2026-09-28 20:55",
+      "missing_bars": 12,
+      "seconds": 3900,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-09-29 20:55",
+      "missing_bars": 12,
+      "seconds": 3900,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-09-30 20:55",
+      "missing_bars": 12,
+      "seconds": 3900,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-10-01 20:55",
+      "missing_bars": 12,
+      "seconds": 3900,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-10-02 20:55",
+      "missing_bars": 588,
+      "seconds": 176700,
+      "weekend": true
+    },
+    {
+      "after_utc": "2026-10-05 20:55",
+      "missing_bars": 12,
+      "seconds": 3900,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-10-06 20:55",
+      "missing_bars": 12,
+      "seconds": 3900,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-10-07 20:55",
+      "missing_bars": 12,
+      "seconds": 3900,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-10-08 20:55",
+      "missing_bars": 12,
+      "seconds": 3900,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-10-09 20:55",
+      "missing_bars": 588,
+      "seconds": 176700,
+      "weekend": true
+    },
+    {
+      "after_utc": "2026-10-12 20:55",
+      "missing_bars": 12,
+      "seconds": 3900,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-10-13 20:55",
+      "missing_bars": 12,
+      "seconds": 3900,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-10-14 20:55",
+      "missing_bars": 12,
+      "seconds": 3900,
+      "weekend": false
+    },
+    {
+      "after_utc": "2026-10-15 20:55",
+      "missing_bars": 12,
+      "seconds": 3900,
+      "weekend": false
+    }
+  ],
+  "zero_volume_bars": 0,
+  "notes": "Bar timestamps are broker server time as delivered by MT5."
+}

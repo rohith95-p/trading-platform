@@ -1,5 +1,8 @@
 # Final audit — Ultra Core (2026-10-16)
 
+> **Update 2026-10-17:** the project was re-scoped to XAUUSD only. The multi-asset instrument registry, portfolio risk layer, forex/crypto data and the multi-asset screens described below were removed (recoverable from commits `3f5964f`-`0cde15f`). The research conclusions about forex/crypto remain valid as recorded; the Atlas rule engine was kept. The engine-vs-broker reconciliation (scripts/validation/reconcile_live_vs_engine.py) found the engine matches the broker per trade for the same config and, with the new opt-in `live_parity` switches (risk_rules, overlap skip, FVG spread cap, ladder, D1 override, protect_profit, entry delay), reproduces 15 of 18 real trades with r = 0.73-0.87 (window 2026-10-05..15). Open item: suspected D1 gate fail-open on a short D1 fetch (live, unconfirmed).
+
+
 Scope: whole repository incl. live demo bot, backtesting, research, new multi-asset/portfolio/Atlas modules.
 Method: independent code reading, controlled experiments, official-source rule capture, 316 automated tests.
 Nothing here enables live trading; no order was sent by any audit or research step.

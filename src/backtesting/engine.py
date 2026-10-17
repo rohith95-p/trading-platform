@@ -36,6 +36,8 @@ import numpy as np
 
 from src.backtesting.costs import CostModel
 from src.backtesting.data import BarSet, SymbolSpec
+from src.core import risk_rules as _rr
+from src.core.sizing_ladder import SizingLadder as _SizingLadder
 from src.research.market_study import atr as _flat_atr
 import src.core.market_hours as market_hours
 
@@ -197,6 +199,10 @@ class Position:
     price_current: float = 0.0
     intrabar_ambiguous: bool = False
     duplicate_of: Optional[int] = None
+    # live-parity bookkeeping (unused unless the matching EngineConfig flag is on)
+    scan_ts: int = 0        # M1-bar stamp of the scan that opened this position
+    delay_sec: int = 0      # entry_delay_sec in force when it opened
+    hit_frac: float = 0.5   # where in its exit minute the stop/target was crossed (0..1)
 
     @property
     def type(self) -> int:
@@ -359,8 +365,146 @@ class EngineConfig:
     use_time_of_day_atr: bool = False
     tod_atr_bucket_minutes: int = 60
 
+    # ------------------------------------------------------------------
+    # LIVE-PARITY switches (2026-10-17). Every flag below defaults OFF so the
+    # results of every existing backtest, and tests/test_engine_gold_regression.py,
+    # are unchanged. Each models one piece of what the live demo bot
+    # (src/core/main_loop.py + scripts/protect_profit.py) actually did that the
+    # engine did not. `live_parity=True` (or EngineConfig.live_parity_preset())
+    # switches all of them on at once; see each flag's comment for its source.
+    # ------------------------------------------------------------------
+    live_parity: bool = False
+
+    # main_loop._execute_signal ordering: live applies Highlander FIRST and only
+    # then the execution gates (market hours, strategy spread cap, concurrency,
+    # risk_rules, ladder veto), and marks the candle fired whether or not the
+    # order went through (main_loop.py ~L544-557: `last_fired_candle[...] =
+    # signal_candle` after _execute_signal, which returns None on any block).
+    # The legacy engine pre-filters on caps and retries every minute.
+    live_exec_order: bool = False
+
+    # (1) src/core/risk_rules.py semantics, ENFORCE=True: early-phase (<$400)
+    # daily cap 3% of day-start equity + max 2 losing trades/day, 3 straight
+    # losses -> 4h pause, 5 -> stop the day, weekly 15%, monthly 25%, peak-DD
+    # 30% hard halt. Uses the module's own evaluate()/_roll_anchors() on the
+    # engine's simulated balance/equity/time; record_trade_result() is
+    # re-implemented (its alerts.send side effect must not fire from a backtest).
+    risk_rules_enforce: bool = False
+    # Epoch seconds. 0 = block from the start. >0 = the state machine always
+    # runs (shadow mode, as live did while risk_rules.ENFORCE was False) but only
+    # BLOCKS entries at/after this instant. The live bot ran ENFORCE=False until
+    # the 2026-10-12 05:55 IST restart (commit 6a27858, 2026-10-11).
+    risk_rules_enforce_from_ts: int = 0
+
+    # (2) main_loop.py L448-451: no strategy evaluation while
+    # RiskManager.get_session_name(now_ist) == "LONDON_NY_OVERLAP" (15:30-17:30
+    # IST); open positions are still managed.
+    skip_overlap_session: bool = False
+
+    # (3) main_loop._execute_signal L759-765: a strategy carrying
+    # `max_spread_pts` (the FVG leg: 250) is blocked at entry when the current
+    # spread exceeds it.
+    enforce_strategy_max_spread: bool = False
+
+    # (4) ExecutionHandler.send_order: SizingLadder.get_sizing(balance) sets the
+    # lot size (ignoring the caller's) and PreTradeVeto layers 1-4 apply
+    # (balance floor $50, ENFORCE'd weekly/monthly/pause breakers, ladder
+    # concurrency <$100: 1, $100-800: 2/3, exposure caps), then the legacy
+    # MAX_CONCURRENT_POSITIONS / MAX_SAME_DIRECTION_POSITIONS checks.
+    sizing_ladder_caps: bool = False
+    # The ladder table the live bot actually carried changed over time (commit
+    # d9c219e, 2026-10-13 22:47 IST, made $100-200 two positions instead of one;
+    # live picked it up at the 2026-10-14 22:24 restart). None = the table in
+    # src/core/sizing_ladder.py as it is now. Otherwise a list of
+    # (effective_from_epoch, ((threshold, lots, max_concurrent, max_exposure), ...)).
+    sizing_ladder_schedule: Optional[List[Tuple[int, Tuple[Tuple[float, float, int, float], ...]]]] = None
+
+    # (5) main_loop.py L408-439: D1 EMA20 bias from the LAST CLOSED daily bar,
+    # then overridden by the FORMING daily bar if |close-open| >= mult * median
+    # |diff| of the last 15 D1 closes (forming bar included). The forming bar is
+    # rebuilt from M1 data up to the decision minute, per scan.
+    # NOTE: the live code said 2.0 until commit 20335dd (2026-10-16 16:10 IST)
+    # and 1.0 since; the bot traded 2026-10-05..15 on 2.0.
+    d1_intraday_override: bool = False
+    d1_intraday_override_mult: float = 1.0
+
+    # (6) scripts/protect_profit.py (separate process, polls every 20s): closes
+    # a GREEN position (profit >= MIN_GREEN) on (a) giveback: peak >= GIVEBACK_PEAK
+    # and profit <= GIVEBACK_FLOOR, or (b) a clean M15 reversal checked once per
+    # new M15 bar (clean_reversal_against), then blocks that leg from re-entering
+    # for COOLDOWN_MIN minutes (main_loop._leg_in_cooldown). Constants mirror
+    # protect_profit.py L32-35 (a unit test pins them to the script).
+    protect_profit: bool = False
+    protect_giveback_peak: float = 6.0
+    protect_giveback_floor: float = 1.0
+    protect_min_green: float = 0.5
+    protect_cooldown_min: int = 45
+
+    # (7) Entry timing. Live scans every 60s (~20s past the minute at start,
+    # then drifting), so an entry fills 0-60s after the M15 close at the
+    # then-current ask/bid. `entry_delay_sec` fills at the price interpolated
+    # `entry_delay_sec` seconds into the first M1 bar after the close. 0 = legacy
+    # (fill at that bar's open). Must be in [0, 60).
+    entry_delay_sec: int = 0
+
+    # main_loop.py L340-345 Gate 1b: no new entries within +-NEWS_BLACKOUT_MINUTES
+    # of a tier-1 event (src/core/news_filter.py); management continues.
+    news_blackout: bool = False
+
+    # main_loop._record_closed_trades only learns of a close when the position
+    # was seen open on a previous loop: a position that opens and closes inside
+    # one 60s scan interval never reaches risk_rules.record_trade_result (seen on
+    # 2026-10-12: the 18:15:39 FVG entry stopped out at 18:16:13 and the
+    # day_losing_trades counter stayed 0). Midpoint rule on 1-min bars.
+    streak_blind_spot: bool = False
+
+    # Downtime / retirement windows: {strategy_name or "*": [(start_ts, end_ts)]}.
+    # Inside a window that strategy is not evaluated ("*" = the whole bot is down:
+    # no evaluation, no entries, no management, no protect_profit; the special key
+    # "@protect_profit" = only the profit-protection watcher is not running).
+    # Broker-side SL/TP keep working. Epoch seconds, [start, end).
+    disabled_windows: Optional[Dict[str, List[Tuple[int, int]]]] = None
+
+    # Record one row per signal decision in BacktestResult.diagnostics["decisions"]
+    # (for reconciliation reports). Not a behaviour switch.
+    record_decisions: bool = False
+
+    def __post_init__(self) -> None:
+        if self.live_parity:
+            for f in _PARITY_FLAGS:
+                setattr(self, f, True)
+            # live main_loop calls _manage_open_positions on the spread-gate branch
+            self.spread_gate_blocks_management = False
+            # live sizing is the ladder's fixed 0.01 (ladder flag also sets lots)
+            self.sizing_mode = "fixed"
+            self.fixed_lots = 0.01
+            self.entry_delay_sec = LIVE_SCAN_PHASE_SEC
+
+    @classmethod
+    def live_parity_preset(cls, **overrides: Any) -> "EngineConfig":
+        """All live-parity flags on, then `overrides` applied on top."""
+        cfg = cls(live_parity=True)
+        for k, v in overrides.items():
+            if not hasattr(cfg, k):
+                raise TypeError(f"unknown EngineConfig field {k!r}")
+            setattr(cfg, k, v)
+        return cfg
+
     def as_dict(self) -> Dict[str, Any]:
         return dict(self.__dict__)
+
+
+# Flags that `live_parity=True` switches on.
+_PARITY_FLAGS = (
+    "live_exec_order", "risk_rules_enforce", "skip_overlap_session",
+    "enforce_strategy_max_spread", "sizing_ladder_caps", "d1_intraday_override",
+    "protect_profit", "news_blackout", "streak_blind_spot",
+)
+
+# Calibrated from broker history (scripts/validation/reconcile_live_parity.py):
+# median seconds between an M15 close and the live fill on trades that filled on
+# the first scan after the close. Reported by the reconcile script on every run.
+LIVE_SCAN_PHASE_SEC = 30
 
 
 @dataclass
@@ -422,6 +566,89 @@ class BacktestEngine:
             "swap_nights_charged": 0,
             "swap_paid": 0.0,
         }
+        # live-parity state (inert unless the matching EngineConfig flag is on)
+        if config.entry_delay_sec < 0 or config.entry_delay_sec >= 60:
+            raise ValueError("entry_delay_sec must be in [0, 60)")
+        self.rr_state = _rr.RiskState()
+        self.cooldown_until: Dict[str, int] = {}
+        self.decisions: List[Dict[str, Any]] = []
+        self._down_windows: Dict[str, List[Tuple[int, int]]] = {
+            k: sorted(v) for k, v in (config.disabled_windows or {}).items()
+        }
+
+    def seed_risk_state(self, **fields: Any) -> None:
+        """Pre-load risk_rules.RiskState (e.g. peak equity / week & month anchors
+        carried in from before the replay window)."""
+        for k, v in fields.items():
+            if not hasattr(self.rr_state, k):
+                raise TypeError(f"unknown RiskState field {k!r}")
+            setattr(self.rr_state, k, v)
+
+    # -- live-parity helpers -----------------------------------------------
+
+    def _is_down(self, name: str, ts: int) -> bool:
+        """True when `name` (or the whole bot, key "*") is disabled at `ts`."""
+        if not self._down_windows:
+            return False
+        for key in ("*", name):
+            for a, b in self._down_windows.get(key, ()):
+                if a <= ts < b:
+                    return True
+        return False
+
+    def _decide(self, ts: int, name: str, is_buy: bool, outcome: str) -> None:
+        if self.cfg.record_decisions:
+            self.decisions.append({"ts": int(ts), "strategy": name,
+                                   "dir": "BUY" if is_buy else "SELL", "outcome": outcome})
+
+    def _forming_d1(self, ts: int) -> Optional[Tuple[float, float, float, float]]:
+        """(open, high, low, close) of the still-forming daily bar at `ts`, built
+        from M1 (M15 when M1 is missing). Broker day = UTC midnight (verified:
+        Exness server runs UTC+0). Close is the bar open at `ts`, i.e. the price
+        the live bot would read from copy_rates_from_pos(D1)[-1] at that scan."""
+        day0 = ts - (ts % 86400)
+        for arr, times, step in ((self.m1, self._m1_t, 60), (self.m15, self._m15_t, 900)):
+            if arr is None or times is None:
+                continue
+            lo = int(np.searchsorted(times, day0, side="left"))
+            # only bars that have fully closed by `ts` (no look-ahead)
+            hi = int(np.searchsorted(times, ts - step, side="right"))
+            if hi <= lo:
+                continue
+            seg = arr[lo:hi]
+            last_close = float(seg["close"][-1])
+            return (float(seg["open"][0]), float(seg["high"].max()),
+                    float(seg["low"].min()), last_close)
+        return None
+
+    def _live_d1_bias(self, d1_view: np.ndarray, ts: int) -> Optional[str]:
+        """Re-implementation of main_loop.py L387-439 on the engine's D1 view.
+
+        Bias = last CLOSED bar ([-2]) vs EMA20 at [-2]; then the forming bar
+        ([-1], rebuilt from M1 as of `ts`) overrides it when its |close-open| is
+        >= mult * median(|diff(closes[-15:])|) and points the other way.
+        """
+        if d1_view is None or len(d1_view) < 21:
+            return None
+        closes = np.array(d1_view["close"], dtype=float)
+        opens = np.array(d1_view["open"], dtype=float)
+        forming = self._forming_d1(ts)
+        if forming is not None:
+            opens[-1], closes[-1] = forming[0], forming[3]
+        ema = _ema(closes, 20)
+        if np.isnan(ema[-2]):
+            return None
+        bias = "BULLISH" if closes[-2] > ema[-2] else "BEARISH"
+        if len(closes) >= 15:
+            arr = np.abs(np.diff(closes[-15:]))
+            atr = float(np.median(arr)) if len(arr) else 0.0
+            move = closes[-1] - opens[-1]
+            if atr > 0 and abs(move) / atr >= self.cfg.d1_intraday_override_mult:
+                intraday = "BULLISH" if move > 0 else "BEARISH"
+                if intraday != bias:
+                    self.diag["d1_intraday_overrides"] = self.diag.get("d1_intraday_overrides", 0) + 1
+                    bias = intraday
+        return bias
 
     # -- helpers ---------------------------------------------------------
 
@@ -587,7 +814,8 @@ class BacktestEngine:
               ts: int, rm, m15_view: np.ndarray, session_mult: float, session: str,
               duplicate_of: Optional[int] = None, is_pyramid: bool = False,
               sl_atr_mult: Optional[float] = None,
-              tp_atr_mult: Optional[float] = None) -> Optional[Position]:
+              tp_atr_mult: Optional[float] = None,
+              lots_override: Optional[float] = None) -> Optional[Position]:
         # Per-strategy exit geometry (rohith phase 3 portfolio_v4 legs). Mirrors
         # main_loop._execute_signal exactly: a strategy carrying its own
         # sl_atr_mult/tp_atr_mult overrides the session-default multiplier and
@@ -617,6 +845,8 @@ class BacktestEngine:
                                                  risk_pct=self.cfg.risk_pct)
             if self.cfg.lot_cap is not None:
                 lots = min(lots, self.cfg.lot_cap)
+        if lots_override is not None:
+            lots = lots_override       # live ignores the caller's size (SizingLadder)
         if lots <= 0:
             return None
 
@@ -749,6 +979,58 @@ class BacktestEngine:
         )
         self.positions.remove(pos)
         self.equity.append((ts, self.balance))
+        if self.cfg.risk_rules_enforce:
+            self._rr_after_close(pos, net, ts)
+
+    def _rr_after_close(self, pos: Position, net: float, ts: int) -> None:
+        """main_loop._record_closed_trades -> risk_rules.record_trade_result.
+
+        Live learns of a close on the next loop and only if the position was seen
+        open on an earlier loop (`known_position_tickets`); `streak_blind_spot`
+        reproduces that: the position is "seen" iff it was still open when the
+        next loop began, i.e. its (estimated) exit is >= 60s after its entry.
+        """
+        if self.cfg.streak_blind_spot and (ts + pos.hit_frac * 60.0) - pos.entry_time < 60.0:
+            self.diag["streak_blind_closes"] = self.diag.get("streak_blind_closes", 0) + 1
+            return
+        now = datetime.fromtimestamp(ts, tz=timezone.utc).astimezone(IST)
+        st = _rr._roll_anchors(self.rr_state, self.balance, now)   # same roll as main_loop L623
+        if net < 0:                                                # risk_rules L253-268
+            st.consecutive_losses += 1
+            st.day_losing_trades += 1
+            if st.consecutive_losses >= _rr.CONSEC_LOSSES_STOP_DAY:
+                st.day_stopped_date = now.date().isoformat()
+            elif st.consecutive_losses >= _rr.CONSEC_LOSSES_PAUSE:
+                st.pause_until_ts = (now + timedelta(hours=_rr.CONSEC_LOSS_PAUSE_HOURS)).timestamp()
+        else:
+            st.consecutive_losses = 0
+        self.rr_state = st
+
+    def _note_hit(self, pos: Position, bar: np.ndarray, level: float,
+                  spread_pts: Optional[float], point: float) -> None:
+        """Estimate how far into the minute `level` was crossed (live-parity only).
+
+        Walks the usual O-L-H-C (up bar) / O-H-L-C (down bar) path at uniform
+        speed and returns the path fraction at which the (bid-equivalent) level is
+        first reached. Used by the streak blind-spot rule to decide whether the
+        bot's next 60s loop started before the position closed.
+        """
+        if not self.cfg.streak_blind_spot:
+            return
+        o, h, l, c = (float(bar[k]) for k in ("open", "high", "low", "close"))
+        lvl = level if pos.is_buy else level - self.cost.spread_price(point, spread_pts)
+        path = [o, l, h, c] if c >= o else [o, h, l, c]
+        total = sum(abs(path[i + 1] - path[i]) for i in range(3))
+        if total <= 0:
+            pos.hit_frac = 0.5
+            return
+        run = 0.0
+        for a, b in zip(path[:-1], path[1:]):
+            if a != b and min(a, b) <= lvl <= max(a, b):
+                pos.hit_frac = min(1.0, (run + abs(lvl - a)) / total)
+                return
+            run += abs(b - a)
+        pos.hit_frac = 0.5
 
     def _walk_minute(self, pos: Position, bar: np.ndarray, ts: int, point: float,
                      ambiguous: bool, is_m15_close: bool = False) -> Optional[Tuple[float, str]]:
@@ -783,8 +1065,10 @@ class BacktestEngine:
                 pos.intrabar_ambiguous = True
                 self.diag["ambiguous_bars"] += 1
             if hit_sl:
+                self._note_hit(pos, bar, pos.sl, spread_pts, point)
                 return pos.sl - slip, "SL"
             if hit_tp:
+                self._note_hit(pos, bar, pos.tp, spread_pts, point)
                 return pos.tp, "TP"
         else:
             # a short exits on ask
@@ -806,8 +1090,10 @@ class BacktestEngine:
                 pos.intrabar_ambiguous = True
                 self.diag["ambiguous_bars"] += 1
             if hit_sl:
+                self._note_hit(pos, bar, pos.sl, spread_pts, point)
                 return pos.sl + slip, "SL"
             if hit_tp:
+                self._note_hit(pos, bar, pos.tp, spread_pts, point)
                 return pos.tp, "TP"
 
         if ambiguous:
@@ -962,8 +1248,21 @@ class BacktestEngine:
                     if hit is not None:
                         self._close(pos, hit[0], ts, hit[1])
 
+                # 1b. scripts/protect_profit.py -- its own process, polling every
+                # 20s, so it acts every minute regardless of the bot's scan gates.
+                if cfg.protect_profit and self.positions and not self._is_down("@protect_profit", ts):
+                    self._protect_profit_step(bar, ts, m, m15_view)
+
                 # 2. Bot side: the 60s scan.
                 if m != 0 and (ts - bar_open) % cfg.loop_interval_sec != 0:
+                    continue
+
+                if self._down_windows and self._is_down("*", ts):
+                    # bot not running: no evaluation/entries/management; a signal
+                    # cached before the outage is not carried across it.
+                    last_signal_eval = -(10 ** 9)
+                    for k in cached:
+                        cached[k] = None
                     continue
 
                 spread_ok = spread_pts is None or spread_pts <= cfg.spread_gate_points
@@ -975,6 +1274,16 @@ class BacktestEngine:
                         # spreads blow out.
                         self.diag["management_skipped_spread"] += 1
                         continue
+                if not spread_ok and cfg.live_exec_order:
+                    # main_loop L329-332: wide spread -> manage, sleep, next scan
+                    self._manage(rm, m15_view, bar, point, spread_pts)
+                    continue
+
+                # Gate 1b (main_loop L340-345): news blackout
+                if cfg.news_blackout and self._news_blocked(current_ist):
+                    self.diag["scans_news_blackout"] = self.diag.get("scans_news_blackout", 0) + 1
+                    self._manage(rm, m15_view, bar, point, spread_pts)
+                    continue
 
                 # 3. Daily drawdown gate.
                 if shutdown_date == today:
@@ -1000,6 +1309,12 @@ class BacktestEngine:
                         self._manage(rm, m15_view, bar, point, spread_pts)
                         continue
 
+                # main_loop L448-451: no strategy evaluation in LONDON_NY_OVERLAP
+                if cfg.skip_overlap_session and rm.get_session_name(current_ist) == "LONDON_NY_OVERLAP":
+                    self.diag["scans_overlap_skipped"] = self.diag.get("scans_overlap_skipped", 0) + 1
+                    self._manage(rm, m15_view, bar, point, spread_pts)
+                    continue
+
                 # 4. Strategy evaluation, on M5 boundaries as the M5 view advances.
                 if spread_ok and ts - last_signal_eval >= cfg.resignal_interval_sec:
                     last_signal_eval = ts
@@ -1008,6 +1323,9 @@ class BacktestEngine:
                         if self.m5 is not None else None
                     )
                     for s in strategies:
+                        if self._down_windows and self._is_down(s.name, ts):
+                            cached[s.name] = None
+                            continue
                         try:
                             cached[s.name] = s.evaluate(m15_view, m5_view)
                         except Exception as exc:
@@ -1017,7 +1335,12 @@ class BacktestEngine:
                             self.diag["signals_generated"] += 1
 
                 # 5. Entries (with Highlander Rule)
-                if spread_ok:
+                if spread_ok and cfg.live_exec_order:
+                    self._parity_entries(strategies, cached, fired_on, bar_open, bar, ts,
+                                         current_ist, spread_pts, m15_view, d1_view, d1_bias,
+                                         choch_override, rm, point, coarse, is_m15_close,
+                                         session_mult)
+                elif spread_ok:
                     mh_ok, _ = market_hours.allow_new_entry(current_ist)
                     if not mh_ok:
                         # Time lock or rollover blocked entry
@@ -1118,6 +1441,11 @@ class BacktestEngine:
             for pos in list(self.positions):
                 self._close(pos, float(last["close"]), int(last["time"]), "END_OF_DATA")
 
+        if cfg.record_decisions:
+            self.diag["decisions"] = self.decisions
+        if cfg.risk_rules_enforce:
+            self.diag["risk_state_final"] = self.rr_state.to_dict()
+
         return BacktestResult(
             trades=self.trades,
             equity=self.equity,
@@ -1133,6 +1461,238 @@ class BacktestEngine:
             return False
         same = sum(1 for p in self.positions if p.is_buy == is_buy)
         return same < self.cfg.max_same_direction
+
+    # -- live-parity components -------------------------------------------
+
+    _RANK_ORDER = {
+        # identical to main_loop.py L516-533 / the legacy block in run()
+        "NVMR_TARGET_10_V5": 6, "NVMR_TARGET_10": 6,
+        "BB_MEAN_REVERSION_V5": 5, "BB_MEAN_REVERSION": 5,
+        "FVG_NY_SWEEP_OR_VOID": 5, "FVG_NY_SWEEP": 4, "FVG_NY_VOID": 3,
+        "FVG_NY_TIGHT_V5": 2, "FVG_NY_TIGHT": 2,
+        "TREND_PULLBACK_V5": 2, "TREND_PULLBACK": 2,
+        "FVG_ASIA_SWEEP": 1,
+        "NY_LIQUIDITY_EXPANSION_V5": 1, "NY_LIQUIDITY_EXPANSION": 1,
+        "PDHLR_STRATEGY_V5": 1, "PDHLR_STRATEGY": 1,
+    }
+
+    def _news_blocked(self, current_ist: datetime) -> bool:
+        from src.core import news_filter
+        blocked, _ = news_filter.is_near_news_event(current_ist)
+        return bool(blocked)
+
+    def _scan_d1_bias(self, d1_view, ts: int, static_bias: Optional[str]) -> Optional[str]:
+        cfg = self.cfg
+        if not cfg.enable_d1_bias_gate:
+            return None
+        if cfg.d1_intraday_override and cfg.direction_gate == "d1_ema20" and d1_view is not None:
+            return self._live_d1_bias(d1_view, ts)
+        return static_bias
+
+    @staticmethod
+    def _clean_reversal(is_buy: bool, m15_view: np.ndarray) -> bool:
+        """scripts/protect_profit.clean_reversal_against on the last 40 M15 bars
+        (copy_rates_from_pos(M15, 0, 40) -> [-1] forming, [-2] last closed)."""
+        from scripts.protect_profit import clean_reversal_against
+        return bool(clean_reversal_against(is_buy, m15_view[-40:]))
+
+    def _protect_profit_step(self, bar, ts: int, m: int, m15_view: np.ndarray) -> None:
+        """scripts/protect_profit.py main() loop body, once per M1 bar.
+
+        The script polls every 20s (3 samples per minute); a 1-minute bar cannot
+        say which prices it sampled, so the model is:
+          * peak     = the position's favourable-extreme profit so far (polls catch
+                       most intrabar extremes: the 2026-10-13 close logged peak
+                       +6.32 against a bar extreme of +6.97);
+          * giveback = fires when this bar's WORST profit lies in
+                       [MIN_GREEN, GIVEBACK_FLOOR] and peak >= GIVEBACK_PEAK, at the
+                       price of that worst point (a poll can land anywhere in the
+                       band as price falls through it);
+          * reversal = once per new M15 bar (first minute), profit measured at the
+                       price at that bar's open, like `new_bar` in the script.
+        Closing arms the leg's re-entry cooldown (`_set_cooldown`).
+        """
+        cfg = self.cfg
+        point = self.spec.point
+        spread_pts = float(bar["spread"]) if "spread" in bar.dtype.names else None
+        for pos in list(self.positions):
+            dirn = 1.0 if pos.is_buy else -1.0
+            vpp = self._value_per_price(pos.lots)
+            peak = (pos.mfe_price - pos.entry_price) * dirn * vpp
+            if pos.is_buy:
+                worst_px = float(bar["low"])                          # exits on bid
+            else:
+                worst_px = self.cost.ask(float(bar["high"]), point, spread_pts)   # exits on ask
+            worst = (worst_px - pos.entry_price) * dirn * vpp
+            reason, exit_px = None, 0.0
+            if peak >= cfg.protect_giveback_peak and cfg.protect_min_green <= worst <= cfg.protect_giveback_floor:
+                reason, exit_px = "PROTECT_GIVEBACK", worst_px
+            elif m == 0:
+                base = float(bar["open"])
+                open_px = base if pos.is_buy else self.cost.ask(base, point, spread_pts)
+                p_open = (open_px - pos.entry_price) * dirn * vpp
+                if p_open >= cfg.protect_min_green and self._clean_reversal(pos.is_buy, m15_view):
+                    reason, exit_px = "PROTECT_REVERSAL", open_px
+            if reason is None:
+                continue
+            self._close(pos, exit_px, ts, reason)
+            self.cooldown_until[pos.strategy] = ts + cfg.protect_cooldown_min * 60
+            self.diag["protect_closes"] = self.diag.get("protect_closes", 0) + 1
+
+    _CAP_REASONS = ("caps", "max_concurrent", "ladder_concurrent", "ladder_exposure",
+                    "same_direction")
+
+    def _ladder_sizing(self, ts: int) -> Tuple[float, int, float]:
+        """(lots, max_concurrent, max_exposure) for the current balance, from the
+        ladder table in force at `ts` (SizingLadder.get_sizing's exact walk)."""
+        sched = self.cfg.sizing_ladder_schedule
+        if not sched:
+            return _SizingLadder.get_sizing(self.balance)
+        table = sched[0][1]
+        for eff, tbl in sorted(sched, key=lambda x: x[0]):
+            if eff <= ts:
+                table = tbl
+        for threshold, lots, max_conc, max_exp in reversed(table):
+            if self.balance >= threshold:
+                return lots, max_conc, max_exp
+        return table[0][1:]
+
+    def _exec_gates(self, strat, sig, ts: int, current_ist: datetime,
+                    spread_pts: Optional[float]) -> Tuple[Optional[str], Optional[float]]:
+        """main_loop._execute_signal + ExecutionHandler.send_order gates, in live
+        order. Returns (block_reason | None, lots_override | None)."""
+        cfg = self.cfg
+        # IV.6 / owner window (main_loop L752)
+        ok, _ = market_hours.allow_new_entry(current_ist)
+        if not ok:
+            return "market_hours", None
+        # per-strategy spread cap (L759-765)
+        cap = getattr(strat, "max_spread_pts", None)
+        if cfg.enforce_strategy_max_spread and cap and spread_pts is not None and spread_pts > cap:
+            return "strategy_max_spread", None
+        # executor.can_open_new_position (L767): MAX_CONCURRENT_POSITIONS
+        if len(self.positions) >= cfg.max_concurrent:
+            return "max_concurrent", None
+        # risk_rules (L792-803). Evaluated even when not enforced (shadow), so the
+        # state machine matches live; only blocks from risk_rules_enforce_from_ts.
+        enforcing = False
+        if cfg.risk_rules_enforce:
+            enforcing = (cfg.risk_rules_enforce_from_ts == 0 or ts >= cfg.risk_rules_enforce_from_ts)
+            equity = self.balance + self.floating_pl()
+            dec, self.rr_state = _rr.evaluate(self.balance, equity, self.used_margin(),
+                                              now=current_ist, state=self.rr_state)
+            if enforcing and not dec.allow_new_entries:
+                return "risk_rules: " + dec.reason, None
+        lots = None
+        if cfg.sizing_ladder_caps:
+            # ExecutionHandler.send_order L158-168 + PreTradeVeto layers 1-4
+            if self.balance < _SizingLadder.POSITION_FLOOR:
+                return "position_floor", None
+            lots, max_conc, max_exp = self._ladder_sizing(ts)
+            if enforcing:                                          # veto layer 2 (L120-167)
+                st = self.rr_state
+                if st.pause_until_ts > 0 and ts < st.pause_until_ts:
+                    return "veto_pause", None
+                if st.week_start_balance > 0 and \
+                        (st.week_start_balance - self.balance) / st.week_start_balance >= 0.15:
+                    return "veto_weekly", None
+                if st.month_start_balance > 0 and \
+                        (st.month_start_balance - self.balance) / st.month_start_balance >= 0.25:
+                    return "veto_monthly", None
+            if len(self.positions) >= max_conc:                    # layer 3
+                return "ladder_concurrent", None
+            if sum(p.lots for p in self.positions) + lots > max_exp:   # layer 4
+                return "ladder_exposure", None
+            if sum(1 for p in self.positions if p.is_buy == sig.is_buy) >= cfg.max_same_direction:
+                return "same_direction", None                      # send_order L234
+        else:
+            if not self._caps_allow(sig.is_buy):
+                return "caps", None
+        return None, lots
+
+    def _parity_entries(self, strategies, cached, fired_on, bar_open, bar, ts, current_ist,
+                        spread_pts, m15_view, d1_view, d1_bias_static, choch_override, rm,
+                        point, coarse, is_m15_close, session_mult) -> None:
+        """main_loop.py L453-557: filter -> Highlander -> execute -> mark fired.
+
+        Differences from the legacy engine block: D1 bias is rebuilt per scan
+        (intraday override), protect_profit cooldown is honoured, and the
+        execution gates run AFTER Highlander with the candle marked fired
+        whether or not the order goes through.
+        """
+        cfg = self.cfg
+        actionable = []
+        d1_bias = None
+        d1_ready = False
+        for s in strategies:
+            sig = cached[s.name]
+            if sig is None:
+                continue
+            if self._down_windows and self._is_down(s.name, ts):
+                continue
+            if cfg.dedup_per_candle and fired_on[s.name] == bar_open:
+                self.diag["signals_deduped"] += 1
+                continue
+            if not d1_ready:
+                d1_bias = self._scan_d1_bias(d1_view, ts, d1_bias_static)
+                d1_ready = True
+            if d1_bias:
+                sig_dir = "BULLISH" if sig.is_buy else "BEARISH"
+                ovr = (cfg.direction_gate == "d1_choch" and choch_override == sig_dir)
+                if not ovr and (d1_bias == "CONFLICT" or (sig.is_buy and d1_bias == "BEARISH")
+                                or (not sig.is_buy and d1_bias == "BULLISH")):
+                    self.diag["entries_blocked_d1_bias"] += 1
+                    self._decide(ts, s.name, sig.is_buy, f"d1_gate({d1_bias})")
+                    continue
+            if cfg.protect_profit and ts < self.cooldown_until.get(s.name, 0):
+                self.diag["entries_blocked_cooldown"] = self.diag.get("entries_blocked_cooldown", 0) + 1
+                self._decide(ts, s.name, sig.is_buy, "reversal_cooldown")
+                continue
+            actionable.append((s, sig))
+        if not actionable:
+            return
+
+        actionable.sort(key=lambda x: self._RANK_ORDER.get(x[0].name.upper(), 0), reverse=True)
+        best_s, best_sig = actionable[0]
+        for other_s, other_sig in actionable[1:]:
+            fired_on[other_s.name] = bar_open
+            self.diag["signals_deduped"] += 1
+            self._decide(ts, other_s.name, other_sig.is_buy, "highlander_lost")
+        # live marks the candle fired after _execute_signal, whatever it returned
+        fired_on[best_s.name] = bar_open
+
+        reason, lots = self._exec_gates(best_s, best_sig, ts, current_ist, spread_pts)
+        if reason is not None:
+            key = "entries_blocked_caps" if reason in self._CAP_REASONS else "entries_blocked_gates"
+            self.diag[key] = self.diag.get(key, 0) + 1
+            self._decide(ts, best_s.name, best_sig.is_buy, "blocked:" + reason)
+            return
+
+        d = cfg.entry_delay_sec
+        op, cl = float(bar["open"]), float(bar["close"])
+        base = op if coarse else op + (cl - op) * (d / 60.0)
+        fill = self.cost.ask(base, point, spread_pts) if best_sig.is_buy else base
+        fill += self.cost.slip(point) * (1 if best_sig.is_buy else -1)
+
+        dup_of = None
+        same = [p for p in self.positions if p.strategy == best_s.name and p.is_buy == best_sig.is_buy]
+        if same:
+            dup_of = same[0].ticket
+        session_name = rm.get_session_name(current_ist)
+        opened = self._open(best_s.name, best_s.magic, best_sig.is_buy, fill, ts + d, rm,
+                            m15_view, session_mult, session_name, duplicate_of=dup_of,
+                            sl_atr_mult=getattr(best_s, "sl_atr_mult", None),
+                            tp_atr_mult=getattr(best_s, "tp_atr_mult", None),
+                            lots_override=lots)
+        if opened is None:
+            self._decide(ts, best_s.name, best_sig.is_buy, "blocked:open_failed")
+            return
+        opened.scan_ts, opened.delay_sec = ts, d
+        self._decide(ts, best_s.name, best_sig.is_buy, "entered")
+        if coarse and cfg.walk_entry_bar_coarse:
+            hit = self._walk_minute(opened, bar, ts, point, True, is_m15_close=is_m15_close)
+            if hit is not None:
+                self._close(opened, hit[0], ts, hit[1])
 
     def _drawdown_breached(self, rm, d1_view, pl_today: float) -> bool:
         mode = self.cfg.daily_loss_limit_mode
