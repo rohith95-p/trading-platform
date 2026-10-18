@@ -1,23 +1,48 @@
 {
   "2026-10-14": [
-    {"name": "US CPI m/m", "utc_time": "12:30"},
-    {"name": "US Core CPI m/m", "utc_time": "12:30"}
+    {
+      "name": "US CPI m/m",
+      "utc_time": "12:30"
+    },
+    {
+      "name": "US Core CPI m/m",
+      "utc_time": "12:30"
+    }
   ],
   "2026-10-15": [
-    {"name": "US Retail Sales", "utc_time": "12:30"}
+    {
+      "name": "US Retail Sales",
+      "utc_time": "12:30"
+    }
+  ],
+  "2026-10-28": [
+    {
+      "name": "FOMC Rate Decision",
+      "utc_time": "18:00"
+    },
+    {
+      "name": "FOMC Press Conference",
+      "utc_time": "18:30"
+    }
   ],
   "2026-10-29": [
-    {"name": "US GDP q/q Advance", "utc_time": "12:30"}
-  ],
-  "2026-10-30": [
-    {"name": "US PCE Price Index", "utc_time": "12:30"}
-  ],
-  "2026-11-05": [
-    {"name": "FOMC Rate Decision", "utc_time": "19:00"},
-    {"name": "FOMC Press Conference", "utc_time": "19:30"}
+    {
+      "name": "US GDP q/q Advance",
+      "utc_time": "12:30"
+    },
+    {
+      "name": "US PCE Price Index",
+      "utc_time": "12:30"
+    }
   ],
   "2026-11-06": [
-    {"name": "US Non-Farm Payrolls", "utc_time": "13:30"},
-    {"name": "US Unemployment Rate", "utc_time": "13:30"}
+    {
+      "name": "US Non-Farm Payrolls",
+      "utc_time": "13:30"
+    },
+    {
+      "name": "US Unemployment Rate",
+      "utc_time": "13:30"
+    }
   ]
 }

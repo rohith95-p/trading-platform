@@ -55,28 +55,30 @@ TIER1_EVENTS: Dict[str, List[dict]] = {
     "2026-10-14": [{"name": "US CPI m/m", "utc_time": "12:30"},
                    {"name": "US Core CPI m/m", "utc_time": "12:30"}],
     "2026-10-15": [{"name": "US Retail Sales", "utc_time": "12:30"}],
-    "2026-10-29": [{"name": "US GDP q/q Advance", "utc_time": "12:30"}],
-    "2026-10-30": [{"name": "US PCE Price Index", "utc_time": "12:30"}],
+    # Corrected 2026-10-19 from official sources: Fed FOMC calendar (federalreserve.gov), BLS schedules (cpi, empsit),
+    # BEA release schedule (GDP and Personal Income & Outlays = PCE). 08:30 ET = 12:30 UTC until 1 Nov (EDT), 13:30 UTC after (EST).
+    "2026-10-28": [{"name": "FOMC Rate Decision", "utc_time": "18:00"},
+                   {"name": "FOMC Press Conference", "utc_time": "18:30"}],
+    "2026-10-29": [{"name": "US GDP q/q Advance", "utc_time": "12:30"},
+                   {"name": "US PCE Price Index", "utc_time": "12:30"}],
 
     # ---- November 2026 ----
-    "2026-11-05": [{"name": "FOMC Rate Decision", "utc_time": "19:00"},
-                   {"name": "FOMC Press Conference", "utc_time": "19:30"}],
     "2026-11-06": [{"name": "US Non-Farm Payrolls", "utc_time": "13:30"},
                    {"name": "US Unemployment Rate", "utc_time": "13:30"}],
-    "2026-11-12": [{"name": "US CPI m/m", "utc_time": "13:30"},
+    "2026-11-10": [{"name": "US CPI m/m", "utc_time": "13:30"},
                    {"name": "US Core CPI m/m", "utc_time": "13:30"}],
-    "2026-11-25": [{"name": "US GDP q/q Second", "utc_time": "13:30"}],
-    "2026-11-27": [{"name": "US PCE Price Index", "utc_time": "13:30"}],
+    "2026-11-25": [{"name": "US GDP q/q Second", "utc_time": "13:30"},
+                   {"name": "US PCE Price Index", "utc_time": "13:30"}],
 
     # ---- December 2026 ----
     "2026-12-04": [{"name": "US Non-Farm Payrolls", "utc_time": "13:30"},
                    {"name": "US Unemployment Rate", "utc_time": "13:30"}],
-    "2026-12-11": [{"name": "US CPI m/m", "utc_time": "13:30"},
-                   {"name": "US Core CPI m/m", "utc_time": "13:30"}],
-    "2026-12-16": [{"name": "FOMC Rate Decision", "utc_time": "19:00"},
+    "2026-12-09": [{"name": "FOMC Rate Decision", "utc_time": "19:00"},
                    {"name": "FOMC Press Conference", "utc_time": "19:30"}],
-    "2026-12-18": [{"name": "US PCE Price Index", "utc_time": "13:30"}],
-    "2026-12-22": [{"name": "US GDP q/q Third", "utc_time": "13:30"}],
+    "2026-12-10": [{"name": "US CPI m/m", "utc_time": "13:30"},
+                   {"name": "US Core CPI m/m", "utc_time": "13:30"}],
+    "2026-12-23": [{"name": "US GDP q/q Third", "utc_time": "13:30"},
+                   {"name": "US PCE Price Index", "utc_time": "13:30"}],
 }
 
 
