@@ -38,6 +38,7 @@ from src.core import trade_log
 from src.core import risk_rules
 from src.core import market_hours
 from src.core import news_filter  # III.5 -- blocks entries around tier-1 macro events
+from src.core import ops  # halt latch, measurement-only mode, external heartbeat (2026-10-18)
 # MorningMomentum (grade H), EMAPullback (grade E), AsianSweep (grade E) were
 # archived to src/strategies/archive/ on 2026-09-01 (rohith phase 3): all three
 # scored below the random-entry control (HYP-020) and MorningMomentum's 83%
@@ -163,6 +164,19 @@ def _run_guarded():
         log.error("Startup safety check FAILED. Not trading. Fix the above and restart.")
         return
 
+    # Persistent halt latch (2026-10-18): a halt survives crashes and restarts and is cleared only by a deliberate
+    # operator action (python -m scripts.halt clear --note "...").
+    _halt = ops.halt_status()
+    if _halt is not None:
+        from src.core import alerts
+        msg = (f"START REFUSED: halt latch is set ({_halt.get('source')}: {_halt.get('reason')}). "
+               f"Review, reconcile, then clear with: python -m scripts.halt clear --note \"...\"")
+        log.error(msg)
+        alerts.send(msg, severity=alerts.CRITICAL)
+        return
+    if ops.measure_only():
+        log.warning("MEASUREMENT-ONLY MODE (ULTRA_MEASURE_ONLY): scanning and logging, NO orders will be sent.")
+
     # Config-integrity gate: refuse to trade a configuration nobody has run
     # through a backtest and recorded. This is the fix for a real recurring
     # failure -- exposure caps raised without re-validating, the D1 gate left
@@ -171,6 +185,7 @@ def _run_guarded():
     # src/core/validation_ledger.py and RESEARCH_LEDGER.md HYP-047/048.
     from src.core import validation_ledger
     _cfg_report = validation_ledger.check_live_config()
+    ops.BUILD["fingerprint"] = _cfg_report.get("fingerprint")
     if _cfg_report["validated"]:
         _res = _cfg_report["match"]["result"]
         log.info(f"CONFIG VALIDATED: fingerprint {_cfg_report['fingerprint']} matches "
@@ -275,7 +290,7 @@ def _run_guarded():
                     log.error(f"Failed to send daily report: {e}")
                 current_date = now_ist.date()
             resilience.heartbeat()
-            resilience.push_heartbeat_external()  # Phase 3.4: external uptime monitor ping
+            _push_ops_heartbeat(fetcher, drawdown_shutdown)  # external dead-man heartbeat (status payload)
             resilience.save_state(last_fired_candle, drawdown_shutdown, shutdown_date,
                                   executed_dedup_keys=[list(k) for k in executed_orders_dedup])
 
@@ -588,6 +603,29 @@ def _run_guarded():
 _COOLDOWN_FILE = os.path.join(resilience._LOGS, "cooldown.json")
 
 
+_LAST_HB = {"t": None}
+
+
+def _push_ops_heartbeat(fetcher, drawdown_shutdown: bool) -> None:
+    """Send the status heartbeat. Never raises and never blocks the loop (push runs in a daemon thread)."""
+    try:
+        now = _time.time()
+        interval = None if _LAST_HB["t"] is None else now - _LAST_HB["t"]
+        _LAST_HB["t"] = now
+        tick = fetcher.get_tick()
+        quote_age = (now - float(tick.time)) if tick is not None else None
+        orders = mt5.orders_get(symbol=SYMBOL)
+        acct = mt5.account_info()
+        mode = {0: "demo", 1: "contest", 2: "real"}.get(getattr(acct, "trade_mode", None), "unknown") if acct else "unknown"
+        payload = ops.build_status(
+            account=mode, scan_interval_s=interval, quote_age_s=quote_age,
+            open_positions=len(fetcher.get_positions()), pending_orders=len(orders) if orders else 0,
+            daily_pnl=fetcher.get_todays_closed_pl(), drawdown_shutdown=drawdown_shutdown)
+        ops.push_status(payload)
+    except Exception as e:
+        log.debug(f"ops heartbeat skipped: {e}")
+
+
 def _leg_in_cooldown(name: str) -> bool:
     """True if scripts/protect_profit.py closed this leg on a reversal recently
     and it should not re-enter yet."""
@@ -769,6 +807,12 @@ def _execute_signal(signal, m15_rates, fetcher, risk, executor, session_mult, se
     multiplier and the shared TP_ATR_MULTIPLIER constant for this order only.
     Absent on a strategy -> falls back to exactly the prior behaviour.
     """
+    # Measurement-only mode (2026-10-18): signals are logged, no order of any kind is sent.
+    if ops.measure_only():
+        trade_log.signal(signal.strategy_name, signal.direction_str, "blocked",
+                         "measurement-only mode (no orders)", session=session_name)
+        return None
+
     # IV.6 + owner's 11:30-21:30 trading window: weekend gap, rollover spread
     # spike, and no-night-trades are all checked here, before anything else.
     _mh_ok, _mh_why = market_hours.allow_new_entry()
@@ -819,6 +863,8 @@ def _execute_signal(signal, m15_rates, fetcher, risk, executor, session_mult, se
                 margin_used=getattr(_acct, "margin", 0.0) or 0.0)
             risk_rules.save_state(_rstate)
             if not _decision.allow_new_entries:
+                if str(_decision.reason).startswith("HARD HALT"):
+                    ops.set_halt(_decision.reason, "risk_rules")   # latch: survives restarts, human clears it
                 trade_log.gate("risk_rules_shadow", allowed=False, reason=_decision.reason,
                                strategy=signal.strategy_name, enforced=risk_rules.ENFORCE)
                 if risk_rules.ENFORCE:

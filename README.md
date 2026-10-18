@@ -46,7 +46,7 @@ per M15/M5/M1 series). Before 2026-07 the engine runs at M15 resolution; the ent
 6. `scripts/protect_profit.py` (separate process) may close green positions early.
 
 Operations: a `STOP` file in the repo root flattens and halts; `logs/trades/YYYY-MM-DD.jsonl` is the structured log; `logs/heartbeat` is liveness.
-Known weakness: the Windows scheduled task has failed to start the bot after PC sleep.
+Operations (added 2026-10-18, see `docs/OPS_RUNBOOK.md`): `scripts/supervisor.py` restarts the bot after a crash (measurement-only by default), a persistent halt latch (`python -m scripts.halt`) survives restarts, and a status heartbeat is POSTed to `ULTRA_HEARTBEAT_URL` for an external dead-man alert. Known weakness: the old Windows scheduled task failed to start the bot after PC sleep; the supervisor task installer is provided but not applied.
 
 ## 4. Backtesting
 

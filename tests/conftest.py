@@ -63,12 +63,13 @@ def isolate_runtime_files(tmp_path):
     Tests used to append fake TEST_STRATEGY orders to logs/trades/*.jsonl and
     could read/write the real risk_state.json, cooldown.json and alerts.log.
     """
-    from src.core import trade_log, risk_rules, alerts
+    from src.core import trade_log, risk_rules, alerts, ops
     import os
     patches = [
         patch.object(trade_log, "LOG_DIR", str(tmp_path / "trades")),
         patch.object(risk_rules, "STATE_PATH", str(tmp_path / "risk_state.json")),
         patch.object(alerts, "ALERT_LOG", str(tmp_path / "alerts.log")),
+        patch.object(ops, "HALT_FILE", str(tmp_path / "HALT_LATCH.json")),
     ]
     try:
         from src.core import main_loop
