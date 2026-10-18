@@ -59,6 +59,7 @@ class TestLiveDedupRegression:
         mock_fetcher = Mock()
         mock_fetcher.get_tick.return_value = Mock(ask=2652.5, bid=2652.0)
         mock_fetcher.get_foreign_positions.return_value = []
+        mock_fetcher.get_foreign_exposure.return_value = []
         mock_fetcher.get_own_positions.return_value = []
 
         mock_risk = Mock()

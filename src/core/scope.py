@@ -47,7 +47,9 @@ def foreign_report(foreign: Iterable[Any]) -> List[Dict[str, Any]]:
     out = []
     for p in foreign:
         out.append({"risk_scope": "account", "magic": getattr(p, "magic", None), "ticket": getattr(p, "ticket", None),
-                    "symbol": getattr(p, "symbol", None), "volume": getattr(p, "volume", None),
+                    "symbol": getattr(p, "symbol", None),
+                    "kind": "pending" if hasattr(p, "volume_current") and not hasattr(p, "profit") else "position",
+                    "volume": getattr(p, "volume", getattr(p, "volume_current", None)),
                     "direction": "BUY" if getattr(p, "type", 0) == 0 else "SELL",
                     "floating_pl": round(float(getattr(p, "profit", 0.0)) + float(getattr(p, "swap", 0.0)), 2),
                     "comment": str(getattr(p, "comment", ""))[:40]})

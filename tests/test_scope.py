@@ -74,6 +74,9 @@ class FakeFetcher:
     def get_foreign_positions(self):
         return scope.split_positions(self._p, OWN)[1]
 
+    def get_foreign_exposure(self):
+        return self.get_foreign_positions()
+
     def get_account_floating_pl(self):
         return sum(p.profit + p.swap for p in self._p)
 
@@ -145,3 +148,42 @@ def test_veto_signature_accepts_own_positions():
     import inspect
     from src.core import pre_trade_veto as v
     assert "own_positions" in inspect.signature(v.PreTradeVeto.check).parameters
+
+
+# ------------------------------------------------------------------ daily P&L costs, pending orders, reminder
+def test_daily_pnl_counts_commission_fee_swap_on_entry_and_exit_deals(monkeypatch):
+    from src.core import data_fetcher as df
+    D = lambda **k: SimpleNamespace(symbol="XAUUSDm", magic=k.pop("magic", 5001), **k)
+    deals = [D(type=0, entry=0, profit=0.0, swap=0.0, commission=-0.07, fee=-0.01),     # entry costs
+             D(type=1, entry=1, profit=-1.00, swap=-0.02, commission=-0.07, fee=0.0),   # exit
+             D(type=2, entry=0, profit=500.0, swap=0.0, commission=0.0, fee=0.0)]       # balance deposit: ignored
+    monkeypatch.setattr(df.mt5, "history_deals_get", lambda *a, **k: deals, raising=False)
+    monkeypatch.setattr(df.mt5, "initialize", lambda *a, **k: True, raising=False)
+    f = df.DataFetcher("XAUUSDm", own_magics=OWN)
+    assert round(f.get_todays_closed_pl(), 2) == -1.17
+
+
+def test_foreign_pending_order_counts_as_foreign_exposure(monkeypatch):
+    from src.core import data_fetcher as df
+    order = SimpleNamespace(ticket=9, magic=777, symbol="XAUUSDm", type=2, volume_current=0.02, comment="")
+    monkeypatch.setattr(df.mt5, "positions_get", lambda **k: [], raising=False)
+    monkeypatch.setattr(df.mt5, "orders_get", lambda **k: [order, SimpleNamespace(ticket=10, magic=5001)], raising=False)
+    monkeypatch.setattr(df.mt5, "initialize", lambda *a, **k: True, raising=False)
+    f = df.DataFetcher("XAUUSDm", own_magics=OWN)
+    assert [o.ticket for o in f.get_foreign_exposure()] == [9]
+    assert scope.foreign_report(f.get_foreign_exposure())[0]["kind"] == "pending"
+
+
+def test_foreign_alert_repeats_after_30_min_while_persisting(monkeypatch):
+    from src.core import main_loop as ml, alerts
+    sent = []
+    monkeypatch.setattr(alerts, "send", lambda m, severity=None: sent.append(m))
+    monkeypatch.setattr(ml, "_FOREIGN_SEEN", {"tickets": None})
+    clock = [1000.0]
+    monkeypatch.setattr(ml._time, "time", lambda: clock[0])
+    f = [pos(2, 5150001)]
+    ml._alert_foreign_exposure(f); ml._alert_foreign_exposure(f)
+    assert len(sent) == 1
+    clock[0] += 1801
+    ml._alert_foreign_exposure(f)
+    assert len(sent) == 2

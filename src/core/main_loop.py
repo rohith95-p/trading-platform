@@ -220,8 +220,19 @@ def _run_guarded():
 
     # --- Modules ---
     fetcher = DataFetcher(SYMBOL)
+    # Netting accounts merge every system's deals into ONE position per symbol, so magic ownership of an open position
+    # is ambiguous. The scoping model assumes HEDGING; refuse to trade otherwise (measurement-only just warns).
+    _acct0 = mt5.account_info()
+    _mm = getattr(_acct0, "margin_mode", None)
+    if _mm is not None and _mm != 2:   # 0 retail netting, 1 exchange, 2 retail hedging
+        _txt = f"account margin mode is {_mm} (not hedging): per-magic position ownership is unreliable."
+        if ops.measure_only():
+            log.warning(_txt)
+        else:
+            log.error(f"START REFUSED: {_txt}")
+            return
     if not ops.measure_only() and scope.block_on_foreign_enabled():
-        _foreign0 = fetcher.get_foreign_positions()
+        _foreign0 = fetcher.get_foreign_exposure()
         if _foreign0:
             from src.core import alerts
             _msg = (f"START REFUSED: another system holds positions on {SYMBOL} while orders are enabled: "
@@ -318,7 +329,7 @@ def _run_guarded():
             resilience.heartbeat()
             _push_ops_heartbeat(fetcher, drawdown_shutdown)  # external dead-man heartbeat (status payload)
             try:
-                _alert_foreign_exposure(fetcher.get_foreign_positions())
+                _alert_foreign_exposure(fetcher.get_foreign_exposure())
             except Exception as _e:
                 log.debug(f"foreign-exposure check skipped: {_e}")
             resilience.save_state(last_fired_candle, drawdown_shutdown, shutdown_date,
@@ -638,10 +649,11 @@ _FOREIGN_SEEN = {"tickets": None}
 
 
 def _alert_foreign_exposure(foreign) -> None:
-    """Alert once per change of the foreign ticket set that another system holds exposure on our symbol."""
+    """Alert when the foreign ticket set changes, and re-alert every 30 min while it persists."""
     tickets = tuple(sorted(p.ticket for p in foreign))
-    if tickets == _FOREIGN_SEEN["tickets"]:
+    if tickets == _FOREIGN_SEEN["tickets"] and (not foreign or _time.time() - _FOREIGN_SEEN.get("t", 0) < 1800):
         return
+    _FOREIGN_SEEN["t"] = _time.time()
     prev, _FOREIGN_SEEN["tickets"] = _FOREIGN_SEEN["tickets"], tickets
     if not foreign:
         if prev:
@@ -871,7 +883,7 @@ def _execute_signal(signal, m15_rates, fetcher, risk, executor, session_mult, se
 
     # Foreign exposure (2026-10-18): another system holds positions on our symbol -> fail closed, never touch them.
     if scope.block_on_foreign_enabled():
-        foreign = fetcher.get_foreign_positions()
+        foreign = fetcher.get_foreign_exposure()
         if foreign:
             _alert_foreign_exposure(foreign)
             trade_log.signal(signal.strategy_name, signal.direction_str, "blocked",

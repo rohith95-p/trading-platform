@@ -104,6 +104,15 @@ class DataFetcher:
         """Positions on this symbol opened by any other system sharing the account."""
         return [p for p in self.get_positions() if p.magic not in self.own_magics]
 
+    def get_foreign_orders(self) -> list:
+        """Pending orders on this symbol placed by any other system (future exposure)."""
+        orders = mt5.orders_get(symbol=self.symbol)
+        return [o for o in orders if o.magic not in self.own_magics] if orders else []
+
+    def get_foreign_exposure(self) -> list:
+        """Foreign open positions + foreign pending orders on this symbol."""
+        return list(self.get_foreign_positions()) + list(self.get_foreign_orders())
+
     def get_account_floating_pl(self) -> float:
         """ACCOUNT view: floating P/L (profit + swap) of ALL open positions, all symbols, all magics."""
         positions = mt5.positions_get()
@@ -131,10 +140,11 @@ class DataFetcher:
         # scope="strategy": only this symbol and Ultra Core's own magics (per-strategy attribution).
         total_pl = 0.0
         for deal in deals:
-            # entry=1 means closing a position (exit deal)
-            if deal.entry != 1:
+            # Only trade deals (buy/sell); balance/credit rows are not trading P/L. Commission and fee are booked on the
+            # entry deal at some brokers, so every trade deal's costs count, not only the exit deal's.
+            if deal.type not in (0, 1):
                 continue
             if scope == "strategy" and not (deal.symbol == self.symbol and deal.magic in self.own_magics):
                 continue
-            total_pl += deal.profit + deal.swap + deal.commission
+            total_pl += deal.profit + deal.swap + deal.commission + getattr(deal, "fee", 0.0)
         return total_pl
