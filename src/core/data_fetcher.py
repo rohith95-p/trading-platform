@@ -24,8 +24,11 @@ IST = timezone(timedelta(hours=5, minutes=30))
 class DataFetcher:
     """Fetches OHLCV data and tick info from MetaTrader 5."""
 
-    def __init__(self, symbol: str = "XAUUSDm"):
+    def __init__(self, symbol: str = "XAUUSDm", own_magics=None):
         self.symbol = symbol
+        # Strategy view = these magics only; account view = everything (see src/core/scope.py).
+        from src.core import scope
+        self.own_magics = frozenset(own_magics) if own_magics is not None else scope.load_own_magics()
 
     # ------------------------------------------------------------------
     # Rate fetchers
@@ -89,11 +92,24 @@ class DataFetcher:
     # ------------------------------------------------------------------
 
     def get_positions(self) -> list:
-        """Return open positions for the symbol, or empty list."""
+        """ACCOUNT view of the symbol: every system's open positions on this symbol (any magic)."""
         positions = mt5.positions_get(symbol=self.symbol)
         return list(positions) if positions else []
 
-    def get_todays_closed_pl(self) -> float:
+    def get_own_positions(self) -> list:
+        """STRATEGY view: only Ultra Core's positions (own magic allowlist) on this symbol."""
+        return [p for p in self.get_positions() if p.magic in self.own_magics]
+
+    def get_foreign_positions(self) -> list:
+        """Positions on this symbol opened by any other system sharing the account."""
+        return [p for p in self.get_positions() if p.magic not in self.own_magics]
+
+    def get_account_floating_pl(self) -> float:
+        """ACCOUNT view: floating P/L (profit + swap) of ALL open positions, all symbols, all magics."""
+        positions = mt5.positions_get()
+        return float(sum(p.profit + getattr(p, "swap", 0.0) for p in positions)) if positions else 0.0
+
+    def get_todays_closed_pl(self, scope: str = "account") -> float:
         """Sum the P/L of all deals closed today (IST midnight to now).
 
         Feeds RiskManager.check_daily_drawdown() -- the 6% breaker -- so this
@@ -111,9 +127,14 @@ class DataFetcher:
         if deals is None:
             return 0.0
 
+        # scope="account" (default, used by the daily-loss gate): every exit deal on the account, any symbol/magic.
+        # scope="strategy": only this symbol and Ultra Core's own magics (per-strategy attribution).
         total_pl = 0.0
         for deal in deals:
             # entry=1 means closing a position (exit deal)
-            if deal.entry == 1 and deal.symbol == self.symbol:
-                total_pl += deal.profit + deal.swap + deal.commission
+            if deal.entry != 1:
+                continue
+            if scope == "strategy" and not (deal.symbol == self.symbol and deal.magic in self.own_magics):
+                continue
+            total_pl += deal.profit + deal.swap + deal.commission
         return total_pl

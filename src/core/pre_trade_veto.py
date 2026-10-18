@@ -61,6 +61,7 @@ class PreTradeVeto:
         risk_manager,
         sizing_ladder,
         risk_rules_state,
+        own_positions: Optional[List] = None,
     ) -> VetoDecision:
         """
         Run all veto layers. First failure blocks the order.
@@ -81,7 +82,8 @@ class PreTradeVeto:
             return result
         
         # Layer 3: Concurrent position limits (from sizing ladder)
-        result = self._check_concurrent_limits(balance, open_positions, sizing_ladder)
+        # Concurrency counts only Ultra Core's own positions; exposure (layer 4) counts every system's (account view).
+        result = self._check_concurrent_limits(balance, open_positions if own_positions is None else own_positions, sizing_ladder)
         if not result.allow:
             return result
         

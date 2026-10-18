@@ -1,0 +1,147 @@
+"""Two ledgers on one account: strategy view (own magics) vs account view (everything) (2026-10-18)."""
+import json
+from types import SimpleNamespace
+
+import pytest
+
+from src.core import scope
+
+
+def pos(ticket, magic, profit=0.0, typ=0, vol=0.01, swap=0.0):
+    return SimpleNamespace(ticket=ticket, magic=magic, profit=profit, type=typ, volume=vol, swap=swap,
+                           symbol="XAUUSDm", comment="c")
+
+
+OWN = frozenset({5001, 5002})
+
+
+# ------------------------------------------------------------------ allowlist
+def test_default_allowlist_loads_and_covers_portfolio():
+    from src.strategies.portfolio_v5_core import PORTFOLIO
+    own = scope.load_own_magics()
+    assert scope.check_portfolio_magics(PORTFOLIO, own) == []
+
+
+def test_missing_portfolio_magic_is_reported():
+    from src.strategies.portfolio_v5_core import PORTFOLIO
+    assert scope.check_portfolio_magics(PORTFOLIO, frozenset({1})) != []
+
+
+@pytest.mark.parametrize("body", ["{not json", "{}", '{"ultra_core_magics": []}', '{"ultra_core_magics": ["a"]}',
+                                  '{"ultra_core_magics": [true]}', '{"ultra_core_magics": [-1]}'])
+def test_bad_allowlist_fails_closed(tmp_path, body):
+    f = tmp_path / "m.json"
+    f.write_text(body)
+    with pytest.raises(scope.ScopeConfigError):
+        scope.load_own_magics(str(f))
+
+
+def test_missing_allowlist_file_fails_closed(tmp_path):
+    with pytest.raises(scope.ScopeConfigError):
+        scope.load_own_magics(str(tmp_path / "nope.json"))
+
+
+# ------------------------------------------------------------------ split / report
+def test_split_and_report():
+    own, foreign = scope.split_positions([pos(1, 5001), pos(2, 5150001, profit=-66.12, typ=1)], OWN)
+    assert [p.ticket for p in own] == [1] and [p.ticket for p in foreign] == [2]
+    rep = scope.foreign_report(foreign)[0]
+    assert rep["risk_scope"] == "account" and rep["magic"] == 5150001 and rep["ticket"] == 2
+    assert rep["direction"] == "SELL" and rep["floating_pl"] == -66.12 and rep["volume"] == 0.01
+
+
+def test_env_switches(monkeypatch):
+    monkeypatch.delenv("ULTRA_ACCOUNT_WIDE_FLATTEN", raising=False)
+    monkeypatch.delenv("ULTRA_BLOCK_ON_FOREIGN", raising=False)
+    assert scope.account_wide_flatten_enabled() is False and scope.block_on_foreign_enabled() is True
+    monkeypatch.setenv("ULTRA_ACCOUNT_WIDE_FLATTEN", "1")
+    monkeypatch.setenv("ULTRA_BLOCK_ON_FOREIGN", "0")
+    assert scope.account_wide_flatten_enabled() is True and scope.block_on_foreign_enabled() is False
+
+
+# ------------------------------------------------------------------ fetcher scoping
+class FakeFetcher:
+    """Mirrors DataFetcher's scoping methods over a fixed position list."""
+    def __init__(self, positions):
+        self._p = positions
+
+    def get_positions(self):
+        return list(self._p)
+
+    def get_own_positions(self):
+        return scope.split_positions(self._p, OWN)[0]
+
+    def get_foreign_positions(self):
+        return scope.split_positions(self._p, OWN)[1]
+
+    def get_account_floating_pl(self):
+        return sum(p.profit + p.swap for p in self._p)
+
+
+def test_datafetcher_scoping(monkeypatch):
+    from src.core import data_fetcher as df
+    mixed = [pos(1, 5001, 5.0), pos(2, 5150001, -66.12)]
+    monkeypatch.setattr(df.mt5, "positions_get", lambda **k: mixed, raising=False)
+    monkeypatch.setattr(df.mt5, "initialize", lambda *a, **k: True, raising=False)
+    f = df.DataFetcher("XAUUSDm", own_magics=OWN)
+    assert [p.ticket for p in f.get_positions()] == [1, 2]
+    assert [p.ticket for p in f.get_own_positions()] == [1]
+    assert [p.ticket for p in f.get_foreign_positions()] == [2]
+
+
+# ------------------------------------------------------------------ main_loop behaviour
+def test_foreign_exposure_blocks_entry_without_touching_executor(monkeypatch):
+    from src.core import main_loop as ml
+    monkeypatch.delenv("ULTRA_MEASURE_ONLY", raising=False)
+    monkeypatch.delenv("ULTRA_BLOCK_ON_FOREIGN", raising=False)
+    monkeypatch.setattr(ml, "_FOREIGN_SEEN", {"tickets": None})
+
+    class Boom:
+        def __getattr__(self, n):
+            raise AssertionError(f"{n} must not be touched")
+
+    sig = SimpleNamespace(strategy_name="T", direction_str="BUY", is_buy=True, magic=5001, direction=0)
+    fetcher = FakeFetcher([pos(2, 5150001, -66.12)])
+    assert ml._execute_signal(sig, None, fetcher, Boom(), Boom(), 1.0, "NY") is None
+
+
+def test_foreign_alert_fires_once_per_ticket_set(monkeypatch):
+    from src.core import main_loop as ml
+    from src.core import alerts
+    sent = []
+    monkeypatch.setattr(alerts, "send", lambda m, severity=None: sent.append(m))
+    monkeypatch.setattr(ml, "_FOREIGN_SEEN", {"tickets": None})
+    f = [pos(2, 5150001)]
+    ml._alert_foreign_exposure(f)
+    ml._alert_foreign_exposure(f)
+    assert len(sent) == 1 and "FOREIGN EXPOSURE DETECTED" in sent[0]
+    ml._alert_foreign_exposure([pos(2, 5150001), pos(3, 999)])
+    assert len(sent) == 2
+
+
+def test_kill_switch_closes_only_own_unless_account_wide(monkeypatch):
+    from src.core import main_loop as ml
+    from src.core import alerts
+    monkeypatch.setattr(alerts, "send", lambda *a, **k: None)
+    closed = []
+
+    class Ex:
+        def close_position(self, p, *a, **k):
+            closed.append(p.ticket)
+            return True
+
+    fetch = FakeFetcher([pos(1, 5001), pos(2, 5150001)])
+    monkeypatch.delenv("ULTRA_ACCOUNT_WIDE_FLATTEN", raising=False)
+    ml._close_all_positions(fetch, Ex(), "test")
+    assert closed == [1]                       # foreign ticket 2 untouched
+    closed.clear()
+    monkeypatch.setenv("ULTRA_ACCOUNT_WIDE_FLATTEN", "1")
+    ml._close_all_positions(fetch, Ex(), "test")
+    assert sorted(closed) == [1, 2]            # explicit opt-in only
+
+
+# ------------------------------------------------------------------ veto: concurrency own-scoped, exposure account-wide
+def test_veto_signature_accepts_own_positions():
+    import inspect
+    from src.core import pre_trade_veto as v
+    assert "own_positions" in inspect.signature(v.PreTradeVeto.check).parameters

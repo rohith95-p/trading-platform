@@ -39,6 +39,7 @@ from src.core import risk_rules
 from src.core import market_hours
 from src.core import news_filter  # III.5 -- blocks entries around tier-1 macro events
 from src.core import ops  # halt latch, measurement-only mode, external heartbeat (2026-10-18)
+from src.core import scope  # own-magic strategy view vs account-wide risk view (2026-10-18)
 # MorningMomentum (grade H), EMAPullback (grade E), AsianSweep (grade E) were
 # archived to src/strategies/archive/ on 2026-09-01 (rohith phase 3): all three
 # scored below the random-entry control (HYP-020) and MorningMomentum's 83%
@@ -133,7 +134,13 @@ def _close_all_positions(fetcher, executor, reason: str) -> None:
     """Flatten every open position on the symbol (kill switch)."""
     from src.core import alerts
     alerts.send(f"⚠️ KILL SWITCH ACTIVATED ⚠️\nReason: {reason}", severity=alerts.CRITICAL)
-    for pos in fetcher.get_positions():
+    # Own positions only. Foreign positions are reported, never closed, unless ULTRA_ACCOUNT_WIDE_FLATTEN=1.
+    wide = scope.account_wide_flatten_enabled()
+    targets = fetcher.get_positions() if wide else fetcher.get_own_positions()
+    foreign_left = [] if wide else fetcher.get_foreign_positions()
+    if foreign_left:
+        log.warning(f"KILL SWITCH: leaving {len(foreign_left)} foreign position(s) untouched: {scope.foreign_report(foreign_left)}")
+    for pos in targets:
         if executor.close_position(pos):
             log.warning(f"KILL SWITCH: closed #{pos.ticket} ({reason})")
         else:
@@ -176,6 +183,15 @@ def _run_guarded():
         return
     if ops.measure_only():
         log.warning("MEASUREMENT-ONLY MODE (ULTRA_MEASURE_ONLY): scanning and logging, NO orders will be sent.")
+    try:
+        _own = scope.load_own_magics()
+        _missing = scope.check_portfolio_magics(PORTFOLIO_V5, _own)
+    except scope.ScopeConfigError as e:
+        log.error(f"START REFUSED: {e}")
+        return
+    if _missing:
+        log.error(f"START REFUSED: PORTFOLIO magics {_missing} are not in config/ultra_magics.json")
+        return
 
     # Config-integrity gate: refuse to trade a configuration nobody has run
     # through a backtest and recorded. This is the fix for a real recurring
@@ -204,6 +220,16 @@ def _run_guarded():
 
     # --- Modules ---
     fetcher = DataFetcher(SYMBOL)
+    if not ops.measure_only() and scope.block_on_foreign_enabled():
+        _foreign0 = fetcher.get_foreign_positions()
+        if _foreign0:
+            from src.core import alerts
+            _msg = (f"START REFUSED: another system holds positions on {SYMBOL} while orders are enabled: "
+                    f"{scope.foreign_report(_foreign0)}. Use measurement-only mode, a separate account, "
+                    f"or close them manually.")
+            log.error(_msg)
+            alerts.send(_msg, severity=alerts.CRITICAL)
+            return
     risk = RiskManager(SYMBOL)
     executor = ExecutionHandler(SYMBOL, risk_manager=risk)
     # rohith phase 3 (2026-09-01): portfolio_v4 replaces EMAStack alone.
@@ -291,6 +317,10 @@ def _run_guarded():
                 current_date = now_ist.date()
             resilience.heartbeat()
             _push_ops_heartbeat(fetcher, drawdown_shutdown)  # external dead-man heartbeat (status payload)
+            try:
+                _alert_foreign_exposure(fetcher.get_foreign_positions())
+            except Exception as _e:
+                log.debug(f"foreign-exposure check skipped: {_e}")
             resilience.save_state(last_fired_candle, drawdown_shutdown, shutdown_date,
                                   executed_dedup_keys=[list(k) for k in executed_orders_dedup])
 
@@ -311,7 +341,7 @@ def _run_guarded():
             # Friday Kill Switch: Flatten for the weekend
             # ----------------------------------------------------------
             if market_hours.should_flatten_for_weekend(now_ist):
-                open_pos = fetcher.get_positions()
+                open_pos = fetcher.get_own_positions()
                 if open_pos:
                     log.warning("FRIDAY KILL SWITCH: Market closing soon. Flattening all positions.")
                     print(f"[{_ist_now()}] FRIDAY KILL SWITCH -- flattening for the weekend.")
@@ -366,7 +396,7 @@ def _run_guarded():
             # CRIT-4: unrealised loss now counts toward the daily limit. The bot
             # could previously sit on a large floating loss and keep opening
             # trades, because only closed deals were measured.
-            floating_pl = sum(p.profit for p in fetcher.get_positions())
+            floating_pl = fetcher.get_account_floating_pl()   # ACCOUNT view: every system
 
             if not risk.check_daily_drawdown(
                 todays_pl=todays_pl, floating_pl=floating_pl
@@ -604,6 +634,30 @@ _COOLDOWN_FILE = os.path.join(resilience._LOGS, "cooldown.json")
 
 
 _LAST_HB = {"t": None}
+_FOREIGN_SEEN = {"tickets": None}
+
+
+def _alert_foreign_exposure(foreign) -> None:
+    """Alert once per change of the foreign ticket set that another system holds exposure on our symbol."""
+    tickets = tuple(sorted(p.ticket for p in foreign))
+    if tickets == _FOREIGN_SEEN["tickets"]:
+        return
+    prev, _FOREIGN_SEEN["tickets"] = _FOREIGN_SEEN["tickets"], tickets
+    if not foreign:
+        if prev:
+            log.info("Foreign exposure cleared.")
+        return
+    rep = scope.foreign_report(foreign)
+    msg = (f"FOREIGN EXPOSURE DETECTED on {SYMBOL}: {rep}. New Ultra Core entries are blocked; "
+           f"foreign positions are left untouched.")
+    log.error(msg)
+    trade_log.gate("foreign_exposure", allowed=False, reason="another system holds positions on this symbol",
+                   foreign=rep, risk_scope="account")
+    try:
+        from src.core import alerts
+        alerts.send(msg, severity=alerts.CRITICAL)
+    except Exception:
+        pass
 
 
 def _push_ops_heartbeat(fetcher, drawdown_shutdown: bool) -> None:
@@ -619,8 +673,9 @@ def _push_ops_heartbeat(fetcher, drawdown_shutdown: bool) -> None:
         mode = {0: "demo", 1: "contest", 2: "real"}.get(getattr(acct, "trade_mode", None), "unknown") if acct else "unknown"
         payload = ops.build_status(
             account=mode, scan_interval_s=interval, quote_age_s=quote_age,
-            open_positions=len(fetcher.get_positions()), pending_orders=len(orders) if orders else 0,
+            open_positions=len(fetcher.get_own_positions()), pending_orders=len(orders) if orders else 0,
             daily_pnl=fetcher.get_todays_closed_pl(), drawdown_shutdown=drawdown_shutdown)
+        payload["foreign_positions"] = len(fetcher.get_foreign_positions())
         ops.push_status(payload)
     except Exception as e:
         log.debug(f"ops heartbeat skipped: {e}")
@@ -655,7 +710,7 @@ def _record_closed_trades(fetcher, known_tickets):
     positions are adopted, not counted as closes. A ticket whose deal history
     can't be read yet is retried next loop rather than lost.
     """
-    current = {p.ticket for p in fetcher.get_positions()}
+    current = {p.ticket for p in fetcher.get_own_positions()}   # strategy view: foreign closes never feed our streak breakers
     if known_tickets is None:
         return current
 
@@ -691,7 +746,8 @@ def _record_closed_trades(fetcher, known_tickets):
                                       consecutive_losses=state.consecutive_losses,
                                       day_losing_trades=state.day_losing_trades,
                                       streak_pause_active=state.pause_until_ts > _time.time(),
-                                      enforced=risk_rules.ENFORCE)
+                                      enforced=risk_rules.ENFORCE, risk_scope="strategy",
+                                      magic=(in_deals[0].magic if in_deals else None))
             
             # Notify exit
             from src.core import alerts
@@ -812,6 +868,16 @@ def _execute_signal(signal, m15_rates, fetcher, risk, executor, session_mult, se
         trade_log.signal(signal.strategy_name, signal.direction_str, "blocked",
                          "measurement-only mode (no orders)", session=session_name)
         return None
+
+    # Foreign exposure (2026-10-18): another system holds positions on our symbol -> fail closed, never touch them.
+    if scope.block_on_foreign_enabled():
+        foreign = fetcher.get_foreign_positions()
+        if foreign:
+            _alert_foreign_exposure(foreign)
+            trade_log.signal(signal.strategy_name, signal.direction_str, "blocked",
+                             "FOREIGN EXPOSURE DETECTED (another system holds positions on this symbol)",
+                             session=session_name, risk_scope="account")
+            return None
 
     # IV.6 + owner's 11:30-21:30 trading window: weekend gap, rollover spread
     # spike, and no-night-trades are all checked here, before anything else.
@@ -950,7 +1016,7 @@ def _check_pyramiding(fetcher, risk, executor, m15_rates, session_mult, session_
     such entries scattered across hours 00-08 and 21-23. Pyramiding is now
     confined to the hours the strategies themselves trade (11:30-21:30 IST).
     """
-    positions = fetcher.get_positions()
+    positions = fetcher.get_own_positions()
     if not positions:
         return
 
@@ -1007,8 +1073,8 @@ def _check_pyramiding(fetcher, risk, executor, m15_rates, session_mult, session_
 
 
 def _manage_open_positions(fetcher, risk, executor):
-    """Run trailing stop logic and consolidation exit checks."""
-    positions = fetcher.get_positions()
+    """Run trailing stop logic and consolidation exit checks (own positions only)."""
+    positions = fetcher.get_own_positions()
     if not positions:
         return
 

@@ -93,21 +93,27 @@ class ExecutionHandler:
         
         self.veto = get_veto()
         self.sizing_ladder = SizingLadder
+        from src.core import scope
+        self.own_magics = scope.load_own_magics()
 
     # ------------------------------------------------------------------
     # Position queries
     # ------------------------------------------------------------------
 
     def get_open_positions(self) -> list:
-        """Return open positions for the symbol."""
+        """ACCOUNT view of the symbol (every system's positions): used for exposure/margin checks."""
         positions = mt5.positions_get(symbol=self.symbol)
         return list(positions) if positions else []
 
+    def get_own_positions(self) -> list:
+        """STRATEGY view: only Ultra Core's own magic numbers: used for position counts and attribution."""
+        return [p for p in self.get_open_positions() if p.magic in self.own_magics]
+
     def count_open_positions(self) -> int:
-        return len(self.get_open_positions())
+        return len(self.get_own_positions())
 
     def get_same_direction_count(self, is_buy: bool) -> int:
-        positions = self.get_open_positions()
+        positions = self.get_own_positions()
         target_type = mt5.ORDER_TYPE_BUY if is_buy else mt5.ORDER_TYPE_SELL
         return sum(1 for p in positions if p.type == target_type)
 
@@ -199,6 +205,7 @@ class ExecutionHandler:
             signal_direction=signal_direction,
             balance=balance,
             open_positions=open_positions,
+            own_positions=self.get_own_positions(),
             strategy_name=strategy_name,
             risk_manager=risk_manager,
             sizing_ladder=self.sizing_ladder,

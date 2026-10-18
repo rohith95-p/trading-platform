@@ -49,3 +49,14 @@ The acceptance run used alerts disabled and a local heartbeat receiver; the test
 - Validation fingerprint still does not include code commit / engine version (the commit is in the heartbeat payload only); it does not block the measurement-only restart.
 - `protect_profit.py` is not started by the supervisor (no positions in measurement-only mode).
 - Telegram token revocation remains the owner's decision.
+
+## Account scoping: strategy view vs account view (2026-10-18)
+Allowlist: `config/ultra_magics.json` (every PORTFOLIO leg magic must be listed, or the bot refuses to start; a missing/invalid file also refuses).
+
+| Uses OWN magics only (strategy view) | Uses EVERYTHING on the account (account view) |
+|---|---|
+| signals/entries, "one position at a time" count, trailing/break-even (`protect_profit`), kill-switch flatten, streak breakers, per-strategy P&L (`position_closed` logs `risk_scope=strategy`, `magic`) | daily loss, floating P&L, equity drawdown, symbol exposure cap, margin, halt state |
+
+Foreign exposure rule (fail closed): if a non-Ultra-Core position exists on XAUUSDm, all new Ultra Core entries are blocked, a `FOREIGN EXPOSURE DETECTED` alert is sent (once per change of the ticket set) and logged with magic, ticket, volume, direction and floating P/L (`risk_scope=account`). Foreign positions are never closed or modified unless `ULTRA_ACCOUNT_WIDE_FLATTEN=1`. With orders enabled, startup is refused while foreign positions exist. `ULTRA_BLOCK_ON_FOREIGN=0` disables the block (not recommended).
+Account ownership: until one account-level governor controls both systems, run Ultra Core on its own demo account or in measurement-only mode. The -$66.12 loss (magic 5150001) is not Ultra Core's; it is excluded from strategy metrics and included in account risk.
+Not done: startup check that no *other* EA uses our magics (MT5 cannot tell which EA placed a deal); the running bot picks these changes up only on its next restart.

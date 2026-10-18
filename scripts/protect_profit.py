@@ -19,9 +19,13 @@ handles those. Ctrl-C to stop.
 import json
 import os
 import time
+import sys
 import numpy as np
 import MetaTrader5 as mt5
 from datetime import datetime, timezone, timedelta
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from src.core import scope  # noqa: E402  (magic allowlist; fail closed if unreadable)
 
 IST = timezone(timedelta(hours=5, minutes=30))
 _LOGS = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "logs")
@@ -33,6 +37,7 @@ GIVEBACK_PEAK = 6.0   # only protect once peak profit >= $6
 GIVEBACK_FLOOR = 1.0  # close if profit falls back below $1 (was $1.5 -- too tight)
 MIN_GREEN = 0.5      # only act when at least this much in profit
 COOLDOWN_MIN = 45    # after a reversal close, block that leg from re-entering
+OWN_MAGICS = scope.load_own_magics()
 
 
 def _set_cooldown(leg_name):
@@ -104,12 +109,14 @@ def close_position(p, reason):
 def main():
     if not mt5.initialize():
         print("MT5 init failed"); return
-    print(f"[{_ist()}] profit-protection watcher started.")
+    print(f"[{_ist()}] profit-protection watcher started (managing magics {sorted(OWN_MAGICS)} only).")
     peak = {}          # ticket -> peak profit seen
     last_bar = None
     while True:
         try:
-            ps = [p for p in (mt5.positions_get(symbol=SYMBOL) or [])]
+            all_ps = [p for p in (mt5.positions_get(symbol=SYMBOL) or [])]
+            # Manage ONLY Ultra Core's own positions; another system's trades are shown in the status file but never touched.
+            ps = [p for p in all_ps if p.magic in OWN_MAGICS]
             acc = mt5.account_info()
             # status file so other tools can read state without their own MT5 connection
             try:
@@ -119,14 +126,15 @@ def main():
                 last_candle_str = datetime.fromtimestamp(int(r_check["time"][-2]), tz=IST).strftime("%H:%M") if r_check is not None and len(r_check) >= 2 else "NONE"
                 conn_status = t_info.connected if t_info else False
                 bid_str = f"{tick.bid:.2f}" if tick else "NONE"
-                lines = [f"{_ist()}  bal {acc.balance:.2f}  eq {acc.equity:.2f}  open {len(ps)}  bid {bid_str}  last_M15 {last_candle_str}  conn {conn_status}"]
-                for p in ps:
+                lines = [f"{_ist()}  bal {acc.balance:.2f}  eq {acc.equity:.2f}  open {len(ps)} (foreign {len(all_ps) - len(ps)})  bid {bid_str}  last_M15 {last_candle_str}  conn {conn_status}"]
+                for p in all_ps:
                     d = "BUY" if p.type == mt5.ORDER_TYPE_BUY else "SELL"
+                    tag = "" if p.magic in OWN_MAGICS else " FOREIGN(magic %s)" % p.magic
                     lines.append(f"  #{p.ticket} {d} {p.volume} @ {p.price_open:.2f} "
                                  f"now {p.price_current:.2f} SL {p.sl:.2f} TP {p.tp:.2f} "
-                                 f"P/L {p.profit:+.2f} [{p.comment}]")
-                if ps:
-                    lines.append(f"  combined {sum(p.profit for p in ps):+.2f}")
+                                 f"P/L {p.profit:+.2f} [{p.comment}]{tag}")
+                if all_ps:
+                    lines.append(f"  combined(all) {sum(p.profit for p in all_ps):+.2f}")
                 open(POSITIONS_FILE, "w").write("\n".join(lines) + "\n")
             except Exception as e:
                 open(POSITIONS_FILE, "w").write(f"ERROR in status: {e}\n")
