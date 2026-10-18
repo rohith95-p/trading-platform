@@ -7,6 +7,7 @@ import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import regime_trend_sim as rt          # chdir to repo root; atr, load_events
+sys.path.insert(0, os.getcwd())
 import fvggold_sim as fg
 from src.core import vol_regime as vr
 
