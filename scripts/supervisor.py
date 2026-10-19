@@ -59,7 +59,19 @@ def heartbeat_stale(path: str, now: float, max_age: float = HEARTBEAT_MAX_AGE_S)
         return False        # no heartbeat file yet (bot still starting)
 
 
+_ALERT_MIN_GAP_S = 1800          # same kind of alert at most once per 30 min (restart storms must not spam Telegram)
+_alert_last: dict = {}
+
+
 def _alert(msg: str, severity: str = "WARN") -> None:
+    if severity == "INFO":
+        return                   # routine status (e.g. "supervisor started") goes to the log only, never to Telegram
+    import re
+    key = re.sub(r"\d+", "#", msg)
+    now = time.time()
+    if now - _alert_last.get(key, 0.0) < _ALERT_MIN_GAP_S:
+        return
+    _alert_last[key] = now
     try:
         from src.core import alerts
         alerts.send(msg, severity=severity, context={"source": "supervisor"})
