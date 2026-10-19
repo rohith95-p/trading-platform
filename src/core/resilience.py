@@ -211,7 +211,7 @@ def note_fetch_result(mt5: Any, got_data: bool, fail_count: int, reason: str = "
     if got_data:
         return 0
     fail_count += 1
-    if fail_count == 3 or (fail_count > 3 and fail_count % 5 == 0):
+    if fail_count == 3 or (fail_count > 3 and fail_count % 3 == 0):
         msg = f"MT5: {fail_count} consecutive empty/stale fetches ({reason or 'no data'}) -- attempting reconnect."
         log.warning(msg)
         try:
