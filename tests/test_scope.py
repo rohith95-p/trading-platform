@@ -187,3 +187,18 @@ def test_foreign_alert_repeats_after_30_min_while_persisting(monkeypatch):
     clock[0] += 1801
     ml._alert_foreign_exposure(f)
     assert len(sent) == 2
+
+
+# ------------------------------------------------------------------ spread blip must not burn the candle's signal
+def test_spread_block_is_flagged_transient(monkeypatch):
+    from unittest.mock import Mock
+    from src.core import main_loop as ml
+    monkeypatch.delenv("ULTRA_MEASURE_ONLY", raising=False)
+    monkeypatch.setattr(ml.market_hours, "allow_new_entry", lambda *a, **k: (True, ""))
+    fetcher = Mock(); fetcher.get_foreign_exposure.return_value = []
+    risk = Mock(); risk.is_spread_ok.return_value = False
+    strat = SimpleNamespace(max_spread_pts=250, name="FVG_NY_TIGHT_V5")
+    sig = SimpleNamespace(strategy_name="FVG_NY_TIGHT_V5", direction_str="SELL", is_buy=False, magic=5005, direction=1)
+    ml._TRANSIENT_BLOCK["flag"] = False
+    assert ml._execute_signal(sig, None, fetcher, risk, Mock(), 1.0, "NY_MORNING", strat) is None
+    assert ml._TRANSIENT_BLOCK["flag"] is True

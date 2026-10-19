@@ -621,12 +621,23 @@ def _run_guarded():
                     log.info(f"HIGHLANDER: {len(actionable_signals)} signals fired. Selected {best_strategy.name} as best conviction.")
                 
                 # Execute the best one
+                _TRANSIENT_BLOCK["flag"] = False
                 _execute_signal(
                     best_signal, m15_rates, fetcher, risk, executor,
                     session_mult, session_name, best_strategy,
                     executed_orders_dedup=executed_orders_dedup,
                 )
-                last_fired_candle[best_strategy.name] = signal_candle
+                # 2026-10-19: spread on XAUUSDm alternates 240/260 pts and the legs' cap is 250, so one 260-pt tick
+                # used to burn the whole candle's signal (dedup). Retry next scan (up to 10 times per candle) instead.
+                _rk = (best_strategy.name, signal_candle)
+                if _TRANSIENT_BLOCK["flag"] and _SPREAD_RETRIES.get(_rk, 0) < 10:
+                    _SPREAD_RETRIES[_rk] = _SPREAD_RETRIES.get(_rk, 0) + 1
+                    for _k in [k for k in _SPREAD_RETRIES if k[1] < signal_candle - 7200]:
+                        _SPREAD_RETRIES.pop(_k, None)
+                    log.info(f"[{best_strategy.name}] spread block is transient -- will retry on this candle "
+                             f"(attempt {_SPREAD_RETRIES[_rk]}/10).")
+                else:
+                    last_fired_candle[best_strategy.name] = signal_candle
                 
                 # Block the others and mark them as fired to prevent immediate re-fires
                 for strat, sig in actionable_signals[1:]:
@@ -660,6 +671,8 @@ _COOLDOWN_FILE = os.path.join(resilience._LOGS, "cooldown.json")
 
 _LAST_HB = {"t": None}
 _FOREIGN_SEEN = {"tickets": None}
+_TRANSIENT_BLOCK = {"flag": False}     # set by _execute_signal when the block is momentary (spread blip)
+_SPREAD_RETRIES: dict = {}             # (strategy, candle) -> retries used
 
 
 def _alert_foreign_exposure(foreign) -> None:
@@ -920,6 +933,7 @@ def _execute_signal(signal, m15_rates, fetcher, risk, executor, session_mult, se
             trade_log.signal(signal.strategy_name, signal.direction_str, "blocked",
                              f"spread > {max_spread}", session=session_name)
             log.info(f"[{signal.strategy_name}] entry blocked -- spread > {max_spread}")
+            _TRANSIENT_BLOCK["flag"] = True       # a momentary spread blip must not spend the candle's signal
             return
 
     if not executor.can_open_new_position():
