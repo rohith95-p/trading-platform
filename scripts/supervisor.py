@@ -130,10 +130,10 @@ def main(argv=None) -> int:
             msg = f"resume detected: supervisor loop paused {now - last_tick:.0f}s (sleep/hibernate?) -- re-checking the bot"
             print(msg, flush=True)
             lg.info(msg)
-            _alert(msg, "WARN")
+            # routine: recorded in the supervisor log only, never pushed to Telegram (owner request 2026-10-20)
         last_tick = now
         if child is not None and child.poll() is None and heartbeat_stale(resilience.HEARTBEAT_FILE, now):
-            _alert("bot heartbeat stale > 5 min while process alive (hung) -- killing and restarting", "WARN")
+            lg.warning("bot heartbeat stale > 5 min while process alive (hung) -- killing and restarting")  # log only
             child.kill()
             child.wait(timeout=10)
         if child is not None and child.poll() is not None:
@@ -143,7 +143,7 @@ def main(argv=None) -> int:
                 crashes.append(now)
                 consecutive += 1
                 next_start = now + backoff_seconds(consecutive)
-                _alert(f"bot exited (code {code}); restart in {backoff_seconds(consecutive):.0f}s", "WARN")
+                lg.warning(f"bot exited (code {code}); restart in {backoff_seconds(consecutive):.0f}s")  # log only
         ok, why = decide_start(ops.halt_status(), os.path.exists(resilience.STOP_FILE), crashes, now)
         if child is None:
             if ok and now >= next_start:
