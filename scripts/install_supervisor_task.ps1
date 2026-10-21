@@ -25,10 +25,13 @@ Write-Host "  mode: $modeText"
 if (-not $Apply) { Write-Host "DRY RUN. Re-run with -Apply to register."; exit 0 }
 
 $desc = "Ultra Core supervisor (restarts the bot after crash/reboot; halt latch aware)"
+# Self-relaunch (2026-10-21): the task died with the PC's sleep/off and only a logon trigger existed. A 5-minute repeating
+# trigger relaunches it; MultipleInstances=IgnoreNew keeps it to a single supervisor while one is running.
+$repeat = New-ScheduledTaskTrigger -Once -At (Get-Date).AddMinutes(1) -RepetitionInterval (New-TimeSpan -Minutes 5) -RepetitionDuration (New-TimeSpan -Days 3650)
 $registered = $false
 # 1) logon + boot (boot trigger needs administrator rights)
 try {
-    $both = @((New-ScheduledTaskTrigger -AtStartup), (New-ScheduledTaskTrigger -AtLogOn))
+    $both = @((New-ScheduledTaskTrigger -AtStartup), (New-ScheduledTaskTrigger -AtLogOn), $repeat)
     Register-ScheduledTask -TaskName "UltraCoreSupervisor" -Action $action -Trigger $both -Settings $settings -Description $desc -Force -ErrorAction Stop | Out-Null
     $registered = $true
     Write-Host "Registered with triggers: AtStartup + AtLogOn"
@@ -38,7 +41,7 @@ try {
 # 2) fall back to logon only (works for the current user without elevation)
 if (-not $registered) {
     try {
-        $logon = New-ScheduledTaskTrigger -AtLogOn -User $env:USERNAME
+        $logon = @((New-ScheduledTaskTrigger -AtLogOn -User $env:USERNAME), $repeat)
         Register-ScheduledTask -TaskName "UltraCoreSupervisor" -Action $action -Trigger $logon -Settings $settings -Description $desc -Force -ErrorAction Stop | Out-Null
         $registered = $true
         Write-Host "Registered with trigger: AtLogOn only. Re-run from an administrator shell to add the AtStartup (boot) trigger."
