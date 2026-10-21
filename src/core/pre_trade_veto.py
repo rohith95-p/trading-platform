@@ -159,7 +159,8 @@ class PreTradeVeto:
         # Check monthly cap
         if hasattr(risk_state, 'month_start_balance') and risk_state.month_start_balance > 0:
             month_loss_pct = (risk_state.month_start_balance - balance) / risk_state.month_start_balance
-            if month_loss_pct >= 0.25:  # 25% monthly cap
+            # demo-only relaxation (owner decision 2026-10-21): same switch as risk_rules, live loop + MT5-confirmed demo only
+            if month_loss_pct >= 0.25 and not risk_rules.hard_halts_relaxed():  # 25% monthly cap
                 return VetoDecision(
                     allow=False,
                     reason=f"Monthly loss cap hit ({month_loss_pct*100:.1f}% >= 25%)",

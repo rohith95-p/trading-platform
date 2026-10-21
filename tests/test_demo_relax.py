@@ -81,3 +81,25 @@ def test_switch_can_be_turned_off(monkeypatch):
     monkeypatch.setattr(rr, "DEMO_RELAX_HARD_HALTS", False)
     d, _ = run()
     assert d.allow_new_entries is False and "HARD HALT" in d.reason
+
+
+# ------------------------------------------------------------------ the pre-trade veto repeats the monthly cap
+def _veto_state(month_start=161.38):
+    return SimpleNamespace(pause_until_ts=0.0, consecutive_losses=0, week_start_balance=111.15, month_start_balance=month_start)
+
+
+def test_veto_monthly_cap_relaxed_only_on_demo_in_live_loop(monkeypatch):
+    from src.core.pre_trade_veto import PreTradeVeto
+    monkeypatch.setattr(rr, "ENFORCE", True)
+    v = PreTradeVeto()
+    monkeypatch.setattr(rr, "LIVE_CONTEXT", True)
+    fake_mt5(monkeypatch, 0)
+    assert v._check_circuit_breakers(111.15, _veto_state()).allow is True
+    fake_mt5(monkeypatch, 2)                                    # real money: the cap applies
+    d = v._check_circuit_breakers(111.15, _veto_state()); assert d.allow is False and "Monthly" in d.reason
+    fake_mt5(monkeypatch, None)                                 # unknown account: the cap applies
+    assert v._check_circuit_breakers(111.15, _veto_state()).allow is False
+    monkeypatch.setattr(rr, "LIVE_CONTEXT", False); fake_mt5(monkeypatch, 0)   # backtest context: the cap applies
+    assert v._check_circuit_breakers(111.15, _veto_state()).allow is False
+    monkeypatch.setattr(rr, "LIVE_CONTEXT", True); fake_mt5(monkeypatch, 0)
+    assert v._check_circuit_breakers(80.0, SimpleNamespace(pause_until_ts=0.0, consecutive_losses=0, week_start_balance=111.15, month_start_balance=161.38)).allow is False  # weekly cap (28%) still applies
