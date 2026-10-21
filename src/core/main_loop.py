@@ -183,6 +183,7 @@ def _run_guarded():
         return
     if ops.measure_only():
         log.warning("MEASUREMENT-ONLY MODE (ULTRA_MEASURE_ONLY): scanning and logging, NO orders will be sent.")
+    risk_rules.LIVE_CONTEXT = True   # lets risk_rules relax the monthly/peak hard halts, and only on a DEMO account
     try:
         _own = scope.load_own_magics()
         _missing = scope.check_portfolio_magics(PORTFOLIO_V5, _own)

@@ -57,6 +57,34 @@ WEEKLY_LIMIT_PCT = 0.15           # from Monday's opening balance
 MONTHLY_LIMIT_PCT = 0.25          # from month-start balance
 PEAK_DRAWDOWN_KILL_PCT = 0.30     # from all-time peak equity -> hard kill
 
+# Owner decision 2026-10-21: on a DEMO account used only to collect data, the monthly-loss and peak-drawdown HARD halts are
+# switched off (the daily cap, weekly cap, streak breakers, margin, spread and news rules all stay). The relaxation is
+# deliberately narrow: it applies only (a) inside the live bot loop (main_loop sets LIVE_CONTEXT, so backtests and the
+# research engine, which also call evaluate(), are untouched), and (b) while MT5 positively reports a DEMO account. A real or
+# unknown account type (or any error reading it) leaves the hard halts fully active.
+DEMO_RELAX_HARD_HALTS = True
+LIVE_CONTEXT = False
+_RELAX_LOGGED: dict = {}
+
+
+def _account_is_demo() -> bool:
+    try:
+        import MetaTrader5 as mt5
+        info = mt5.account_info()
+        return info is not None and info.trade_mode == mt5.ACCOUNT_TRADE_MODE_DEMO
+    except Exception:
+        return False                   # fail closed: unknown account type keeps the halts on
+
+
+def hard_halts_relaxed() -> bool:
+    return bool(DEMO_RELAX_HARD_HALTS and LIVE_CONTEXT and _account_is_demo())
+
+
+def _note_relaxed(kind: str, text: str) -> None:
+    if _RELAX_LOGGED.get(kind, 0.0) < datetime.now().timestamp() - 3600:
+        _RELAX_LOGGED[kind] = datetime.now().timestamp()
+        log.warning(f"HARD HALT RELAXED (demo account, owner decision 2026-10-21): {text} -- trading continues.")
+
 # --- II.4 circuit breakers -------------------------------------------------
 CONSEC_LOSSES_PAUSE = 3           # -> pause new entries
 CONSEC_LOSS_PAUSE_HOURS = 4
@@ -190,22 +218,29 @@ def evaluate(balance: float, equity: float, margin_used: float = 0.0,
 
     d = RiskDecision(True, "", lots, max_vol, max_pos)
 
-    # Hard halts first -- these require a human to clear.
-    if state.hard_halt_reason:
+    # Hard halts first -- these require a human to clear (except on a demo account in the live loop; see top of file).
+    relaxed = hard_halts_relaxed()
+    if state.hard_halt_reason and not relaxed:
         return RiskDecision(False, f"HARD HALT: {state.hard_halt_reason}", lots, max_vol, max_pos), state
 
     peak_dd = (state.peak_equity - equity) / state.peak_equity if state.peak_equity > 0 else 0.0
     if peak_dd >= PEAK_DRAWDOWN_KILL_PCT:
-        state.hard_halt_reason = (f"peak drawdown {peak_dd:.1%} >= {PEAK_DRAWDOWN_KILL_PCT:.0%} "
-                                  f"(peak ${state.peak_equity:.2f} -> ${equity:.2f}); post-mortem required")
-        return RiskDecision(False, f"HARD HALT: {state.hard_halt_reason}", lots, max_vol, max_pos), state
+        if relaxed:
+            _note_relaxed("peak", f"peak drawdown {peak_dd:.1%} >= {PEAK_DRAWDOWN_KILL_PCT:.0%}")
+        else:
+            state.hard_halt_reason = (f"peak drawdown {peak_dd:.1%} >= {PEAK_DRAWDOWN_KILL_PCT:.0%} "
+                                      f"(peak ${state.peak_equity:.2f} -> ${equity:.2f}); post-mortem required")
+            return RiskDecision(False, f"HARD HALT: {state.hard_halt_reason}", lots, max_vol, max_pos), state
 
     if state.month_start_balance > 0:
         m_dd = (state.month_start_balance - equity) / state.month_start_balance
         if m_dd >= MONTHLY_LIMIT_PCT:
-            state.hard_halt_reason = (f"monthly loss {m_dd:.1%} >= {MONTHLY_LIMIT_PCT:.0%}; "
-                                      f"re-run Part I before resuming")
-            return RiskDecision(False, f"HARD HALT: {state.hard_halt_reason}", lots, max_vol, max_pos), state
+            if relaxed:
+                _note_relaxed("monthly", f"monthly loss {m_dd:.1%} >= {MONTHLY_LIMIT_PCT:.0%}")
+            else:
+                state.hard_halt_reason = (f"monthly loss {m_dd:.1%} >= {MONTHLY_LIMIT_PCT:.0%}; "
+                                          f"re-run Part I before resuming")
+                return RiskDecision(False, f"HARD HALT: {state.hard_halt_reason}", lots, max_vol, max_pos), state
 
     if state.week_start_balance > 0:
         w_dd = (state.week_start_balance - equity) / state.week_start_balance
