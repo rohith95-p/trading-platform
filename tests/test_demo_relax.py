@@ -103,3 +103,48 @@ def test_veto_monthly_cap_relaxed_only_on_demo_in_live_loop(monkeypatch):
     assert v._check_circuit_breakers(111.15, _veto_state()).allow is False
     monkeypatch.setattr(rr, "LIVE_CONTEXT", True); fake_mt5(monkeypatch, 0)
     assert v._check_circuit_breakers(80.0, SimpleNamespace(pause_until_ts=0.0, consecutive_losses=0, week_start_balance=111.15, month_start_balance=161.38)).allow is False  # weekly cap (28%) still applies
+
+
+# ------------------------------------------------------------------ streak breakers (3-loss pause, 2 losing trades/day)
+def _streak_state(**kw):
+    return state(peak_equity=111.15, month_start_balance=111.15, **kw)
+
+
+def test_streak_breakers_off_only_on_demo_in_live_loop(monkeypatch):
+    import time
+    paused = dict(consecutive_losses=3, day_losing_trades=2, pause_until_ts=time.time() + 3600)
+    monkeypatch.setattr(rr, "LIVE_CONTEXT", True)
+    fake_mt5(monkeypatch, 0)
+    d, _ = rr.evaluate(111.15, 111.15, now=NOW, state=_streak_state(**paused))
+    assert d.allow_new_entries is True
+    for mode in (2, None):                                      # real / unknown account: both breakers apply again
+        fake_mt5(monkeypatch, mode)
+        d, _ = rr.evaluate(111.15, 111.15, now=NOW, state=_streak_state(**paused))
+        assert d.allow_new_entries is False and ("losing trades" in d.reason or "pause" in d.reason)
+    monkeypatch.setattr(rr, "LIVE_CONTEXT", False); fake_mt5(monkeypatch, 0)
+    d, _ = rr.evaluate(111.15, 111.15, now=NOW, state=_streak_state(**paused))
+    assert d.allow_new_entries is False                          # backtest context unchanged
+
+
+def test_demo_still_stops_the_day_after_five_losses_and_obeys_daily_cap(monkeypatch):
+    monkeypatch.setattr(rr, "LIVE_CONTEXT", True); fake_mt5(monkeypatch, 0)
+    d, _ = rr.evaluate(111.15, 111.15, now=NOW, state=_streak_state(day_stopped_date=NOW.date().isoformat()))
+    assert d.allow_new_entries is False and "day stopped" in d.reason
+
+
+def test_third_loss_does_not_set_a_pause_on_demo(monkeypatch):
+    monkeypatch.setattr(rr, "LIVE_CONTEXT", True); fake_mt5(monkeypatch, 0)
+    s = rr.record_trade_result(-4.0, now=NOW, state=_streak_state(consecutive_losses=2))
+    assert s.consecutive_losses == 3 and s.pause_until_ts == 0.0
+    fake_mt5(monkeypatch, 2)                                    # real money: the pause is set
+    s2 = rr.record_trade_result(-4.0, now=NOW, state=_streak_state(consecutive_losses=2))
+    assert s2.pause_until_ts > 0
+
+
+def test_veto_pause_relaxed_on_demo_only(monkeypatch):
+    import time
+    from src.core.pre_trade_veto import PreTradeVeto
+    monkeypatch.setattr(rr, "ENFORCE", True); monkeypatch.setattr(rr, "LIVE_CONTEXT", True)
+    st = SimpleNamespace(pause_until_ts=time.time() + 3600, consecutive_losses=3, week_start_balance=111.15, month_start_balance=111.15)
+    fake_mt5(monkeypatch, 0); assert PreTradeVeto()._check_circuit_breakers(111.15, st).allow is True
+    fake_mt5(monkeypatch, 2); assert PreTradeVeto()._check_circuit_breakers(111.15, st).allow is False

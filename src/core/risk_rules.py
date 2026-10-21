@@ -80,6 +80,16 @@ def hard_halts_relaxed() -> bool:
     return bool(DEMO_RELAX_HARD_HALTS and LIVE_CONTEXT and _account_is_demo())
 
 
+# Owner decision 2026-10-21 (second step): on the same demo-only terms, the 3-consecutive-loss PAUSE and the early-phase
+# "2 losing trades per day" cap are switched off. Still enforced: daily cap, weekly cap, the 5-consecutive-loss stop-the-day,
+# margin, spread and news rules. Same fail-closed gate (live loop + MT5-confirmed demo; real/unknown accounts keep them).
+DEMO_RELAX_STREAK_BREAKERS = True
+
+
+def streak_breakers_relaxed() -> bool:
+    return bool(DEMO_RELAX_STREAK_BREAKERS and LIVE_CONTEXT and _account_is_demo())
+
+
 def _note_relaxed(kind: str, text: str) -> None:
     if _RELAX_LOGGED.get(kind, 0.0) < datetime.now().timestamp() - 3600:
         _RELAX_LOGGED[kind] = datetime.now().timestamp()
@@ -261,13 +271,14 @@ def evaluate(balance: float, equity: float, margin_used: float = 0.0,
                                 lots, max_vol, max_pos), state
 
     if (balance < EARLY_PHASE_BALANCE
-            and state.day_losing_trades >= DAILY_MAX_LOSING_TRADES_EARLY):
+            and state.day_losing_trades >= DAILY_MAX_LOSING_TRADES_EARLY
+            and not streak_breakers_relaxed()):
         return RiskDecision(False, f"{state.day_losing_trades} losing trades today "
                                    f"(early-phase cap {DAILY_MAX_LOSING_TRADES_EARLY})",
                             lots, max_vol, max_pos), state
 
     # II.4 consecutive-loss pause
-    if state.pause_until_ts > now.timestamp():
+    if state.pause_until_ts > now.timestamp() and not streak_breakers_relaxed():
         mins = (state.pause_until_ts - now.timestamp()) / 60
         return RiskDecision(False, f"loss-streak pause active, {mins:.0f} min remaining",
                             lots, max_vol, max_pos), state
@@ -294,6 +305,8 @@ def record_trade_result(pl: float, now: Optional[datetime] = None,
             log.warning(msg)
             from src.core import alerts
             alerts.send(f"🛑 CIRCUIT BREAKER TRIPPED 🛑\n{msg}", severity=alerts.CRITICAL)
+        elif state.consecutive_losses >= CONSEC_LOSSES_PAUSE and streak_breakers_relaxed():
+            log.info(f"{state.consecutive_losses} consecutive losses -- pause NOT applied (demo account, owner decision 2026-10-21).")
         elif state.consecutive_losses >= CONSEC_LOSSES_PAUSE:
             state.pause_until_ts = (now + timedelta(hours=CONSEC_LOSS_PAUSE_HOURS)).timestamp()
             msg = (f"CIRCUIT BREAKER: {state.consecutive_losses} consecutive losses -- "

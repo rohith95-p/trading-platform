@@ -137,7 +137,7 @@ class PreTradeVeto:
             )
         
         # Check consecutive losses
-        if risk_state.pause_until_ts > 0:
+        if risk_state.pause_until_ts > 0 and not risk_rules.streak_breakers_relaxed():
             import time
             if time.time() < risk_state.pause_until_ts:
                 return VetoDecision(
