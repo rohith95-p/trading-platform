@@ -61,9 +61,35 @@ def write(kind: str, **payload: Any) -> None:
 
 # --- Convenience wrappers, so call sites stay readable ---------------------
 
+# A signal that reaches a REAL gate and is blocked is worth a Telegram line (2026-10-21: a valid FVG sell was blocked by a
+# risk halt and nobody was told). Routine blocks stay silent, and each (leg, direction, reason) alerts at most once an hour.
+_QUIET_REASON_PREFIXES = ("D1 bias gate", "measurement-only", "reversal cooldown", "Highlander", "already acted")
+_BLOCKED_ALERT_GAP_S = 3600
+_blocked_alert_last: Dict[Any, float] = {}
+
+
+def _maybe_alert_blocked(strategy: str, direction: str, reason: str) -> None:
+    try:
+        if not reason or reason.startswith(_QUIET_REASON_PREFIXES):
+            return
+        import re
+        import time as _t
+        key = (strategy, direction, re.sub(r"\d+", "#", reason))
+        now = _t.time()
+        if now - _blocked_alert_last.get(key, 0.0) < _BLOCKED_ALERT_GAP_S:
+            return
+        _blocked_alert_last[key] = now
+        from src.core import alerts
+        alerts.send(f"Signal blocked: {strategy} {direction} -- {reason}", severity=alerts.INFO)
+    except Exception as e:                       # alerting must never break trading
+        log.debug(f"blocked-signal alert skipped: {e}")
+
+
 def signal(strategy: str, direction: str, action: str, reason: str = "", **ctx) -> None:
     """action: 'fired' | 'blocked' | 'deduped' | 'queued'."""
     write(SIGNAL, strategy=strategy, direction=direction, action=action, reason=reason, **ctx)
+    if action == "blocked":
+        _maybe_alert_blocked(strategy, direction, reason)
 
 
 def order(strategy: str, direction: str, lots: float, price: Optional[float] = None,

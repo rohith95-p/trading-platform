@@ -47,6 +47,12 @@ def set_halt(reason: str, source: str = "unknown") -> None:
             json.dump(rec, f)
         os.replace(tmp, HALT_FILE)
         log.error(f"HALT LATCHED ({source}): {reason}. Clear with: python -m scripts.halt clear --note \"...\"")
+        try:                                           # tell the owner (a halt used to be log-only: 2026-10-21)
+            from src.core import alerts
+            alerts.send(f"HALT LATCHED ({source}): {reason}. All new entries are blocked until it is cleared "
+                        f"(python -m scripts.halt clear --note \"...\").", severity=alerts.CRITICAL)
+        except Exception:
+            pass
     except OSError as e:                               # never raise from a safety path
         log.error(f"could not write halt latch: {e}")
 
