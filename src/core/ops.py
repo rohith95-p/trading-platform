@@ -1,7 +1,7 @@
 """ops.py -- operational safety helpers for the live demo bot (added 2026-10-18).
 
 * HALT LATCH: a halt is stored in a file outside process memory (logs/HALT_LATCH.json). A crash or restart cannot clear it;
-  only a deliberate operator action (`python -m scripts.halt clear --note ...`) does. main_loop and the supervisor refuse to
+  only a deliberate operator action (`python -m scripts.halt clear --note ...`) does. main_loop refuses to
   start while it is set.
 * MEASUREMENT-ONLY mode (env ULTRA_MEASURE_ONLY=1): the bot keeps scanning, logging and reconciling but sends NO orders.
 * EXTERNAL HEARTBEAT: a status payload is POSTed (in a daemon thread, never blocking the loop) to ULTRA_HEARTBEAT_URL

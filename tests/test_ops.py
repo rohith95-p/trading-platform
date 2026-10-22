@@ -1,4 +1,4 @@
-"""Operational safety: halt latch, measurement-only mode, external heartbeat, supervisor decisions (2026-10-18)."""
+"""Operational safety: halt latch, measurement-only mode, external heartbeat (2026-10-18)."""
 import json
 import os
 import threading
@@ -167,28 +167,3 @@ def test_halt_state_pings_the_fail_endpoint_for_healthchecks(monkeypatch):
 
 def test_push_never_raises_on_unreachable_endpoint():
     ops._post("http://127.0.0.1:9/unreachable", {"a": 1})              # must swallow the error
-
-
-# ------------------------------------------------------------------ supervisor decisions
-def test_supervisor_refuses_to_start_under_halt_or_stop():
-    from scripts import supervisor as sv
-    assert sv.decide_start({"source": "risk_rules", "reason": "x"}, False, [], 1000.0)[0] is False
-    assert sv.decide_start(None, True, [], 1000.0) == (False, "STOP file present")
-    assert sv.decide_start(None, False, [], 1000.0) == (True, "ok")
-
-
-def test_supervisor_crash_loop_guard_and_backoff():
-    from scripts import supervisor as sv
-    now = 10_000.0
-    assert sv.decide_start(None, False, [now - 10] * 5, now)[0] is False
-    assert sv.decide_start(None, False, [now - 5000] * 9, now)[0] is True         # old crashes do not count
-    assert [sv.backoff_seconds(n) for n in (1, 2, 3, 7, 12)] == [5.0, 10.0, 20.0, 300.0, 300.0]
-
-
-def test_heartbeat_stale_detection(tmp_path):
-    from scripts import supervisor as sv
-    f = tmp_path / "hb"
-    assert sv.heartbeat_stale(str(f), time.time()) is False                       # no file yet
-    f.write_text("x")
-    assert sv.heartbeat_stale(str(f), time.time()) is False
-    assert sv.heartbeat_stale(str(f), time.time() + 301) is True

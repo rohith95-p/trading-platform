@@ -444,9 +444,9 @@ def _run_guarded():
                     log.warning(f"NO USABLE M15 DATA though the terminal reports connected "
                                 f"(rates={'None' if m15_rates is None else len(m15_rates)}); fail count {mt5_fail_count}.")
                 # Self-heal (2026-10-19): a reconnect can leave this process's MT5 session blind even after the network
-                # returns. After 8 blind scans (~8 min) exit so the supervisor starts a fresh process with a fresh session.
+                # returns. After 8 blind scans (~8 min) exit (the supervisor that restarted it was removed 2026-10-22).
                 if mt5_fail_count >= 8:
-                    msg = f"MT5 session blind for {mt5_fail_count} scans -- exiting so the supervisor restarts the bot."
+                    msg = f"MT5 session blind for {mt5_fail_count} scans -- exiting; restart the bot by hand."
                     log.error(msg)
                     try:
                         from src.core import alerts

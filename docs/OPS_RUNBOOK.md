@@ -1,5 +1,9 @@
 # Operations runbook — dead-man heartbeat, supervisor, halt latch, measurement-only (2026-10-18)
 
+> **2026-10-22: the supervisor was removed** (owner decision). `scripts/supervisor.py`, `scripts/install_supervisor_task.ps1` and the
+> `UltraCoreSupervisor` scheduled task no longer exist; the supervisor sections below are kept as history. The bot runs on its own
+> (`python -m src.core.main_loop`) and nothing restarts it after a crash, a blind-session exit or PC sleep.
+
 ## What was added
 | Piece | File | Purpose |
 |---|---|---|
