@@ -68,11 +68,31 @@ def test_unknown_account_fails_closed(monkeypatch):
     assert d.allow_new_entries is False and "HARD HALT" in d.reason
 
 
-def test_demo_still_obeys_the_daily_loss_cap(monkeypatch):
-    fake_mt5(monkeypatch, 0)
+def _daily_state():
+    return state(peak_equity=111.15, month_start_balance=111.15, day_start_balance=111.15)
+
+
+def test_daily_loss_cap_off_only_on_demo_in_live_loop(monkeypatch):
     monkeypatch.setattr(rr, "LIVE_CONTEXT", True)
-    d, _ = rr.evaluate(111.15, 104.0, now=NOW, state=state(day_start_balance=111.15))   # -6.4% today
+    fake_mt5(monkeypatch, 0)
+    d, _ = rr.evaluate(111.15, 104.0, now=NOW, state=_daily_state())                   # -6.4% today
+    assert d.allow_new_entries is True
+    for mode in (2, None):                                      # real / unknown account: the cap applies
+        fake_mt5(monkeypatch, mode)
+        d, _ = rr.evaluate(111.15, 104.0, now=NOW, state=_daily_state())
+        assert d.allow_new_entries is False and "daily loss" in d.reason
+    monkeypatch.setattr(rr, "LIVE_CONTEXT", False); fake_mt5(monkeypatch, 0)          # backtest context unchanged
+    d, _ = rr.evaluate(111.15, 104.0, now=NOW, state=_daily_state())
     assert d.allow_new_entries is False and "daily loss" in d.reason
+    monkeypatch.setattr(rr, "LIVE_CONTEXT", True); monkeypatch.setattr(rr, "DEMO_RELAX_DAILY_CAP", False)
+    d, _ = rr.evaluate(111.15, 104.0, now=NOW, state=_daily_state())
+    assert d.allow_new_entries is False and "daily loss" in d.reason
+
+
+def test_demo_still_obeys_the_weekly_cap(monkeypatch):
+    monkeypatch.setattr(rr, "LIVE_CONTEXT", True); fake_mt5(monkeypatch, 0)
+    d, _ = rr.evaluate(111.15, 92.0, now=NOW, state=_daily_state())                    # -17% this week
+    assert d.allow_new_entries is False and "WEEK HALTED" in d.reason
 
 
 def test_switch_can_be_turned_off(monkeypatch):

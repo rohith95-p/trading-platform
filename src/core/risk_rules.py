@@ -90,6 +90,16 @@ def streak_breakers_relaxed() -> bool:
     return bool(DEMO_RELAX_STREAK_BREAKERS and LIVE_CONTEXT and _account_is_demo())
 
 
+# Owner decision 2026-10-22 (third step): on the same demo-only terms, the DAILY loss caps are switched off -- this file's
+# 3 %/6 % cap and main_loop's 6 % drawdown shutdown (risk_manager.DAILY_LOSS_LIMIT_PCT). Still enforced: weekly cap, the
+# 5-consecutive-loss stop-the-day, margin, spread and news rules. Same fail-closed gate as above.
+DEMO_RELAX_DAILY_CAP = True
+
+
+def daily_cap_relaxed() -> bool:
+    return bool(DEMO_RELAX_DAILY_CAP and LIVE_CONTEXT and _account_is_demo())
+
+
 def _note_relaxed(kind: str, text: str) -> None:
     if _RELAX_LOGGED.get(kind, 0.0) < datetime.now().timestamp() - 3600:
         _RELAX_LOGGED[kind] = datetime.now().timestamp()
@@ -266,7 +276,9 @@ def evaluate(balance: float, equity: float, margin_used: float = 0.0,
     daily_cap = DAILY_LIMIT_PCT_EARLY if balance < EARLY_PHASE_BALANCE else DAILY_LIMIT_PCT_NORMAL
     if state.day_start_balance > 0:
         d_dd = (state.day_start_balance - equity) / state.day_start_balance
-        if d_dd >= daily_cap:
+        if d_dd >= daily_cap and daily_cap_relaxed():
+            _note_relaxed("daily", f"daily loss {d_dd:.1%} >= {daily_cap:.0%} cap")
+        elif d_dd >= daily_cap:
             return RiskDecision(False, f"daily loss {d_dd:.1%} >= {daily_cap:.0%} cap",
                                 lots, max_vol, max_pos), state
 

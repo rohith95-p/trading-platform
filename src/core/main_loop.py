@@ -264,7 +264,9 @@ def _run_guarded():
         for name, candle in _saved["last_fired_candle"].items():
             if name in last_fired_candle:
                 last_fired_candle[name] = candle
-    if _saved.get("drawdown_shutdown") and _saved.get("shutdown_date") == str(datetime.now(IST).date()):
+    if risk_rules.daily_cap_relaxed():
+        log.warning("DAILY LOSS CAP RELAXED (demo account, owner decision 2026-10-22): no daily drawdown shutdown.")
+    elif _saved.get("drawdown_shutdown") and _saved.get("shutdown_date") == str(datetime.now(IST).date()):
         drawdown_shutdown = True
         shutdown_date = datetime.now(IST).date()
         log.info("STATE: daily drawdown shutdown restored for today.")
@@ -412,7 +414,7 @@ def _run_guarded():
 
             if not risk.check_daily_drawdown(
                 todays_pl=todays_pl, floating_pl=floating_pl
-            ):
+            ) and not risk_rules.daily_cap_relaxed():   # demo-only relaxation (owner decision 2026-10-22)
                 drawdown_shutdown = True
                 shutdown_date = now_ist.date()
                 print(
