@@ -57,12 +57,11 @@ WEEKLY_LIMIT_PCT = 0.15           # from Monday's opening balance
 MONTHLY_LIMIT_PCT = 0.25          # from month-start balance
 PEAK_DRAWDOWN_KILL_PCT = 0.30     # from all-time peak equity -> hard kill
 
-# Owner decision 2026-10-21: on a DEMO account used only to collect data, the monthly-loss and peak-drawdown HARD halts are
-# switched off (the daily cap, weekly cap, streak breakers, margin, spread and news rules all stay). The relaxation is
-# deliberately narrow: it applies only (a) inside the live bot loop (main_loop sets LIVE_CONTEXT, so backtests and the
-# research engine, which also call evaluate(), are untouched), and (b) while MT5 positively reports a DEMO account. A real or
-# unknown account type (or any error reading it) leaves the hard halts fully active.
-DEMO_RELAX_HARD_HALTS = True
+# ULTRA_DEMO_MODE env var: a single switch that controls ALL demo relaxations.
+# Set ULTRA_DEMO_MODE=1 for a demo account collecting data. Leave unset or =0 for real money.
+# The relaxation still requires LIVE_CONTEXT=True (set by main_loop) AND MT5 confirming a demo account.
+_DEMO_MODE = os.environ.get("ULTRA_DEMO_MODE", "0") == "1"
+DEMO_RELAX_HARD_HALTS = _DEMO_MODE
 LIVE_CONTEXT = False
 _RELAX_LOGGED: dict = {}
 
@@ -83,7 +82,7 @@ def hard_halts_relaxed() -> bool:
 # Owner decision 2026-10-21 (second step): on the same demo-only terms, the 3-consecutive-loss PAUSE and the early-phase
 # "2 losing trades per day" cap are switched off. Still enforced: daily cap, weekly cap, the 5-consecutive-loss stop-the-day,
 # margin, spread and news rules. Same fail-closed gate (live loop + MT5-confirmed demo; real/unknown accounts keep them).
-DEMO_RELAX_STREAK_BREAKERS = True
+DEMO_RELAX_STREAK_BREAKERS = _DEMO_MODE
 
 
 def streak_breakers_relaxed() -> bool:
@@ -93,7 +92,7 @@ def streak_breakers_relaxed() -> bool:
 # Owner decision 2026-10-22 (third step): on the same demo-only terms, the DAILY loss caps are switched off -- this file's
 # 3 %/6 % cap and main_loop's 6 % drawdown shutdown (risk_manager.DAILY_LOSS_LIMIT_PCT). Still enforced: weekly cap, the
 # 5-consecutive-loss stop-the-day, margin, spread and news rules. Same fail-closed gate as above.
-DEMO_RELAX_DAILY_CAP = True
+DEMO_RELAX_DAILY_CAP = _DEMO_MODE
 
 
 def daily_cap_relaxed() -> bool:

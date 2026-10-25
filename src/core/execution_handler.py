@@ -31,11 +31,11 @@ IST = timezone(timedelta(hours=5, minutes=30))
 # ---------------------------------------------------------------------------
 SYMBOL = "XAUUSDm"
 
-# DEPRECATED: These are now managed by SizingLadder.get_sizing(balance)
-# Kept for backwards compatibility in can_open_new_position() checks
-MAX_CONCURRENT_POSITIONS = 2
-MAX_SAME_DIRECTION_POSITIONS = 2
-MAX_TOTAL_VOLUME = 0.04
+# These are fallback ceilings only; the live sizing comes from
+# risk_rules.SIZING_LADDER via SizingLadder.get_sizing(balance).
+MAX_CONCURRENT_POSITIONS = 3
+MAX_SAME_DIRECTION_POSITIONS = 3
+MAX_TOTAL_VOLUME = 0.06
 
 ORDER_RETRY_COUNT = 3
 ORDER_RETRY_DELAY_MS = 500

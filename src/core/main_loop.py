@@ -48,6 +48,7 @@ from src.core import scope  # own-magic strategy view vs account-wide risk view 
 # portfolio below -- kept in src/strategies/ema_stack.py for reference but
 # no longer imported here.
 from src.strategies.portfolio_v5_core import PORTFOLIO as PORTFOLIO_V5  # 4 legs: Validated core (pruned from 6)
+from src.strategies.portfolio_v6 import PORTFOLIO as PORTFOLIO_V6  # Donchian Trend V6 (replaces losing V5 legs)
 
 # IST offset
 IST = timezone(timedelta(hours=5, minutes=30))
@@ -186,7 +187,7 @@ def _run_guarded():
     risk_rules.LIVE_CONTEXT = True   # lets risk_rules relax the monthly/peak hard halts, and only on a DEMO account
     try:
         _own = scope.load_own_magics()
-        _missing = scope.check_portfolio_magics(PORTFOLIO_V5, _own)
+        _missing = scope.check_portfolio_magics(PORTFOLIO_V6, _own)
     except scope.ScopeConfigError as e:
         log.error(f"START REFUSED: {e}")
         return
@@ -248,7 +249,7 @@ def _run_guarded():
     # Validated together (PF 1.512, $703 net/~100d) is not the same claim as
     # "EMAStack plus these 4" -- that 5-strategy combination was never tested,
     # so EMAStack is not run alongside them. See HYP-036/038.
-    strategies = [cls() for cls in PORTFOLIO_V5]
+    strategies = [cls() for cls in PORTFOLIO_V6]
 
     # Daily drawdown shutdown flag
     drawdown_shutdown = False
@@ -378,59 +379,10 @@ def _run_guarded():
                 continue
 
             # ----------------------------------------------------------
-            # Gate 1: Spread filter
-            #
-            # HIGH-7: this gate blocks new entries only. It must NOT skip
-            # position management -- wide spreads and fast adverse moves are the
-            # same events, so freezing the trailing stop here disengaged
-            # protection exactly when it was needed.
+            # Fetch data early so the blind-session counter is always
+            # updated, even when a spread or news gate fires.
             # ----------------------------------------------------------
-            if not risk.is_spread_ok():
-                _manage_open_positions(fetcher, risk, executor)
-                _time.sleep(LOOP_INTERVAL)
-                continue
-
-            # ----------------------------------------------------------
-            # Gate 1b: News blackout (III.5) -- block entries around
-            # scheduled tier-1 macro events (NFP, CPI, FOMC, PCE, etc.)
-            # that spike XAUUSD spreads to 50-100 pts and cause extreme
-            # slippage on the FVG legs' tight ~$5 stops.
-            # ----------------------------------------------------------
-            _news_blocked, _news_reason = news_filter.is_near_news_event(now_ist)
-            if _news_blocked:
-                log.info(f"NEWS FILTER: {_news_reason}")
-                _manage_open_positions(fetcher, risk, executor)
-                _time.sleep(LOOP_INTERVAL)
-                continue
-
-            # ----------------------------------------------------------
-            # Gate 2: Dynamic daily drawdown cap
-            # ----------------------------------------------------------
-            todays_pl = fetcher.get_todays_closed_pl()
-            # CRIT-4: unrealised loss now counts toward the daily limit. The bot
-            # could previously sit on a large floating loss and keep opening
-            # trades, because only closed deals were measured.
-            floating_pl = fetcher.get_account_floating_pl()   # ACCOUNT view: every system
-
-            if not risk.check_daily_drawdown(
-                todays_pl=todays_pl, floating_pl=floating_pl
-            ) and not risk_rules.daily_cap_relaxed():   # demo-only relaxation (owner decision 2026-10-22)
-                drawdown_shutdown = True
-                shutdown_date = now_ist.date()
-                print(
-                    f"[{_ist_now()}] SHUTDOWN: Daily drawdown limit hit "
-                    f"(realised ${todays_pl:.2f} + floating ${floating_pl:.2f}). "
-                    f"No more trades until midnight IST."
-                )
-                # Still manage open positions (trailing stops)
-                _manage_open_positions(fetcher, risk, executor)
-                _time.sleep(LOOP_INTERVAL)
-                continue
-
-            # ----------------------------------------------------------
-            # Fetch data & Macro Bias
-            # ----------------------------------------------------------
-            risk.refresh_macro_rules()  # re-read DAILY_MARKET_ANALYSIS.md's marker each scan
+            risk.refresh_macro_rules()
             m15_rates = fetcher.get_m15_rates(250)
             m5_rates = fetcher.get_m5_rates(100)
 
@@ -457,9 +409,47 @@ def _run_guarded():
                 _time.sleep(LOOP_INTERVAL)
                 continue
 
+            # ----------------------------------------------------------
+            # Gate 1: Spread filter (entries only; positions still managed)
+            # ----------------------------------------------------------
+            if not risk.is_spread_ok():
+                _manage_open_positions(fetcher, risk, executor)
+                _time.sleep(LOOP_INTERVAL)
+                continue
+
+            # ----------------------------------------------------------
+            # Gate 1b: News blackout
+            # ----------------------------------------------------------
+            _news_blocked, _news_reason = news_filter.is_near_news_event(now_ist)
+            if _news_blocked:
+                log.info(f"NEWS FILTER: {_news_reason}")
+                _manage_open_positions(fetcher, risk, executor)
+                _time.sleep(LOOP_INTERVAL)
+                continue
+
+            # ----------------------------------------------------------
+            # Gate 2: Dynamic daily drawdown cap
+            # ----------------------------------------------------------
+            todays_pl = fetcher.get_todays_closed_pl()
+            floating_pl = fetcher.get_account_floating_pl()
+
+            if not risk.check_daily_drawdown(
+                todays_pl=todays_pl, floating_pl=floating_pl
+            ) and not risk_rules.daily_cap_relaxed():
+                drawdown_shutdown = True
+                shutdown_date = now_ist.date()
+                print(
+                    f"[{_ist_now()}] SHUTDOWN: Daily drawdown limit hit "
+                    f"(realised ${todays_pl:.2f} + floating ${floating_pl:.2f}). "
+                    f"No more trades until midnight IST."
+                )
+                _manage_open_positions(fetcher, risk, executor)
+                _time.sleep(LOOP_INTERVAL)
+                continue
+
             d1_bias = None
+            d1_rates_macro = fetcher.get_d1_rates(60)
             if ENABLE_D1_GATE:
-                d1_rates_macro = fetcher.get_d1_rates(50)
                 if d1_rates_macro is not None and len(d1_rates_macro) >= 21:
                     # get_d1_rates() uses copy_rates_from_pos(..., 0, n), whose
                     # index 0 (and therefore [-1]) is today's still-forming D1
@@ -521,6 +511,12 @@ def _run_guarded():
                                         f"({_move_ratio:.1f}×ATR) — confirms {d1_bias}."
                                     )
 
+            # Pass D1 rates to strategies that use them directly (V6+)
+            if d1_rates_macro is not None:
+                for s in strategies:
+                    if hasattr(s, "set_d1_rates"):
+                        s.set_d1_rates(d1_rates_macro)
+
             # ----------------------------------------------------------
             # Session info
             # ----------------------------------------------------------
@@ -558,7 +554,7 @@ def _run_guarded():
                         log.info(f"[{strategy.name}] confirmed signal DEDUPED (already acted this candle).")
                     else:
                         log.info(f"Pending signal CONFIRMED ({strategy.name}): {confirmed_signal.direction_str}")
-                        if _d1_bias_allows(confirmed_signal, d1_bias, strategy.name):
+                        if _d1_bias_allows(confirmed_signal, d1_bias, strategy.name, strategy):
                             actionable_signals.append((strategy, confirmed_signal))
 
                 # Evaluate strategy
@@ -570,7 +566,7 @@ def _run_guarded():
                                          "already acted on this candle", candle=signal_candle,
                                          session=session_name)
                         continue
-                    if not _d1_bias_allows(signal, d1_bias, strategy.name):
+                    if not _d1_bias_allows(signal, d1_bias, strategy.name, strategy):
                         trade_log.signal(strategy.name, signal.direction_str, "blocked",
                                          f"D1 bias gate ({d1_bias})", candle=signal_candle,
                                          session=session_name)
@@ -873,7 +869,7 @@ def _override_may_apply(closed_bias: str, intraday_bias: str) -> bool:
     return closed_bias == "BULLISH" and intraday_bias == "BEARISH"
 
 
-def _d1_bias_allows(signal, d1_bias, strategy_name: str) -> bool:
+def _d1_bias_allows(signal, d1_bias, strategy_name: str, strategy=None) -> bool:
     """Daily-trend gate, shared by the fresh and confirmed signal paths.
 
     Previously only fresh signals were gated; confirmed pending signals executed
@@ -881,7 +877,12 @@ def _d1_bias_allows(signal, d1_bias, strategy_name: str) -> bool:
 
     Fails CLOSED (2026-10-17): with the gate enabled, no bias (short/failed D1 fetch, NaN EMA)
     means no new entry, instead of silently trading both directions.
+
+    Strategies with skip_d1_gate=True (V6+) bypass this gate because they have
+    their own internal trend filter.
     """
+    if strategy is not None and getattr(strategy, "skip_d1_gate", False):
+        return True
     if not d1_bias:
         if ENABLE_D1_GATE:
             log.warning(f"[{strategy_name}] entry blocked: D1 gate enabled but the daily bias could not be computed.")
