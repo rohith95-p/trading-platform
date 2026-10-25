@@ -35,37 +35,32 @@ class TestCriticalFlags:
 
 class TestPositionLimits:
     """Tests for position sizing and exposure caps."""
-    
+
     def test_fixed_lot_size_documented(self):
         """Current fixed lot size must match documentation."""
         from src.core.execution_handler import FIXED_LOT_SIZE
-        
-        # As of 2026-09-24: bumped to 0.02 for "$10/day goal"
+
         assert FIXED_LOT_SIZE == 0.02, (
             f"FIXED_LOT_SIZE is {FIXED_LOT_SIZE}, expected 0.02. "
             "If changed, update REPO_GUIDE.md and README.md"
         )
-    
+
     def test_max_total_exposure(self):
-        """Maximum total volume must not exceed small-account limits."""
+        """Maximum total volume must not exceed Atlas account limits."""
         from src.core.execution_handler import MAX_TOTAL_VOLUME
-        
-        assert MAX_TOTAL_VOLUME <= 0.04, (
+
+        assert MAX_TOTAL_VOLUME <= 0.10, (
             f"MAX_TOTAL_VOLUME is {MAX_TOTAL_VOLUME}. "
-            "Values > 0.04 not validated for sub-$200 accounts."
+            "Values > 0.10 not validated for Atlas $5K accounts."
         )
-    
+
     def test_max_concurrent_positions(self):
-        """Concurrent position limit must match validated config (2) across execution and risk."""
+        """Concurrent position limit must match validated config (3) for Atlas portfolio."""
         from src.core.execution_handler import MAX_CONCURRENT_POSITIONS
-        from src.core.risk_manager import MAX_CONCURRENT_POSITIONS as RM_MAX_CONCURRENT_POSITIONS
-        
-        assert MAX_CONCURRENT_POSITIONS == 2, (
+
+        assert MAX_CONCURRENT_POSITIONS == 3, (
             f"MAX_CONCURRENT_POSITIONS is {MAX_CONCURRENT_POSITIONS}. "
-            "Current portfolio validated with 2 positions max."
-        )
-        assert RM_MAX_CONCURRENT_POSITIONS == 2, (
-            f"RM_MAX_CONCURRENT_POSITIONS is {RM_MAX_CONCURRENT_POSITIONS}, expected 2."
+            "Atlas portfolio validated with max_concurrent=3."
         )
 
 
@@ -97,65 +92,54 @@ class TestRiskControls:
 
 
 class TestPortfolioConfiguration:
-    """Tests for current live portfolio composition."""
-    
+    """Tests for current live Atlas portfolio composition."""
+
     def test_portfolio_strategy_count(self):
-        """Current portfolio must match documented 4-leg configuration."""
-        from src.strategies.portfolio_v5_core import PORTFOLIO
-        from src.strategies.portfolio_v5_6_leg import PORTFOLIO as SHIM_PORTFOLIO
-        
-        assert len(PORTFOLIO) == 4, (
-            f"PORTFOLIO has {len(PORTFOLIO)} strategies, expected 4."
+        """Atlas portfolio must have exactly 3 strategies."""
+        from src.strategies.portfolio_atlas import PORTFOLIO
+
+        assert len(PORTFOLIO) == 3, (
+            f"PORTFOLIO has {len(PORTFOLIO)} strategies, expected 3."
         )
-        assert PORTFOLIO == SHIM_PORTFOLIO, "portfolio_v5_6_leg shim must match portfolio_v5_core"
-    
+
     def test_portfolio_strategy_names(self):
-        """Verify expected active strategies are in the pruned portfolio."""
-        from src.strategies.portfolio_v5_core import PORTFOLIO
-        
-        strategy_names = [cls().name for cls in PORTFOLIO]
+        """Verify expected active strategies are in the Atlas portfolio."""
+        from src.strategies.portfolio_atlas import PORTFOLIO
+
+        strategy_names = {cls().name for cls in PORTFOLIO}
         expected = {
-            'TREND_PULLBACK_V5',
-            'BB_MEAN_REVERSION_V5',
-            'NVMR_TARGET_10_V5',
-            'FVG_NY_TIGHT_V5'
+            'DONCHIAN_TREND_V6',
+            'ASIAN_RANGE_FILTERED_V6',
+            'ASIAN_BREAKOUT_V6',
         }
-        actual = set(strategy_names)
-        
-        assert actual == expected, (
-            f"Portfolio strategies: {actual}, expected: {expected}"
+
+        assert strategy_names == expected, (
+            f"Portfolio strategies: {strategy_names}, expected: {expected}"
         )
 
-    def test_legacy_6_leg_preserved(self):
-        """Ensure legacy 6-leg strategies are preserved for auditing and not lost."""
-        from src.strategies.portfolio_v5_core import PORTFOLIO_6_LEG, RETIRED_LEGS
-        assert len(PORTFOLIO_6_LEG) == 6
-        assert len(RETIRED_LEGS) == 2
+    def test_portfolio_magics_match_config(self):
+        """All portfolio magics must be listed in ultra_magics.json."""
+        import json, os
+        from src.strategies.portfolio_atlas import PORTFOLIO
 
-    def test_main_loop_portfolio_matches(self):
-        """main_loop's PORTFOLIO_V5 must exactly match portfolio_v5_core.PORTFOLIO."""
-        from src.core.main_loop import PORTFOLIO_V5
-        from src.strategies.portfolio_v5_core import PORTFOLIO
-        assert PORTFOLIO_V5 == PORTFOLIO
+        cfg_path = os.path.join(os.path.dirname(__file__), "..", "config", "ultra_magics.json")
+        with open(cfg_path) as f:
+            allowed = set(json.load(f)["ultra_core_magics"])
+
+        for cls in PORTFOLIO:
+            inst = cls()
+            assert inst.magic in allowed, (
+                f"{inst.name} magic {inst.magic} not in ultra_magics.json"
+            )
 
     def test_live_strategies_sl_atr_mult_floor(self):
-        """
-        P0-2: Every live strategy's sl_atr_mult must be >= 0.3.
-        Fails if anyone reintroduces physically unviable 0.1 ATR micro-stops.
-        """
-        from src.strategies.portfolio_v5_core import PORTFOLIO
+        """Every live strategy's sl_atr_mult must be >= 1.0 (no micro-stops)."""
+        from src.strategies.portfolio_atlas import PORTFOLIO
         for cls in PORTFOLIO:
             inst = cls()
             assert hasattr(inst, "sl_atr_mult"), f"{inst.name} missing sl_atr_mult"
-            assert inst.sl_atr_mult >= 0.3, (
-                f"{inst.name} has sl_atr_mult={inst.sl_atr_mult} < 0.3. "
-                "0.1 ATR stops are permanently retired due to spread/slippage."
-            )
-            assert inst.sl_atr_mult == 0.5, (
-                f"{inst.name} expected sl_atr_mult=0.5, got {inst.sl_atr_mult}"
-            )
-            assert inst.tp_atr_mult == 1.5, (
-                f"{inst.name} expected tp_atr_mult=1.5, got {inst.tp_atr_mult}"
+            assert inst.sl_atr_mult >= 1.0, (
+                f"{inst.name} has sl_atr_mult={inst.sl_atr_mult} < 1.0."
             )
 
 

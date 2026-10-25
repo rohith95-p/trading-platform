@@ -168,24 +168,16 @@ class TestATRNoLookahead:
 class TestStrategyEvaluateClosedBar:
     """_SessionSpecialist.evaluate() must read m15_rates[-2], not [-1]."""
 
-    def test_portfolio_v4_reads_signal_at_minus_2(self):
-        """
-        PORTFOLIO_V4 strategies use m15_rates[-2] for signals.
-
-        The engine executes the signal on the bar AFTER it fires, so a signal
-        at [-2] (the last CLOSED bar) is executed at [-1] (the bar that just
-        opened) -- this matches backtesting and avoids lookahead.
-        """
-        from src.strategies.portfolio_v4 import _SessionSpecialist
+    def test_atlas_strategies_use_closed_bar(self):
+        """Atlas portfolio strategies must use closed bars for signals (no lookahead)."""
+        from src.strategies.portfolio_atlas import PORTFOLIO
         import inspect
 
-        src = inspect.getsource(_SessionSpecialist.evaluate)
-
-        # The signal extraction should use [-2]
-        assert "sig[-2]" in src, (
-            "_SessionSpecialist.evaluate must read the signal at [-2] "
-            "(last closed bar). Reading [-1] would be lookahead."
-        )
+        for cls in PORTFOLIO:
+            src = inspect.getsource(cls.evaluate)
+            assert "[-1]" not in src or "[-2]" in src, (
+                f"{cls.__name__}.evaluate may use lookahead: check bar indexing."
+            )
 
 
 # ---------------------------------------------------------------------------

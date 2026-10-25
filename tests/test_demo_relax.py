@@ -40,6 +40,7 @@ def test_default_context_keeps_hard_halts(monkeypatch):
 def test_live_loop_on_demo_relaxes_peak_and_monthly(monkeypatch):
     fake_mt5(monkeypatch, 0)
     monkeypatch.setattr(rr, "LIVE_CONTEXT", True)
+    monkeypatch.setattr(rr, "DEMO_RELAX_HARD_HALTS", True)
     d, s = run()
     assert d.allow_new_entries is True and not s.hard_halt_reason
 
@@ -47,6 +48,7 @@ def test_live_loop_on_demo_relaxes_peak_and_monthly(monkeypatch):
 def test_live_loop_on_demo_ignores_a_stale_persisted_halt(monkeypatch):
     fake_mt5(monkeypatch, 0)
     monkeypatch.setattr(rr, "LIVE_CONTEXT", True)
+    monkeypatch.setattr(rr, "DEMO_RELAX_HARD_HALTS", True)
     d, _ = run(hard_halt_reason="monthly loss 31.1% >= 25%")
     assert d.allow_new_entries is True
 
@@ -74,6 +76,7 @@ def _daily_state():
 
 def test_daily_loss_cap_off_only_on_demo_in_live_loop(monkeypatch):
     monkeypatch.setattr(rr, "LIVE_CONTEXT", True)
+    monkeypatch.setattr(rr, "DEMO_RELAX_DAILY_CAP", True)
     fake_mt5(monkeypatch, 0)
     d, _ = rr.evaluate(111.15, 104.0, now=NOW, state=_daily_state())                   # -6.4% today
     assert d.allow_new_entries is True
@@ -111,6 +114,7 @@ def _veto_state(month_start=161.38):
 def test_veto_monthly_cap_relaxed_only_on_demo_in_live_loop(monkeypatch):
     from src.core.pre_trade_veto import PreTradeVeto
     monkeypatch.setattr(rr, "ENFORCE", True)
+    monkeypatch.setattr(rr, "DEMO_RELAX_HARD_HALTS", True)
     v = PreTradeVeto()
     monkeypatch.setattr(rr, "LIVE_CONTEXT", True)
     fake_mt5(monkeypatch, 0)
@@ -134,6 +138,7 @@ def test_streak_breakers_off_only_on_demo_in_live_loop(monkeypatch):
     import time
     paused = dict(consecutive_losses=3, day_losing_trades=2, pause_until_ts=time.time() + 3600)
     monkeypatch.setattr(rr, "LIVE_CONTEXT", True)
+    monkeypatch.setattr(rr, "DEMO_RELAX_STREAK_BREAKERS", True)
     fake_mt5(monkeypatch, 0)
     d, _ = rr.evaluate(111.15, 111.15, now=NOW, state=_streak_state(**paused))
     assert d.allow_new_entries is True
@@ -153,7 +158,9 @@ def test_demo_still_stops_the_day_after_five_losses_and_obeys_daily_cap(monkeypa
 
 
 def test_third_loss_does_not_set_a_pause_on_demo(monkeypatch):
-    monkeypatch.setattr(rr, "LIVE_CONTEXT", True); fake_mt5(monkeypatch, 0)
+    monkeypatch.setattr(rr, "LIVE_CONTEXT", True)
+    monkeypatch.setattr(rr, "DEMO_RELAX_STREAK_BREAKERS", True)
+    fake_mt5(monkeypatch, 0)
     s = rr.record_trade_result(-4.0, now=NOW, state=_streak_state(consecutive_losses=2))
     assert s.consecutive_losses == 3 and s.pause_until_ts == 0.0
     fake_mt5(monkeypatch, 2)                                    # real money: the pause is set
@@ -165,6 +172,7 @@ def test_veto_pause_relaxed_on_demo_only(monkeypatch):
     import time
     from src.core.pre_trade_veto import PreTradeVeto
     monkeypatch.setattr(rr, "ENFORCE", True); monkeypatch.setattr(rr, "LIVE_CONTEXT", True)
+    monkeypatch.setattr(rr, "DEMO_RELAX_STREAK_BREAKERS", True)
     st = SimpleNamespace(pause_until_ts=time.time() + 3600, consecutive_losses=3, week_start_balance=111.15, month_start_balance=111.15)
     fake_mt5(monkeypatch, 0); assert PreTradeVeto()._check_circuit_breakers(111.15, st).allow is True
     fake_mt5(monkeypatch, 2); assert PreTradeVeto()._check_circuit_breakers(111.15, st).allow is False

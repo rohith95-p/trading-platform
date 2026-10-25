@@ -3,11 +3,10 @@ main_loop.py -- Ultra Core v3 Final Boss Orchestrator.
 
 PHILOSOPHY:
   - NEVER hardcode dollar limits. Everything scales with ATR.
-  - Fixed 0.02 lots, 0.04 total exposure (owner's hard rule, not a risk model).
-  - Positions run to their fixed SL/TP -- no trailing, no pyramiding. Both were
-    measured net-negative on the validation window (see ENABLE_TRAILING below).
-  - portfolio_v4: two session-specialist legs (LARS/NVMR).
-  - Direction gated by the D1 EMA20 bias; sessions in IST.
+  - Fixed lots, positions run to their fixed SL/TP -- no trailing, no pyramiding.
+  - Atlas mode: portfolio_atlas (DonchianTrend, AsianRangeFiltered, AsianBreakout).
+  - Non-Atlas: portfolio_v6 (DonchianTrend only).
+  - Sessions in IST; D1 bias gate disabled for V6 strategies.
 
 Resilience (src/core/resilience.py -- does not affect trading):
   - single-instance lockfile
@@ -701,23 +700,6 @@ def _run_guarded():
                     "DONCHIAN_TREND_V6": 7,
                     "ASIAN_RANGE_FILTERED_V6": 6,
                     "ASIAN_BREAKOUT_V6": 6,
-                    "LONDON_MOMENTUM_V6": 5,
-                    "NVMR_TARGET_10_V5": 6,
-                    "NVMR_TARGET_10": 6,
-                    "BB_MEAN_REVERSION_V5": 5,
-                    "BB_MEAN_REVERSION": 5,
-                    "FVG_NY_SWEEP_OR_VOID": 5,
-                    "FVG_NY_SWEEP": 4,
-                    "FVG_NY_VOID": 3,
-                    "FVG_NY_TIGHT_V5": 2,
-                    "FVG_NY_TIGHT": 2,
-                    "TREND_PULLBACK_V5": 2,
-                    "TREND_PULLBACK": 2,
-                    "FVG_ASIA_SWEEP": 1,
-                    "NY_LIQUIDITY_EXPANSION_V5": 1,
-                    "NY_LIQUIDITY_EXPANSION": 1,
-                    "PDHLR_STRATEGY_V5": 1,
-                    "PDHLR_STRATEGY": 1,
                 }
                 
                 # Sort signals by rank (descending)

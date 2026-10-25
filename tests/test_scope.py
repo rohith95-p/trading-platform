@@ -17,13 +17,13 @@ OWN = frozenset({5001, 5002})
 
 # ------------------------------------------------------------------ allowlist
 def test_default_allowlist_loads_and_covers_portfolio():
-    from src.strategies.portfolio_v5_core import PORTFOLIO
+    from src.strategies.portfolio_atlas import PORTFOLIO
     own = scope.load_own_magics()
     assert scope.check_portfolio_magics(PORTFOLIO, own) == []
 
 
 def test_missing_portfolio_magic_is_reported():
-    from src.strategies.portfolio_v5_core import PORTFOLIO
+    from src.strategies.portfolio_atlas import PORTFOLIO
     assert scope.check_portfolio_magics(PORTFOLIO, frozenset({1})) != []
 
 

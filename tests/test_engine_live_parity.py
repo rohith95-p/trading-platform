@@ -225,10 +225,10 @@ def test_ladder_allows_one_position_under_100_and_two_above(flat_bars):
     mk = lambda: [held(candles=cands[:1]), held(name="BB_MEAN_REVERSION_V5", magic=5002, candles=cands[1:])]
     _, free = run(bars, mk(), live_exec_order=True, starting_balance=90.0)
     assert len(free.trades) == 2                       # no ladder flag -> engine max_concurrent 2
-    _, capped = run(bars, mk(), live_exec_order=True, sizing_ladder_caps=True, starting_balance=90.0)
-    assert len(capped.trades) == 1                     # < $100: one position
-    _, two = run(bars, mk(), live_exec_order=True, sizing_ladder_caps=True, starting_balance=150.0)
-    assert len(two.trades) == 2                        # $100-200: two positions (current table)
+    _, capped = run(bars, mk(), live_exec_order=True, sizing_ladder_caps=True, starting_balance=150.0)
+    assert len(capped.trades) == 1                     # < $200: one position (current ladder)
+    _, two = run(bars, mk(), live_exec_order=True, sizing_ladder_caps=True, starting_balance=300.0)
+    assert len(two.trades) == 2                        # $200-400: two positions (current ladder)
 
 
 def test_ladder_schedule_swaps_tables_over_time(flat_bars):

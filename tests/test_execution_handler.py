@@ -83,7 +83,7 @@ class TestOrderRetryLogic:
         # 3. count_open_positions() = positions_before L238
         # 4. count_open_positions() after sleep (fill check) L275
         # Use side_effect for the first calls, with the last one showing a filled position.
-        filled_pos = Mock(ticket=12345, magic=5001)
+        filled_pos = Mock(ticket=12345, magic=7310)
         # Positions are empty until the (null-reply) order_send has been attempted; after that the fill shows up.
         mock_mt5.positions_get.side_effect = (
             lambda *a, **k: [filled_pos] if mock_mt5.order_send.called else []

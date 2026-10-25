@@ -211,12 +211,12 @@ class TestSizingLadder:
             SizingLadder.get_sizing(49.99)
 
     def test_survival_tier_100_200(self):
-        """$100-$200: 0.01 lots, 2 positions max, 0.02 max exposure."""
+        """$100-$200: 0.01 lots, 1 position max, 0.01 max exposure."""
         from src.core.sizing_ladder import SizingLadder
         lots, max_conc, max_exp = SizingLadder.get_sizing(150.0)
         assert lots == 0.01
-        assert max_conc == 2
-        assert max_exp == 0.02
+        assert max_conc == 1
+        assert max_exp == 0.01
 
     def test_growth_tier_200_400(self):
         """$200-$400: 0.01 lots, 2 positions max."""
@@ -227,12 +227,12 @@ class TestSizingLadder:
         assert max_exp == 0.02
 
     def test_scaling_tier_800_plus(self):
-        """$800+: 0.02 lots, 2 positions max."""
+        """$800+: 0.02 lots, 3 positions max, 0.06 max exposure."""
         from src.core.sizing_ladder import SizingLadder
         lots, max_conc, max_exp = SizingLadder.get_sizing(900.0)
         assert lots == 0.02
-        assert max_conc == 2
-        assert max_exp == 0.04
+        assert max_conc == 3
+        assert max_exp == 0.06
 
 
 # ---------------------------------------------------------------------------

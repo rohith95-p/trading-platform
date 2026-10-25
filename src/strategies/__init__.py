@@ -1,16 +1,12 @@
 """Strategy package.
 
-ACTIVE (live in main_loop): portfolio_v4 -- three session-specialist legs:
-  EMAStackLondonTight (London), FVGNYTight (NY), FVGNYSweepOrVoid (NY).
-  See src/strategies/portfolio_v4.py and docs/research/STRATEGY_REGISTRY.md.
+ACTIVE (live in main_loop via portfolio_atlas.py):
+  DonchianTrendV6 (7310) — daily breakout with EMA50 trend filter
+  AsianRangeFilteredV6 (7320) — Asian breakout with range filter
+  AsianBreakoutV6 (7311) — unfiltered Asian breakout
 
-RESEARCH ONLY (not imported by main_loop): ema_stack, trend_sniper_sar,
-  luxalgo_fvg, supertrend_ema.
-
-ARCHIVED (2026-09-01, rohith phase 3): MorningMomentum, EMAPullback, AsianSweep,
-  KeltnerBreakout, MACDCross, AsianBreakout, PDHLBreakout, LondonBot
-  -- all scored below the random-entry control; saved in
-  src/strategies/archive/, NOT deleted.
+ARCHIVED: All prior strategies (V4/V5 legs, failed London/NY candidates)
+  saved in src/strategies/archive/ and src/strategies/_deprecated/.
 """
 
 from src.strategies.base_strategy import BaseStrategy, Signal

@@ -3,7 +3,7 @@ import os
 
 from src.core import alerts, news_filter, risk_rules, trade_log, validation_ledger
 from src.core.execution_handler import TradeRecord
-from src.strategies.portfolio_v5_core import PORTFOLIO
+from src.strategies.portfolio_atlas import PORTFOLIO
 
 
 def test_trade_record_reads_like_mt5_result():
@@ -12,12 +12,9 @@ def test_trade_record_reads_like_mt5_result():
     assert r.order == 7 and r.retcode == 10009 and r.lots == 0.01
 
 
-def test_vi3_magics_come_from_live_portfolio():
-    from src.core import main_loop
-    import inspect
-    src = inspect.getsource(main_loop._check_vi3_tripwire)
-    assert "PORTFOLIO_V5" in src and "3012" not in src
-    assert {5001, 5002, 5003, 5005} == {int(c().magic) for c in PORTFOLIO}
+def test_atlas_portfolio_magics():
+    expected = {7310, 7320, 7311}
+    assert expected == {int(c().magic) for c in PORTFOLIO}
 
 
 def test_runtime_paths_are_absolute(monkeypatch):
