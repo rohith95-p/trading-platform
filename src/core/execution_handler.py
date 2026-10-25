@@ -13,6 +13,7 @@ PRODUCTION UPGRADES (2026-09-25):
   - Both are wired into send_order() for every trade
 """
 
+import os
 import time as _time
 import logging
 import MetaTrader5 as _mt5
@@ -29,7 +30,7 @@ IST = timezone(timedelta(hours=5, minutes=30))
 # ---------------------------------------------------------------------------
 # Constants
 # ---------------------------------------------------------------------------
-SYMBOL = "XAUUSDm"
+SYMBOL = os.environ.get("ULTRA_SYMBOL", "XAUUSDm")
 
 # These are fallback ceilings only; the live sizing comes from
 # risk_rules.SIZING_LADDER via SizingLadder.get_sizing(balance).

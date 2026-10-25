@@ -85,7 +85,7 @@ log = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 # Config
 # ---------------------------------------------------------------------------
-SYMBOL = "XAUUSDm"
+SYMBOL = os.environ.get("ULTRA_SYMBOL", "XAUUSDm")
 LOOP_INTERVAL = 60  # seconds between scans
 
 # Atlas Funded integration: enable with ULTRA_ATLAS_MODE=1 (env var).
