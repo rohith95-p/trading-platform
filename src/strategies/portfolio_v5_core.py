@@ -7,9 +7,9 @@
 # - RETIRED to archive: NY_LIQUIDITY_EXPANSION_V5 (PF 0.953, -$39.08)
 # Validated Performance: PF 1.141, Net +$4,495.43, Max DD $1,250.45 (22.44%), 8,347 trades.
 
-from src.strategies.grid_strategies import TrendPullbackStrat, BBMeanReversionStrat
-from src.strategies.bible_strategies import NVMRStrategy as _NVMRStrategy
-from src.strategies.portfolio_v4 import _LiquidityFilteredFVG
+from src.strategies._deprecated.grid_strategies import TrendPullbackStrat, BBMeanReversionStrat
+from src.strategies._deprecated.bible_strategies import NVMRStrategy as _NVMRStrategy
+from src.strategies._deprecated.portfolio_v4 import _LiquidityFilteredFVG
 
 
 class TrendPullbackV5(TrendPullbackStrat):

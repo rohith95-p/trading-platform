@@ -47,7 +47,7 @@ from src.core import scope  # own-magic strategy view vs account-wide risk view 
 # EMAStack (rohith phase 2, HYP-027) superseded 2026-09-01 by the 4-leg
 # portfolio below -- kept in src/strategies/ema_stack.py for reference but
 # no longer imported here.
-from src.strategies.portfolio_v5_core import PORTFOLIO as PORTFOLIO_V5  # 4 legs: Validated core (pruned from 6)
+# V5 portfolio retired — all 4 legs were net-negative (PF 0.73/0.86/0.98).
 from src.strategies.portfolio_v6 import PORTFOLIO as PORTFOLIO_V6  # Donchian Trend V6 (replaces losing V5 legs)
 
 # IST offset
@@ -831,7 +831,7 @@ def _check_vi3_tripwire(fetcher):
         if not deals:
             return
             
-        magics = {int(cls().magic) for cls in PORTFOLIO_V5}
+        magics = {int(cls().magic) for cls in PORTFOLIO_V6}
         pls = []
         for d in deals:
             if d.symbol == fetcher.symbol and d.magic in magics and d.entry == mt5.DEAL_ENTRY_OUT:

@@ -60,7 +60,7 @@ def replace_block(path: Path, new_content: str) -> bool:
 def get_portfolio_meta() -> list[dict]:
     """Import PORTFOLIO from portfolio_v5_6_leg and extract metadata from each strategy class."""
     sys.path.insert(0, str(REPO_ROOT))
-    from src.strategies.portfolio_v5_core import PORTFOLIO
+    from src.strategies.portfolio_atlas import PORTFOLIO
     legs = []
     for cls in PORTFOLIO:
         inst = cls()
@@ -86,7 +86,7 @@ def run_30day_backtest(legs_meta: list[dict]) -> dict:
         from src.backtesting.data import load_bars
         from src.backtesting.engine import BacktestEngine, EngineConfig
         from src.backtesting.costs import SCENARIOS
-        from src.strategies.portfolio_v5_core import PORTFOLIO
+        from src.strategies.portfolio_atlas import PORTFOLIO
 
         bars = load_bars("XAUUSDm", timeframes=("M15", "M5", "M1", "D1"))
 
