@@ -24,7 +24,7 @@ import time as _time
 import logging
 import numpy as np
 import MetaTrader5 as _mt5
-from typing import Any
+from typing import Any, Optional
 from types import SimpleNamespace
 from datetime import datetime, timezone, timedelta
 
@@ -49,6 +49,11 @@ from src.core import scope  # own-magic strategy view vs account-wide risk view 
 # no longer imported here.
 # V5 portfolio retired — all 4 legs were net-negative (PF 0.73/0.86/0.98).
 from src.strategies.portfolio_v6 import PORTFOLIO as PORTFOLIO_V6  # Donchian Trend V6 (replaces losing V5 legs)
+from src.strategies.portfolio_atlas import PORTFOLIO as PORTFOLIO_ATLAS
+from src.atlas import (
+    AtlasRuleEngine, AtlasState, AccountInfo, OrderRequest, load_rules, RulesError,
+)
+from src.atlas.mcp_monitor import AtlasMCPMonitor
 
 # IST offset
 IST = timezone(timedelta(hours=5, minutes=30))
@@ -78,6 +83,14 @@ log = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 SYMBOL = "XAUUSDm"
 LOOP_INTERVAL = 60  # seconds between scans
+
+# Atlas Funded integration: enable with ULTRA_ATLAS_MODE=1 (env var).
+# When on, portfolio_atlas replaces portfolio_v6, the AtlasRuleEngine gates
+# every order, and the MCP monitor polls account health in the background.
+ATLAS_MODE = os.environ.get("ULTRA_ATLAS_MODE", "0") == "1"
+
+# Unverified rules the engine must acknowledge to load (see atlas_access.json).
+_ATLAS_ALLOW_UNVERIFIED = ["daily_loss_eod_computation", "ea_approval_required"]
 
 # ---------------------------------------------------------------------------
 # Exit-management switches (rohith-2, 2026-09-03)
@@ -129,6 +142,30 @@ def _calc_ema(closes: np.ndarray, period: int) -> np.ndarray:
         for i in range(period, len(closes)):
             ema[i] = (closes[i] - ema[i - 1]) * multiplier + ema[i - 1]
     return ema
+
+
+def _init_atlas(balance: float, equity: float) -> tuple:
+    """Load Atlas rules, create engine + state + MCP monitor. Returns (engine, state, monitor) or raises."""
+    rules = load_rules(allow_unverified=_ATLAS_ALLOW_UNVERIFIED)
+    engine = AtlasRuleEngine(rules)
+    phase = os.environ.get("ULTRA_ATLAS_PHASE", "evaluation")
+    now_utc = datetime.now(timezone.utc)
+    state = AtlasState.new(initial_balance=balance, now_utc=now_utc, phase=phase, equity=equity)
+    monitor = AtlasMCPMonitor(poll_interval=300.0)
+    monitor.start()
+    return engine, state, monitor
+
+
+def _atlas_account_info(acct) -> AccountInfo:
+    """Build an AccountInfo from an MT5 account_info() result."""
+    return AccountInfo(
+        balance=float(acct.balance),
+        equity=float(acct.equity),
+        margin=float(getattr(acct, "margin", 0.0) or 0.0),
+        free_margin=float(getattr(acct, "margin_free", 0.0) or 0.0),
+        ts_utc=datetime.now(timezone.utc),
+        floating_pnl=float(acct.profit) if hasattr(acct, "profit") else None,
+    )
 
 
 def _close_all_positions(fetcher, executor, reason: str) -> None:
@@ -185,15 +222,18 @@ def _run_guarded():
     if ops.measure_only():
         log.warning("MEASUREMENT-ONLY MODE (ULTRA_MEASURE_ONLY): scanning and logging, NO orders will be sent.")
     risk_rules.LIVE_CONTEXT = True   # lets risk_rules relax the monthly/peak hard halts, and only on a DEMO account
+    _active_portfolio = PORTFOLIO_ATLAS if ATLAS_MODE else PORTFOLIO_V6
     try:
         _own = scope.load_own_magics()
-        _missing = scope.check_portfolio_magics(PORTFOLIO_V6, _own)
+        _missing = scope.check_portfolio_magics(_active_portfolio, _own)
     except scope.ScopeConfigError as e:
         log.error(f"START REFUSED: {e}")
         return
     if _missing:
         log.error(f"START REFUSED: PORTFOLIO magics {_missing} are not in config/ultra_magics.json")
         return
+    if ATLAS_MODE:
+        log.info("ATLAS MODE ENABLED — portfolio_atlas, Atlas rule engine and MCP monitor active.")
 
     # Config-integrity gate: refuse to trade a configuration nobody has run
     # through a backtest and recorded. This is the fix for a real recurring
@@ -249,7 +289,28 @@ def _run_guarded():
     # Validated together (PF 1.512, $703 net/~100d) is not the same claim as
     # "EMAStack plus these 4" -- that 5-strategy combination was never tested,
     # so EMAStack is not run alongside them. See HYP-036/038.
-    strategies = [cls() for cls in PORTFOLIO_V6]
+    strategies = [cls() for cls in _active_portfolio]
+
+    # Atlas rule engine + MCP monitor (only in ATLAS_MODE)
+    atlas_engine: Optional[AtlasRuleEngine] = None
+    atlas_state: Optional[AtlasState] = None
+    atlas_monitor: Optional[AtlasMCPMonitor] = None
+    if ATLAS_MODE:
+        try:
+            _acct_init = mt5.account_info()
+            atlas_engine, atlas_state, atlas_monitor = _init_atlas(
+                float(_acct_init.balance), float(_acct_init.equity))
+            _ATLAS_RT.update(engine=atlas_engine, state=atlas_state, monitor=atlas_monitor)
+            log.info(f"ATLAS: rule engine loaded (phase={atlas_state.phase}, "
+                     f"balance=${atlas_state.initial_balance:.2f}, "
+                     f"trailing DD floor=${atlas_engine.trailing_floor(atlas_state):.2f})")
+        except RulesError as e:
+            log.error(f"ATLAS: rule engine failed to load: {e}")
+            log.error("Cannot trade in Atlas mode without the rule engine. Exiting.")
+            return
+        except Exception as e:
+            log.error(f"ATLAS: unexpected init error: {e}")
+            return
 
     # Daily drawdown shutdown flag
     drawdown_shutdown = False
@@ -302,6 +363,8 @@ def _run_guarded():
              f"Pyramiding: {'ON' if ENABLE_PYRAMIDING else 'OFF'} | "
              f"D1 gate: {'ON' if ENABLE_D1_GATE else 'OFF'}")
     log.info(f"Resilience: lock={resilience.LOCK_FILE} | kill switch=create '{resilience.STOP_FILE}'")
+    log.info(f"Atlas mode: {'ON' if ATLAS_MODE else 'OFF'}"
+             + (f" (phase={atlas_state.phase})" if atlas_state else ""))
     log.info(f"News filter: {'ENABLED' if news_filter.ENABLE_NEWS_FILTER else 'DISABLED'} "
              f"(±{news_filter.NEWS_BLACKOUT_MINUTES}min blackout around tier-1 events)")
     news_filter.invalidate_cache()  # ensure calendar is freshly loaded at startup
@@ -408,6 +471,43 @@ def _run_guarded():
                     raise SystemExit(3)
                 _time.sleep(LOOP_INTERVAL)
                 continue
+
+            # ----------------------------------------------------------
+            # Atlas monitoring: update state and check DD/daily limits
+            # ----------------------------------------------------------
+            if ATLAS_MODE and atlas_engine and atlas_state:
+                try:
+                    _acct_atlas = mt5.account_info()
+                    if _acct_atlas is not None:
+                        _ai = _atlas_account_info(_acct_atlas)
+                        atlas_engine.update_state(_ai, atlas_state, datetime.now(timezone.utc))
+                        _mon = atlas_engine.monitor(_ai, atlas_state, datetime.now(timezone.utc))
+                        if _mon == "FLATTEN":
+                            log.error(f"ATLAS MONITOR: FLATTEN triggered — closing all positions.")
+                            from src.core import alerts
+                            _detail = atlas_engine.monitor_detail(_ai, atlas_state, datetime.now(timezone.utc))
+                            alerts.send(f"🚨 ATLAS FLATTEN: {_detail.reasons}", severity=alerts.CRITICAL)
+                            _close_all_positions(fetcher, executor, f"Atlas rule engine: {_detail.reasons}")
+                            ops.set_halt(f"Atlas FLATTEN: {_detail.reasons}", "atlas_rule_engine")
+                            break
+                        elif _mon == "STOP_NEW":
+                            _detail = atlas_engine.monitor_detail(_ai, atlas_state, datetime.now(timezone.utc))
+                            log.warning(f"ATLAS MONITOR: STOP_NEW — {_detail.reasons}. "
+                                        f"No new entries this scan.")
+                            _manage_open_positions(fetcher, risk, executor)
+                            _time.sleep(LOOP_INTERVAL)
+                            continue
+                        # Periodic eval progress log (every ~10 min)
+                        if atlas_state.phase == "evaluation" and int(_time.time()) % 600 < LOOP_INTERVAL:
+                            _prog = atlas_engine.evaluation_progress(
+                                float(_acct_atlas.balance), atlas_state.initial_balance)
+                            log.info(f"ATLAS EVAL: {_prog['progress']*100:.1f}% to target "
+                                     f"(${_prog['profit_usd']:.2f}/${_prog['target_usd']:.2f})")
+                except Exception as _ae:
+                    log.warning(f"Atlas monitor check failed (fail-closed, skipping entries): {_ae}")
+                    _manage_open_positions(fetcher, risk, executor)
+                    _time.sleep(LOOP_INTERVAL)
+                    continue
 
             # ----------------------------------------------------------
             # Gate 1: Spread filter (entries only; positions still managed)
@@ -593,6 +693,8 @@ def _run_guarded():
             if actionable_signals:
                 # Rank by conviction based on validated risk-adjusted expectancy
                 rank_order = {
+                    "DONCHIAN_TREND_V6": 7,
+                    "ASIAN_BREAKOUT_V6": 6,
                     "NVMR_TARGET_10_V5": 6,
                     "NVMR_TARGET_10": 6,
                     "BB_MEAN_REVERSION_V5": 5,
@@ -672,6 +774,7 @@ _LAST_HB = {"t": None}
 _FOREIGN_SEEN = {"tickets": None}
 _TRANSIENT_BLOCK = {"flag": False}     # set by _execute_signal when the block is momentary (spread blip)
 _SPREAD_RETRIES: dict = {}             # (strategy, candle) -> retries used
+_ATLAS_RT: dict = {}                   # populated by _run_guarded when ATLAS_MODE is on
 
 
 def _alert_foreign_exposure(foreign) -> None:
@@ -831,7 +934,7 @@ def _check_vi3_tripwire(fetcher):
         if not deals:
             return
             
-        magics = {int(cls().magic) for cls in PORTFOLIO_V6}
+        magics = {int(cls().magic) for cls in (PORTFOLIO_ATLAS if ATLAS_MODE else PORTFOLIO_V6)}
         pls = []
         for d in deals:
             if d.symbol == fetcher.symbol and d.magic in magics and d.entry == mt5.DEAL_ENTRY_OUT:
@@ -982,6 +1085,33 @@ def _execute_signal(signal, m15_rates, fetcher, risk, executor, session_mult, se
                     return
     except Exception as _e:  # shadow logging must never break execution
         log.debug(f"risk_rules shadow evaluation skipped: {_e}")
+
+    # Atlas rule engine pre-trade gate
+    if ATLAS_MODE and _ATLAS_RT.get("engine") and _ATLAS_RT.get("state"):
+        try:
+            _acct_at = mt5.account_info()
+            if _acct_at is not None:
+                _ai_at = _atlas_account_info(_acct_at)
+                _atr_val = risk.get_latest_atr(m15_rates) or 0.0
+                _stop_risk = float(FIXED_LOT_SIZE * 100.0 * _atr_val * (getattr(strategy, "sl_atr_mult", 2.0) or 2.0))
+                _margin_req = float(FIXED_LOT_SIZE * price * 100.0 / 50.0)  # 1:50 leverage
+                _ord = OrderRequest(
+                    symbol=SYMBOL, stop_risk_usd=_stop_risk,
+                    margin_required=_margin_req, volume=FIXED_LOT_SIZE,
+                    side="buy" if signal.is_buy else "sell")
+                _news = _ATLAS_RT["monitor"].get_news_events() if _ATLAS_RT.get("monitor") else None
+                _decision = _ATLAS_RT["engine"].check_order(
+                    _ord, _ai_at, _ATLAS_RT["state"], datetime.now(timezone.utc), _news)
+                if not _decision.allow:
+                    log.warning(f"[{signal.strategy_name}] ATLAS GATE BLOCKED: {_decision.reasons}")
+                    trade_log.signal(signal.strategy_name, signal.direction_str, "blocked",
+                                     f"Atlas rule engine: {_decision.reasons}", session=session_name)
+                    return None
+        except Exception as _ae:
+            log.warning(f"Atlas pre-trade gate error (fail-closed): {_ae}")
+            trade_log.signal(signal.strategy_name, signal.direction_str, "blocked",
+                             f"Atlas pre-trade gate error: {_ae}", session=session_name)
+            return None
 
     # P0-3: Strict deduplication before placing order: (strategy_magic, bar_time, direction)
     bar_time = int(m15_rates[-2]["time"]) if m15_rates is not None and len(m15_rates) >= 2 else 0
