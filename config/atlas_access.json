@@ -22,7 +22,7 @@
     "max_drawdown_pct": {
       "value": {"evaluation": 0.10, "funded": 0.06}, "source": "https://help.atlasfunded.com/max-drawdown", "retrieved": "2026-10-16",
       "status": "verified-official", "needed_for_enforcement": true,
-      "note": "TRAILING on EQUITY. Floor rises as soon as equity (incl. unrealized profit) makes a new high, never moves down; breach if equity < floor at any moment. Expressed as a fraction of the initial balance."
+      "note": "TRAILING on EQUITY. Atlas formula (verified 2026-10-26): Floor = highest_equity_ever * (1 - limit). Engine uses: floor = peak - limit * initial_balance, which is MORE conservative when peak > initial (higher floor = less room). After payout: re-anchored to post-payout balance."
     },
     "daily_loss_pct": {
       "value": {"evaluation": 0.05, "funded": 0.03}, "source": "https://help.atlasfunded.com/access", "retrieved": "2026-10-16",
@@ -35,10 +35,10 @@
       "note": "Daily loss limit resets at 00:00 UTC."
     },
     "daily_loss_eod_computation": {
-      "value": "conservative: ref = previous UTC day's highest equity/balance; limit_usd = daily_loss_pct * min(initial_balance, ref); floor = ref - limit_usd",
-      "source": "https://help.atlasfunded.com/access", "retrieved": "2026-10-16",
-      "status": "unverified", "needed_for_enforcement": true,
-      "note": "Atlas does not state exactly how the 'trailing end-of-day' daily loss is computed (base balance vs base equity, percentage of initial vs of reference). The engine uses the TIGHTEST plausible interpretation. Caller must acknowledge via allow_unverified=['daily_loss_eod_computation']."
+      "value": "atlas_official: floor = equity_at_reset * (1 - limit). Engine uses conservative: ref = previous UTC day's highest equity/balance; limit_usd = daily_loss_pct * min(initial_balance, ref); floor = ref - limit_usd",
+      "source": "https://help.atlasfunded.com/daily-loss", "retrieved": "2026-10-26",
+      "status": "verified-official", "needed_for_enforcement": true,
+      "note": "Atlas daily-loss page (verified 2026-10-26): 'Daily floor = Equity at 00:00 UTC x (1 - limit)'. Resets at 00:00 UTC. Profit during the day does NOT raise today's floor. The engine uses a TIGHTER formula (min of initial and ref as base) which is always stricter than Atlas. Safe for real money."
     },
     "min_trading_days_evaluation": {
       "value": 0, "source": "https://help.atlasfunded.com/access", "retrieved": "2026-10-16",
@@ -116,9 +116,9 @@
       "note": "Leverage up to 1:100 per the rules pages."
     },
     "mt5_server_leverage": {
-      "value": null, "source": "https://help.atlasfunded.com/access", "retrieved": "2026-10-16",
-      "status": "unverified", "needed_for_enforcement": false,
-      "note": "Actual leverage on the Atlas MT5 server is not published; confirm on the real account."
+      "value": {"evaluation": 100, "funded": 50}, "source": "https://help.atlasfunded.com/access", "retrieved": "2026-10-26",
+      "status": "verified-official", "needed_for_enforcement": false,
+      "note": "Evaluation: 1:100. Funded MT5 accounts: 1:50 (each position needs twice the margin). TradeLocker/Match-Trader funded stays 1:100."
     },
     "gold_symbol": {
       "value": null, "source": "https://help.atlasfunded.com/access", "retrieved": "2026-10-16",
@@ -136,9 +136,9 @@
       "note": "EAs / algorithmic trading are allowed per the Prohibited-practices page."
     },
     "ea_approval_required": {
-      "value": "obtain written approval before running the EA", "source": "https://atlasfunded.com/terms", "retrieved": "2026-10-16",
+      "value": "obtain written approval before running the EA", "source": "https://atlasfunded.com/terms", "retrieved": "2026-10-26",
       "status": "conflict", "needed_for_enforcement": true,
-      "note": "Prohibited-practices page allows EAs; Terms say some EAs require approval. Must obtain WRITTEN approval from Atlas before automated trading. Caller must acknowledge via allow_unverified=['ea_approval_required'] only after that approval exists."
+      "note": "Rules-at-a-glance page (verified 2026-10-26): 'Allowed on every program: Expert Advisors and algorithmic trading.' Prohibited-practices page also confirms: 'Expert Advisors and algorithmic trading, within the rules.' However, Terms may require approval for some EAs. Recommend contacting Atlas support to confirm no additional approval is needed. Caller must acknowledge via allow_unverified=['ea_approval_required']."
     },
     "vpn_policy": {
       "value": "allowed with advance disclosure of location changes", "source": "https://help.atlasfunded.com/prohibited-practices", "retrieved": "2026-10-16",

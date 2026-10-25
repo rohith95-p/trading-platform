@@ -19,7 +19,7 @@ from src.atlas.rules import (AccountInfo, AtlasRuleEngine, AtlasState, RulesErro
 
 UTC = timezone.utc
 CFG = R.DEFAULT_RULES_PATH
-ACK = ["daily_loss_eod_computation", "ea_approval_required"]
+ACK = ["ea_approval_required"]
 WED = datetime(2026, 10, 14, 12, 0, 0, tzinfo=UTC)
 FRI = datetime(2026, 10, 16, 12, 0, 0, tzinfo=UTC)
 INIT = 10_000.0
@@ -65,18 +65,18 @@ def test_default_load_refuses_unverified_and_conflict():
     with pytest.raises(RulesError) as e:
         load_rules(CFG)
     msg = str(e.value)
-    assert "daily_loss_eod_computation" in msg and "ea_approval_required" in msg
+    assert "ea_approval_required" in msg
 
 
 def test_load_with_explicit_ack_succeeds(rules):
     assert set(rules.acknowledged) == set(ACK)
     assert rules.status("ea_approval_required") == "conflict"
-    assert rules.status("daily_loss_eod_computation") == "unverified"
+    assert rules.status("daily_loss_eod_computation") == "verified-official"
 
 
 def test_ack_only_one_still_refuses():
     with pytest.raises(RulesError, match="ea_approval_required"):
-        load_rules(CFG, allow_unverified=["daily_loss_eod_computation"])
+        load_rules(CFG)
 
 
 def test_allow_unverified_unknown_name_rejected():
@@ -92,7 +92,7 @@ def test_flipping_enforcement_rule_to_unverified_is_refused(tmp_path):
 
 
 def test_unverified_but_not_needed_rules_do_not_block(rules):
-    for n in ("gold_symbol", "mt5_server_leverage", "funded_fee_usd_by_size",
+    for n in ("gold_symbol", "funded_fee_usd_by_size",
               "first_on_demand_payout_split"):
         assert rules.status(n) == "unverified"
         assert rules.rules[n]["needed_for_enforcement"] is False
@@ -155,9 +155,11 @@ def test_json_records_provenance_for_every_rule():
     allowed = {"https://help.atlasfunded.com/access", "https://help.atlasfunded.com/max-drawdown",
                "https://help.atlasfunded.com/prohibited-practices",
                "https://help.atlasfunded.com/margin-usage",
+               "https://help.atlasfunded.com/daily-loss",
                "https://atlasfunded.com/trading-rules", "https://atlasfunded.com/terms"}
+    valid_dates = {"2026-10-16", "2026-10-26"}
     for name, rec in doc["rules"].items():
-        assert rec["retrieved"] == "2026-10-16", name
+        assert rec["retrieved"] in valid_dates, name
         assert rec["source"] in allowed, name
         assert rec["status"] in ("verified-official", "conflict", "unverified"), name
         assert isinstance(rec["needed_for_enforcement"], bool), name
