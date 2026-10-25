@@ -20,6 +20,11 @@ Run:
 """
 
 import os
+try:
+    from dotenv import load_dotenv
+    load_dotenv(".env.local")
+except ImportError:
+    pass
 import time as _time
 import logging
 import numpy as np
