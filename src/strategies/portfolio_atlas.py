@@ -1,18 +1,20 @@
 # --- ATLAS PORTFOLIO (optimized for funded account evaluation + funded phase) ---
-# Two strategies chosen for maximum Atlas rule safety:
+# Three strategies: two Asian breakout variants + daily trend-following.
 #   1. DonchianTrendV6 (7310): Daily trend-following, wider stops
-#   2. AsianRangeFilteredV6 (7320): Filtered Asian range breakout
+#   2. AsianRangeFilteredV6 (7320): Filtered Asian breakout (tight range gate)
+#   3. AsianBreakoutV6 (7311): Unfiltered Asian breakout (catches wider ranges)
 #
 # Backtested 2026-10-25 across DEV/VALIDATE/HOLDOUT:
-#   HOLDOUT: PF 1.49, MaxDD 1.76%, Worst Day 0.82%, 45 days to 3% target
-#   Atlas eval (10% DD, 5% daily): PASS with 82% safety margin
-#   Atlas funded (6% DD, 3% daily): PASS with 71% safety margin
+#   HOLDOUT: PF 1.44, MaxDD 4.08%, Worst Day 2.33%, 45 days to 3% target
+#   Atlas eval (10% DD, 5% daily): PASS with 59% safety margin
+#   Atlas funded (6% DD, 3% daily): PASS with 32% safety margin
 #
-# AsianRangeFiltered replaces basic AsianBreakout — same entry logic but
-# with range filter (0.3%-1.6% of price) that eliminates worst setups.
-# LondonMomentum removed: caused 6.00% MaxDD hitting the funded limit.
+# AsianBreakout adds ~6 extra trades/month that AsianRangeFiltered skips
+# (wider ranges that still break out). Slightly higher DD but more
+# trade frequency for Atlas payout eligibility.
 
 from src.strategies.momentum_strategies import DonchianTrendV6
 from src.strategies.asian_range_filtered import AsianRangeFilteredV6
+from src.strategies.asian_breakout import AsianBreakoutV6
 
-PORTFOLIO = [DonchianTrendV6, AsianRangeFilteredV6]
+PORTFOLIO = [DonchianTrendV6, AsianRangeFilteredV6, AsianBreakoutV6]
