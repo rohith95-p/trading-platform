@@ -699,6 +699,7 @@ def _run_guarded():
                 # Rank by conviction based on validated risk-adjusted expectancy
                 rank_order = {
                     "DONCHIAN_TREND_V6": 7,
+                    "ASIAN_RANGE_FILTERED_V6": 6,
                     "ASIAN_BREAKOUT_V6": 6,
                     "LONDON_MOMENTUM_V6": 5,
                     "NVMR_TARGET_10_V5": 6,
