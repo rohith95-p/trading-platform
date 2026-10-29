@@ -1,4 +1,4 @@
 {
   "_comment": "Magic numbers owned by Ultra Core. Strategy control, order management, flatten actions and per-strategy P&L use ONLY these. Account-level risk (daily loss, drawdown, exposure, margin) deliberately ignores this list and counts every system on the account. Every PORTFOLIO strategy magic must be listed here or the bot refuses to start.",
-  "ultra_core_magics": [7310, 7311, 7320]
+  "ultra_core_magics": [7310, 7311, 7313, 7320, 7324]
 }

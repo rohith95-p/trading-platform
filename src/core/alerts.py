@@ -22,6 +22,7 @@ import html
 import json
 import logging
 import os
+import re
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -60,14 +61,17 @@ def _alerts_disabled() -> bool:
     return bool("PYTEST_CURRENT_TEST" in os.environ or os.environ.get("ULTRA_DISABLE_ALERTS") == "1")
 
 
-def _telegram(text: str) -> bool:
+def _telegram(text: str, parse_html: bool = False) -> bool:
     if _alerts_disabled():
         return False
     token = os.environ.get("ULTRA_ALERT_TELEGRAM_TOKEN") or os.environ.get("TELEGRAM_BOT_TOKEN")
     chat = os.environ.get("ULTRA_ALERT_TELEGRAM_CHAT") or os.environ.get("TELEGRAM_CHAT_ID")
     if not token or not chat:
         return False
-    data = urllib.parse.urlencode({"chat_id": chat, "text": text}).encode()
+    fields = {"chat_id": chat, "text": text}
+    if parse_html:
+        fields["parse_mode"] = "HTML"
+    data = urllib.parse.urlencode(fields).encode()
     req = urllib.request.Request(
         f"https://api.telegram.org/bot{token}/sendMessage", data=data)
     for attempt in range(2):
@@ -99,28 +103,54 @@ def _webhook(text: str, severity: str) -> bool:
         return False
 
 
+def ist_stamp(dt: Optional[datetime] = None) -> str:
+    return (dt or datetime.now(IST)).astimezone(IST).strftime("%d %b %I:%M %p IST")
+
+
+def table(title: str, rows) -> str:
+    """Telegram HTML: bold title, then aligned 'Label | value' rows in a monospace block."""
+    rows = [(str(k), str(v)) for k, v in rows if v not in (None, "")]
+    w = max((len(k) for k, _ in rows), default=0)
+    body = "\n".join(f"{k.ljust(w)} | {v}" for k, v in rows)
+    return f"<b>{html.escape(title)}</b>\n<pre>{html.escape(body)}</pre>"
+
+
+_TITLE = {INFO: "ℹ️ INFO", WARN: "⚠️ WARNING", CRITICAL: "🚨 CRITICAL"}
+
+
 def send(message: str, severity: str = WARN, context: Optional[dict] = None) -> bool:
-    """Fire an alert on every configured channel. Returns True if any delivered."""
+    """System alert as a short table: first message line is the event, later lines are details."""
     if _alerts_disabled():
         return False
-    now = datetime.now(IST).strftime("%Y-%m-%d %H:%M:%S IST")
-    text = f"[{severity}] ULTRA CORE {now}\n{message}"
-    if context:
-        text += "\n" + "\n".join(f"  {k}: {v}" for k, v in context.items())
+    lines = [l.strip() for l in re.sub(r"<[^>]+>", "", message).splitlines() if l.strip()]
+    event = lines[0] if lines else ""
+    rows = [("Time", ist_stamp()), ("Event", event)]
+    rows += [("Detail", l[:90]) for l in lines[1:4]]
+    rows += [(k.replace("_", " ").capitalize(), str(v)[:90]) for k, v in (context or {}).items()]
+    return send_html(table(_TITLE.get(severity, severity), rows), severity)
 
-    _record(text.replace("\n", " | "))
+
+def send_html(text: str, severity: str = "TRADE") -> bool:
+    """Message already formatted as Telegram HTML."""
+    if _alerts_disabled():
+        return False
+    plain = html.unescape(re.sub(r"<[^>]+>", "", text))
+    _record(f"[{severity}] " + plain.replace("\n", " | "))
     try:
-        print(text)
+        print(plain)
     except UnicodeEncodeError:
-        print(text.encode('ascii', 'replace').decode('ascii'))
-
+        print(plain.encode('ascii', 'replace').decode('ascii'))
     delivered = False
-    for fn in (lambda: _telegram(text), lambda: _webhook(text, severity)):
+    for fn in (lambda: _telegram(text, parse_html=True), lambda: _webhook(plain, severity)):
         try:
             delivered = fn() or delivered
-        except Exception as e:  # belt and braces -- never propagate
+        except Exception as e:
             log.warning(f"alert channel raised: {e}")
     return delivered
+
+
+def record_only(message: str, severity: str = INFO) -> None:
+    _record(f"[{severity}] {message}")
 
 
 def configured() -> bool:

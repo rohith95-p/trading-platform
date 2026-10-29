@@ -80,7 +80,7 @@ def _maybe_alert_blocked(strategy: str, direction: str, reason: str) -> None:
             return
         _blocked_alert_last[key] = now
         from src.core import alerts
-        alerts.send(f"Signal blocked: {strategy} {direction} -- {reason}", severity=alerts.INFO)
+        alerts.record_only(f"Signal blocked: {strategy} {direction} -- {reason}")
     except Exception as e:                       # alerting must never break trading
         log.debug(f"blocked-signal alert skipped: {e}")
 

@@ -12,7 +12,7 @@ def test_halt_latch_sends_one_critical_alert(monkeypatch):
 
 def test_meaningful_block_alerts_once_per_hour(monkeypatch):
     sent = []
-    monkeypatch.setattr(alerts, "send", lambda m, severity=None, context=None: sent.append(m) or True)
+    monkeypatch.setattr(alerts, "record_only", lambda m, severity=None: sent.append(m))
     monkeypatch.setattr(trade_log, "_blocked_alert_last", {})
     for _ in range(5):
         trade_log.signal("FVG_NY_TIGHT_V5", "SELL", "blocked", "spread > 250")

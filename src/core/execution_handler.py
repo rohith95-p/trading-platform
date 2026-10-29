@@ -315,21 +315,9 @@ class ExecutionHandler:
                 log.info(log_msg)
                 print(f"[{_ist_now()}] >> {log_msg}")
                 
-                from src.core import alerts
-                # HTML formatted columns for Telegram
-                tg_msg = (
-                    f"🟢 <b>TRADE OPENED</b>\n"
-                    f"<pre>\n"
-                    f"Time     | {_ist_now()}\n"
-                    f"Strategy | {strategy_name}\n"
-                    f"Action   | {label} {lot_size:.2f} lots\n"
-                    f"Entry    | {price:.3f}\n"
-                    f"Stop     | {sl:.3f}\n"
-                    f"Target   | {tp:.3f}\n"
-                    f"P&L      | $0.00 (Open)\n"
-                    f"</pre>"
-                )
-                alerts.send(tg_msg, severity=alerts.INFO)
+                from src.core import trade_alerts
+                trade_alerts.entry(strategy_name, is_buy, lot_size, getattr(res, "price", 0) or price,
+                                   sl, tp, res.order, self.symbol)
                 return record
 
             else:
@@ -399,7 +387,5 @@ class ExecutionHandler:
         if res and res.retcode == mt5.TRADE_RETCODE_DONE:
             log.info(f"Consolidation exit: closed #{position.ticket} @ {price:.3f}")
             print(f"[{_ist_now()}] CLOSED: #{position.ticket} (consolidation) @ {price:.3f}")
-            from src.core import alerts
-            alerts.send(f"TRADE CLOSED 🏁\nClosed #{position.ticket} (consolidation) @ {price:.3f}", severity=alerts.INFO)
             return True
         return False

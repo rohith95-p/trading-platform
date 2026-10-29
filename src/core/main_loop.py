@@ -41,6 +41,7 @@ from src.core import resilience
 from src.core import trade_log
 from src.core import risk_rules
 from src.core import market_hours
+from src.core import trade_alerts
 from src.core import news_filter  # III.5 -- blocks entries around tier-1 macro events
 from src.core import ops  # halt latch, measurement-only mode, external heartbeat (2026-10-18)
 from src.core import scope  # own-magic strategy view vs account-wide risk view (2026-10-18)
@@ -527,6 +528,7 @@ def _run_guarded():
             _news_blocked, _news_reason = news_filter.is_near_news_event(now_ist)
             if _news_blocked:
                 log.info(f"NEWS FILTER: {_news_reason}")
+                trade_alerts.news_pause(_news_reason)
                 _manage_open_positions(fetcher, risk, executor)
                 _time.sleep(LOOP_INTERVAL)
                 continue
@@ -878,30 +880,8 @@ def _record_closed_trades(fetcher, known_tickets):
                                       streak_pause_active=state.pause_until_ts > _time.time(),
                                       enforced=risk_rules.ENFORCE, risk_scope="strategy",
                                       magic=(in_deals[0].magic if in_deals else None))
-            
-            # Notify exit
-            from src.core import alerts
-            icon = "✅" if pl > 0 else "❌"
-            
-            _acct = mt5.account_info()
-            bal_str = f"${_acct.balance:.2f}" if _acct else "Unknown"
-            float_str = f"${_acct.profit:.2f}" if _acct else "Unknown"
-            
-            now_str = datetime.now(IST).strftime("%Y-%m-%d %H:%M:%S")
-            log_msg = f"{icon} EXIT: {strat_name} (Ticket #{ticket}) | Trade P&L: ${pl:.2f} | Floating: {float_str} | Balance: {bal_str}"
-            
-            # Formatted columns for Telegram
-            tg_msg = (
-                f"{icon} TRADE CLOSED\n"
-                f"Time     | {now_str}\n"
-                f"Strategy | {strat_name}\n"
-                f"Ticket   | #{ticket}\n"
-                f"P&L      | ${pl:.2f}\n"
-                f"Floating | {float_str}\n"
-                f"Balance  | {bal_str}\n"
-            )
-            alerts.send(tg_msg, severity=alerts.INFO)
-            
+            from src.core import trade_alerts
+            trade_alerts.closed(ticket, deals, pl, strat_name)
         except Exception as e:
             log.warning(f"streak breaker: could not record close of #{ticket}: {e}")
             still_pending.add(ticket)
@@ -1157,16 +1137,6 @@ def _execute_signal(signal, m15_rates, fetcher, risk, executor, session_mult, se
         bar_time=bar_time,
         dedup_key=f"{signal.magic}:{bar_time}:{dir_str}",
     )
-    
-    # Notify entry
-    if getattr(result, "retcode", None) == mt5.TRADE_RETCODE_DONE:
-        from src.core import alerts
-        _acct = mt5.account_info()
-        bal_str = f"${_acct.balance:.2f}" if _acct else "Unknown"
-        float_str = f"${_acct.profit:.2f}" if _acct else "Unknown"
-        msg = f"🟢 ENTRY: {signal.direction_str} {lot_size} lots\nStrategy: {signal.strategy_name}\nPrice: {price}\nSL: {stops.sl}\nTP: {stops.tp}\nFloating P&L: {float_str}\nAccount Balance: {bal_str}"
-        alerts.send(msg, severity=alerts.INFO)
-        
     return result
 
 
@@ -1238,6 +1208,7 @@ def _check_pyramiding(fetcher, risk, executor, m15_rates, session_mult, session_
 def _manage_open_positions(fetcher, risk, executor):
     """Run trailing stop logic and consolidation exit checks (own positions only)."""
     positions = fetcher.get_own_positions()
+    trade_alerts.maybe_floating_update(positions)
     if not positions:
         return
 

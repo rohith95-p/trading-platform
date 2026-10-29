@@ -1,20 +1,22 @@
-# --- ATLAS PORTFOLIO (optimized for funded account evaluation + funded phase) ---
-# Three strategies: two Asian breakout variants + daily trend-following.
-#   1. DonchianTrendV6 (7310): Daily trend-following, wider stops
-#   2. AsianRangeFilteredV6 (7320): Filtered Asian breakout (tight range gate)
-#   3. AsianBreakoutV6 (7311): Unfiltered Asian breakout (catches wider ranges)
+# --- ATLAS PORTFOLIO (funded account evaluation + funded phase) ---
+#   1. DonchianTrendV6 (7310): daily 10-day breakout, checked 06:15 IST
+#   2. AsianRangeFilteredV6 (7320): Asian range breakout with range-size gate, 12:45 IST
+#   3. AsianBreakoutV6 (7311): Asian range breakout without the gate, 12:45 IST
+#   4. LondonMomentumTightV6 (7324): London/NY overlap continuation, 17:45 IST
+#   5. NYSessionReversalV6 (7313): NY session sweep reversal
 #
-# Backtested 2026-10-25 across DEV/VALIDATE/HOLDOUT:
-#   HOLDOUT: PF 1.44, MaxDD 4.08%, Worst Day 2.33%, 45 days to 3% target
-#   Atlas eval (10% DD, 5% daily): PASS with 59% safety margin
-#   Atlas funded (6% DD, 3% daily): PASS with 32% safety margin
-#
-# AsianBreakout adds ~6 extra trades/month that AsianRangeFiltered skips
-# (wider ranges that still break out). Slightly higher DD but more
-# trade frequency for Atlas payout eligibility.
+# 2026-10-29 M1 shared-cap confirm ($5K, 0.02 lots, live parity, risk rules on;
+# scripts/research/atlas_candidate_study.py --confirm):
+#   5-leg  PF 1.14 / 1.39 / 1.48 (DEV / TEST / RECENT), ~0.6 trades/day, ~half of days traded,
+#          maxDD <= 5.6%, worst day -$92, no Atlas 10% / 5% breach.
+#   3-leg  PF 1.43 / 1.52 / 0.91, ~0.2 trades/day.
+# LondonMomentumV6 takes the same trades as the Tight variant; never run both.
 
 from src.strategies.momentum_strategies import DonchianTrendV6
 from src.strategies.asian_range_filtered import AsianRangeFilteredV6
 from src.strategies.asian_breakout import AsianBreakoutV6
+from src.strategies.london_momentum_tight import LondonMomentumTightV6
+from src.strategies.ny_session_reversal import NYSessionReversalV6
 
-PORTFOLIO = [DonchianTrendV6, AsianRangeFilteredV6, AsianBreakoutV6]
+PORTFOLIO = [DonchianTrendV6, AsianRangeFilteredV6, AsianBreakoutV6,
+             LondonMomentumTightV6, NYSessionReversalV6]

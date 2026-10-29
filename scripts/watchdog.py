@@ -13,6 +13,7 @@ See docs/research/REAL_MONEY_READINESS.md part IV.1.
 """
 
 import os
+import re
 import subprocess
 import sys
 import time
@@ -36,9 +37,9 @@ def _now():
     return datetime.now(IST).strftime("%Y-%m-%d %H:%M:%S IST")
 
 
-def _alert(msg: str, severity: str = alerts.WARN):
+def _alert(msg: str, severity: str = alerts.WARN, **details):
     """Notification channel. Sends via Telegram/webhook if configured, and records to logs/alerts.log."""
-    alerts.send(msg, severity=severity, context={"source": "watchdog"})
+    alerts.send(msg, severity=severity, context={**details, "source": "watchdog"})
 
 
 def _get_last_error_from_log(max_lines: int = 25) -> str:
@@ -75,15 +76,15 @@ def handle_main_loop_crash(consecutive_restarts: int, wait_seconds: int = 5) -> 
             f"FATAL: main_loop restart failed after {consecutive_restarts} attempts! "
             f"Watchdog terminating non-zero.\nTraceback snippet:\n{traceback_snippet}"
         )
-        _alert(fatal_msg, severity=alerts.CRITICAL)
+        _alert(f"FATAL: trading loop failed {consecutive_restarts} restarts -- watchdog stopped",
+               severity=alerts.CRITICAL, action="restart manually (start_ultra_core.bat)")
         trade_log.lifecycle("watchdog_fatal_exit", attempts=consecutive_restarts, error=traceback_snippet)
         sys.exit(1)
 
-    _alert(
-        f"main_loop crashed (attempt #{consecutive_restarts}/3) -- restarting in {wait_seconds}s.\n"
-        f"Traceback snippet:\n{traceback_snippet}",
-        severity=alerts.WARN,
-    )
+    last = [l for l in traceback_snippet.splitlines() if "ERROR" in l or "Traceback" in l or "Exception" in l]
+    _alert(f"Trading loop crashed (attempt #{consecutive_restarts}/3)", severity=alerts.WARN,
+           action=f"restart in {wait_seconds}s",
+           last_error=re.sub(r"^\S+ \S+ \S+ \S+ IST ", "", last[-1])[:80] if last else "none logged")
     trade_log.lifecycle("watchdog_restart", attempt=consecutive_restarts, error=traceback_snippet)
 
     time.sleep(wait_seconds)
@@ -180,6 +181,9 @@ def main():
               f"(set ULTRA_ALERT_TELEGRAM_TOKEN/_CHAT or ULTRA_ALERT_WEBHOOK). "
               f"Alerts will still be written to logs/alerts.log.")
     _alert("watchdog started", alerts.INFO)
+    if not os.path.exists(resilience.STOP_FILE) and not _loop_alive():
+        _start_loop()
+        time.sleep(CHECK_EVERY)
     consecutive_restarts = 0
     last_restart = 0.0
     pp_warned = False

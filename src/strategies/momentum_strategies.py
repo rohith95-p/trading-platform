@@ -92,8 +92,10 @@ class DonchianTrendV6(BaseStrategy):
 
     def _get_d1(self, m15_rates: np.ndarray):
         """Use live D1 rates if available, else build from M15."""
-        if self._d1_rates is not None and len(self._d1_rates) >= self._min_d1:
-            d = self._d1_rates
+        d = self._d1_rates
+        if d is not None and len(d) and int(d["time"][-1]) >= int(m15_rates["time"][-1]) // 86400 * 86400:
+            d = d[:-1]  # live feed includes today's forming bar; the strategy (and backtest) use completed days
+        if d is not None and len(d) >= self._min_d1:
             return (d["time"].astype("int64"), d["open"].astype(float),
                     d["high"].astype(float), d["low"].astype(float),
                     d["close"].astype(float))

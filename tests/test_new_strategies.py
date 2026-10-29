@@ -8,12 +8,14 @@ from src.strategies.base_strategy import Signal
 from src.strategies.momentum_strategies import DonchianTrendV6
 from src.strategies.asian_range_filtered import AsianRangeFilteredV6
 from src.strategies.asian_breakout import AsianBreakoutV6
+from src.strategies.london_momentum_tight import LondonMomentumTightV6
+from src.strategies.ny_session_reversal import NYSessionReversalV6
 
 DATA = os.path.join(os.path.dirname(__file__), "..", "research", "data", "XAUUSDm_M15.npy")
 DTYPE = [("time", "<i8"), ("open", "<f8"), ("high", "<f8"), ("low", "<f8"),
          ("close", "<f8"), ("tick_volume", "<u8"), ("spread", "<i4"), ("real_volume", "<u8")]
 T0 = 1704067200  # Monday 2024-01-01 00:00 UTC
-STRATS = [DonchianTrendV6, AsianRangeFilteredV6, AsianBreakoutV6]
+STRATS = [DonchianTrendV6, AsianRangeFilteredV6, AsianBreakoutV6, LondonMomentumTightV6, NYSessionReversalV6]
 
 
 def _make(n, drift=0.0, sigma=0.3, seed=1, t0=T0):
@@ -43,7 +45,7 @@ def real():
 @pytest.mark.parametrize("cls", STRATS)
 def test_attributes_present(cls):
     s = cls()
-    assert s.magic in (7310, 7311, 7320)
+    assert s.magic in (7310, 7311, 7313, 7320, 7324)
     assert hasattr(s, 'sl_atr_mult') and hasattr(s, 'tp_atr_mult')
     assert s.sl_atr_mult > 0 and s.tp_atr_mult > 0
     assert s.name and isinstance(s.name, str)
@@ -105,3 +107,31 @@ def test_portfolio_magics_unique():
 def test_portfolio_names_unique():
     names = [cls().name for cls in STRATS]
     assert len(names) == len(set(names))
+
+
+def _d1(n_days, day0):
+    r = np.zeros(n_days, dtype=DTYPE)
+    r["time"] = day0 + 86400 * np.arange(n_days)
+    r["close"] = 2000.0 + np.arange(n_days, dtype=float)
+    r["open"] = r["close"] - 0.5
+    r["high"] = r["close"] + 1.0
+    r["low"] = r["close"] - 1.0
+    return r
+
+
+@pytest.mark.parametrize("forming_close", [1900.0, 2100.0, 2500.0])
+def test_donchian_ignores_forming_live_d1_bar(forming_close):
+    day = T0 + 70 * 86400
+    m15 = _make(300, t0=day + 2700 - 299 * 900)
+    completed = _d1(60, day - 60 * 86400)
+    completed["close"][-1] = completed["high"][-2] + 30.0     # fresh breakout on the last completed day
+    completed["high"][-1] = completed["close"][-1] + 1.0
+    forming = _d1(1, day)
+    forming["close"] = forming["high"] = forming["low"] = forming["open"] = forming_close
+
+    s_live, s_ref = DonchianTrendV6(), DonchianTrendV6()
+    s_live.set_d1_rates(np.concatenate([completed, forming]))
+    s_ref.set_d1_rates(completed)
+    live, ref = s_live.evaluate(m15), s_ref.evaluate(m15)
+    assert ref is not None and ref.is_buy
+    assert _key(live) == _key(ref)
