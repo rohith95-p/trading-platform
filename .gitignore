@@ -89,3 +89,7 @@ research/data/*.npy
 # Lock & runtime control files
 *.lock
 STOP
+
+# Research raw trade dumps (large; regenerate with the scripts in scripts/research/)
+research/results/atlas_candidate_study/trades*.json
+research/results/atlas_new_families/results*.json
