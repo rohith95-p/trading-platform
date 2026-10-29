@@ -27,6 +27,8 @@ os.chdir(ROOT)
 from src.strategies.base_strategy import BaseStrategy, Signal, mt5  # noqa: E402
 
 OUT = os.path.join(ROOT, "research", "results", "atlas_new_families")
+# ULTRA_TRADE_24H=1 lifts the live 06:00-21:30 IST entry window (src/core/market_hours.py)
+RESULTS = "results_24h.json" if os.getenv("ULTRA_TRADE_24H") == "1" else "results.json"
 H = 3600
 
 
@@ -251,6 +253,106 @@ class H1Squeeze(_Family):
         return None
 
 
+# ---------------- round 2: published gold anomalies, with time exits ----------------
+# Sources: Blose/Gondhalekar/Kort 2018 (gold overnight returns positive, daytime negative);
+# CBS thesis 2019 "hat-shaped" intraday pattern (gold rises in eastern hours);
+# Friday gold drift (Thu close -> Fri close); daily RSI(2) mean reversion (Connors-style).
+# Live entries are only allowed 00:30-16:00 UTC (TRADING_WINDOW_IST), Friday flatten 17:00 UTC,
+# so every entry below sits inside that window.
+
+class _Timed(_Family):
+    """Adds `max_hold_sec`: TimedEngine closes the position at market after that long."""
+    def __init__(self, name, magic, sl, tp, hold_h, **p):
+        super().__init__(name, magic, sl, tp, **p)
+        self.max_hold_sec = int(hold_h * H)
+
+
+def _d1_trend(r, n):
+    u, o, h, lo, c = _daily(r)
+    if len(u) < n + 2:
+        return 0
+    e = _ema(c[:-1], n)
+    return 1 if c[-2] > e[-1] else -1
+
+
+class AsiaDrift(_Timed):
+    """Buy at `hour` UTC (Asian session), hold `hold_h` hours. Optional D1 trend filter."""
+    def decide(self, r, t, day, sod):
+        if sod != self.p["hour"] * H - 900:
+            return None
+        if self.p.get("trend") and _d1_trend(r, 20) < 0:
+            return None
+        return self._sig(True, day)
+
+
+class DayTrend(_Timed):
+    """At `hour` UTC, trade in the D1 EMA20 direction (or only shorts in downtrends), hold `hold_h`."""
+    def decide(self, r, t, day, sod):
+        if sod != self.p["hour"] * H - 900:
+            return None
+        tr = _d1_trend(r, 20)
+        if self.p["mode"] == "short_dn":
+            return self._sig(False, day) if tr < 0 else None
+        if self.p["mode"] == "fade":
+            tr = -tr
+        return self._sig(tr > 0, day) if tr else None
+
+
+class FridayDrift(_Timed):
+    """Buy Thursday at 15:45 UTC, hold into Friday (weekend flatten closes it by 17:00 UTC)."""
+    def decide(self, r, t, day, sod):
+        if sod != 15 * H + 1800 or (day + 4) % 7 != 4:  # bar 15:30-15:45 just closed, Thursday
+            return None
+        if self.p.get("trend") and _d1_trend(r, 20) < 0:
+            return None
+        return self._sig(True, day)
+
+
+class DailyRSI2(_Timed):
+    """At 15:45 UTC: RSI(2) of daily closes (today's 15:45 price as today's close) extreme,
+    in the direction of the D1 EMA50 trend; hold `hold_h`."""
+    def decide(self, r, t, day, sod):
+        if sod != 15 * H + 1800:
+            return None
+        u, o, h, lo, c = _daily(r)
+        if len(u) < 55:
+            return None
+        cl = c.copy()  # last element is today's price at 15:45
+        d = np.diff(cl[-4:])
+        g, l = np.where(d > 0, d, 0)[-2:].mean(), np.where(d < 0, -d, 0)[-2:].mean()
+        rsi = 100 if l == 0 else 100 - 100 / (1 + g / l)
+        tr = 1 if cl[-2] > _ema(cl[:-1], 50)[-1] else -1
+        k = self.p["rsi"]
+        if rsi < k and tr > 0:
+            return self._sig(True, day)
+        if rsi > 100 - k and tr < 0 and not self.p.get("long_only"):
+            return self._sig(False, day)
+        return None
+
+
+def timed_engine_cls():
+    from src.backtesting.engine import BacktestEngine
+
+    class TimedEngine(BacktestEngine):
+        """BacktestEngine + market close of any position whose strategy has max_hold_sec."""
+        def run(self, strategies, start_ts=None, end_ts=None, *a, **k):
+            self._hold = {s.name: s.max_hold_sec for s in strategies if getattr(s, "max_hold_sec", 0)}
+            return super().run(strategies, start_ts, end_ts, *a, **k)
+
+        def _manage(self, rm, m15_view, bar, point, spread_pts):
+            if self._hold:
+                ts = int(bar["time"])
+                for pos in list(self.positions):
+                    hold = self._hold.get(pos.strategy)
+                    if hold and ts - pos.entry_time >= hold:
+                        base = float(bar["close"])
+                        px = base if pos.is_buy else self.cost.ask(base, point, spread_pts)
+                        self._close(pos, px, ts, "TIME_EXIT")
+            super()._manage(rm, m15_view, bar, point, spread_pts)
+
+    return TimedEngine
+
+
 def variants():
     v, m = [], [7400]
 
@@ -285,9 +387,48 @@ def variants():
     return v
 
 
+def variants2():
+    v, m = [], [7460]
+
+    def add(cls, label, sl, tp, **p):
+        m[0] += 1
+        v.append((cls.__name__, f"{label}_sl{sl}_tp{tp}", m[0], sl, tp, p))
+
+    for hour in (1, 2):
+        for hold in (5, 6):
+            for trend in (0, 1):
+                add(AsiaDrift, f"ASIADRIFT_h{hour}_hold{hold}_tr{trend}", 4.0, 8.0, hour=hour, hold_h=hold, trend=trend)
+    for hour in (7, 13):
+        for mode in ("with", "fade", "short_dn"):
+            add(DayTrend, f"DAYTREND_h{hour}_{mode}", 4.0, 6.0, hour=hour, hold_h=16 - hour, mode=mode)
+    for trend in (0, 1):
+        add(FridayDrift, f"FRIDAY_tr{trend}", 4.0, 8.0, hold_h=24, trend=trend)
+    for rsi in (10, 25):
+        for hold in (24, 48):
+            add(DailyRSI2, f"DRSI2_{rsi}_hold{hold}", 6.0, 10.0, rsi=rsi, hold_h=hold)
+        add(DailyRSI2, f"DRSI2_{rsi}_hold24_long", 6.0, 10.0, rsi=rsi, hold_h=24, long_only=1)
+    return v
+
+
 def build(spec):
     clsname, name, magic, sl, tp, p = spec
     return globals()[clsname](name, magic, sl, tp, **p)
+
+
+def variants3():
+    """Night entries -- only reachable with ULTRA_TRADE_24H=1."""
+    v, m = [], [7480]
+    for hour in (22, 23):
+        for hold in (7, 8):
+            for trend in (0, 1):
+                m[0] += 1
+                v.append(("AsiaDrift", f"NIGHTDRIFT_h{hour}_hold{hold}_tr{trend}_sl4.0_tp8.0", m[0], 4.0, 8.0,
+                          dict(hour=hour, hold_h=hold, trend=trend)))
+    return v
+
+
+def all_variants():
+    return variants() + variants2() + variants3()
 
 
 # ---------------- running ----------------
@@ -307,7 +448,7 @@ def _job(spec, wname, start, end):
         risk_rules_enforce=False, sizing_ladder_caps=False, streak_blind_spot=False,
         max_concurrent=3, max_same_direction=2, history_bars=7500)
     try:
-        res = BacktestEngine(bars=_BARS, cost=SCENARIOS["realistic_ecn"], config=cfg).run([build(spec)], start, end)
+        res = timed_engine_cls()(bars=_BARS, cost=SCENARIOS["realistic_ecn"], config=cfg).run([build(spec)], start, end)
     except Exception as e:
         return spec[1], wname, None, f"{type(e).__name__}: {e}"[:200]
     return spec[1], wname, [dict(entry_time=int(t.entry_time), exit_time=int(t.exit_time),
@@ -365,12 +506,12 @@ def _portfolio_job(label, new_names, wname, start, end):
     from src.strategies.portfolio_atlas import PORTFOLIO
     if _BARS is None:
         _BARS = merged_bars()
-    by_name = {s[1]: s for s in variants()}
+    by_name = {s[1]: s for s in all_variants()}
     strats = [c() for c in PORTFOLIO] + [build(by_name[n]) for n in new_names]
     cfg = EngineConfig.live_parity_preset(
         sizing_mode="fixed", fixed_lots=0.02, starting_balance=5000.0,
         max_concurrent=3, max_same_direction=2, history_bars=7500)
-    res = BacktestEngine(bars=_BARS, cost=SCENARIOS["realistic_ecn"], config=cfg).run(strats, start, end)
+    res = timed_engine_cls()(bars=_BARS, cost=SCENARIOS["realistic_ecn"], config=cfg).run(strats, start, end)
     return label, wname, [dict(entry_time=int(t.entry_time), exit_time=int(t.exit_time), net_pl=float(t.net_pl),
                                strategy=str(t.strategy)) for t in res.trades]
 
@@ -409,20 +550,21 @@ def main():
     ap.add_argument("--dev", action="store_true")
     ap.add_argument("--oos", action="store_true")
     ap.add_argument("--confirm", nargs="+")
+    ap.add_argument("--round", type=int, default=1)
     a = ap.parse_args()
     if a.confirm:
         confirm(a.confirm)
         return
-    specs = variants()
+    specs = {1: variants, 2: variants2, 3: variants3, 0: all_variants}[a.round]()
     dev = [w for w in WINDOWS if w[0] == "DEV"]
     if a.dev:
-        report(_run(specs, dev, "results.json"), dev)
+        report({k: v for k, v in _run(specs, dev, RESULTS).items() if k in {s[1] for s in specs}}, dev)
     if a.oos:
-        res = json.load(open(os.path.join(OUT, "results.json")))
+        res = json.load(open(os.path.join(OUT, RESULTS)))
         keep = [s for s in specs if s[1] in res and isinstance(res[s[1]].get("DEV"), list)
                 and (st := _stats(res[s[1]]["DEV"]))["pf"] >= 1.20 and st["n"] >= 60]
         print(f"DEV survivors ({len(keep)}/{len(specs)}): {[s[1] for s in keep]}")
-        res = _run(keep, WINDOWS, "results.json")
+        res = _run(keep, WINDOWS, RESULTS)
         report({s[1]: res[s[1]] for s in keep}, WINDOWS)
 
 

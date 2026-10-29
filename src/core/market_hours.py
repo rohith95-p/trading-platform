@@ -19,6 +19,7 @@ actually keys off.
 """
 from __future__ import annotations
 
+import os
 from datetime import datetime, time, timedelta, timezone
 from typing import Optional, Tuple
 
@@ -40,7 +41,9 @@ ROLLOVER_SKIP_MINUTES = 10           # +/- around 00:00 UTC
 # This is a hard outer boundary applied on top of each leg's own session, so a
 # leg can never trade outside it even if its own window says otherwise.
 TRADING_WINDOW_IST = (6.0, 21.5)
-ENFORCE_TRADING_WINDOW = True
+# Owner 2026-10-29: "trade 24/7". ULTRA_TRADE_24H=1 lifts this window; weekend,
+# Friday cut-off and rollover checks below still apply.
+ENFORCE_TRADING_WINDOW = os.getenv("ULTRA_TRADE_24H", "0") != "1"
 
 
 def in_trading_window(now: Optional[datetime] = None) -> bool:
