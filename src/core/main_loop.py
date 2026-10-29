@@ -400,6 +400,7 @@ def _run_guarded():
                 current_date = now_ist.date()
             resilience.heartbeat()
             _push_ops_heartbeat(fetcher, drawdown_shutdown)  # external dead-man heartbeat (status payload)
+            _status_report(fetcher, now_ist)
             try:
                 _alert_foreign_exposure(fetcher.get_foreign_exposure())
             except Exception as _e:
@@ -790,6 +791,19 @@ def _alert_foreign_exposure(foreign) -> None:
         alerts.send(msg, severity=alerts.CRITICAL)
     except Exception:
         pass
+
+
+def _status_report(fetcher, now_ist) -> None:
+    """Scheduled Telegram 'still alive' snapshot (06:00 / 18:00 IST by default). Never raises."""
+    try:
+        floors = None
+        eng, st = _ATLAS_RT.get("engine"), _ATLAS_RT.get("state")
+        if eng and st:
+            floors = {"trailing_floor": eng.trailing_floor(st), "daily_floor": eng.daily_floor(st)}
+        trade_alerts.maybe_status_report(now_ist, fetcher.get_own_positions(),
+                                         fetcher.get_todays_closed_pl(), floors)
+    except Exception as e:
+        log.debug(f"status report skipped: {e}")
 
 
 def _push_ops_heartbeat(fetcher, drawdown_shutdown: bool) -> None:

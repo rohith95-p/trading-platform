@@ -123,6 +123,40 @@ def maybe_floating_update(positions) -> None:
     alerts.send_html(alerts.table(f"📊 OPEN TRADES ({len(positions)})", rows))
 
 
+STATUS_TIMES_IST = [t.strip() for t in os.environ.get("ULTRA_STATUS_TIMES_IST", "06:00,18:00").split(",") if t.strip()]
+_status_sent: set = set()
+
+
+@_safe
+def maybe_status_report(now_ist: datetime, own_positions, todays_pl: float, floors: dict | None = None) -> None:
+    """'Still alive' snapshot at fixed IST times on weekdays, so silence means something is wrong."""
+    if now_ist.weekday() >= 5:
+        return
+    due = [t for t in STATUS_TIMES_IST if now_ist.strftime("%H:%M") >= t]
+    if not due:
+        return
+    key = f"{now_ist:%Y-%m-%d} {due[-1]}"
+    if key in _status_sent:
+        return
+    if not _status_sent:  # first call after a (re)start: don't replay slots already passed today
+        _status_sent.update(f"{now_ist:%Y-%m-%d} {t}" for t in due)
+        return
+    _status_sent.add(key)
+    acct = mt5.account_info()
+    floating = sum(p.profit + p.swap for p in own_positions) if own_positions else 0.0
+    rows = [("Time", alerts.ist_stamp()),
+            ("Bot", "Running"),
+            ("Account", f"{acct.login} {acct.server}" if acct else "MT5 not connected"),
+            ("Balance", f"${acct.balance:.2f}" if acct else None),
+            ("Equity", f"${acct.equity:.2f}" if acct else None),
+            ("Open", f"{len(own_positions or [])} trade(s), {_money(floating)}"),
+            ("Today", _money(todays_pl))]
+    if floors and acct:
+        rows += [("DD floor", f"${floors['trailing_floor']:.2f} ({_money(acct.equity - floors['trailing_floor'])} room)"),
+                 ("Day floor", f"${floors['daily_floor']:.2f}")]
+    alerts.send_html(alerts.table("🟦 STATUS", rows))
+
+
 @_safe
 def news_pause(reason: str) -> None:
     key = re.sub(r"\(.*?\)|\d+ ?min", "", reason).strip()
