@@ -30,7 +30,8 @@ def main():
     if not m.initialize():
         print("MT5 not reachable"); return
     acct = m.account_info()
-    deals = [d for d in (m.history_deals_get(d0 - dt.timedelta(days=3), d1 + dt.timedelta(days=1)) or [])
+    # epoch seconds, not tz-aware datetimes: the MT5 API mis-reads aware datetimes and returns nothing
+    deals = [d for d in (m.history_deals_get(int(d0.timestamp()) - 3 * 86400, int(d1.timestamp()) + 86400) or [])
              if d.symbol == SYMBOL]
     by_pos = {}
     for d in deals:
@@ -60,8 +61,9 @@ def main():
         vol = a.volume
         risk = abs(a.price - sl) * vol * 100 if sl else 0.0
         reward = abs(tp - a.price) * vol * 100 if tp else 0.0
-        bars = m.copy_rates_range(SYMBOL, m.TIMEFRAME_M1, dt.datetime.fromtimestamp(a.time, UTC),
-                                  dt.datetime.fromtimestamp(b.time + 60, UTC))
+        bars = m.copy_rates_range(SYMBOL, m.TIMEFRAME_M1, a.time - 60, b.time + 60)
+        if bars is not None:
+            bars = bars[(bars["time"] >= a.time // 60 * 60) & (bars["time"] <= b.time)]
         if bars is not None and len(bars):
             best = (bars["high"].max() - a.price) if buy else (a.price - bars["low"].min())
             worst = (a.price - bars["low"].min()) if buy else (bars["high"].max() - a.price)
@@ -84,14 +86,14 @@ def main():
     overlap = any(s2 < e1 for (s1, e1), (s2, e2) in zip(spans, spans[1:]))
     print(f"Trades open at the same time: {'yes' if overlap else 'no (each closed before the next opened)'}")
 
-    d = m.copy_rates_from_pos(SYMBOL, m.TIMEFRAME_D1, 0, 120)
+    d = m.copy_rates_range(SYMBOL, m.TIMEFRAME_D1, int(d0.timestamp()) - 200 * 86400, int(d1.timestamp()))
     if d is not None and len(d) > 21:
         rng = d["high"] - d["low"]
         days = [dt.datetime.fromtimestamp(int(t), UTC).date() for t in d["time"]]
         k = next((j for j, x in enumerate(days) if x == day), len(d) - 1)
-        fri = [r for r, x in zip(rng[:k], days[:k]) if x.weekday() == 4][-12:]
+        fri = sorted([r for r, x in zip(rng[:k], days[:k]) if x.weekday() == 4][-12:])
         print(f"\nVolatility: {day:%a} range ${rng[k]:.2f} (high {d['high'][k]:.2f}, low {d['low'][k]:.2f}) | "
-              f"avg of last 20 days ${rng[k - 20:k].mean():.2f} | avg of last 12 Fridays ${sum(fri) / max(len(fri), 1):.2f}")
+              f"avg of last 20 days ${rng[k - 20:k].mean():.2f} | median of last 12 Fridays ${fri[len(fri) // 2] if fri else 0:.2f}")
         print(f"Daily trend gate: close {d['close'][k - 1]:.2f} vs 20-day EMA -> see D1 GATE lines below")
 
     log = os.path.join(ROOT, "logs", "main_loop.log")
