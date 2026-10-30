@@ -60,3 +60,31 @@ class TestWatchdogCrashRecovery:
         assert l_kwargs.get("attempts") == 3
 
         mock_start.assert_not_called()
+
+
+class _Stop(Exception):
+    pass
+
+
+@pytest.mark.parametrize("on, alive, stops, starts", [
+    (False, True, 1, 0),   # switched off, still running -> killed, never restarted
+    (False, False, 0, 0),  # switched off, not running -> left alone
+    (True, False, 0, 1),   # on, not running -> restarted (unchanged behaviour)
+])
+def test_protect_profit_switch(on, alive, stops, starts):
+    def _sleep(sec):  # end after the first full pass (its CHECK_EVERY wait)
+        if sec == watchdog.CHECK_EVERY:
+            raise _Stop
+    with patch.object(watchdog, "PROTECT_PROFIT_ON", on), \
+         patch.object(watchdog, "_protect_profit_alive", return_value=alive), \
+         patch.object(watchdog, "_stop_protect_profit") as stop, \
+         patch.object(watchdog, "_loop_alive", return_value=True), \
+         patch.object(watchdog, "_alert"), \
+         patch.object(watchdog.os.path, "exists", return_value=False), \
+         patch.object(watchdog.subprocess, "Popen") as popen, \
+         patch("builtins.open"), \
+         patch.object(watchdog.time, "sleep", side_effect=_sleep):
+        with pytest.raises(_Stop):
+            watchdog.main()
+    assert stop.call_count == stops
+    assert popen.call_count == starts

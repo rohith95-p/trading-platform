@@ -31,6 +31,10 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PYTHON = os.path.join(ROOT, "venv", "Scripts", "python.exe")
 if not os.path.exists(PYTHON):
     PYTHON = sys.executable
+# Owner 2026-10-30: "turn off protector". ULTRA_PROTECT_PROFIT=0 (in .env.local,
+# loaded by the alerts import) stops the watchdog starting protect_profit.py and
+# kills one already running; trades then exit only at their SL/TP.
+PROTECT_PROFIT_ON = os.getenv("ULTRA_PROTECT_PROFIT", "1") != "0"
 
 
 def _now():
@@ -123,6 +127,21 @@ def _protect_profit_alive() -> bool:
             return True  # can't tell -> don't cry wolf
 
 
+def _stop_protect_profit() -> None:
+    """Kill any running protect_profit.py (used when ULTRA_PROTECT_PROFIT=0)."""
+    try:
+        import psutil
+        for proc in psutil.process_iter(['cmdline']):
+            try:
+                if "protect_profit" in " ".join(proc.info.get('cmdline') or []):
+                    print(f"[{_now()}] protector switched off -- stopping protect_profit.py (PID {proc.pid})")
+                    proc.kill()
+            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                continue
+    except Exception as e:
+        print(f"[{_now()}] could not stop protect_profit.py: {e}")
+
+
 def _loop_alive() -> bool:
     if not os.path.exists(resilience.LOCK_FILE):
         return False
@@ -180,7 +199,7 @@ def main():
         print(f"[{_now()}] NOTE: no alert channel configured "
               f"(set ULTRA_ALERT_TELEGRAM_TOKEN/_CHAT or ULTRA_ALERT_WEBHOOK). "
               f"Alerts will still be written to logs/alerts.log.")
-    _alert("watchdog started", alerts.INFO)
+    _alert("watchdog started", alerts.INFO, profit_protector="ON" if PROTECT_PROFIT_ON else "OFF")
     if not os.path.exists(resilience.STOP_FILE) and not _loop_alive():
         _start_loop()
         time.sleep(CHECK_EVERY)
@@ -194,7 +213,10 @@ def main():
             continue
 
         # Watch the other safety layer too, not just main_loop.
-        if not _protect_profit_alive():
+        if not PROTECT_PROFIT_ON:
+            if _protect_profit_alive():
+                _stop_protect_profit()
+        elif not _protect_profit_alive():
             if not pp_warned:
                 _alert("protect_profit.py is NOT running -- ATTEMPTING RESTART.", alerts.WARN)
                 pp_warned = True
