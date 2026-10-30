@@ -44,6 +44,7 @@ from src.core import trade_log
 from src.core import risk_rules
 from src.core import market_hours
 from src.core import trade_alerts
+from src.core import journal  # 23:59 IST trade journal + day summary (2026-10-30)
 from src.core import news_filter  # III.5 -- blocks entries around tier-1 macro events
 from src.core import ops  # halt latch, measurement-only mode, external heartbeat (2026-10-18)
 from src.core import scope  # own-magic strategy view vs account-wide risk view (2026-10-18)
@@ -462,13 +463,9 @@ def _run_guarded():
             # Midnight IST tasks
             # ----------------------------------------------------------
             if current_date != now_ist.date():
-                log.info("Midnight IST transition detected. Running daily tasks.")
-                try:
-                    from src.core.daily_report import send_daily_report
-                    send_daily_report(force=False)
-                except Exception as e:
-                    log.error(f"Failed to send daily report: {e}")
+                log.info("Midnight IST transition detected.")
                 current_date = now_ist.date()
+            journal.maybe_run(mt5, now_ist)   # 23:59 IST: record the day's trades + day summary (replaces the midnight report)
             resilience.heartbeat()
             _push_ops_heartbeat(fetcher, drawdown_shutdown)  # external dead-man heartbeat (status payload)
             _write_status(fetcher)

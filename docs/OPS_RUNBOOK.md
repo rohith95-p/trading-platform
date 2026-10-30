@@ -19,10 +19,13 @@ Only problems make a sound. Routine messages arrive silently.
 
 | Message | Sound | What to do |
 |---|---|---|
-| 🟢 / 🔴 `BUY` / `SELL 0.02 lot · Strategy` | yes | Nothing. A trade opened with its stop and target already at the broker |
-| ✅ / ❌ `+$x` / `−$x · Strategy` | yes | Nothing. A trade closed |
+| 🟢 / 🔴 `BUY` / `SELL 0.02 lot opened` (strategy, entry price, stop, target, time, ticket, one per line) | yes | Nothing. Stop and target are already at the broker |
+| ✅ / ❌ `Trade closed +$x` / `−$x` (strategy, entry and exit price with times, held, result, balance) | yes | Nothing |
+| 📅 `Day summary` at 23:59 IST (every trade of the day, day net, balance; also written to `logs/trade_journal.csv`) | silent | Nothing |
 | 💚 `All good · HH:00` (hourly, Mon–Fri) | silent | Nothing. **If it stops arriving, something is wrong** |
-| 📊 open trades, 📅 day summary, 📰 news pause, ℹ️ bot started | silent | Nothing |
+
+In the pulse, **Daily limit: $X left** is how much equity can still fall today before the Atlas daily rule trips. It is measured from the day's reference (the previous day's highest equity), so profit made today adds to it: up $50 today means $250 + $50 = $300 left. **Max-loss limit** is measured from the highest equity ever reached minus $500, so it does not grow with today's profit until that profit sets a new high.
+| 📊 open trades, 📰 news pause, ℹ️ bot started | silent | Nothing |
 | ℹ️ `Bot stopped: restarting it (attempt 1/3)` | silent | Nothing. It healed itself |
 | ⚠️ MT5 connection lost / order rejected / restart attempt 2 / losses in a row | yes | Usually nothing; the message says if it needs you |
 | ⚠️ `Atlas daily limit: … paused until tomorrow` | yes | Nothing. The bot restarts by itself at 05:30 IST (the new Atlas day) |
@@ -38,7 +41,8 @@ Only problems make a sound. Routine messages arrive silently.
 | 17:45–21:30 | NY Session Reversal: NY session sweep reversal | ~4 | within 2 h (some overnight) |
 
 Altogether about 14 trades a month and roughly half of weekdays get a trade. The D1 trend gate blocks trades against
-the daily trend (e.g. only sells while gold closes below its 20-day average). Fridays: no new trades after 21:30 IST,
+the daily trend for all five strategies (only sells while gold closes below its 20-day average, only buys
+while above). Skipping it, as live did until 2026-10-30, was break-even in the backtests. Fridays: no new trades after 21:30 IST,
 everything is closed at 22:30 IST.
 
 ## Lot size

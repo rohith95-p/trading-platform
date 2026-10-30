@@ -59,8 +59,10 @@ def _status(**kw):
 def test_pulse_all_good():
     a = watchdog.build_pulse(_status(), 20, None, datetime(2026, 11, 2, 14, 0, tzinfo=IST))
     assert a.severity == alerts.INFO and a.headline == "All good · 14:00"
-    assert a.lines == ("Balance $5,000.00 · Equity $4,990.00", "Today +$12.50 · 1 open trade (−$10.00)",
-                       "Atlas room: +$490.00 total · +$240.00 today")
+    assert a.lines == ("Balance: $5,000.00", "Equity: $4,990.00", "Today closed: +$12.50",
+                       "Open trades: 1 (−$10.00)",
+                       "Daily limit: $240.00 left (stops at $4,750.00)",
+                       "Max-loss limit: $490.00 left (stops at $4,500.00)")
 
 
 def test_pulse_stale_and_halted():

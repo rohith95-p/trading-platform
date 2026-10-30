@@ -168,12 +168,15 @@ def build_pulse(status: dict | None, hb_age: float | None, halt: dict | None, no
                             alerts.WARN, action="If the next pulse says the same, RDP in and check MT5.")
     s = status
     n = int(s.get("open", 0))
-    lines = [f"Balance ${s['balance']:,.2f} · Equity ${s['equity']:,.2f}",
-             f"Today {_money(s.get('today', 0.0))} · {n} open trade{'' if n == 1 else 's'}"
-             + (f" ({_money(s.get('floating', 0.0))})" if n else "")]
+    lines = [f"Balance: ${s['balance']:,.2f}",
+             f"Equity: ${s['equity']:,.2f}",
+             f"Today closed: {_money(s.get('today', 0.0))}",
+             f"Open trades: {n}" + (f" ({_money(s.get('floating', 0.0))})" if n else "")]
     if "trailing_floor" in s and "daily_floor" in s:
-        lines.append(f"Atlas room: {_money(s['equity'] - s['trailing_floor'])} total · "
-                     f"{_money(s['equity'] - s['daily_floor'])} today")
+        # Atlas limits as "how much more could be lost before the rule trips", with the equity level it trips at
+        lines.append(f"Daily limit: ${s['equity'] - s['daily_floor']:,.2f} left (stops at ${s['daily_floor']:,.2f})")
+        lines.append(f"Max-loss limit: ${s['equity'] - s['trailing_floor']:,.2f} left "
+                     f"(stops at ${s['trailing_floor']:,.2f})")
     return alerts.Alert(f"All good · {when}", tuple(lines), alerts.INFO, icon="💚")
 
 

@@ -36,8 +36,8 @@ Five strategies (`src/strategies/portfolio_atlas.py`), each one order of 0.02 lo
 Independent audit 2026-10-30 (M1 data only, $5K, 0.02 lots, protector off, 24h, Atlas guard, realistic ECN costs;
 `research/results/audit_2026-10-30/README.md`): PF 1.07 DEV (2022-08 to 2024-06), 1.32 TEST (2024-06 to 2026-02),
 1.53 RECENT (2026-07 to 2026-10); about 14 trades a month, 25-42% of months lose money.
-**Those numbers have the daily trend gate on. Live skips it for all five legs (`skip_d1_gate`); with the gate
-skipped as live runs, the same windows are break-even (pooled PF 0.99). See section 3 of the audit.**
+These are the numbers with the daily trend gate on, which live applies to all five legs since 2026-10-30;
+skipping the gate (as live did before) was break-even (pooled PF 0.99). See section 3 of the audit.
 
 ## How It Works
 

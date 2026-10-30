@@ -30,7 +30,7 @@ class AsianRangeFilteredV6(BaseStrategy):
     execute_immediately = True
     edge_trigger = True
     session = (0.0, 24.0)
-    skip_d1_gate = True
+    skip_d1_gate = False  # owner 2026-10-30: apply the daily trend gate live, as every validated backtest did
 
     def __init__(self, sl_atr_mult: float = 2.0, tp_atr_mult: float = 3.5,
                  min_range_pct: float = 0.003, max_range_pct: float = 0.016,

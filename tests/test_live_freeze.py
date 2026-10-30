@@ -28,6 +28,13 @@ def test_live_portfolio_is_the_validated_five_legs():
     assert got == LIVE_LEGS
 
 
+def test_daily_trend_gate_applies_to_every_live_leg():
+    """Owner 2026-10-30: live runs the gated system that was validated (skipping it was break-even, PF 0.99)."""
+    from src.core import main_loop
+    assert main_loop.ENABLE_D1_GATE is True
+    assert all(getattr(cls(), "skip_d1_gate", False) is False for cls in PORTFOLIO)
+
+
 def test_sizing_and_position_caps():
     assert eh.FIXED_LOT_SIZE == 0.02
     assert eh.MAX_CONCURRENT_POSITIONS == 3

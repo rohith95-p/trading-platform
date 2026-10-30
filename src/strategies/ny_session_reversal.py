@@ -32,7 +32,7 @@ class NYSessionReversalV6(BaseStrategy):
     execute_immediately = True
     edge_trigger = True
     session = (0.0, 24.0)
-    skip_d1_gate = True
+    skip_d1_gate = False  # owner 2026-10-30: apply the daily trend gate live, as every validated backtest did
 
     def __init__(self, penetration_atr: float = 0.2, displacement_atr: float = 0.5,
                  sl_atr_mult: float = 2.5, tp_atr_mult: float = 4.5,

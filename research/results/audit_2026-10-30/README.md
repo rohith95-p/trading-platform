@@ -55,9 +55,10 @@ engine now mirrors live. Same windows, same settings, gate skipped as live does:
 Per strategy, gated → as live: Asian Breakout $204 → $15 · Asian Range Filtered $393 → $10 · Donchian −$11 → −$167 ·
 London Momentum Tight $398 → −$109 · NY Session Reversal $643 → $203. The mechanics checks (section 1) are still
 0 mismatches on the new run and the look-ahead probe is identical (40/40). Conclusion: the edge belongs to the
-gated system; applying the daily gate live is needed to run what was validated (owner decision pending).
+gated system. **Owner decision 2026-10-30: apply the daily gate live** (`skip_d1_gate = False` on all five
+legs, pinned by `tests/test_live_freeze.py`).
 
-## 4. Results with the daily gate applied (M1 bars only; what was validated, not what live currently runs)
+## 4. Results with the daily gate applied (M1 bars only; what was validated and, since 2026-10-30, what live runs)
 | Window | Trades | Net | PF (90% CI) | Win rate | P(edge > 0) | Median month | Losing months | Max DD | Longest losing run |
 |---|---|---|---|---|---|---|---|---|---|
 | DEV 2022-08 → 2024-06 | 313 | +$130 | 1.07 (0.87–1.33) | 37% | 0.71 | +$11 | 37% | $209 | 9 |

@@ -42,6 +42,10 @@ def _at(ts: float) -> str:
     return alerts.ist_stamp(datetime.fromtimestamp(ts, timezone.utc))
 
 
+def _hm(ts: float) -> str:
+    return datetime.fromtimestamp(ts, timezone.utc).astimezone(alerts.IST).strftime("%H:%M IST")
+
+
 def _dur(seconds: float) -> str:
     m = int(seconds // 60)
     return f"{m // 60}h {m % 60}m" if m >= 60 else f"{m}m"
@@ -69,12 +73,14 @@ def entry(strategy: str, is_buy: bool, lots: float, price: float, sl: float, tp:
           ticket, symbol: str) -> None:
     risk = _pnl_at(symbol, is_buy, lots, price, sl) if sl else None
     reward = _pnl_at(symbol, is_buy, lots, price, tp) if tp else None
-    stop = f"Stop {sl:.2f}" + (f" ({_money(risk)})" if risk is not None else "") if sl else "Stop none"
-    target = f"Target {tp:.2f}" + (f" ({_money(reward)})" if reward is not None else "") if tp else "Target none"
-    alerts.notify(alerts.Alert(
-        f"{'BUY' if is_buy else 'SELL'} {lots:.2f} lot · {_name(strategy)}",
-        (f"Entry {price:.2f}", f"{stop} · {target}", f"Ticket #{ticket}"),
-        alerts.TRADE, icon="🟢" if is_buy else "🔴"))
+    lines = [f"Strategy: {_name(strategy)}",
+             f"Entry price: {price:.2f}",
+             f"Stop loss: {sl:.2f}" + (f" ({_money(risk)})" if risk is not None else "") if sl else "Stop loss: none",
+             f"Target: {tp:.2f}" + (f" ({_money(reward)})" if reward is not None else "") if tp else "Target: none",
+             f"Time: {_hm(_time.time())}",
+             f"Ticket: #{ticket}"]
+    alerts.notify(alerts.Alert(f"{'BUY' if is_buy else 'SELL'} {lots:.2f} lot opened", tuple(lines),
+                               alerts.TRADE, icon="🟢" if is_buy else "🔴"))
 
 
 @_safe
@@ -86,12 +92,15 @@ def closed(ticket, deals, pl: float, strategy: str) -> None:
     acct = mt5.account_info()
     icon = "✅" if pl > 0 else "❌" if pl < 0 else "➖"
     result = _EXIT_REASON.get(getattr(last, "reason", -1), "Closed")
-    alerts.notify(alerts.Alert(
-        f"{_money(pl)} · {_name(strategy)}",
-        (f"{'BUY' if is_buy else 'SELL'} {first.volume:.2f} · {first.price:.2f} → {last.price:.2f} · "
-         f"held {_dur(last.time - first.time)}",
-         f"{result}" + (f" · Balance {_usd(acct.balance)}" if acct else "")),
-        alerts.TRADE, icon=icon))
+    lines = [f"Strategy: {_name(strategy)}",
+             f"Side: {'BUY' if is_buy else 'SELL'} {first.volume:.2f} lot",
+             f"Entry price: {first.price:.2f} ({_hm(first.time)})",
+             f"Exit price: {last.price:.2f} ({_hm(last.time)})",
+             f"Held: {_dur(last.time - first.time)}",
+             f"Result: {result}"]
+    if acct:
+        lines.append(f"Balance: {_usd(acct.balance)}")
+    alerts.notify(alerts.Alert(f"Trade closed {_money(pl)}", tuple(lines), alerts.TRADE, icon=icon))
 
 
 @_safe
@@ -107,11 +116,15 @@ def maybe_floating_update(positions) -> None:
         return
     _last_float_ts = now
     total = sum(p.profit + p.swap for p in positions)
-    lines = [f"{'BUY' if p.type == mt5.POSITION_TYPE_BUY else 'SELL'} {p.volume:.2f} {_name(p.comment)} "
-             f"{_money(p.profit + p.swap)} ({_dur(now - p.time)})" for p in positions]
+    lines = []
+    for p in positions:
+        lines += [f"{'BUY' if p.type == mt5.POSITION_TYPE_BUY else 'SELL'} {p.volume:.2f} · {_name(p.comment)}",
+                  f"Entry price: {p.price_open:.2f}",
+                  f"Now: {p.price_current:.2f} ({_money(p.profit + p.swap)})",
+                  f"Open for: {_dur(now - p.time)}"]
     acct = mt5.account_info()
     if acct:
-        lines.append(f"Equity {_usd(acct.equity)}")
+        lines.append(f"Equity: {_usd(acct.equity)}")
     n = len(positions)
     alerts.notify(alerts.Alert(f"{n} open trade{'s' if n > 1 else ''} · {_money(total)}", tuple(lines),
                                alerts.INFO, icon="📊"))
