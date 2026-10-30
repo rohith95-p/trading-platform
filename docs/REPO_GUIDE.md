@@ -68,7 +68,7 @@ _(last synced 2026-10-30 by `scripts/sync_docs.py`)_:
 
 | Leg | Magic | Session IST | SL/TP ×ATR | Notes |
 |---|---|---|---|---|
-| `ASIAN_RANGE_FILTERED_V6` | 7320 | 00:00–24:00 | 2.0 / 3.5 | |
+| `ASIAN_RANGE_FILTERED_V6` | 7320 | 00:00–24:00 | 2.5 / 3.5 | |
 | `ASIAN_BREAKOUT_V6` | 7311 | 00:00–24:00 | 3.0 / 5.0 | |
 | `LONDON_MOMENTUM_TIGHT_V6` | 7324 | 00:00–24:00 | 2.0 / 4.0 | |
 | `NY_SESSION_REVERSAL_V6` | 7313 | 00:00–24:00 | 2.5 / 4.5 | |
