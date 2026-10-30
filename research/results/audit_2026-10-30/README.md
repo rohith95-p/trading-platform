@@ -58,6 +58,16 @@ London Momentum Tight $398 → −$109 · NY Session Reversal $643 → $203. The
 gated system. **Owner decision 2026-10-30: apply the daily gate live** (`skip_d1_gate = False` on all five
 legs, pinned by `tests/test_live_freeze.py`).
 
+## 3b. Donchian Trend removed (2026-10-30)
+Same gated setup, run again without DonchianTrendV6 (owner: "remove it if it's useless"):
+
+| Window | 5 legs | 4 legs (no Donchian) |
+|---|---|---|
+| DEV | +$130, PF 1.07, max DD $209 | +$101, PF 1.06, max DD $173 |
+| TEST | +$885, PF 1.32, max DD $272 | +$856, PF 1.36, max DD $250 |
+| RECENT | +$611, PF 1.53, max DD $269 | +$730, PF 1.75, max DD $184 |
+| All | +$1,627, PF 1.29, 38% losing months | +$1,687, PF 1.34, 31% losing months |
+
 ## 4. Results with the daily gate applied (M1 bars only; what was validated and, since 2026-10-30, what live runs)
 | Window | Trades | Net | PF (90% CI) | Win rate | P(edge > 0) | Median month | Losing months | Max DD | Longest losing run |
 |---|---|---|---|---|---|---|---|---|---|

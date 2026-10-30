@@ -12,7 +12,6 @@ from src.strategies.portfolio_atlas import PORTFOLIO
 
 # name: (magic, sl_atr_mult, tp_atr_mult)
 LIVE_LEGS = {
-    "DONCHIAN_TREND_V6": (7310, 2.0, 4.0),
     "ASIAN_RANGE_FILTERED_V6": (7320, 2.0, 3.5),
     "ASIAN_BREAKOUT_V6": (7311, 3.0, 5.0),
     "LONDON_MOMENTUM_TIGHT_V6": (7324, 2.0, 4.0),
@@ -20,7 +19,7 @@ LIVE_LEGS = {
 }
 
 
-def test_live_portfolio_is_the_validated_five_legs():
+def test_live_portfolio_is_the_validated_four_legs():
     got = {}
     for cls in PORTFOLIO:
         s = cls()

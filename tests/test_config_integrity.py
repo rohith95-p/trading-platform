@@ -95,11 +95,11 @@ class TestPortfolioConfiguration:
     """Tests for current live Atlas portfolio composition."""
 
     def test_portfolio_strategy_count(self):
-        """Atlas portfolio must have exactly 5 strategies."""
+        """Atlas portfolio must have exactly 4 strategies (Donchian removed 2026-10-30)."""
         from src.strategies.portfolio_atlas import PORTFOLIO
 
-        assert len(PORTFOLIO) == 5, (
-            f"PORTFOLIO has {len(PORTFOLIO)} strategies, expected 5."
+        assert len(PORTFOLIO) == 4, (
+            f"PORTFOLIO has {len(PORTFOLIO)} strategies, expected 4."
         )
 
     def test_portfolio_strategy_names(self):
@@ -108,7 +108,6 @@ class TestPortfolioConfiguration:
 
         strategy_names = {cls().name for cls in PORTFOLIO}
         expected = {
-            'DONCHIAN_TREND_V6',
             'ASIAN_RANGE_FILTERED_V6',
             'ASIAN_BREAKOUT_V6',
             'LONDON_MOMENTUM_TIGHT_V6',

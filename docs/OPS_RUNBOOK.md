@@ -34,14 +34,13 @@ In the pulse, **Daily limit: $X left** is how much equity can still fall today b
 ## When each strategy trades (IST, Mon–Fri)
 | Time (IST) | Strategy | Trades/month (backtest) | Usually closes |
 |---|---|---|---|
-| 06:15 | Donchian Trend: 10-day breakout | ~2 | within 1–7 h |
 | 12:45 | Asian Range Filtered: Asian-range breakout with a size filter | ~3 | within 2–6 h |
 | 12:45 | Asian Breakout: same breakout without the filter (rare) | <1 | within 5–8 h |
 | 17:45 | London Momentum Tight: London/NY overlap continuation | ~5 | within 1–3 h |
 | 17:45–21:30 | NY Session Reversal: NY session sweep reversal | ~4 | within 2 h (some overnight) |
 
-Altogether about 14 trades a month and roughly half of weekdays get a trade. The D1 trend gate blocks trades against
-the daily trend for all five strategies (only sells while gold closes below its 20-day average, only buys
+Altogether about 12 trades a month (Donchian Trend was removed 2026-10-30: break-even on its own) and roughly half of weekdays get a trade. The D1 trend gate blocks trades against
+the daily trend for every strategy (only sells while gold closes below its 20-day average, only buys
 while above). Skipping it, as live did until 2026-10-30, was break-even in the backtests. Fridays: no new trades after 21:30 IST,
 everything is closed at 22:30 IST.
 

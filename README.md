@@ -1,6 +1,6 @@
 # Ultra Core — XAUUSD Algorithmic Trading System
 
-An automated XAUUSD (gold) trading system built on MetaTrader 5, designed for Atlas Funded prop-firm evaluation accounts. Runs a 5-strategy portfolio with full risk management, position sizing, and prop-firm rule compliance. Day-to-day operation (Telegram messages, strategy times, VPS commands): [docs/OPS_RUNBOOK.md](docs/OPS_RUNBOOK.md).
+An automated XAUUSD (gold) trading system built on MetaTrader 5, designed for Atlas Funded prop-firm evaluation accounts. Runs a 4-strategy portfolio with full risk management, position sizing, and prop-firm rule compliance. Day-to-day operation (Telegram messages, strategy times, VPS commands): [docs/OPS_RUNBOOK.md](docs/OPS_RUNBOOK.md).
 
 ## Architecture
 
@@ -23,20 +23,20 @@ docs/             OPS_RUNBOOK, ATLAS_TEST_PLAN, REPO_GUIDE
 
 ## Active Portfolio
 
-Five strategies (`src/strategies/portfolio_atlas.py`), each one order of 0.02 lots with a fixed stop and target:
+Four strategies (`src/strategies/portfolio_atlas.py`), each one order of 0.02 lots with a fixed stop and target:
 
 | Strategy | Magic | Entry (IST) | Logic | SL / TP (ATR14) |
 |---|---|---|---|---|
-| **DonchianTrendV6** | 7310 | 06:15 | 10-day Donchian breakout | 2.0x / 4.0x |
 | **AsianRangeFilteredV6** | 7320 | 12:45 | Asian range breakout at London open, range-size gate | 2.0x / 3.5x |
 | **AsianBreakoutV6** | 7311 | 12:45 | Unfiltered Asian breakout | 3.0x / 5.0x |
 | **LondonMomentumTightV6** | 7324 | 17:45 | London/NY overlap continuation | 2.0x / 4.0x |
 | **NYSessionReversalV6** | 7313 | 17:45-21:30 | NY session sweep reversal | 2.5x / 4.5x |
 
-Independent audit 2026-10-30 (M1 data only, $5K, 0.02 lots, protector off, 24h, Atlas guard, realistic ECN costs;
-`research/results/audit_2026-10-30/README.md`): PF 1.07 DEV (2022-08 to 2024-06), 1.32 TEST (2024-06 to 2026-02),
-1.53 RECENT (2026-07 to 2026-10); about 14 trades a month, 25-42% of months lose money.
-These are the numbers with the daily trend gate on, which live applies to all five legs since 2026-10-30;
+Independent audit 2026-10-30 (M1 data only, $5K, 0.02 lots, protector off, 24h, daily trend gate on, Atlas guard,
+realistic ECN costs; `research/results/audit_2026-10-30/README.md`): PF 1.06 DEV (2022-08 to 2024-06),
+1.36 TEST (2024-06 to 2026-02), 1.75 RECENT (2026-07 to 2026-10); about 12 trades a month, 31% of months lose money.
+DonchianTrendV6 was removed the same day: on its own it was break-even (89 trades, −$11, PF 0.98).
+These are the numbers with the daily trend gate on, which live applies to every leg since 2026-10-30;
 skipping the gate (as live did before) was break-even (pooled PF 0.99). See section 3 of the audit.
 
 ## How It Works

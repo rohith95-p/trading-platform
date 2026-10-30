@@ -13,7 +13,7 @@ def test_trade_record_reads_like_mt5_result():
 
 
 def test_atlas_portfolio_magics():
-    expected = {7310, 7311, 7313, 7320, 7324}
+    expected = {7311, 7313, 7320, 7324}
     assert expected == {int(c().magic) for c in PORTFOLIO}
 
 
