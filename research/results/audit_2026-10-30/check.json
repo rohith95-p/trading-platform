@@ -1,53 +1,7 @@
 {
  "DEV": {
-  "n": 313,
-  "net": 130.32,
-  "coarse_m15_trades_skipped": 0,
-  "bad": {
-   "pnl": 0,
-   "comm": 0,
-   "swap": 0,
-   "exit_bar": 0,
-   "exit_px": 0,
-   "missed_hit": 0,
-   "balance_chain": 0
-  },
-  "ambiguous_bars": 0,
-  "sl_gaps": 1,
-  "sl_gap_extra_cost": 0.01,
-  "entry_bar_touch": 0,
-  "reasons": {
-   "SL": 194,
-   "Weekend Gap Avoidance": 10,
-   "TP": 109
-  }
- },
- "TEST": {
-  "n": 291,
-  "net": 1125.38,
-  "coarse_m15_trades_skipped": 21,
-  "bad": {
-   "pnl": 0,
-   "comm": 0,
-   "swap": 0,
-   "exit_bar": 0,
-   "exit_px": 0,
-   "missed_hit": 0,
-   "balance_chain": 0
-  },
-  "ambiguous_bars": 0,
-  "sl_gaps": 1,
-  "sl_gap_extra_cost": 0.11,
-  "entry_bar_touch": 1,
-  "reasons": {
-   "SL": 178,
-   "Weekend Gap Avoidance": 5,
-   "TP": 108
-  }
- },
- "RECENT": {
-  "n": 61,
-  "net": 611.26,
+  "n": 256,
+  "net": -238.74,
   "coarse_m15_trades_skipped": 0,
   "bad": {
    "pnl": 0,
@@ -63,8 +17,55 @@
   "sl_gap_extra_cost": 0.0,
   "entry_bar_touch": 0,
   "reasons": {
-   "SL": 34,
-   "TP": 27
+   "SL": 175,
+   "TP": 74,
+   "Weekend Gap Avoidance": 7
+  }
+ },
+ "TEST": {
+  "n": 250,
+  "net": 9.99,
+  "coarse_m15_trades_skipped": 0,
+  "bad": {
+   "pnl": 0,
+   "comm": 0,
+   "swap": 0,
+   "exit_bar": 0,
+   "exit_px": 0,
+   "missed_hit": 0,
+   "balance_chain": 0
+  },
+  "ambiguous_bars": 0,
+  "sl_gaps": 3,
+  "sl_gap_extra_cost": 11.02,
+  "entry_bar_touch": 1,
+  "reasons": {
+   "SL": 162,
+   "TP": 79,
+   "Weekend Gap Avoidance": 9
+  }
+ },
+ "RECENT": {
+  "n": 41,
+  "net": 180.31,
+  "coarse_m15_trades_skipped": 0,
+  "bad": {
+   "pnl": 0,
+   "comm": 0,
+   "swap": 0,
+   "exit_bar": 0,
+   "exit_px": 0,
+   "missed_hit": 0,
+   "balance_chain": 0
+  },
+  "ambiguous_bars": 0,
+  "sl_gaps": 0,
+  "sl_gap_extra_cost": 0.0,
+  "entry_bar_touch": 0,
+  "reasons": {
+   "SL": 24,
+   "TP": 16,
+   "Weekend Gap Avoidance": 1
   }
  }
 }

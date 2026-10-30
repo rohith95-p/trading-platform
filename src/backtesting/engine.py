@@ -1358,7 +1358,7 @@ class BacktestEngine:
                         if cfg.dedup_per_candle and fired_on[s.name] == bar_open:
                             self.diag["signals_deduped"] += 1
                             continue
-                        if d1_bias:
+                        if d1_bias and not getattr(s, "skip_d1_gate", False):   # main_loop._d1_bias_allows
                             sig_dir = "BULLISH" if sig.is_buy else "BEARISH"
                             _ovr = (cfg.direction_gate == "d1_choch" and choch_override == sig_dir)
                             if not _ovr:
@@ -1640,7 +1640,9 @@ class BacktestEngine:
             if not d1_ready:
                 d1_bias = self._scan_d1_bias(d1_view, ts, d1_bias_static)
                 d1_ready = True
-            if d1_bias:
+            # main_loop._d1_bias_allows: strategies with skip_d1_gate (all V6 legs) bypass the daily gate live.
+            # Until 2026-10-30 the engine gated them anyway, so research blocked counter-trend trades live takes.
+            if d1_bias and not getattr(s, "skip_d1_gate", False):
                 sig_dir = "BULLISH" if sig.is_buy else "BEARISH"
                 ovr = (cfg.direction_gate == "d1_choch" and choch_override == sig_dir)
                 if not ovr and (d1_bias == "CONFLICT" or (sig.is_buy and d1_bias == "BEARISH")
