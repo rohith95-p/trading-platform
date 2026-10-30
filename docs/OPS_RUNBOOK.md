@@ -1,66 +1,69 @@
-# Operations runbook — dead-man heartbeat, supervisor, halt latch, measurement-only (2026-10-18)
+# Operations runbook (current as of 2026-10-30)
 
-> **2026-10-22: the supervisor was removed** (owner decision). `scripts/supervisor.py`, `scripts/install_supervisor_task.ps1` and the
-> `UltraCoreSupervisor` scheduled task no longer exist; the supervisor sections below are kept as history. The bot runs on its own
-> (`python -m src.core.main_loop`) and nothing restarts it after a crash, a blind-session exit or PC sleep.
+The bot runs on the AWS Windows VPS only (never also on the PC). Account: Exness demo 198874999, server
+Exness-MT5Trial11, Atlas "1 Step Access $5K" rehearsal (`ULTRA_ATLAS_MODE=1`).
 
-## What was added
-| Piece | File | Purpose |
+## What runs
+| Process | Started by | Job |
 |---|---|---|
-| External heartbeat | `src/core/ops.py` (`build_status`, `push_status`), wired in `main_loop._push_ops_heartbeat` | POSTs a status payload (commit, config fingerprint, quote age, positions, pending orders, daily P&L, rule state, account type) at most every 30 s, in a daemon thread (never blocks the loop) |
-| Persistent halt latch | `src/core/ops.py` + `scripts/halt.py` | A halt lives in `logs/HALT_LATCH.json`. A crash/restart cannot clear it. Only `python -m scripts.halt clear --note "..."` does (note mandatory, latch archived). Corrupt latch file = still halted. |
-| Latch triggers | `main_loop._execute_signal` | A `risk_rules` HARD HALT (peak-drawdown/monthly kill) now also sets the latch. Startup is refused while it is set. |
-| Measurement-only mode | env `ULTRA_MEASURE_ONLY=1` | Bot scans, logs signals as "blocked: measurement-only mode", reconciles, heartbeats; sends **no orders**. Default of the supervisor. |
-| Supervisor | `scripts/supervisor.py` | Starts/restarts the bot after a crash with backoff (5,10,20…300 s), refuses to start under halt latch or STOP file, crash-loop guard (5 crashes/10 min), rotating log (5 MB x 5), hung-process kill (heartbeat file > 5 min), sleep/resume detection, optional supervisor heartbeat. |
-| Task installer | `scripts/install_supervisor_task.ps1` | Registers `UltraCoreSupervisor` (boot + logon, wake, restart-on-failure, battery OK). **Dry run by default**; `-Apply` registers; `-Trade` selects trade mode. Not applied by this change. |
+| `scripts/watchdog.py` | `start_ultra_core.bat` | Starts and restarts the trading loop, stands down while a halt is latched, sends the hourly pulse |
+| `src.core.main_loop` | the watchdog | Scans every 60 s, places trades, writes `logs/heartbeat` and `logs/status.json` every scan |
+| `scripts/protect_profit.py` | the watchdog, only if `ULTRA_PROTECT_PROFIT` is not `0` | Early profit-taking. **Off since 2026-10-30 (owner decision)** |
 
-## Set up the external dead-man alert (you do this once)
-1. Create a free check at healthchecks.io (or run Uptime Kuma). Period **1 minute**, grace **3 minutes**.
-2. Add your Telegram / email integration there. The alert fires when pings **stop** (PC asleep, crashed, offline) — nothing local can do that.
-3. Put the ping URL in `.env.local` (never commit): `ULTRA_HEARTBEAT_URL=https://hc-ping.com/<uuid>` (bot) and optionally `ULTRA_SUPERVISOR_HEARTBEAT_URL=...` (second check for the supervisor).
-4. A latched halt pings `<url>/fail` on healthchecks.io so it alerts immediately.
-Note: on weekends `quote_age_s` is large because the market is closed; do not alert on quote age outside trading hours.
+Settings live in `.env.local` (never committed): `ULTRA_ATLAS_MODE=1`, `ULTRA_TRADE_24H=1`, `ULTRA_PROTECT_PROFIT=0`,
+Telegram token/chat, and on the VPS `SSL_CERT_FILE` (certifi). Optional: `ULTRA_PULSE_EVERY_H` (default 1, 0 = off),
+`ULTRA_FLOAT_UPDATE_MIN` (default 30).
 
-## Run
+## Telegram messages
+Only problems make a sound. Routine messages arrive silently.
+
+| Message | Sound | What to do |
+|---|---|---|
+| 🟢 / 🔴 `BUY` / `SELL 0.02 lot · Strategy` | yes | Nothing. A trade opened with its stop and target already at the broker |
+| ✅ / ❌ `+$x` / `−$x · Strategy` | yes | Nothing. A trade closed |
+| 💚 `All good · HH:00` (hourly, Mon–Fri) | silent | Nothing. **If it stops arriving, something is wrong** |
+| 📊 open trades, 📅 day summary, 📰 news pause, ℹ️ bot started | silent | Nothing |
+| ℹ️ `Bot stopped: restarting it (attempt 1/3)` | silent | Nothing. It healed itself |
+| ⚠️ MT5 connection lost / order rejected / restart attempt 2 / losses in a row | yes | Usually nothing; the message says if it needs you |
+| 🚨 `Atlas safety stop` / `Bot halted` / `Bot is down: watchdog gave up` / other trades found | yes | **Act.** The message ends with 👉 and the exact step |
+
+## When each strategy trades (IST, Mon–Fri)
+| Time (IST) | Strategy | Trades/month (backtest) | Usually closes |
+|---|---|---|---|
+| 06:15 | Donchian Trend: 10-day breakout | ~2 | within 1–7 h |
+| 12:45 | Asian Range Filtered: Asian-range breakout with a size filter | ~3 | within 2–6 h |
+| 12:45 | Asian Breakout: same breakout without the filter (rare) | <1 | within 5–8 h |
+| 17:45 | London Momentum Tight: London/NY overlap continuation | ~5 | within 1–3 h |
+| 17:45–21:30 | NY Session Reversal: NY session sweep reversal | ~4 | within 2 h (some overnight) |
+
+Altogether about 14 trades a month and roughly half of weekdays get a trade. The D1 trend gate blocks trades against
+the daily trend (e.g. only sells while gold closes below its 20-day average). Fridays: no new trades after 21:30 IST,
+everything is closed at 22:30 IST.
+
+## Lot size
+Every trade is **one order of 0.02 lots**. Not 0.03, and not split into smaller orders. At most 3 trades can be open
+at once (0.06 lots total). At 0.02 lots a $1 move in gold is $2. A typical stop-loss costs $17–35 (0.3–0.7% of $5,000)
+and a take-profit pays about twice that. The size comes from `risk_rules.SIZING_LADDER` (0.02 above $800 balance).
+
+## Commands (PowerShell on the VPS)
+```powershell
+# health check (read-only)
+powershell -ExecutionPolicy Bypass -File C:\projects\ultra_core\scripts\vps_check.ps1
+# update to the latest GitHub version and restart (keeps .env.local and logs)
+powershell -ExecutionPolicy Bypass -File C:\projects\ultra_core\scripts\vps_update.ps1
+# halt latch
+cd C:\projects\ultra_core; venv\Scripts\python.exe -m scripts.halt status
+cd C:\projects\ultra_core; venv\Scripts\python.exe -m scripts.halt clear --note "checked"
+# stop the bot without touching open trades (their stop/target stay at the broker)
+Get-Process python -ErrorAction SilentlyContinue | Stop-Process -Force
 ```
-python -m scripts.supervisor            # measurement-only (recommended default)
-python -m scripts.supervisor --trade    # allow orders (demo account)
-powershell -ExecutionPolicy Bypass -File scripts\install_supervisor_task.ps1          # dry run
-powershell -ExecutionPolicy Bypass -File scripts\install_supervisor_task.ps1 -Apply   # register at boot/logon
-python -m scripts.halt status | set --reason "..." | clear --note "..."
-```
-Disable the old `UltraCoreBot` task when you enable the supervisor so two launchers do not compete. Also set the PC to never sleep while plugged in (power settings are not changed by these scripts).
+Do **not** create a `STOP` file to stop the bot: that closes every open trade.
 
-## Acceptance tests
-| Test | Result 2026-10-18 |
-|---|---|
-| Bot starts under the supervisor, heartbeat payload received | **PASS** (payload: account=demo, commit, fingerprint, rule_state=MEASURE_ONLY) |
-| Supervisor publishes its own heartbeat | **PASS** |
-| Kill the bot process -> supervisor restarts it, heartbeats resume | **PASS** |
-| Latch a halt, kill the bot -> not restarted ("not starting: halt latch set") | **PASS** |
-| Clear the latch with a note -> restarts | **PASS** (latch archived) |
-| Rotating log written | **PASS** |
-| Unit tests (23, `tests/test_ops.py`): latch persistence, fail-closed corrupt file, clear needs note, measurement-only sends nothing, payload, POST to a real local endpoint, `/fail` routing, rate limit, supervisor decisions | **PASS** (268 tests total) |
-| PC sleep -> external alert fires | **NOT TESTED** (needs the external service configured and a sleep) |
-| Network disconnect -> stale-quote/heartbeat alerts | **NOT TESTED** |
-| Friday flatten with pendings cancelled | **NOT TESTED** (bot does not use pending orders; positions flatten as before) |
-| Reconciliation mismatch -> alert + entries blocked | **NOT IMPLEMENTED** |
-The acceptance run used alerts disabled and a local heartbeat receiver; the test halt was cleared and archived.
+## Halts
+A halt (Atlas safety stop, risk-rules hard halt, or `halt set`) is stored in `logs/HALT_LATCH.json` and survives
+restarts. While it is set the watchdog does not restart the trading loop. It sends one message and then waits. Clear
+it with the command above; the watchdog restarts the bot within a minute.
 
-## Not done yet (honest list)
-- Heartbeat-silence **protective action** (cancel pendings/flatten) is not automated; the dead-man action is an alert to you.
-- Daily-loss / order-reject-burst / reconciliation-mismatch alerts are not yet raised from the payload.
-- Validation fingerprint still does not include code commit / engine version (the commit is in the heartbeat payload only); it does not block the measurement-only restart.
-- `protect_profit.py` is not started by the supervisor (no positions in measurement-only mode).
-- Telegram token revocation remains the owner's decision.
-
-## Account scoping: strategy view vs account view (2026-10-18)
-Allowlist: `config/ultra_magics.json` (every PORTFOLIO leg magic must be listed, or the bot refuses to start; a missing/invalid file also refuses).
-
-| Uses OWN magics only (strategy view) | Uses EVERYTHING on the account (account view) |
-|---|---|
-| signals/entries, "one position at a time" count, trailing/break-even (`protect_profit`), kill-switch flatten, streak breakers, per-strategy P&L (`position_closed` logs `risk_scope=strategy`, `magic`) | daily loss, floating P&L, equity drawdown, symbol exposure cap, margin, halt state |
-
-Foreign exposure rule (fail closed): if a non-Ultra-Core position exists on XAUUSDm, all new Ultra Core entries are blocked, a `FOREIGN EXPOSURE DETECTED` alert is sent (once per change of the ticket set) and logged with magic, ticket, volume, direction and floating P/L (`risk_scope=account`). Foreign positions are never closed or modified unless `ULTRA_ACCOUNT_WIDE_FLATTEN=1`. With orders enabled, startup is refused while foreign positions exist. `ULTRA_BLOCK_ON_FOREIGN=0` disables the block (not recommended).
-Account ownership: until one account-level governor controls both systems, run Ultra Core on its own demo account or in measurement-only mode. The -$66.12 loss (magic 5150001) is not Ultra Core's; it is excluded from strategy metrics and included in account risk.
-Not done: startup check that no *other* EA uses our magics (MT5 cannot tell which EA placed a deal); the running bot picks these changes up only on its next restart.
+## Freeze
+`tests/test_live_freeze.py` pins every live number (legs, magics, stops/targets, lot size, caps, Atlas thresholds,
+trading hours, switch defaults). Changing any of them fails CI until that file is updated in the same commit.

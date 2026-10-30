@@ -26,6 +26,7 @@ except ImportError:
     pass
 import time as _time
 import logging
+import re
 import numpy as np
 import MetaTrader5 as _mt5
 from typing import Any, Optional
@@ -173,10 +174,35 @@ def _atlas_account_info(acct) -> AccountInfo:
     )
 
 
-def _close_all_positions(fetcher, executor, reason: str) -> None:
-    """Flatten every open position on the symbol (kill switch)."""
+HALT_CLEAR_HELP = ('RDP into the VPS, check MT5, then in PowerShell: cd C:\\projects\\ultra_core; '
+                   'venv\\Scripts\\python.exe -m scripts.halt clear --note "checked". The watchdog restarts the bot.')
+
+_ATLAS_WORDS = {"daily_loss": "today's loss", "trailing_dd": "total drawdown", "protector": "open-trade loss",
+                "margin": "margin use"}
+
+
+def _explain_atlas(reasons) -> str:
+    """'daily_loss_hard:0.9697>=0.8' -> "today's loss at 97% of the Atlas limit"."""
+    out = []
+    for r in reasons or []:
+        m = re.match(r"(\w+?)_(hard|soft):([\d.]+)>=([\d.]+)", str(r))
+        if not m:
+            out.append(str(r))
+            continue
+        what, val, lim = _ATLAS_WORDS.get(m.group(1), m.group(1)), float(m.group(3)), float(m.group(4))
+        out.append(f"{what} ${val:,.2f} (limit ${lim:,.2f})" if m.group(1) == "protector"
+                   else f"{what} at {val:.0%} of the Atlas limit")
+    return "; ".join(out)
+
+
+def _close_all_positions(fetcher, executor, reason: str, severity: str | None = "CRITICAL") -> None:
+    """Flatten every open position on the symbol. severity=None: the caller sends its own message."""
     from src.core import alerts
-    alerts.send(f"⚠️ KILL SWITCH ACTIVATED ⚠️\nReason: {reason}", severity=alerts.CRITICAL)
+    if severity == alerts.CRITICAL:
+        alerts.send("Kill switch: closing all trades", alerts.CRITICAL, context={"reason": reason},
+                    action="The bot stays stopped while the STOP file exists. Delete it, then restart the bot.")
+    elif severity:
+        alerts.send(f"Closing all trades: {reason}", severity)
     # Own positions only. Foreign positions are reported, never closed, unless ULTRA_ACCOUNT_WIDE_FLATTEN=1.
     wide = scope.account_wide_flatten_enabled()
     targets = fetcher.get_positions() if wide else fetcher.get_own_positions()
@@ -188,7 +214,8 @@ def _close_all_positions(fetcher, executor, reason: str) -> None:
             log.warning(f"KILL SWITCH: closed #{pos.ticket} ({reason})")
         else:
             log.error(f"KILL SWITCH: FAILED to close #{pos.ticket} -- close it manually.")
-            alerts.send(f"🚨 KILL SWITCH FAILED to close #{pos.ticket} -- close it manually!", severity=alerts.CRITICAL)
+            alerts.send(f"Could not close trade #{pos.ticket}", alerts.CRITICAL, context={"reason": reason},
+                        action="Close it by hand in MT5 now.")
 
 
 def run():
@@ -197,6 +224,7 @@ def run():
     # Single-instance guard -- refuse to start if another main_loop is alive.
     if not resilience.acquire_lock():
         return
+    resilience.heartbeat()
 
     try:
         _run_guarded()
@@ -221,8 +249,7 @@ def _run_guarded():
         from src.core import alerts
         msg = (f"START REFUSED: halt latch is set ({_halt.get('source')}: {_halt.get('reason')}). "
                f"Review, reconcile, then clear with: python -m scripts.halt clear --note \"...\"")
-        log.error(msg)
-        alerts.send(msg, severity=alerts.CRITICAL)
+        log.error(msg)   # the watchdog sees the latch and tells the owner once; no alert per refused start
         return
     if ops.measure_only():
         log.warning("MEASUREMENT-ONLY MODE (ULTRA_MEASURE_ONLY): scanning and logging, NO orders will be sent.")
@@ -286,7 +313,9 @@ def _run_guarded():
                     f"{scope.foreign_report(_foreign0)}. Use measurement-only mode, a separate account, "
                     f"or close them manually.")
             log.error(_msg)
-            alerts.send(_msg, severity=alerts.CRITICAL)
+            alerts.send(f"Bot refused to start: other trades on {SYMBOL}", alerts.CRITICAL,
+                        context={"found": scope.foreign_report(_foreign0)},
+                        action="Close the other trades (or use a separate account), then restart the bot.")
             return
     risk = RiskManager(SYMBOL)
     executor = ExecutionHandler(SYMBOL, risk_manager=risk)
@@ -400,7 +429,7 @@ def _run_guarded():
                 current_date = now_ist.date()
             resilience.heartbeat()
             _push_ops_heartbeat(fetcher, drawdown_shutdown)  # external dead-man heartbeat (status payload)
-            _status_report(fetcher, now_ist)
+            _write_status(fetcher)
             try:
                 _alert_foreign_exposure(fetcher.get_foreign_exposure())
             except Exception as _e:
@@ -429,7 +458,7 @@ def _run_guarded():
                 if open_pos:
                     log.warning("FRIDAY KILL SWITCH: Market closing soon. Flattening all positions.")
                     print(f"[{_ist_now()}] FRIDAY KILL SWITCH -- flattening for the weekend.")
-                    _close_all_positions(fetcher, executor, "Weekend Gap Avoidance")
+                    _close_all_positions(fetcher, executor, "Friday close before the weekend", "INFO")
                 # Sleep and skip the rest of the loop until market reopens
                 _time.sleep(LOOP_INTERVAL)
                 continue
@@ -467,11 +496,13 @@ def _run_guarded():
                 # Self-heal (2026-10-19): a reconnect can leave this process's MT5 session blind even after the network
                 # returns. After 8 blind scans (~8 min) exit (the supervisor that restarted it was removed 2026-10-22).
                 if mt5_fail_count >= 8:
-                    msg = f"MT5 session blind for {mt5_fail_count} scans -- exiting; restart the bot by hand."
+                    msg = f"MT5 session blind for {mt5_fail_count} scans -- exiting so the watchdog restarts it."
                     log.error(msg)
                     try:
                         from src.core import alerts
-                        alerts.send(f"⚠️ {msg}", severity=alerts.CRITICAL)
+                        alerts.send(f"MT5 still not answering after {mt5_fail_count} min: restarting the bot",
+                                    alerts.WARN,
+                                    action="Nothing yet. If this repeats, RDP in and check MT5 is logged in.")
                     except Exception:
                         pass
                     raise SystemExit(3)
@@ -492,9 +523,12 @@ def _run_guarded():
                             log.error(f"ATLAS MONITOR: FLATTEN triggered — closing all positions.")
                             from src.core import alerts
                             _detail = atlas_engine.monitor_detail(_ai, atlas_state, datetime.now(timezone.utc))
-                            alerts.send(f"🚨 ATLAS FLATTEN: {_detail.reasons}", severity=alerts.CRITICAL)
-                            _close_all_positions(fetcher, executor, f"Atlas rule engine: {_detail.reasons}")
-                            ops.set_halt(f"Atlas FLATTEN: {_detail.reasons}", "atlas_rule_engine")
+                            alerts.send("Atlas safety stop: all trades closed, bot halted", alerts.CRITICAL,
+                                        context={"why": _explain_atlas(_detail.reasons),
+                                                 "equity": f"${_ai.equity:,.2f}"},
+                                        action=HALT_CLEAR_HELP)
+                            _close_all_positions(fetcher, executor, f"Atlas rule engine: {_detail.reasons}", None)
+                            ops.set_halt(f"Atlas FLATTEN: {_detail.reasons}", "atlas_rule_engine", notify=False)
                             break
                         elif _mon == "STOP_NEW":
                             _detail = atlas_engine.monitor_detail(_ai, atlas_state, datetime.now(timezone.utc))
@@ -788,22 +822,29 @@ def _alert_foreign_exposure(foreign) -> None:
                    foreign=rep, risk_scope="account")
     try:
         from src.core import alerts
-        alerts.send(msg, severity=alerts.CRITICAL)
+        alerts.send(f"Other trades found on {SYMBOL}: new entries blocked", alerts.CRITICAL,
+                    context={"found": rep}, action="Close them in MT5 (the bot never touches them).")
     except Exception:
         pass
 
 
-def _status_report(fetcher, now_ist) -> None:
-    """Scheduled Telegram 'still alive' snapshot (06:00 / 18:00 IST by default). Never raises."""
+def _write_status(fetcher) -> None:
+    """logs/status.json for the watchdog's hourly pulse (the watchdog has no MT5 session). Never raises."""
     try:
-        floors = None
+        acct = mt5.account_info()
+        if acct is None:
+            return
+        own = fetcher.get_own_positions()
+        snap = {"login": acct.login, "server": acct.server, "balance": float(acct.balance),
+                "equity": float(acct.equity), "open": len(own),
+                "floating": float(sum(p.profit + p.swap for p in own)),
+                "today": float(fetcher.get_todays_closed_pl())}
         eng, st = _ATLAS_RT.get("engine"), _ATLAS_RT.get("state")
         if eng and st:
-            floors = {"trailing_floor": eng.trailing_floor(st), "daily_floor": eng.daily_floor(st)}
-        trade_alerts.maybe_status_report(now_ist, fetcher.get_own_positions(),
-                                         fetcher.get_todays_closed_pl(), floors)
+            snap.update(trailing_floor=float(eng.trailing_floor(st)), daily_floor=float(eng.daily_floor(st)))
+        resilience.write_status(snap)
     except Exception as e:
-        log.debug(f"status report skipped: {e}")
+        log.debug(f"status snapshot skipped: {e}")
 
 
 def _push_ops_heartbeat(fetcher, drawdown_shutdown: bool) -> None:
@@ -938,13 +979,15 @@ def _check_vi3_tripwire(fetcher):
             msg = f"VI.3 TRIPWIRE: Rolling 30-trade PF is {pf:.2f} (<0.8). Logging only (kill switch disabled by user)."
             log.error(msg)
             from src.core import alerts
-            alerts.send(msg, severity=alerts.CRITICAL)
+            alerts.send(f"Last 30 trades: profit factor {pf:.2f}", alerts.WARN,
+                        context={"meaning": "the strategies are losing more than they win lately"},
+                        action="Trading continues. Worth a review if it stays below 0.8.")
             # Kill switch disabled
         elif pf < 1.0:
             msg = f"VI.3 TRIPWIRE WARN: Rolling 30-trade PF is {pf:.2f} (<1.0)."
             log.warning(msg)
             from src.core import alerts
-            alerts.send(msg, severity=alerts.WARN)
+            alerts.send(f"Last 30 trades: profit factor {pf:.2f} (below 1)", alerts.INFO)
     except Exception as e:
         log.warning(f"Could not check VI.3 tripwire: {e}")
 

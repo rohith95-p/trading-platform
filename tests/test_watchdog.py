@@ -26,8 +26,8 @@ class TestWatchdogCrashRecovery:
         assert restarts == 1
         assert mock_alert.call_count == 1
         args, kwargs = mock_alert.call_args
-        assert "crashed (attempt #1/3)" in args[0]
-        assert kwargs.get("severity") == alerts.WARN
+        assert "restarting it (attempt 1/3)" in args[0]
+        assert kwargs.get("severity") == alerts.INFO      # a first, self-healed restart is routine
 
         assert mock_lifecycle.call_count == 1
         l_args, l_kwargs = mock_lifecycle.call_args
@@ -51,7 +51,7 @@ class TestWatchdogCrashRecovery:
 
         assert mock_alert.call_count == 1
         args, kwargs = mock_alert.call_args
-        assert "FATAL" in args[0]
+        assert "gave up" in args[0]
         assert kwargs.get("severity") == alerts.CRITICAL
 
         assert mock_lifecycle.call_count == 1
@@ -80,6 +80,8 @@ def test_protect_profit_switch(on, alive, stops, starts):
          patch.object(watchdog, "_stop_protect_profit") as stop, \
          patch.object(watchdog, "_loop_alive", return_value=True), \
          patch.object(watchdog, "_alert"), \
+         patch.object(watchdog.ops, "halt_status", return_value=None), \
+         patch.object(watchdog, "PULSE_EVERY_H", 0), \
          patch.object(watchdog.os.path, "exists", return_value=False), \
          patch.object(watchdog.subprocess, "Popen") as popen, \
          patch("builtins.open"), \

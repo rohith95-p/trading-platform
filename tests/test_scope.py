@@ -112,12 +112,12 @@ def test_foreign_alert_fires_once_per_ticket_set(monkeypatch):
     from src.core import main_loop as ml
     from src.core import alerts
     sent = []
-    monkeypatch.setattr(alerts, "send", lambda m, severity=None: sent.append(m))
+    monkeypatch.setattr(alerts, "send", lambda m, severity=None, **k: sent.append(m))
     monkeypatch.setattr(ml, "_FOREIGN_SEEN", {"tickets": None})
     f = [pos(2, 5150001)]
     ml._alert_foreign_exposure(f)
     ml._alert_foreign_exposure(f)
-    assert len(sent) == 1 and "FOREIGN EXPOSURE DETECTED" in sent[0]
+    assert len(sent) == 1 and "Other trades found" in sent[0]
     ml._alert_foreign_exposure([pos(2, 5150001), pos(3, 999)])
     assert len(sent) == 2
 
@@ -177,7 +177,7 @@ def test_foreign_pending_order_counts_as_foreign_exposure(monkeypatch):
 def test_foreign_alert_repeats_after_30_min_while_persisting(monkeypatch):
     from src.core import main_loop as ml, alerts
     sent = []
-    monkeypatch.setattr(alerts, "send", lambda m, severity=None: sent.append(m))
+    monkeypatch.setattr(alerts, "send", lambda m, severity=None, **k: sent.append(m))
     monkeypatch.setattr(ml, "_FOREIGN_SEEN", {"tickets": None})
     clock = [1000.0]
     monkeypatch.setattr(ml._time, "time", lambda: clock[0])

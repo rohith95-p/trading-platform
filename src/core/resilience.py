@@ -30,6 +30,7 @@ _LOGS = os.path.join(_ROOT, "logs")
 LOCK_FILE = os.path.join(_LOGS, "main_loop.lock")
 STOP_FILE = os.path.join(_ROOT, "STOP")
 HEARTBEAT_FILE = os.path.join(_LOGS, "heartbeat")
+STATUS_FILE = os.path.join(_LOGS, "status.json")   # main_loop -> watchdog: account snapshot for the hourly pulse
 STATE_FILE = os.path.join(_LOGS, "loop_state.json")
 
 # Expected account identity -- refuse to start against anything else.
@@ -103,6 +104,25 @@ def heartbeat() -> None:
             f.write(datetime.now(IST).isoformat())
     except OSError:
         pass
+
+
+def write_status(snapshot: dict) -> None:
+    """Atomically publish main_loop's latest account snapshot (read by the watchdog)."""
+    try:
+        tmp = STATUS_FILE + ".tmp"
+        with open(tmp, "w", encoding="utf-8") as f:
+            json.dump({**snapshot, "ts": time.time()}, f)
+        os.replace(tmp, STATUS_FILE)
+    except OSError:
+        pass
+
+
+def read_status() -> dict | None:
+    try:
+        with open(STATUS_FILE, encoding="utf-8") as f:
+            return json.load(f)
+    except (OSError, ValueError):
+        return None
 
 
 # ---------------------------------------------------------------------------
@@ -216,7 +236,9 @@ def note_fetch_result(mt5: Any, got_data: bool, fail_count: int, reason: str = "
         log.warning(msg)
         try:
             from src.core import alerts
-            alerts.send(f"⚠️ {msg}", severity=alerts.CRITICAL)
+            alerts.send(f"MT5 connection lost: reconnecting (try {fail_count // 3})", alerts.WARN,
+                        context={"why": reason or "no data"},
+                        action="Nothing yet: the bot retries by itself and restarts after 8 min.")
         except Exception:
             pass
         try:

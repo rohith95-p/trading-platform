@@ -4,10 +4,11 @@ from src.core import alerts, ops, trade_log
 
 def test_halt_latch_sends_one_critical_alert(monkeypatch):
     sent = []
-    monkeypatch.setattr(alerts, "send", lambda m, severity=None, context=None: sent.append((severity, m)) or True)
+    monkeypatch.setattr(alerts, "send", lambda m, severity=None, context=None, action=None:
+                        sent.append((severity, m, context)) or True)
     ops.set_halt("monthly loss 31%", "risk_rules")
     ops.set_halt("second cause ignored", "risk_rules")          # idempotent: no second alert
-    assert len(sent) == 1 and sent[0][0] == alerts.CRITICAL and "monthly loss" in sent[0][1]
+    assert len(sent) == 1 and sent[0][0] == alerts.CRITICAL and "monthly loss" in sent[0][2]["why"]
 
 
 def test_meaningful_block_alerts_once_per_hour(monkeypatch):

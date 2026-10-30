@@ -227,7 +227,7 @@ class PreTradeVeto:
                 from src.core import alerts
                 alerts.send(
                     f"Macro override: {strategy_name} SHORT with strict stops",
-                    severity=alerts.WARN,
+                    severity=alerts.INFO,
                     context={'strategy': strategy_name, 'direction': signal_direction}
                 )
             except Exception as e:

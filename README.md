@@ -1,6 +1,6 @@
 # Ultra Core — XAUUSD Algorithmic Trading System
 
-An automated XAUUSD (gold) trading system built on MetaTrader 5, designed for Atlas Funded prop-firm evaluation accounts. Runs a 3-strategy portfolio with full risk management, position sizing, and prop-firm rule compliance.
+An automated XAUUSD (gold) trading system built on MetaTrader 5, designed for Atlas Funded prop-firm evaluation accounts. Runs a 5-strategy portfolio with full risk management, position sizing, and prop-firm rule compliance. Day-to-day operation (Telegram messages, strategy times, VPS commands): [docs/OPS_RUNBOOK.md](docs/OPS_RUNBOOK.md).
 
 ## Architecture
 
@@ -13,29 +13,29 @@ src/
   backtesting/    Replay engine with M1/M15 fills, realistic cost models, D1 gate
   atlas/          Atlas Funded rule engine (trailing DD, daily loss, consistency)
   research/       Feature library, candidate screening
-scripts/          Watchdog, monitors, diagnostics, backtest runners
+scripts/          Watchdog, VPS update/check scripts, halt CLI, research and validation runners
 research/         Cached XAUUSDm bars (.npy, git-ignored), validation ledger
-tests/            311 tests (pytest): strategy logic, risk rules, no-lookahead,
-                  engine parity, sizing ladder, demo relaxation
+tests/            pytest suite: strategy logic, risk rules, no-lookahead, engine parity,
+                  sizing ladder, alert priorities, live-config freeze guard
 config/           Atlas rules (atlas_access.json), magic numbers (ultra_magics.json)
 docs/             OPS_RUNBOOK, ATLAS_TEST_PLAN, REPO_GUIDE
 ```
 
 ## Active Portfolio
 
-Three strategies optimized for Atlas Funded evaluation + funded phases:
+Five strategies (`src/strategies/portfolio_atlas.py`), each one order of 0.02 lots with a fixed stop and target:
 
-| Strategy | Magic | Logic | SL / TP (ATR14) |
-|---|---|---|---|
-| **DonchianTrendV6** | 7310 | 10-day Donchian breakout with EMA50 trend filter on D1 | 3.0x / 6.0x |
-| **AsianRangeFilteredV6** | 7320 | Asian range breakout at London open, range must be 0.3%-1.6% of price | 2.0x / 3.5x |
-| **AsianBreakoutV6** | 7311 | Unfiltered Asian breakout (catches wider ranges the filtered version skips) | 2.5x / 4.0x |
+| Strategy | Magic | Entry (IST) | Logic | SL / TP (ATR14) |
+|---|---|---|---|---|
+| **DonchianTrendV6** | 7310 | 06:15 | 10-day Donchian breakout | 2.0x / 4.0x |
+| **AsianRangeFilteredV6** | 7320 | 12:45 | Asian range breakout at London open, range-size gate | 2.0x / 3.5x |
+| **AsianBreakoutV6** | 7311 | 12:45 | Unfiltered Asian breakout | 3.0x / 5.0x |
+| **LondonMomentumTightV6** | 7324 | 17:45 | London/NY overlap continuation | 2.0x / 4.0x |
+| **NYSessionReversalV6** | 7313 | 17:45-21:30 | NY session sweep reversal | 2.5x / 4.5x |
 
-Holdout backtest (2025-06 to 2026-10, realistic ECN costs):
-- **Profit Factor 1.44**, max drawdown 4.08%, worst single day -2.33%
-- Atlas evaluation (10% DD, 5% daily loss): **PASS** with 59% safety margin
-- Atlas funded (6% DD, 3% daily loss): **PASS** with 32% safety margin
-- Estimated ~45 days to reach the 3% profit target ($150 on $5K)
+Independent audit 2026-10-30 (M1 data only, $5K, 0.02 lots, protector off, 24h, Atlas guard, realistic ECN costs;
+`research/results/audit_2026-10-30/README.md`): PF 1.07 DEV (2022-08 to 2024-06), 1.32 TEST (2024-06 to 2026-02),
+1.53 RECENT (2026-07 to 2026-10); about 14 trades a month, 25-42% of months lose money.
 
 ## How It Works
 
@@ -43,7 +43,7 @@ Holdout backtest (2025-06 to 2026-10, realistic ECN costs):
 
 1. **Safety gates**: single-instance lock, `STOP` file kill switch, Friday 22:30 IST flatten, spread filter, ±15-min news blackout, daily-loss cap, data freshness check.
 2. **D1 EMA20 gate**: bearish daily trend blocks buys, bullish blocks sells. Fails closed (no entries) if D1 data unavailable.
-3. **Trading window**: entries only 06:00–21:30 IST.
+3. **Trading window**: 06:00–21:30 IST by default; `ULTRA_TRADE_24H=1` (set live) lifts it. Weekend and Friday cut-offs always apply.
 4. **Signal generation**: strategies evaluate on M15/M5 bars, one signal per candle via Highlander ranking (best strategy wins when multiple fire).
 5. **Order path**: `SizingLadder` → `PreTradeVeto` → `risk_rules` (ENFORCE=True) → market order with SL/TP attached.
 
@@ -73,9 +73,9 @@ Holdout backtest (2025-06 to 2026-10, realistic ECN costs):
 
 ## Backtesting
 
-`BacktestEngine` replays the live loop: M1 fills where available (from 2026-07), M15 with entry-bar testing otherwise. Includes D1 gate, live trading window, dedup, Highlander ranking, realistic ECN costs (spread from bar data + 20pt slippage + $3.50/lot commission).
+`BacktestEngine` replays the live loop: M1 fills where M1 bars exist, M15 with entry-bar testing otherwise (coarse M15 is optimistic; the M1 merge has a hole 2025-09-12 to 2025-10-15). Includes D1 gate, live trading window, dedup, Highlander ranking, realistic ECN costs (spread from bar data + 20pt slippage + $3.50/lot commission).
 
-Data splits: **DEV** (2022-08 to 2024-02), **VALIDATE** (2024-02 to 2025-06), **HOLDOUT** (2025-06 to 2026-10).
+Data splits used for the live portfolio: **DEV** (2022-08 to 2024-06), **TEST** (2024-06 to 2026-02), **RECENT** (2026-07 to 2026-10).
 
 ## Setup
 
@@ -83,19 +83,19 @@ Data splits: **DEV** (2022-08 to 2024-02), **VALIDATE** (2024-02 to 2025-06), **
 python -m venv venv && venv\Scripts\activate
 pip install -r requirements.txt
 copy .env.example .env.local   # MT5_LOGIN, MT5_PASSWORD, MT5_SERVER
-python -m pytest tests -q      # 311 tests
+python -m pytest tests -q
 ```
 
-**Running the bot**:
-```bash
-python -m src.core.main_loop              # direct
-python -m scripts.watchdog                # with keep-alive
-```
+**Running the bot**: `start_ultra_core.bat` (starts the watchdog, which starts and supervises the trading loop).
+On the VPS, update with `scripts\vps_update.ps1` and check with `scripts\vps_check.ps1` (see the runbook).
 
 **Environment variables**:
 - `ULTRA_ATLAS_MODE=1` — activate Atlas rule engine
 - `ULTRA_DEMO_MODE=1` — relax streak breakers and hard halts (demo accounts only)
 - `ULTRA_ALLOW_UNVALIDATED=1` — bypass validation ledger check at startup
+- `ULTRA_TRADE_24H=1` — lift the 06:00–21:30 IST entry window
+- `ULTRA_PROTECT_PROFIT=0` — do not run the profit protector (live setting since 2026-10-30)
+- `ULTRA_PULSE_EVERY_H` — hourly Telegram pulse interval (default 1, 0 = off)
 
 ## Security
 
@@ -103,10 +103,12 @@ Credentials only via `.env.local` (git-ignored). No API keys, tokens or secrets 
 
 ## Test Suite
 
-311 passing tests covering:
+Tests cover:
 - Strategy signal generation and no-lookahead bias
 - Risk rules, sizing ladder, circuit breakers
 - Demo relaxation flags (DEMO_RELAX_HARD_HALTS, DEMO_RELAX_STREAK_BREAKERS, DEMO_RELAX_DAILY_CAP)
 - Engine-vs-live parity (sizing ladder caps, execution order)
 - Atlas portfolio integrity (magic uniqueness, config alignment)
 - D1 gate, EMA calculation, market hours, ATR causality
+- Telegram priorities and layout, hourly pulse, halt stand-down
+- Live-config freeze guard (`tests/test_live_freeze.py`)

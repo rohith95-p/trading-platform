@@ -1,9 +1,0 @@
-{
-  "config": "sl0.1_tp2.0",
-  "sl_mult": 0.1,
-  "tp_mult": 2.0,
-  "stage": "BACKTESTING",
-  "message": "Running backtest (this takes 60-120 seconds)...",
-  "timestamp": "2026-10-03T02:57:38.469101",
-  "data": {}
-}

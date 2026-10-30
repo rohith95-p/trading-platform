@@ -94,3 +94,6 @@ STOP
 research/results/atlas_candidate_study/trades*.json
 research/results/atlas_new_families/results*.json
 research/data_*/
+
+# independent audit: raw engine trade dump (re-create with scripts/validation/independent_audit_run.py)
+research/results/audit_2026-10-30/trades.json

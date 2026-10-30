@@ -35,7 +35,7 @@ _commit_cache: Optional[str] = None
 
 
 # ---------------------------------------------------------------- halt latch
-def set_halt(reason: str, source: str = "unknown") -> None:
+def set_halt(reason: str, source: str = "unknown", notify: bool = True) -> None:
     """Latch a halt. Idempotent: an existing latch is never overwritten (first cause is kept)."""
     try:
         if os.path.exists(HALT_FILE):
@@ -47,12 +47,15 @@ def set_halt(reason: str, source: str = "unknown") -> None:
             json.dump(rec, f)
         os.replace(tmp, HALT_FILE)
         log.error(f"HALT LATCHED ({source}): {reason}. Clear with: python -m scripts.halt clear --note \"...\"")
-        try:                                           # tell the owner (a halt used to be log-only: 2026-10-21)
-            from src.core import alerts
-            alerts.send(f"HALT LATCHED ({source}): {reason}. All new entries are blocked until it is cleared "
-                        f"(python -m scripts.halt clear --note \"...\").", severity=alerts.CRITICAL)
-        except Exception:
-            pass
+        if notify:                                     # tell the owner (a halt used to be log-only: 2026-10-21)
+            try:
+                from src.core import alerts
+                alerts.send("Bot halted: no new trades until you clear it", alerts.CRITICAL,
+                            context={"why": reason, "by": source},
+                            action='RDP in, check MT5, then run: venv\\Scripts\\python.exe -m scripts.halt '
+                                   'clear --note "checked"')
+            except Exception:
+                pass
     except OSError as e:                               # never raise from a safety path
         log.error(f"could not write halt latch: {e}")
 

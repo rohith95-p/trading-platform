@@ -53,7 +53,7 @@ def _compute_rolling_pf(log_dir: str, lookback_days: int = 60, n_trades: int = 3
     return round(wins / losses, 3)
 
 
-def generate_report(date_str: str) -> str:
+def generate_report(date_str: str) -> "alerts.Alert":
     """Generate daily P&L report string for the given date (YYYY-MM-DD).
 
     Includes:
@@ -90,10 +90,6 @@ def generate_report(date_str: str) -> str:
     ref_balance = state.day_start_balance if state.day_start_balance > 0 else state.peak_equity
     balance = ref_balance + day_pl
 
-    dd_today = 0.0
-    if ref_balance > 0 and day_pl < 0:
-        dd_today = (abs(day_pl) / ref_balance) * 100
-
     # VI.3: Rolling 30-trade profit factor
     rolling_pf = _compute_rolling_pf(log_dir)
 
@@ -101,51 +97,35 @@ def generate_report(date_str: str) -> str:
     now_ist = datetime.now(IST)
     upcoming = news_filter.upcoming_events(hours_ahead=24, now=now_ist)
 
-    # Format date: "17 Sep 2026"
-    dt = datetime.strptime(date_str, "%Y-%m-%d")
-    formatted_date = dt.strftime("%d %b %Y")
+    try:   # the broker's balance, when the terminal is reachable; else the risk-state estimate
+        import MetaTrader5 as _mt5
+        _acct = _mt5.account_info()
+        if _acct is not None:
+            balance = float(_acct.balance)
+    except Exception:
+        pass
 
-    lines = [
-        f"📊 Ultra Core Daily — {formatted_date}",
-        f"Balance: ${balance:.2f} | Day P&L: {'+' if day_pl > 0 else ''}${day_pl:.2f}",
-        f"Trades: {n_trades} | W: {len(wins)} | L: {len(losses)} | Win rate: {win_rate:.0f}%",
-        f"Risk state: {state.consecutive_losses} consecutive losses | DD today: {dd_today:.1f}%",
-    ]
+    day = datetime.strptime(date_str, "%Y-%m-%d").strftime("%a %d %b")
+    sign = "+" if day_pl >= 0 else "−"
+    lines = [f"Trades {n_trades} · {len(wins)} won, {len(losses)} lost · net {sign}${abs(day_pl):,.2f}"
+             if n_trades else "No trades",
+             f"Balance ${balance:,.2f}"]
 
-    # --- Circuit breaker status ---
-    cb_parts = []
     if state.hard_halt_reason:
-        cb_parts.append(f"⛔ HARD HALT: {state.hard_halt_reason}")
+        lines.append(f"⛔ Halted: {state.hard_halt_reason}")
     elif state.day_stopped_date == now_ist.date().isoformat():
-        cb_parts.append("⛔ Day stopped by circuit breaker")
+        lines.append("⛔ Stopped for today (loss streak)")
     elif state.pause_until_ts > now_ist.timestamp():
-        mins_left = (state.pause_until_ts - now_ist.timestamp()) / 60
-        cb_parts.append(f"⏸ Loss-streak pause ({mins_left:.0f} min remaining)")
-    else:
-        cb_parts.append("✅ No circuit breakers active")
+        lines.append(f"⏸ Paused {(state.pause_until_ts - now_ist.timestamp()) / 60:.0f} more min (loss streak)")
 
-    if not risk_rules.ENFORCE:
-        cb_parts.append("(shadow mode — ENFORCE=False)")
+    if rolling_pf is not None and rolling_pf != float("inf"):
+        lines.append(f"Last 30 trades: profit factor {rolling_pf:.2f}")
 
-    lines.append("CB: " + " | ".join(cb_parts))
-
-    # --- VI.3 rolling PF ---
-    if rolling_pf is None:
-        lines.append("VI.3 Rolling PF: < 30 trades (not yet computable)")
-    elif rolling_pf == float("inf"):
-        lines.append("VI.3 Rolling 30-trade PF: ∞ (no losing trades)")
-    else:
-        pf_status = "✅" if rolling_pf >= 1.0 else ("⚠️" if rolling_pf >= 0.8 else "🚨 TRIPWIRE")
-        lines.append(f"VI.3 Rolling 30-trade PF: {rolling_pf:.2f} {pf_status}")
-
-    # --- News ---
     if upcoming:
         ev = upcoming[0]
-        lines.append(f"📅 News tomorrow: {ev['name']} @ {ev['utc_time']} UTC")
-    else:
-        lines.append("📅 News tomorrow: None")
+        lines.append(f"Next news: {ev['name']} at {ev['utc_time']} UTC")
 
-    return "\n".join(lines)
+    return alerts.Alert(f"Day summary · {day}", tuple(lines), alerts.INFO, icon="📅")
 
 
 def send_daily_report(force: bool = False) -> None:
@@ -162,5 +142,4 @@ def send_daily_report(force: bool = False) -> None:
         log.info(f"daily_report: No activity found for {date_str}, skipping report.")
         return
 
-    report = generate_report(date_str)
-    alerts.send(report, severity=alerts.INFO)
+    alerts.notify(generate_report(date_str))

@@ -315,7 +315,8 @@ def record_trade_result(pl: float, now: Optional[datetime] = None,
             msg = f"CIRCUIT BREAKER: {state.consecutive_losses} consecutive losses -- stopped for the day."
             log.warning(msg)
             from src.core import alerts
-            alerts.send(f"🛑 CIRCUIT BREAKER TRIPPED 🛑\n{msg}", severity=alerts.CRITICAL)
+            alerts.send(f"{state.consecutive_losses} losses in a row: no new trades today", alerts.WARN,
+                        action="Nothing to do: trading resumes tomorrow.")
         elif state.consecutive_losses >= CONSEC_LOSSES_PAUSE and streak_breakers_relaxed():
             log.info(f"{state.consecutive_losses} consecutive losses -- pause NOT applied (demo account, owner decision 2026-10-21).")
         elif state.consecutive_losses >= CONSEC_LOSSES_PAUSE:
@@ -324,7 +325,8 @@ def record_trade_result(pl: float, now: Optional[datetime] = None,
                    f"pausing new entries {CONSEC_LOSS_PAUSE_HOURS}h.")
             log.warning(msg)
             from src.core import alerts
-            alerts.send(f"⚠️ CIRCUIT BREAKER ⚠️\n{msg}", severity=alerts.WARN)
+            alerts.send(f"{state.consecutive_losses} losses in a row: pausing new trades "
+                        f"{CONSEC_LOSS_PAUSE_HOURS}h", alerts.INFO)
     else:
         state.consecutive_losses = 0
     return state

@@ -330,7 +330,9 @@ class ExecutionHandler:
 
         print(f"[{_ist_now()}] FAILED: {strategy_name} after {ORDER_RETRY_COUNT} retries")
         from src.core import alerts
-        alerts.send(f"TRADE FAILED ❌\n{strategy_name} rejected by MT5 after {ORDER_RETRY_COUNT} retries.", severity=alerts.WARN)
+        alerts.send(f"Order rejected by MT5: {strategy_name}", alerts.WARN,
+                    context={"tries": ORDER_RETRY_COUNT},
+                    action="Nothing if it is a one-off. If it repeats, check MT5 'Algo Trading' is on.")
         return None
 
     # ------------------------------------------------------------------

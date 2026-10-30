@@ -26,8 +26,9 @@ import re
 import urllib.error
 import urllib.parse
 import urllib.request
+from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
-from typing import Optional
+from typing import Optional, Sequence
 import time as _time
 
 try:
@@ -43,8 +44,49 @@ _ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__
 ALERT_LOG = os.path.join(_ROOT, "logs", "alerts.log")
 TIMEOUT = 15
 
-# Severity prefixes so a phone notification is triage-able at a glance.
-INFO, WARN, CRITICAL = "INFO", "WARN", "CRITICAL"
+# Priorities (owner 2026-10-30: "everything shouldn't be a warning").
+#   INFO      silent push: status, heartbeat pulse, self-healed restarts, reports
+#   TRADE     normal push: a trade opened or closed
+#   WARN      normal push: something degraded; usually self-heals, worth a look
+#   CRITICAL  normal push: trading has stopped or needs the owner to act now
+INFO, TRADE, WARN, CRITICAL = "INFO", "TRADE", "WARN", "CRITICAL"
+
+
+@dataclass(frozen=True)
+class Level:
+    icon: str
+    silent: bool          # Telegram disable_notification
+
+
+LEVELS = {
+    INFO: Level("ℹ️", True),
+    TRADE: Level("", False),
+    WARN: Level("⚠️", False),
+    CRITICAL: Level("🚨", False),
+}
+
+
+@dataclass(frozen=True)
+class Alert:
+    """One phone message: a bold headline, a few short lines, and (for problems) what to do."""
+    headline: str
+    lines: Sequence[str] = ()
+    severity: str = INFO
+    action: Optional[str] = None
+    icon: Optional[str] = None      # overrides the level icon (trade messages use their own)
+
+    def html(self) -> str:
+        icon = self.icon if self.icon is not None else LEVELS.get(self.severity, LEVELS[WARN]).icon
+        head = f"{icon} <b>{html.escape(self.headline)}</b>".strip()
+        body = [html.escape(l) for l in self.lines if l]
+        out = "\n".join([head] + body)
+        if self.action:
+            out += f"\n\n👉 {html.escape(self.action)}"
+        return out
+
+
+# Emoji/markers callers used to prepend by hand; the level icon replaces them.
+_LEAD_MARKS = re.compile(r"^[\s⚠️🚨🛑ℹ️❌✅📊]+|[\s⚠️🛑]+$")
 
 
 def _record(line: str) -> None:
@@ -61,7 +103,7 @@ def _alerts_disabled() -> bool:
     return bool("PYTEST_CURRENT_TEST" in os.environ or os.environ.get("ULTRA_DISABLE_ALERTS") == "1")
 
 
-def _telegram(text: str, parse_html: bool = False) -> bool:
+def _telegram(text: str, parse_html: bool = False, silent: bool = False) -> bool:
     if _alerts_disabled():
         return False
     token = os.environ.get("ULTRA_ALERT_TELEGRAM_TOKEN") or os.environ.get("TELEGRAM_BOT_TOKEN")
@@ -71,6 +113,8 @@ def _telegram(text: str, parse_html: bool = False) -> bool:
     fields = {"chat_id": chat, "text": text}
     if parse_html:
         fields["parse_mode"] = "HTML"
+    if silent:
+        fields["disable_notification"] = "true"
     data = urllib.parse.urlencode(fields).encode()
     req = urllib.request.Request(
         f"https://api.telegram.org/bot{token}/sendMessage", data=data)
@@ -107,30 +151,24 @@ def ist_stamp(dt: Optional[datetime] = None) -> str:
     return (dt or datetime.now(IST)).astimezone(IST).strftime("%d %b %I:%M %p IST")
 
 
-def table(title: str, rows) -> str:
-    """Telegram HTML: bold title, then aligned 'Label | value' rows in a monospace block."""
-    rows = [(str(k), str(v)) for k, v in rows if v not in (None, "")]
-    w = max((len(k) for k, _ in rows), default=0)
-    body = "\n".join(f"{k.ljust(w)} | {v}" for k, v in rows)
-    return f"<b>{html.escape(title)}</b>\n<pre>{html.escape(body)}</pre>"
-
-
-_TITLE = {INFO: "ℹ️ INFO", WARN: "⚠️ WARNING", CRITICAL: "🚨 CRITICAL"}
-
-
-def send(message: str, severity: str = WARN, context: Optional[dict] = None) -> bool:
-    """System alert as a short table: first message line is the event, later lines are details."""
+def send(message: str, severity: str = WARN, context: Optional[dict] = None,
+         action: Optional[str] = None) -> bool:
+    """Plain-text alert: first line is the headline, later lines and `context` are details."""
     if _alerts_disabled():
         return False
     lines = [l.strip() for l in re.sub(r"<[^>]+>", "", message).splitlines() if l.strip()]
-    event = lines[0] if lines else ""
-    rows = [("Time", ist_stamp()), ("Event", event)]
-    rows += [("Detail", l[:90]) for l in lines[1:4]]
-    rows += [(k.replace("_", " ").capitalize(), str(v)[:90]) for k, v in (context or {}).items()]
-    return send_html(table(_TITLE.get(severity, severity), rows), severity)
+    headline = _LEAD_MARKS.sub("", lines[0]) if lines else ""
+    details = [l[:160] for l in lines[1:6]]
+    details += [f"{k.replace('_', ' ').capitalize()}: {str(v)[:120]}"
+                for k, v in (context or {}).items() if k != "source"]
+    return notify(Alert(headline, tuple(details), severity, action))
 
 
-def send_html(text: str, severity: str = "TRADE") -> bool:
+def notify(alert: Alert) -> bool:
+    return send_html(alert.html(), alert.severity)
+
+
+def send_html(text: str, severity: str = TRADE) -> bool:
     """Message already formatted as Telegram HTML."""
     if _alerts_disabled():
         return False
@@ -140,8 +178,9 @@ def send_html(text: str, severity: str = "TRADE") -> bool:
         print(plain)
     except UnicodeEncodeError:
         print(plain.encode('ascii', 'replace').decode('ascii'))
+    silent = LEVELS.get(severity, LEVELS[WARN]).silent
     delivered = False
-    for fn in (lambda: _telegram(text, parse_html=True), lambda: _webhook(plain, severity)):
+    for fn in (lambda: _telegram(text, parse_html=True, silent=silent), lambda: _webhook(plain, severity)):
         try:
             delivered = fn() or delivered
         except Exception as e:

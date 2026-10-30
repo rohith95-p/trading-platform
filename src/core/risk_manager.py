@@ -131,12 +131,14 @@ class RiskManager:
                     _alerts.send(
                         f"Macro override: strict SHORT stops {status_str}. "
                         f"Triggered by marker in DAILY_MARKET_ANALYSIS.md.",
-                        severity=_alerts.WARN,
+                        severity=_alerts.INFO,
                         context={"source": "risk_manager._load_macro_rules"},
                     )
                 except Exception:
                     pass  # Alert failure must never crash the risk manager
             self._strict_short_stops = triggered
+        except FileNotFoundError:
+            pass  # optional file; absent = no override (was a WARNING every scan)
         except Exception as e:
             log.warning(f"Could not parse macro analysis: {e}")
 

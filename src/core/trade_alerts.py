@@ -1,4 +1,7 @@
-"""Telegram trade messages: entry, exit, floating P&L, news pause. Best-effort; never raises."""
+"""Telegram trade messages: entry, exit, floating P&L, news pause. Best-effort; never raises.
+
+Short, phone-first layout (owner 2026-10-30): headline says what happened, two or three lines say the
+numbers. Trades push with sound; floating updates and news pauses are silent (alerts.INFO)."""
 from __future__ import annotations
 
 import logging
@@ -28,7 +31,11 @@ def _name(strategy: str) -> str:
 
 
 def _money(x: float) -> str:
-    return f"{'+' if x >= 0 else '-'}${abs(x):.2f}"
+    return f"{'+' if x >= 0 else '−'}${abs(x):,.2f}"
+
+
+def _usd(x: float) -> str:
+    return f"${x:,.2f}"
 
 
 def _at(ts: float) -> str:
@@ -62,17 +69,12 @@ def entry(strategy: str, is_buy: bool, lots: float, price: float, sl: float, tp:
           ticket, symbol: str) -> None:
     risk = _pnl_at(symbol, is_buy, lots, price, sl) if sl else None
     reward = _pnl_at(symbol, is_buy, lots, price, tp) if tp else None
-    alerts.send_html(alerts.table(f"{'🟢' if is_buy else '🔴'} TRADE OPENED", [
-        ("Time", alerts.ist_stamp()),
-        ("Strategy", _name(strategy)),
-        ("Action", f"{'BUY' if is_buy else 'SELL'} {lots:.2f} lots"),
-        ("Entry", f"{price:.2f}"),
-        ("Stop", f"{sl:.2f} ({_money(risk)})" if sl and risk is not None else (f"{sl:.2f}" if sl else "none")),
-        ("Target", f"{tp:.2f} ({_money(reward)})" if tp and reward is not None else (f"{tp:.2f}" if tp else "none")),
-        ("R:R", f"1 : {abs(reward / risk):.1f}" if risk and reward else None),
-        ("P&L", "$0.00 (Open)"),
-        ("Ticket", f"#{ticket}"),
-    ]))
+    stop = f"Stop {sl:.2f}" + (f" ({_money(risk)})" if risk is not None else "") if sl else "Stop none"
+    target = f"Target {tp:.2f}" + (f" ({_money(reward)})" if reward is not None else "") if tp else "Target none"
+    alerts.notify(alerts.Alert(
+        f"{'BUY' if is_buy else 'SELL'} {lots:.2f} lot · {_name(strategy)}",
+        (f"Entry {price:.2f}", f"{stop} · {target}", f"Ticket #{ticket}"),
+        alerts.TRADE, icon="🟢" if is_buy else "🔴"))
 
 
 @_safe
@@ -82,19 +84,14 @@ def closed(ticket, deals, pl: float, strategy: str) -> None:
     first, last = (in_d[0] if in_d else deals[0]), out_d[-1]
     is_buy = first.type == mt5.DEAL_TYPE_BUY
     acct = mt5.account_info()
-    title = "✅ TRADE CLOSED · WIN" if pl > 0 else "❌ TRADE CLOSED · LOSS" if pl < 0 else "➖ TRADE CLOSED · BREAKEVEN"
-    alerts.send_html(alerts.table(title, [
-        ("Time", _at(last.time)),
-        ("Strategy", _name(strategy)),
-        ("Action", f"{'BUY' if is_buy else 'SELL'} {first.volume:.2f} lots"),
-        ("Entry", f"{first.price:.2f} @ {_at(first.time)[7:15]}"),
-        ("Exit", f"{last.price:.2f} @ {_at(last.time)[7:15]}"),
-        ("Held", _dur(last.time - first.time)),
-        ("Result", _EXIT_REASON.get(getattr(last, "reason", -1), "Closed")),
-        ("P&L", _money(pl)),
-        ("Balance", f"${acct.balance:.2f}" if acct else None),
-        ("Ticket", f"#{ticket}"),
-    ]))
+    icon = "✅" if pl > 0 else "❌" if pl < 0 else "➖"
+    result = _EXIT_REASON.get(getattr(last, "reason", -1), "Closed")
+    alerts.notify(alerts.Alert(
+        f"{_money(pl)} · {_name(strategy)}",
+        (f"{'BUY' if is_buy else 'SELL'} {first.volume:.2f} · {first.price:.2f} → {last.price:.2f} · "
+         f"held {_dur(last.time - first.time)}",
+         f"{result}" + (f" · Balance {_usd(acct.balance)}" if acct else "")),
+        alerts.TRADE, icon=icon))
 
 
 @_safe
@@ -109,52 +106,15 @@ def maybe_floating_update(positions) -> None:
     if now - _last_float_ts < FLOAT_UPDATE_MIN * 60:
         return
     _last_float_ts = now
-    rows, total = [("Time", alerts.ist_stamp())], 0.0
-    for i, p in enumerate(positions, 1):
-        pl = p.profit + p.swap
-        total += pl
-        side = "BUY" if p.type == mt5.POSITION_TYPE_BUY else "SELL"
-        rows += [(f"#{i}", f"{side} {p.volume:.2f} {_name(p.comment)}"),
-                 ("  P&L", _money(pl)),
-                 ("  Price", f"{p.price_open:.2f} -> {p.price_current:.2f}"),
-                 ("  Open", _dur(now - p.time))]
+    total = sum(p.profit + p.swap for p in positions)
+    lines = [f"{'BUY' if p.type == mt5.POSITION_TYPE_BUY else 'SELL'} {p.volume:.2f} {_name(p.comment)} "
+             f"{_money(p.profit + p.swap)} ({_dur(now - p.time)})" for p in positions]
     acct = mt5.account_info()
-    rows += [("Floating", _money(total)), ("Equity", f"${acct.equity:.2f}" if acct else None)]
-    alerts.send_html(alerts.table(f"📊 OPEN TRADES ({len(positions)})", rows))
-
-
-STATUS_TIMES_IST = [t.strip() for t in os.environ.get("ULTRA_STATUS_TIMES_IST", "06:00,18:00").split(",") if t.strip()]
-_status_sent: set = set()
-
-
-@_safe
-def maybe_status_report(now_ist: datetime, own_positions, todays_pl: float, floors: dict | None = None) -> None:
-    """'Still alive' snapshot at fixed IST times on weekdays, so silence means something is wrong."""
-    if now_ist.weekday() >= 5:
-        return
-    due = [t for t in STATUS_TIMES_IST if now_ist.strftime("%H:%M") >= t]
-    if not due:
-        return
-    key = f"{now_ist:%Y-%m-%d} {due[-1]}"
-    if key in _status_sent:
-        return
-    if not _status_sent:  # first call after a (re)start: don't replay slots already passed today
-        _status_sent.update(f"{now_ist:%Y-%m-%d} {t}" for t in due)
-        return
-    _status_sent.add(key)
-    acct = mt5.account_info()
-    floating = sum(p.profit + p.swap for p in own_positions) if own_positions else 0.0
-    rows = [("Time", alerts.ist_stamp()),
-            ("Bot", "Running"),
-            ("Account", f"{acct.login} {acct.server}" if acct else "MT5 not connected"),
-            ("Balance", f"${acct.balance:.2f}" if acct else None),
-            ("Equity", f"${acct.equity:.2f}" if acct else None),
-            ("Open", f"{len(own_positions or [])} trade(s), {_money(floating)}"),
-            ("Today", _money(todays_pl))]
-    if floors and acct:
-        rows += [("DD floor", f"${floors['trailing_floor']:.2f} ({_money(acct.equity - floors['trailing_floor'])} room)"),
-                 ("Day floor", f"${floors['daily_floor']:.2f}")]
-    alerts.send_html(alerts.table("🟦 STATUS", rows))
+    if acct:
+        lines.append(f"Equity {_usd(acct.equity)}")
+    n = len(positions)
+    alerts.notify(alerts.Alert(f"{n} open trade{'s' if n > 1 else ''} · {_money(total)}", tuple(lines),
+                               alerts.INFO, icon="📊"))
 
 
 @_safe
@@ -163,9 +123,6 @@ def news_pause(reason: str) -> None:
     if key in _news_alerted:
         return
     _news_alerted.add(key)
-    alerts.send_html(alerts.table("📰 NEWS PAUSE", [
-        ("Time", alerts.ist_stamp()),
-        ("Event", reason),
-        ("Status", "No new entries"),
-        ("Open", "SL/TP stay in place"),
-    ]))
+    alerts.notify(alerts.Alert(f"News pause: {reason}",
+                               ("No new trades until it passes. Open trades keep their stop and target.",),
+                               alerts.INFO, icon="📰"))
