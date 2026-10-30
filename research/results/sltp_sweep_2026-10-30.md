@@ -16,3 +16,5 @@ Step 2: full-engine confirm of the candidates (trade limits and Atlas guard incl
 Asian Breakout (22 trades) is too rare to tune; NY Session Reversal is already at the best of its grid.
 Verdict: only the Asian Range Filtered stop at 2.5 ATR improves every window including the unseen one; the London
 change fails on unseen data. Each ARF loss gets ~25% bigger (stop $40 instead of $32 at 0.02 lots).
+
+**Owner decision 2026-10-30: ARF stop changed to 2.5 ATR live** (pinned in `tests/test_live_freeze.py`).

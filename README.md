@@ -27,14 +27,15 @@ Four strategies (`src/strategies/portfolio_atlas.py`), each one order of 0.02 lo
 
 | Strategy | Magic | Entry (IST) | Logic | SL / TP (ATR14) |
 |---|---|---|---|---|
-| **AsianRangeFilteredV6** | 7320 | 12:45 | Asian range breakout at London open, range-size gate | 2.0x / 3.5x |
+| **AsianRangeFilteredV6** | 7320 | 12:45 | Asian range breakout at London open, range-size gate | 2.5x / 3.5x |
 | **AsianBreakoutV6** | 7311 | 12:45 | Unfiltered Asian breakout | 3.0x / 5.0x |
 | **LondonMomentumTightV6** | 7324 | 17:45 | London/NY overlap continuation | 2.0x / 4.0x |
 | **NYSessionReversalV6** | 7313 | 17:45-21:30 | NY session sweep reversal | 2.5x / 4.5x |
 
 Independent audit 2026-10-30 (M1 data only, $5K, 0.02 lots, protector off, 24h, daily trend gate on, Atlas guard,
-realistic ECN costs; `research/results/audit_2026-10-30/README.md`): PF 1.06 DEV (2022-08 to 2024-06),
-1.36 TEST (2024-06 to 2026-02), 1.75 RECENT (2026-07 to 2026-10); about 12 trades a month, 31% of months lose money.
+realistic ECN costs; `research/results/audit_2026-10-30/README.md`): PF 1.08 DEV (2022-08 to 2024-06),
+1.48 TEST (2024-06 to 2026-02), 1.81 RECENT (2026-07 to 2026-10), +$2,020 over all three; about 12 trades a month,
+29% of months lose money. Stops/targets checked against 60 alternatives per leg (`research/results/sltp_sweep_2026-10-30.md`).
 DonchianTrendV6 was removed the same day: on its own it was break-even (89 trades, −$11, PF 0.98).
 These are the numbers with the daily trend gate on, which live applies to every leg since 2026-10-30;
 skipping the gate (as live did before) was break-even (pooled PF 0.99). See section 3 of the audit.

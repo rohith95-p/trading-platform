@@ -25,14 +25,14 @@ class AsianRangeFilteredV6(BaseStrategy):
 
     Entry: At 07:00 UTC, if price > Asian high -> BUY, < Asian low -> SELL.
     Filters: range must be 0.3%-1.6% of price AND >= $3 (absolute floor).
-    SL: 2.0x ATR14 (tighter than basic version), TP: 3.5x ATR14.
+    SL: 2.5x ATR14 (was 2.0; 2026-10-30 sweep: better in DEV, TEST and unseen RECENT), TP: 3.5x ATR14.
     """
     execute_immediately = True
     edge_trigger = True
     session = (0.0, 24.0)
     skip_d1_gate = False  # owner 2026-10-30: apply the daily trend gate live, as every validated backtest did
 
-    def __init__(self, sl_atr_mult: float = 2.0, tp_atr_mult: float = 3.5,
+    def __init__(self, sl_atr_mult: float = 2.5, tp_atr_mult: float = 3.5,
                  min_range_pct: float = 0.003, max_range_pct: float = 0.016,
                  min_range_abs: float = 3.0, magic: int = 7320):
         self.sl_atr_mult = sl_atr_mult

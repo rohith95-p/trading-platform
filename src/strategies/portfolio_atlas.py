@@ -7,6 +7,8 @@
 # 2026-10-30 audit (M1 only, $5K, 0.02 lots, protector off, 24h, D1 gate on, Atlas guard, realistic ECN;
 # scripts/validation/independent_audit_run.py), DEV / TEST / RECENT:
 #   4-leg  PF 1.06 / 1.36 / 1.75, all windows +$1,687, 31% losing months.
+#   4-leg, AsianRangeFiltered stop 2.5 ATR (live since 2026-10-30, sltp_sweep):
+#          PF 1.08 / 1.48 / 1.81, all windows +$2,020, 29% losing months, max DD $356.
 #   5-leg  (+DonchianTrendV6 7310) PF 1.07 / 1.32 / 1.53, +$1,627, 38% losing months.
 # DonchianTrendV6 removed 2026-10-30 (owner: "remove it if it's useless"): 89 trades, -$11, PF 0.98 on its own.
 # LondonMomentumV6 takes the same trades as the Tight variant; never run both.

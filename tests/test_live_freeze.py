@@ -12,7 +12,7 @@ from src.strategies.portfolio_atlas import PORTFOLIO
 
 # name: (magic, sl_atr_mult, tp_atr_mult)
 LIVE_LEGS = {
-    "ASIAN_RANGE_FILTERED_V6": (7320, 2.0, 3.5),
+    "ASIAN_RANGE_FILTERED_V6": (7320, 2.5, 3.5),
     "ASIAN_BREAKOUT_V6": (7311, 3.0, 5.0),
     "LONDON_MOMENTUM_TIGHT_V6": (7324, 2.0, 4.0),
     "NY_SESSION_REVERSAL_V6": (7313, 2.5, 4.5),
