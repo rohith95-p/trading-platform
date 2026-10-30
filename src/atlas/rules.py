@@ -290,6 +290,34 @@ class AtlasState:
                    day_ref_equity=eq, day_ref_date_utc=now.date(), phase=phase,
                    day_high_equity=eq, day_start_balance=initial_balance)
 
+    # Persistence (2026-10-30): the state used to live only in memory, so every restart rebuilt it
+    # from the current balance and forgot the real peak -- the trailing floor came back looser than Atlas's.
+    def to_json(self) -> Dict[str, Any]:
+        return {
+            "initial_balance": self.initial_balance, "peak_equity": self.peak_equity,
+            "day_ref_equity": self.day_ref_equity, "day_ref_date_utc": self.day_ref_date_utc.isoformat(),
+            "phase": self.phase, "protector_strikes": self.protector_strikes,
+            "last_trade_ts": self.last_trade_ts.isoformat() if self.last_trade_ts else None,
+            "cycle_day_profits": {d.isoformat(): v for d, v in self.cycle_day_profits.items()},
+            "day_high_equity": self.day_high_equity, "day_start_balance": self.day_start_balance,
+        }
+
+    @classmethod
+    def from_json(cls, d: Mapping[str, Any]) -> "AtlasState":
+        st = cls(
+            initial_balance=float(d["initial_balance"]), peak_equity=float(d["peak_equity"]),
+            day_ref_equity=float(d["day_ref_equity"]), day_ref_date_utc=date.fromisoformat(d["day_ref_date_utc"]),
+            phase=str(d["phase"]), protector_strikes=int(d.get("protector_strikes", 0)),
+            last_trade_ts=datetime.fromisoformat(d["last_trade_ts"]) if d.get("last_trade_ts") else None,
+            cycle_day_profits={date.fromisoformat(k): float(v) for k, v in (d.get("cycle_day_profits") or {}).items()},
+            day_high_equity=None if d.get("day_high_equity") is None else float(d["day_high_equity"]),
+            day_start_balance=None if d.get("day_start_balance") is None else float(d["day_start_balance"]),
+        )
+        for n in ("initial_balance", "peak_equity", "day_ref_equity"):
+            if not _finite(getattr(st, n)) or getattr(st, n) <= 0:
+                raise ValueError(f"saved state.{n} invalid")
+        return st
+
 
 @dataclass
 class AccountInfo:

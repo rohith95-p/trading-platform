@@ -25,6 +25,7 @@ Only problems make a sound. Routine messages arrive silently.
 | 📊 open trades, 📅 day summary, 📰 news pause, ℹ️ bot started | silent | Nothing |
 | ℹ️ `Bot stopped: restarting it (attempt 1/3)` | silent | Nothing. It healed itself |
 | ⚠️ MT5 connection lost / order rejected / restart attempt 2 / losses in a row | yes | Usually nothing; the message says if it needs you |
+| ⚠️ `Atlas daily limit: … paused until tomorrow` | yes | Nothing. The bot restarts by itself at 05:30 IST (the new Atlas day) |
 | 🚨 `Atlas safety stop` / `Bot halted` / `Bot is down: watchdog gave up` / other trades found | yes | **Act.** The message ends with 👉 and the exact step |
 
 ## When each strategy trades (IST, Mon–Fri)
@@ -60,9 +61,16 @@ Get-Process python -ErrorAction SilentlyContinue | Stop-Process -Force
 Do **not** create a `STOP` file to stop the bot: that closes every open trade.
 
 ## Halts
-A halt (Atlas safety stop, risk-rules hard halt, or `halt set`) is stored in `logs/HALT_LATCH.json` and survives
-restarts. While it is set the watchdog does not restart the trading loop. It sends one message and then waits. Clear
-it with the command above; the watchdog restarts the bot within a minute.
+A halt is stored in `logs/HALT_LATCH.json` and survives restarts. While it is set the watchdog does not restart the
+trading loop. It sends one message and then waits.
+
+- **Atlas stop caused only by the daily-loss limit**: the latch carries an expiry at the next 00:00 UTC (05:30 IST,
+  the new Atlas day). It clears itself and the watchdog restarts the bot (owner decision 2026-10-30).
+- **Everything else** (total drawdown, open-trade loss, margin, a rule-engine error, risk-rules hard halt,
+  `halt set`): stays until you clear it with the command above. The watchdog restarts the bot within a minute.
+
+The Atlas peak equity and daily reference are saved in `logs/atlas_state.json` every scan, so a restart keeps the
+real floors. Delete that file only when starting a brand-new Atlas account.
 
 ## Freeze
 `tests/test_live_freeze.py` pins every live number (legs, magics, stops/targets, lot size, caps, Atlas thresholds,

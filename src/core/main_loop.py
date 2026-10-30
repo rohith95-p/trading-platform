@@ -26,6 +26,7 @@ except ImportError:
     pass
 import time as _time
 import logging
+import json
 import re
 import numpy as np
 import MetaTrader5 as _mt5
@@ -156,10 +157,51 @@ def _init_atlas(balance: float, equity: float) -> tuple:
     engine = AtlasRuleEngine(rules)
     phase = os.environ.get("ULTRA_ATLAS_PHASE", "evaluation")
     now_utc = datetime.now(timezone.utc)
-    state = AtlasState.new(initial_balance=balance, now_utc=now_utc, phase=phase, equity=equity)
+    state = _load_atlas_state(phase)
+    if state is None:
+        state = AtlasState.new(initial_balance=balance, now_utc=now_utc, phase=phase, equity=equity)
+        log.warning(f"ATLAS: no saved state -- starting fresh from balance ${balance:,.2f}")
+    _save_atlas_state(state)
     monitor = AtlasMCPMonitor(poll_interval=300.0)
     monitor.start()
     return engine, state, monitor
+
+
+ATLAS_STATE_FILE = os.path.join(os.path.dirname(resilience.HEARTBEAT_FILE), "atlas_state.json")
+
+
+def _load_atlas_state(phase: str) -> Optional[AtlasState]:
+    """Saved peak / daily reference, so a restart keeps Atlas's real floors. None = start fresh."""
+    try:
+        with open(ATLAS_STATE_FILE, encoding="utf-8") as f:
+            st = AtlasState.from_json(json.load(f))
+    except FileNotFoundError:
+        return None
+    except Exception as e:
+        log.error(f"ATLAS: saved state unreadable ({e}) -- starting fresh")
+        return None
+    if st.phase != phase:
+        log.warning(f"ATLAS: saved state is for phase {st.phase}, running {phase} -- starting fresh")
+        return None
+    log.info(f"ATLAS: resumed saved state (start ${st.initial_balance:,.2f}, peak ${st.peak_equity:,.2f}, "
+             f"day ref ${st.day_ref_equity:,.2f} {st.day_ref_date_utc})")
+    return st
+
+
+def _save_atlas_state(state: AtlasState) -> None:
+    try:
+        tmp = ATLAS_STATE_FILE + ".tmp"
+        with open(tmp, "w", encoding="utf-8") as f:
+            json.dump(state.to_json(), f)
+        os.replace(tmp, ATLAS_STATE_FILE)
+    except OSError as e:
+        log.warning(f"ATLAS: could not save state: {e}")
+
+
+def _daily_only(reasons) -> bool:
+    """True when the only hard Atlas breach is the daily-loss limit (that one resets at the next UTC day)."""
+    hard = [r for r in reasons or [] if "_hard:" in str(r) or str(r).startswith("fail_closed")]
+    return bool(hard) and all(str(r).startswith("daily_loss_hard:") for r in hard)
 
 
 def _atlas_account_info(acct) -> AccountInfo:
@@ -518,17 +560,30 @@ def _run_guarded():
                     if _acct_atlas is not None:
                         _ai = _atlas_account_info(_acct_atlas)
                         atlas_engine.update_state(_ai, atlas_state, datetime.now(timezone.utc))
+                        _save_atlas_state(atlas_state)
                         _mon = atlas_engine.monitor(_ai, atlas_state, datetime.now(timezone.utc))
                         if _mon == "FLATTEN":
                             log.error(f"ATLAS MONITOR: FLATTEN triggered — closing all positions.")
                             from src.core import alerts
                             _detail = atlas_engine.monitor_detail(_ai, atlas_state, datetime.now(timezone.utc))
-                            alerts.send("Atlas safety stop: all trades closed, bot halted", alerts.CRITICAL,
-                                        context={"why": _explain_atlas(_detail.reasons),
-                                                 "equity": f"${_ai.equity:,.2f}"},
-                                        action=HALT_CLEAR_HELP)
+                            _expiry = None
+                            if _daily_only(_detail.reasons):       # owner 2026-10-30: resume at the next Atlas day
+                                _expiry = datetime.combine(datetime.now(timezone.utc).date() + timedelta(days=1),
+                                                           datetime.min.time(), tzinfo=timezone.utc)
+                                alerts.send("Atlas daily limit: all trades closed, paused until tomorrow",
+                                            alerts.WARN,
+                                            context={"why": _explain_atlas(_detail.reasons),
+                                                     "equity": f"${_ai.equity:,.2f}",
+                                                     "resumes": _expiry.astimezone(IST).strftime("%a %H:%M IST")},
+                                            action="Nothing to do: the bot restarts by itself at the new Atlas day.")
+                            else:
+                                alerts.send("Atlas safety stop: all trades closed, bot halted", alerts.CRITICAL,
+                                            context={"why": _explain_atlas(_detail.reasons),
+                                                     "equity": f"${_ai.equity:,.2f}"},
+                                            action=HALT_CLEAR_HELP)
                             _close_all_positions(fetcher, executor, f"Atlas rule engine: {_detail.reasons}", None)
-                            ops.set_halt(f"Atlas FLATTEN: {_detail.reasons}", "atlas_rule_engine", notify=False)
+                            ops.set_halt(f"Atlas FLATTEN: {_detail.reasons}", "atlas_rule_engine", notify=False,
+                                         expires_utc=_expiry)
                             break
                         elif _mon == "STOP_NEW":
                             _detail = atlas_engine.monitor_detail(_ai, atlas_state, datetime.now(timezone.utc))

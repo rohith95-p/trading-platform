@@ -74,6 +74,8 @@ def isolate_runtime_files(tmp_path):
     try:
         from src.core import main_loop
         patches.append(patch.object(main_loop, "_COOLDOWN_FILE", str(tmp_path / "cooldown.json")))
+        patches.append(patch.object(main_loop, "ATLAS_STATE_FILE", str(tmp_path / "atlas_state.json")))
+        patches.append(patch.object(main_loop.resilience, "STATUS_FILE", str(tmp_path / "status.json")))
     except Exception:
         pass
     for p in patches:

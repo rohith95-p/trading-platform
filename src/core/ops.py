@@ -35,13 +35,20 @@ _commit_cache: Optional[str] = None
 
 
 # ---------------------------------------------------------------- halt latch
-def set_halt(reason: str, source: str = "unknown", notify: bool = True) -> None:
-    """Latch a halt. Idempotent: an existing latch is never overwritten (first cause is kept)."""
+def set_halt(reason: str, source: str = "unknown", notify: bool = True,
+             expires_utc: Optional[datetime] = None) -> None:
+    """Latch a halt. Idempotent: an existing latch is never overwritten (first cause is kept).
+
+    expires_utc: the latch clears itself at that instant (owner 2026-10-30: an Atlas stop caused only by the
+    daily-loss limit resumes at the next Atlas day). Without it, only `halt clear` removes the latch.
+    """
     try:
         if os.path.exists(HALT_FILE):
             return
         os.makedirs(os.path.dirname(HALT_FILE), exist_ok=True)
         rec = {"reason": str(reason), "source": source, "set_at_utc": datetime.now(timezone.utc).isoformat()}
+        if expires_utc is not None:
+            rec["expires_utc"] = expires_utc.astimezone(timezone.utc).isoformat()
         tmp = HALT_FILE + ".tmp"
         with open(tmp, "w", encoding="utf-8") as f:
             json.dump(rec, f)
@@ -67,9 +74,24 @@ def halt_status() -> Optional[Dict[str, Any]]:
     try:
         with open(HALT_FILE, "r", encoding="utf-8") as f:
             data = json.load(f)
-        return data if isinstance(data, dict) else {"reason": "latch file unreadable", "source": "corrupt"}
+        if not isinstance(data, dict):
+            return {"reason": "latch file unreadable", "source": "corrupt"}
     except (OSError, ValueError):
         return {"reason": "latch file unreadable", "source": "corrupt"}
+    exp = data.get("expires_utc")
+    if exp:
+        try:
+            expired = datetime.now(timezone.utc) >= datetime.fromisoformat(exp)
+        except (TypeError, ValueError):
+            return data                                # unreadable expiry: stay halted (fail closed)
+        if expired:
+            try:
+                _archive_latch(data, f"auto-expired at {exp}")
+            except RuntimeError:
+                return data
+            log.warning(f"halt latch auto-expired ({data.get('reason')})")
+            return None
+    return data
 
 
 def clear_halt(note: str) -> bool:
@@ -79,13 +101,17 @@ def clear_halt(note: str) -> bool:
     st = halt_status()
     if st is None:
         return False
+    _archive_latch(st, note.strip())
+    return True
+
+
+def _archive_latch(st: Dict[str, Any], note: str) -> None:
     try:
         archive = HALT_FILE.replace(".json", f".cleared_{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}.json")
         with open(archive, "w", encoding="utf-8") as f:
-            json.dump({"cleared_latch": st, "operator_note": note.strip(),
+            json.dump({"cleared_latch": st, "operator_note": note,
                        "cleared_at_utc": datetime.now(timezone.utc).isoformat()}, f)
         os.remove(HALT_FILE)
-        return True
     except OSError as e:
         raise RuntimeError(f"could not clear halt latch: {e}")
 

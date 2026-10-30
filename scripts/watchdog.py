@@ -153,6 +153,10 @@ def _money(x: float) -> str:
 def build_pulse(status: dict | None, hb_age: float | None, halt: dict | None, now_ist: datetime) -> alerts.Alert:
     """The hourly 'is it alive' message, from main_loop's status.json snapshot."""
     when = now_ist.strftime("%H:%M")
+    if halt and halt.get("expires_utc"):
+        return alerts.Alert(f"Bot paused · {when}", (f"Why: {halt.get('reason', '?')}",
+                                                     f"Resumes by itself at {_ist_time(halt['expires_utc'])}"),
+                            alerts.INFO, icon="⏸")
     if halt:
         return alerts.Alert(f"Bot halted · {when}", (f"Why: {halt.get('reason', '?')}",),
                             alerts.INFO, icon="⛔",
@@ -171,6 +175,13 @@ def build_pulse(status: dict | None, hb_age: float | None, halt: dict | None, no
         lines.append(f"Atlas room: {_money(s['equity'] - s['trailing_floor'])} total · "
                      f"{_money(s['equity'] - s['daily_floor'])} today")
     return alerts.Alert(f"All good · {when}", tuple(lines), alerts.INFO, icon="💚")
+
+
+def _ist_time(iso: str) -> str:
+    try:
+        return datetime.fromisoformat(iso).astimezone(IST).strftime("%a %H:%M IST")
+    except (TypeError, ValueError):
+        return iso
 
 
 def _pulse_due(now_ist: datetime, sent: set) -> bool:
@@ -272,6 +283,9 @@ def main():
 
         # A latched halt: main_loop refuses to start, so restarting it would only loop. Say so once, then wait.
         if halt is not None:
+            if not halt_told and not _loop_alive() and halt.get("expires_utc"):
+                _alert(f"Bot paused until {_ist_time(halt['expires_utc'])}", alerts.INFO, why=halt.get("reason", "?"))
+                halt_told = True
             if not halt_told and not _loop_alive():
                 # whoever set it within the last 10 min already sent the loud message; this is the record
                 try:
@@ -286,7 +300,7 @@ def main():
             time.sleep(CHECK_EVERY)
             continue
         if halt_told:
-            _alert("Halt cleared: restarting the bot", alerts.INFO)
+            _alert("Halt cleared: bot restarting", alerts.INFO)
             halt_told = False
             consecutive_restarts = 0
             if not _loop_alive():

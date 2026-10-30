@@ -30,7 +30,10 @@ stops, targets, exits) as the full run, so no trade used data from after its own
    On 2025-11-21 an open trade was +$240 at its best and then gave it back; the next session opened with 97% of the $250
    daily allowance already used and the guard flattened (no trades were open). Live, that also latches a halt
    that only a manual `halt clear` removes; the backtest resumes the next day. More likely with the protector off.
-   Owner decision pending.
+   **Owner decision: a stop caused only by the daily-loss limit now clears itself at the next UTC day**; every
+   other halt still needs a manual clear.
+5. **Atlas state was not saved.** Each restart rebuilt peak equity and the daily reference from the current balance,
+   so after a drawdown the trailing floor came back looser than Atlas's. Now saved in `logs/atlas_state.json`.
 3. **Live allows 3 trades in the same direction, research used 2.** Immaterial: 1 extra trade in 4 years.
 4. **Alerts:** the Friday close was sent as a CRITICAL "KILL SWITCH"; an Atlas flatten sent 3 CRITICALs; a halt
    made the watchdog restart a bot that refuses to start (alert loop, then watchdog exit); every boot sent a false
