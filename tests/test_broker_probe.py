@@ -240,3 +240,16 @@ def test_save_and_load_expected_round_trip(tmp_path):
 def test_summary_is_one_readable_line():
     s = bp.summary(bp.probe(FakeTerminal(), "XAUUSDm"))
     assert "XAUUSDm" in s and "Exness" in s and "\n" not in s
+
+
+def test_a_first_run_says_so_instead_of_reporting_a_change():
+    assert bp.compare(bp.probe(FakeTerminal(), "XAUUSDm"), {}) == [bp.NO_EXPECTED]
+
+
+def test_a_field_that_was_never_recorded_is_not_a_difference(monkeypatch):
+    # an expected profile taken at the weekend has no server clock, so the first
+    # live reading of it is news, not a change
+    monkeypatch.setattr(bp, "market_probably_open", lambda now=None: True)
+    exp = _expected(clock_offset_hours=None)
+    got = bp.probe(FakeTerminal(offset_hours=3.0), "XAUUSDm")
+    assert not [d for d in bp.compare(got, exp) if "clock" in d]

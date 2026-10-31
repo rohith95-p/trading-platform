@@ -231,7 +231,9 @@ def _run_guarded():
                         f"{risk_manager_mod.MAX_SPREAD_POINTS} -> {_gate} points "
                         f"(${broker_probe.MAX_SPREAD_USD} at {_bprofile.digits} decimals)")
             risk_manager_mod.MAX_SPREAD_POINTS = _gate
-    if _bdiffs:
+    if _bdiffs == [broker_probe.NO_EXPECTED]:
+        log.warning(f"BROKER: {broker_probe.NO_EXPECTED}")      # first run, not a change
+    elif _bdiffs:
         from src.core import alerts as _al
         _lines = ["Broker profile differs from the validated one:"]
         _lines += [f"- {d}" for d in _bdiffs]

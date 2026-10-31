@@ -70,3 +70,64 @@ def test_switch_defaults_when_env_is_unset(monkeypatch):
     finally:
         importlib.reload(watchdog)
         importlib.reload(mh)
+
+
+def test_the_live_configuration_is_one_a_recorded_backtest_actually_tested(monkeypatch):
+    """The config-integrity gate, exercised.
+
+    This gate exists because the same failure keeps happening here: a cap or a
+    leg changes and no backtest is re-run. On 2026-11-01 the ledger's newest
+    entry was still the V5 portfolio with 2-position caps, so the gate had been
+    failing and the bot was only starting with ULTRA_ALLOW_UNVALIDATED=1 -- the
+    guard switched off. Recording the audited config fixed that, and this test
+    keeps it fixed: change a live number without re-recording and CI fails.
+    """
+    from src.core import market_hours, validation_ledger
+
+    # The VPS runs with ULTRA_TRADE_24H=1, so the fingerprint that has to be in
+    # the ledger is the 24-hour one. The test environment leaves the trading
+    # window on, which would fingerprint a configuration the VPS never runs.
+    monkeypatch.setattr(market_hours, "ENFORCE_TRADING_WINDOW", False)
+    report = validation_ledger.check_live_config()
+    assert report["validated"], (
+        "the live configuration matches no recorded backtest. Re-run "
+        "scripts/validation/independent_audit_run.py and record it with "
+        "validation_ledger.record(), rather than setting ULTRA_ALLOW_UNVALIDATED=1. "
+        f"Differences from the newest entry: {report['diff']}")
+
+
+def test_the_exit_code_that_was_measured_net_negative_stays_deleted():
+    """Trailing and pyramiding: PF 0.592 with them on against 1.478 with them off.
+
+    Both flags were silently flipped back on once before (commit b8ab85c,
+    2026-09-24). The code is gone now, so flipping a flag cannot bring the
+    behaviour back -- this checks neither the flags nor the code return.
+    """
+    import inspect
+
+    from src.core import main_loop
+
+    assert main_loop.ENABLE_TRAILING is False
+    assert main_loop.ENABLE_PYRAMIDING is False
+    src = inspect.getsource(main_loop)
+    assert "_check_pyramiding" not in src
+    assert "calculate_trailing_stop" not in src
+    assert "virtual_sl" not in src
+
+
+def test_the_engine_will_not_resolve_an_exit_on_a_fifteen_minute_candle():
+    """The default has to stay strict: coarse candles read PF 1.38 against 0.93."""
+    from src.backtesting.engine import EngineConfig
+
+    assert EngineConfig().m1_policy == "require"
+
+
+def test_the_price_archive_stops_where_it_stops_agreeing_with_the_broker():
+    """From January 2026 the archive and the broker differ by more than $1 on 29%
+    of candles (scripts/validation/data_check.py, 2026-11-01)."""
+    import datetime as dt
+
+    from src.backtesting import master
+
+    assert master.KAGGLE_END == int(dt.datetime(2026, 1, 1, tzinfo=dt.timezone.utc).timestamp())
+    assert master.window("TEST")[1] == master.KAGGLE_END

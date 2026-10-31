@@ -263,6 +263,12 @@ CHECKED = (
 )
 
 
+# Said when nothing has been recorded yet: a fresh install, not a change. The
+# caller logs it and does not alert on it.
+NO_EXPECTED = ("no expected broker profile recorded yet -- record this one with: "
+               "python -m src.core.broker_probe --save")
+
+
 def load_expected(path: Optional[str] = None) -> Optional[Dict[str, Any]]:
     path = path or EXPECTED_PATH
     if not os.path.exists(path):
@@ -279,14 +285,15 @@ def compare(profile: BrokerProfile, expected: Optional[Dict[str, Any]] = None) -
     """One line per difference that changes how the bot trades."""
     exp = expected if expected is not None else load_expected()
     if not exp:
-        return ["no expected broker profile recorded yet "
-                "(python -m src.core.broker_probe --save writes one)"]
+        return [NO_EXPECTED]
     got = asdict(profile)
     out: List[str] = []
     for key, why in CHECKED:
         if key not in exp:
             continue
         a, b = got.get(key), exp.get(key)
+        if b is None:
+            continue                       # never recorded, so nothing to differ from
         if isinstance(a, float) or isinstance(b, float):
             if a is None or b is None:
                 same = a == b
