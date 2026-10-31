@@ -136,9 +136,9 @@
       "note": "EAs / algorithmic trading are allowed per the Prohibited-practices page."
     },
     "ea_approval_required": {
-      "value": "obtain written approval before running the EA", "source": "https://atlasfunded.com/terms", "retrieved": "2026-10-26",
-      "status": "conflict", "needed_for_enforcement": true,
-      "note": "Rules-at-a-glance page (verified 2026-10-26): 'Allowed on every program: Expert Advisors and algorithmic trading.' Prohibited-practices page also confirms: 'Expert Advisors and algorithmic trading, within the rules.' However, Terms may require approval for some EAs. Recommend contacting Atlas support to confirm no additional approval is needed. Caller must acknowledge via allow_unverified=['ea_approval_required']."
+      "value": "no approval needed: EAs and algorithmic trading are allowed within the rules", "source": "https://help.atlasfunded.com/platforms", "retrieved": "2026-10-31",
+      "status": "verified-official", "needed_for_enforcement": true,
+      "note": "Platforms page (read 2026-10-31): 'Expert Advisors (EAs) are allowed. You are still responsible for every trade they place, including short trades and news windows on funded accounts.' Prohibited-practices page: 'Allowed: Expert Advisors and algorithmic trading, within the rules.' No approval step on either page; owner confirmed. Was 'conflict' (old Terms wording) until 2026-10-31."
     },
     "vpn_policy": {
       "value": "allowed with advance disclosure of location changes", "source": "https://help.atlasfunded.com/prohibited-practices", "retrieved": "2026-10-16",

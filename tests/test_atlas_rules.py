@@ -61,22 +61,38 @@ def _mutate(tmp_path, fn):
     return p
 
 
-def test_default_load_refuses_unverified_and_conflict():
+def _conflict_cfg(tmp_path, *also_unverified):
+    """The real file with ea_approval_required put back into 'conflict' (it was, until 2026-10-31)."""
+    def fn(doc):
+        doc["rules"]["ea_approval_required"]["status"] = "conflict"
+        for name in also_unverified:
+            doc["rules"][name]["status"] = "unverified"
+    return _mutate(tmp_path, fn)
+
+
+def test_real_rules_file_loads_without_any_acknowledgement():
+    """Every rule needed for enforcement is verified (EA approval resolved 2026-10-31)."""
+    assert load_rules(CFG).status("ea_approval_required") == "verified-official"
+
+
+def test_default_load_refuses_unverified_and_conflict(tmp_path):
     with pytest.raises(RulesError) as e:
-        load_rules(CFG)
+        load_rules(_conflict_cfg(tmp_path))
     msg = str(e.value)
     assert "ea_approval_required" in msg
 
 
-def test_load_with_explicit_ack_succeeds(rules):
-    assert set(rules.acknowledged) == set(ACK)
-    assert rules.status("ea_approval_required") == "conflict"
-    assert rules.status("daily_loss_eod_computation") == "verified-official"
+def test_load_with_explicit_ack_succeeds(tmp_path):
+    r = load_rules(_conflict_cfg(tmp_path), allow_unverified=ACK)
+    assert set(r.acknowledged) == set(ACK)
+    assert r.status("ea_approval_required") == "conflict"
+    assert r.status("daily_loss_eod_computation") == "verified-official"
 
 
-def test_ack_only_one_still_refuses():
+def test_ack_only_one_still_refuses(tmp_path):
     with pytest.raises(RulesError, match="ea_approval_required"):
-        load_rules(CFG)
+        load_rules(_conflict_cfg(tmp_path, "daily_loss_eod_computation"),
+                   allow_unverified=["daily_loss_eod_computation"])
 
 
 def test_allow_unverified_unknown_name_rejected():
@@ -155,9 +171,9 @@ def test_json_records_provenance_for_every_rule():
     allowed = {"https://help.atlasfunded.com/access", "https://help.atlasfunded.com/max-drawdown",
                "https://help.atlasfunded.com/prohibited-practices",
                "https://help.atlasfunded.com/margin-usage",
-               "https://help.atlasfunded.com/daily-loss",
+               "https://help.atlasfunded.com/daily-loss", "https://help.atlasfunded.com/platforms",
                "https://atlasfunded.com/trading-rules", "https://atlasfunded.com/terms"}
-    valid_dates = {"2026-10-16", "2026-10-26"}
+    valid_dates = {"2026-10-16", "2026-10-26", "2026-10-31"}
     for name, rec in doc["rules"].items():
         assert rec["retrieved"] in valid_dates, name
         assert rec["source"] in allowed, name
