@@ -1137,7 +1137,10 @@ def _execute_signal(signal, m15_rates, fetcher, risk, executor, session_mult, se
 
     sl_mult = getattr(strategy, "sl_atr_mult", None) or session_mult
     tp_mult = getattr(strategy, "tp_atr_mult", None)
-    stops = risk.calculate_atr_stops(price, signal.is_buy, m15_rates, sl_mult, tp_mult)
+    # ATR from CLOSED bars only (2026-11-01): copy_rates_from_pos(0) ends with the bar that just opened, whose
+    # few seconds of range shrank the ATR 5-9% vs the backtest (RESULT_StopRobustness_2026-11-01).
+    closed_m15 = m15_rates[:-1] if m15_rates is not None and len(m15_rates) > 1 else m15_rates
+    stops = risk.calculate_atr_stops(price, signal.is_buy, closed_m15, sl_mult, tp_mult)
     if stops is None:
         trade_log.signal(signal.strategy_name, signal.direction_str, "blocked",
                          "ATR stops unavailable", session=session_name)
@@ -1170,7 +1173,7 @@ def _execute_signal(signal, m15_rates, fetcher, risk, executor, session_mult, se
             _acct_at = mt5.account_info()
             if _acct_at is not None:
                 _ai_at = _atlas_account_info(_acct_at)
-                _atr_val = risk.get_latest_atr(m15_rates) or 0.0
+                _atr_val = risk.get_latest_atr(closed_m15) or 0.0
                 _stop_risk = float(FIXED_LOT_SIZE * 100.0 * _atr_val * (getattr(strategy, "sl_atr_mult", 2.0) or 2.0))
                 _margin_req = float(FIXED_LOT_SIZE * price * 100.0 / 50.0)  # 1:50 leverage
                 _ord = OrderRequest(

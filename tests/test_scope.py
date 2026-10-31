@@ -202,3 +202,24 @@ def test_spread_block_is_flagged_transient(monkeypatch):
     ml._TRANSIENT_BLOCK["flag"] = False
     assert ml._execute_signal(sig, None, fetcher, risk, Mock(), 1.0, "NY_MORNING", strat) is None
     assert ml._TRANSIENT_BLOCK["flag"] is True
+
+
+# ------------------------------------------------------------------ live stops use closed bars, like the backtest
+def test_stop_atr_excludes_the_bar_that_just_opened(monkeypatch):
+    """copy_rates_from_pos(0) ends with the forming bar; its few seconds of range shrank the live ATR 5-9%
+    below the backtest's (RESULT_StopRobustness_2026-11-01). The stop calculation must get closed bars only."""
+    from unittest.mock import Mock
+    import numpy as np
+    from src.core import main_loop as ml
+    monkeypatch.delenv("ULTRA_MEASURE_ONLY", raising=False)
+    monkeypatch.setattr(ml.market_hours, "allow_new_entry", lambda *a, **k: (True, ""))
+    fetcher = Mock(); fetcher.get_foreign_exposure.return_value = []
+    risk = Mock(); risk.is_spread_ok.return_value = True; risk.calculate_atr_stops.return_value = None
+    strat = SimpleNamespace(max_spread_pts=None, name="ASIAN_RANGE_FILTERED_V6", sl_atr_mult=2.5, tp_atr_mult=3.5)
+    sig = SimpleNamespace(strategy_name="ASIAN_RANGE_FILTERED_V6", direction_str="SELL", is_buy=False,
+                          magic=7320, direction=1)
+    rates = np.zeros(30, dtype=[("time", "i8"), ("high", "f8"), ("low", "f8"), ("close", "f8")])
+    rates["time"] = np.arange(30) * 900
+    assert ml._execute_signal(sig, rates, fetcher, risk, Mock(), 1.0, "LONDON_OPEN", strat) is None
+    passed = risk.calculate_atr_stops.call_args.args[2]
+    assert len(passed) == 29 and passed["time"][-1] == 28 * 900      # forming bar (index 29) dropped

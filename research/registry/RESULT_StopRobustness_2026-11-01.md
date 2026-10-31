@@ -33,4 +33,4 @@ P(six months negative) 19%; P($500 drawdown) 0.4%; P(+$150 before −$500) 74%.
 (`main_loop` passes the full rates array, whose last row is the forming bar); the backtest uses closed bars. On
 2026-10-30 the live ATR was 95% and 91% of the closed-bar ATR. Replaying with stops and targets 6% tighter:
 DEV +$161, TEST +$1,064, **RECENT +$475 instead of +$790**. Fix: pass closed bars only to `calculate_atr_stops`
-(owner decision pending; live code, freeze week).
+**Owner approved; applied 2026-11-01** (`main_loop._execute_signal`, pinned by `tests/test_scope.py::test_stop_atr_excludes_the_bar_that_just_opened`).
