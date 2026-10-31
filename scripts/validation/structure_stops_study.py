@@ -12,6 +12,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 sys.path.insert(0, ROOT)
 os.chdir(ROOT)
 
+from scripts.validation import audit_data  # noqa: E402
 from scripts.validation import independent_audit_run as base          # noqa: E402
 from scripts.validation.sltp_sweep import (HOLE, LIVE as LIVE_AT_AUDIT, LOTS, VPP, SLIP,  # noqa: E402
                                            COMM, SWAP_LONG_NIGHT, friday_cut, stats)
@@ -73,7 +74,7 @@ def levels(t, variant, m15):
 
 
 def main():
-    D = json.load(open(os.path.join("research", "results", "audit_2026-10-30", "trades_no_donchian.json")))
+    D, _src = audit_data.trades()
     B = base.bars()
     m1, m15 = B.m1, B.m15
     T = m1["time"].astype(np.int64)

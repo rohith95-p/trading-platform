@@ -21,6 +21,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 sys.path.insert(0, ROOT)
 os.chdir(ROOT)
 
+from scripts.validation import audit_data  # noqa: E402
 from scripts.validation import independent_audit_run as base   # noqa: E402
 
 LIVE = {"ASIAN_RANGE_FILTERED_V6": (2.0, 3.5), "ASIAN_BREAKOUT_V6": (3.0, 5.0),
@@ -82,7 +83,7 @@ def stats(p):
 
 
 def main():
-    D = json.load(open(os.path.join("research", "results", "audit_2026-10-30", "trades_no_donchian.json")))
+    D, _src = audit_data.trades()
     B = base.bars()
     m1 = B.m1
     T = m1["time"].astype(np.int64)

@@ -1,0 +1,304 @@
+{
+ "generated_utc": "2026-10-31 23:14:12",
+ "coverage": {
+  "kaggle/M1": {
+   "bars": 6822714,
+   "first": "2004-06-11 04:18",
+   "last": "2026-02-27 03:41",
+   "non_weekend_gaps": 214301,
+   "missing_bars": 1232371,
+   "worst": [
+    {
+     "after": "2005-11-23 17:16",
+     "missing_bars": 6559
+    },
+    {
+     "after": "2006-11-22 17:00",
+     "missing_bars": 6126
+    },
+    {
+     "after": "2010-11-11 09:03",
+     "missing_bars": 5161
+    }
+   ]
+  },
+  "kaggle/M15": {
+   "bars": 496556,
+   "first": "2004-06-11 04:15",
+   "last": "2026-02-27 03:30",
+   "non_weekend_gaps": 7457,
+   "missing_bars": 41061,
+   "worst": [
+    {
+     "after": "2005-11-23 17:15",
+     "missing_bars": 436
+    },
+    {
+     "after": "2006-11-22 17:00",
+     "missing_bars": 407
+    },
+    {
+     "after": "2010-11-11 09:00",
+     "missing_bars": 343
+    }
+   ]
+  },
+  "kaggle/D1": {
+   "bars": 5558,
+   "first": "2004-06-10 21:00",
+   "last": "2026-02-26 22:00",
+   "non_weekend_gaps": 1148,
+   "missing_bars": 2343,
+   "worst": [
+    {
+     "after": "2025-09-11 21:00",
+     "missing_bars": 32
+    },
+    {
+     "after": "2005-11-22 22:00",
+     "missing_bars": 4
+    },
+    {
+     "after": "2006-11-21 22:00",
+     "missing_bars": 4
+    }
+   ]
+  },
+  "broker/M1": {
+   "bars": 100000,
+   "first": "2026-07-02 23:00",
+   "last": "2026-10-13 18:55",
+   "non_weekend_gaps": 57,
+   "missing_bars": 3689,
+   "worst": [
+    {
+     "after": "2026-09-07 18:27",
+     "missing_bars": 213
+    },
+    {
+     "after": "2026-08-18 20:57",
+     "missing_bars": 66
+    },
+    {
+     "after": "2026-07-06 20:57",
+     "missing_bars": 62
+    }
+   ]
+  },
+  "broker/M5": {
+   "bars": 100000,
+   "first": "2025-05-16 13:30",
+   "last": "2026-10-13 18:55",
+   "non_weekend_gaps": 295,
+   "missing_bars": 5258,
+   "worst": [
+    {
+     "after": "2026-04-02 20:55",
+     "missing_bars": 876
+    },
+    {
+     "after": "2025-12-24 18:25",
+     "missing_bars": 344
+    },
+    {
+     "after": "2025-12-31 21:55",
+     "missing_bars": 301
+    }
+   ]
+  },
+  "broker/M15": {
+   "bars": 100000,
+   "first": "2022-07-20 19:15",
+   "last": "2026-10-13 18:45",
+   "non_weekend_gaps": 879,
+   "missing_bars": 5399,
+   "worst": [
+    {
+     "after": "2023-04-06 20:45",
+     "missing_bars": 292
+    },
+    {
+     "after": "2024-03-28 20:45",
+     "missing_bars": 292
+    },
+    {
+     "after": "2025-04-17 20:45",
+     "missing_bars": 292
+    }
+   ]
+  },
+  "broker/H1": {
+   "bars": 28599,
+   "first": "2021-10-27 17:00",
+   "last": "2026-08-31 17:00",
+   "non_weekend_gaps": 1004,
+   "missing_bars": 1631,
+   "worst": [
+    {
+     "after": "2021-12-23 21:00",
+     "missing_bars": 73
+    },
+    {
+     "after": "2022-04-14 20:00",
+     "missing_bars": 73
+    },
+    {
+     "after": "2023-04-06 20:00",
+     "missing_bars": 73
+    }
+   ]
+  },
+  "broker/H4": {
+   "bars": 7498,
+   "first": "2022-01-02 20:00",
+   "last": "2026-09-09 12:00",
+   "non_weekend_gaps": 9,
+   "missing_bars": 107,
+   "worst": [
+    {
+     "after": "2022-04-14 20:00",
+     "missing_bars": 17
+    },
+    {
+     "after": "2023-04-06 20:00",
+     "missing_bars": 17
+    },
+    {
+     "after": "2024-03-28 20:00",
+     "missing_bars": 17
+    }
+   ]
+  },
+  "broker/D1": {
+   "bars": 1544,
+   "first": "2021-10-27 00:00",
+   "last": "2026-10-13 00:00",
+   "non_weekend_gaps": 6,
+   "missing_bars": 12,
+   "worst": [
+    {
+     "after": "2021-12-23 00:00",
+     "missing_bars": 2
+    },
+    {
+     "after": "2022-04-14 00:00",
+     "missing_bars": 2
+    },
+    {
+     "after": "2023-04-06 00:00",
+     "missing_bars": 2
+    }
+   ]
+  },
+  "topup/M1": {
+   "bars": 100000,
+   "first": "2026-07-21 04:40",
+   "last": "2026-10-29 20:36",
+   "non_weekend_gaps": 58,
+   "missing_bars": 3751,
+   "worst": [
+    {
+     "after": "2026-09-07 18:27",
+     "missing_bars": 213
+    },
+    {
+     "after": "2026-08-18 20:57",
+     "missing_bars": 66
+    },
+    {
+     "after": "2026-07-21 20:57",
+     "missing_bars": 62
+    }
+   ]
+  },
+  "topup/M15": {
+   "bars": 100000,
+   "first": "2022-08-07 22:00",
+   "last": "2026-10-29 20:30",
+   "non_weekend_gaps": 879,
+   "missing_bars": 5399,
+   "worst": [
+    {
+     "after": "2023-04-06 20:45",
+     "missing_bars": 292
+    },
+    {
+     "after": "2024-03-28 20:45",
+     "missing_bars": 292
+    },
+    {
+     "after": "2025-04-17 20:45",
+     "missing_bars": 292
+    }
+   ]
+  },
+  "topup/D1": {
+   "bars": 1558,
+   "first": "2021-10-27 00:00",
+   "last": "2026-10-29 00:00",
+   "non_weekend_gaps": 6,
+   "missing_bars": 12,
+   "worst": [
+    {
+     "after": "2021-12-23 00:00",
+     "missing_bars": 2
+    },
+    {
+     "after": "2022-04-14 00:00",
+     "missing_bars": 2
+    },
+    {
+     "after": "2023-04-06 00:00",
+     "missing_bars": 2
+    }
+   ]
+  }
+ },
+ "agreement": {
+  "overlap_from": "2022-07-20 19:15",
+  "overlap_to": "2026-02-27 02:15",
+  "kaggle_candles": 81318,
+  "broker_candles": 85171,
+  "matched": 81232,
+  "matched_pct": 95.38,
+  "close_diff_median": 0.053,
+  "close_diff_p95": 0.19,
+  "close_diff_max": 52.786,
+  "close_within_10c_pct": 81.75,
+  "high_diff_p95": 0.182,
+  "low_diff_p95": 0.197
+ },
+ "windows": {
+  "DEV": {
+   "from_": "2022-08-01 00:00",
+   "to": "2024-06-01 00:00",
+   "m1_bars": 650576,
+   "expected_approx": 662400,
+   "coverage_pct": 98.2,
+   "sources": {
+    "kaggle": "2022-08-01 00:00 -> 2024-06-01 00:00"
+   }
+  },
+  "TEST": {
+   "from_": "2024-06-01 00:00",
+   "to": "2026-02-18 00:00",
+   "m1_bars": 573601,
+   "expected_approx": 616860,
+   "coverage_pct": 93.0,
+   "sources": {
+    "kaggle": "2024-06-01 00:00 -> 2026-02-18 00:00"
+   }
+  },
+  "RECENT": {
+   "from_": "2026-07-06 00:00",
+   "to": "2026-10-30 00:00",
+   "m1_bars": 115194,
+   "expected_approx": 115920,
+   "coverage_pct": 99.4,
+   "sources": {
+    "broker": "2026-07-06 00:00 -> 2026-10-14 00:00",
+    "topup": "2026-10-14 00:00 -> 2026-10-30 00:00"
+   }
+  }
+ }
+}

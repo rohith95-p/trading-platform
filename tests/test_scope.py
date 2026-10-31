@@ -94,10 +94,10 @@ def test_datafetcher_scoping(monkeypatch):
 
 # ------------------------------------------------------------------ main_loop behaviour
 def test_foreign_exposure_blocks_entry_without_touching_executor(monkeypatch):
-    from src.core import main_loop as ml
+    from src.core import main_loop as ml, live_status
     monkeypatch.delenv("ULTRA_MEASURE_ONLY", raising=False)
     monkeypatch.delenv("ULTRA_BLOCK_ON_FOREIGN", raising=False)
-    monkeypatch.setattr(ml, "_FOREIGN_SEEN", {"tickets": None})
+    monkeypatch.setattr(live_status, "_FOREIGN_SEEN", {"tickets": None})
 
     class Boom:
         def __getattr__(self, n):
@@ -109,11 +109,11 @@ def test_foreign_exposure_blocks_entry_without_touching_executor(monkeypatch):
 
 
 def test_foreign_alert_fires_once_per_ticket_set(monkeypatch):
-    from src.core import main_loop as ml
+    from src.core import main_loop as ml, live_status
     from src.core import alerts
     sent = []
     monkeypatch.setattr(alerts, "send", lambda m, severity=None, **k: sent.append(m))
-    monkeypatch.setattr(ml, "_FOREIGN_SEEN", {"tickets": None})
+    monkeypatch.setattr(live_status, "_FOREIGN_SEEN", {"tickets": None})
     f = [pos(2, 5150001)]
     ml._alert_foreign_exposure(f)
     ml._alert_foreign_exposure(f)
@@ -123,7 +123,7 @@ def test_foreign_alert_fires_once_per_ticket_set(monkeypatch):
 
 
 def test_kill_switch_closes_only_own_unless_account_wide(monkeypatch):
-    from src.core import main_loop as ml
+    from src.core import main_loop as ml, live_status
     from src.core import alerts
     monkeypatch.setattr(alerts, "send", lambda *a, **k: None)
     closed = []
@@ -175,10 +175,10 @@ def test_foreign_pending_order_counts_as_foreign_exposure(monkeypatch):
 
 
 def test_foreign_alert_repeats_after_30_min_while_persisting(monkeypatch):
-    from src.core import main_loop as ml, alerts
+    from src.core import main_loop as ml, alerts, live_status
     sent = []
     monkeypatch.setattr(alerts, "send", lambda m, severity=None, **k: sent.append(m))
-    monkeypatch.setattr(ml, "_FOREIGN_SEEN", {"tickets": None})
+    monkeypatch.setattr(live_status, "_FOREIGN_SEEN", {"tickets": None})
     clock = [1000.0]
     monkeypatch.setattr(ml._time, "time", lambda: clock[0])
     f = [pos(2, 5150001)]
@@ -192,7 +192,7 @@ def test_foreign_alert_repeats_after_30_min_while_persisting(monkeypatch):
 # ------------------------------------------------------------------ spread blip must not burn the candle's signal
 def test_spread_block_is_flagged_transient(monkeypatch):
     from unittest.mock import Mock
-    from src.core import main_loop as ml
+    from src.core import main_loop as ml, live_status
     monkeypatch.delenv("ULTRA_MEASURE_ONLY", raising=False)
     monkeypatch.setattr(ml.market_hours, "allow_new_entry", lambda *a, **k: (True, ""))
     fetcher = Mock(); fetcher.get_foreign_exposure.return_value = []
@@ -210,7 +210,7 @@ def test_stop_atr_excludes_the_bar_that_just_opened(monkeypatch):
     below the backtest's (RESULT_StopRobustness_2026-11-01). The stop calculation must get closed bars only."""
     from unittest.mock import Mock
     import numpy as np
-    from src.core import main_loop as ml
+    from src.core import main_loop as ml, live_status
     monkeypatch.delenv("ULTRA_MEASURE_ONLY", raising=False)
     monkeypatch.setattr(ml.market_hours, "allow_new_entry", lambda *a, **k: (True, ""))
     fetcher = Mock(); fetcher.get_foreign_exposure.return_value = []

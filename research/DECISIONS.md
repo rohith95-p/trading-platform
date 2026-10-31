@@ -26,8 +26,16 @@ is an upper bound, not an estimate.
 | 2026-10-31 | Strategy-specific stops/targets (range, breakout candle, London range, sweep wick; 96 variants, fixed and equal-risk lots): not adopted | DEV + TEST, pre-registered (PREREG_StrategyStops) | TEST (walk-forward A), RECENT (walk-forward B), Monte Carlo | 0 of 8 pass all four checks (RESULT_StrategyStops) | no change |
 | 2026-11-01 | Stop robustness (stability map, 6 volatility measures, flip test, cost stress, Monte Carlo): live ATR(14) M15 stops kept | pre-registered (PREREG_StopRobustness) | DEV / TEST / RECENT each | nothing beats live; edge is in the entries (RESULT_StopRobustness). Found: live ATR used the forming bar (5-9% tighter than backtest) | kept; forming-bar fix approved and applied 2026-11-01 |
 | 2026-11-01 | Live stop ATR computed on closed 15-min bars only (was: including the bar that just opened) | parity fix, owner approved | backtest already used closed bars | live now matches the validated stops exactly | live |
+| 2026-11-01 | Audit of the data and the engine (no trading change): engine refuses to resolve exits on 15-minute candles; archive trusted only to 2026-01-01; one master bar series; broker measured at startup; holdout enforced in code | n/a -- nothing was chosen | re-ran DEV / TEST / RECENT | corrected honest numbers: DEV -$295 (PF 0.66, Atlas guard freezes the account in May 2023; -$210 over the full window with the guard off), TEST +$1,058 (PF 1.40), RECENT +$790 (PF 1.81). Zero exits resolved without minute data in any window. See research/AUDIT_2026-11-01.md | live (tooling only) |
 
 ## What this means for the numbers
-Every live setting above was picked while looking at 2022-08 → 2026-10. The backtest's +$2,020 / PF 1.42 is the
-best case for that period, not a forecast. The first honest test of the current system is live trading from
-2026-11-01, compared with the backtest after 40 trades and again after 100.
+Every live setting above was picked while looking at 2022-08 → 2026-10, so the backtest is the best case for that
+period, not a forecast. The first honest test of the current system is live trading from 2026-11-01, compared with
+the backtest after 40 trades and again after 100.
+
+The figures to compare against are the corrected ones from the 2026-11-01 audit, not the earlier +$2,020 / PF 1.42:
+DEV **-$295**, TEST **+$1,058**, RECENT **+$790**. The earlier DEV figure (PF 1.07) came from a one-off script that
+no longer exists; the current ones come from a committed pipeline that can be re-run
+(`scripts/validation/audit_stats.py`). The shape of the result is the thing to remember: **this portfolio earns in
+trending gold and bleeds in quiet gold.** It lost money across the range-bound 2022-23 stretch and would have had
+its Atlas account frozen nine months in. A flat month is the expected bad case, not a surprise.

@@ -106,6 +106,10 @@ VARIANTS = [
 
 print("Loading data...", flush=True)
 bars = load_bars("XAUUSDm", timeframes=("M15", "M5", "M1", "D1"))
+# DEV/TEST here ran on M15 candles, not M1 sub-bars: exits are ambiguous and the
+# numbers read high (M1 A/B: PF 0.93 vs 1.38). Kept as a record of what was run on
+# 2026-10-25; m1_policy="coarse" is now required to opt into it. Do not compare these
+# DEV/TEST figures with M1 results.
 coarse = dataclasses.replace(bars, m1=None)
 
 print("\n%-35s | %-32s | %-32s | %-32s" % ("VARIANT", "DEV", "VALIDATE", "HOLDOUT"))
@@ -118,6 +122,7 @@ for ch, ma, sl, tp in VARIANTS:
         strat = DonchianFiltered(ch, ma, sl, tp)
         hist = max(ch, ma, 50) * 96 + 300
         cfg = EngineConfig(
+        m1_policy="coarse",
             sizing_mode="fixed", fixed_lots=0.01, starting_balance=105.74,
             history_bars=max(7500, hist),
             enable_d1_bias_gate=False, dedup_per_candle=True,

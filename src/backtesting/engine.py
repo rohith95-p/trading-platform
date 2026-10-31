@@ -176,6 +176,27 @@ class _Mt5Stub:
 # ---------------------------------------------------------------------------
 
 
+class MissingM1Error(RuntimeError):
+    """No M1 bars for a candle the engine was asked to simulate.
+
+    Raised instead of quietly resolving exits on the M15 candle. Either extend
+    the M1 series (scripts/data_refresh.py) or narrow the window; passing
+    `m1_policy="skip"` leaves such candles unsimulated and counts them;
+    `m1_policy="coarse"` restores the old M15 fallback and marks the run.
+    """
+
+    def __init__(self, ts: int, symbol: str = ""):
+        from datetime import datetime as _dt, timezone as _tz
+        when = _dt.fromtimestamp(ts, tz=_tz.utc).strftime("%Y-%m-%d %H:%M UTC")
+        self.ts = ts
+        super().__init__(
+            f"no M1 bars for the 15-minute candle opening {when}"
+            + (f" on {symbol}" if symbol else "")
+            + ". The engine will not resolve exits on M15 candles: extend the M1 "
+              'series, move the window, or pass m1_policy="skip" / "coarse".'
+        )
+
+
 @dataclass
 class Position:
     ticket: int
@@ -472,7 +493,26 @@ class EngineConfig:
     # (for reconciliation reports). Not a behaviour switch.
     record_decisions: bool = False
 
+    # Missing M1 bars. Exits are resolved inside each M15 candle on M1 sub-bars;
+    # where M1 is absent the engine used to fall back to the M15 candle itself,
+    # which makes stop and target hits ambiguous and was the single largest
+    # source of inflated results in this project (M1 A/B: PF 0.93 vs 1.38,
+    # deep audit 2026-10-16). It now refuses by default: a run either has the
+    # M1 data for every bar it simulates, or it stops.
+    #   "require" : raise MissingM1Error at the first bar with no M1 coverage
+    #   "skip"    : never substitute M15 -- skip the candle (no entry can fill
+    #               without minute prices), counting it in diagnostics as
+    #               bars_skipped_no_m1, and counting any open position that went
+    #               unchecked through it as exits_unchecked_no_m1. Use this for
+    #               long historical runs, and read both counters.
+    #   "coarse"  : old behaviour -- resolve on the M15 candle, count it in
+    #               diagnostics and mark trades opened on such a bar coarse=True
+    m1_policy: str = "require"
+
     def __post_init__(self) -> None:
+        if self.m1_policy not in ("require", "skip", "coarse"):
+            raise ValueError(
+                f"m1_policy must be 'require', 'skip' or 'coarse', got {self.m1_policy!r}")
         if self.live_parity:
             for f in _PARITY_FLAGS:
                 setattr(self, f, True)
@@ -563,6 +603,10 @@ class BacktestEngine:
             "management_skipped_spread": 0,
             "daily_shutdowns": 0,
             "bars_without_m1": 0,
+            "bars_skipped_no_m1": 0,
+            "exits_unchecked_no_m1": 0,
+            "partial_m1_candles": 0,
+            "partial_m1_minutes_missing": 0,
             "entries_blocked_insufficient_equity": 0,
             "entries_blocked_margin": 0,
             "same_candle_refires": 0,
@@ -1148,11 +1192,25 @@ class BacktestEngine:
 
             m1_bars = self._m1_slice(nxt_open, nxt_open + 900)
             if m1_bars is None:
+                if cfg.m1_policy == "require":
+                    raise MissingM1Error(nxt_open, cfg.symbol)
+                if cfg.m1_policy == "skip":
+                    # No minute prices: an entry cannot fill and an exit cannot be
+                    # located, so the candle is not simulated at all. Both counters
+                    # below are the honest cost of the hole.
+                    self.diag["bars_skipped_no_m1"] += 1
+                    self.diag["exits_unchecked_no_m1"] += len(self.positions)
+                    continue
                 self.diag["bars_without_m1"] += 1
                 m1_bars = self.m15[i + 1: i + 2]
                 coarse = True
             else:
                 coarse = False
+                if len(m1_bars) < 15:
+                    # some minutes of this candle are missing: an exit inside one
+                    # of them is invisible, so count it rather than assume it away
+                    self.diag["partial_m1_candles"] += 1
+                    self.diag["partial_m1_minutes_missing"] += 15 - len(m1_bars)
 
             m15_view = self._view(self.m15, self._m15_t, bar_close, cfg.history_bars, 900)
             if m15_view is None:

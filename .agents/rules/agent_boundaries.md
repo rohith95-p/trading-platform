@@ -13,14 +13,17 @@ The AI agent must **NEVER** unilaterally make important trading logic decisions 
 
 ## User-approved measures (do not treat these as violations of the above)
 
-As of rohith-2 (2026-09-02/03), with the user's explicit approval and backtest
+Current as of 2026-11-01, each with the owner's explicit approval and backtest
 evidence:
-- **D1 EMA20 bias gate** — trade only in the direction of the daily trend. It is
-  a formula (`daily close vs daily EMA20`), not discretion, and the user
-  approved keeping it after seeing the A/B result (`scripts/d1_gate_ab.py`:
-  gate off drops PF 1.5 → 1.09).
-- **0.01-lot hard lock + 0.02 exposure cap** — owner's directive.
-- **Trailing stops and pyramiding disabled** — backtested net-negative
-  (`scripts/live_config_ab.py`).
+- **D1 EMA20 bias gate, ON for all four legs** — trade only with the daily
+  trend. It is a formula (daily close against the daily EMA20), not discretion.
+  The owner kept it after seeing the A/B result; turning it off was worse.
+- **0.02 lots per order, 0.06 lots of exposure, 3 positions** — owner's
+  directive, see `account_growth_rule.md`.
+- **Trailing stops and pyramiding disabled**, and the code removed — both
+  measured net-negative (the A/B is recorded in `main_loop.py`'s header:
+  PF 0.592 with them on against 1.478 with them off).
+- **Atlas rule engine in front of every order**, with STOP_NEW at 60% of a
+  limit and FLATTEN at 80%.
 
 Changing any of these back also requires explicit user instruction.

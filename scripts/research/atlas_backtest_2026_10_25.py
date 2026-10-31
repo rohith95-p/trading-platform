@@ -37,6 +37,10 @@ print("=" * 80)
 
 print("\nLoading data...", flush=True)
 bars = load_bars("XAUUSDm", timeframes=("M15", "M5", "M1", "D1"))
+# DEV/TEST here ran on M15 candles, not M1 sub-bars: exits are ambiguous and the
+# numbers read high (M1 A/B: PF 0.93 vs 1.38). Kept as a record of what was run on
+# 2026-10-25; m1_policy="coarse" is now required to opt into it. Do not compare these
+# DEV/TEST figures with M1 results.
 coarse = dataclasses.replace(bars, m1=None)
 
 # --- Test each strategy individually and combined ---
@@ -47,6 +51,7 @@ from src.strategies.momentum_strategies import DonchianTrendV6
 def run_and_report(strat_classes, label, bars_obj, start, end, balance):
     strategies = [cls() for cls in strat_classes]
     cfg = EngineConfig(
+        m1_policy="coarse",
         sizing_mode="fixed", fixed_lots=0.01,
         starting_balance=balance,
         history_bars=7500,

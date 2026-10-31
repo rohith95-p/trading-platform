@@ -37,6 +37,8 @@ from datetime import datetime, timezone, timedelta
 mt5: Any = _mt5
 
 from src.core.data_fetcher import DataFetcher
+from src.core import risk_manager as risk_manager_mod
+from src.core import broker_probe  # measures the broker at startup (2026-11-01)
 from src.core.risk_manager import RiskManager
 from src.core.execution_handler import ExecutionHandler, FIXED_LOT_SIZE
 from src.core import resilience
@@ -62,6 +64,17 @@ from src.atlas import (
     AtlasRuleEngine, AtlasState, AccountInfo, OrderRequest, load_rules, RulesError,
 )
 from src.atlas.mcp_monitor import AtlasMCPMonitor
+from src.core import atlas_bridge
+from src.core import live_status
+# Names kept here so every caller, script and test that reads them off
+# main_loop keeps working; the code itself lives in the two modules above.
+from src.core.atlas_bridge import (                       # noqa: F401
+    ATLAS_STATE_FILE, HALT_CLEAR_HELP, _atlas_account_info, _daily_only,
+    _explain_atlas, _init_atlas, _load_atlas_state, _save_atlas_state,
+)
+from src.core.live_status import (                        # noqa: F401
+    _alert_foreign_exposure, _push_ops_heartbeat, _write_status,
+)
 
 # IST offset
 IST = timezone(timedelta(hours=5, minutes=30))
@@ -92,13 +105,17 @@ log = logging.getLogger(__name__)
 SYMBOL = os.environ.get("ULTRA_SYMBOL", "XAUUSDm")
 LOOP_INTERVAL = 60  # seconds between scans
 
+# live_status writes the watchdog snapshot and the ops heartbeat, both of which
+# need the terminal handle and the symbol this loop trades.
+live_status.bind(mt5, SYMBOL)
+
 # Atlas Funded integration: enable with ULTRA_ATLAS_MODE=1 (env var).
 # When on, portfolio_atlas replaces portfolio_v6, the AtlasRuleEngine gates
 # every order, and the MCP monitor polls account health in the background.
 ATLAS_MODE = os.environ.get("ULTRA_ATLAS_MODE", "0") == "1"
 
 # Unverified rules the engine must acknowledge to load (see atlas_access.json).
-_ATLAS_ALLOW_UNVERIFIED = ["daily_loss_eod_computation", "ea_approval_required"]
+_ATLAS_ALLOW_UNVERIFIED = atlas_bridge.ALLOW_UNVERIFIED
 
 # ---------------------------------------------------------------------------
 # Exit-management switches (rohith-2, 2026-09-03)
@@ -152,92 +169,6 @@ def _calc_ema(closes: np.ndarray, period: int) -> np.ndarray:
     return ema
 
 
-def _init_atlas(balance: float, equity: float) -> tuple:
-    """Load Atlas rules, create engine + state + MCP monitor. Returns (engine, state, monitor) or raises."""
-    rules = load_rules(allow_unverified=_ATLAS_ALLOW_UNVERIFIED)
-    engine = AtlasRuleEngine(rules)
-    phase = os.environ.get("ULTRA_ATLAS_PHASE", "evaluation")
-    now_utc = datetime.now(timezone.utc)
-    state = _load_atlas_state(phase)
-    if state is None:
-        state = AtlasState.new(initial_balance=balance, now_utc=now_utc, phase=phase, equity=equity)
-        log.warning(f"ATLAS: no saved state -- starting fresh from balance ${balance:,.2f}")
-    _save_atlas_state(state)
-    monitor = AtlasMCPMonitor(poll_interval=300.0)
-    monitor.start()
-    return engine, state, monitor
-
-
-ATLAS_STATE_FILE = os.path.join(os.path.dirname(resilience.HEARTBEAT_FILE), "atlas_state.json")
-
-
-def _load_atlas_state(phase: str) -> Optional[AtlasState]:
-    """Saved peak / daily reference, so a restart keeps Atlas's real floors. None = start fresh."""
-    try:
-        with open(ATLAS_STATE_FILE, encoding="utf-8") as f:
-            st = AtlasState.from_json(json.load(f))
-    except FileNotFoundError:
-        return None
-    except Exception as e:
-        log.error(f"ATLAS: saved state unreadable ({e}) -- starting fresh")
-        return None
-    if st.phase != phase:
-        log.warning(f"ATLAS: saved state is for phase {st.phase}, running {phase} -- starting fresh")
-        return None
-    log.info(f"ATLAS: resumed saved state (start ${st.initial_balance:,.2f}, peak ${st.peak_equity:,.2f}, "
-             f"day ref ${st.day_ref_equity:,.2f} {st.day_ref_date_utc})")
-    return st
-
-
-def _save_atlas_state(state: AtlasState) -> None:
-    try:
-        tmp = ATLAS_STATE_FILE + ".tmp"
-        with open(tmp, "w", encoding="utf-8") as f:
-            json.dump(state.to_json(), f)
-        os.replace(tmp, ATLAS_STATE_FILE)
-    except OSError as e:
-        log.warning(f"ATLAS: could not save state: {e}")
-
-
-def _daily_only(reasons) -> bool:
-    """True when the only hard Atlas breach is the daily-loss limit (that one resets at the next UTC day)."""
-    hard = [r for r in reasons or [] if "_hard:" in str(r) or str(r).startswith("fail_closed")]
-    return bool(hard) and all(str(r).startswith("daily_loss_hard:") for r in hard)
-
-
-def _atlas_account_info(acct) -> AccountInfo:
-    """Build an AccountInfo from an MT5 account_info() result."""
-    return AccountInfo(
-        balance=float(acct.balance),
-        equity=float(acct.equity),
-        margin=float(getattr(acct, "margin", 0.0) or 0.0),
-        free_margin=float(getattr(acct, "margin_free", 0.0) or 0.0),
-        ts_utc=datetime.now(timezone.utc),
-        floating_pnl=float(acct.profit) if hasattr(acct, "profit") else None,
-    )
-
-
-HALT_CLEAR_HELP = ('RDP into the VPS, check MT5, then in PowerShell: cd C:\\projects\\ultra_core; '
-                   'venv\\Scripts\\python.exe -m scripts.halt clear --note "checked". The watchdog restarts the bot.')
-
-_ATLAS_WORDS = {"daily_loss": "today's loss", "trailing_dd": "total drawdown", "protector": "open-trade loss",
-                "margin": "margin use"}
-
-
-def _explain_atlas(reasons) -> str:
-    """'daily_loss_hard:0.9697>=0.8' -> "today's loss at 97% of the Atlas limit"."""
-    out = []
-    for r in reasons or []:
-        m = re.match(r"(\w+?)_(hard|soft):([\d.]+)>=([\d.]+)", str(r))
-        if not m:
-            out.append(str(r))
-            continue
-        what, val, lim = _ATLAS_WORDS.get(m.group(1), m.group(1)), float(m.group(3)), float(m.group(4))
-        out.append(f"{what} ${val:,.2f} (limit ${lim:,.2f})" if m.group(1) == "protector"
-                   else f"{what} at {val:.0%} of the Atlas limit")
-    return "; ".join(out)
-
-
 def _close_all_positions(fetcher, executor, reason: str, severity: str | None = "CRITICAL") -> None:
     """Flatten every open position on the symbol. severity=None: the caller sends its own message."""
     from src.core import alerts
@@ -284,6 +215,29 @@ def _run_guarded():
     if not resilience.startup_safety_check(mt5, SYMBOL):
         log.error("Startup safety check FAILED. Not trading. Fix the above and restart.")
         return
+
+    # What broker is this, measured rather than assumed (2026-11-01). The symbol
+    # name, its price decimals, the server's clock, the contract terms and the
+    # swap all differ between brokers, and every one of them is baked into a
+    # constant somewhere. On a new account (Atlas) a difference here is silent:
+    # the bot keeps trading, at the wrong session times or through a spread gate
+    # that means ten times what it should. So it is checked, logged and alerted.
+    _bprofile, _bdiffs = broker_probe.startup_check(mt5, SYMBOL)
+    if _bprofile is not None:
+        log.info(f"BROKER: {broker_probe.summary(_bprofile)}")
+        _gate = broker_probe.spread_gate_points(_bprofile, risk_manager_mod.MAX_SPREAD_POINTS)
+        if _gate != risk_manager_mod.MAX_SPREAD_POINTS:
+            log.warning(f"Spread gate rescaled for this broker: "
+                        f"{risk_manager_mod.MAX_SPREAD_POINTS} -> {_gate} points "
+                        f"(${broker_probe.MAX_SPREAD_USD} at {_bprofile.digits} decimals)")
+            risk_manager_mod.MAX_SPREAD_POINTS = _gate
+    if _bdiffs:
+        from src.core import alerts as _al
+        _lines = ["Broker profile differs from the validated one:"]
+        _lines += [f"- {d}" for d in _bdiffs]
+        _al.send(os.linesep.join(_lines), severity=_al.WARN)
+        for d in _bdiffs:
+            log.warning(f"BROKER DIFFERENCE: {d}")
 
     # Persistent halt latch (2026-10-18): a halt survives crashes and restarts and is cleared only by a deliberate
     # operator action (python -m scripts.halt clear --note "...").
@@ -829,9 +783,6 @@ def _run_guarded():
             # ----------------------------------------------------------
             # Pyramiding: add to winning positions
             # ----------------------------------------------------------
-            if ENABLE_PYRAMIDING:
-                _check_pyramiding(fetcher, risk, executor, m15_rates, session_mult,
-                                  session_name, now_ist=now_ist)
 
             # ----------------------------------------------------------
             # Manage open positions (trailing + consolidation)
@@ -848,76 +799,9 @@ def _run_guarded():
 _COOLDOWN_FILE = os.path.join(resilience._LOGS, "cooldown.json")
 
 
-_LAST_HB = {"t": None}
-_FOREIGN_SEEN = {"tickets": None}
 _TRANSIENT_BLOCK = {"flag": False}     # set by _execute_signal when the block is momentary (spread blip)
 _SPREAD_RETRIES: dict = {}             # (strategy, candle) -> retries used
-_ATLAS_RT: dict = {}                   # populated by _run_guarded when ATLAS_MODE is on
-
-
-def _alert_foreign_exposure(foreign) -> None:
-    """Alert when the foreign ticket set changes, and re-alert every 30 min while it persists."""
-    tickets = tuple(sorted(p.ticket for p in foreign))
-    if tickets == _FOREIGN_SEEN["tickets"] and (not foreign or _time.time() - _FOREIGN_SEEN.get("t", 0) < 1800):
-        return
-    _FOREIGN_SEEN["t"] = _time.time()
-    prev, _FOREIGN_SEEN["tickets"] = _FOREIGN_SEEN["tickets"], tickets
-    if not foreign:
-        if prev:
-            log.info("Foreign exposure cleared.")
-        return
-    rep = scope.foreign_report(foreign)
-    msg = (f"FOREIGN EXPOSURE DETECTED on {SYMBOL}: {rep}. New Ultra Core entries are blocked; "
-           f"foreign positions are left untouched.")
-    log.error(msg)
-    trade_log.gate("foreign_exposure", allowed=False, reason="another system holds positions on this symbol",
-                   foreign=rep, risk_scope="account")
-    try:
-        from src.core import alerts
-        alerts.send(f"Other trades found on {SYMBOL}: new entries blocked", alerts.CRITICAL,
-                    context={"found": rep}, action="Close them in MT5 (the bot never touches them).")
-    except Exception:
-        pass
-
-
-def _write_status(fetcher) -> None:
-    """logs/status.json for the watchdog's hourly pulse (the watchdog has no MT5 session). Never raises."""
-    try:
-        acct = mt5.account_info()
-        if acct is None:
-            return
-        own = fetcher.get_own_positions()
-        snap = {"login": acct.login, "server": acct.server, "balance": float(acct.balance),
-                "equity": float(acct.equity), "open": len(own),
-                "floating": float(sum(p.profit + p.swap for p in own)),
-                "today": float(fetcher.get_todays_closed_pl())}
-        eng, st = _ATLAS_RT.get("engine"), _ATLAS_RT.get("state")
-        if eng and st:
-            snap.update(trailing_floor=float(eng.trailing_floor(st)), daily_floor=float(eng.daily_floor(st)))
-        resilience.write_status(snap)
-    except Exception as e:
-        log.debug(f"status snapshot skipped: {e}")
-
-
-def _push_ops_heartbeat(fetcher, drawdown_shutdown: bool) -> None:
-    """Send the status heartbeat. Never raises and never blocks the loop (push runs in a daemon thread)."""
-    try:
-        now = _time.time()
-        interval = None if _LAST_HB["t"] is None else now - _LAST_HB["t"]
-        _LAST_HB["t"] = now
-        tick = fetcher.get_tick()
-        quote_age = (now - float(tick.time)) if tick is not None else None
-        orders = mt5.orders_get(symbol=SYMBOL)
-        acct = mt5.account_info()
-        mode = {0: "demo", 1: "contest", 2: "real"}.get(getattr(acct, "trade_mode", None), "unknown") if acct else "unknown"
-        payload = ops.build_status(
-            account=mode, scan_interval_s=interval, quote_age_s=quote_age,
-            open_positions=len(fetcher.get_own_positions()), pending_orders=len(orders) if orders else 0,
-            daily_pnl=fetcher.get_todays_closed_pl(), drawdown_shutdown=drawdown_shutdown)
-        payload["foreign_positions"] = len(fetcher.get_foreign_positions())
-        ops.push_status(payload)
-    except Exception as e:
-        log.debug(f"ops heartbeat skipped: {e}")
+_ATLAS_RT: dict = atlas_bridge.RUNTIME  # filled in by _run_guarded when ATLAS_MODE is on
 
 
 def _leg_in_cooldown(name: str) -> bool:
@@ -1252,71 +1136,6 @@ def _execute_signal(signal, m15_rates, fetcher, risk, executor, session_mult, se
     return result
 
 
-def _check_pyramiding(fetcher, risk, executor, m15_rates, session_mult, session_name,
-                      now_ist=None):
-    """Check if any open position qualifies for pyramiding.
-
-    MED-14: this path had no session check at all, so a strategy gated to
-    "London Open only" could add exposure at 04:30 IST. Backtesting found 50
-    such entries scattered across hours 00-08 and 21-23. Pyramiding is now
-    confined to the hours the strategies themselves trade (11:30-21:30 IST).
-    """
-    positions = fetcher.get_own_positions()
-    if not positions:
-        return
-
-    now_ist = now_ist or datetime.now(IST)
-    tv = now_ist.hour + now_ist.minute / 60.0
-    if not (11.5 <= tv < 21.5):
-        return
-
-    if not executor.can_open_new_position():
-        return
-
-    curr_atr = risk.get_latest_atr(m15_rates)
-    if curr_atr is None:
-        return
-
-    for pos in positions:
-        is_buy = pos.type == mt5.ORDER_TYPE_BUY
-        if risk.check_pyramid_condition(pos.price_open, pos.price_current, curr_atr, is_buy):
-            # Check if we already pyramided this position (look for matching magic+direction)
-            existing = [p for p in positions if p.type == pos.type and p.magic == pos.magic]
-            if len(existing) >= 2:
-                continue  # Already pyramided
-
-            tick = fetcher.get_tick()
-            if tick is None:
-                continue
-
-            price = tick.ask if is_buy else tick.bid
-            stops = risk.calculate_atr_stops(price, is_buy, m15_rates, session_mult)
-            if stops is None:
-                continue
-
-            lot_size = FIXED_LOT_SIZE  # owner's rule: pyramid adds are also 0.02
-
-            profit_dist = abs(pos.price_current - pos.price_open)
-            log.info(
-                f"PYRAMID: {pos.comment} moved {profit_dist:.2f} in profit "
-                f"(threshold: {0.5 * curr_atr:.2f}). Adding position."
-            )
-
-            executor.send_order(
-                signal=mt5.ORDER_TYPE_BUY if is_buy else mt5.ORDER_TYPE_SELL,
-                price=price,
-                sl=stops.sl,
-                tp=stops.tp,
-                strategy_name=pos.comment.replace("_PYR", ""),
-                magic=pos.magic,
-                lot_size=lot_size,
-                atr=stops.atr,
-                session=session_name,
-                is_pyramid=True,
-            )
-            break  # Only pyramid once per cycle
-
-
 def _manage_open_positions(fetcher, risk, executor):
     """Run trailing stop logic and consolidation exit checks (own positions only)."""
     positions = fetcher.get_own_positions()
@@ -1332,77 +1151,12 @@ def _manage_open_positions(fetcher, risk, executor):
     if curr_atr is None:
         return
         
-    try:
-        import json
-        import os as _os
-        _vsl_path = _os.path.join(resilience._LOGS, "virtual_sl.json")
-        with open(_vsl_path, "r") as f:
-            virtual_sls = json.load(f)
-    except Exception:
-        virtual_sls = {}
-        
-    state_changed = False
-
     for pos in positions:
-        # Trailing stop -- OFF by default, see ENABLE_TRAILING above.
-        if ENABLE_TRAILING:
-            ticket_str = str(pos.ticket)
-
-            # `pos` comes straight from mt5.positions_get() -- MetaTrader5's
-            # TradePosition is a read-only C struct sequence (subclasses
-            # tuple), so `pos.sl = ...` raises AttributeError on a real
-            # connection. Build a plain, mutable stand-in instead of
-            # mutating the broker object in place.
-            effective_sl = pos.sl
-            if CLOSE_ONLY_TRAIL and ticket_str in virtual_sls:
-                effective_sl = virtual_sls[ticket_str]
-
-            trail_input = SimpleNamespace(
-                sl=effective_sl,
-                price_current=pos.price_current,
-                price_open=pos.price_open,
-                type=pos.type,
-            )
-            new_sl = risk.calculate_trailing_stop(trail_input, curr_atr)
-
-            if new_sl is not None:
-                if CLOSE_ONLY_TRAIL:
-                    virtual_sls[ticket_str] = new_sl
-                    state_changed = True
-                    log.info(f"Virtual Trailing SL for #{pos.ticket} updated to {new_sl}")
-                else:
-                    executor.modify_sl(pos.ticket, new_sl, pos.tp, pos.symbol)
-                    
-            if CLOSE_ONLY_TRAIL and ticket_str in virtual_sls:
-                v_sl = virtual_sls[ticket_str]
-                is_buy = pos.type == 0 # mt5.ORDER_TYPE_BUY
-                last_closed_bar = m15_rates[-2]
-                close_price = float(last_closed_bar["close"])
-                
-                # Check if the closed candle violated our virtual SL
-                if is_buy and close_price <= v_sl:
-                    log.warning(f"CLOSE-ONLY TRAIL HIT: #{pos.ticket} long closed at {close_price} (SL: {v_sl})")
-                    executor.close_position(pos)
-                    continue # Skip consolidation check since it's closed
-                elif not is_buy and close_price >= v_sl:
-                    log.warning(f"CLOSE-ONLY TRAIL HIT: #{pos.ticket} short closed at {close_price} (SL: {v_sl})")
-                    executor.close_position(pos)
-                    continue
-
         # Consolidation exit
         if risk.should_exit_consolidation(m15_rates):
             log.info(f"Consolidation detected -- closing #{pos.ticket}")
             executor.close_position(pos)
             
-    if state_changed:
-        try:
-            import json
-            import os as _os
-            _vsl_path = _os.path.join(resilience._LOGS, "virtual_sl.json")
-            with open(_vsl_path, "w") as f:
-                json.dump(virtual_sls, f)
-        except Exception as e:
-            log.error(f"Failed to save virtual SL state: {e}")
 
 
 if __name__ == "__main__":

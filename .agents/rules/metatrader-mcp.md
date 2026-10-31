@@ -2,7 +2,7 @@
 
 > **Note:** the live bot (`src.core.main_loop`) executes through the
 > **`MetaTrader5` Python package directly**, not through MCP. MCP is used only
-> for ad-hoc queries and the `mt5-trade-auditor` skill. Execution failures in
+> for ad-hoc queries. Execution failures in
 > the bot show up in `logs/main_loop.log`, not as MCP errors — but the error
 > codes below are the same.
 

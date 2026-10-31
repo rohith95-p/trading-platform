@@ -650,3 +650,74 @@ def test_live_parity_preset_runs_end_to_end(flat_bars):
     assert t.lots == pytest.approx(0.01)
     assert t.entry_time - (C_NY + 900) == cfg.entry_delay_sec
     assert any(d["outcome"] == "entered" for d in res.diagnostics["decisions"])
+
+
+# ---------------------------------------------------------------------------
+# missing M1 data (2026-11-01): the engine refuses the M15 fallback by default
+# ---------------------------------------------------------------------------
+
+def _bars_with_m1_hole(bars, hole_start, hole_end):
+    """Same series with every M1 bar in [hole_start, hole_end) removed."""
+    import dataclasses
+    t = bars.m1["time"].astype(np.int64)
+    keep = (t < hole_start) | (t >= hole_end)
+    return dataclasses.replace(bars, m1=bars.m1[keep])
+
+
+def test_missing_m1_raises_instead_of_resolving_exits_on_m15(flat_bars):
+    from src.backtesting.engine import MissingM1Error
+
+    holed = _bars_with_m1_hole(flat_bars, C_NY + 900, C_NY + 1800)
+    with pytest.raises(MissingM1Error) as exc:
+        run(holed, [Fire(candles=[C_NY])])
+    assert "no M1 bars" in str(exc.value)
+    assert exc.value.ts == C_NY + 900
+
+
+def test_coarse_policy_restores_the_old_m15_fallback(flat_bars):
+    holed = _bars_with_m1_hole(flat_bars, C_NY + 900, C_NY + 1800)
+    eng, res = run(holed, [Fire(candles=[C_NY])], m1_policy="coarse")
+    assert res.diagnostics["bars_without_m1"] >= 1
+
+
+def test_m1_series_entirely_absent_is_refused(flat_bars):
+    import dataclasses
+
+    from src.backtesting.engine import MissingM1Error
+
+    with pytest.raises(MissingM1Error):
+        run(dataclasses.replace(flat_bars, m1=None), [Fire(candles=[C_NY])])
+
+
+def test_m1_policy_rejects_an_unknown_value():
+    with pytest.raises(ValueError, match="m1_policy"):
+        EngineConfig(m1_policy="whatever")
+
+
+def test_require_is_the_default_so_a_silent_fallback_cannot_come_back():
+    assert EngineConfig().m1_policy == "require"
+    assert EngineConfig.live_parity_preset().m1_policy == "require"
+
+
+def test_skip_policy_never_resolves_on_m15_and_counts_what_it_cost(flat_bars):
+    # the signal on C_NY fills on the next candle; hole the one after that, so a
+    # position is open while the minute prices are missing
+    holed = _bars_with_m1_hole(flat_bars, C_NY + 1800, C_NY + 2700)
+    eng, res = run(holed, [held(candles=[C_NY])], m1_policy="skip")
+    d = res.diagnostics
+    assert d["bars_skipped_no_m1"] == 1
+    assert d["bars_without_m1"] == 0          # no M15 substitution happened
+    assert d["exits_unchecked_no_m1"] >= 1    # the held position went unchecked
+
+
+def test_skip_policy_does_not_fill_an_entry_without_minute_prices(flat_bars):
+    holed = _bars_with_m1_hole(flat_bars, C_NY + 900, C_NY + 1800)
+    eng, res = run(holed, [Fire(candles=[C_NY])], m1_policy="skip")
+    assert res.diagnostics["bars_skipped_no_m1"] == 1
+    assert not [t for t in res.trades if t.entry_time < C_NY + 1800]
+
+
+def test_skip_policy_reports_zero_when_m1_is_complete(flat_bars):
+    eng, res = run(flat_bars, [Fire(candles=[C_NY])], m1_policy="skip")
+    assert res.diagnostics["bars_skipped_no_m1"] == 0
+    assert res.diagnostics["exits_unchecked_no_m1"] == 0

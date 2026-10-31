@@ -31,3 +31,10 @@ jobs:
 
       - name: Run full test suite
         run: python -m pytest tests/ -v --tb=short
+
+      # Every recorded result must have a pre-registration that was committed
+      # first. scripts/validation/prereg_check.py exits 1 if one does not.
+      - name: Check every result was pre-registered
+        run: |
+          git fetch --unshallow || true
+          python -I scripts/validation/prereg_check.py

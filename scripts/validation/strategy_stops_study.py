@@ -13,6 +13,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 sys.path.insert(0, ROOT)
 os.chdir(ROOT)
 
+from scripts.validation import audit_data  # noqa: E402
 from scripts.validation import independent_audit_run as base          # noqa: E402
 from scripts.validation.sltp_sweep import (HOLE, LIVE as LIVE_AT_AUDIT, VPP, SLIP, COMM,  # noqa: E402
                                            SWAP_LONG_NIGHT, friday_cut, stats)
@@ -138,7 +139,7 @@ def exit_pl(t, sl, tp, lots, A):
 
 def main():
     rng = np.random.default_rng(31)
-    D = json.load(open(os.path.join("research", "results", "audit_2026-10-30", "trades_no_donchian.json")))
+    D, _src = audit_data.trades()
     B = base.bars()
     m1, m15 = B.m1, B.m15
     A = (m1["time"].astype(np.int64), m1["high"].astype(float), m1["low"].astype(float), m1["close"].astype(float),

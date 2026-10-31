@@ -1,0 +1,234 @@
+{
+ "source": "research\\results\\audit_2026-11-01\\trades.json",
+ "DEV": {
+  "first": "2022-08-01",
+  "last": "2023-05-15",
+  "months": 9.44,
+  "portfolio": {
+   "n": 132,
+   "net": -294.9,
+   "pf": 0.658,
+   "win": 28.0,
+   "dd": 305.87,
+   "avg_win": 15.35,
+   "avg_loss": -9.08
+  },
+  "per_strategy": {
+   "ASIAN_BREAKOUT_V6": {
+    "n": 5,
+    "net": -24.41,
+    "pf": 0.367,
+    "win": 20.0,
+    "dd": 31.05,
+    "avg_win": 14.15,
+    "avg_loss": -9.64
+   },
+   "ASIAN_RANGE_FILTERED_V6": {
+    "n": 49,
+    "net": -81.15,
+    "pf": 0.72,
+    "win": 32.7,
+    "dd": 84.99,
+    "avg_win": 13.07,
+    "avg_loss": -8.8
+   },
+   "LONDON_MOMENTUM_TIGHT_V6": {
+    "n": 55,
+    "net": -159.27,
+    "pf": 0.539,
+    "win": 21.8,
+    "dd": 225.61,
+    "avg_win": 15.5,
+    "avg_loss": -8.03
+   },
+   "NY_SESSION_REVERSAL_V6": {
+    "n": 23,
+    "net": -30.07,
+    "pf": 0.841,
+    "win": 34.8,
+    "dd": 73.02,
+    "avg_win": 19.83,
+    "avg_loss": -12.58
+   }
+  },
+  "dropped_in_m1_hole": 0,
+  "m1": {
+   "bars_skipped_no_m1": 4,
+   "exits_unchecked_no_m1": 0,
+   "bars_without_m1": 0,
+   "partial_m1_candles": 761,
+   "partial_m1_minutes_missing": 1204
+  }
+ },
+ "TEST": {
+  "first": "2024-06-03",
+  "last": "2025-11-25",
+  "months": 17.74,
+  "portfolio": {
+   "n": 253,
+   "net": 1058.48,
+   "pf": 1.395,
+   "win": 42.3,
+   "dd": 238.99,
+   "avg_win": 34.92,
+   "avg_loss": -18.34
+  },
+  "per_strategy": {
+   "ASIAN_BREAKOUT_V6": {
+    "n": 14,
+    "net": -13.93,
+    "pf": 0.929,
+    "win": 42.9,
+    "dd": 128.2,
+    "avg_win": 30.6,
+    "avg_loss": -24.69
+   },
+   "ASIAN_RANGE_FILTERED_V6": {
+    "n": 76,
+    "net": 586.87,
+    "pf": 1.869,
+    "win": 55.3,
+    "dd": 111.5,
+    "avg_win": 30.04,
+    "avg_loss": -19.85
+   },
+   "LONDON_MOMENTUM_TIGHT_V6": {
+    "n": 106,
+    "net": 303.47,
+    "pf": 1.295,
+    "win": 31.1,
+    "dd": 219.28,
+    "avg_win": 40.4,
+    "avg_loss": -14.11
+   },
+   "NY_SESSION_REVERSAL_V6": {
+    "n": 57,
+    "net": 182.07,
+    "pf": 1.235,
+    "win": 45.6,
+    "dd": 283.35,
+    "avg_win": 36.83,
+    "avg_loss": -25.02
+   }
+  },
+  "dropped_in_m1_hole": 0,
+  "m1": {
+   "bars_skipped_no_m1": 2130,
+   "exits_unchecked_no_m1": 0,
+   "bars_without_m1": 0,
+   "partial_m1_candles": 402,
+   "partial_m1_minutes_missing": 1000
+  }
+ },
+ "RECENT": {
+  "first": "2026-07-06",
+  "last": "2026-10-26",
+  "months": 3.68,
+  "portfolio": {
+   "n": 54,
+   "net": 790.14,
+   "pf": 1.809,
+   "win": 50.0,
+   "dd": 193.52,
+   "avg_win": 65.44,
+   "avg_loss": -36.18
+  },
+  "per_strategy": {
+   "ASIAN_BREAKOUT_V6": {
+    "n": 1,
+    "net": 79.83,
+    "pf": Infinity,
+    "win": 100.0,
+    "dd": 0.0,
+    "avg_win": 79.83,
+    "avg_loss": 0.0
+   },
+   "ASIAN_RANGE_FILTERED_V6": {
+    "n": 11,
+    "net": 141.33,
+    "pf": 1.724,
+    "win": 54.5,
+    "dd": 86.56,
+    "avg_win": 56.1,
+    "avg_loss": -39.06
+   },
+   "LONDON_MOMENTUM_TIGHT_V6": {
+    "n": 21,
+    "net": 340.78,
+    "pf": 2.15,
+    "win": 52.4,
+    "dd": 66.92,
+    "avg_win": 57.92,
+    "avg_loss": -29.64
+   },
+   "NY_SESSION_REVERSAL_V6": {
+    "n": 21,
+    "net": 228.2,
+    "pf": 1.47,
+    "win": 42.9,
+    "dd": 280.4,
+    "avg_win": 79.26,
+    "avg_loss": -40.43
+   }
+  },
+  "dropped_in_m1_hole": 0,
+  "m1": {
+   "bars_skipped_no_m1": 0,
+   "exits_unchecked_no_m1": 0,
+   "bars_without_m1": 0,
+   "partial_m1_candles": 102,
+   "partial_m1_minutes_missing": 199
+  }
+ },
+ "RECENT_CUT": {
+  "first": "2026-07-06",
+  "last": "2026-09-14",
+  "months": 2.3,
+  "portfolio": {
+   "n": 33,
+   "net": 314.81,
+   "pf": 1.467,
+   "win": 45.5,
+   "dd": 193.52,
+   "avg_win": 65.96,
+   "avg_loss": -37.48
+  },
+  "per_strategy": {
+   "ASIAN_RANGE_FILTERED_V6": {
+    "n": 8,
+    "net": 77.29,
+    "pf": 1.495,
+    "win": 50.0,
+    "dd": 86.56,
+    "avg_win": 58.33,
+    "avg_loss": -39.01
+   },
+   "LONDON_MOMENTUM_TIGHT_V6": {
+    "n": 11,
+    "net": 310.31,
+    "pf": 3.455,
+    "win": 63.6,
+    "dd": 35.72,
+    "avg_win": 62.38,
+    "avg_loss": -31.59
+   },
+   "NY_SESSION_REVERSAL_V6": {
+    "n": 14,
+    "net": -72.8,
+    "pf": 0.814,
+    "win": 28.6,
+    "dd": 280.4,
+    "avg_win": 79.86,
+    "avg_loss": -39.22
+   }
+  },
+  "dropped_in_m1_hole": 0,
+  "m1": {
+   "bars_skipped_no_m1": 0,
+   "exits_unchecked_no_m1": 0,
+   "bars_without_m1": 0,
+   "partial_m1_candles": 63,
+   "partial_m1_minutes_missing": 121
+  }
+ }
+}

@@ -95,8 +95,10 @@ research/results/atlas_candidate_study/trades*.json
 research/results/atlas_new_families/results*.json
 research/data_*/
 
-# independent audit: raw engine trade dump (re-create with scripts/validation/independent_audit_run.py)
-research/results/audit_2026-10-30/trades*.json
+# independent audit: raw engine trade dumps (re-create with scripts/validation/independent_audit_run.py)
+research/results/audit_*/trades*.json
+# the accumulating broker archive: bars, not source (manifests are kept)
+research/data/broker_archive/*.npy
 research/results/trailing_study_2026-10-30.json
 research/results/sltp_sweep_2026-10-30.json
 research/results/structure_stops_2026-10-31.json

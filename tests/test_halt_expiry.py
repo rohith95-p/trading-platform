@@ -9,7 +9,7 @@ import pytest
 
 from scripts import watchdog
 from src.atlas.rules import AtlasState
-from src.core import alerts, main_loop, ops
+from src.core import alerts, atlas_bridge, main_loop, ops
 
 UTC = timezone.utc
 IST = timezone(timedelta(hours=5, minutes=30))
@@ -61,7 +61,7 @@ def test_atlas_state_round_trip_and_resume():
 
 def test_corrupt_or_missing_state_starts_fresh():
     assert main_loop._load_atlas_state("evaluation") is None
-    with open(main_loop.ATLAS_STATE_FILE, "w") as f:
+    with open(atlas_bridge.ATLAS_STATE_FILE, "w") as f:
         f.write("{broken")
     assert main_loop._load_atlas_state("evaluation") is None
 

@@ -1,40 +1,37 @@
-# Rule: Multi-Strategy Session Architecture
+# Rule: one strategy, one session
 
-Architectural guardrails for building, modifying, or auditing XAUUSD strategies
-for the Ultra Core bot.
+Architectural guardrails for building, changing or auditing XAUUSD strategies.
 
-## 1. No monolithic strategies
+## 1. No strategy runs all day
 
-Never build a single strategy that runs 24/5. Market regimes differ by session.
-Each strategy is assigned to its session. The live portfolio (`portfolio_v4`):
+Market behaviour differs by session, so each leg owns a window. The live
+portfolio (`src/strategies/portfolio_atlas.py`):
 
-| Leg | Session (IST) | Family |
+| Leg | Entry window, IST | Family |
 |---|---|---|
-| SQUEEZE_ASIA | 02:30–11:30 | volatility breakout |
-| EMASTACK_LONDON_TIGHT | 11:30–15:30 | trend continuation |
-| FVG_NY_TIGHT | 17:30–21:30 | structure / imbalance |
-| RANGEREJECTION_NY_TIGHT | 17:30–21:30 | mean reversion |
+| AsianRangeFilteredV6 | 12:45 | range breakout, with a range-size filter |
+| AsianBreakoutV6 | 12:45 | range breakout, unfiltered (rare: ~6 trades a year) |
+| LondonMomentumTightV6 | 17:45 | trend continuation |
+| NYSessionReversalV6 | 17:45-21:30 | sweep reversal |
+
+Session times are checked against `bar_time % 86400`, which is **broker server
+time, not UTC**. `src/core/broker_probe.py` measures the server's offset at
+startup and alerts when it differs from the profile the configuration was
+validated against. A new broker can shift every entry by hours, so check it
+before trading.
 
 ## 2. The orchestrator pattern
 
-- New strategies go in the `PORTFOLIO_V4` list in
-  `src/strategies/portfolio_v4.py`, which `src.core.main_loop.run()` loads.
-  (There is no `TradingEngine` class — the loop is `run()` with a `strategies`
-  list.)
-- `main_loop` evaluates all strategies each 60s scan, gated by session mask and
-  the D1 EMA20 bias.
-- `ExecutionHandler` arbitrates execution: `FIXED_LOT_SIZE` 0.01, `MAX_TOTAL_VOLUME`
-  0.02, max 2 concurrent positions.
-- `RiskManager.check_daily_drawdown` enforces the global daily loss cap:
-  **6% of balance** (`DAILY_LOSS_LIMIT_PCT`), realised + floating. (The old
-  "1.5x D1 ATR" cap was dimensionally broken — CRIT-4 — and is gone.)
-- Positions run to their per-leg fixed SL/TP. **No trailing, no pyramiding** —
-  both backtested net-negative (`scripts/live_config_ab.py`).
+- A new leg is a class in `src/strategies/`, added to `PORTFOLIO` in
+  `portfolio_atlas.py`, with its magic registered in `config/ultra_magics.json`.
+  `main_loop` refuses to start if a leg's magic is missing.
+- A leg decides **direction only**. Stops, targets, sizing, caps, the Atlas gate
+  and the kill switch all live outside it.
+- A leg reads closed bars only: `rates[-1]` is the forming candle, so use
+  `rates[-2]`. `tests/test_no_lookahead.py` enforces this.
 
-## 3. Mandatory verification
+## 3. Retiring a leg
 
-If a strategy underperforms, do NOT loosen its indicators. Backtest it across
-sessions on the real engine (`src/backtesting/engine.py`, see rule
-`strategy_design.md` and the `pandas-backtesting` skill). If it only works in
-one session, gate it there. Every change is a hypothesis logged in
-`docs/research/RESEARCH_LEDGER.md`.
+Archive it to `src/strategies/archive/` together with the result that condemned
+it, and record the removal in `research/DECISIONS.md`. Do not delete the file:
+the next search for an edge should be able to see what has already failed.
