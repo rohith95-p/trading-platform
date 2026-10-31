@@ -42,7 +42,7 @@ class TestPositionLimits:
 
         assert FIXED_LOT_SIZE == 0.02, (
             f"FIXED_LOT_SIZE is {FIXED_LOT_SIZE}, expected 0.02. "
-            "If changed, update REPO_GUIDE.md and README.md"
+            "If changed, update README.md, docs/OPS_RUNBOOK.md and research/DECISIONS.md"
         )
 
     def test_max_total_exposure(self):

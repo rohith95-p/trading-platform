@@ -14,11 +14,12 @@ src/
   atlas/          Atlas Funded rule engine (trailing DD, daily loss, consistency)
   research/       Feature library, candidate screening
 scripts/          Watchdog, VPS update/check scripts, halt CLI, research and validation runners
-research/         Cached XAUUSDm bars (.npy, git-ignored), validation ledger
+research/         Results summaries (results/), pre-registrations (registry/), decision log (DECISIONS.md);
+                  cached XAUUSDm bars are git-ignored
 tests/            pytest suite: strategy logic, risk rules, no-lookahead, engine parity,
                   sizing ladder, alert priorities, live-config freeze guard
 config/           Atlas rules (atlas_access.json), magic numbers (ultra_magics.json)
-docs/             OPS_RUNBOOK, ATLAS_TEST_PLAN, REPO_GUIDE
+docs/             OPS_RUNBOOK (daily operation), VPS_WINDOWS_SETUP, ATLAS_TEST_PLAN
 ```
 
 ## Active Portfolio

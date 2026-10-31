@@ -12,10 +12,6 @@ from src.backtesting.metrics import summarize
 
 S = "src.strategies."
 SPECS = [  # (label, module, class, kwargs)
- ("TREND_PULLBACK_V5", S+"portfolio_v5_core", "TrendPullbackV5", {}),
- ("BB_MEAN_REVERSION_V5", S+"portfolio_v5_core", "BBMeanReversionV5", {}),
- ("NVMR_V5", S+"portfolio_v5_core", "NVMRPortfolioV5", {}),
- ("FVG_NY_TIGHT_V5", S+"portfolio_v5_core", "FVGNYTightV5", {}),
  ("PDHLR_V5(retired)", S+"archive.retired_v5_legs", "PDHLRStrategyV5", {}),
  ("NY_LIQ_EXPANSION(retired)", S+"archive.retired_v5_legs", "NYLiquidityExpansionV5", {}),
  ("LARS_LONDON", S+"bible_strategies", "LARSStrategy", {}),
