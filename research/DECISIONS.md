@@ -24,6 +24,7 @@ is an upper bound, not an estimate.
 | 2026-10-30 | Asian Range Filtered stop 2.0 → 2.5 ATR | DEV + TEST (60-combination sweep) | RECENT (2026-07..10) | better in all three windows; all +$2,020 vs +$1,687 | partly out-of-sample (RECENT unseen for this choice only) |
 | 2026-10-31 | Structure (swing / range) stops: not adopted | DEV + TEST, pre-registered (PREREG_StructureStops) | RECENT | all 4 strategies fail the pre-set bar (RESULT_StructureStops) | no change |
 | 2026-10-31 | Strategy-specific stops/targets (range, breakout candle, London range, sweep wick; 96 variants, fixed and equal-risk lots): not adopted | DEV + TEST, pre-registered (PREREG_StrategyStops) | TEST (walk-forward A), RECENT (walk-forward B), Monte Carlo | 0 of 8 pass all four checks (RESULT_StrategyStops) | no change |
+| 2026-11-01 | Stop robustness (stability map, 6 volatility measures, flip test, cost stress, Monte Carlo): live ATR(14) M15 stops kept | pre-registered (PREREG_StopRobustness) | DEV / TEST / RECENT each | nothing beats live; edge is in the entries (RESULT_StopRobustness). Found: live ATR uses the forming bar (5-9% tighter than backtest) | fix pending owner decision |
 
 ## What this means for the numbers
 Every live setting above was picked while looking at 2022-08 → 2026-10. The backtest's +$2,020 / PF 1.42 is the
