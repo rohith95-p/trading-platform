@@ -131,3 +131,29 @@ def test_the_price_archive_stops_where_it_stops_agreeing_with_the_broker():
 
     assert master.KAGGLE_END == int(dt.datetime(2026, 1, 1, tzinfo=dt.timezone.utc).timestamp())
     assert master.window("TEST")[1] == master.KAGGLE_END
+
+
+def test_the_validation_ledger_is_in_a_folder_the_vps_update_actually_copies():
+    """The gate is only a gate if the VPS has the file.
+
+    `scripts/vps_update.ps1` copies the repository with
+    `robocopy /XD venv logs .git research`. The ledger used to live in
+    `research/`, so it never reached the VPS: the gate failed there and the bot
+    could only start with the guard switched off (found 2026-11-01).
+    """
+    import re
+
+    from src.core import validation_ledger
+
+    assert os.path.exists(validation_ledger.LEDGER_PATH), "the ledger file is missing"
+    rel = os.path.relpath(validation_ledger.LEDGER_PATH,
+                          os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    folder = rel.replace("\\", "/").split("/")[0]
+
+    script = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                          "scripts", "vps_update.ps1")
+    with open(script, encoding="utf-8") as fh:
+        excluded = re.search(r"/XD\s+([^/\n]+)", fh.read()).group(1).split()
+    assert folder not in excluded, (
+        f"{rel} lives in {folder}/, which vps_update.ps1 excludes from the copy, "
+        f"so the VPS would never receive it")

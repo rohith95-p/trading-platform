@@ -24,13 +24,22 @@ from typing import Any, Dict, List, Optional
 from src.core.system_config import SystemConfig
 
 _ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-LEDGER_PATH = os.path.join(_ROOT, "research", "validation_ledger.json")
+
+# The ledger is configuration, not a research output: main_loop refuses to trade
+# a configuration it cannot find in here, so the file has to travel with the
+# code. It used to live in research/, which scripts/vps_update.ps1 excludes from
+# the copy -- so the VPS never received it, the gate failed there, and the bot
+# could only start with ULTRA_ALLOW_UNVALIDATED=1 (2026-11-01). It lives in
+# config/ now, which is copied.
+LEDGER_PATH = os.path.join(_ROOT, "config", "validation_ledger.json")
+LEGACY_LEDGER_PATH = os.path.join(_ROOT, "research", "validation_ledger.json")
 
 
 def _load() -> List[Dict[str, Any]]:
-    if not os.path.exists(LEDGER_PATH):
+    path = LEDGER_PATH if os.path.exists(LEDGER_PATH) else LEGACY_LEDGER_PATH
+    if not os.path.exists(path):
         return []
-    with open(LEDGER_PATH, "r", encoding="utf-8") as f:
+    with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
