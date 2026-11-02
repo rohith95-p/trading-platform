@@ -35,6 +35,7 @@ from typing import Any, Dict, List, Optional, Sequence, Tuple
 import numpy as np
 
 from src.backtesting.costs import CostModel
+from src.core import conviction as _conviction
 from src.backtesting.data import BarSet, SymbolSpec
 from src.core import risk_rules as _rr
 from src.core.sizing_ladder import SizingLadder as _SizingLadder
@@ -1431,30 +1432,15 @@ class BacktestEngine:
                         actionable_signals.append((s, sig))
 
                     if actionable_signals:
-                        # HIGHLANDER RULE: Execute only highest conviction signal
-                        rank_order = {
-                            "NVMR_TARGET_10_V5": 6,
-                            "NVMR_TARGET_10": 6,
-                            "BB_MEAN_REVERSION_V5": 5,
-                            "BB_MEAN_REVERSION": 5,
-                            "FVG_NY_SWEEP_OR_VOID": 5,
-                            "FVG_NY_SWEEP": 4,
-                            "FVG_NY_VOID": 3,
-                            "FVG_NY_TIGHT_V5": 2,
-                            "FVG_NY_TIGHT": 2,
-                            "TREND_PULLBACK_V5": 2,
-                            "TREND_PULLBACK": 2,
-                            "FVG_ASIA_SWEEP": 1,
-                            "NY_LIQUIDITY_EXPANSION_V5": 1,
-                            "NY_LIQUIDITY_EXPANSION": 1,
-                            "PDHLR_STRATEGY_V5": 1,
-                            "PDHLR_STRATEGY": 1,
-                        }
-                        actionable_signals.sort(key=lambda x: rank_order.get(x[0].name.upper(), 0), reverse=True)
-                        best_s, best_sig = actionable_signals[0]
+                        # HIGHLANDER RULE: only the highest-conviction signal trades.
+                        # The ranking is shared with the live loop
+                        # (src/core/conviction.py); each side used to carry its own
+                        # table, and this one named sixteen strategies that no
+                        # longer exist (2026-11-02).
+                        (best_s, best_sig), _losers = _conviction.pick(actionable_signals)
 
                         # Block others
-                        for other_s, _ in actionable_signals[1:]:
+                        for other_s, _ in _losers:
                             fired_on[other_s.name] = bar_open
                             self.diag["signals_deduped"] += 1
 
@@ -1526,17 +1512,10 @@ class BacktestEngine:
 
     # -- live-parity components -------------------------------------------
 
-    _RANK_ORDER = {
-        # identical to main_loop.py L516-533 / the legacy block in run()
-        "NVMR_TARGET_10_V5": 6, "NVMR_TARGET_10": 6,
-        "BB_MEAN_REVERSION_V5": 5, "BB_MEAN_REVERSION": 5,
-        "FVG_NY_SWEEP_OR_VOID": 5, "FVG_NY_SWEEP": 4, "FVG_NY_VOID": 3,
-        "FVG_NY_TIGHT_V5": 2, "FVG_NY_TIGHT": 2,
-        "TREND_PULLBACK_V5": 2, "TREND_PULLBACK": 2,
-        "FVG_ASIA_SWEEP": 1,
-        "NY_LIQUIDITY_EXPANSION_V5": 1, "NY_LIQUIDITY_EXPANSION": 1,
-        "PDHLR_STRATEGY_V5": 1, "PDHLR_STRATEGY": 1,
-    }
+    # The conviction ranking is src/core/conviction.py, the same table the live
+    # loop reads. This class used to keep its own copy, which claimed to be
+    # "identical to main_loop" and was not: it named sixteen V5 strategies that
+    # no longer exist and none of the four legs that trade (2026-11-02).
 
     def _news_blocked(self, current_ist: datetime) -> bool:
         from src.core import news_filter
@@ -1716,9 +1695,8 @@ class BacktestEngine:
         if not actionable:
             return
 
-        actionable.sort(key=lambda x: self._RANK_ORDER.get(x[0].name.upper(), 0), reverse=True)
-        best_s, best_sig = actionable[0]
-        for other_s, other_sig in actionable[1:]:
+        (best_s, best_sig), _losers = _conviction.pick(actionable)
+        for other_s, other_sig in _losers:
             fired_on[other_s.name] = bar_open
             self.diag["signals_deduped"] += 1
             self._decide(ts, other_s.name, other_sig.is_buy, "highlander_lost")

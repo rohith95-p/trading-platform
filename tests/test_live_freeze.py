@@ -157,3 +157,20 @@ def test_the_validation_ledger_is_in_a_folder_the_vps_update_actually_copies():
     assert folder not in excluded, (
         f"{rel} lives in {folder}/, which vps_update.ps1 excludes from the copy, "
         f"so the VPS would never receive it")
+
+
+def test_the_conviction_ranking_is_the_validated_one():
+    """Which leg wins a same-candle collision is a live trading decision.
+
+    Only two collisions are reachable -- the 07:00 UTC candle (the two Asian
+    legs) and the 12:00 UTC candle (London against NY) -- and these are the
+    winners every backtest in the ledger was run with.
+    """
+    from src.core import conviction
+
+    assert conviction.RANK == {
+        "ASIAN_RANGE_FILTERED_V6": 40,
+        "ASIAN_BREAKOUT_V6": 30,
+        "LONDON_MOMENTUM_TIGHT_V6": 20,
+        "NY_SESSION_REVERSAL_V6": 10,
+    }

@@ -33,6 +33,7 @@ from typing import Any, Optional
 import numpy as np
 
 from src.atlas import OrderRequest
+from src.core import conviction
 from src.core import atlas_bridge, market_hours, ops, resilience, risk_rules, scope, trade_alerts, trade_log
 from src.core.atlas_bridge import _atlas_account_info
 from src.core.execution_handler import FIXED_LOT_SIZE
@@ -284,20 +285,16 @@ def execute_best_signal(actionable_signals, last_fired_candle, signal_candle, m1
     spread blip does NOT mark the candle fired, so the next scan retries it.
     """
     if actionable_signals:
-        # Rank by conviction based on validated risk-adjusted expectancy
-        rank_order = {
-            "DONCHIAN_TREND_V6": 7,
-            "ASIAN_RANGE_FILTERED_V6": 6,
-            "ASIAN_BREAKOUT_V6": 6,
-        }
+        # One order per scan. The ranking lives in src/core/conviction.py, which
+        # the backtest engine reads too -- it used to be a separate table on each
+        # side, and neither listed the legs that actually trade (2026-11-02).
+        (best_strategy, best_signal), _losers = conviction.pick(actionable_signals)
+        actionable_signals = [(best_strategy, best_signal)] + _losers
 
-        # Sort signals by rank (descending)
-        actionable_signals.sort(key=lambda x: rank_order.get(x[0].name.upper(), 0), reverse=True)
-
-        best_strategy, best_signal = actionable_signals[0]
-
-        if len(actionable_signals) > 1:
-            log.info(f"HIGHLANDER: {len(actionable_signals)} signals fired. Selected {best_strategy.name} as best conviction.")
+        if _losers:
+            log.info(f"HIGHLANDER: {len(actionable_signals)} signals fired. "
+                     f"Selected {best_strategy.name} (rank {conviction.rank(best_strategy.name)}) "
+                     f"over {', '.join(s.name for s, _ in _losers)}.")
 
         # Execute the best one
         _TRANSIENT_BLOCK["flag"] = False

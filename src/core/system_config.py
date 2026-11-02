@@ -32,6 +32,11 @@ class StrategyConfig:
     tp_atr_mult: float
     edge_trigger: bool
     execute_immediately: bool
+    # Which leg wins when two fire on the same candle (src/core/conviction.py).
+    # In the fingerprint since 2026-11-02: it decides what trades, and until then
+    # live and backtest each kept their own unfingerprinted copy of it, so a
+    # divergence could not be caught. 0 = unranked, loses every collision.
+    conviction: int = 0
 
 
 @dataclass(frozen=True)
@@ -62,10 +67,13 @@ class SystemConfig:
 
     @staticmethod
     def _strategy_configs_from_classes(strategy_objs) -> Tuple[StrategyConfig, ...]:
+        from src.core import conviction as _conv
+
         cfgs = [
             StrategyConfig(
                 name=s.name,
                 magic=s.magic,
+                conviction=_conv.rank(s.name),
                 candidate_id=getattr(s, "candidate_id", ""),
                 session=tuple(getattr(s, "session", (0.0, 24.0))),
                 sl_atr_mult=float(getattr(s, "sl_atr_mult", 0.0) or 0.0),
@@ -143,8 +151,10 @@ class SystemConfig:
     @classmethod
     def from_dict(cls, d: Dict[str, Any]) -> "SystemConfig":
         d = dict(d)
+        # conviction was added 2026-11-02; entries recorded before it have none
         strategies = tuple(
-            StrategyConfig(**{**s, "session": tuple(s["session"])}) for s in d.pop("strategies")
+            StrategyConfig(**{"conviction": 0, **s, "session": tuple(s["session"])})
+            for s in d.pop("strategies")
         )
         tw = d.pop("trading_window_ist", None)
         # Tolerate ledger entries written before these fields existed.
