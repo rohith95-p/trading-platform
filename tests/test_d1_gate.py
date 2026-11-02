@@ -7,6 +7,7 @@ import numpy as np
 import pytest
 
 from src.core import main_loop as ml
+from src.core import order_flow
 
 
 def sig(is_buy):
@@ -31,13 +32,13 @@ def test_bearish_blocks_buys_allows_sells_bullish_the_reverse():
 
 
 def test_missing_bias_fails_closed_when_gate_enabled():
-    with patch.object(ml, "ENABLE_D1_GATE", True):
+    with patch.object(order_flow, "ENABLE_D1_GATE", True):
         assert ml._d1_bias_allows(sig(True), None, "X") is False
         assert ml._d1_bias_allows(sig(False), None, "X") is False
 
 
 def test_missing_bias_allowed_only_when_gate_disabled():
-    with patch.object(ml, "ENABLE_D1_GATE", False):
+    with patch.object(order_flow, "ENABLE_D1_GATE", False):
         assert ml._d1_bias_allows(sig(True), None, "X") is True
 
 

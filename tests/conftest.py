@@ -72,10 +72,11 @@ def isolate_runtime_files(tmp_path):
         patch.object(ops, "HALT_FILE", str(tmp_path / "HALT_LATCH.json")),
     ]
     try:
-        from src.core import atlas_bridge, main_loop
-        patches.append(patch.object(main_loop, "_COOLDOWN_FILE", str(tmp_path / "cooldown.json")))
-        # the state file lives with the Atlas code now, so patch it there -- patching
-        # main_loop's re-export would not change what atlas_bridge itself reads
+        from src.core import atlas_bridge, main_loop, order_flow
+        # Each of these lives with the code that reads it, so each is patched
+        # there -- patching main_loop's re-export would not change what the
+        # owning module itself reads.
+        patches.append(patch.object(order_flow, "_COOLDOWN_FILE", str(tmp_path / "cooldown.json")))
         patches.append(patch.object(atlas_bridge, "ATLAS_STATE_FILE", str(tmp_path / "atlas_state.json")))
         patches.append(patch.object(main_loop.resilience, "STATUS_FILE", str(tmp_path / "status.json")))
     except Exception:

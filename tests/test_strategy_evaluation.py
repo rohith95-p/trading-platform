@@ -95,17 +95,17 @@ class TestD1BiasGate:
         """Owner rule 2026-10-17: with the D1 gate ON, an unavailable bias (failed/short D1 fetch) blocks
         new entries; it only passes everything when the gate itself is disabled."""
         from unittest.mock import patch
-        from src.core import main_loop
+        from src.core import order_flow
         from src.core.main_loop import _d1_bias_allows
         from src.strategies.base_strategy import Signal
 
         buy_signal = Signal(direction=0, strategy_name="TEST", magic=9999, is_buy=True)
         sell_signal = Signal(direction=1, strategy_name="TEST", magic=9999, is_buy=False)
 
-        with patch.object(main_loop, "ENABLE_D1_GATE", True):
+        with patch.object(order_flow, "ENABLE_D1_GATE", True):
             assert _d1_bias_allows(buy_signal, None, "TEST") is False
             assert _d1_bias_allows(sell_signal, None, "TEST") is False
-        with patch.object(main_loop, "ENABLE_D1_GATE", False):
+        with patch.object(order_flow, "ENABLE_D1_GATE", False):
             assert _d1_bias_allows(buy_signal, None, "TEST") is True
             assert _d1_bias_allows(sell_signal, None, "TEST") is True
 

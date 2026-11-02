@@ -8,6 +8,10 @@ PHILOSOPHY:
   - Non-Atlas: portfolio_v6 (DonchianTrend only).
   - Sessions in IST; D1 bias gate disabled for V6 strategies.
 
+This file is the loop: startup() holds every check that can refuse the start,
+and _run_guarded() is the scan. Whether a signal becomes an order, and what
+happens to the position afterwards, is src/core/order_flow.py.
+
 Resilience (src/core/resilience.py -- does not affect trading):
   - single-instance lockfile
   - kill switch: create a file named STOP in the project root -> flatten + halt
@@ -28,7 +32,6 @@ import time as _time
 import logging
 import json
 import re
-import numpy as np
 import MetaTrader5 as _mt5
 from typing import Any, Optional
 from types import SimpleNamespace
@@ -61,7 +64,7 @@ from src.core import scope  # own-magic strategy view vs account-wide risk view 
 from src.strategies.portfolio_v6 import PORTFOLIO as PORTFOLIO_V6  # Donchian Trend V6 (replaces losing V5 legs)
 from src.strategies.portfolio_atlas import PORTFOLIO as PORTFOLIO_ATLAS
 from src.atlas import (
-    AtlasRuleEngine, AtlasState, AccountInfo, OrderRequest, load_rules, RulesError,
+    AtlasRuleEngine, AtlasState, AccountInfo, load_rules, RulesError,
 )
 from src.atlas.mcp_monitor import AtlasMCPMonitor
 from src.core import atlas_bridge
@@ -75,12 +78,20 @@ from src.core.atlas_bridge import (                       # noqa: F401
 from src.core.live_status import (                        # noqa: F401
     _alert_foreign_exposure, _push_ops_heartbeat, _write_status,
 )
+from src.core import order_flow
+# _COOLDOWN_FILE and ENABLE_D1_GATE are deliberately NOT re-exported: they are
+# plain values, so a re-export here is a copy, and patching the copy (a test
+# pointing at main_loop) would leave order_flow reading the original. Patch and
+# read them on order_flow. The names below are functions and mutable containers,
+# where the re-export is the same object.
+from src.core.order_flow import (                        # noqa: F401
+    EXECUTED_ORDERS_DEDUP, _TRANSIENT_BLOCK, _calc_ema, _check_vi3_tripwire,
+    _close_all_positions, _d1_bias_allows, _execute_signal, _leg_in_cooldown,
+    _manage_open_positions, _override_may_apply, _record_closed_trades,
+)
 
 # IST offset
 IST = timezone(timedelta(hours=5, minutes=30))
-
-# P0-3: Global dedup set for (magic, bar_time, direction) to prevent duplicate fills
-EXECUTED_ORDERS_DEDUP: set = set()
 
 # ---------------------------------------------------------------------------
 # Logging (IST timestamps)
@@ -117,6 +128,12 @@ ATLAS_MODE = os.environ.get("ULTRA_ATLAS_MODE", "0") == "1"
 # Unverified rules the engine must acknowledge to load (see atlas_access.json).
 _ATLAS_ALLOW_UNVERIFIED = atlas_bridge.ALLOW_UNVERIFIED
 
+# order_flow sends the orders, so it needs the same terminal handle, symbol and
+# mode this loop runs on. Bound here, at import, before anything can call it.
+order_flow.bind(mt5, SYMBOL, ATLAS_MODE)
+
+_ATLAS_RT: dict = atlas_bridge.RUNTIME  # filled in by startup() when ATLAS_MODE is on
+
 # ---------------------------------------------------------------------------
 # Exit-management switches (rohith-2, 2026-09-03)
 #
@@ -147,49 +164,9 @@ ENABLE_TRAILING = False
 ENABLE_PYRAMIDING = False
 CLOSE_ONLY_TRAIL = True
 
-# D1 EMA20 direction gate -- ON. Reversed 2026-09-06 (HYP-064) after August 2026
-# simulation proved that trading FVG strategies without trend filtering in a
-# high-volatility environment causes extreme drawdowns. The gate flawlessly
-# filtered out toxic counter-trend setups in August, turning a -79% maxDD failure
-# into a +$44 profit (PF 1.40).
-ENABLE_D1_GATE = True
-
 
 def _ist_now() -> str:
     return datetime.now(IST).strftime("%I:%M:%S %p IST")
-
-
-def _calc_ema(closes: np.ndarray, period: int) -> np.ndarray:
-    ema = np.full_like(closes, np.nan, dtype=float)
-    if len(closes) >= period:
-        multiplier = 2.0 / (period + 1.0)
-        ema[period - 1] = np.mean(closes[:period])
-        for i in range(period, len(closes)):
-            ema[i] = (closes[i] - ema[i - 1]) * multiplier + ema[i - 1]
-    return ema
-
-
-def _close_all_positions(fetcher, executor, reason: str, severity: str | None = "CRITICAL") -> None:
-    """Flatten every open position on the symbol. severity=None: the caller sends its own message."""
-    from src.core import alerts
-    if severity == alerts.CRITICAL:
-        alerts.send("Kill switch: closing all trades", alerts.CRITICAL, context={"reason": reason},
-                    action="The bot stays stopped while the STOP file exists. Delete it, then restart the bot.")
-    elif severity:
-        alerts.send(f"Closing all trades: {reason}", severity)
-    # Own positions only. Foreign positions are reported, never closed, unless ULTRA_ACCOUNT_WIDE_FLATTEN=1.
-    wide = scope.account_wide_flatten_enabled()
-    targets = fetcher.get_positions() if wide else fetcher.get_own_positions()
-    foreign_left = [] if wide else fetcher.get_foreign_positions()
-    if foreign_left:
-        log.warning(f"KILL SWITCH: leaving {len(foreign_left)} foreign position(s) untouched: {scope.foreign_report(foreign_left)}")
-    for pos in targets:
-        if executor.close_position(pos):
-            log.warning(f"KILL SWITCH: closed #{pos.ticket} ({reason})")
-        else:
-            log.error(f"KILL SWITCH: FAILED to close #{pos.ticket} -- close it manually.")
-            alerts.send(f"Could not close trade #{pos.ticket}", alerts.CRITICAL, context={"reason": reason},
-                        action="Close it by hand in MT5 now.")
 
 
 def run():
@@ -206,15 +183,26 @@ def run():
         resilience.release_lock()
 
 
-def _run_guarded():
+def startup():
+    """Every check that has to pass before the first scan, then the modules the loop runs on.
+
+    Returns the built modules, or None when a check refuses the start.
+
+    The ORDER of these checks is not editorial. Each is here because of a
+    specific incident -- named in the comment above it -- and several depend on
+    an earlier one having run: the broker probe rescales the spread gate before
+    any gate reads it, the config-integrity gate stamps ops.BUILD before the
+    first heartbeat carries a fingerprint, and the hedging check runs before any
+    position's magic is believed. Nothing here may be reordered.
+    """
     if not mt5.initialize():
         log.error("MT5 initialisation failed. Exiting.")
-        return
+        return None
 
     # Startup safety: right account, tradeable connection, symbol present.
     if not resilience.startup_safety_check(mt5, SYMBOL):
         log.error("Startup safety check FAILED. Not trading. Fix the above and restart.")
-        return
+        return None
 
     # What broker is this, measured rather than assumed (2026-11-01). The symbol
     # name, its price decimals, the server's clock, the contract terms and the
@@ -249,7 +237,7 @@ def _run_guarded():
         msg = (f"START REFUSED: halt latch is set ({_halt.get('source')}: {_halt.get('reason')}). "
                f"Review, reconcile, then clear with: python -m scripts.halt clear --note \"...\"")
         log.error(msg)   # the watchdog sees the latch and tells the owner once; no alert per refused start
-        return
+        return None
     if ops.measure_only():
         log.warning("MEASUREMENT-ONLY MODE (ULTRA_MEASURE_ONLY): scanning and logging, NO orders will be sent.")
     risk_rules.LIVE_CONTEXT = True   # lets risk_rules relax the monthly/peak hard halts, and only on a DEMO account
@@ -259,10 +247,10 @@ def _run_guarded():
         _missing = scope.check_portfolio_magics(_active_portfolio, _own)
     except scope.ScopeConfigError as e:
         log.error(f"START REFUSED: {e}")
-        return
+        return None
     if _missing:
         log.error(f"START REFUSED: PORTFOLIO magics {_missing} are not in config/ultra_magics.json")
-        return
+        return None
     if ATLAS_MODE:
         log.info("ATLAS MODE ENABLED — portfolio_atlas, Atlas rule engine and MCP monitor active.")
 
@@ -288,7 +276,7 @@ def _run_guarded():
             log.error("Refusing to trade an unvalidated configuration. Re-run a backtest "
                        "and record it (validation_ledger.record), or set "
                        "ULTRA_ALLOW_UNVALIDATED=1 to override (not recommended).")
-            return
+            return None
         log.warning("ULTRA_ALLOW_UNVALIDATED=1 set -- proceeding on an unvalidated config.")
 
     # --- Modules ---
@@ -303,7 +291,7 @@ def _run_guarded():
             log.warning(_txt)
         else:
             log.error(f"START REFUSED: {_txt}")
-            return
+            return None
     if not ops.measure_only() and scope.block_on_foreign_enabled():
         _foreign0 = fetcher.get_foreign_exposure()
         if _foreign0:
@@ -315,7 +303,7 @@ def _run_guarded():
             alerts.send(f"Bot refused to start: other trades on {SYMBOL}", alerts.CRITICAL,
                         context={"found": scope.foreign_report(_foreign0)},
                         action="Close the other trades (or use a separate account), then restart the bot.")
-            return
+            return None
     risk = RiskManager(SYMBOL)
     executor = ExecutionHandler(SYMBOL, risk_manager=risk)
     # rohith phase 3 (2026-09-01): portfolio_v4 replaces EMAStack alone.
@@ -340,10 +328,24 @@ def _run_guarded():
         except RulesError as e:
             log.error(f"ATLAS: rule engine failed to load: {e}")
             log.error("Cannot trade in Atlas mode without the rule engine. Exiting.")
-            return
+            return None
         except Exception as e:
             log.error(f"ATLAS: unexpected init error: {e}")
-            return
+            return None
+
+    return SimpleNamespace(fetcher=fetcher, risk=risk, executor=executor,
+                           strategies=strategies, atlas_engine=atlas_engine,
+                           atlas_state=atlas_state, atlas_monitor=atlas_monitor)
+
+
+def _run_guarded():
+    """The scan loop. startup() has already refused anything that should stop it."""
+    _mods = startup()
+    if _mods is None:
+        return
+    fetcher, risk, executor = _mods.fetcher, _mods.risk, _mods.executor
+    strategies = _mods.strategies
+    atlas_engine, atlas_state = _mods.atlas_engine, _mods.atlas_state
 
     # Daily drawdown shutdown flag
     drawdown_shutdown = False
@@ -394,7 +396,7 @@ def _run_guarded():
     log.info(f"Daily loss cap: 6% of balance | Session: IST-adaptive")
     log.info(f"Trailing: {'ON' if ENABLE_TRAILING else 'OFF'} | "
              f"Pyramiding: {'ON' if ENABLE_PYRAMIDING else 'OFF'} | "
-             f"D1 gate: {'ON' if ENABLE_D1_GATE else 'OFF'}")
+             f"D1 gate: {'ON' if order_flow.ENABLE_D1_GATE else 'OFF'}")
     log.info(f"Resilience: lock={resilience.LOCK_FILE} | kill switch=create '{resilience.STOP_FILE}'")
     log.info(f"Atlas mode: {'ON' if ATLAS_MODE else 'OFF'}"
              + (f" (phase={atlas_state.phase})" if atlas_state else ""))
@@ -596,69 +598,8 @@ def _run_guarded():
                 _time.sleep(LOOP_INTERVAL)
                 continue
 
-            d1_bias = None
             d1_rates_macro = fetcher.get_d1_rates(60)
-            if ENABLE_D1_GATE:
-                if d1_rates_macro is not None and len(d1_rates_macro) >= 21:
-                    # get_d1_rates() uses copy_rates_from_pos(..., 0, n), whose
-                    # index 0 (and therefore [-1]) is today's still-forming D1
-                    # candle, not the last closed one. Every other bias/signal
-                    # check in this file reads the closed bar at [-2]
-                    # (see signal_candle above); this gate previously read
-                    # [-1] directly, letting the daily bias flip intraday as
-                    # gold moves rather than only on a closed daily candle.
-                    d1_closes = d1_rates_macro["close"]
-                    d1_opens  = d1_rates_macro["open"]
-                    d1_ema20 = _calc_ema(d1_closes, 20)
-                    if not np.isnan(d1_ema20[-2]):
-                        d1_bias = "BULLISH" if d1_closes[-2] > d1_ema20[-2] else "BEARISH"
-                        log.info(
-                            f"D1 GATE: close[-2]={d1_closes[-2]:.2f}  EMA20={d1_ema20[-2]:.2f}  "
-                            f"→ bias={d1_bias}"
-                        )
-
-                    # ----------------------------------------------------------
-                    # P2: Supplementary intraday override.
-                    # If the LIVE (still-forming) D1 bar has already moved
-                    # >= 2× D1 ATR against the closed-bar bias, the closed bar
-                    # is stale and we flip the bias to match the intraday move.
-                    # This catches crash days like 2026-09-28 where the prior
-                    # close was barely above EMA20 (BULLISH) but the day opened
-                    # and immediately sold off 100+ pts.
-                    # ----------------------------------------------------------
-                    _D1_INTRADAY_OVERRIDE_MULT = 1.0   # >=1.0x ATR intraday move overrides previous day's stale close
-                    if d1_bias is not None and len(d1_closes) >= 15:
-                        _d1_atr_arr = np.abs(np.diff(d1_closes[-15:]))
-                        _d1_atr = float(np.median(_d1_atr_arr)) if len(_d1_atr_arr) else 0.0
-                        _live_open  = float(d1_opens[-1])
-                        _live_close = float(d1_closes[-1])
-                        _intraday_move = _live_close - _live_open  # + = up, - = down
-                        if _d1_atr > 0:
-                            _move_ratio = abs(_intraday_move) / _d1_atr
-                            if _move_ratio >= _D1_INTRADAY_OVERRIDE_MULT:
-                                _intraday_bias = "BULLISH" if _intraday_move > 0 else "BEARISH"
-                                if _intraday_bias != d1_bias and not _override_may_apply(d1_bias, _intraday_bias):
-                                    # 2026-10-17 (owner rule): a BEARISH daily trend must keep blocking buys.
-                                    # The override may only TIGHTEN (bullish -> bearish on a crash day), never
-                                    # loosen (bearish -> bullish), which is how counter-trend buys got through
-                                    # on 2026-10-15.
-                                    log.warning(
-                                        f"D1 INTRADAY OVERRIDE SUPPRESSED: live bar {_intraday_move:+.1f} pts "
-                                        f"({_move_ratio:.1f}×ATR) points {_intraday_bias} but the daily trend is "
-                                        f"{d1_bias}; bias stays {d1_bias}."
-                                    )
-                                elif _intraday_bias != d1_bias:
-                                    log.warning(
-                                        f"D1 INTRADAY OVERRIDE: live bar moved "
-                                        f"{_intraday_move:+.1f} pts ({_move_ratio:.1f}×ATR). "
-                                        f"Overriding stale {d1_bias} → {_intraday_bias}."
-                                    )
-                                    d1_bias = _intraday_bias
-                                else:
-                                    log.info(
-                                        f"D1 INTRADAY CHECK: move {_intraday_move:+.1f} pts "
-                                        f"({_move_ratio:.1f}×ATR) — confirms {d1_bias}."
-                                    )
+            d1_bias = order_flow.compute_d1_bias(d1_rates_macro)
 
             # Pass D1 rates to strategies that use them directly (V6+)
             if d1_rates_macro is not None:
@@ -693,101 +634,20 @@ def _run_guarded():
             EXECUTED_ORDERS_DEDUP.clear()
             EXECUTED_ORDERS_DEDUP.update(executed_orders_dedup)
             
-            actionable_signals = []
-
-            for strategy in strategies:
-                # Check pending confirmation (non-London signals)
-                confirmed_signal = strategy.check_pending_confirmation(m15_rates)
-                if confirmed_signal is not None:
-                    if last_fired_candle.get(strategy.name) == signal_candle:
-                        log.info(f"[{strategy.name}] confirmed signal DEDUPED (already acted this candle).")
-                    else:
-                        log.info(f"Pending signal CONFIRMED ({strategy.name}): {confirmed_signal.direction_str}")
-                        if _d1_bias_allows(confirmed_signal, d1_bias, strategy.name, strategy):
-                            actionable_signals.append((strategy, confirmed_signal))
-
-                # Evaluate strategy
-                signal = strategy.evaluate(m15_rates, m5_rates)
-
-                if signal is not None:
-                    if last_fired_candle.get(strategy.name) == signal_candle:
-                        trade_log.signal(strategy.name, signal.direction_str, "deduped",
-                                         "already acted on this candle", candle=signal_candle,
-                                         session=session_name)
-                        continue
-                    if not _d1_bias_allows(signal, d1_bias, strategy.name, strategy):
-                        trade_log.signal(strategy.name, signal.direction_str, "blocked",
-                                         f"D1 bias gate ({d1_bias})", candle=signal_candle,
-                                         session=session_name)
-                        continue
-                    if _leg_in_cooldown(strategy.name):
-                        log.info(f"[{strategy.name}] {signal.direction_str} skipped -- reversal cooldown active.")
-                        trade_log.signal(strategy.name, signal.direction_str, "blocked",
-                                         "reversal cooldown active", candle=signal_candle,
-                                         session=session_name)
-                        continue
-
-                    if is_london or getattr(strategy, "execute_immediately", False):
-                        log.info(f"[{strategy.name}] {signal.direction_str} -- actionable immediately (session={session_name})")
-                        actionable_signals.append((strategy, signal))
-                    else:
-                        candle_time = int(m15_rates[-2]["time"])
-                        strategy.set_pending(signal, candle_time)
-                        log.info(f"Signal queued for confirmation ({strategy.name} in {session_name}): {signal.direction_str}")
-                        print(f"[{_ist_now()}] PENDING: {signal.direction_str} signal queued (session: {session_name}). Confirming next candle.")
+            actionable_signals = order_flow.collect_actionable_signals(
+                strategies, m15_rates, m5_rates, d1_bias, last_fired_candle,
+                signal_candle, session_name, is_london)
 
             # ----------------------------------------------------------
             # HIGHLANDER RULE: Execute only the highest conviction signal
             # ----------------------------------------------------------
-            if actionable_signals:
-                # Rank by conviction based on validated risk-adjusted expectancy
-                rank_order = {
-                    "DONCHIAN_TREND_V6": 7,
-                    "ASIAN_RANGE_FILTERED_V6": 6,
-                    "ASIAN_BREAKOUT_V6": 6,
-                }
-                
-                # Sort signals by rank (descending)
-                actionable_signals.sort(key=lambda x: rank_order.get(x[0].name.upper(), 0), reverse=True)
-                
-                best_strategy, best_signal = actionable_signals[0]
-                
-                if len(actionable_signals) > 1:
-                    log.info(f"HIGHLANDER: {len(actionable_signals)} signals fired. Selected {best_strategy.name} as best conviction.")
-                
-                # Execute the best one
-                _TRANSIENT_BLOCK["flag"] = False
-                _execute_signal(
-                    best_signal, m15_rates, fetcher, risk, executor,
-                    session_mult, session_name, best_strategy,
-                    executed_orders_dedup=executed_orders_dedup,
-                )
-                # 2026-10-19: spread on XAUUSDm alternates 240/260 pts and the legs' cap is 250, so one 260-pt tick
-                # used to burn the whole candle's signal (dedup). Retry next scan (up to 10 times per candle) instead.
-                _rk = (best_strategy.name, signal_candle)
-                if _TRANSIENT_BLOCK["flag"] and _SPREAD_RETRIES.get(_rk, 0) < 10:
-                    _SPREAD_RETRIES[_rk] = _SPREAD_RETRIES.get(_rk, 0) + 1
-                    for _k in [k for k in _SPREAD_RETRIES if k[1] < signal_candle - 7200]:
-                        _SPREAD_RETRIES.pop(_k, None)
-                    log.info(f"[{best_strategy.name}] spread block is transient -- will retry on this candle "
-                             f"(attempt {_SPREAD_RETRIES[_rk]}/10).")
-                else:
-                    last_fired_candle[best_strategy.name] = signal_candle
-                
-                # Block the others and mark them as fired to prevent immediate re-fires
-                for strat, sig in actionable_signals[1:]:
-                    trade_log.signal(strat.name, sig.direction_str, "blocked",
-                                     f"Highlander rule: overridden by {best_strategy.name}", candle=signal_candle,
-                                     session=session_name)
-                    log.info(f"[{strat.name}] {sig.direction_str} BLOCKED by Highlander rule (lost to {best_strategy.name}).")
-                    last_fired_candle[strat.name] = signal_candle
+            order_flow.execute_best_signal(
+                actionable_signals, last_fired_candle, signal_candle, m15_rates,
+                fetcher, risk, executor, session_mult, session_name,
+                executed_orders_dedup)
 
             # ----------------------------------------------------------
-            # Pyramiding: add to winning positions
-            # ----------------------------------------------------------
-
-            # ----------------------------------------------------------
-            # Manage open positions (trailing + consolidation)
+            # Manage open positions (consolidation exit)
             # ----------------------------------------------------------
             _manage_open_positions(fetcher, risk, executor)
 
@@ -796,369 +656,6 @@ def _run_guarded():
             print(f"[{_ist_now()}] ERROR: {e}")
 
         _time.sleep(LOOP_INTERVAL)
-
-
-_COOLDOWN_FILE = os.path.join(resilience._LOGS, "cooldown.json")
-
-
-_TRANSIENT_BLOCK = {"flag": False}     # set by _execute_signal when the block is momentary (spread blip)
-_SPREAD_RETRIES: dict = {}             # (strategy, candle) -> retries used
-_ATLAS_RT: dict = atlas_bridge.RUNTIME  # filled in by _run_guarded when ATLAS_MODE is on
-
-
-def _leg_in_cooldown(name: str) -> bool:
-    """True if scripts/protect_profit.py closed this leg on a reversal recently
-    and it should not re-enter yet."""
-    try:
-        import json as _json
-        with open(_COOLDOWN_FILE) as f:
-            until = _json.load(f).get(name, 0)
-        # pyrefly: ignore [no-any-return-implicit]
-        return _time.time() < until
-    except (OSError, ValueError):
-        return False
-
-
-def _record_closed_trades(fetcher, known_tickets):
-    """Feed every newly-closed position's realised P/L to the risk_rules streak
-    breakers (II.4: consecutive-loss pause / stop-day, early-phase losing-trade
-    cap).
-
-    `record_trade_result()` existed but nothing ever called it, so
-    consecutive_losses / day_losing_trades sat at 0 forever and those breakers
-    could not fire even in shadow mode. This closes that gap. It is still
-    shadow-only while risk_rules.ENFORCE is False -- it makes the breaker STATE
-    real (persisted to logs/risk_state.json) so it can be measured now and works
-    the moment ENFORCE is flipped on.
-
-    known_tickets is None on the first loop after startup -- pre-existing
-    positions are adopted, not counted as closes. A ticket whose deal history
-    can't be read yet is retried next loop rather than lost.
-    """
-    current = {p.ticket for p in fetcher.get_own_positions()}   # strategy view: foreign closes never feed our streak breakers
-    if known_tickets is None:
-        return current
-
-    closed = known_tickets - current
-    if not closed:
-        return current
-
-    acct = mt5.account_info()
-    state = risk_rules.load_state()
-    if acct is not None:
-        # same day/week/month roll evaluate() does, so a close before the first
-        # signal of a new day sees a reset day_losing_trades.
-        state = risk_rules._roll_anchors(state, float(acct.balance), datetime.now(IST))
-
-    still_pending = set()
-    for ticket in closed:
-        try:
-            deals = mt5.history_deals_get(position=ticket)
-            if not deals:
-                still_pending.add(ticket)
-                continue
-            out_deals = [d for d in deals if d.entry == mt5.DEAL_ENTRY_OUT]
-            if not out_deals:
-                # Position still open / exit deal not yet visible: retry next loop
-                # rather than recording a phantom $0 "win" that resets the streak.
-                still_pending.add(ticket)
-                continue
-            pl = sum((d.profit + d.swap + d.commission) for d in out_deals)
-            in_deals = [d for d in deals if d.entry == mt5.DEAL_ENTRY_IN]
-            strat_name = (in_deals[0].comment if in_deals else deals[0].comment) or "Unknown"
-            state = risk_rules.record_trade_result(pl, state=state)
-            trade_log.position_closed(strategy=strat_name, ticket=ticket, profit=round(pl, 2),
-                                      consecutive_losses=state.consecutive_losses,
-                                      day_losing_trades=state.day_losing_trades,
-                                      streak_pause_active=state.pause_until_ts > _time.time(),
-                                      enforced=risk_rules.ENFORCE, risk_scope="strategy",
-                                      magic=(in_deals[0].magic if in_deals else None))
-            from src.core import trade_alerts
-            trade_alerts.closed(ticket, deals, pl, strat_name)
-        except Exception as e:
-            log.warning(f"streak breaker: could not record close of #{ticket}: {e}")
-            still_pending.add(ticket)
-
-    risk_rules.save_state(state)
-    
-    if closed:
-        _check_vi3_tripwire(fetcher)
-
-    return current | still_pending
-
-
-def _check_vi3_tripwire(fetcher):
-    """VI.3 tripwire: monitor rolling 30-trade live profit factor."""
-    try:
-        now = datetime.now(timezone.utc)
-        start = now - timedelta(days=60)
-        deals = mt5.history_deals_get(start, now)
-        if not deals:
-            return
-            
-        magics = {int(cls().magic) for cls in (PORTFOLIO_ATLAS if ATLAS_MODE else PORTFOLIO_V6)}
-        pls = []
-        for d in deals:
-            if d.symbol == fetcher.symbol and d.magic in magics and d.entry == mt5.DEAL_ENTRY_OUT:
-                pl = float(d.profit) + float(d.swap) + float(d.commission)
-                pls.append((int(d.time), pl))
-                
-        if len(pls) < 30:
-            return
-            
-        pls.sort(key=lambda x: x[0])
-        recent_30 = [x[1] for x in pls[-30:]]
-        
-        arr = np.array(recent_30, dtype=float)
-        w, l = arr[arr > 0], arr[arr < 0]
-        pf = float(w.sum() / -l.sum()) if len(l) else float("inf")
-        
-        if pf < 0.8:
-            msg = f"VI.3 TRIPWIRE: Rolling 30-trade PF is {pf:.2f} (<0.8). Logging only (kill switch disabled by user)."
-            log.error(msg)
-            from src.core import alerts
-            alerts.send(f"Last 30 trades: profit factor {pf:.2f}", alerts.WARN,
-                        context={"meaning": "the strategies are losing more than they win lately"},
-                        action="Trading continues. Worth a review if it stays below 0.8.")
-            # Kill switch disabled
-        elif pf < 1.0:
-            msg = f"VI.3 TRIPWIRE WARN: Rolling 30-trade PF is {pf:.2f} (<1.0)."
-            log.warning(msg)
-            from src.core import alerts
-            alerts.send(f"Last 30 trades: profit factor {pf:.2f} (below 1)", alerts.INFO)
-    except Exception as e:
-        log.warning(f"Could not check VI.3 tripwire: {e}")
-
-
-def _override_may_apply(closed_bias: str, intraday_bias: str) -> bool:
-    """The intraday override may only make the gate STRICTER: a bullish daily trend turning
-    bearish on a crash day. A bearish daily trend is never flipped to bullish (owner rule 2026-10-17)."""
-    return closed_bias == "BULLISH" and intraday_bias == "BEARISH"
-
-
-def _d1_bias_allows(signal, d1_bias, strategy_name: str, strategy=None) -> bool:
-    """Daily-trend gate, shared by the fresh and confirmed signal paths.
-
-    Previously only fresh signals were gated; confirmed pending signals executed
-    without ever consulting the daily bias.
-
-    Fails CLOSED (2026-10-17): with the gate enabled, no bias (short/failed D1 fetch, NaN EMA)
-    means no new entry, instead of silently trading both directions.
-
-    Strategies with skip_d1_gate=True (V6+) bypass this gate because they have
-    their own internal trend filter.
-    """
-    if strategy is not None and getattr(strategy, "skip_d1_gate", False):
-        return True
-    if not d1_bias:
-        if ENABLE_D1_GATE:
-            log.warning(f"[{strategy_name}] entry blocked: D1 gate enabled but the daily bias could not be computed.")
-            return False
-        return True
-    if signal.is_buy and d1_bias == "BEARISH":
-        log.info(f"[{strategy_name}] BUY blocked by D1 BEARISH bias.")
-        return False
-    if not signal.is_buy and d1_bias == "BULLISH":
-        log.info(f"[{strategy_name}] SELL blocked by D1 BULLISH bias.")
-        return False
-    return True
-
-
-def _execute_signal(signal, m15_rates, fetcher, risk, executor, session_mult, session_name, strategy=None, executed_orders_dedup=None):
-    """Calculate stops and execute a signal.
-
-    `strategy` is optional so every existing caller keeps working unchanged.
-    When the firing strategy carries its own `sl_atr_mult`/`tp_atr_mult`
-    (portfolio_v4 legs, rohith phase 3), those override the session-default
-    multiplier and the shared TP_ATR_MULTIPLIER constant for this order only.
-    Absent on a strategy -> falls back to exactly the prior behaviour.
-    """
-    # Measurement-only mode (2026-10-18): signals are logged, no order of any kind is sent.
-    if ops.measure_only():
-        trade_log.signal(signal.strategy_name, signal.direction_str, "blocked",
-                         "measurement-only mode (no orders)", session=session_name)
-        return None
-
-    # Foreign exposure (2026-10-18): another system holds positions on our symbol -> fail closed, never touch them.
-    if scope.block_on_foreign_enabled():
-        foreign = fetcher.get_foreign_exposure()
-        if foreign:
-            _alert_foreign_exposure(foreign)
-            trade_log.signal(signal.strategy_name, signal.direction_str, "blocked",
-                             "FOREIGN EXPOSURE DETECTED (another system holds positions on this symbol)",
-                             session=session_name, risk_scope="account")
-            return None
-
-    # IV.6 + owner's 11:30-21:30 trading window: weekend gap, rollover spread
-    # spike, and no-night-trades are all checked here, before anything else.
-    _mh_ok, _mh_why = market_hours.allow_new_entry()
-    if not _mh_ok:
-        trade_log.signal(signal.strategy_name, signal.direction_str, "blocked",
-                         _mh_why, session=session_name)
-        log.info(f"[{signal.strategy_name}] entry blocked -- {_mh_why}")
-        return
-
-    if strategy and getattr(strategy, "max_spread_pts", None):
-        max_spread = strategy.max_spread_pts
-        if not risk.is_spread_ok(max_spread):
-            trade_log.signal(signal.strategy_name, signal.direction_str, "blocked",
-                             f"spread > {max_spread}", session=session_name)
-            log.info(f"[{signal.strategy_name}] entry blocked -- spread > {max_spread}")
-            _TRANSIENT_BLOCK["flag"] = True       # a momentary spread blip must not spend the candle's signal
-            return
-
-    if not executor.can_open_new_position():
-        log.info("Cannot execute: max concurrent positions reached.")
-        trade_log.signal(signal.strategy_name, signal.direction_str, "blocked",
-                         "max concurrent positions reached", session=session_name)
-        return
-
-    tick = fetcher.get_tick()
-    if tick is None:
-        trade_log.signal(signal.strategy_name, signal.direction_str, "blocked",
-                         "no tick available", session=session_name)
-        return
-
-    price = tick.ask if signal.is_buy else tick.bid
-
-    sl_mult = getattr(strategy, "sl_atr_mult", None) or session_mult
-    tp_mult = getattr(strategy, "tp_atr_mult", None)
-    # ATR from CLOSED bars only (2026-11-01): copy_rates_from_pos(0) ends with the bar that just opened, whose
-    # few seconds of range shrank the ATR 5-9% vs the backtest (RESULT_StopRobustness_2026-11-01).
-    closed_m15 = m15_rates[:-1] if m15_rates is not None and len(m15_rates) > 1 else m15_rates
-    stops = risk.calculate_atr_stops(price, signal.is_buy, closed_m15, sl_mult, tp_mult)
-    if stops is None:
-        trade_log.signal(signal.strategy_name, signal.direction_str, "blocked",
-                         "ATR stops unavailable", session=session_name)
-        return
-
-    # Part II shadow mode: record what the (not yet enforced) risk rulebook
-    # would have decided, so its real-world impact can be measured before
-    # ENFORCE is ever switched on. See src/core/risk_rules.py.
-    try:
-        _acct = mt5.account_info()
-        if _acct is not None:
-            _decision, _rstate = risk_rules.evaluate(
-                balance=_acct.balance, equity=_acct.equity,
-                margin_used=getattr(_acct, "margin", 0.0) or 0.0)
-            risk_rules.save_state(_rstate)
-            if not _decision.allow_new_entries:
-                if str(_decision.reason).startswith("HARD HALT"):
-                    ops.set_halt(_decision.reason, "risk_rules")   # latch: survives restarts, human clears it
-                trade_log.gate("risk_rules_shadow", allowed=False, reason=_decision.reason,
-                               strategy=signal.strategy_name, enforced=risk_rules.ENFORCE)
-                if risk_rules.ENFORCE:
-                    log.warning(f"[{signal.strategy_name}] BLOCKED by risk rules: {_decision.reason}")
-                    return
-    except Exception as _e:  # shadow logging must never break execution
-        log.debug(f"risk_rules shadow evaluation skipped: {_e}")
-
-    # Atlas rule engine pre-trade gate
-    if ATLAS_MODE and _ATLAS_RT.get("engine") and _ATLAS_RT.get("state"):
-        try:
-            _acct_at = mt5.account_info()
-            if _acct_at is not None:
-                _ai_at = _atlas_account_info(_acct_at)
-                _atr_val = risk.get_latest_atr(closed_m15) or 0.0
-                _stop_risk = float(FIXED_LOT_SIZE * 100.0 * _atr_val * (getattr(strategy, "sl_atr_mult", 2.0) or 2.0))
-                _margin_req = float(FIXED_LOT_SIZE * price * 100.0 / 50.0)  # 1:50 leverage
-                _ord = OrderRequest(
-                    symbol=SYMBOL, stop_risk_usd=_stop_risk,
-                    margin_required=_margin_req, volume=FIXED_LOT_SIZE,
-                    side="buy" if signal.is_buy else "sell")
-                _news = _ATLAS_RT["monitor"].get_news_events() if _ATLAS_RT.get("monitor") else None
-                _decision = _ATLAS_RT["engine"].check_order(
-                    _ord, _ai_at, _ATLAS_RT["state"], datetime.now(timezone.utc), _news)
-                if not _decision.allow:
-                    log.warning(f"[{signal.strategy_name}] ATLAS GATE BLOCKED: {_decision.reasons}")
-                    trade_log.signal(signal.strategy_name, signal.direction_str, "blocked",
-                                     f"Atlas rule engine: {_decision.reasons}", session=session_name)
-                    return None
-        except Exception as _ae:
-            log.warning(f"Atlas pre-trade gate error (fail-closed): {_ae}")
-            trade_log.signal(signal.strategy_name, signal.direction_str, "blocked",
-                             f"Atlas pre-trade gate error: {_ae}", session=session_name)
-            return None
-
-    # P0-3: Strict deduplication before placing order: (strategy_magic, bar_time, direction)
-    bar_time = int(m15_rates[-2]["time"]) if m15_rates is not None and len(m15_rates) >= 2 else 0
-    dir_str = signal.direction_str.upper()
-    dedup_key = (int(signal.magic), bar_time, dir_str)
-
-    dedup_set = executed_orders_dedup if executed_orders_dedup is not None else EXECUTED_ORDERS_DEDUP
-    if dedup_key in dedup_set:
-        log.warning(
-            f"[{signal.strategy_name}] DUPLICATE ORDER BLOCKED by key {dedup_key} "
-            f"(order already placed for bar {bar_time}). Refusing duplicate fill."
-        )
-        trade_log.signal(
-            signal.strategy_name, signal.direction_str, "deduped",
-            f"duplicate order key {dedup_key}", candle=bar_time,
-            session=session_name
-        )
-        return None
-
-    # Owner's rule: fixed 0.02 lots, no dynamic sizing. The 0.15 risk_pct sizer
-    # put 0.02-0.03 lots on a ~$105 account (live, 2026-09-02). ExecutionHandler
-    # also hard-caps this, but the call site now states the intent.
-    lot_size = FIXED_LOT_SIZE
-
-    result = executor.send_order(
-        signal=signal.direction,
-        price=price,
-        sl=stops.sl,
-        tp=stops.tp,
-        strategy_name=signal.strategy_name,
-        magic=signal.magic,
-        lot_size=lot_size,
-        atr=stops.atr,
-        session=session_name,
-    )
-
-    dedup_set.add(dedup_key)
-
-    if result is None:
-        # Vetoed, blocked or rejected: no order exists, so none is logged as one.
-        trade_log.signal(signal.strategy_name, signal.direction_str, "blocked",
-                         "order not placed (veto/cap/broker reject)", candle=bar_time,
-                         session=session_name)
-        return None
-
-    trade_log.order(
-        strategy=signal.strategy_name, direction=signal.direction_str,
-        lots=getattr(result, "lots", lot_size),
-        price=price, sl=stops.sl, tp=stops.tp,
-        retcode=getattr(result, "retcode", None),
-        ticket=getattr(result, "order", None),
-        atr=stops.atr, sl_atr_mult=sl_mult, tp_atr_mult=tp_mult,
-        session=session_name, magic=signal.magic,
-        bar_time=bar_time,
-        dedup_key=f"{signal.magic}:{bar_time}:{dir_str}",
-    )
-    return result
-
-
-def _manage_open_positions(fetcher, risk, executor):
-    """Run trailing stop logic and consolidation exit checks (own positions only)."""
-    positions = fetcher.get_own_positions()
-    trade_alerts.maybe_floating_update(positions)
-    if not positions:
-        return
-
-    m15_rates = fetcher.get_m15_rates(20)
-    if m15_rates is None:
-        return
-
-    curr_atr = risk.get_latest_atr(m15_rates)
-    if curr_atr is None:
-        return
-        
-    for pos in positions:
-        # Consolidation exit
-        if risk.should_exit_consolidation(m15_rates):
-            log.info(f"Consolidation detected -- closing #{pos.ticket}")
-            executor.close_position(pos)
-            
 
 
 if __name__ == "__main__":

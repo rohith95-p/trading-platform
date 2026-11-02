@@ -82,6 +82,7 @@ class SystemConfig:
         """Snapshot of what main_loop.py would actually run right now."""
         from src.core import execution_handler as eh
         from src.core import main_loop as ml
+        from src.core import order_flow as of
         from src.core import risk_manager as rm
         from src.strategies.portfolio_atlas import PORTFOLIO
 
@@ -110,8 +111,8 @@ class SystemConfig:
             max_total_volume=eh.MAX_TOTAL_VOLUME,
             enable_trailing=ml.ENABLE_TRAILING,
             enable_pyramiding=ml.ENABLE_PYRAMIDING,
-            enable_d1_gate=ml.ENABLE_D1_GATE,
-            direction_gate="d1_ema20" if ml.ENABLE_D1_GATE else "none",
+            enable_d1_gate=of.ENABLE_D1_GATE,
+            direction_gate="d1_ema20" if of.ENABLE_D1_GATE else "none",
             daily_loss_limit_pct=rm.DAILY_LOSS_LIMIT_PCT,
             strategies=cls._strategy_configs_from_classes(strategy_instances),
         )

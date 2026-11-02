@@ -51,7 +51,8 @@ positions, 0.06 lots in total.
 
 | Need | Go to |
 |---|---|
-| the live loop | `src/core/main_loop.py` |
+| the live loop | `src/core/main_loop.py` (startup checks, then the scan loop) |
+| signal -> order: gates, Highlander, exits, the D1 gate switch | `src/core/order_flow.py` |
 | Atlas state and limits | `src/core/atlas_bridge.py`, `src/atlas/rules.py` |
 | what the broker actually is | `src/core/broker_probe.py` |
 | status, heartbeat, alerts | `src/core/live_status.py`, `src/core/trade_alerts.py` |

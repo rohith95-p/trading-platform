@@ -29,8 +29,8 @@ def test_live_portfolio_is_the_validated_four_legs():
 
 def test_daily_trend_gate_applies_to_every_live_leg():
     """Owner 2026-10-30: live runs the gated system that was validated (skipping it was break-even, PF 0.99)."""
-    from src.core import main_loop
-    assert main_loop.ENABLE_D1_GATE is True
+    from src.core import order_flow
+    assert order_flow.ENABLE_D1_GATE is True
     assert all(getattr(cls(), "skip_d1_gate", False) is False for cls in PORTFOLIO)
 
 

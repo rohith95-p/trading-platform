@@ -59,18 +59,19 @@ class TestD1GateNoLookahead:
         gold moves intraday. Reading it would let the daily bias flip every
         minute instead of only on a confirmed daily close.
 
-        Verified in main_loop.py: uses d1_closes[-2] and d1_ema20[-2].
+        Verified in order_flow.compute_d1_bias(), which the scan loop calls:
+        uses d1_closes[-2] and d1_ema20[-2].
         """
-        from src.core import main_loop
+        from src.core import order_flow
 
         # Inspect the source to find the index used in the D1 bias block.
         import inspect
-        src = inspect.getsource(main_loop)
+        src = inspect.getsource(order_flow)
 
         # The gate should use [-2] to read the closed bar
         assert "d1_closes[-2]" in src, (
             "D1 gate must read d1_closes[-2] (closed bar), not d1_closes[-1] "
-            "(still-forming). See main_loop.py D1 gate block."
+            "(still-forming). See order_flow.compute_d1_bias()."
         )
         assert "d1_ema20[-2]" in src, (
             "D1 gate must read d1_ema20[-2] (closed bar), not d1_ema20[-1]."
@@ -185,11 +186,11 @@ class TestStrategyEvaluateClosedBar:
 # ---------------------------------------------------------------------------
 
 class TestEMANoLookahead:
-    """main_loop's _calc_ema must be causal (no future bars)."""
+    """order_flow's _calc_ema (the D1 gate's EMA) must be causal (no future bars)."""
 
     def test_ema_causal(self):
         """EMA at bar N must equal EMA computed with only bars 0..N."""
-        from src.core.main_loop import _calc_ema
+        from src.core.order_flow import _calc_ema
 
         closes = np.array([2000.0 + i for i in range(30)])
 
