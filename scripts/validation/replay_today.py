@@ -21,6 +21,7 @@ import argparse
 import datetime as dt
 import os
 import sys
+import time
 
 import numpy as np
 
@@ -73,22 +74,55 @@ def main() -> int:
               f"bid {info.bid:.3f} / ask {info.ask:.3f}")
         print(f"clock    : now {now_utc:%Y-%m-%d %H:%M} UTC = {now_utc.astimezone(IST):%H:%M} IST")
 
-        # --- the server's clock, from the bars themselves -------------------
-        m15 = mt5.copy_rates_from_pos(args.symbol, mt5.TIMEFRAME_M15, 0, 2000)
+        # --- wait for the terminal to finish syncing ------------------------
+        # A freshly initialised terminal serves cached history and downloads the
+        # rest in the background. On 2026-11-02 the first call here returned bars
+        # ending 11 hours earlier while ticks were live, and this script happily
+        # reported "not one signal today" from them -- missing a signal that had
+        # fired. Never conclude anything from bars that are not current.
+        m15 = None
+        for attempt in range(12):
+            m15 = mt5.copy_rates_from_pos(args.symbol, mt5.TIMEFRAME_M15, 0, 2000)
+            age = (dt.datetime.now(dt.timezone.utc).timestamp()
+                   - float(m15[-1]["time"])) if m15 is not None and len(m15) else None
+            if age is not None and age <= 25 * 60:
+                break
+            if not broker_probe.market_probably_open():
+                print(f"market is closed; newest bar is "
+                      f"{'unknown' if age is None else f'{age / 3600:.1f}h'} old, "
+                      f"which is expected -- replaying what the terminal has")
+                break
+            print(f"terminal still syncing (newest bar "
+                  f"{'missing' if age is None else f'{age / 60:.0f} min old'}), waiting... "
+                  f"[{attempt + 1}/12]")
+            time.sleep(5)
+        else:
+            print("the terminal never caught up. Open an XAUUSDm M15 chart in MT5 so it "
+                  "downloads history, then run this again.")
+            return 1
         if m15 is None or len(m15) < 300:
             print("not enough M15 history in the terminal")
             return 1
         forming = int(m15["time"][-1])
+        bar_age = now_utc.timestamp() - forming
         # the forming bar opened at or before now; the gap to the current
-        # quarter-hour in UTC is the server offset, to the nearest half hour
-        utc_q = int(now_utc.timestamp()) // 900 * 900
-        offset_h = round((forming - utc_q) / 3600 * 2) / 2
+        # quarter-hour in UTC is the server offset, to the nearest half hour --
+        # but only while the bar is current. A stale bar gives a nonsense offset
+        # (it read UTC-11 on 2026-11-02), so fall back to the broker's measured
+        # clock instead of printing a fiction.
+        if bar_age <= 25 * 60:
+            offset_h = round((forming - int(now_utc.timestamp()) // 900 * 900) / 3600 * 2) / 2
+            clock_note = "from the newest bar"
+        else:
+            offset_h = 0.0
+            clock_note = (f"newest bar is {bar_age / 3600:.1f}h old, so the clock could not be "
+                          f"measured -- times below assume UTC, which this broker uses "
+                          f"(verified: weekly boundaries fall on Fri 20:45 / Sun 22:00)")
         probe_off, probe_src = broker_probe._clock_offset(mt5, args.symbol)
-        print(f"server   : newest 15-min bar stamped {dt.datetime.utcfromtimestamp(forming):%Y-%m-%d %H:%M} "
-              f"-> server clock is UTC{offset_h:+g} (tick says UTC{probe_off:+g}, {probe_src})"
-              if probe_off is not None else
-              f"server   : newest bar stamped {dt.datetime.utcfromtimestamp(forming):%Y-%m-%d %H:%M} "
-              f"-> server clock is UTC{offset_h:+g} ({probe_src})")
+        print(f"server   : newest 15-min bar {dt.datetime.utcfromtimestamp(forming):%Y-%m-%d %H:%M} "
+              f"({bar_age / 60:.0f} min old) -> clock UTC{offset_h:+g} {clock_note}")
+        print(f"           tick: {'UTC%+g' % probe_off if probe_off is not None else 'unmeasurable'} "
+              f"({probe_src})")
 
         def srv(ts):
             """A server-stamped bar time, printed as server time and as IST."""

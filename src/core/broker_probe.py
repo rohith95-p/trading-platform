@@ -84,6 +84,9 @@ class BrokerProfile:
     server_time_utc: str = ""
     clock_offset_hours: Optional[float] = None
     clock_source: str = ""
+    # Seconds between the newest minute bar and now. Large while the terminal is
+    # still downloading history, which is when bars must not be trusted.
+    newest_bar_age_sec: Optional[float] = None
 
     max_spread_points_for_this_broker: int = 0
     gold_candidates: List[str] = field(default_factory=list)
@@ -132,6 +135,23 @@ def market_probably_open(now: Optional[dt.datetime] = None) -> bool:
     return not (20.5 < h < 22.5)                  # the daily rollover break
 
 
+def newest_bar_age(mt5: Any, symbol: str) -> Optional[float]:
+    """Seconds between the newest M1 bar and now, as the terminal reports them.
+
+    A freshly initialised terminal serves whatever history it has cached and
+    downloads the rest in the background, so the first call after `initialize()`
+    can hand back bars hours old while ticks are already live. Anything reading
+    bars has to know that before it draws a conclusion from them.
+    """
+    try:
+        r = mt5.copy_rates_from_pos(symbol, mt5.TIMEFRAME_M1, 0, 1)
+    except Exception:                                     # pragma: no cover - terminal
+        return None
+    if r is None or not len(r):
+        return None
+    return dt.datetime.now(dt.timezone.utc).timestamp() - float(r[-1]["time"])
+
+
 def _clock_offset(mt5: Any, symbol: str) -> tuple:
     """(server-time minus UTC in hours, how it was measured).
 
@@ -165,7 +185,20 @@ def _clock_offset(mt5: Any, symbol: str) -> tuple:
     stale_sec = abs(raw - offset) * 3600.0
     if stale_sec > 600:
         return None, f"newest tick is {stale_sec / 60:.0f} min stale"
-    return offset, f"last tick, {stale_sec:.0f}s old"
+
+    # A tick that is a whole number of hours behind looks exactly like a
+    # different timezone, and the leftover-minutes test above cannot tell them
+    # apart. The bars are the second opinion: they carry the same clock, so the
+    # newest bar must agree with the tick. Measured 2026-11-02, when a
+    # half-synced terminal reported a confident UTC-10 while the truth was UTC.
+    bar_age = newest_bar_age(mt5, symbol)
+    if bar_age is None:
+        return None, "no bars to check the tick against"
+    bar_offset = round((-bar_age) / 3600 * 2) / 2
+    if abs(bar_offset - offset) > 0.5:
+        return None, (f"tick says UTC{offset:+g} but the newest bar says UTC{bar_offset:+g} -- "
+                      f"the terminal is still syncing its history")
+    return offset, f"last tick, {stale_sec:.0f}s old; newest bar agrees"
 
 
 def probe(mt5: Any, symbol: Optional[str] = None) -> BrokerProfile:
@@ -232,6 +265,12 @@ def probe(mt5: Any, symbol: Optional[str] = None) -> BrokerProfile:
 
     p.max_spread_points_for_this_broker = (
         int(round(MAX_SPREAD_USD / p.point)) if p.point else 0)
+
+    age = newest_bar_age(mt5, chosen)
+    p.newest_bar_age_sec = None if age is None else round(age, 1)
+    if age is not None and age > 25 * 60 and market_probably_open():
+        p.notes.append(f"the terminal's newest minute bar is {age / 60:.0f} min old while the "
+                       f"market is open -- it is still syncing, so bars are not trustworthy yet")
 
     off, how = _clock_offset(mt5, chosen)
     p.clock_offset_hours = off

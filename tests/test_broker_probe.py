@@ -19,9 +19,11 @@ NOW = dt.datetime.now(dt.timezone.utc).timestamp()
 class FakeTerminal:
     """Enough of the MetaTrader5 module surface for the probe."""
 
+    TIMEFRAME_M1 = 1
+
     def __init__(self, symbols=("XAUUSDm", "EURUSD"), digits=3, offset_hours=0.0,
                  tick_age_sec=1.0, swap_long=-51.55, leverage=200, currency="USD",
-                 margin_mode=0, tick=True):
+                 margin_mode=0, tick=True, bar_age_sec=30.0, bars=True):
         self._symbols = symbols
         self._digits = digits
         self._offset = offset_hours
@@ -31,7 +33,20 @@ class FakeTerminal:
         self._currency = currency
         self._margin_mode = margin_mode
         self._has_tick = tick
+        self._bar_age = bar_age_sec
+        self._has_bars = bars
         self.selected = []
+
+    def copy_rates_from_pos(self, name, timeframe, start, count):
+        """One minute bar, stamped on the server clock like the real thing."""
+        if not self._has_bars:
+            return None
+        import numpy as np
+        t = NOW + self._offset * 3600 - self._bar_age
+        return np.array([(int(t), 1.0, 1.0, 1.0, 1.0, 1, 0, 0)],
+                        dtype=[("time", "<i8"), ("open", "<f8"), ("high", "<f8"),
+                               ("low", "<f8"), ("close", "<f8"), ("tick_volume", "<u8"),
+                               ("spread", "<i4"), ("real_volume", "<u8")])
 
     def account_info(self):
         return SimpleNamespace(server="Exness-MT5Trial11", login=198874999,
@@ -253,3 +268,60 @@ def test_a_field_that_was_never_recorded_is_not_a_difference(monkeypatch):
     exp = _expected(clock_offset_hours=None)
     got = bp.probe(FakeTerminal(offset_hours=3.0), "XAUUSDm")
     assert not [d for d in bp.compare(got, exp) if "clock" in d]
+
+
+# ---------------------------------------------------------------------------
+# a half-synced terminal (found live on 2026-11-02)
+# ---------------------------------------------------------------------------
+
+
+def test_a_tick_stale_by_whole_hours_is_caught_by_the_bars(monkeypatch):
+    """The failure this exists for.
+
+    A terminal that has just started serves live ticks while its bar history is
+    still downloading. On 2026-11-02 the tick was ten hours behind -- which looks
+    exactly like a broker in a different timezone -- and the probe reported a
+    confident UTC-10 for a broker that runs on UTC. The bars carry the same
+    clock, so they are the second opinion.
+    """
+    monkeypatch.setattr(bp, "market_probably_open", lambda now=None: True)
+    # tick stamped as if UTC-10 (ten hours stale), bars correctly on UTC
+    t = FakeTerminal(offset_hours=-10.0, bar_age_sec=30.0)
+    t._bar_age = 30.0
+    t._offset = -10.0
+    # make the bars tell the truth while the tick lies
+    import numpy as np
+
+    def honest_bars(name, timeframe, start, count):
+        return np.array([(int(NOW - 30), 1.0, 1.0, 1.0, 1.0, 1, 0, 0)],
+                        dtype=[("time", "<i8"), ("open", "<f8"), ("high", "<f8"),
+                               ("low", "<f8"), ("close", "<f8"), ("tick_volume", "<u8"),
+                               ("spread", "<i4"), ("real_volume", "<u8")])
+
+    t.copy_rates_from_pos = honest_bars
+    p = bp.probe(t, "XAUUSDm")
+    assert p.clock_offset_hours is None
+    assert "still syncing" in p.clock_source
+
+
+def test_a_terminal_with_no_bars_yet_does_not_get_a_clock(monkeypatch):
+    monkeypatch.setattr(bp, "market_probably_open", lambda now=None: True)
+    p = bp.probe(FakeTerminal(bars=False), "XAUUSDm")
+    assert p.clock_offset_hours is None
+    assert "no bars" in p.clock_source
+
+
+def test_old_bars_during_market_hours_are_called_out(monkeypatch):
+    monkeypatch.setattr(bp, "market_probably_open", lambda now=None: True)
+    p = bp.probe(FakeTerminal(bar_age_sec=11 * 3600), "XAUUSDm")
+    assert p.newest_bar_age_sec and p.newest_bar_age_sec > 25 * 60
+    assert any("still syncing" in n for n in p.notes)
+
+
+def test_a_synced_terminal_reports_the_bar_age_and_a_clock(monkeypatch):
+    monkeypatch.setattr(bp, "market_probably_open", lambda now=None: True)
+    p = bp.probe(FakeTerminal(offset_hours=2.0, bar_age_sec=30.0), "XAUUSDm")
+    assert p.clock_offset_hours == 2.0
+    assert "newest bar agrees" in p.clock_source
+    assert p.newest_bar_age_sec is not None and p.newest_bar_age_sec < 25 * 60
+    assert not any("still syncing" in n for n in p.notes)
