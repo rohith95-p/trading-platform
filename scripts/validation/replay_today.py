@@ -82,7 +82,15 @@ def main() -> int:
         # fired. Never conclude anything from bars that are not current.
         m15 = None
         for attempt in range(12):
-            m15 = mt5.copy_rates_from_pos(args.symbol, mt5.TIMEFRAME_M15, 0, 2000)
+            # copy_rates_RANGE, not from_pos: from_pos serves the cached window and
+            # never asks the terminal to fetch what is missing, so on 2026-11-04 it
+            # returned bars 50 hours old while prices were live. A range request
+            # triggers the download.
+            span_from = now_utc - dt.timedelta(days=max(args.days, 1) + 40)
+            m15 = mt5.copy_rates_range(args.symbol, mt5.TIMEFRAME_M15,
+                                       span_from, now_utc + dt.timedelta(hours=2))
+            if m15 is None or len(m15) < 300:
+                m15 = mt5.copy_rates_from_pos(args.symbol, mt5.TIMEFRAME_M15, 0, 2000)
             age = (dt.datetime.now(dt.timezone.utc).timestamp()
                    - float(m15[-1]["time"])) if m15 is not None and len(m15) else None
             if age is not None and age <= 25 * 60:
@@ -131,15 +139,21 @@ def main() -> int:
             return s.strftime("%H:%M"), real.replace(tzinfo=dt.timezone.utc).astimezone(IST).strftime("%H:%M")
 
         # --- the daily trend gate, exactly as main_loop computes it ---------
-        d1 = mt5.copy_rates_from_pos(args.symbol, mt5.TIMEFRAME_D1, 0, 60)
+        d1 = mt5.copy_rates_range(args.symbol, mt5.TIMEFRAME_D1,
+                                  now_utc - dt.timedelta(days=200),
+                                  now_utc + dt.timedelta(hours=2))
+        if d1 is None or len(d1) < 21:
+            d1 = mt5.copy_rates_from_pos(args.symbol, mt5.TIMEFRAME_D1, 0, 60)
         bias = None
         if d1 is not None and len(d1) >= 21:
             c = d1["close"].astype(float)
             e = ema(c, 20)
             if not np.isnan(e[-2]):
                 bias = "BULLISH" if c[-2] > e[-2] else "BEARISH"
-                print(f"D1 gate  : last closed daily close {c[-2]:,.2f} vs EMA20 {e[-2]:,.2f} "
-                      f"-> {bias} (only {'BUYS' if bias == 'BULLISH' else 'SELLS'} allowed today)")
+                when = dt.datetime.utcfromtimestamp(int(d1["time"][-2]))
+                print(f"D1 gate  : last closed daily ({when:%Y-%m-%d}) close {c[-2]:,.2f} vs "
+                      f"EMA20 {e[-2]:,.2f} -> {bias} "
+                      f"(only {'BUYS' if bias == 'BULLISH' else 'SELLS'} allowed)")
         if bias is None:
             print("D1 gate  : no bias could be computed -> the gate fails closed, nothing may enter")
 
@@ -159,7 +173,16 @@ def main() -> int:
             if not idx:
                 continue
             d = dt.datetime.utcfromtimestamp(day * 86400)
-            print(f"=== {d:%A %Y-%m-%d} (server day) " + "=" * 30)
+            day_bias = None
+            if d1 is not None and len(d1) >= 21:
+                dt1 = d1["time"].astype(np.int64)
+                prior = np.nonzero(dt1 // 86400 < day)[0]
+                if len(prior) >= 20:
+                    cc = d1["close"].astype(float)[: prior[-1] + 1]
+                    ee = ema(cc, 20)
+                    if not np.isnan(ee[-1]):
+                        day_bias = "BULLISH" if cc[-1] > ee[-1] else "BEARISH"
+            print(f"=== {d:%A %Y-%m-%d} (server day)  gate: {day_bias or 'unknown'} " + "=" * 18)
             fired = []
             for i in idx:
                 view = m15[: i + 2]                     # [-2] = bar i, [-1] = forming
@@ -172,9 +195,10 @@ def main() -> int:
                         hits.append(f"{s.name} ERROR {exc}")
                         continue
                     if sig is not None:
-                        allowed = not ((sig.is_buy and bias == "BEARISH")
-                                       or (not sig.is_buy and bias == "BULLISH")
-                                       or bias is None)
+                        gate = day_bias if day_bias is not None else bias
+                        allowed = not ((sig.is_buy and gate == "BEARISH")
+                                       or (not sig.is_buy and gate == "BULLISH")
+                                       or gate is None)
                         hits.append(f"{s.name} {'BUY' if sig.is_buy else 'SELL'}"
                                     f"{'' if allowed else ' -- BLOCKED by the D1 gate'}")
                         total_signals += 1
