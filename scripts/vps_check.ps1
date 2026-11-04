@@ -35,6 +35,34 @@ if (Test-Path VERSION.txt) { Write-Host ("Code version     : " + (Get-Content VE
 
 & $py -c "import MetaTrader5 as m; ok=m.initialize(); t=m.terminal_info() if ok else None; a=m.account_info() if ok else None; print('MT5              :', 'connected' if t and t.connected else 'NOT connected', '| algo trading', 'on' if t and t.trade_allowed else 'OFF'); print('Account          :', (f'{a.login} {a.server} | balance {a.balance:,.2f} | equity {a.equity:,.2f}') if a else 'none'); [print('Open trade       :', ('BUY', 'SELL')[p.type], p.volume, p.comment, 'P/L', round(p.profit, 2)) for p in (m.positions_get() or [])]; m.shutdown()"
 
+# Bar feed freshness. The terminal can hold a live tick stream while its bar
+# history is hours behind (seen 2026-11-04). The bot then fails its own liveness
+# check and skips every signal evaluation, while the process, the heartbeat and
+# the MT5 connection all look perfectly healthy -- which is why this check used
+# to say ALL GOOD through three days with a missed trade.
+$barAge = & $py -c "import MetaTrader5 as m, datetime as d; m.initialize(); r=m.copy_rates_from_pos('XAUUSDm', m.TIMEFRAME_M15, 0, 1); print(-1 if r is None or not len(r) else int(d.datetime.now(d.timezone.utc).timestamp()-int(r[-1]['time']))); m.shutdown()"
+$barAge = [int]$barAge
+if ($barAge -lt 0) {
+    Write-Host "Newest M15 bar   : NONE"
+    $bad += "the terminal has no M15 bars: open an XAUUSDm M15 chart so it downloads history"
+} else {
+    Write-Host ("Newest M15 bar   : {0} min old" -f [int]($barAge / 60))
+    $dow = (Get-Date).ToUniversalTime().DayOfWeek
+    $hr = (Get-Date).ToUniversalTime().Hour
+    $marketOpen = -not ($dow -eq "Saturday" -or ($dow -eq "Sunday" -and $hr -lt 22) -or ($dow -eq "Friday" -and $hr -ge 21) -or ($hr -eq 21))
+    if ($marketOpen -and $barAge -gt 1500) {
+        $bad += "candle feed is STALE ($([int]($barAge/60)) min): the bot is skipping every signal. Open an XAUUSDm M15 chart in MT5, or restart the terminal"
+    }
+}
+
+# What the bot itself said about its data recently.
+if (Test-Path logs\main_loop.log) {
+    $skips = @(Select-String -Path logs\main_loop.log -Pattern "LIVENESS CHECK FAILED|NO USABLE M15 DATA" -ErrorAction SilentlyContinue | Select-Object -Last 1)
+    if ($skips.Count -gt 0) { Write-Host ("Last data skip   : " + $skips[0].Line.Trim()) }
+    $sigs = @(Select-String -Path logs\main_loop.log -Pattern "BLOCKED|blocked" -ErrorAction SilentlyContinue | Select-Object -Last 3)
+    foreach ($x in $sigs) { Write-Host ("Recent block     : " + $x.Line.Trim()) }
+}
+
 Write-Host "--- last 5 log lines ---"
 Get-Content logs\main_loop.log -Tail 5
 Write-Host "------------------------"
