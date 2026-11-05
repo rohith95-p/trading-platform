@@ -303,13 +303,14 @@ def execute_best_signal(actionable_signals, last_fired_candle, signal_candle, m1
             session_mult, session_name, best_strategy,
             executed_orders_dedup=executed_orders_dedup,
         )
-        # 2026-11-03: a signal cleared the daily gate and no order ever reached
-        # the broker, and nothing anywhere said so -- it was found days later by
-        # replaying candles against the account history. Every refusal inside
-        # _execute_signal logs its reason, so reaching here with nothing to show
-        # means a reason we have not thought of. Alert on it rather than trust
-        # that the list of known refusals is complete.
-        if _result is None and not _TRANSIENT_BLOCK["flag"]:
+        # 2026-11-03: a signal cleared the daily gate and no order reached the
+        # broker. That one turned out to have a recorded reason (the Atlas news
+        # window) that simply nobody was watching, which is what the alerts above
+        # now fix. This is the net underneath: _execute_signal sets _REFUSED on
+        # every path that records a reason, so landing here means a refusal with
+        # no reason at all -- something we have not thought of. Those are the only
+        # ones worth waking the owner for.
+        if _result is None and not _TRANSIENT_BLOCK["flag"] and not _REFUSED["flag"]:
             _report_silent_miss(best_strategy, best_signal, signal_candle, session_name)
         # 2026-10-19: spread on XAUUSDm alternates 240/260 pts and the legs' cap is 250, so one 260-pt tick
         # used to burn the whole candle's signal (dedup). Retry next scan (up to 10 times per candle) instead.
@@ -334,6 +335,11 @@ def execute_best_signal(actionable_signals, last_fired_candle, signal_candle, m1
 
 # One alert per (strategy, candle): a retried candle must not alert twice.
 _SILENT_MISSES: set = set()
+
+# Set by every refusal inside _execute_signal. The silent-miss alarm is only for
+# a refusal nobody recorded a reason for -- without this it fires on ordinary
+# ones (an Atlas gate block, a news window, a spread blip) and cries wolf.
+_REFUSED = {"flag": False}
 
 
 def _report_silent_miss(strategy, signal, signal_candle, session_name) -> None:
@@ -370,8 +376,10 @@ def _execute_signal(signal, m15_rates, fetcher, risk, executor, session_mult, se
     multiplier and the shared TP_ATR_MULTIPLIER constant for this order only.
     Absent on a strategy -> falls back to exactly the prior behaviour.
     """
+    _REFUSED["flag"] = False
     # Measurement-only mode (2026-10-18): signals are logged, no order of any kind is sent.
     if ops.measure_only():
+        _REFUSED["flag"] = True
         trade_log.signal(signal.strategy_name, signal.direction_str, "blocked",
                          "measurement-only mode (no orders)", session=session_name)
         return None
@@ -381,6 +389,7 @@ def _execute_signal(signal, m15_rates, fetcher, risk, executor, session_mult, se
         foreign = fetcher.get_foreign_exposure()
         if foreign:
             _alert_foreign_exposure(foreign)
+            _REFUSED["flag"] = True
             trade_log.signal(signal.strategy_name, signal.direction_str, "blocked",
                              "FOREIGN EXPOSURE DETECTED (another system holds positions on this symbol)",
                              session=session_name, risk_scope="account")
@@ -390,6 +399,7 @@ def _execute_signal(signal, m15_rates, fetcher, risk, executor, session_mult, se
     # spike, and no-night-trades are all checked here, before anything else.
     _mh_ok, _mh_why = market_hours.allow_new_entry()
     if not _mh_ok:
+        _REFUSED["flag"] = True
         trade_log.signal(signal.strategy_name, signal.direction_str, "blocked",
                          _mh_why, session=session_name)
         log.info(f"[{signal.strategy_name}] entry blocked -- {_mh_why}")
@@ -398,6 +408,7 @@ def _execute_signal(signal, m15_rates, fetcher, risk, executor, session_mult, se
     if strategy and getattr(strategy, "max_spread_pts", None):
         max_spread = strategy.max_spread_pts
         if not risk.is_spread_ok(max_spread):
+            _REFUSED["flag"] = True
             trade_log.signal(signal.strategy_name, signal.direction_str, "blocked",
                              f"spread > {max_spread}", session=session_name)
             log.info(f"[{signal.strategy_name}] entry blocked -- spread > {max_spread}")
@@ -406,12 +417,14 @@ def _execute_signal(signal, m15_rates, fetcher, risk, executor, session_mult, se
 
     if not executor.can_open_new_position():
         log.info("Cannot execute: max concurrent positions reached.")
+        _REFUSED["flag"] = True
         trade_log.signal(signal.strategy_name, signal.direction_str, "blocked",
                          "max concurrent positions reached", session=session_name)
         return
 
     tick = fetcher.get_tick()
     if tick is None:
+        _REFUSED["flag"] = True
         trade_log.signal(signal.strategy_name, signal.direction_str, "blocked",
                          "no tick available", session=session_name)
         return
@@ -425,6 +438,7 @@ def _execute_signal(signal, m15_rates, fetcher, risk, executor, session_mult, se
     closed_m15 = m15_rates[:-1] if m15_rates is not None and len(m15_rates) > 1 else m15_rates
     stops = risk.calculate_atr_stops(price, signal.is_buy, closed_m15, sl_mult, tp_mult)
     if stops is None:
+        _REFUSED["flag"] = True
         trade_log.signal(signal.strategy_name, signal.direction_str, "blocked",
                          "ATR stops unavailable", session=session_name)
         return
@@ -446,6 +460,7 @@ def _execute_signal(signal, m15_rates, fetcher, risk, executor, session_mult, se
                                strategy=signal.strategy_name, enforced=risk_rules.ENFORCE)
                 if risk_rules.ENFORCE:
                     log.warning(f"[{signal.strategy_name}] BLOCKED by risk rules: {_decision.reason}")
+                    _REFUSED["flag"] = True
                     return
     except Exception as _e:  # shadow logging must never break execution
         log.debug(f"risk_rules shadow evaluation skipped: {_e}")
@@ -468,11 +483,13 @@ def _execute_signal(signal, m15_rates, fetcher, risk, executor, session_mult, se
                     _ord, _ai_at, atlas_bridge.RUNTIME["state"], datetime.now(timezone.utc), _news)
                 if not _decision.allow:
                     log.warning(f"[{signal.strategy_name}] ATLAS GATE BLOCKED: {_decision.reasons}")
+                    _REFUSED["flag"] = True
                     trade_log.signal(signal.strategy_name, signal.direction_str, "blocked",
                                      f"Atlas rule engine: {_decision.reasons}", session=session_name)
                     return None
         except Exception as _ae:
             log.warning(f"Atlas pre-trade gate error (fail-closed): {_ae}")
+            _REFUSED["flag"] = True
             trade_log.signal(signal.strategy_name, signal.direction_str, "blocked",
                              f"Atlas pre-trade gate error: {_ae}", session=session_name)
             return None
@@ -488,6 +505,7 @@ def _execute_signal(signal, m15_rates, fetcher, risk, executor, session_mult, se
             f"[{signal.strategy_name}] DUPLICATE ORDER BLOCKED by key {dedup_key} "
             f"(order already placed for bar {bar_time}). Refusing duplicate fill."
         )
+        _REFUSED["flag"] = True
         trade_log.signal(
             signal.strategy_name, signal.direction_str, "deduped",
             f"duplicate order key {dedup_key}", candle=bar_time,
@@ -516,6 +534,7 @@ def _execute_signal(signal, m15_rates, fetcher, risk, executor, session_mult, se
 
     if result is None:
         # Vetoed, blocked or rejected: no order exists, so none is logged as one.
+        _REFUSED["flag"] = True
         trade_log.signal(signal.strategy_name, signal.direction_str, "blocked",
                          "order not placed (veto/cap/broker reject)", candle=bar_time,
                          session=session_name)
