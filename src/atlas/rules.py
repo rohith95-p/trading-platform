@@ -29,12 +29,15 @@ Unit conventions
 from __future__ import annotations
 
 import json
+import logging
 import math
 import re
 from dataclasses import dataclass, field
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional, Sequence, Union
+
+log = logging.getLogger(__name__)
 
 DEFAULT_RULES_PATH = Path(__file__).resolve().parents[2] / "config" / "atlas_access.json"
 
@@ -656,12 +659,35 @@ class AtlasRuleEngine:
 
     def in_news_window(self, now_utc: datetime, news_events: Optional[Iterable[Any]]) -> bool:
         """True if now is within +/-(5 + pad) minutes (edges inclusive). Fails closed."""
+        return self.news_block_reason(now_utc, news_events) is not None
+
+    def news_block_reason(self, now_utc: datetime,
+                          news_events: Optional[Iterable[Any]]) -> Optional[str]:
+        """Why the news window blocks, or None. Same decision, readable cause.
+
+        Failing closed is right -- an unreadable calendar must not become
+        permission to trade through a release -- but it is indistinguishable from
+        a real event in the log, and both appear as "news_window". On 2026-11-03
+        a trade was refused this way and it took a candle replay against the
+        account to work out which it had been. The two now read differently:
+        a genuine event blocks as `news_window`, a calendar this engine cannot
+        parse blocks as `news_window_unreadable`, which is a feed to fix rather
+        than a market to wait out.
+        """
         try:
             now = _to_utc(now_utc)
             w = timedelta(minutes=self.news_window_minutes())
-            return any(abs(now - t) <= w for t in self._event_times(news_events))
-        except Exception:  # noqa: BLE001
-            return True
+            times = self._event_times(news_events)
+        except Exception as exc:  # noqa: BLE001 - fail closed, but say why
+            log.warning("Atlas news calendar could not be read (%s: %s); blocking entries "
+                        "until it can be", type(exc).__name__, exc)
+            return "news_window_unreadable"
+        try:
+            return "news_window" if any(abs(now - t) <= w for t in times) else None
+        except Exception as exc:  # noqa: BLE001
+            log.warning("Atlas news event times unusable (%s: %s); blocking entries",
+                        type(exc).__name__, exc)
+            return "news_window_unreadable"
 
     @staticmethod
     def is_weekend_utc(now_utc: datetime) -> bool:
@@ -694,8 +720,9 @@ class AtlasRuleEngine:
             reasons.append("weekend_entry")
 
         # news window
-        if self.in_news_window(now, news_events):
-            reasons.append("news_window")
+        _news = self.news_block_reason(now, news_events)
+        if _news is not None:
+            reasons.append(_news)
 
         # projected equity if the stop is hit
         projected = acct.equity - od.stop_risk_usd

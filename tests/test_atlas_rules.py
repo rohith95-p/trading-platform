@@ -767,3 +767,74 @@ def test_state_new_factory():
     assert st.peak_equity == 5000.0 and st.day_ref_equity == 5000.0
     assert st.day_ref_date_utc == WED.date() and st.phase == "funded"
     assert math.isfinite(st.initial_balance)
+
+
+# ---------------------------------------------------------------------------
+# the news window: same decision, readable cause (2026-11-05)
+# ---------------------------------------------------------------------------
+
+def _engine():
+    from src.atlas.rules import AtlasRuleEngine, load_rules
+    return AtlasRuleEngine(load_rules(
+        allow_unverified=["daily_loss_eod_computation", "ea_approval_required"]))
+
+
+def test_a_real_event_nearby_blocks_as_news_window():
+    import datetime as _dt
+
+    eng = _engine()
+    now = _dt.datetime(2026, 11, 3, 7, 15, tzinfo=_dt.timezone.utc)
+    assert eng.news_block_reason(now, [now]) == "news_window"
+    assert eng.in_news_window(now, [now]) is True
+
+
+def test_an_event_far_away_does_not_block():
+    import datetime as _dt
+
+    eng = _engine()
+    now = _dt.datetime(2026, 11, 3, 7, 15, tzinfo=_dt.timezone.utc)
+    far = now + _dt.timedelta(hours=3)
+    assert eng.news_block_reason(now, [far]) is None
+    assert eng.in_news_window(now, [far]) is False
+
+
+def test_an_empty_calendar_does_not_block():
+    import datetime as _dt
+
+    eng = _engine()
+    now = _dt.datetime(2026, 11, 3, 7, 15, tzinfo=_dt.timezone.utc)
+    assert eng.news_block_reason(now, []) is None
+    assert eng.news_block_reason(now, None) is None
+
+
+def test_an_unreadable_calendar_still_blocks_but_says_it_is_the_feed():
+    """Failing closed is right; being indistinguishable from a real event is not.
+
+    On 2026-11-03 a trade was refused with reason 'news_window' and it took a
+    candle replay against the account to find out which of the two it had been.
+    """
+    import datetime as _dt
+
+    eng = _engine()
+    now = _dt.datetime(2026, 11, 3, 7, 15, tzinfo=_dt.timezone.utc)
+    for junk in ([{"no_time_field": 1}], ["not a date"], [object()]):
+        reason = eng.news_block_reason(now, junk)
+        assert reason == "news_window_unreadable", junk
+        assert eng.in_news_window(now, junk) is True      # still blocks
+
+
+def test_an_order_refused_by_an_unreadable_calendar_names_the_feed():
+    import datetime as _dt
+
+    from src.atlas.rules import AccountInfo, AtlasState, OrderRequest
+
+    eng = _engine()
+    now = _dt.datetime(2026, 11, 3, 7, 15, tzinfo=_dt.timezone.utc)
+    st = AtlasState.new(initial_balance=5000.0, now_utc=now, phase="evaluation", equity=5000.0)
+    acct = AccountInfo(balance=5000.0, equity=5000.0, margin=0.0, free_margin=5000.0,
+                       ts_utc=now, floating_pnl=0.0)
+    order = OrderRequest(symbol="XAUUSDm", stop_risk_usd=30.0, margin_required=160.0,
+                         volume=0.02, side="sell")
+    d = eng.check_order(order, acct, st, now, [{"garbage": True}])
+    assert not d.allow
+    assert "news_window_unreadable" in d.reasons
