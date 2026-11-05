@@ -29,18 +29,85 @@ class DataFetcher:
         # Strategy view = these magics only; account view = everything (see src/core/scope.py).
         from src.core import scope
         self.own_magics = frozenset(own_magics) if own_magics is not None else scope.load_own_magics()
+        # how many times a stalled candle feed had to be repaired this run
+        self.feed_repairs = 0
 
     # ------------------------------------------------------------------
     # Rate fetchers
     # ------------------------------------------------------------------
 
+    # How far behind the newest candle may be before the feed counts as stale.
+    # One M15 candle is 15 minutes old just before it closes, so this allows a
+    # full candle plus ten minutes of slack -- the same bar the liveness check in
+    # resilience.check_connection_and_freshness uses.
+    STALE_AFTER_SEC = 25 * 60
+
+    # Timeframes we will force a refetch for, and how far back to ask.
+    _REFETCH_DAYS = {60: 3, 300: 10, 900: 30, 3600: 120, 86400: 400}
+
     def get_rates(self, timeframe: int, count: int) -> Optional[np.ndarray]:
-        """Fetch the latest `count` candles for the given timeframe."""
+        """Fetch the latest `count` candles, repairing a stalled feed once.
+
+        `copy_rates_from_pos` only ever serves what the terminal already has
+        cached; it never asks the server for bars that are missing. A terminal
+        that has just started, reconnected, or sat idle can therefore hand back
+        a live tick stream alongside bars that are hours old -- seen on
+        2026-11-04 with bars 50 hours behind while prices were current.
+
+        The bot used to notice that (the liveness check) and skip every signal
+        evaluation until it eventually exited for the watchdog to restart. In
+        between it was blind, and a tradeable signal was missed on 2026-11-03.
+
+        `copy_rates_range` does trigger the download. So when the newest candle
+        is stale, ask for a range once -- which both repairs the gap and returns
+        current bars -- and only then give up. One extra call, on the rare scan
+        where it is needed.
+        """
         rates = mt5.copy_rates_from_pos(self.symbol, timeframe, 0, count)
+        if self._is_stale(rates, timeframe):
+            repaired = self._refetch(timeframe, count)
+            if repaired is not None:          # `or` is ambiguous on a numpy array
+                rates = repaired
         if rates is None or len(rates) < count:
             log.debug(f"get_rates({timeframe}, {count}): insufficient data")
             return None
         return cast(np.ndarray, rates)
+
+    def _is_stale(self, rates, timeframe: int) -> bool:
+        """True when the newest candle is too old to act on."""
+        if rates is None or not len(rates):
+            return True
+        try:
+            age = datetime.now(timezone.utc).timestamp() - float(rates[-1]["time"])
+        except Exception:
+            return False
+        return age > self.STALE_AFTER_SEC
+
+    def _refetch(self, timeframe: int, count: int) -> Optional[np.ndarray]:
+        """Force the terminal to download the recent span, then return it."""
+        days = self._REFETCH_DAYS.get(timeframe)
+        if days is None:
+            return None
+        now = datetime.now(timezone.utc)
+        try:
+            rates = mt5.copy_rates_range(self.symbol, timeframe,
+                                         now - timedelta(days=days),
+                                         now + timedelta(hours=2))
+        except Exception as exc:
+            log.warning(f"feed repair for timeframe {timeframe} raised: {exc}")
+            return None
+        if rates is None or not len(rates):
+            log.warning(f"feed repair for timeframe {timeframe} returned nothing")
+            return None
+        if self._is_stale(rates, timeframe):
+            age = datetime.now(timezone.utc).timestamp() - float(rates[-1]["time"])
+            log.warning(f"feed repair for timeframe {timeframe}: newest candle is still "
+                        f"{age / 60:.0f} min old after a range request")
+            return rates[-count:] if len(rates) >= count else rates
+        log.warning(f"CANDLE FEED REPAIRED for timeframe {timeframe}: the terminal was serving "
+                    f"stale bars; a range request pulled {len(rates)} current ones.")
+        self.feed_repairs += 1
+        return rates[-count:] if len(rates) >= count else rates
 
     def get_m5_rates(self, count: int = 100) -> Optional[np.ndarray]:
         """Fetch M5 candles (used for volume confirmation)."""

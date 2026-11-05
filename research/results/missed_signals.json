@@ -1,0 +1,125 @@
+{
+ "generated_utc": "2026-11-05 05:23:01",
+ "days": 14,
+ "rows": [
+  {
+   "candle": 1792670400,
+   "strategy": "LONDON_MOMENTUM_TIGHT_V6",
+   "side": "SELL",
+   "gate": "BEARISH",
+   "outcome": "not live yet"
+  },
+  {
+   "candle": 1792679400,
+   "strategy": "NY_SESSION_REVERSAL_V6",
+   "side": "BUY",
+   "gate": "BEARISH",
+   "outcome": "not live yet"
+  },
+  {
+   "candle": 1792761300,
+   "strategy": "NY_SESSION_REVERSAL_V6",
+   "side": "SELL",
+   "gate": "BEARISH",
+   "outcome": "not live yet"
+  },
+  {
+   "candle": 1793016000,
+   "strategy": "LONDON_MOMENTUM_TIGHT_V6",
+   "side": "BUY",
+   "gate": "BEARISH",
+   "outcome": "not live yet"
+  },
+  {
+   "candle": 1793023200,
+   "strategy": "NY_SESSION_REVERSAL_V6",
+   "side": "BUY",
+   "gate": "BEARISH",
+   "outcome": "not live yet"
+  },
+  {
+   "candle": 1793102400,
+   "strategy": "LONDON_MOMENTUM_TIGHT_V6",
+   "side": "BUY",
+   "gate": "BEARISH",
+   "outcome": "not live yet"
+  },
+  {
+   "candle": 1793275200,
+   "strategy": "LONDON_MOMENTUM_TIGHT_V6",
+   "side": "SELL",
+   "gate": "BEARISH",
+   "outcome": "not live yet"
+  },
+  {
+   "candle": 1793343600,
+   "strategy": "ASIAN_BREAKOUT_V6",
+   "side": "SELL",
+   "gate": "BEARISH",
+   "outcome": "lost_highlander"
+  },
+  {
+   "candle": 1793343600,
+   "fill_candle": 1793344500,
+   "strategy": "ASIAN_RANGE_FILTERED_V6",
+   "magic": 7320,
+   "side": "SELL",
+   "gate": "BEARISH",
+   "outcome": "traded",
+   "ticket": 725980157
+  },
+  {
+   "candle": 1793361600,
+   "fill_candle": 1793362500,
+   "strategy": "LONDON_MOMENTUM_TIGHT_V6",
+   "magic": 7324,
+   "side": "SELL",
+   "gate": "BEARISH",
+   "outcome": "traded",
+   "ticket": 726389404
+  },
+  {
+   "candle": 1793620800,
+   "strategy": "LONDON_MOMENTUM_TIGHT_V6",
+   "side": "BUY",
+   "gate": "BEARISH",
+   "outcome": "blocked_by_gate"
+  },
+  {
+   "candle": 1793689200,
+   "strategy": "ASIAN_BREAKOUT_V6",
+   "side": "SELL",
+   "gate": "BEARISH",
+   "outcome": "lost_highlander"
+  },
+  {
+   "candle": 1793689200,
+   "fill_candle": 1793690100,
+   "strategy": "ASIAN_RANGE_FILTERED_V6",
+   "magic": 7320,
+   "side": "SELL",
+   "gate": "BEARISH",
+   "outcome": "NO ORDER",
+   "ticket": null
+  },
+  {
+   "candle": 1793775600,
+   "strategy": "ASIAN_BREAKOUT_V6",
+   "side": "BUY",
+   "gate": "BEARISH",
+   "outcome": "blocked_by_gate"
+  }
+ ],
+ "misses": [
+  {
+   "candle": 1793689200,
+   "fill_candle": 1793690100,
+   "strategy": "ASIAN_RANGE_FILTERED_V6",
+   "magic": 7320,
+   "side": "SELL",
+   "gate": "BEARISH",
+   "outcome": "NO ORDER",
+   "ticket": null
+  }
+ ]
+}

@@ -93,6 +93,9 @@ from src.core.order_flow import (                        # noqa: F401
 # IST offset
 IST = timezone(timedelta(hours=5, minutes=30))
 
+# One alert per blind-feed episode, not one per scan.
+_FEED_BLIND = {"alerted": False}
+
 # ---------------------------------------------------------------------------
 # Logging (IST timestamps)
 # ---------------------------------------------------------------------------
@@ -482,11 +485,28 @@ def _run_guarded():
             m5_rates = fetcher.get_m5_rates(100)
 
             conn_ok, conn_reason = resilience.check_connection_and_freshness(mt5, m15_rates)
+            if conn_ok and _FEED_BLIND["alerted"]:
+                _FEED_BLIND["alerted"] = False
+                from src.core import alerts as _fa
+                _fa.send("Prices are back: the bot can see the market again", _fa.WARN)
             got_data = conn_ok and m15_rates is not None and len(m15_rates) >= 200
             mt5_fail_count = resilience.note_fetch_result(mt5, got_data, mt5_fail_count, reason=conn_reason)
             if not got_data:
                 if not conn_ok:
                     log.warning(f"LIVENESS CHECK FAILED: {conn_reason}. Skipping signal evaluation.")
+                    # 2026-11-04: a blind feed used to be a log line and nothing
+                    # more for eight minutes, while the process, the heartbeat and
+                    # the MT5 connection all looked healthy. A tradeable signal
+                    # was missed that way. Tell the owner on the first scan, once
+                    # per episode, because "scanning but blind" is not visible
+                    # from anywhere else.
+                    if not _FEED_BLIND["alerted"]:
+                        _FEED_BLIND["alerted"] = True
+                        from src.core import alerts as _fa
+                        _fa.send("Bot is scanning but cannot see prices: no trades will be taken",
+                                 _fa.CRITICAL, context={"reason": conn_reason},
+                                 action=("Open an XAUUSDm M15 chart in MT5 on the VPS so it downloads "
+                                         "history, or restart the terminal. Run scripts\\vps_check.ps1."))
                 else:
                     log.warning(f"NO USABLE M15 DATA though the terminal reports connected "
                                 f"(rates={'None' if m15_rates is None else len(m15_rates)}); fail count {mt5_fail_count}.")

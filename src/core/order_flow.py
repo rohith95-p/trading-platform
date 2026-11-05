@@ -298,11 +298,19 @@ def execute_best_signal(actionable_signals, last_fired_candle, signal_candle, m1
 
         # Execute the best one
         _TRANSIENT_BLOCK["flag"] = False
-        _execute_signal(
+        _result = _execute_signal(
             best_signal, m15_rates, fetcher, risk, executor,
             session_mult, session_name, best_strategy,
             executed_orders_dedup=executed_orders_dedup,
         )
+        # 2026-11-03: a signal cleared the daily gate and no order ever reached
+        # the broker, and nothing anywhere said so -- it was found days later by
+        # replaying candles against the account history. Every refusal inside
+        # _execute_signal logs its reason, so reaching here with nothing to show
+        # means a reason we have not thought of. Alert on it rather than trust
+        # that the list of known refusals is complete.
+        if _result is None and not _TRANSIENT_BLOCK["flag"]:
+            _report_silent_miss(best_strategy, best_signal, signal_candle, session_name)
         # 2026-10-19: spread on XAUUSDm alternates 240/260 pts and the legs' cap is 250, so one 260-pt tick
         # used to burn the whole candle's signal (dedup). Retry next scan (up to 10 times per candle) instead.
         _rk = (best_strategy.name, signal_candle)
@@ -322,6 +330,35 @@ def execute_best_signal(actionable_signals, last_fired_candle, signal_candle, m1
                              session=session_name)
             log.info(f"[{strat.name}] {sig.direction_str} BLOCKED by Highlander rule (lost to {best_strategy.name}).")
             last_fired_candle[strat.name] = signal_candle
+
+
+# One alert per (strategy, candle): a retried candle must not alert twice.
+_SILENT_MISSES: set = set()
+
+
+def _report_silent_miss(strategy, signal, signal_candle, session_name) -> None:
+    """An allowed signal that produced no order. Never silent again."""
+    key = (strategy.name, signal_candle)
+    if key in _SILENT_MISSES:
+        return
+    _SILENT_MISSES.add(key)
+    for _k in [k for k in _SILENT_MISSES if k[1] < signal_candle - 86400]:
+        _SILENT_MISSES.discard(_k)
+    when = datetime.fromtimestamp(signal_candle, timezone.utc)
+    msg = (f"{strategy.name} {signal.direction_str} passed every check and no order was placed "
+           f"(candle {when:%Y-%m-%d %H:%M} UTC)")
+    log.error("SILENT MISS: " + msg)
+    trade_log.signal(strategy.name, signal.direction_str, "silent_miss",
+                     "allowed by every gate, no order placed", candle=signal_candle,
+                     session=session_name)
+    try:
+        from src.core import alerts
+        alerts.send(f"A trade was missed: {strategy.name} {signal.direction_str}", alerts.CRITICAL,
+                    context={"candle": f"{when:%Y-%m-%d %H:%M} UTC",
+                             "meaning": "the signal was allowed but no order reached the broker"},
+                    action="Check logs/main_loop.log for this candle, then run scripts\\vps_check.ps1.")
+    except Exception:
+        pass
 
 
 def _execute_signal(signal, m15_rates, fetcher, risk, executor, session_mult, session_name, strategy=None, executed_orders_dedup=None):
