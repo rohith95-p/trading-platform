@@ -639,6 +639,20 @@ class AtlasRuleEngine:
         return max(0.0, -pnl)
 
     # ----- news / weekend ---------------------------------------------------
+
+    # Where an event's timestamp can live. `event_time` is what Atlas's own MCP
+    # calendar actually sends:
+    #   {"event_name": "Parliamentary Elections",
+    #    "event_time": "2026-11-06T21:45:00+00:00",
+    #    "currency": "NZD", "impact": "high", "source": "forex_factory"}
+    # It was missing from this list until 2026-11-07, so every event raised
+    # "news event without a time", `in_news_window` failed closed, and EVERY
+    # order was refused as `news_window` for as long as the calendar held at
+    # least one event. Four tradeable signals were lost that way between
+    # 2026-11-03 and 2026-11-06, and the reason read like a real news block.
+    _TIME_KEYS = ("event_time", "time", "ts", "timestamp", "datetime", "date",
+                  "time_utc", "start", "start_time")
+
     def _event_times(self, events: Optional[Iterable[Any]]) -> List[datetime]:
         out: List[datetime] = []
         for ev in events or ():
@@ -646,9 +660,10 @@ class AtlasRuleEngine:
                 impact = str(ev.get("impact", "high")).lower()
                 if impact not in ("high", "red", "3"):
                     continue  # explicit lower impact is ignored; unspecified counts as high
-                raw = next((ev[k] for k in ("time", "ts", "timestamp") if k in ev), None)
+                raw = next((ev[k] for k in self._TIME_KEYS if ev.get(k) is not None), None)
                 if raw is None:
-                    raise ValueError("news event without a time")
+                    raise ValueError(
+                        f"news event without a time; keys were {sorted(ev)}")
                 out.append(_to_utc(raw))
             else:
                 out.append(_to_utc(ev))

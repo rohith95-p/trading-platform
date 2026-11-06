@@ -838,3 +838,78 @@ def test_an_order_refused_by_an_unreadable_calendar_names_the_feed():
     d = eng.check_order(order, acct, st, now, [{"garbage": True}])
     assert not d.allow
     assert "news_window_unreadable" in d.reasons
+
+
+# ---------------------------------------------------------------------------
+# the field the Atlas feed actually sends (2026-11-07)
+# ---------------------------------------------------------------------------
+
+# Captured verbatim from https://mcp.atlasfunded.com get_news_calendar.
+LIVE_FEED_EVENT = {
+    "event_name": "Parliamentary Elections",
+    "event_time": "2026-11-06T21:45:00+00:00",
+    "currency": "NZD",
+    "symbol": "NZD",
+    "impact": "high",
+    "source": "forex_factory",
+}
+
+
+def test_the_live_feed_shape_parses():
+    """The bug that cost four trades.
+
+    `_event_times` looked for "time"/"ts"/"timestamp" and the feed sends
+    "event_time", so every event raised, `in_news_window` failed closed, and
+    every order was refused as `news_window` for as long as the calendar held
+    one event. Oct 30 traded only because the calendar was empty that day.
+    """
+    import datetime as _dt
+
+    eng = _engine()
+    times = eng._event_times([LIVE_FEED_EVENT])
+    assert len(times) == 1
+    assert times[0] == _dt.datetime(2026, 11, 6, 21, 45, tzinfo=_dt.timezone.utc)
+
+
+def test_the_four_lost_signals_would_all_have_been_allowed():
+    import datetime as _dt
+
+    eng = _engine()
+    for when in (_dt.datetime(2026, 11, 3, 7, 15, tzinfo=_dt.timezone.utc),
+                 _dt.datetime(2026, 11, 5, 12, 15, tzinfo=_dt.timezone.utc),
+                 _dt.datetime(2026, 11, 5, 13, 45, tzinfo=_dt.timezone.utc),
+                 _dt.datetime(2026, 11, 6, 15, 0, tzinfo=_dt.timezone.utc)):
+        assert eng.news_block_reason(when, [LIVE_FEED_EVENT]) is None, when
+
+
+def test_an_event_in_the_live_shape_still_blocks_when_it_is_near():
+    import datetime as _dt
+
+    eng = _engine()
+    near = _dt.datetime(2026, 11, 6, 21, 47, tzinfo=_dt.timezone.utc)   # 2 min after
+    assert eng.news_block_reason(near, [LIVE_FEED_EVENT]) == "news_window"
+
+
+@pytest.mark.parametrize("key", ["event_time", "time", "ts", "timestamp",
+                                 "datetime", "date", "time_utc", "start", "start_time"])
+def test_every_plausible_time_field_is_accepted(key):
+    import datetime as _dt
+
+    eng = _engine()
+    ev = {"event_name": "x", "impact": "high", key: "2026-11-06T21:45:00+00:00"}
+    assert len(eng._event_times([ev])) == 1
+
+
+def test_an_event_with_no_time_at_all_still_names_its_keys():
+    eng = _engine()
+    with pytest.raises(ValueError, match="keys were"):
+        eng._event_times([{"event_name": "x", "impact": "high", "curency": "USD"}])
+
+
+def test_a_low_impact_event_is_ignored_not_blocked():
+    import datetime as _dt
+
+    eng = _engine()
+    low = dict(LIVE_FEED_EVENT, impact="low")
+    near = _dt.datetime(2026, 11, 6, 21, 46, tzinfo=_dt.timezone.utc)
+    assert eng.news_block_reason(near, [low]) is None

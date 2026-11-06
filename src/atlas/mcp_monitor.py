@@ -30,6 +30,11 @@ def _api_key() -> Optional[str]:
     return os.environ.get("ATLAS_MCP_KEY")
 
 
+# The Atlas account id, once there is one. Until then the account-rules tool
+# cannot be called at all (it is a required argument).
+ATLAS_ACCOUNT_ID = os.environ.get("ATLAS_ACCOUNT_ID", "").strip()
+
+
 def _call(method: str, params: Optional[Dict] = None, timeout: float = 15.0) -> Optional[Any]:
     """JSON-RPC call to the Atlas MCP endpoint. Returns the result or None on error."""
     key = _api_key()
@@ -53,14 +58,33 @@ def _call(method: str, params: Optional[Dict] = None, timeout: float = 15.0) -> 
             if lines:
                 raw = lines[-1].removeprefix("data: ")
             doc = json.loads(raw)
+            if "error" in doc and doc.get("error"):
+                # A JSON-RPC error used to be returned as its own message text,
+                # so callers stored an error string where they expected a dict
+                # (seen 2026-11-07: get_account_rules has always failed for want
+                # of an account_id, and its error text was being kept as the
+                # account-rules snapshot). None means "no data", which every
+                # caller already handles.
+                log.warning("Atlas MCP %s returned an error: %s", method,
+                            str(doc["error"])[:300])
+                return None
             result = doc.get("result", {})
+            if result.get("isError"):
+                log.warning("Atlas MCP %s reported isError: %s", method,
+                            str(result.get("content"))[:300])
+                return None
             content = result.get("content", [])
             for item in content:
                 if item.get("type") == "text":
+                    text = item.get("text", "")
                     try:
-                        return json.loads(item["text"])
-                    except (json.JSONDecodeError, KeyError):
-                        return item.get("text")
+                        return json.loads(text)
+                    except (json.JSONDecodeError, TypeError):
+                        # tool-level errors come back as plain prose, not JSON
+                        if "error" in str(text)[:40].lower():
+                            log.warning("Atlas MCP %s: %s", method, str(text)[:300])
+                            return None
+                        return text
             return result
     except Exception as exc:
         log.debug(f"Atlas MCP call {method} failed: {exc}")
@@ -112,7 +136,12 @@ class AtlasMCPMonitor:
     def _refresh(self) -> None:
         try:
             snap = AtlasMCPSnapshot(ts=time.time())
-            snap.account_rules = _call("get_account_rules")
+            # get_account_rules needs the Atlas account id, which does not exist
+            # until the funded account does. Calling it without one returns an
+            # input-validation error on every poll, so only ask when we can.
+            if ATLAS_ACCOUNT_ID:
+                snap.account_rules = _call("get_account_rules",
+                                           {"account_id": ATLAS_ACCOUNT_ID})
             snap.news_events = self._fetch_news()
             self.snapshot = snap
         except Exception as exc:

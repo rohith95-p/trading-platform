@@ -336,6 +336,36 @@ def execute_best_signal(actionable_signals, last_fired_candle, signal_candle, m1
 # One alert per (strategy, candle): a retried candle must not alert twice.
 _SILENT_MISSES: set = set()
 
+# One alert per episode of a broken gate feed, not one per scan.
+_FEED_HALT = {"alerted_reasons": None}
+
+
+def signal_candle_of(m15_rates) -> int:
+    """The closed candle a signal was read from, or 0."""
+    try:
+        return int(m15_rates[-2]["time"])
+    except Exception:
+        return 0
+
+
+def _report_feed_halt(signal, reasons, signal_candle: int) -> None:
+    """The Atlas gate refused because WE could not read something, not the market."""
+    key = tuple(sorted(str(r) for r in reasons))
+    if _FEED_HALT["alerted_reasons"] == key:
+        return
+    _FEED_HALT["alerted_reasons"] = key
+    msg = ("Atlas gate is refusing every trade because a feed it needs cannot be read: "
+           + ", ".join(key))
+    log.error("FEED HALT: " + msg)
+    try:
+        from src.core import alerts
+        alerts.send("Trading halted by a broken data feed, not by the market", alerts.CRITICAL,
+                    context={"reasons": ", ".join(key),
+                             "effect": "every entry is refused while this lasts"},
+                    action="Check logs/main_loop.log for ATLAS GATE BLOCKED and the Atlas MCP feed.")
+    except Exception:
+        pass
+
 # Set by every refusal inside _execute_signal. The silent-miss alarm is only for
 # a refusal nobody recorded a reason for -- without this it fires on ordinary
 # ones (an Atlas gate block, a news window, a spread blip) and cries wolf.
@@ -486,6 +516,15 @@ def _execute_signal(signal, m15_rates, fetcher, risk, executor, session_mult, se
                     _REFUSED["flag"] = True
                     trade_log.signal(signal.strategy_name, signal.direction_str, "blocked",
                                      f"Atlas rule engine: {_decision.reasons}", session=session_name)
+                    # A refusal the market caused is routine. A refusal our own
+                    # inability to read a feed caused halts ALL trading, silently,
+                    # for as long as it lasts -- it cost four trades between
+                    # 2026-11-03 and 2026-11-06. Those are not the same event and
+                    # must not look the same.
+                    _broken = [r for r in _decision.reasons
+                               if "unreadable" in str(r) or str(r).startswith("fail_closed")]
+                    if _broken:
+                        _report_feed_halt(signal, _broken, signal_candle_of(m15_rates))
                     return None
         except Exception as _ae:
             log.warning(f"Atlas pre-trade gate error (fail-closed): {_ae}")
