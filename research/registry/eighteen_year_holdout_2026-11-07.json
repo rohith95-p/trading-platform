@@ -1,0 +1,123 @@
+{
+ "E1 2004-2008": {
+  "n": 331,
+  "net": -254.97,
+  "pf": 0.748,
+  "win": 31.1,
+  "dd": 254.97,
+  "avg_win": 7.35,
+  "avg_loss": -4.44,
+  "months": 42.0,
+  "m1": {
+   "bars_skipped_no_m1": 0,
+   "exits_unchecked_no_m1": 0,
+   "partial_m1_candles": 66764
+  }
+ },
+ "E2 2008-2012": {
+  "n": 643,
+  "net": -742.8,
+  "pf": 0.82,
+  "win": 34.5,
+  "dd": 886.39,
+  "avg_win": 15.27,
+  "avg_loss": -9.82,
+  "months": 48.0,
+  "m1": {
+   "bars_skipped_no_m1": 0,
+   "exits_unchecked_no_m1": 0,
+   "partial_m1_candles": 18930
+  }
+ },
+ "E3 2012-2016": {
+  "n": 567,
+  "net": 5.28,
+  "pf": 1.002,
+  "win": 38.1,
+  "dd": 309.52,
+  "avg_win": 12.79,
+  "avg_loss": -7.86,
+  "months": 48.0,
+  "m1": {
+   "bars_skipped_no_m1": 0,
+   "exits_unchecked_no_m1": 0,
+   "partial_m1_candles": 3768
+  }
+ },
+ "E4 2016-2020": {
+  "n": 578,
+  "net": -146.5,
+  "pf": 0.931,
+  "win": 35.8,
+  "dd": 247.43,
+  "avg_win": 9.5,
+  "avg_loss": -5.7,
+  "months": 48.0,
+  "m1": {
+   "bars_skipped_no_m1": 0,
+   "exits_unchecked_no_m1": 0,
+   "partial_m1_candles": 2246
+  }
+ },
+ "E5 2020-2022": {
+  "n": 437,
+  "net": -172.36,
+  "pf": 0.944,
+  "win": 37.3,
+  "dd": 375.89,
+  "avg_win": 17.67,
+  "avg_loss": -11.14,
+  "months": 31.0,
+  "m1": {
+   "bars_skipped_no_m1": 0,
+   "exits_unchecked_no_m1": 0,
+   "partial_m1_candles": 1599
+  }
+ },
+ "POOLED": {
+  "n": 2556,
+  "net": -1311.35,
+  "pf": 0.9,
+  "win": 35.6,
+  "dd": 1412.91,
+  "avg_win": 12.91,
+  "avg_loss": -7.94
+ },
+ "leg_ASIAN_BREAKOUT_V6": {
+  "n": 19,
+  "net": -297.83,
+  "pf": 0.216,
+  "win": 21.1,
+  "dd": 307.86,
+  "avg_win": 20.46,
+  "avg_loss": -25.31
+ },
+ "leg_ASIAN_RANGE_FILTERED_V6": {
+  "n": 651,
+  "net": -224.13,
+  "pf": 0.923,
+  "win": 40.4,
+  "dd": 269.62,
+  "avg_win": 10.27,
+  "avg_loss": -7.54
+ },
+ "leg_LONDON_MOMENTUM_TIGHT_V6": {
+  "n": 1106,
+  "net": -483.71,
+  "pf": 0.901,
+  "win": 32.0,
+  "dd": 681.82,
+  "avg_win": 12.43,
+  "avg_loss": -6.49
+ },
+ "leg_NY_SESSION_REVERSAL_V6": {
+  "n": 780,
+  "net": -305.69,
+  "pf": 0.937,
+  "win": 37.2,
+  "dd": 313.36,
+  "avg_win": 15.78,
+  "avg_loss": -9.96
+ },
+ "verdict": "FAIL -- these legs have no demonstrated edge; the 2024-2026 result was selection, not skill"
+}
