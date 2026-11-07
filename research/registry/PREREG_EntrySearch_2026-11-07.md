@@ -162,3 +162,28 @@ Recording that here so a failure cannot later be dressed up as insight, and a
 success cannot be dressed up as foresight.
 
 Run: `python -I scripts/validation/entry_search.py --stage select`
+
+---
+
+## Addendum, recorded before any candidate was run (signal counts only, no P&L)
+
+A smoke test counted how often each signal fires on 2020-2022 (741 trading days).
+All 21 fire; none is dead. But two are **structurally underpowered** against the
+>= 150-trade gate above, and that is knowable now, from firing rates alone:
+
+| signal | fires/yr | expected trades on SELECT (11.5 yr) |
+|---|---|---|
+| TSMOM-10 / 20 / 40 | 206 / 235 / 251 | ample |
+| DONCH-20 | 20.9 | ~240, ample |
+| MR-20 | 38.3 | ~440, ample |
+| **DONCH-55** | **10.5** | **~120, below the gate** |
+| **NRX** | **5.4** | **~62, far below the gate** |
+
+So DONCH-55 and NRX will almost certainly be reported **inconclusive — too few
+trades to tell** rather than refuted. The gate is **not** being relaxed for them:
+it was set to keep underpowered results out, and these are exactly that. Noting
+it here so it reads as a known limitation rather than a result.
+
+Also noted: the 6 x ATR filter on TSMOM barely binds (it fires on ~72-88% of
+days), so S1-S3 are close to "always hold the direction of the N-day move". That
+is the intended behaviour of time-series momentum and is left as declared.
