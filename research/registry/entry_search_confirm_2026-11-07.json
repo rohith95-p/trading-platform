@@ -1,0 +1,48 @@
+{
+ "stage": "confirm",
+ "swap": true,
+ "gate": {
+  "min_trades": 150,
+  "min_pf": 1.1
+ },
+ "real": {
+  "DONCH20_S6_T10": {
+   "n": 149,
+   "net": -324.33,
+   "pf": 0.823,
+   "win": 40.9,
+   "dd": 407.23,
+   "avg_win": 24.8,
+   "avg_loss": -20.88
+  },
+  "DONCH55_S6_T10": {
+   "n": 78,
+   "net": -15.44,
+   "pf": 0.985,
+   "win": 42.3,
+   "dd": 241.57,
+   "avg_win": 30.58,
+   "avg_loss": -22.77
+  }
+ },
+ "controls": {},
+ "eligible": [],
+ "underpowered": [
+  "DONCH20_S6_T10",
+  "DONCH55_S6_T10"
+ ],
+ "passed": [],
+ "advancing": [],
+ "windows": [
+  [
+   "2016-2020",
+   1451606400,
+   1577836800
+  ],
+  [
+   "2020-2022",
+   1577836800,
+   1659312000
+  ]
+ ]
+}
