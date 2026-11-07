@@ -187,3 +187,26 @@ it here so it reads as a known limitation rather than a result.
 Also noted: the 6 x ATR filter on TSMOM barely binds (it fires on ~72-88% of
 days), so S1-S3 are close to "always hold the direction of the N-day move". That
 is the intended behaviour of time-series momentum and is left as declared.
+
+## Disclosure: an accidental peek at part of CONFIRM
+
+While validating the harness I ran four candidate/arm combinations on **2021
+alone**, which falls inside the CONFIRM window (2016-2022). I should have
+validated on a SELECT year. What I saw, stated so it is on the record rather than
+in my head only:
+
+| ran on 2021 only | trades | PF |
+|---|---|---|
+| TSMOM20_S8_T16, real | 188 | 0.81 |
+| TSMOM20_S8_T16, coin seed 1 | 190 | 0.67 |
+| DONCH20_S6_T10, real | 19 | 0.62 |
+| MR20_S6_T10, real | 36 | 1.33 |
+
+Nothing is changed in response: the candidate list, the thresholds, the
+geometries, the windows and the gates were all frozen above before this happened,
+and they stay frozen. The practical effect is that I hold a weak prior about
+three candidates on one of CONFIRM's six years. It is disclosed because the whole
+value of this protocol is that its breaches are visible.
+
+It also confirmed the geometry is doing its job: average win came out $32-36
+against the live legs' $13, which is the 2.5-3x target size the cost map called for.
