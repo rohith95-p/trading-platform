@@ -1,0 +1,123 @@
+{
+ "stage": "fit",
+ "gate": {
+  "min_trades": 500,
+  "min_pf": 1.15
+ },
+ "real": {
+  "VOLBREAK_S6_T10": {
+   "n": 2615,
+   "net": 656.03,
+   "pf": 1.024,
+   "win": 42.7,
+   "dd": 1571.11,
+   "avg_win": 25.45,
+   "avg_loss": -18.51
+  },
+  "VOLBREAK_S8_T14": {
+   "n": 2122,
+   "net": -640.81,
+   "pf": 0.976,
+   "win": 44.0,
+   "dd": 1939.44,
+   "avg_win": 28.4,
+   "avg_loss": -22.86
+  },
+  "VOLDIVERG_S6_T10": {
+   "n": 629,
+   "net": -934.06,
+   "pf": 0.848,
+   "win": 35.9,
+   "dd": 1113.2,
+   "avg_win": 23.1,
+   "avg_loss": -15.27
+  },
+  "VOLDIVERG_S8_T14": {
+   "n": 623,
+   "net": -1848.48,
+   "pf": 0.765,
+   "win": 35.2,
+   "dd": 1891.62,
+   "avg_win": 27.43,
+   "avg_loss": -19.45
+  },
+  "VOLSPIKE_S6_T10": {
+   "n": 2087,
+   "net": -2732.91,
+   "pf": 0.888,
+   "win": 40.4,
+   "dd": 2732.91,
+   "avg_win": 25.72,
+   "avg_loss": -19.62
+  },
+  "VOLSPIKE_S8_T14": {
+   "n": 1434,
+   "net": -2836.82,
+   "pf": 0.838,
+   "win": 42.7,
+   "dd": 3028.09,
+   "avg_win": 23.96,
+   "avg_loss": -21.29
+  },
+  "VWAPREV_S6_T10": {
+   "n": 1841,
+   "net": -4037.17,
+   "pf": 0.789,
+   "win": 35.7,
+   "dd": 4124.13,
+   "avg_win": 22.92,
+   "avg_loss": -16.13
+  },
+  "VWAPREV_S8_T14": {
+   "n": 1497,
+   "net": -2562.47,
+   "pf": 0.87,
+   "win": 38.5,
+   "dd": 3359.9,
+   "avg_win": 29.8,
+   "avg_loss": -21.42
+  }
+ },
+ "controls": {},
+ "eligible": [],
+ "underpowered": [],
+ "passed": [],
+ "advancing": [],
+ "k_eff": {
+  "k_raw": 24,
+  "k_eff": 20.38,
+  "reduction_pct": 15.1,
+  "eigenvalues": [
+   2.4658,
+   2.1945,
+   1.7636,
+   1.6172,
+   1.3931,
+   1.3151,
+   1.2613,
+   1.1866,
+   1.1624,
+   1.1202,
+   1.0763,
+   0.9307,
+   0.9012,
+   0.8626,
+   0.7374,
+   0.6988,
+   0.6095,
+   0.5547,
+   0.514,
+   0.4497,
+   0.3969,
+   0.3107,
+   0.2621,
+   0.2155
+  ],
+  "bonferroni_raw": 0.002083,
+  "bonferroni_keff": 0.002453,
+  "interpretation": "Your 24 tested configs are effectively 20.4 independent experiments (15% correlation overlap). Use p < 0.0025 as your significance threshold, not p < 0.0021."
+ },
+ "prior_trials": 209,
+ "window": "2004-2016",
+ "respent": true
+}

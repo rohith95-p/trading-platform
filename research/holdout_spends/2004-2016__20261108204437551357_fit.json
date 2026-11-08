@@ -1,0 +1,13 @@
+{
+ "window": "2004-2016",
+ "slug": "2004-2016",
+ "start": 1088640000,
+ "end": 1451606400,
+ "purpose": "fit",
+ "is_decision": false,
+ "respend": true,
+ "reason": "owner instruction 2026-11-09 to run the volume search; PREREG_VolumeSearch_2026-11-09 discloses that no clean historical window remains and that the real verdict is forward",
+ "prior_decisions": 1,
+ "recorded_utc": "2026-11-08T20:44:37.551357+00:00",
+ "commit": "9477ada"
+}
