@@ -1,0 +1,13 @@
+{
+ "window": "2004-2022",
+ "slug": "2004-2022",
+ "start": 1088640000,
+ "end": 1659312000,
+ "purpose": "judge",
+ "is_decision": true,
+ "respend": false,
+ "reason": "backfilled 2026-11-09 from the registry: PREREG_EighteenYearHoldout_2026-11-07: the live 4 legs judged here",
+ "prior_decisions": 0,
+ "recorded_utc": "2026-11-08T20:25:41.235968+00:00",
+ "commit": "a48bd62"
+}

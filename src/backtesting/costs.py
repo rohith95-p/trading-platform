@@ -64,6 +64,20 @@ class CostModel:
     rollover_hour_utc: float = 0.0
     triple_swap_weekday: Optional[int] = None
 
+    def descriptor(self) -> str:
+        """Compact, stable identity for the trial ledger.
+
+        Two backtests that differ only in their cost model are different trials,
+        so the trial id has to see the cost model. This is deliberately short and
+        deterministic -- it ends up in a filename-forming hash.
+        """
+        return ("spread=%s:%g x%g slip=%g comm=%g swap=%s/%g/%g roll=%g triple=%s"
+                % (self.spread_source, self.fixed_spread_points,
+                   self.spread_multiplier, self.slippage_points,
+                   self.commission_per_lot_roundtrip, self.enable_swap,
+                   self.swap_long_points, self.swap_short_points,
+                   self.rollover_hour_utc, self.triple_swap_weekday))
+
     def spread_price(self, point: float, bar_spread_points: Optional[float]) -> float:
         """Spread for one bar, in price units."""
         if self.spread_source == "bar" and bar_spread_points:

@@ -1,0 +1,13 @@
+{
+ "window": "2004-2016",
+ "slug": "2004-2016",
+ "start": 1088640000,
+ "end": 1451606400,
+ "purpose": "select",
+ "is_decision": true,
+ "respend": false,
+ "reason": "backfilled 2026-11-09 from the registry: PREREG_EntrySearch_2026-11-07: 21 candidates ranked here",
+ "prior_decisions": 0,
+ "recorded_utc": "2026-11-08T20:25:41.164246+00:00",
+ "commit": "a48bd62"
+}

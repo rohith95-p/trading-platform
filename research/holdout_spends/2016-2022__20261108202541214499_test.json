@@ -1,0 +1,13 @@
+{
+ "window": "2016-2022",
+ "slug": "2016-2022",
+ "start": 1451606400,
+ "end": 1659312000,
+ "purpose": "test",
+ "is_decision": true,
+ "respend": true,
+ "reason": "backfilled 2026-11-09 from the registry: PREREG_VolTiming_2026-11-09: 16 arms judged here",
+ "prior_decisions": 1,
+ "recorded_utc": "2026-11-08T20:25:41.214499+00:00",
+ "commit": "a48bd62"
+}

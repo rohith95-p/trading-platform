@@ -1,0 +1,13 @@
+{
+ "window": "2016-2022",
+ "slug": "2016-2022",
+ "start": 1451606400,
+ "end": 1659312000,
+ "purpose": "confirm",
+ "is_decision": true,
+ "respend": false,
+ "reason": "backfilled 2026-11-09 from the registry: PREREG_EntrySearch_2026-11-07: 2 finalists judged here",
+ "prior_decisions": 0,
+ "recorded_utc": "2026-11-08T20:25:41.187407+00:00",
+ "commit": "a48bd62"
+}

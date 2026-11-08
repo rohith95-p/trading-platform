@@ -42,6 +42,12 @@ if "MetaTrader5" not in sys.modules:
 # Prevent any test from sending live network alerts, even if individual tests don't patch
 os.environ["ULTRA_DISABLE_ALERTS"] = "1"
 
+# BacktestEngine.run records every backtest to the trial ledger (research/trials/)
+# so the deflated Sharpe's N is a query rather than a recollection. The suite runs
+# hundreds of backtests that are not research trials, so it must not pollute the
+# ledger. Tests that exercise the ledger itself re-enable it against a tmp_path.
+os.environ["ULTRA_NO_TRIAL_LEDGER"] = "1"
+
 
 @pytest.fixture(autouse=True)
 def silence_all_alerts():

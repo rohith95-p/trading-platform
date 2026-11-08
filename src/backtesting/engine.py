@@ -1552,6 +1552,28 @@ class BacktestEngine:
         if cfg.risk_rules_enforce:
             self.diag["risk_state_final"] = self.rr_state.to_dict()
 
+        # -- trial ledger ------------------------------------------------
+        # Recorded automatically, because the failure mode being fixed is a human
+        # forgetting to count. The deflated Sharpe needs N (how many
+        # configurations were tried) and the per-variant return series for the
+        # effective-N correction; before 2026-11-09 this project could supply
+        # neither, so DSR had to be run against a guess. Disabled by
+        # ULTRA_NO_TRIAL_LEDGER (set in tests/conftest.py). Never raises.
+        try:
+            from src.research.ledger import record_trial
+
+            w_start = int(start_ts) if start_ts else int(self._m15_t[cfg.warmup_bars])
+            w_end = int(end_ts) if end_ts else int(self._m15_t[-1])
+            record_trial(
+                strategies=[getattr(s, "name", type(s).__name__) for s in strategies],
+                window=(w_start, w_end),
+                pls=[t.net_pl for t in self.trades],
+                engine_config=cfg.as_dict(),
+                cost=self.cost.descriptor(),
+            )
+        except Exception:
+            pass
+
         return BacktestResult(
             trades=self.trades,
             equity=self.equity,
