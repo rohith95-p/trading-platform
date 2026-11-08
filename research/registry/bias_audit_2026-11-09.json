@@ -1,0 +1,53 @@
+{
+ "BASE     (as published)": {
+  "trades": 2556,
+  "net": -1311.35,
+  "pf": 0.9,
+  "win": 35.6,
+  "diag": {
+   "ambiguous_bars": 2,
+   "ambiguous_given_to_tp": 0,
+   "gapped_stops": 0,
+   "gapped_stop_extra_usd": 0.0,
+   "bars_skipped_no_m1": 0
+  }
+ },
+ "GENEROUS (tp first)": {
+  "trades": 2556,
+  "net": -1284.1,
+  "pf": 0.902,
+  "win": 35.7,
+  "diag": {
+   "ambiguous_bars": 2,
+   "ambiguous_given_to_tp": 2,
+   "gapped_stops": 0,
+   "gapped_stop_extra_usd": 0.0,
+   "bars_skipped_no_m1": 0
+  }
+ },
+ "HARSH    (gap fills)": {
+  "trades": 2556,
+  "net": -1426.65,
+  "pf": 0.892,
+  "win": 35.6,
+  "diag": {
+   "ambiguous_bars": 2,
+   "ambiguous_given_to_tp": 0,
+   "gapped_stops": 122,
+   "gapped_stop_extra_usd": 115.29599999999766,
+   "bars_skipped_no_m1": 0
+  }
+ },
+ "swap_check": {
+  "shorts_paying": 0,
+  "intraday_paying": 0,
+  "total": -178.36
+ },
+ "verdict": "NEGATIVE VERDICT ROBUST -- even the most favourable reading the data allows stays below breakeven",
+ "live": {
+  "engine_net": 278.1,
+  "engine_trades": 10,
+  "broker_net": 112.45,
+  "broker_trades": 2
+ }
+}
