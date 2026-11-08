@@ -332,6 +332,20 @@ class EngineConfig:
     # external data. Tested rohith-2 iter 4 against the 4-year regime swings.
     equity_pause_dd: float = 0.0
     equity_resume_dd: float = 0.0
+    # -- bias-audit knobs (PREREG_BiasAudit_2026-11-09) -------------------
+    # Both default to the behaviour this engine has always had, so leaving them
+    # alone changes nothing. They exist so the two known intrabar biases can be
+    # BOUNDED by measurement instead of argued about.
+    #
+    # ambiguous_resolution: when one M1 bar touches both stop and target the true
+    #   tick order is unknown. "sl_first" (default, and what every published
+    #   result here used) books the loss -- pessimistic. "tp_first" books the win,
+    #   which is the most favourable reading the data permits.
+    # gap_fill_stops: by default a stop fills exactly at its level however far the
+    #   bar ran past it, which flatters losses. True fills at the bar's open when
+    #   the bar opened already beyond the stop, as a real market stop would.
+    ambiguous_resolution: str = "sl_first"
+    gap_fill_stops: bool = False
     spread_gate_points: float = 350.0
     spread_gate_blocks_management: bool = True   # HIGH-7: the bug at HEAD
     lot_cap: Optional[float] = None              # the lost 0.01 guard
@@ -601,6 +615,9 @@ class BacktestEngine:
             "duplicate_entries": 0,
             "pyramid_entries": 0,
             "ambiguous_bars": 0,
+            "ambiguous_given_to_tp": 0,
+            "gapped_stops": 0,
+            "gapped_stop_extra_usd": 0.0,
             "management_skipped_spread": 0,
             "daily_shutdowns": 0,
             "bars_without_m1": 0,
@@ -1081,6 +1098,39 @@ class BacktestEngine:
             run += abs(b - a)
         pos.hit_frac = 0.5
 
+    def _stop_fill(self, pos: Position, bar: np.ndarray, point: float,
+                   slip: float, spread_pts: Optional[float]) -> float:
+        """Where a stop-out actually fills.
+
+        Default (and every published result in this repo): exactly at the stop
+        level, however far the bar ran past it. That flatters losses, because a
+        real market stop on a bar that OPENED beyond the level fills at the open,
+        not at the level. `gap_fill_stops` models that, so the size of the
+        flattery can be measured. See PREREG_BiasAudit_2026-11-09.
+        """
+        if pos.is_buy:
+            px = pos.sl - slip
+            if not self.cfg.gap_fill_stops:
+                return px
+            o = float(bar["open"])
+            if o < pos.sl:
+                self.diag["gapped_stops"] += 1
+                self.diag["gapped_stop_extra_usd"] += (
+                    (pos.sl - o) * self._value_per_price(pos.lots))
+                return o - slip
+            return px
+        # a short exits on ask
+        px = pos.sl + slip
+        if not self.cfg.gap_fill_stops:
+            return px
+        ask_o = self.cost.ask(float(bar["open"]), point, spread_pts)
+        if ask_o > pos.sl:
+            self.diag["gapped_stops"] += 1
+            self.diag["gapped_stop_extra_usd"] += (
+                (ask_o - pos.sl) * self._value_per_price(pos.lots))
+            return ask_o + slip
+        return px
+
     def _walk_minute(self, pos: Position, bar: np.ndarray, ts: int, point: float,
                      ambiguous: bool, is_m15_close: bool = False) -> Optional[Tuple[float, str]]:
         """Advance one position through one M1 bar. Returns (exit_price, reason) if hit.
@@ -1113,9 +1163,13 @@ class BacktestEngine:
             if hit_sl and hit_tp:
                 pos.intrabar_ambiguous = True
                 self.diag["ambiguous_bars"] += 1
+                if self.cfg.ambiguous_resolution == "tp_first":
+                    self.diag["ambiguous_given_to_tp"] += 1
+                    self._note_hit(pos, bar, pos.tp, spread_pts, point)
+                    return pos.tp, "TP"
             if hit_sl:
                 self._note_hit(pos, bar, pos.sl, spread_pts, point)
-                return pos.sl - slip, "SL"
+                return self._stop_fill(pos, bar, point, slip, spread_pts), "SL"
             if hit_tp:
                 self._note_hit(pos, bar, pos.tp, spread_pts, point)
                 return pos.tp, "TP"
@@ -1138,9 +1192,13 @@ class BacktestEngine:
             if hit_sl and hit_tp:
                 pos.intrabar_ambiguous = True
                 self.diag["ambiguous_bars"] += 1
+                if self.cfg.ambiguous_resolution == "tp_first":
+                    self.diag["ambiguous_given_to_tp"] += 1
+                    self._note_hit(pos, bar, pos.tp, spread_pts, point)
+                    return pos.tp, "TP"
             if hit_sl:
                 self._note_hit(pos, bar, pos.sl, spread_pts, point)
-                return pos.sl + slip, "SL"
+                return self._stop_fill(pos, bar, point, slip, spread_pts), "SL"
             if hit_tp:
                 self._note_hit(pos, bar, pos.tp, spread_pts, point)
                 return pos.tp, "TP"
