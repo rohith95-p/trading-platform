@@ -6,6 +6,7 @@ columns never become features. Production modules/settings are not modified.
 from dataclasses import asdict, replace
 from datetime import datetime, timedelta
 import hashlib
+import gzip
 import json
 import os
 from pathlib import Path
@@ -17,6 +18,14 @@ from zoneinfo import ZoneInfo
 
 import numpy as np
 import pandas as pd
+
+# market_hours freezes this environment at import. Only the separately launched
+# research runner lifts the owner's live night window; importing research helpers
+# into tests/application code must not change process settings.
+if __name__ == "__main__":
+    os.environ["ULTRA_TRADE_24H"] = "1"
+    os.environ["ULTRA_DISABLE_ALERTS"] = "1"
+    os.environ["ULTRA_NO_TRIAL_LEDGER"] = "1"
 
 from src.backtesting.costs import SCENARIOS
 from src.backtesting.data import BarSet
@@ -313,7 +322,15 @@ def main():
         if isinstance(x, (float, np.floating)) and not np.isfinite(x):
             return None
         return x.item() if hasattr(x, "item") else x
-    OUT.write_text(json.dumps(clean(report), indent=2, allow_nan=False) + "\n", encoding="utf-8")
+    full = clean(report)
+    full_path = OUT.with_suffix(".json.gz")
+    with gzip.open(full_path, "wt", encoding="utf-8") as stream:
+        json.dump(full, stream, allow_nan=False)
+    for key, result in full["results"].items():
+        samples = result.pop("equity_samples")
+        result["equity_samples_archive"] = dict(path=str(full_path.relative_to(ROOT)),
+            result_key=key, rows=len(samples), archive_sha256=sha(full_path))
+    OUT.write_text(json.dumps(full, indent=2, allow_nan=False) + "\n", encoding="utf-8")
     print("GATES", json.dumps(gates), flush=True)
 
 

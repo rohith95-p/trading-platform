@@ -76,7 +76,8 @@ def test_closed_atr_adapter_is_independent_of_forming_bar_future_range():
 
 
 def test_actual_engine_fills_only_at_delayed_open_and_exits_by_fixed_horizon(monkeypatch):
-    monkeypatch.setenv("ULTRA_TRADE_24H", "1")
+    from src.backtesting import engine as engine_module
+    monkeypatch.setattr(engine_module.market_hours, "ENFORCE_TRADING_WINDOW", False)
     bars = make_bars(price_fn=lambda t: 4000. + .1 * np.sin(t / 2000.), spread=20)
     release = DAY + 12 * 3600
     feature = dict(direction=1, latest_feature_close_time=release + 1800)
@@ -87,3 +88,17 @@ def test_actual_engine_fills_only_at_delayed_open_and_exits_by_fixed_horizon(mon
     assert trade.exit_time <= release + 105 * 60
     assert balance == pytest.approx(5000. + trade.net_pl)
     assert result.diagnostics["exits_unchecked_no_m1"] == 0
+
+
+def test_night_window_requires_explicit_research_process_configuration(monkeypatch):
+    from src.backtesting import engine as engine_module
+    bars = make_bars(price_fn=lambda t: 4000. + .1 * np.sin(t / 2000.), spread=20)
+    release = DAY + 18 * 3600
+    feature = dict(direction=1, latest_feature_close_time=release + 1800)
+    monkeypatch.setattr(engine_module.market_hours, "ENFORCE_TRADING_WINDOW", True)
+    blocked, _ = replay_one(bars, release, feature, SCENARIOS["observed"], 5000., "candidate")
+    assert not blocked.trades
+    monkeypatch.setattr(engine_module.market_hours, "ENFORCE_TRADING_WINDOW", False)
+    allowed, _ = replay_one(bars, release, feature, SCENARIOS["observed"], 5000., "candidate")
+    assert len(allowed.trades) == 1
+    assert allowed.trades[0].entry_time == release + 45 * 60
