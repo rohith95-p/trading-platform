@@ -16,6 +16,7 @@ from src.backtesting.engine import BacktestEngine, EngineConfig
 from src.backtesting.data import load_bars
 from src.backtesting.costs import SCENARIOS
 from src.backtesting.metrics import summarize
+from src.backtesting.report import format_metric
 
 
 ts = lambda y, m, d: int(dt.datetime(y, m, d, tzinfo=dt.timezone.utc).timestamp())
@@ -63,7 +64,7 @@ def run_and_report(strat_classes, label, bars_obj, start, end, balance):
 
     d = summarize(res.trades, res.equity, balance).to_dict()
     n = d.get("trades", 0)
-    pf = d.get("profit_factor", 0)
+    pf = d.get("profit_factor")
     wr = d.get("win_rate", 0)
     net = d.get("net_pl", 0)
 
@@ -102,7 +103,7 @@ def run_and_report(strat_classes, label, bars_obj, start, end, balance):
             break
 
     return {
-        "n": n, "pf": pf, "wr": wr, "net": net,
+        "n": n, "pf": pf, "pf_status": d.get("profit_factor_status"), "wr": wr, "net": net,
         "max_dd_pct": dd_pct, "worst_day_pct": worst_day_pct,
         "profit_days": profit_days, "best_day_share": best_day_share,
         "days_to_target": days_to_target, "total_days": len(daily_pls),
@@ -126,10 +127,10 @@ for config_name, strat_classes in configs:
         atlas_daily_ok = "PASS" if r["worst_day_pct"] > -5 else "FAIL"
         target_str = "%dd" % r["days_to_target"] if r["days_to_target"] else "NOT HIT"
 
-        print("  %-10s n=%3d PF=%.2f wr=%.0f%% net=$%+.0f | "
+        print("  %-10s n=%3d PF=%s wr=%.0f%% net=$%+.0f | "
               "DD=%.1f%%[%s] DailyLoss=%.1f%%[%s] | "
               "ProfitDays=%d BestDay=%.0f%% Target=%s"
-              % (split_name, r["n"], r["pf"], r["wr"], r["net"],
+              % (split_name, r["n"], format_metric(r["pf"], 2), r["wr"], r["net"],
                  r["max_dd_pct"], atlas_dd_ok, r["worst_day_pct"], atlas_daily_ok,
                  r["profit_days"], r["best_day_share"], target_str))
 

@@ -18,6 +18,7 @@ count via `metrics.k_eff_correction`.
 """
 from __future__ import annotations
 
+import math
 from dataclasses import asdict
 from typing import Any, Dict, Optional, Sequence
 
@@ -30,6 +31,16 @@ from src.backtesting.metrics import (
     monte_carlo_paths,
     summarize,
 )
+
+
+def format_metric(value, precision: int = 3) -> str:
+    """Display a finite ratio or n/a; undefined values remain null in data."""
+    return f"{value:.{precision}f}" if value is not None and math.isfinite(value) else "n/a"
+
+
+def metric_at_least(value, threshold: float) -> bool:
+    """A missing/nonfinite estimate cannot satisfy a finite screening threshold."""
+    return value is not None and math.isfinite(value) and value >= threshold
 
 
 def _skew(a: np.ndarray) -> float:
@@ -216,6 +227,8 @@ def format_report(rep: Dict[str, Any]) -> str:
             row(k, st[k])
 
     lines.append("-- risk-adjusted --")
+    row("profit_factor_status", st.get("profit_factor_status"))
+    row("sortino_status", st.get("sortino_status"))
     row("drawdown_basis", st.get("drawdown_basis"))
     row("sortino_basis", st.get("sortino_basis"))
     for k in ("sortino_ratio", "omega_ratio", "calmar_ratio", "recovery_factor",

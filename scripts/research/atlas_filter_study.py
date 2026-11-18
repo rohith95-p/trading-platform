@@ -28,6 +28,7 @@ os.chdir(ROOT)
 from src.backtesting.engine import BacktestEngine, EngineConfig
 from src.backtesting.data import load_bars
 from src.backtesting.costs import SCENARIOS
+from src.backtesting.report import format_metric
 from src.strategies.portfolio_atlas import PORTFOLIO
 
 OUT = os.path.join(ROOT, "research", "results", "atlas_filter_study")
@@ -271,7 +272,7 @@ def confirm():
             for t in res.trades:
                 k = t.exit_time // 86400
                 day[k] = day.get(k, 0) + t.net_pl
-            line += (f"| {d['trades']:4d} {d['win_rate']:4.1f} {d['profit_factor']:4.2f} {d['net_pl']:6.0f} "
+            line += (f"| {d['trades']:4d} {d['win_rate']:4.1f} {format_metric(d['profit_factor'], 2):>4s} {d['net_pl']:6.0f} "
                      f"{d['max_drawdown_pct']:6.1f} {min(day.values(), default=0):8.0f}   ")
         print(line, flush=True)
 

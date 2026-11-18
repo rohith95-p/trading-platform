@@ -14,6 +14,7 @@ from src.backtesting.engine import BacktestEngine, EngineConfig
 from src.backtesting.data import load_bars
 from src.backtesting.costs import SCENARIOS
 from src.backtesting.metrics import summarize
+from src.backtesting.report import format_metric, metric_at_least
 from src.strategies.momentum_strategies import (
     D1EMACrossover,
     DonchianBreakout20,
@@ -75,17 +76,17 @@ for strat_name, factory in STRATEGY_FACTORIES:
         key = (strat_name, split_name)
         results[key] = d
 
-        pf = d.get("profit_factor", 0)
+        pf = d.get("profit_factor")
         n_trades = d.get("trades", 0)
         win_rate = d.get("win_rate", 0)
         net = d.get("net_pl", 0)
 
         passed = True
-        if split_name == "DEV" and pf < 1.2:
+        if split_name == "DEV" and not metric_at_least(pf, 1.2):
             passed = False
-        elif split_name == "VALIDATE" and pf < 1.1:
+        elif split_name == "VALIDATE" and not metric_at_least(pf, 1.1):
             passed = False
-        elif split_name == "HOLDOUT" and pf < 1.0:
+        elif split_name == "HOLDOUT" and not metric_at_least(pf, 1.0):
             passed = False
         if dd_pct > 35:
             passed = False
@@ -94,7 +95,7 @@ for strat_name, factory in STRATEGY_FACTORIES:
 
         status = "PASS" if passed else "FAIL"
 
-        print(f"  {split_name:10s} n={n_trades:4d} win={win_rate:5.1f}% PF={pf:.3f} "
+        print(f"  {split_name:10s} n={n_trades:4d} win={win_rate:5.1f}% PF={format_metric(pf)} "
               f"net=${net:8.2f} end=${bal[-1]:8.2f} maxDD=${max_dd:7.2f} ({dd_pct:4.1f}%) "
               f"avgLoss=${np.mean(losses) if losses else 0:.2f} [{status}]", flush=True)
 
@@ -124,7 +125,7 @@ for split_name, start, end in SPLITS:
     max_dd = (peak - bal).max()
     dd_pct = max_dd / peak[np.argmax(peak - bal)] * 100 if len(peak) > 0 and peak.max() > 0 else 0
 
-    pf = d.get("profit_factor", 0)
+    pf = d.get("profit_factor")
     n_trades = d.get("trades", 0)
     win_rate = d.get("win_rate", 0)
     net = d.get("net_pl", 0)
@@ -134,7 +135,7 @@ for split_name, start, end in SPLITS:
     for t in res.trades:
         by_strat.setdefault(t.strategy, []).append(t)
 
-    print(f"  {split_name:10s} n={n_trades:4d} win={win_rate:5.1f}% PF={pf:.3f} "
+    print(f"  {split_name:10s} n={n_trades:4d} win={win_rate:5.1f}% PF={format_metric(pf)} "
           f"net=${net:8.2f} end=${bal[-1]:8.2f} maxDD=${max_dd:7.2f} ({dd_pct:4.1f}%)", flush=True)
     for sn, trades in sorted(by_strat.items()):
         gross = sum(t.gross_pl for t in trades)

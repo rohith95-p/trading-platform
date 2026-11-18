@@ -69,7 +69,8 @@ if __name__ == "__main__":
             for t in res.trades:
                 m = dt.datetime.fromtimestamp(t.exit_time, dt.timezone.utc).strftime("%m")
                 monthly[m] = round(monthly.get(m, 0) + t.net_pl, 2)
-            rec.update(n=d["trades"], win=d["win_rate"], pf=d["profit_factor"], net=d["net_pl"],
+            rec.update(n=d["trades"], win=d["win_rate"], pf=d["profit_factor"],
+                       pf_status=d.get("profit_factor_status"), net=d["net_pl"],
                        maxdd=d["max_drawdown"], avg_win_r=d.get("avg_win_r"), avg_loss_r=d.get("avg_loss_r"),
                        exp_r=d.get("expectancy_r"), monthly=monthly)
         except Exception as e:

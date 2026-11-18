@@ -17,6 +17,7 @@ from src.backtesting.engine import BacktestEngine, EngineConfig
 from src.backtesting.data import load_bars
 from src.backtesting.costs import SCENARIOS
 from src.backtesting.metrics import summarize
+from src.backtesting.report import format_metric
 from src.strategies.base_strategy import BaseStrategy, Signal, mt5
 from src.strategies.momentum_strategies import _build_d1_from_m15, _ema
 
@@ -136,11 +137,11 @@ for ch, ma, sl, tp in VARIANTS:
         peak = np.maximum.accumulate(bal)
         max_dd = (peak - bal).max()
         dd_pct = max_dd / peak[np.argmax(peak - bal)] * 100 if len(peak) > 0 and peak.max() > 0 else 0
-        pf = d.get("profit_factor", 0)
+        pf = d.get("profit_factor")
         n = d.get("trades", 0)
         wr = d.get("win_rate", 0)
         net = d.get("net_pl", 0)
-        row += " n=%2d PF=%.2f wr=%.0f%% $%+.0f DD%.0f%% |" % (n, pf, wr, net, dd_pct)
+        row += " n=%2d PF=%s wr=%.0f%% $%+.0f DD%.0f%% |" % (n, format_metric(pf, 2), wr, net, dd_pct)
     print(row, flush=True)
 
 print("\nDone.", flush=True)

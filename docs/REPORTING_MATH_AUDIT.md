@@ -104,3 +104,31 @@ Corrected annualized risk ratios for that study require the complete separate
 including non-event and no-position time. Reusing only event trade timestamps
 would again omit idle exposure time. The original run hash, configuration,
 outcomes and rejection classification remain intact.
+
+## Nullable-consumer compatibility verification
+
+Audited repository callers of the normal `summarize`/`full_report` entry points.
+Repaired reachable float-formatting failures in `atlas_filter_study.py --confirm`,
+legacy momentum/portfolio output, legacy Atlas backtest output and legacy
+Donchian sweep output. A shared finite formatter prints **n/a**, retaining null
+in stored data. Legacy momentum numeric PF comparisons now fail a missing
+estimate without a TypeError; existing finite thresholds remain unchanged.
+The all-strategy JSON export already supported null and now also carries
+`pf_status` rather than dropping its reason. The active FOMC qualification
+condition already checks PF is not None and needed no compatibility change.
+
+Normal human-readable reports now print PF and Sortino status alongside n/a
+and the existing metric basis. Undefined PF is never converted to zero or
+infinity for presentation or used to pass a numeric screen.
+
+```
+.\venv\Scripts\python.exe -m pytest tests/test_nullable_metric_consumers.py tests/test_reporting_math.py tests/test_report_suite.py tests/test_bootstrap_ci.py -q
+```
+
+**46 focused tests passed**, including normal no-trade/no-loss reports and
+actual legacy format/gate expressions evaluated with normal summary data.
+Legacy modules run backtests on import, so tests parse and execute only their
+pure presentation or gate blocks; no historical research was rerun. All five
+modified legacy scripts also passed `py_compile`. Their old coarse execution,
+data sources, historical rule references and old-study limitations remain
+legacy and are not certified by these presentation repairs.
