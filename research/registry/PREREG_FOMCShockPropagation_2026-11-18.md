@@ -26,3 +26,7 @@ Run through BacktestEngine only, actual RiskManager stop geometry, minute protec
 ## Implementation clarification before any price evaluation
 
 The engine's ordinary ATR call includes a synthetic flat forming bar, while this protocol specifies closed-bar ATR. A research-only BacktestEngine subclass will pass `m15_view[:-1]` into the original RiskManager.calculate_atr_stops, preserving its actual seeded ATR14, rounding and2/4multipliers. It does not implement a separate stop formula. A minute-clock policy reads only engine equity samples tagged `open`, because the policy also receives prior interval-end callbacks at the same timestamp; that end callback must not submit an entry or time-exit before the new opening quote exists. A synthetic test must distinguish the previous close from the next open across a gap.
+
+## Disclosed harness bootstrap repair before valid fill evaluation
+
+The first run generated signals but zero orders because market_hours cached the production night-window flag when imported, before the runner set its research24h environment in main. This is not evidence against the strategy, and no trade outcomes were obtained. Preserve the invalid zero-fill run as `fomc_shock_invalid_night_gate.json.gz`. Configure research-only process environment before engine import at module execution, add a night-clock integration regression, then replay the unchanged predetermined14:45ET rules. No production file or production process setting is changed. Archive data/master sourcing, features, thresholds and exits remain unchanged.
