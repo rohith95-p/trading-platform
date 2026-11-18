@@ -1,0 +1,41 @@
+{
+  "source_sha256": {
+    "src/backtesting/engine.py": "4f52ab500a8ca352d8d501ed8887ddd547f472c42ffca77e8fdb222b08861151",
+    "src/backtesting/costs.py": "5a015315ebab25ef976912f297c2144b9ec817ae5cf7108ef3502fe9406d74f7",
+    "src/core/risk_manager.py": "fb593c2c5581d01580d5b7bac8fda74a21d201625df382d230d91748c2559b1f",
+    "scripts/validation/tick_fixture_reconciliation.py": "1c08cc6840d00f53493cd147b8989d405504c84c443929010cbc2e3402b4a546",
+    "scripts/validation/mt5_demo_tick_capture.py": "f62c02cb806fe55c899e68edd174534cd927a3b48018b6921f9cc892948024ed",
+    "tests/test_tick_execution_fixture.py": "7c647ac3c6ac51340044e1731df74352ab60d3acea12d89e05256e107b6793d5"
+  },
+  "acquisition_logs": [
+    {
+      "url": "https://datafeed.dukascopy.com/datafeed/XAUUSD/2025/00/06/12h_ticks.bi5",
+      "status": null,
+      "error": "<urlopen error [WinError 10054] An existing connection was forcibly closed by the remote host>"
+    },
+    {
+      "url": "https://jetta.dukascopy.com/v1/ticks/XAU-USD/2025/1/6/12",
+      "status": 202,
+      "headers": {
+        "x-amzn-waf-action": "challenge",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "local_cache_inventory": {
+    "provider_directory": "Exness-MT5Trial11",
+    "symbol": "XAUUSDm",
+    "file": "202610.tkc",
+    "bytes": 1452957,
+    "last_write_utc": "2026-10-19T15:06:36Z",
+    "terminal_running": false,
+    "decoded": false,
+    "demo_identity_verified": false,
+    "reason": "No running terminal; proprietary cache was not reinterpreted as certified ticks. No terminal auto-launch or account sign-in performed."
+  },
+  "historical_tick_verification": false,
+  "orders_sent": 0,
+  "holdout_accessed": false
+}

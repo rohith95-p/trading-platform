@@ -173,3 +173,33 @@ The short previously explored benchmark is engineering evidence only. It is not
 a new edge, holdout evaluation, Atlas pass/payout simulation or broker fill audit.
 See `research/registry/RESULT_SampledEquity_2026-11-18.md` and full machine-readable
 records under `research/results/sampled_equity_2026-11-18/`.
+
+## Raw-tick source attempt and read-only demo capture fallback
+
+The precommitted `PREREG_TickReconciliation_2026-11-18.md` fixed a Jan 6, 2025,
+12:00–13:00 UTC raw-quote comparison. The official archive connection reset;
+one alternate official-domain API request returned HTTP 202 with WAF challenge
+and an empty body. This was recorded as blocked acquisition, never empty market
+data. No retry, challenge bypass or paid storage was used. Historical tick
+execution reconciliation therefore **remains incomplete**.
+
+A standard local native cache inventory found one Oct 2026 XAUUSDm `.tkc` under
+an Exness-MT5Trial11 directory. No MT5 terminal was running; demo identity was not
+verified and the proprietary file was not decoded or relabeled certified ticks.
+
+`scripts/validation/mt5_demo_tick_capture.py` now provides bounded, pre-holdout,
+read-only capture from an explicitly pinned **already-running demo** terminal.
+It checks exact executable path, login/server and actual demo mode; real/contest
+accounts and identity changes fail closed. It never signs in, auto-launches a
+terminal, changes trading settings or sends orders. It has not been connected to
+an actual terminal in this study.
+
+`scripts/validation/tick_fixture_reconciliation.py` was executed using **66 toy
+quotes**, explicitly synthetic, against the actual M1 engine and a separate
+ordered bid/ask quote replay. Known target-before-stop ordering and ask-only
+spread widening produce opposite protective exits between tick and M1 paths.
+These cases verify why M1 approximation can differ; they do not measure how
+often that happens historically or calibrate intended-broker execution. **14
+focused capture/replay tests passed**, using an offline mock terminal. Complete
+source-status, fixture and price/time/P&L/DD evidence is under
+`research/results/tick_reconciliation_2026-11-18/`; see the matching RESULT report.

@@ -1,0 +1,5 @@
+{
+  "url": "https://datafeed.dukascopy.com/datafeed/XAUUSD/2025/00/06/12h_ticks.bi5",
+  "status": null,
+  "error": "<urlopen error [WinError 10054] An existing connection was forcibly closed by the remote host>"
+}
