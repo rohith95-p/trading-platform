@@ -478,6 +478,8 @@ def _execute_signal(signal, m15_rates, fetcher, risk, executor, session_mult, se
     # ENFORCE is ever switched on. See src/core/risk_rules.py.
     try:
         _acct = mt5.account_info()
+        if _acct is None and risk_rules.ENFORCE:
+            raise RuntimeError("Account snapshot unavailable")
         if _acct is not None:
             _decision, _rstate = risk_rules.evaluate(
                 balance=_acct.balance, equity=_acct.equity,
@@ -492,13 +494,20 @@ def _execute_signal(signal, m15_rates, fetcher, risk, executor, session_mult, se
                     log.warning(f"[{signal.strategy_name}] BLOCKED by risk rules: {_decision.reason}")
                     _REFUSED["flag"] = True
                     return
-    except Exception as _e:  # shadow logging must never break execution
+    except Exception as _e:
+        if risk_rules.ENFORCE:
+            _REFUSED["flag"] = True
+            log.error("Order refused: risk evaluation failed: %s", _e)
+            return
         log.debug(f"risk_rules shadow evaluation skipped: {_e}")
 
     # Atlas rule engine pre-trade gate
-    if ATLAS_MODE and atlas_bridge.RUNTIME.get("engine") and atlas_bridge.RUNTIME.get("state"):
+    if ATLAS_MODE:
         try:
+            if not atlas_bridge.RUNTIME.get("engine") or atlas_bridge.RUNTIME.get("state") is None:
+                raise atlas_bridge.AtlasStateError("Atlas runtime engine/state unavailable")
             _acct_at = mt5.account_info()
+            atlas_bridge.require_persistence_ready(atlas_bridge.RUNTIME["state"], _acct_at)
             if _acct_at is not None:
                 _ai_at = _atlas_account_info(_acct_at)
                 _atr_val = risk.get_latest_atr(closed_m15) or 0.0

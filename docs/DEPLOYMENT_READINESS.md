@@ -15,14 +15,14 @@ A November22 deadline cannot turn a short prospective sample into proof of posit
 | Priority | Observation | Evidence / required closure |
 |---|---|---|
 | P0 | No qualified trading edge from recovered studies | `research/STRATEGY_VALIDATION_REPORT.md`; final research policy is abstain unless a new candidate passes |
-| P0 | Atlas state loader returns fresh state after corruption or phase mismatch | `src/core/atlas_bridge.py::_load_atlas_state`; bind account/server/program/phase and reconcile authoritative equity/strikes before resuming |
+| P0 | Established-account state requires reviewed migration before upgrading | Fresh-reset defect repaired: schema2 account/server/program/phase/rule/capital binding, durable-save authorization and pending-write refusal. Existing legacy/corrupt/missing histories intentionally cannot restart until offline authoritative reconciliation. See `ATLAS_STATE_RECOVERY.md`; no actual account migrated |
 | P0 | Broker/account-specific Atlas rules and XAUUSD contract unverified | User is researching before buying; current official-page review cannot substitute for signed account terms and broker probe |
 | P0 | No independently reconciled real-tick / demo execution record for final candidate | Need signal→intent→request→order→deal→position journal, unknown/partial fill recovery and equity/cost reconciliation |
 | P1 | Validation ledger can be bypassed with `ULTRA_ALLOW_UNVALIDATED=1` | Startup source; a release must explicitly reject/record this override and require a validated release identity |
 | P1 | Existing demo switch relaxes daily and some streak/hard controls | `risk_rules.py`; demo does not imply same risk behavior or a no-order mode |
 | P1 | Broker profile differences warn and continue | Startup source; define which contract, clock, account or margin discrepancies must prevent orders |
 | P1 | Release activation and runtime rollback remain unverified | Unsafe latest-master/all-Python updater was replaced with pinned, hash-verified prepare-only workflow. No production stop/start/copy remains. A reviewed activation, account-state preservation and rollback drill are still required |
-| P1 | Runbook includes all-Python stop and state deletion advice | `OPS_RUNBOOK.md`; follow a reviewed targeted procedure, never delete account risk history casually |
+| P1 | Legacy runbook includes all-Python stop advice | Follow a reviewed targeted procedure. State-deletion advice has been superseded by `ATLAS_STATE_RECOVERY.md`; never reset account risk history |
 | P1 | Watchdog heartbeat timeout is300 seconds | `scripts/watchdog.py`; heartbeat recovery is not independent quote-speed risk supervision; test stale/blocked-loop and network-loss behavior |
 | P1 | Dependency/CI runtime compatibility not certified | CI says Python3.11 while current requirements contain newer pinned numpy/pandas/scipy; fresh clean installation must prove compatibility |
 | P1 | Research files remain outside committed release | November11 source/data/results were untracked at recovery; committing old results now does not retroactively establish preregistration |
@@ -104,3 +104,7 @@ powershell -NoProfile -File scripts/vps_update.ps1 -Revision <40-character-SHA> 
 ```
 
 Do not run a connected preflight merely to satisfy a deadline. An isolated terminal/account and explicit intended identity must be available first. Current package remains **prepared, not deployed**, and the selected strategy remains unqualified unless separate final evidence changes that verdict.
+
+## Atlas state protection completed
+
+Account-bound schema2 persistence and the order/monitor readiness guard now refuse missing, corrupt, legacy unbound, mismatched and unsuccessfully saved state. No original strategy, lot, session, stop, target or rule level was changed. The inherited risk-evaluation exception refusal was preserved in `order_flow.py`.89 focused state/halt/glue/freeze/config tests passed. The read-only/offline migration tool prepares a separate reviewed artifact and refuses to overwrite runtime state; it does not verify the truth of supplied dashboard/history values. Established deployments require explicit migration before their next startup. No actual runtime file was migrated and no running service was changed. Full procedure and remaining limitations: `ATLAS_STATE_RECOVERY.md`.

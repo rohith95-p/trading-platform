@@ -323,7 +323,7 @@ def startup():
         try:
             _acct_init = mt5.account_info()
             atlas_engine, atlas_state, atlas_monitor = _init_atlas(
-                float(_acct_init.balance), float(_acct_init.equity))
+                float(_acct_init.balance), float(_acct_init.equity), account=_acct_init)
             _ATLAS_RT.update(engine=atlas_engine, state=atlas_state, monitor=atlas_monitor)
             log.info(f"ATLAS: rule engine loaded (phase={atlas_state.phase}, "
                      f"balance=${atlas_state.initial_balance:.2f}, "
@@ -532,6 +532,9 @@ def _run_guarded():
             if ATLAS_MODE and atlas_engine and atlas_state:
                 try:
                     _acct_atlas = mt5.account_info()
+                    if _acct_atlas is None:
+                        raise atlas_bridge.AtlasStateError("Atlas account snapshot unavailable")
+                    atlas_bridge.require_persistence_ready(atlas_state, _acct_atlas)
                     if _acct_atlas is not None:
                         _ai = _atlas_account_info(_acct_atlas)
                         atlas_engine.update_state(_ai, atlas_state, datetime.now(timezone.utc))

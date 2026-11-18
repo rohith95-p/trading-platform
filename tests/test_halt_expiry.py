@@ -53,17 +53,24 @@ def test_atlas_state_round_trip_and_resume():
     st = AtlasState.new(initial_balance=5000.0, now_utc=datetime(2026, 11, 2, 9, tzinfo=UTC), equity=5000.0)
     st.peak_equity, st.day_ref_equity, st.day_high_equity = 5320.5, 5290.0, 5301.0
     st.cycle_day_profits[datetime(2026, 11, 2).date()] = 1.25
+    from types import SimpleNamespace
+    binding = atlas_bridge.account_binding(SimpleNamespace(login=123, server="test-demo"), "evaluation",
+                                           SimpleNamespace(rules={"test": {"value": 1}}))
+    st = atlas_bridge.bind_reconciled_state(st.to_json(), binding, {"reviewed_history": "test reviewed history"})
     main_loop._save_atlas_state(st)
-    back = main_loop._load_atlas_state("evaluation")
+    back = main_loop._load_atlas_state("evaluation", binding=binding)
     assert back == st
-    assert main_loop._load_atlas_state("funded") is None          # other phase: start fresh
+    with pytest.raises(atlas_bridge.AtlasStateError):
+        main_loop._load_atlas_state("funded", binding=binding)
 
 
-def test_corrupt_or_missing_state_starts_fresh():
-    assert main_loop._load_atlas_state("evaluation") is None
+def test_corrupt_or_missing_state_refuses_fresh_risk_anchors():
+    with pytest.raises(atlas_bridge.AtlasStateError):
+        main_loop._load_atlas_state("evaluation", binding={})
     with open(atlas_bridge.ATLAS_STATE_FILE, "w") as f:
         f.write("{broken")
-    assert main_loop._load_atlas_state("evaluation") is None
+    with pytest.raises(atlas_bridge.AtlasStateError):
+        main_loop._load_atlas_state("evaluation", binding={})
 
 
 def test_pulse_says_paused_with_resume_time():

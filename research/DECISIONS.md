@@ -45,3 +45,8 @@ no longer exists; the current ones come from a committed pipeline that can be re
 (`scripts/validation/audit_stats.py`). The shape of the result is the thing to remember: **this portfolio earns in
 trending gold and bleeds in quiet gold.** It lost money across the range-bound 2022-23 stretch and would have had
 its Atlas account frozen nine months in. A flat month is the expected bad case, not a surprise.
+
+
+## Finalization engineering — 18 November2026 (source only, not deployed)
+
+Owner requested finalization, demo-only readiness and correction of defects without changing production strategies or rule levels. Persisted Atlas history now uses explicit account/server/program/phase/rule/capital binding. Missing/corrupt/legacy/mismatched history refuses startup; failed durable saves disarm new-order authorization and attempt a persistent halt; pending saves prevent silently restoring looser anchors. Monitor/order gates recheck persistence readiness and account identity. Prior inherited generic risk-evaluation exceptions now refuse entries rather than proceeding. No signal, sizing, SL/TP, time, rule level or currently running service was changed. Existing-account migration is intentionally manual/offline and preserves source evidence; see `docs/ATLAS_STATE_RECOVERY.md`. This is an engineering safety correction, not a new profitability experiment or a claim of deployment.89 focused state/halt/glue/freeze/config tests passed; current full-suite result belongs in `docs/FINALIZATION_STATUS.md`.

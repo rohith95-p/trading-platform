@@ -72,8 +72,7 @@ trading loop. It sends one message and then waits.
 - **Everything else** (total drawdown, open-trade loss, margin, a rule-engine error, risk-rules hard halt,
   `halt set`): stays until you clear it with the command above. The watchdog restarts the bot within a minute.
 
-The Atlas peak equity and daily reference are saved in `logs/atlas_state.json` every scan, so a restart keeps the
-real floors. Delete that file only when starting a brand-new Atlas account.
+The Atlas peak equity and daily reference are saved in `logs/atlas_state.json` every scan. **Do not delete or reset this file to make startup pass.** The18 November2026 schema2 implementation requires account/server/program/phase/rule binding and refuses missing, corrupt or legacy unbound history. Prepare an explicitly reviewed offline migration using [ATLAS_STATE_RECOVERY.md](ATLAS_STATE_RECOVERY.md) before upgrading an established account. No automatic phase change or fresh reset is allowed.
 
 ## Freeze
 `tests/test_live_freeze.py` pins every live number (legs, magics, stops/targets, lot size, caps, Atlas thresholds,

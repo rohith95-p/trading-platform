@@ -77,7 +77,10 @@ class TestLiveDedupRegression:
 
         dedup_set = set()
 
-        with patch('src.core.market_hours.allow_new_entry', return_value=(True, "")):
+        account = SimpleNamespace(balance=5000., equity=5000., margin=0.)
+        # Isolate dedup from Atlas authorization; dedicated binding tests cover
+        # the fail-closed Atlas gate, which must never be bypassed by empty runtime.
+        with patch('src.core.order_flow.mt5.account_info', return_value=account), patch('src.core.market_hours.allow_new_entry', return_value=(True, "")), patch('src.core.order_flow.ATLAS_MODE', False):
             # First scan: should execute successfully
             res1 = main_loop._execute_signal(
                 signal=signal,
