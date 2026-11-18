@@ -1,0 +1,5 @@
+{
+  "reason": "Initial coupling checked destination M15 aggregate only, not every unexplained minute aggregate across whole gaps. Not valid under frozen proof; retained for audit, not final account evidence.",
+  "initial_runner_commit": "5e73e2a",
+  "no_strategy_or_acceptance_rule_change": true
+}

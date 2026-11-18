@@ -1,0 +1,17 @@
+{
+  "scope": "saved trace/cash arithmetic only; no independent strategy, tick or broker reconstruction",
+  "phases": [
+    {
+      "phase": "evaluation",
+      "trades": 0,
+      "observations": 2490,
+      "net_cash": 0,
+      "ledger_balance": 5000.0,
+      "last_observation": 1783370700,
+      "last_observation_utc": "2026-07-06T20:45:00+00:00",
+      "cash_identity_and_observed_floors_checked": true,
+      "post_stop_engine_settlements_not_ledgered": 0
+    }
+  ],
+  "actual_cash_received": 0
+}

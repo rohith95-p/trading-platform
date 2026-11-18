@@ -1,0 +1,28 @@
+{
+  "scope": "saved trace/cash arithmetic only; no independent strategy, tick or broker reconstruction",
+  "phases": [
+    {
+      "phase": "evaluation",
+      "trades": 9,
+      "observations": 37394,
+      "net_cash": 184.75399999999993,
+      "ledger_balance": 5184.754,
+      "last_observation": 1784811960,
+      "last_observation_utc": "2026-07-23T13:06:00+00:00",
+      "cash_identity_and_observed_floors_checked": true,
+      "post_stop_engine_settlements_not_ledgered": 0
+    },
+    {
+      "phase": "funded",
+      "trades": 12,
+      "observations": 50525,
+      "net_cash": -193.52300000001185,
+      "ledger_balance": 4806.476999999988,
+      "last_observation": 1787086680,
+      "last_observation_utc": "2026-08-18T20:58:00+00:00",
+      "cash_identity_and_observed_floors_checked": true,
+      "post_stop_engine_settlements_not_ledgered": 0
+    }
+  ],
+  "actual_cash_received": 0
+}
