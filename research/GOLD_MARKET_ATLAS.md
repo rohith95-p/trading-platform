@@ -1,5 +1,7 @@
 # Gold market atlas — 2026-11-18
 
+The [frozen four-lag M15 study](registry/RESULT_GoldM15Forecast_2026-11-18.md) measured how well the last hour of returns predicted the next move. Relative to a fixed training mean, the size forecast reduced squared error by 12.38% to 23.58% across three evaluation periods. The direction model failed its criterion.
+
 Exploratory empirical evidence, not a profitable strategy or independent holdout test.
 
 Protocol committed before computation, with a committed clarification after the first run exposed empty hourly/daily groups: volatility uses previous60 valid adjacent returns, not60 consecutive elapsed bars. That first run failed serialization; this correction is disclosed rather than called independent confirmation. Frozen November2026 observations excluded. All historical eras here have influenced prior project research; splitting them again does not restore independence.

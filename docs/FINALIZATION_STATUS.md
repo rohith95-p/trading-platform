@@ -1,5 +1,13 @@
 # Finalization checkpoint — 18 November 2026
 
+## Gold market research update
+
+The original research objective remains open. The most recent strategy experiment rejected the nominal Treasury auction short across 186 eligible auctions (PF 0.963, net −$18.21 at 0.02 lots). Its implementation and result are in commit 9a44c77. [Auction study](../research/registry/RESULT_TreasuryAuctionGold_2026-11-18.md)
+
+The latest market study compared signed and absolute M15 forecasts from a frozen 2004–2018 fit. The absolute-return model beat its historical-mean baseline in all three later periods. Direction failed the registered criterion. Protocol commit a99ffda precedes the result. Run `python -m scripts.research.gold_m15_forecast` from the repository root. Synthetic checks verified timestamps, gaps, nonfinite observations, lag order and the constant-gain bootstrap. The runner, machine-readable output, market atlas and registry result carry this update. [Full forecast results](../research/registry/RESULT_GoldM15Forecast_2026-11-18.md)
+
+The Shanghai premium source review identified a timing problem. The afternoon benchmark auction begins at 14:15 Shanghai time and can run for several rounds. The World Gold Council publishes daily observations on a weekly schedule today, and its older methodology describes monthly delivery. These sources do not establish when an individual daily premium first became public. An intraday study using this input still needs historical release timestamps and aligned onshore USD/CNY and XAUUSD quotes. Check publication timing before testing downstream gold returns. [Exchange specification](https://en.sge.com.cn/upload/file/201703/24/RGDmtsfPVEzy935O.pdf) · [Auction process](https://en.sge.com.cn/upload/file/201703/23/dQ9nse8KyRy3StIX.pdf) · [Current publication schedule](https://www.gold.org/goldhub/data/gold-premium) · [Earlier methodology](https://www.gold.org/sites/default/files/downloads/2019-01/Chinese-premium-discount-methodology.pdf)
+
 ## Current decision
 
 **Zero strategies qualify for Atlas deployment.** A positive evaluation result and an eligible reward are distinct milestones. The frozen four-leg system can pass the evaluation on one previously explored path under the provider-calendar assumption. That path alone cannot establish expected trader cash after funded losses, fees and program restrictions.

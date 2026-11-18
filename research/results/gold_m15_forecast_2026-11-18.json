@@ -1,0 +1,158 @@
+{
+  "protocol_commit": "a99ffda",
+  "master_provenance": [
+    {
+      "source": "kaggle",
+      "timeframe": "M15",
+      "bars": 492964,
+      "first": 1086927300,
+      "last": 1767217500,
+      "clock": "athens",
+      "note": "22-year third-party archive; diverges from the broker after Feb 2026"
+    },
+    {
+      "source": "broker",
+      "timeframe": "M15",
+      "bars": 100000,
+      "first": 1658344500,
+      "last": 1791917100,
+      "clock": "utc",
+      "note": "the bot's own Exness terminal"
+    },
+    {
+      "source": "topup",
+      "timeframe": "M15",
+      "bars": 100000,
+      "first": 1659909600,
+      "last": 1793305800,
+      "clock": "utc",
+      "note": "later pull of the same terminal"
+    }
+  ],
+  "bars_sha256": "7fe3db2897c5f4a84cf9a128c455e4622a475fbafd22aa69df087808726ea6cd",
+  "input_bars": 514712,
+  "signed": {
+    "train_observations": 303023,
+    "coefficients_intercept_then_lags": [
+      0.007723502441155078,
+      -0.01978513515650844,
+      0.0024597254703694867,
+      0.00093887937604273,
+      0.004684116803770741
+    ],
+    "constant_forecast_bps": 0.0075259033834694285,
+    "periods": {
+      "2019": {
+        "n": 133825,
+        "first_close_utc": "2019-01-02T05:30:00",
+        "last_close_utc": "2024-12-31T22:00:00",
+        "months": 72,
+        "baseline_mse_bps2": 94.56809936895314,
+        "model_mse_bps2": 94.54223523818679,
+        "mse_reduction_pct": 0.02734974155019872,
+        "gain_bps2": 0.025864130766343793,
+        "gain_ci95": [
+          -0.014318575726982053,
+          0.0742706869465155
+        ],
+        "direction_accuracy_pct": 51.03904352699421,
+        "baseline_direction_accuracy_pct": 50.332150196151694,
+        "flat_targets": 559,
+        "forecast_signed_gross_move_usd_oz": 0.01862525686530935
+      },
+      "2025": {
+        "n": 22348,
+        "first_close_utc": "2025-01-02T00:30:00",
+        "last_close_utc": "2025-12-31T22:00:00",
+        "months": 12,
+        "baseline_mse_bps2": 142.62399764405387,
+        "model_mse_bps2": 142.64626041925965,
+        "mse_reduction_pct": -0.015609417470757905,
+        "gain_bps2": -0.02226277520574429,
+        "gain_ci95": [
+          -0.12741292404894808,
+          0.092433406440636
+        ],
+        "direction_accuracy_pct": 50.760694469303736,
+        "baseline_direction_accuracy_pct": 51.57061034544478,
+        "flat_targets": 4,
+        "forecast_signed_gross_move_usd_oz": -0.007635269375338379
+      },
+      "2026": {
+        "n": 18544,
+        "first_close_utc": "2026-01-02T00:30:00",
+        "last_close_utc": "2026-10-29T20:45:00",
+        "months": 10,
+        "baseline_mse_bps2": 362.08161530764414,
+        "model_mse_bps2": 362.32184772022265,
+        "mse_reduction_pct": -0.06634758640655883,
+        "gain_bps2": -0.2402324125785031,
+        "gain_ci95": [
+          -0.9819832973508958,
+          0.2828649520699902
+        ],
+        "direction_accuracy_pct": 51.17018981880932,
+        "baseline_direction_accuracy_pct": 50.49611734253667,
+        "flat_targets": 0,
+        "forecast_signed_gross_move_usd_oz": 0.02730543572044613
+      }
+    },
+    "meets_broad_improvement_criterion": false
+  },
+  "absolute": {
+    "train_observations": 303023,
+    "coefficients_intercept_then_lags": [
+      2.991721898815419,
+      0.20595693994131403,
+      0.13852353296061073,
+      0.12511368498575767,
+      0.11560082673999114
+    ],
+    "constant_forecast_bps": 7.306237103318846,
+    "periods": {
+      "2019": {
+        "n": 133825,
+        "first_close_utc": "2019-01-02T05:30:00",
+        "last_close_utc": "2024-12-31T22:00:00",
+        "months": 72,
+        "baseline_mse_bps2": 57.28468172572761,
+        "model_mse_bps2": 48.38720566754251,
+        "mse_reduction_pct": 15.532033678366549,
+        "gain_bps2": 8.8974760581851,
+        "gain_ci95": [
+          6.76841447648092,
+          12.331582386075764
+        ]
+      },
+      "2025": {
+        "n": 22348,
+        "first_close_utc": "2025-01-02T00:30:00",
+        "last_close_utc": "2025-12-31T22:00:00",
+        "months": 12,
+        "baseline_mse_bps2": 80.51796711277586,
+        "model_mse_bps2": 70.54696606683652,
+        "mse_reduction_pct": 12.383572764540471,
+        "gain_bps2": 9.971001045939365,
+        "gain_ci95": [
+          3.9294994972155934,
+          18.24300167067911
+        ]
+      },
+      "2026": {
+        "n": 18544,
+        "first_close_utc": "2026-01-02T00:30:00",
+        "last_close_utc": "2026-10-29T20:45:00",
+        "months": 10,
+        "baseline_mse_bps2": 242.74667775426005,
+        "model_mse_bps2": 185.50976327165063,
+        "mse_reduction_pct": 23.578866253548515,
+        "gain_bps2": 57.23691448260938,
+        "gain_ci95": [
+          22.741300853614437,
+          100.66601533757525
+        ]
+      }
+    },
+    "meets_broad_improvement_criterion": true
+  }
+}
