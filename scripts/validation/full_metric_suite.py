@@ -25,10 +25,7 @@ from concurrent.futures import ProcessPoolExecutor
 import numpy as np
 from scipy import stats as sps
 
-os.environ["ULTRA_TRADE_24H"] = "1"
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-sys.path.insert(0, ROOT)
-os.chdir(ROOT)
 
 OUT = os.path.join("research", "registry", "full_metric_suite_2026-11-09.json")
 
@@ -87,27 +84,29 @@ def ratios(pls, years):
     dd_abs = float(np.max(peak - eq))
     dd_pct = float(np.max((peak - eq) / peak) * 100.0)
 
-    downside = a[a < 0]
-    downside_std = float(downside.std()) if len(downside) else 0.0
-    ann_ret_pct = ((eq[-1] / START_BALANCE) ** (1.0 / years) - 1.0) * 100.0 if years > 0 else 0.0
+    downside_std = float(np.sqrt(np.mean(np.minimum(a, 0.0) ** 2))) if len(a) else 0.0
+    nonpositive = np.flatnonzero(eq <= 0)
+    ann_ret_pct = ((eq[-1] / START_BALANCE) ** (1.0 / years) - 1.0) * 100.0 if years > 0 and not len(nonpositive) else None
 
     # Omega at threshold 0: sum of gains / sum of losses above/below 0
     out = dict(
         trades=int(len(a)),
         net=round(float(a.sum()), 2),
         profit_factor=round(float(wins.sum() / gl), 3) if gl > 0 else None,
-        win_pct=round(100 * float((a > 0).mean()), 1),
-        expectancy=round(float(a.mean()), 4),
+        win_pct=round(100 * float((a > 0).mean()), 1) if len(a) else None,
+        expectancy=round(float(a.mean()), 4) if len(a) else None,
         max_dd_usd=round(dd_abs, 2),
         max_dd_pct=round(dd_pct, 2),
         recovery_factor=round(float(a.sum() / dd_abs), 3) if dd_abs > 0 else None,
-        annualised_return_pct=round(ann_ret_pct, 2),
-        calmar_ratio=round(ann_ret_pct / dd_pct, 3) if dd_pct > 0 else None,
+        closed_balance_nonpositive=bool(len(nonpositive)),
+        first_nonpositive_after_trade=int(nonpositive[0]) if len(nonpositive) else None,
+        annualised_return_pct=round(ann_ret_pct, 2) if ann_ret_pct is not None else None,
+        calmar_ratio=round(ann_ret_pct / dd_pct, 3) if dd_pct > 0 and ann_ret_pct is not None else None,
         omega_ratio=round(float(wins.sum() / gl), 3) if gl > 0 else None,
         sortino_ratio=round(float(a.mean() / downside_std), 4) if downside_std > 0 else None,
-        sharpe_per_trade=round(float(a.mean() / a.std()), 4) if a.std() > 0 else None,
-        skew=round(float(sps.skew(a)), 3),
-        kurtosis=round(float(sps.kurtosis(a, fisher=False)), 3),
+        sharpe_per_trade=round(float(a.mean() / a.std()), 4) if len(a)>1 and a.std() > 0 else None,
+        skew=round(float(sps.skew(a)), 3) if len(a)>2 and a.std()>0 else None,
+        kurtosis=round(float(sps.kurtosis(a, fisher=False)), 3) if len(a)>3 and a.std()>0 else None,
     )
     return out
 
@@ -209,4 +208,7 @@ def main():
 
 
 if __name__ == "__main__":
+    os.environ["ULTRA_TRADE_24H"] = "1"
+    sys.path.insert(0, ROOT)
+    os.chdir(ROOT)
     raise SystemExit(main())
