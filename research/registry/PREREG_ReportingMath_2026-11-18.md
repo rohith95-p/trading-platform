@@ -28,3 +28,13 @@ Acceptance criteria at normal `report.full_report` and `metrics.summarize` calls
 
 No historical result or acceptance decision is retroactively upgraded. State
 that closed-balance DD differs from sampled/continuous floating-equity DD.
+
+## Nullable-consumer compatibility follow-up
+
+Before implementation: audit callers of normal summarize/full_report for direct
+numeric formatting or comparisons against now-null PF/Calmar/Sortino. Preserve
+undefined status; show n/a and never silently coerce to a passing numeric value.
+Exercise actual reporting expressions on no-loss/no-trade reports without
+importing legacy modules that execute historical backtests at import time.
+Do not rerun strategy studies, alter legacy criteria, or repair unrelated research
+architecture. Pure presentation/gate helpers may be shared where needed.
