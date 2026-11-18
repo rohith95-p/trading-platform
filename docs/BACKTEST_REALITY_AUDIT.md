@@ -29,6 +29,8 @@ These are synthetic implementation checks, not strategy selection experiments.
 | Cross-experiment geometry leakage | `_make_risk_manager` overwrote module TP/trailing constants | Production method code bound to per-manager globals; module constants unchanged | Construct custom then default managers; execute both stop formulas and recheck the custom manager |
 | Auditor stale fill assumptions | Excluded entry minute and assumed stop-level fills | Independent helper honors recorded entry-minute, gap and ambiguity policies; exporter records config/cost/spec | Archived-versus-new entry indices, long/short gaps, both-touch, configured triple swap |
 | Same-minute future account state | Later range exits released cash and slots before entries at the earlier minute open | Default `causal_minute_order=True`: only opening-quote events precede entry gates; full minute range runs afterward, including scan-skip branches | Both gate paths preserve occupied slot until later exit; future cash/floating values excluded; genuine opening gaps settle first; entry range walked once; protection survives downtime/spread/cadence skips |
+| Delayed daily realized loss | Daily totals refreshed only after M15 block | `_close` immediately updates the IST exit-date total used by next scan | Later signal in same M15 blocks after loss; IST-midnight date boundary checked |
+| Equity evidence classification | Balance path could be mislabeled floating equity | Diagnostics declare `equity_kind="closed_balance"`, `floating_drawdown_verified=False` | Exported result evidence flags checked |
 
 `walk_entry_bar_m1=False`, `gap_fill_stops=False`, and legacy interpolation are
 reproduction options. Their explicit config identities must accompany historical
@@ -57,10 +59,9 @@ scheduled closure from missing observations. No interpolation or padding is used
    block preserves broker protection when scan gates skip the minute. Account
    policies see opening state and subsequently interval-end state. This is a
    causal bar approximation, not a timestamped tick event engine. Exact ordering
-   within the subsequent minute remains unknown. The main engine's daily realized
-   P&L accumulator is refreshed per M15 block, so same-block realized losses may
-   reach that daily gate late; account certification still requires finer state
-   reconciliation.
+   within the subsequent minute remains unknown. The daily realized accumulator
+   now updates immediately on each close with the existing IST exit-date
+   attribution; account certification still requires finer state reconciliation.
 2. **Ask reconstruction.** Shorts test ask extrema as bid extrema plus one
    minute spread. A bar spread is not a synchronized ask high/low. The existing
    separate 2025 Dukascopy bid/ask snapshot is not integrated into this engine
@@ -74,6 +75,8 @@ scheduled closure from missing observations. No interpolation or padding is used
 4. **Floating drawdown.** `BacktestResult.equity` is appended on realized closes
    as balance. It is not a continuously sampled mark-to-market equity series.
    Closed-balance DD cannot certify prop-firm equity floors or pathwise ruin.
+   Diagnostics now explicitly classify this curve as `closed_balance` and set
+   `floating_drawdown_verified=False`; consumers must not promote it to MTM DD.
 5. **Remaining shared module bindings.** TP/trailing geometry isolation is fixed.
    The engine still replaces risk-manager and strategy module MT5 references with
    its offline stub. Run research in a dedicated process; do not run a live
@@ -129,14 +132,15 @@ scheduled closure from missing observations. No interpolation or padding is used
 .\venv\Scripts\python.exe -m pytest tests/test_execution_reality.py tests/test_execution_audit_helpers.py tests/test_bias_audit_knobs.py tests/test_engine_live_parity.py tests/test_execution_delay.py -q
 ```
 
-**79 passed** on 2026-11-18. The chronology extension was committed before its
+**82 passed** on 2026-11-18. The chronology extension and follow-up daily-loss/
+equity-evidence criteria were committed before their
 implementation/tests in `PREREG_MinuteChronology_2026-11-18.md`. Synthetic tests establish these contracts only.
 They provide no profit factor, execution accuracy percentage or account pass
 probability. Broader regression suite remains the parent finalization task's job.
 
 ## Required next validation
 
-First complete full-equity recording and finer daily-risk state reconciliation. Extend auditor
+First complete full-equity recording and quote-level state reconciliation. Extend auditor
 compatibility for dynamic management. Re-run a fixed committed candidate with its exact input hashes and
 record all changed trades and costs against the old engine. Then acquire intended
 broker demo quote/deal logs, estimate conditional fill costs and implement an

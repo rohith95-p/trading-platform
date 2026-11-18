@@ -166,3 +166,53 @@ def test_new_position_range_is_walked_exactly_once():
         symbol="XAUUSDm", starting_balance=500., sizing_mode="fixed", enable_d1_bias_gate=False))
     engine.run([Fire(candles=[C_NY], sl_atr_mult=20., tp_atr_mult=120.)], DAY, DAY+86400-3600)
     assert engine.entry_walks == 1
+
+
+def test_loss_reaches_next_minute_daily_gate_inside_same_m15():
+    bars = make_bars(price_fn=lambda t: 4000.)
+    m1 = bars.m1.copy()
+    loss_ts = C_NY + 960
+    j = np.flatnonzero(m1["time"] == loss_ts)[0]
+    m1["low"][j] = 3000.
+    class Later(Fire):
+        def evaluate(self, m15, m5=None):
+            if int(m5["time"][-1]) < C_NY + 1020:
+                return None
+            return super().evaluate(m15, m5)
+    def strategies():
+        return [Fire(candles=[C_NY], sl_atr_mult=20., tp_atr_mult=120.),
+                Later(name="BB_MEAN_REVERSION_V5", magic=5002, candles=[C_NY])]
+    data = replace(bars, m1=m1)
+    _, control = run(data, strategies(), daily_loss_limit_mode="off", resignal_interval_sec=60)
+    assert any(t.strategy == "BB_MEAN_REVERSION_V5" and t.entry_time == C_NY + 1020
+               for t in control.trades)
+    engine, limited = run(data, strategies(), daily_loss_limit_pct=.001,
+                          resignal_interval_sec=60)
+    assert limited.trades[0].exit_time == loss_ts
+    assert limited.trades[0].net_pl < -.5
+    assert limited.diagnostics["daily_shutdowns"] >= 1
+    assert not [t for t in limited.trades if t.strategy == "BB_MEAN_REVERSION_V5"]
+    assert sum(engine.realized_daily_pl.values()) == pytest.approx(sum(t.net_pl for t in limited.trades))
+
+
+def test_realized_daily_attribution_preserves_ist_midnight():
+    from datetime import datetime, timezone, date
+    from src.backtesting.engine import Position
+    bars = make_bars()
+    engine = BacktestEngine(bars, SCENARIOS["observed"], EngineConfig())
+    boundary = int(datetime(2026, 10, 7, 18, 30, tzinfo=timezone.utc).timestamp())
+    for idx, exit_ts in enumerate([boundary-1, boundary]):
+        position = Position(ticket=idx+1, strategy="synthetic", magic=1, is_buy=True,
+                            lots=.01, entry_price=4000., entry_time=exit_ts-60,
+                            sl=3990., tp=4020., initial_sl=3990., atr_at_entry=1.,
+                            session="synthetic")
+        engine.positions.append(position)
+        engine._close(position, 3999., exit_ts, "TEST")
+    assert engine.realized_daily_pl[date(2026, 10, 7)] == pytest.approx(-1.)
+    assert engine.realized_daily_pl[date(2026, 10, 8)] == pytest.approx(-1.)
+
+
+def test_output_identifies_balance_curve_and_unverified_floating_drawdown():
+    _, result = run(make_bars(price_fn=lambda t: 4000.), [])
+    assert result.diagnostics["equity_kind"] == "closed_balance"
+    assert result.diagnostics["floating_drawdown_verified"] is False

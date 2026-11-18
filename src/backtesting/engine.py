@@ -614,7 +614,10 @@ class BacktestEngine:
         self.positions: List[Position] = []
         self.trades: List[Trade] = []
         self.equity: List[Tuple[int, float]] = []
+        self.realized_daily_pl: Dict[Any, float] = {}
         self.diag: Dict[str, Any] = {
+            "equity_kind": "closed_balance",
+            "floating_drawdown_verified": False,
             "signals_generated": 0,
             "signals_deduped": 0,
             "entries_blocked_caps": 0,
@@ -1036,6 +1039,8 @@ class BacktestEngine:
 
         self.balance += net
         self.stub.balance = self.balance
+        exit_day = datetime.fromtimestamp(ts, tz=timezone.utc).astimezone(IST).date()
+        self.realized_daily_pl[exit_day] = self.realized_daily_pl.get(exit_day, 0.0) + net
 
         self.trades.append(
             Trade(
@@ -1254,7 +1259,7 @@ class BacktestEngine:
         cached: Dict[str, Any] = {s.name: None for s in strategies}
         fired_on: Dict[str, int] = {s.name: -1 for s in strategies}
 
-        daily_pl: Dict[Any, float] = {}
+        daily_pl = self.realized_daily_pl
         shutdown_date = None
         peak_bal = self.balance
         equity_paused = False
@@ -1625,12 +1630,6 @@ class BacktestEngine:
                                 self._close(pos, hit[0], ts, hit[1])
                         if account_policy is not None and account_policy.observe(self, ts + (900 if coarse else 60)):
                             account_finished = True
-
-            # attribute closed P/L to its IST day for the drawdown gate
-            daily_pl = {}
-            for t in self.trades:
-                d = datetime.fromtimestamp(t.exit_time, tz=timezone.utc).astimezone(IST).date()
-                daily_pl[d] = daily_pl.get(d, 0.0) + t.net_pl
 
         if self.positions:
             if last_simulated is None:
