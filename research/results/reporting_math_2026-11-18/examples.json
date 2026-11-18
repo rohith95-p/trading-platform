@@ -1,0 +1,1016 @@
+{
+  "purpose": "hand-calculated synthetic reporting arithmetic, not strategy research",
+  "normal_entry_point": "src.backtesting.report.full_report",
+  "source_sha256": {
+    "src\\backtesting\\metrics.py": "8e7ccfcb44cc05edac60a10240f5a55e3ac2404aa182b420baf999875882b8ff",
+    "src\\backtesting\\report.py": "5c406ff9e068b66ef056762887793471c8f25f100c12a22da4b2c512390b3526",
+    "tests\\test_reporting_math.py": "a31a85a3fef4da5fc6f6323c023cad53d2af65b4ad5c6f586d27ac36a765d2ba"
+  },
+  "frozen_fomc_result_unchanged_sha256": "4b6333d67cc7c926d1d14d563cd66d9bc519b6687b5f50cc575e2a4e1084fcb6",
+  "examples": {
+    "sparse_one_calendar_year": {
+      "stats": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "scratches": 0,
+        "win_rate": 50.0,
+        "gross_profit": 20.0,
+        "gross_loss": 10.0,
+        "net_pl": 10.0,
+        "profit_factor": 2.0,
+        "expectancy": 5.0,
+        "avg_win": 20.0,
+        "avg_loss": 10.0,
+        "median_win": 20.0,
+        "median_loss": 10.0,
+        "payoff_ratio": 2.0,
+        "breakeven_win_rate": 33.333333,
+        "win_rate_margin": 16.67,
+        "total_r": 1.0,
+        "expectancy_r": 0.5,
+        "avg_win_r": 2.0,
+        "avg_loss_r": 1.0,
+        "max_drawdown": 10.0,
+        "max_drawdown_pct": 10.0,
+        "max_drawdown_duration_days": 2.0,
+        "recovery_factor": 1.0,
+        "max_consec_wins": 1,
+        "max_consec_losses": 1,
+        "avg_mae_r": -0.5,
+        "avg_mfe_r": 1.0,
+        "mfe_capture": 0.5,
+        "avg_minutes_open": 60.0,
+        "median_minutes_open": 60.0,
+        "avg_minutes_to_mfe": 30.0,
+        "duplicate_trades": 0,
+        "duplicate_pl": 0,
+        "pyramid_trades": 0,
+        "pyramid_pl": 0,
+        "ambiguous_trades": 0,
+        "exit_reasons": {
+          "SL": 1,
+          "TP": 1
+        },
+        "by_session": {
+          "LONDON": {
+            "trades": 2,
+            "wins": 1,
+            "net_pl": 10.0,
+            "gross_profit": 20.0,
+            "gross_loss": 10.0,
+            "win_rate": 50.0,
+            "profit_factor": 2.0,
+            "profit_factor_status": "finite"
+          }
+        },
+        "by_month": {
+          "2020-09": {
+            "trades": 2,
+            "wins": 1,
+            "net_pl": 10.0,
+            "gross_profit": 20.0,
+            "gross_loss": 10.0,
+            "win_rate": 50.0,
+            "profit_factor": 2.0,
+            "profit_factor_status": "finite"
+          }
+        },
+        "by_strategy": {
+          "S": {
+            "trades": 2,
+            "wins": 1,
+            "net_pl": 10.0,
+            "gross_profit": 20.0,
+            "gross_loss": 10.0,
+            "win_rate": 50.0,
+            "profit_factor": 2.0,
+            "profit_factor_status": "finite"
+          }
+        },
+        "start_balance": 100.0,
+        "end_balance": 110.0,
+        "return_pct": 10.0,
+        "calmar_ratio": 1.0,
+        "omega_ratio": 2.0,
+        "sortino_ratio": 0.707107,
+        "annualised_return_pct": 10.0,
+        "years": 1.0,
+        "annualization_basis": "calendar_cagr_closed_balance",
+        "drawdown_basis": "closed_balance_observations_not_floating_equity",
+        "sortino_basis": "unannualized_per_trade_net_pnl_zero_target_downside_rms_all_trades",
+        "profit_factor_status": "finite",
+        "sortino_status": "finite",
+        "closed_balance_nonpositive": false,
+        "metric_notes": []
+      },
+      "years": 1.0,
+      "metric_definitions": {
+        "profit_factor": "positive_net_trade_PnL / abs(negative_net_trade_PnL), unrounded inputs",
+        "sortino_ratio": "unannualized mean_net_trade_PnL / zero_target_downside_RMS_all_trades",
+        "sharpe_per_trade": "unannualized mean_net_trade_PnL / population_std_net_trade_PnL",
+        "calmar_ratio": "calendar_CAGR_pct / max_closed_balance_drawdown_pct; no holding_time_extrapolation",
+        "drawdown": "closed_balance_observations_not_floating_equity",
+        "monte_carlo": "fixed_trade_order_permutations; terminal_PnL_invariant; prob_50pct_drawdown_tests_half_initial_balance_not_peak_DD",
+        "nonfinite_ratios": "JSON null with status; no observed losses/downside is not estimated zero risk"
+      },
+      "ratios": {
+        "omega_ratio": 2.0,
+        "profit_factor_status": "finite",
+        "sortino_ratio": 0.707107,
+        "sortino_status": "finite",
+        "sharpe_per_trade": 0.3333,
+        "annualised_return_pct": 10.0,
+        "calmar_ratio": 1.0,
+        "recovery_factor": 1.0,
+        "skew": null,
+        "kurtosis": null
+      },
+      "monte_carlo": {},
+      "ablation": {},
+      "bootstrap": {},
+      "sr_variance": null,
+      "deflated_sharpe": {
+        "raw_trials": {
+          "num_trials": 1,
+          "expected_max_sr": 0.0,
+          "dsr": 0.0
+        },
+        "warning": "sr_variance defaulted to 1.0; pass variant_series for the measured value, or this DSR is far harsher than it should be",
+        "warning_trials": "num_trials=1 claims this is the only configuration ever tried. If that is not literally true, this DSR means nothing."
+      }
+    },
+    "dollar_and_percentage_dd_maxima_differ": {
+      "stats": {
+        "trades": 3,
+        "wins": 1,
+        "losses": 2,
+        "scratches": 0,
+        "win_rate": 33.33,
+        "gross_profit": 950.0,
+        "gross_loss": 150.0,
+        "net_pl": 800.0,
+        "profit_factor": 6.333333,
+        "expectancy": 266.6667,
+        "avg_win": 950.0,
+        "avg_loss": 75.0,
+        "median_win": 950.0,
+        "median_loss": 75.0,
+        "payoff_ratio": 12.666667,
+        "breakeven_win_rate": 7.317073,
+        "win_rate_margin": 26.01,
+        "total_r": 80.0,
+        "expectancy_r": 26.6667,
+        "avg_win_r": 95.0,
+        "avg_loss_r": 7.5,
+        "max_drawdown": 100.0,
+        "max_drawdown_pct": 50.0,
+        "max_drawdown_duration_days": 363.25,
+        "recovery_factor": 8.0,
+        "max_consec_wins": 1,
+        "max_consec_losses": 1,
+        "avg_mae_r": -0.5,
+        "avg_mfe_r": 1.0,
+        "mfe_capture": 26.667,
+        "avg_minutes_open": 60.0,
+        "median_minutes_open": 60.0,
+        "avg_minutes_to_mfe": 30.0,
+        "duplicate_trades": 0,
+        "duplicate_pl": 0,
+        "pyramid_trades": 0,
+        "pyramid_pl": 0,
+        "ambiguous_trades": 0,
+        "exit_reasons": {
+          "SL": 2,
+          "TP": 1
+        },
+        "by_session": {
+          "LONDON": {
+            "trades": 3,
+            "wins": 1,
+            "net_pl": 800.0,
+            "gross_profit": 950.0,
+            "gross_loss": 150.0,
+            "win_rate": 33.3,
+            "profit_factor": 6.333333,
+            "profit_factor_status": "finite"
+          }
+        },
+        "by_month": {
+          "2020-09": {
+            "trades": 3,
+            "wins": 1,
+            "net_pl": 800.0,
+            "gross_profit": 950.0,
+            "gross_loss": 150.0,
+            "win_rate": 33.3,
+            "profit_factor": 6.333333,
+            "profit_factor_status": "finite"
+          }
+        },
+        "by_strategy": {
+          "S": {
+            "trades": 3,
+            "wins": 1,
+            "net_pl": 800.0,
+            "gross_profit": 950.0,
+            "gross_loss": 150.0,
+            "win_rate": 33.3,
+            "profit_factor": 6.333333,
+            "profit_factor_status": "finite"
+          }
+        },
+        "start_balance": 100.0,
+        "end_balance": 900.0,
+        "return_pct": 800.0,
+        "calmar_ratio": 16.0,
+        "omega_ratio": 6.333333,
+        "sortino_ratio": 4.131182,
+        "annualised_return_pct": 800.0,
+        "years": 1.0,
+        "annualization_basis": "calendar_cagr_closed_balance",
+        "drawdown_basis": "closed_balance_observations_not_floating_equity",
+        "sortino_basis": "unannualized_per_trade_net_pnl_zero_target_downside_rms_all_trades",
+        "profit_factor_status": "finite",
+        "sortino_status": "finite",
+        "closed_balance_nonpositive": false,
+        "metric_notes": []
+      },
+      "years": 1.0,
+      "metric_definitions": {
+        "profit_factor": "positive_net_trade_PnL / abs(negative_net_trade_PnL), unrounded inputs",
+        "sortino_ratio": "unannualized mean_net_trade_PnL / zero_target_downside_RMS_all_trades",
+        "sharpe_per_trade": "unannualized mean_net_trade_PnL / population_std_net_trade_PnL",
+        "calmar_ratio": "calendar_CAGR_pct / max_closed_balance_drawdown_pct; no holding_time_extrapolation",
+        "drawdown": "closed_balance_observations_not_floating_equity",
+        "monte_carlo": "fixed_trade_order_permutations; terminal_PnL_invariant; prob_50pct_drawdown_tests_half_initial_balance_not_peak_DD",
+        "nonfinite_ratios": "JSON null with status; no observed losses/downside is not estimated zero risk"
+      },
+      "ratios": {
+        "omega_ratio": 6.333333,
+        "profit_factor_status": "finite",
+        "sortino_ratio": 4.131182,
+        "sortino_status": "finite",
+        "sharpe_per_trade": 0.5514,
+        "annualised_return_pct": 800.0,
+        "calmar_ratio": 16.0,
+        "recovery_factor": 8.0,
+        "skew": 0.7014,
+        "kurtosis": null
+      },
+      "monte_carlo": {},
+      "ablation": {},
+      "bootstrap": {},
+      "sr_variance": null,
+      "deflated_sharpe": {
+        "raw_trials": {
+          "num_trials": 1,
+          "expected_max_sr": 0.0,
+          "dsr": 0.83305
+        },
+        "warning": "sr_variance defaulted to 1.0; pass variant_series for the measured value, or this DSR is far harsher than it should be",
+        "warning_trials": "num_trials=1 claims this is the only configuration ever tried. If that is not literally true, this DSR means nothing."
+      }
+    },
+    "equal_high_recovery_and_idle_tail": {
+      "stats": {
+        "trades": 3,
+        "wins": 1,
+        "losses": 2,
+        "scratches": 0,
+        "win_rate": 33.33,
+        "gross_profit": 10.0,
+        "gross_loss": 20.0,
+        "net_pl": -10.0,
+        "profit_factor": 0.5,
+        "expectancy": -3.3333,
+        "avg_win": 10.0,
+        "avg_loss": 10.0,
+        "median_win": 10.0,
+        "median_loss": 10.0,
+        "payoff_ratio": 1.0,
+        "breakeven_win_rate": 50.0,
+        "win_rate_margin": -16.67,
+        "total_r": -1.0,
+        "expectancy_r": -0.3333,
+        "avg_win_r": 1.0,
+        "avg_loss_r": 1.0,
+        "max_drawdown": 10.0,
+        "max_drawdown_pct": 10.0,
+        "max_drawdown_duration_days": 5.0,
+        "recovery_factor": -1.0,
+        "max_consec_wins": 1,
+        "max_consec_losses": 1,
+        "avg_mae_r": -0.5,
+        "avg_mfe_r": 1.0,
+        "mfe_capture": -0.333,
+        "avg_minutes_open": 60.0,
+        "median_minutes_open": 60.0,
+        "avg_minutes_to_mfe": 30.0,
+        "duplicate_trades": 0,
+        "duplicate_pl": 0,
+        "pyramid_trades": 0,
+        "pyramid_pl": 0,
+        "ambiguous_trades": 0,
+        "exit_reasons": {
+          "SL": 2,
+          "TP": 1
+        },
+        "by_session": {
+          "LONDON": {
+            "trades": 3,
+            "wins": 1,
+            "net_pl": -10.0,
+            "gross_profit": 10.0,
+            "gross_loss": 20.0,
+            "win_rate": 33.3,
+            "profit_factor": 0.5,
+            "profit_factor_status": "finite"
+          }
+        },
+        "by_month": {
+          "2020-09": {
+            "trades": 3,
+            "wins": 1,
+            "net_pl": -10.0,
+            "gross_profit": 10.0,
+            "gross_loss": 20.0,
+            "win_rate": 33.3,
+            "profit_factor": 0.5,
+            "profit_factor_status": "finite"
+          }
+        },
+        "by_strategy": {
+          "S": {
+            "trades": 3,
+            "wins": 1,
+            "net_pl": -10.0,
+            "gross_profit": 10.0,
+            "gross_loss": 20.0,
+            "win_rate": 33.3,
+            "profit_factor": 0.5,
+            "profit_factor_status": "finite"
+          }
+        },
+        "start_balance": 100.0,
+        "end_balance": 90.0,
+        "return_pct": -10.0,
+        "calmar_ratio": -9.786839,
+        "omega_ratio": 0.5,
+        "sortino_ratio": -0.408248,
+        "annualised_return_pct": -97.86839,
+        "years": 0.02737850787132101,
+        "annualization_basis": "calendar_cagr_closed_balance",
+        "drawdown_basis": "closed_balance_observations_not_floating_equity",
+        "sortino_basis": "unannualized_per_trade_net_pnl_zero_target_downside_rms_all_trades",
+        "profit_factor_status": "finite",
+        "sortino_status": "finite",
+        "closed_balance_nonpositive": false,
+        "metric_notes": [
+          "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+        ]
+      },
+      "years": 0.02737850787132101,
+      "metric_definitions": {
+        "profit_factor": "positive_net_trade_PnL / abs(negative_net_trade_PnL), unrounded inputs",
+        "sortino_ratio": "unannualized mean_net_trade_PnL / zero_target_downside_RMS_all_trades",
+        "sharpe_per_trade": "unannualized mean_net_trade_PnL / population_std_net_trade_PnL",
+        "calmar_ratio": "calendar_CAGR_pct / max_closed_balance_drawdown_pct; no holding_time_extrapolation",
+        "drawdown": "closed_balance_observations_not_floating_equity",
+        "monte_carlo": "fixed_trade_order_permutations; terminal_PnL_invariant; prob_50pct_drawdown_tests_half_initial_balance_not_peak_DD",
+        "nonfinite_ratios": "JSON null with status; no observed losses/downside is not estimated zero risk"
+      },
+      "ratios": {
+        "omega_ratio": 0.5,
+        "profit_factor_status": "finite",
+        "sortino_ratio": -0.408248,
+        "sortino_status": "finite",
+        "sharpe_per_trade": -0.3536,
+        "annualised_return_pct": -97.86839,
+        "calmar_ratio": -9.786839,
+        "recovery_factor": -1.0,
+        "skew": 0.7071,
+        "kurtosis": null
+      },
+      "monte_carlo": {},
+      "ablation": {},
+      "bootstrap": {},
+      "sr_variance": null,
+      "deflated_sharpe": {
+        "raw_trials": {
+          "num_trials": 1,
+          "expected_max_sr": 0.0,
+          "dsr": 0.32836
+        },
+        "warning": "sr_variance defaulted to 1.0; pass variant_series for the measured value, or this DSR is far harsher than it should be",
+        "warning_trials": "num_trials=1 claims this is the only configuration ever tried. If that is not literally true, this DSR means nothing."
+      }
+    },
+    "tiny_after_cost_pnl": {
+      "stats": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "scratches": 0,
+        "win_rate": 50.0,
+        "gross_profit": 0.004,
+        "gross_loss": 0.001,
+        "net_pl": 0.003,
+        "profit_factor": 4.0,
+        "expectancy": 0.0015,
+        "avg_win": 0.004,
+        "avg_loss": 0.001,
+        "median_win": 0.004,
+        "median_loss": 0.001,
+        "payoff_ratio": 4.0,
+        "breakeven_win_rate": 20.0,
+        "win_rate_margin": 30.0,
+        "total_r": 0.0,
+        "expectancy_r": 0.0002,
+        "avg_win_r": 0.0,
+        "avg_loss_r": 0.0,
+        "max_drawdown": 0.001,
+        "max_drawdown_pct": 0.001,
+        "max_drawdown_duration_days": 364.25,
+        "recovery_factor": 3.0,
+        "max_consec_wins": 1,
+        "max_consec_losses": 1,
+        "avg_mae_r": -0.5,
+        "avg_mfe_r": 1.0,
+        "mfe_capture": 0.0,
+        "avg_minutes_open": 60.0,
+        "median_minutes_open": 60.0,
+        "avg_minutes_to_mfe": 30.0,
+        "duplicate_trades": 0,
+        "duplicate_pl": 0,
+        "pyramid_trades": 0,
+        "pyramid_pl": 0,
+        "ambiguous_trades": 0,
+        "exit_reasons": {
+          "TP": 1,
+          "SL": 1
+        },
+        "by_session": {
+          "LONDON": {
+            "trades": 2,
+            "wins": 1,
+            "net_pl": 0.0,
+            "gross_profit": 0.0,
+            "gross_loss": 0.0,
+            "win_rate": 50.0,
+            "profit_factor": 4.0,
+            "profit_factor_status": "finite"
+          }
+        },
+        "by_month": {
+          "2020-09": {
+            "trades": 2,
+            "wins": 1,
+            "net_pl": 0.0,
+            "gross_profit": 0.0,
+            "gross_loss": 0.0,
+            "win_rate": 50.0,
+            "profit_factor": 4.0,
+            "profit_factor_status": "finite"
+          }
+        },
+        "by_strategy": {
+          "S": {
+            "trades": 2,
+            "wins": 1,
+            "net_pl": 0.0,
+            "gross_profit": 0.0,
+            "gross_loss": 0.0,
+            "win_rate": 50.0,
+            "profit_factor": 4.0,
+            "profit_factor_status": "finite"
+          }
+        },
+        "start_balance": 100.0,
+        "end_balance": 100.003,
+        "return_pct": 0.003,
+        "calmar_ratio": 3.00012,
+        "omega_ratio": 4.0,
+        "sortino_ratio": 2.12132,
+        "annualised_return_pct": 0.003,
+        "years": 1.0,
+        "annualization_basis": "calendar_cagr_closed_balance",
+        "drawdown_basis": "closed_balance_observations_not_floating_equity",
+        "sortino_basis": "unannualized_per_trade_net_pnl_zero_target_downside_rms_all_trades",
+        "profit_factor_status": "finite",
+        "sortino_status": "finite",
+        "closed_balance_nonpositive": false,
+        "metric_notes": []
+      },
+      "years": 1.0,
+      "metric_definitions": {
+        "profit_factor": "positive_net_trade_PnL / abs(negative_net_trade_PnL), unrounded inputs",
+        "sortino_ratio": "unannualized mean_net_trade_PnL / zero_target_downside_RMS_all_trades",
+        "sharpe_per_trade": "unannualized mean_net_trade_PnL / population_std_net_trade_PnL",
+        "calmar_ratio": "calendar_CAGR_pct / max_closed_balance_drawdown_pct; no holding_time_extrapolation",
+        "drawdown": "closed_balance_observations_not_floating_equity",
+        "monte_carlo": "fixed_trade_order_permutations; terminal_PnL_invariant; prob_50pct_drawdown_tests_half_initial_balance_not_peak_DD",
+        "nonfinite_ratios": "JSON null with status; no observed losses/downside is not estimated zero risk"
+      },
+      "ratios": {
+        "omega_ratio": 4.0,
+        "profit_factor_status": "finite",
+        "sortino_ratio": 2.12132,
+        "sortino_status": "finite",
+        "sharpe_per_trade": 0.6,
+        "annualised_return_pct": 0.003,
+        "calmar_ratio": 3.00012,
+        "recovery_factor": 3.0,
+        "skew": null,
+        "kurtosis": null
+      },
+      "monte_carlo": {},
+      "ablation": {},
+      "bootstrap": {},
+      "sr_variance": null,
+      "deflated_sharpe": {
+        "raw_trials": {
+          "num_trials": 1,
+          "expected_max_sr": 0.0,
+          "dsr": 0.0
+        },
+        "warning": "sr_variance defaulted to 1.0; pass variant_series for the measured value, or this DSR is far harsher than it should be",
+        "warning_trials": "num_trials=1 claims this is the only configuration ever tried. If that is not literally true, this DSR means nothing."
+      }
+    },
+    "all_winning": {
+      "stats": {
+        "trades": 5,
+        "wins": 5,
+        "losses": 0,
+        "scratches": 0,
+        "win_rate": 100.0,
+        "gross_profit": 5.0,
+        "gross_loss": 0.0,
+        "net_pl": 5.0,
+        "profit_factor": null,
+        "expectancy": 1.0,
+        "avg_win": 1.0,
+        "avg_loss": 0.0,
+        "median_win": 1.0,
+        "median_loss": 0.0,
+        "payoff_ratio": null,
+        "breakeven_win_rate": null,
+        "win_rate_margin": null,
+        "total_r": 0.5,
+        "expectancy_r": 0.1,
+        "avg_win_r": 0.1,
+        "avg_loss_r": 0.0,
+        "max_drawdown": 0.0,
+        "max_drawdown_pct": 0.0,
+        "max_drawdown_duration_days": 0.0,
+        "recovery_factor": null,
+        "max_consec_wins": 5,
+        "max_consec_losses": 0,
+        "avg_mae_r": -0.5,
+        "avg_mfe_r": 1.0,
+        "mfe_capture": 0.1,
+        "avg_minutes_open": 60.0,
+        "median_minutes_open": 60.0,
+        "avg_minutes_to_mfe": 30.0,
+        "duplicate_trades": 0,
+        "duplicate_pl": 0,
+        "pyramid_trades": 0,
+        "pyramid_pl": 0,
+        "ambiguous_trades": 0,
+        "exit_reasons": {
+          "TP": 5
+        },
+        "by_session": {
+          "LONDON": {
+            "trades": 5,
+            "wins": 5,
+            "net_pl": 5.0,
+            "gross_profit": 5.0,
+            "gross_loss": 0.0,
+            "win_rate": 100.0,
+            "profit_factor": null,
+            "profit_factor_status": "unbounded_no_observed_losses"
+          }
+        },
+        "by_month": {
+          "2020-09": {
+            "trades": 5,
+            "wins": 5,
+            "net_pl": 5.0,
+            "gross_profit": 5.0,
+            "gross_loss": 0.0,
+            "win_rate": 100.0,
+            "profit_factor": null,
+            "profit_factor_status": "unbounded_no_observed_losses"
+          }
+        },
+        "by_strategy": {
+          "S": {
+            "trades": 5,
+            "wins": 5,
+            "net_pl": 5.0,
+            "gross_profit": 5.0,
+            "gross_loss": 0.0,
+            "win_rate": 100.0,
+            "profit_factor": null,
+            "profit_factor_status": "unbounded_no_observed_losses"
+          }
+        },
+        "start_balance": 100.0,
+        "end_balance": 105.0,
+        "return_pct": 5.0,
+        "calmar_ratio": null,
+        "omega_ratio": null,
+        "sortino_ratio": null,
+        "annualised_return_pct": 5.0,
+        "years": 1.0,
+        "annualization_basis": "calendar_cagr_closed_balance",
+        "drawdown_basis": "closed_balance_observations_not_floating_equity",
+        "sortino_basis": "unannualized_per_trade_net_pnl_zero_target_downside_rms_all_trades",
+        "profit_factor_status": "unbounded_no_observed_losses",
+        "sortino_status": "unbounded_no_observed_downside",
+        "closed_balance_nonpositive": false,
+        "metric_notes": []
+      },
+      "years": 1.0,
+      "metric_definitions": {
+        "profit_factor": "positive_net_trade_PnL / abs(negative_net_trade_PnL), unrounded inputs",
+        "sortino_ratio": "unannualized mean_net_trade_PnL / zero_target_downside_RMS_all_trades",
+        "sharpe_per_trade": "unannualized mean_net_trade_PnL / population_std_net_trade_PnL",
+        "calmar_ratio": "calendar_CAGR_pct / max_closed_balance_drawdown_pct; no holding_time_extrapolation",
+        "drawdown": "closed_balance_observations_not_floating_equity",
+        "monte_carlo": "fixed_trade_order_permutations; terminal_PnL_invariant; prob_50pct_drawdown_tests_half_initial_balance_not_peak_DD",
+        "nonfinite_ratios": "JSON null with status; no observed losses/downside is not estimated zero risk"
+      },
+      "ratios": {
+        "omega_ratio": null,
+        "profit_factor_status": "unbounded_no_observed_losses",
+        "sortino_ratio": null,
+        "sortino_status": "unbounded_no_observed_downside",
+        "sharpe_per_trade": null,
+        "annualised_return_pct": 5.0,
+        "calmar_ratio": null,
+        "recovery_factor": null,
+        "skew": null,
+        "kurtosis": null
+      },
+      "monte_carlo": {
+        "median_max_dd": 0.0,
+        "p95_max_dd": 0.0,
+        "worst_max_dd": 0.0,
+        "median_final": 105.0,
+        "p05_final": 105.0,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 0.0
+      },
+      "ablation": {},
+      "bootstrap": {
+        "n_trades": 5,
+        "n_resamples": 1000,
+        "confidence_level": 0.95,
+        "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+        "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+        "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+        "profit_factor": {
+          "observed": null,
+          "observed_status": "unbounded_no_observed_losses",
+          "unbounded_fraction": 1.0,
+          "undefined_fraction": 0.0,
+          "ci_lower": null,
+          "ci_lower_status": "unbounded",
+          "median": null,
+          "median_status": "unbounded",
+          "ci_upper": null,
+          "ci_upper_status": "unbounded"
+        },
+        "sortino_ratio": {
+          "observed": null,
+          "observed_status": "unbounded_no_observed_downside",
+          "unbounded_fraction": 1.0,
+          "undefined_fraction": 0.0,
+          "ci_lower": null,
+          "ci_lower_status": "unbounded",
+          "median": null,
+          "median_status": "unbounded",
+          "ci_upper": null,
+          "ci_upper_status": "unbounded"
+        }
+      },
+      "sr_variance": null,
+      "deflated_sharpe": {
+        "raw_trials": {
+          "num_trials": 1,
+          "expected_max_sr": 0.0,
+          "dsr": 0.0
+        },
+        "warning": "sr_variance defaulted to 1.0; pass variant_series for the measured value, or this DSR is far harsher than it should be",
+        "warning_trials": "num_trials=1 claims this is the only configuration ever tried. If that is not literally true, this DSR means nothing."
+      }
+    },
+    "all_zero": {
+      "stats": {
+        "trades": 5,
+        "wins": 0,
+        "losses": 0,
+        "scratches": 5,
+        "win_rate": 0.0,
+        "gross_profit": 0.0,
+        "gross_loss": 0.0,
+        "net_pl": 0.0,
+        "profit_factor": null,
+        "expectancy": 0.0,
+        "avg_win": 0.0,
+        "avg_loss": 0.0,
+        "median_win": 0.0,
+        "median_loss": 0.0,
+        "payoff_ratio": null,
+        "breakeven_win_rate": null,
+        "win_rate_margin": null,
+        "total_r": 0.0,
+        "expectancy_r": 0.0,
+        "avg_win_r": 0.0,
+        "avg_loss_r": 0.0,
+        "max_drawdown": 0.0,
+        "max_drawdown_pct": 0.0,
+        "max_drawdown_duration_days": 0.0,
+        "recovery_factor": null,
+        "max_consec_wins": 0,
+        "max_consec_losses": 0,
+        "avg_mae_r": -0.5,
+        "avg_mfe_r": 1.0,
+        "mfe_capture": 0.0,
+        "avg_minutes_open": 60.0,
+        "median_minutes_open": 60.0,
+        "avg_minutes_to_mfe": 30.0,
+        "duplicate_trades": 0,
+        "duplicate_pl": 0,
+        "pyramid_trades": 0,
+        "pyramid_pl": 0,
+        "ambiguous_trades": 0,
+        "exit_reasons": {
+          "SL": 5
+        },
+        "by_session": {
+          "LONDON": {
+            "trades": 5,
+            "wins": 0,
+            "net_pl": 0.0,
+            "gross_profit": 0.0,
+            "gross_loss": 0.0,
+            "win_rate": 0.0,
+            "profit_factor": null,
+            "profit_factor_status": "undefined_no_gains_or_losses"
+          }
+        },
+        "by_month": {
+          "2020-09": {
+            "trades": 5,
+            "wins": 0,
+            "net_pl": 0.0,
+            "gross_profit": 0.0,
+            "gross_loss": 0.0,
+            "win_rate": 0.0,
+            "profit_factor": null,
+            "profit_factor_status": "undefined_no_gains_or_losses"
+          }
+        },
+        "by_strategy": {
+          "S": {
+            "trades": 5,
+            "wins": 0,
+            "net_pl": 0.0,
+            "gross_profit": 0.0,
+            "gross_loss": 0.0,
+            "win_rate": 0.0,
+            "profit_factor": null,
+            "profit_factor_status": "undefined_no_gains_or_losses"
+          }
+        },
+        "start_balance": 100.0,
+        "end_balance": 100.0,
+        "return_pct": 0.0,
+        "calmar_ratio": null,
+        "omega_ratio": null,
+        "sortino_ratio": null,
+        "annualised_return_pct": 0.0,
+        "years": 1.0,
+        "annualization_basis": "calendar_cagr_closed_balance",
+        "drawdown_basis": "closed_balance_observations_not_floating_equity",
+        "sortino_basis": "unannualized_per_trade_net_pnl_zero_target_downside_rms_all_trades",
+        "profit_factor_status": "undefined_no_gains_or_losses",
+        "sortino_status": "undefined_no_downside_or_mean",
+        "closed_balance_nonpositive": false,
+        "metric_notes": []
+      },
+      "years": 1.0,
+      "metric_definitions": {
+        "profit_factor": "positive_net_trade_PnL / abs(negative_net_trade_PnL), unrounded inputs",
+        "sortino_ratio": "unannualized mean_net_trade_PnL / zero_target_downside_RMS_all_trades",
+        "sharpe_per_trade": "unannualized mean_net_trade_PnL / population_std_net_trade_PnL",
+        "calmar_ratio": "calendar_CAGR_pct / max_closed_balance_drawdown_pct; no holding_time_extrapolation",
+        "drawdown": "closed_balance_observations_not_floating_equity",
+        "monte_carlo": "fixed_trade_order_permutations; terminal_PnL_invariant; prob_50pct_drawdown_tests_half_initial_balance_not_peak_DD",
+        "nonfinite_ratios": "JSON null with status; no observed losses/downside is not estimated zero risk"
+      },
+      "ratios": {
+        "omega_ratio": null,
+        "profit_factor_status": "undefined_no_gains_or_losses",
+        "sortino_ratio": null,
+        "sortino_status": "undefined_no_downside_or_mean",
+        "sharpe_per_trade": null,
+        "annualised_return_pct": 0.0,
+        "calmar_ratio": null,
+        "recovery_factor": null,
+        "skew": null,
+        "kurtosis": null
+      },
+      "monte_carlo": {
+        "median_max_dd": 0.0,
+        "p95_max_dd": 0.0,
+        "worst_max_dd": 0.0,
+        "median_final": 100.0,
+        "p05_final": 100.0,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 0.0
+      },
+      "ablation": {},
+      "bootstrap": {
+        "n_trades": 5,
+        "n_resamples": 1000,
+        "confidence_level": 0.95,
+        "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+        "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+        "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+        "profit_factor": {
+          "observed": null,
+          "observed_status": "undefined_no_gains_or_losses",
+          "unbounded_fraction": 0.0,
+          "undefined_fraction": 1.0,
+          "ci_lower": null,
+          "ci_lower_status": "undefined",
+          "median": null,
+          "median_status": "undefined",
+          "ci_upper": null,
+          "ci_upper_status": "undefined"
+        },
+        "sortino_ratio": {
+          "observed": null,
+          "observed_status": "undefined_no_downside_or_mean",
+          "unbounded_fraction": 0.0,
+          "undefined_fraction": 1.0,
+          "ci_lower": null,
+          "ci_lower_status": "undefined",
+          "median": null,
+          "median_status": "undefined",
+          "ci_upper": null,
+          "ci_upper_status": "undefined"
+        }
+      },
+      "sr_variance": null,
+      "deflated_sharpe": {
+        "raw_trials": {
+          "num_trials": 1,
+          "expected_max_sr": 0.0,
+          "dsr": 0.0
+        },
+        "warning": "sr_variance defaulted to 1.0; pass variant_series for the measured value, or this DSR is far harsher than it should be",
+        "warning_trials": "num_trials=1 claims this is the only configuration ever tried. If that is not literally true, this DSR means nothing."
+      }
+    },
+    "exhaustion_then_recovery": {
+      "stats": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "scratches": 0,
+        "win_rate": 50.0,
+        "gross_profit": 210.0,
+        "gross_loss": 110.0,
+        "net_pl": 100.0,
+        "profit_factor": 1.909091,
+        "expectancy": 50.0,
+        "avg_win": 210.0,
+        "avg_loss": 110.0,
+        "median_win": 210.0,
+        "median_loss": 110.0,
+        "payoff_ratio": 1.909091,
+        "breakeven_win_rate": 34.375,
+        "win_rate_margin": 15.62,
+        "total_r": 10.0,
+        "expectancy_r": 5.0,
+        "avg_win_r": 21.0,
+        "avg_loss_r": 11.0,
+        "max_drawdown": 110.0,
+        "max_drawdown_pct": 110.0,
+        "max_drawdown_duration_days": 2.0,
+        "recovery_factor": 0.909091,
+        "max_consec_wins": 1,
+        "max_consec_losses": 1,
+        "avg_mae_r": -0.5,
+        "avg_mfe_r": 1.0,
+        "mfe_capture": 5.0,
+        "avg_minutes_open": 60.0,
+        "median_minutes_open": 60.0,
+        "avg_minutes_to_mfe": 30.0,
+        "duplicate_trades": 0,
+        "duplicate_pl": 0,
+        "pyramid_trades": 0,
+        "pyramid_pl": 0,
+        "ambiguous_trades": 0,
+        "exit_reasons": {
+          "SL": 1,
+          "TP": 1
+        },
+        "by_session": {
+          "LONDON": {
+            "trades": 2,
+            "wins": 1,
+            "net_pl": 100.0,
+            "gross_profit": 210.0,
+            "gross_loss": 110.0,
+            "win_rate": 50.0,
+            "profit_factor": 1.909091,
+            "profit_factor_status": "finite"
+          }
+        },
+        "by_month": {
+          "2020-09": {
+            "trades": 2,
+            "wins": 1,
+            "net_pl": 100.0,
+            "gross_profit": 210.0,
+            "gross_loss": 110.0,
+            "win_rate": 50.0,
+            "profit_factor": 1.909091,
+            "profit_factor_status": "finite"
+          }
+        },
+        "by_strategy": {
+          "S": {
+            "trades": 2,
+            "wins": 1,
+            "net_pl": 100.0,
+            "gross_profit": 210.0,
+            "gross_loss": 110.0,
+            "win_rate": 50.0,
+            "profit_factor": 1.909091,
+            "profit_factor_status": "finite"
+          }
+        },
+        "start_balance": 100.0,
+        "end_balance": 200.0,
+        "return_pct": 100.0,
+        "calmar_ratio": null,
+        "omega_ratio": 1.909091,
+        "sortino_ratio": 0.642824,
+        "annualised_return_pct": null,
+        "years": 1.0,
+        "annualization_basis": "calendar_cagr_closed_balance",
+        "drawdown_basis": "closed_balance_observations_not_floating_equity",
+        "sortino_basis": "unannualized_per_trade_net_pnl_zero_target_downside_rms_all_trades",
+        "profit_factor_status": "finite",
+        "sortino_status": "finite",
+        "closed_balance_nonpositive": true,
+        "metric_notes": [
+          "nonpositive_closed_balance_CAGR_not_financeable"
+        ]
+      },
+      "years": 1.0,
+      "metric_definitions": {
+        "profit_factor": "positive_net_trade_PnL / abs(negative_net_trade_PnL), unrounded inputs",
+        "sortino_ratio": "unannualized mean_net_trade_PnL / zero_target_downside_RMS_all_trades",
+        "sharpe_per_trade": "unannualized mean_net_trade_PnL / population_std_net_trade_PnL",
+        "calmar_ratio": "calendar_CAGR_pct / max_closed_balance_drawdown_pct; no holding_time_extrapolation",
+        "drawdown": "closed_balance_observations_not_floating_equity",
+        "monte_carlo": "fixed_trade_order_permutations; terminal_PnL_invariant; prob_50pct_drawdown_tests_half_initial_balance_not_peak_DD",
+        "nonfinite_ratios": "JSON null with status; no observed losses/downside is not estimated zero risk"
+      },
+      "ratios": {
+        "omega_ratio": 1.909091,
+        "profit_factor_status": "finite",
+        "sortino_ratio": 0.642824,
+        "sortino_status": "finite",
+        "sharpe_per_trade": 0.3125,
+        "annualised_return_pct": null,
+        "calmar_ratio": null,
+        "recovery_factor": 0.909091,
+        "skew": null,
+        "kurtosis": null
+      },
+      "monte_carlo": {},
+      "ablation": {},
+      "bootstrap": {},
+      "sr_variance": null,
+      "deflated_sharpe": {
+        "raw_trials": {
+          "num_trials": 1,
+          "expected_max_sr": 0.0,
+          "dsr": 0.0
+        },
+        "warning": "sr_variance defaulted to 1.0; pass variant_series for the measured value, or this DSR is far harsher than it should be",
+        "warning_trials": "num_trials=1 claims this is the only configuration ever tried. If that is not literally true, this DSR means nothing."
+      }
+    }
+  }
+}

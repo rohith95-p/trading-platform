@@ -67,7 +67,7 @@ def full_report(trades: Sequence[Any], equity: Sequence[Any],
                 start_balance: float, num_trials: int = 1,
                 sr_variance: Optional[float] = None,
                 variant_series: Optional[Sequence[Sequence[float]]] = None,
-                years: Optional[float] = None) -> Dict[str, Any]:
+                years: Optional[float] = None, *, start_ts=None, end_ts=None) -> Dict[str, Any]:
     """Every metric, one call. Safe to attach to any backtest result.
 
     Args:
@@ -79,51 +79,50 @@ def full_report(trades: Sequence[Any], equity: Sequence[Any],
         variant_series: per-trade P&L of every configuration tried, one series
             each. Supplying it is what makes the DSR honest: it yields both the
             measured sr_variance and the correlation-aware effective trial count.
-        years: calendar span for annualised figures; derived from trade
-            timestamps when omitted.
+        years: explicit calendar span, never inferred from holding duration.
+            Prefer exact start_ts/end_ts; otherwise available equity/trade
+            timestamp bounds are disclosed as inferred.
 
     Every sub-report is individually guarded, so a metric that cannot be computed
     records its reason instead of breaking the backtest that asked for it.
     """
     out: Dict[str, Any] = {}
     pls = [float(t.net_pl) for t in trades]
+    if not np.isfinite(pls).all():
+        raise ValueError("Report requires finite per-trade net P&L")
 
     try:
-        out["stats"] = asdict(summarize(trades, equity, start_balance))
+        out["stats"] = asdict(summarize(trades, equity, start_balance,
+                                       start_ts=start_ts, end_ts=end_ts, years=years))
     except Exception as exc:
         out["stats"] = {"error": "%s: %s" % (type(exc).__name__, exc)}
 
-    if years is None and len(trades) >= 2:
-        try:
-            span = int(trades[-1].exit_time) - int(trades[0].entry_time)
-            years = span / (365.25 * 86400) if span > 0 else None
-        except Exception:
-            years = None
-    out["years"] = round(years, 3) if years else None
+    out["years"] = out["stats"].get("years")
+    out["metric_definitions"] = {
+        "profit_factor": "positive_net_trade_PnL / abs(negative_net_trade_PnL), unrounded inputs",
+        "sortino_ratio": "unannualized mean_net_trade_PnL / zero_target_downside_RMS_all_trades",
+        "sharpe_per_trade": "unannualized mean_net_trade_PnL / population_std_net_trade_PnL",
+        "calmar_ratio": "calendar_CAGR_pct / max_closed_balance_drawdown_pct; no holding_time_extrapolation",
+        "drawdown": "closed_balance_observations_not_floating_equity",
+        "monte_carlo": "fixed_trade_order_permutations; terminal_PnL_invariant; prob_50pct_drawdown_tests_half_initial_balance_not_peak_DD",
+        "nonfinite_ratios": "JSON null with status; no observed losses/downside is not estimated zero risk",
+    }
 
     try:
         a = np.asarray(pls, dtype=float)
-        eq = np.concatenate([[start_balance], start_balance + np.cumsum(a)])
-        peak = np.maximum.accumulate(eq)
-        dd_abs = float(np.max(peak - eq))
-        dd_pct = float(np.max((peak - eq) / peak) * 100.0)
-        wins, losses = a[a > 0], a[a < 0]
-        gl = float(-losses.sum())
-        ann = ((((eq[-1] / start_balance) ** (1.0 / years)) - 1.0) * 100.0
-               if years and years > 0 and eq[-1] > 0 else None)
+        summary = out["stats"]
         out["ratios"] = {
-            "omega_ratio": round(float(wins.sum() / gl), 4) if gl > 0 else None,
-            "sortino_ratio": (round(float(a.mean() / losses.std()), 4)
-                              if len(losses) and losses.std() > 0 else None),
+            "omega_ratio": summary["omega_ratio"],
+            "profit_factor_status": summary["profit_factor_status"],
+            "sortino_ratio": summary["sortino_ratio"],
+            "sortino_status": summary["sortino_status"],
             "sharpe_per_trade": (round(float(a.mean() / a.std()), 4)
-                                 if a.std() > 0 else None),
-            "annualised_return_pct": round(ann, 3) if ann is not None else None,
-            "calmar_ratio": (round(ann / dd_pct, 4)
-                             if ann is not None and dd_pct > 0 else None),
-            "recovery_factor": (round(float(a.sum()) / dd_abs, 4)
-                                if dd_abs > 0 else None),
-            "skew": round(_skew(a), 4),
-            "kurtosis": round(_kurtosis(a), 4),
+                                 if len(a) > 1 and a.std() > 0 else None),
+            "annualised_return_pct": summary["annualised_return_pct"],
+            "calmar_ratio": summary["calmar_ratio"],
+            "recovery_factor": summary["recovery_factor"],
+            "skew": round(_skew(a), 4) if len(a) > 2 and a.std() > 0 else None,
+            "kurtosis": round(_kurtosis(a), 4) if len(a) > 3 and a.std() > 0 else None,
         }
     except Exception as exc:
         out["ratios"] = {"error": "%s: %s" % (type(exc).__name__, exc)}
@@ -212,11 +211,13 @@ def format_report(rep: Dict[str, Any]) -> str:
     lines.append("-- performance --")
     for k in ("trades", "net_pl", "profit_factor", "win_rate", "expectancy",
               "payoff_ratio", "breakeven_win_rate", "win_rate_margin",
-              "max_drawdown", "max_drawdown_pct"):
+              "max_drawdown", "max_drawdown_pct", "max_drawdown_duration_days"):
         if k in st:
             row(k, st[k])
 
     lines.append("-- risk-adjusted --")
+    row("drawdown_basis", st.get("drawdown_basis"))
+    row("sortino_basis", st.get("sortino_basis"))
     for k in ("sortino_ratio", "omega_ratio", "calmar_ratio", "recovery_factor",
               "sharpe_per_trade", "annualised_return_pct", "skew", "kurtosis"):
         row(k, rt.get(k))

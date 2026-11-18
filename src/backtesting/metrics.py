@@ -43,16 +43,16 @@ class TradeStats:
     gross_profit: float = 0.0
     gross_loss: float = 0.0
     net_pl: float = 0.0
-    profit_factor: float = 0.0
+    profit_factor: Optional[float] = None
     expectancy: float = 0.0
 
     avg_win: float = 0.0
     avg_loss: float = 0.0
     median_win: float = 0.0
     median_loss: float = 0.0
-    payoff_ratio: float = 0.0
-    breakeven_win_rate: float = 0.0
-    win_rate_margin: float = 0.0
+    payoff_ratio: Optional[float] = None
+    breakeven_win_rate: Optional[float] = None
+    win_rate_margin: Optional[float] = None
 
     total_r: float = 0.0
     expectancy_r: float = 0.0
@@ -62,7 +62,7 @@ class TradeStats:
     max_drawdown: float = 0.0
     max_drawdown_pct: float = 0.0
     max_drawdown_duration_days: float = 0.0
-    recovery_factor: float = 0.0
+    recovery_factor: Optional[float] = None
 
     max_consec_wins: int = 0
     max_consec_losses: int = 0
@@ -82,20 +82,28 @@ class TradeStats:
     ambiguous_trades: int = 0
 
     exit_reasons: Dict[str, int] = field(default_factory=dict)
-    by_session: Dict[str, Dict[str, float]] = field(default_factory=dict)
-    by_month: Dict[str, Dict[str, float]] = field(default_factory=dict)
-    by_strategy: Dict[str, Dict[str, float]] = field(default_factory=dict)
+    by_session: Dict[str, Dict[str, Any]] = field(default_factory=dict)
+    by_month: Dict[str, Dict[str, Any]] = field(default_factory=dict)
+    by_strategy: Dict[str, Dict[str, Any]] = field(default_factory=dict)
 
     start_balance: float = 0.0
     end_balance: float = 0.0
     return_pct: float = 0.0
 
     # --- Distribution-agnostic risk-adjusted return metrics ---
-    # None of these use standard deviation of the *full* return series, so
-    # they remain valid for the fat-tailed, skewed XAUUSD trade P&L distribution.
-    calmar_ratio: float = 0.0          # annualised_return / max_drawdown_pct
-    omega_ratio: float = 0.0           # integral above threshold / integral below
-    sortino_ratio: float = 0.0         # mean_trade_pl / downside_std (losses only)
+    # These are descriptive estimators, not assurances of stable tail risk.
+    calmar_ratio: Optional[float] = None
+    omega_ratio: Optional[float] = None
+    sortino_ratio: Optional[float] = None
+    annualised_return_pct: Optional[float] = None
+    years: Optional[float] = None
+    annualization_basis: str = "calendar_cagr_closed_balance"
+    drawdown_basis: str = "closed_balance_observations_not_floating_equity"
+    sortino_basis: str = "unannualized_per_trade_net_pnl_zero_target_downside_rms_all_trades"
+    profit_factor_status: str = "undefined_no_trades"
+    sortino_status: str = "undefined_no_trades"
+    closed_balance_nonpositive: bool = False
+    metric_notes: List[str] = field(default_factory=list)
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
@@ -105,9 +113,118 @@ def _safe_div(a: float, b: float, default: float = 0.0) -> float:
     return a / b if b else default
 
 
-def _bucket(trades: Sequence[Any], key) -> Dict[str, Dict[str, float]]:
+def pnl_ratios(pls) -> Dict[str, Any]:
+    """Unrounded zero-target ratios, null when no finite estimate is defined."""
+    a = np.asarray(pls, dtype=float)
+    if not np.isfinite(a).all():
+        raise ValueError("Trade P&L must be finite")
+    gains, losses = float(np.maximum(a, 0.).sum()), float(np.maximum(-a, 0.).sum())
+    downside = float(np.sqrt(np.mean(np.minimum(a, 0.)**2))) if len(a) else 0.
+    return {"profit_factor": gains/losses if losses > 0 else None,
+            "profit_factor_status": ("finite" if losses > 0 else
+                                     "unbounded_no_observed_losses" if gains > 0 else
+                                     "undefined_no_gains_or_losses"),
+            "sortino_ratio": float(a.mean())/downside if downside > 0 else None,
+            "sortino_status": ("finite" if downside > 0 else
+                               "unbounded_no_observed_downside" if gains > 0 else
+                               "undefined_no_downside_or_mean"),
+            "gross_profit_unrounded": gains, "gross_loss_unrounded": losses}
+
+
+def closed_balance_metrics(trades, equity, start_balance, *, start_ts=None, end_ts=None, years=None):
+    """Calendar return and observed balance drawdowns; no continuous-equity claim.
+
+    Explicit boundaries are preferred. Otherwise use the full supplied timeline
+    including idle endpoints, or trade timestamps when no timeline is supplied.
+    Cashflows/inconsistent ending balances invalidate CAGR rather than masquerade
+    as investment returns. Input observations remain in their original order.
+    """
+    if not math.isfinite(start_balance) or start_balance <= 0:
+        raise ValueError("Positive finite starting balance required")
+    pls = np.array([float(t.net_pl) for t in trades], dtype=float)
+    if not np.isfinite(pls).all():
+        raise ValueError("Trade P&L must be finite")
+    entries = [int(t.entry_time) for t in trades]
+    exits = [int(t.exit_time) for t in trades]
+    if any(b < a for a, b in zip(exits, exits[1:])):
+        raise ValueError("Trades must be in chronological exit order")
+    points = [(int(row[0]), float(row[1])) for row in equity]
+    if any(not math.isfinite(value) for _, value in points):
+        raise ValueError("Equity observations must be finite")
+    if any(b[0] < a[0] for a, b in zip(points, points[1:])):
+        raise ValueError("Equity observations must be chronological")
+    notes = []
+    if not points:
+        points = list(zip(exits, start_balance+np.cumsum(pls)))
+        notes.append("closed_balance_reconstructed_from_net_trades_no_cashflows_assumed")
+    available = entries + exits + [ts for ts, _ in points]
+    lo = int(start_ts) if start_ts is not None else (min(available) if available else None)
+    hi = int(end_ts) if end_ts is not None else (max(available) if available else None)
+    if lo is not None and hi is not None and hi < lo:
+        raise ValueError("Observation end precedes its start")
+    if entries and ((start_ts is not None and min(entries) < lo) or
+                    (end_ts is not None and max(exits) > hi)):
+        raise ValueError("Trades fall outside the declared observation window")
+    if start_ts is None or end_ts is None:
+        notes.append("calendar_bounds_inferred_from_available_timestamps_may_include_warmup_or_miss_idle_tail")
+    points = [(ts, value) for ts, value in points
+              if (lo is None or ts >= lo) and (hi is None or ts <= hi)]
+    timeline = ([(lo, start_balance)] if lo is not None else []) + points
+    if hi is not None:
+        timeline.append((hi, timeline[-1][1] if timeline else start_balance))
+    end_balance = timeline[-1][1] if timeline else start_balance
+    peak, last_peak = start_balance, lo
+    max_dd, max_pct, max_duration = 0., 0., 0.
+    underwater = False
+    for ts, value in timeline:
+        if value >= peak:
+            if underwater and last_peak is not None:
+                max_duration = max(max_duration, (ts-last_peak)/86400.)
+            peak, last_peak, underwater = value, ts, False
+        else:
+            underwater = True
+            max_dd = max(max_dd, peak-value)
+            if peak > 0:
+                max_pct = max(max_pct, (peak-value)/peak*100.)
+            if last_peak is not None:
+                max_duration = max(max_duration, (ts-last_peak)/86400.)
+    if years is not None and (not math.isfinite(years) or years <= 0):
+        raise ValueError("Explicit annualization years must be positive and finite")
+    span = (hi-lo)/(365.25*86400.) if lo is not None and hi is not None and hi > lo else None
+    if years is not None and start_ts is not None and end_ts is not None and not math.isclose(years, span or 0., rel_tol=1e-8):
+        raise ValueError("Explicit years conflict with the declared calendar window")
+    observed_years = float(years) if years is not None else span
+    if observed_years is not None and observed_years < 1:
+        notes.append("CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance")
+    # Sparse balance observations cannot erase a known bankruptcy in the
+    # no-cashflow realized trade path merely by omitting its intermediate point.
+    nonpositive = (any(value <= 0 for _, value in timeline) or
+                   bool(np.any(start_balance+np.cumsum(pls) <= 0)))
+    cash_consistent = math.isclose(end_balance, start_balance+float(pls.sum()), rel_tol=1e-10, abs_tol=1e-6)
+    annual = None
+    if not cash_consistent:
+        notes.append("equity_end_disagrees_with_net_trades_cashflows_or_inconsistent_path_CAGR_unavailable")
+    if nonpositive:
+        notes.append("nonpositive_closed_balance_CAGR_not_financeable")
+    if observed_years and cash_consistent and not nonpositive:
+        try:
+            annual = math.expm1(math.log(end_balance/start_balance)/observed_years)*100.
+            if not math.isfinite(annual):
+                annual = None
+        except OverflowError:
+            notes.append("calendar_CAGR_overflow_unavailable")
+    return {"years": observed_years, "annualised_return_pct": annual,
+            "max_drawdown": max_dd, "max_drawdown_pct": max_pct,
+            "max_drawdown_duration_days": max_duration, "end_balance": end_balance,
+            "closed_balance_nonpositive": nonpositive,
+            "calmar_ratio": annual/max_pct if annual is not None and max_pct > 0 else None,
+            "recovery_factor": float(pls.sum())/max_dd if max_dd > 0 else None,
+            "metric_notes": notes}
+
+
+def _bucket(trades: Sequence[Any], key) -> Dict[str, Dict[str, Any]]:
     """Group trades and report the few numbers that matter per group."""
-    out: Dict[str, Dict[str, float]] = {}
+    out: Dict[str, Dict[str, Any]] = {}
     for t in trades:
         k = key(t)
         b = out.setdefault(k, {"trades": 0, "wins": 0, "net_pl": 0.0,
@@ -121,8 +238,11 @@ def _bucket(trades: Sequence[Any], key) -> Dict[str, Dict[str, float]]:
             b["gross_loss"] += abs(t.net_pl)
     for b in out.values():
         b["win_rate"] = round(_safe_div(b["wins"], b["trades"]) * 100, 1)
-        b["profit_factor"] = round(_safe_div(b["gross_profit"], b["gross_loss"],
-                                             float("inf") if b["gross_profit"] else 0.0), 3)
+        b["profit_factor"] = (round(b["gross_profit"]/b["gross_loss"], 6)
+                              if b["gross_loss"] > 0 else None)
+        b["profit_factor_status"] = ("finite" if b["gross_loss"] > 0 else
+                                     "unbounded_no_observed_losses" if b["gross_profit"] > 0 else
+                                     "undefined_no_gains_or_losses")
         b["net_pl"] = round(b["net_pl"], 2)
         b["gross_profit"] = round(b["gross_profit"], 2)
         b["gross_loss"] = round(b["gross_loss"], 2)
@@ -130,11 +250,19 @@ def _bucket(trades: Sequence[Any], key) -> Dict[str, Dict[str, float]]:
 
 
 def summarize(trades: Sequence[Any], equity: Sequence[Any],
-              start_balance: float) -> TradeStats:
+              start_balance: float, *, start_ts=None, end_ts=None, years=None) -> TradeStats:
     s = TradeStats(start_balance=round(start_balance, 2))
+    path = closed_balance_metrics(trades, equity, start_balance,
+                                  start_ts=start_ts, end_ts=end_ts, years=years)
+    for key in ("max_drawdown", "max_drawdown_pct", "max_drawdown_duration_days",
+                "end_balance", "annualised_return_pct", "calmar_ratio", "recovery_factor"):
+        value = path[key]
+        setattr(s, key, round(value, 6) if value is not None else None)
+    s.years = path["years"]
+    s.metric_notes = path["metric_notes"]
+    s.closed_balance_nonpositive = path["closed_balance_nonpositive"]
     s.trades = len(trades)
     if not trades:
-        s.end_balance = round(start_balance, 2)
         return s
 
     pls = np.array([t.net_pl for t in trades], dtype=float)
@@ -146,20 +274,22 @@ def summarize(trades: Sequence[Any], equity: Sequence[Any],
     s.scratches = int((pls == 0).sum())
     s.win_rate = round(_safe_div(s.wins, s.trades) * 100, 2)
 
-    s.gross_profit = round(float(wins.sum()), 2)
-    s.gross_loss = round(float(abs(losses.sum())), 2)
-    s.net_pl = round(float(pls.sum()), 2)
-    s.profit_factor = round(_safe_div(s.gross_profit, s.gross_loss,
-                                      float("inf") if s.gross_profit else 0.0), 3)
+    s.gross_profit = round(float(wins.sum()), 6)
+    s.gross_loss = round(float(abs(losses.sum())), 6)
+    s.net_pl = round(float(pls.sum()), 6)
+    ratios = pnl_ratios(pls)
+    s.profit_factor = round(ratios["profit_factor"], 6) if ratios["profit_factor"] is not None else None
+    s.profit_factor_status = ratios["profit_factor_status"]
+    s.sortino_status = ratios["sortino_status"]
     s.expectancy = round(float(pls.mean()), 4)
 
-    s.avg_win = round(float(wins.mean()), 2) if len(wins) else 0.0
-    s.avg_loss = round(float(abs(losses.mean())), 2) if len(losses) else 0.0
-    s.median_win = round(float(np.median(wins)), 2) if len(wins) else 0.0
-    s.median_loss = round(float(abs(np.median(losses))), 2) if len(losses) else 0.0
-    s.payoff_ratio = round(_safe_div(s.avg_win, s.avg_loss), 3)
-    if s.avg_win + s.avg_loss > 0:
-        s.breakeven_win_rate = round(s.avg_loss / (s.avg_win + s.avg_loss) * 100, 2)
+    s.avg_win = round(float(wins.mean()), 6) if len(wins) else 0.0
+    s.avg_loss = round(float(abs(losses.mean())), 6) if len(losses) else 0.0
+    s.median_win = round(float(np.median(wins)), 6) if len(wins) else 0.0
+    s.median_loss = round(float(abs(np.median(losses))), 6) if len(losses) else 0.0
+    s.payoff_ratio = round(float(wins.mean())/float(abs(losses.mean())), 6) if len(wins) and len(losses) else None
+    if len(wins) and len(losses):
+        s.breakeven_win_rate = round(float(abs(losses.mean())) / (float(wins.mean()) + float(abs(losses.mean()))) * 100, 6)
         s.win_rate_margin = round(s.win_rate - s.breakeven_win_rate, 2)
 
     s.total_r = round(float(rs.sum()), 3)
@@ -167,24 +297,6 @@ def summarize(trades: Sequence[Any], equity: Sequence[Any],
     win_r, loss_r = rs[rs > 0], rs[rs < 0]
     s.avg_win_r = round(float(win_r.mean()), 3) if len(win_r) else 0.0
     s.avg_loss_r = round(float(abs(loss_r.mean())), 3) if len(loss_r) else 0.0
-
-    # --- drawdown from the realised equity path ---
-    eq = [start_balance] + [t.balance_after for t in trades]
-    times = [trades[0].entry_time] + [t.exit_time for t in trades]
-    peak, peak_t = eq[0], times[0]
-    max_dd, max_dd_pct, max_dur = 0.0, 0.0, 0.0
-    for v, ts in zip(eq, times):
-        if v > peak:
-            peak, peak_t = v, ts
-        dd = peak - v
-        if dd > max_dd:
-            max_dd = dd
-            max_dd_pct = _safe_div(dd, peak) * 100
-        max_dur = max(max_dur, (ts - peak_t) / 86400.0)
-    s.max_drawdown = round(max_dd, 2)
-    s.max_drawdown_pct = round(max_dd_pct, 2)
-    s.max_drawdown_duration_days = round(max_dur, 1)
-    s.recovery_factor = round(_safe_div(s.net_pl, max_dd), 3)
 
     # --- streaks ---
     cw = cl = 0
@@ -231,37 +343,15 @@ def summarize(trades: Sequence[Any], equity: Sequence[Any],
         .astimezone(IST).strftime("%Y-%m"),
     )
 
-    s.end_balance = round(trades[-1].balance_after, 2)
-    s.return_pct = round(_safe_div(s.net_pl, start_balance) * 100, 2)
+    s.return_pct = round(float(pls.sum()) / start_balance * 100, 6)
 
-    # --- Calmar Ratio ---
-    # Annualised return (assume ~252 trading days, scale by avg trade duration).
-    # Using trade-count-based annualisation: trades_per_year = n / years.
-    if s.avg_minutes_open > 0 and s.trades > 0:
-        minutes_in_year = 252 * 6.5 * 60  # ~252 trading days, 6.5h/day
-        trades_per_year = minutes_in_year / s.avg_minutes_open
-        annualised_return_pct = s.expectancy * trades_per_year / start_balance * 100
-    else:
-        annualised_return_pct = s.return_pct
-    s.calmar_ratio = round(_safe_div(annualised_return_pct, s.max_drawdown_pct), 3)
-
-    # --- Omega Ratio (threshold = 0, i.e. every dollar counts) ---
-    # Omega = sum(gains above threshold) / sum(losses below threshold).
-    # This is literally just Profit Factor when threshold=0, but expressed as
-    # a ratio of partial expectations -- distribution-free by construction.
-    # A threshold > 0 can be set to represent a minimum acceptable return.
-    threshold = 0.0
-    gains_above = float(np.sum(np.maximum(pls - threshold, 0)))
-    losses_below = float(np.sum(np.maximum(threshold - pls, 0)))
-    s.omega_ratio = round(_safe_div(gains_above, losses_below,
-                                    float('inf') if gains_above else 0.0), 3)
+    # Zero-dollar target Omega equals after-cost trade-P&L profit factor.
+    s.omega_ratio = s.profit_factor
 
     # --- Sortino Ratio ---
     # Uses only the *downside* semi-deviation, so large winners don't inflate
     # the denominator the way they would in Sharpe.  Threshold = 0.
-    downside = pls[pls < threshold] - threshold          # negative deviations
-    downside_std = float(np.std(downside)) if len(downside) > 1 else 0.0
-    s.sortino_ratio = round(_safe_div(float(pls.mean()), downside_std), 3)
+    s.sortino_ratio = round(ratios["sortino_ratio"], 6) if ratios["sortino_ratio"] is not None else None
 
     return s
 
@@ -306,53 +396,48 @@ def bootstrap_ci_metrics(
     """
     if len(trades) < 5:
         return {}
+    if not isinstance(n_resamples, int) or n_resamples <= 0 or not 0 < confidence_level < 1:
+        raise ValueError("Positive resample count and confidence level in (0, 1) required")
     rng = np.random.default_rng(seed)
     pls = np.array([t.net_pl if hasattr(t, "net_pl") else float(t) for t in trades], dtype=float)
+    if not np.isfinite(pls).all():
+        raise ValueError("Finite net P&L required")
     n = len(pls)
-    indices = rng.integers(0, n, size=(n_resamples, n))
-    resampled_pls = pls[indices]
-
-    # Profit Factor per resample
-    wins = np.where(resampled_pls > 0, resampled_pls, 0.0).sum(axis=1)
-    losses = -np.where(resampled_pls < 0, resampled_pls, 0.0).sum(axis=1)
+    resampled = pls[rng.integers(0, n, size=(n_resamples, n))]
+    wins = np.maximum(resampled, 0.).sum(axis=1)
+    losses = np.maximum(-resampled, 0.).sum(axis=1)
     pfs = np.divide(wins, losses, out=np.full(n_resamples, np.inf), where=losses > 0)
+    pfs[(wins == 0) & (losses == 0)] = np.nan
+    means = resampled.mean(axis=1)
+    downside = np.sqrt(np.mean(np.minimum(resampled, 0.) ** 2, axis=1))
+    sortinos = np.divide(means, downside, out=np.full(n_resamples, np.inf), where=downside > 0)
+    sortinos[(means == 0) & (downside == 0)] = np.nan
+    observed = pnl_ratios(pls)
+    tail = (1.-confidence_level)/2.
 
-    # Sortino Ratio per resample (mean / downside_std)
-    means = resampled_pls.mean(axis=1)
-    downside_stds = np.zeros(n_resamples)
-    for i in range(n_resamples):
-        downside = resampled_pls[i][resampled_pls[i] < 0]
-        downside_stds[i] = float(np.std(downside)) if len(downside) > 1 else 0.0
-    sortinos = np.divide(means, downside_stds, out=np.zeros(n_resamples), where=downside_stds > 0)
+    def interval(values, key, status_key):
+        # Keep infinite empirical outcomes in rank order; interpolation between
+        # finite/inf values produces NaNs. Undefined 0/0 mass is disclosed.
+        defined = np.sort(values[~np.isnan(values)])
+        report = {"observed": (round(observed[key], 6) if observed[key] is not None else None),
+                  "observed_status": observed[status_key],
+                  "unbounded_fraction": float(np.isinf(values).mean()),
+                  "undefined_fraction": float(np.isnan(values).mean())}
+        for name, q in (("ci_lower", tail), ("median", .5), ("ci_upper", 1.-tail)):
+            value = defined[max(0, math.ceil(q*len(defined))-1)] if len(defined) else None
+            report[name] = round(float(value), 6) if value is not None and np.isfinite(value) else None
+            report[name+"_status"] = ("undefined" if value is None else
+                                      "unbounded" if np.isinf(value) else "finite")
+        return report
 
-    alpha_tail = (1.0 - confidence_level) / 2.0
-    p_low = alpha_tail * 100.0
-    p_high = (1.0 - alpha_tail) * 100.0
+    return {"n_trades": n, "n_resamples": n_resamples, "confidence_level": confidence_level,
+            "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+            "interval_scope": "conditional_on_defined_ratio; unbounded_mass_retained; undefined_mass_reported",
+            "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+            "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+            "profit_factor": interval(pfs, "profit_factor", "profit_factor_status"),
+            "sortino_ratio": interval(sortinos, "sortino_ratio", "sortino_status")}
 
-    obs_wins = float(np.sum(np.maximum(pls, 0)))
-    obs_losses = float(np.sum(np.maximum(-pls, 0)))
-    obs_pf = round(obs_wins / obs_losses, 4) if obs_losses > 0 else float("inf")
-    obs_downside = pls[pls < 0]
-    obs_downside_std = float(np.std(obs_downside)) if len(obs_downside) > 1 else 0.0
-    obs_sortino = round(float(pls.mean()) / obs_downside_std, 4) if obs_downside_std > 0 else 0.0
-
-    return {
-        "n_trades": n,
-        "n_resamples": n_resamples,
-        "confidence_level": confidence_level,
-        "profit_factor": {
-            "observed": obs_pf,
-            "ci_lower": round(float(np.percentile(pfs, p_low)), 4),
-            "median": round(float(np.median(pfs)), 4),
-            "ci_upper": round(float(np.percentile(pfs, p_high)), 4),
-        },
-        "sortino_ratio": {
-            "observed": obs_sortino,
-            "ci_lower": round(float(np.percentile(sortinos, p_low)), 4),
-            "median": round(float(np.median(sortinos)), 4),
-            "ci_upper": round(float(np.percentile(sortinos, p_high)), 4),
-        },
-    }
 
 
 def monte_carlo_paths(trades: Sequence[Any], start_balance: float,
