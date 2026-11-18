@@ -1,0 +1,232 @@
+{
+  "as_of": "2026-11-18",
+  "scope": "Bounded primary-source mechanism and validation review; no candidate backtests performed by this review",
+  "complete_world_review": false,
+  "records": [
+    {
+      "id": "L01",
+      "title": "Stylized facts of intraday precious metals",
+      "authors": [
+        "Jonathan Batten",
+        "Brian Lucey",
+        "Frank McGroarty",
+        "Maurice Peat",
+        "Andrew Urquhart"
+      ],
+      "institution": "Monash; Trinity College Dublin; Southampton; Sydney",
+      "publication_date": "2017-04-27",
+      "source": "PLOS ONE 12(4), e0174232",
+      "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0174232",
+      "dataset": "Reuters wholesale precious-metal quotes/trades, 5-minute, May 2000-April 2015",
+      "methodology": "Intraday periodicity, return-volatility relationships, three subsamples",
+      "mathematical_model": "Log returns; volatility; spread; Granger causality",
+      "main_finding": "Session periodicity and two-way return-volatility dependence.",
+      "limitations": "Descriptive wholesale data; no executable retail strategy.",
+      "reproducibility": "Methods accessible; underlying licensed observations unavailable here.",
+      "relevance": "Use session-conditioned nulls and separate directional prediction from volatility.",
+      "testable_hypothesis": "Lagged volatility predicts magnitude beyond session-only baseline.",
+      "reading_status": "Full text accessible; methods/results inspected; not independently reproduced"
+    },
+    {
+      "id": "L02",
+      "title": "Who sets the price of gold? London or New York",
+      "authors": [
+        "Martin Hauptfleisch",
+        "Talis J. Putnins",
+        "Brian Lucey"
+      ],
+      "institution": "UTS; Stockholm School of Economics Riga; Trinity College Dublin",
+      "publication_date": "2016-06-01 (manuscript 2015-11-30)",
+      "source": "Journal of Futures Markets 36(6), 564-586; university manuscript",
+      "url": "https://www.pure.ed.ac.uk/ws/files/82358957/GoldILS_JFutMkt_Forthcoming.pdf",
+      "dataset": "Reuters London/COMEX midquotes, 1997-November 2014, one-second sampling",
+      "methodology": "Daily/hourly price-discovery decomposition, structural-change analysis",
+      "mathematical_model": "VECM; information/component/leadership shares",
+      "main_finding": "Futures lead on average, with changing intraday structure.",
+      "limitations": "Subsecond retail arbitrage not established; historical platform break; licensed data.",
+      "reproducibility": "Equations available; synchronized original feeds unavailable.",
+      "relevance": "Spot tick volume is not COMEX signed order flow.",
+      "testable_hypothesis": "Future authorized synchronous feeds may test causal lead after latency/cost.",
+      "reading_status": "University full manuscript accessible; data/method/results sections inspected"
+    },
+    {
+      "id": "L03",
+      "title": "Impact of macroeconomic news on metal futures",
+      "authors": [
+        "John Elder",
+        "Hong Miao",
+        "Sanjay Ramchander"
+      ],
+      "institution": "Colorado State University",
+      "publication_date": "2012 (manuscript 2011-06-07)",
+      "source": "Journal of Banking & Finance; university manuscript",
+      "url": "https://mountainscholar.org/bitstream/10217/206884/1/Miao_H_BanFin_2012.pdf",
+      "dataset": "Gold/silver/copper intraday futures and US releases, 2002-2008",
+      "methodology": "Event-window regressions on standardized announcement surprises",
+      "mathematical_model": "Return/volatility/volume response to actual-minus-consensus surprises",
+      "main_finding": "Rapid announcement response; important 08:30 US releases; asymmetric effects.",
+      "limitations": "Contemporaneous explanatory relation; consensus timing and spreads critical.",
+      "reproducibility": "Methods accessible; original consensus and futures data not reproduced.",
+      "relevance": "Release calendars alone cannot recreate surprise signals.",
+      "testable_hypothesis": "Compare post-window volatility forecast and abstention to matched nonevent days.",
+      "reading_status": "Full manuscript accessible; regression/results/conclusions inspected"
+    },
+    {
+      "id": "L04",
+      "title": "A Simple Approximate Long-Memory Model of Realized Volatility",
+      "authors": [
+        "Fulvio Corsi"
+      ],
+      "institution": "University of Lugano; Swiss Finance Institute",
+      "publication_date": "2009-02-19 advance publication",
+      "source": "Journal of Financial Econometrics 7(2), 174-196",
+      "url": "https://statmath.wu.ac.at/~hauser/LVs/FinEtricsQF/References/Corsi2009JFinEtrics_LMmodelRealizedVola.pdf",
+      "dataset": "Financial realized-volatility empirical/simulation examples; not XAUUSD validation",
+      "methodology": "Parsimonious heterogeneous autoregression",
+      "mathematical_model": "RV_next = b0 + bd*RV_day + bw*mean_RV_week + bm*mean_RV_month + error",
+      "main_finding": "Daily/weekly/monthly components approximate persistent volatility.",
+      "limitations": "Volatility prediction does not imply positive directional expectancy.",
+      "reproducibility": "Equation implementable; no gold replication performed here.",
+      "relevance": "Risk and feasibility baseline with past-only features.",
+      "testable_hypothesis": "Chronological HAR forecast beats rolling variance on QLIKE without directional claim.",
+      "reading_status": "Full article accessible; model/introduction/conclusion inspected"
+    },
+    {
+      "id": "L05",
+      "title": "Time Series Momentum: Original Paper Data",
+      "authors": [
+        "Tobias J. Moskowitz",
+        "Yao Hua Ooi",
+        "Lasse Heje Pedersen"
+      ],
+      "institution": "AQR; academic collaborators",
+      "publication_date": "2018-02-27 data page; underlying paper 2012",
+      "source": "AQR original-paper dataset documentation",
+      "url": "https://www.aqr.com/Insights/Datasets/Time-Series-Momentum-Original-Paper-Data",
+      "dataset": "58 futures/forwards; factor returns January 1985-December 2009",
+      "methodology": "12-month signal, one-month holding period",
+      "mathematical_model": "Direction from own past excess return; diversified factor construction",
+      "main_finding": "Historical cross-asset own-return persistence reported.",
+      "limitations": "Monthly diversified result does not certify intraday single-market edge.",
+      "reproducibility": "Original factor dataset offered; paper not fully reread here.",
+      "relevance": "Basic trend exposure is a baseline, not a rescue of failed local variants.",
+      "testable_hypothesis": "Any new signal must improve over a predeclared trend control.",
+      "reading_status": "Primary dataset page read; underlying paper not claimed fully read"
+    },
+    {
+      "id": "L06",
+      "title": "The Deflated Sharpe Ratio: Correcting for Selection Bias, Backtest Overfitting and Non-Normality",
+      "authors": [
+        "David H. Bailey",
+        "Marcos Lopez de Prado"
+      ],
+      "institution": "UC Davis/LBNL affiliations; Guggenheim/LBNL",
+      "publication_date": "2014-07-31 manuscript",
+      "source": "Author manuscript; Journal of Portfolio Management",
+      "url": "https://davidhbailey.com/dhbpapers/deflated-sharpe.pdf",
+      "dataset": "Analytical derivation and numerical examples",
+      "methodology": "Selection-adjusted probabilistic Sharpe significance",
+      "mathematical_model": "Normal-CDF statistic using sample length, skewness, kurtosis and expected maximum Sharpe across trials",
+      "main_finding": "Searching and nonnormality inflate apparent performance.",
+      "limitations": "Effective trial count/dispersion required; leakage is not repaired.",
+      "reproducibility": "Equations available; historical project trial count incomplete.",
+      "relevance": "Report trial-count sensitivity rather than fabricated precise correction.",
+      "testable_hypothesis": "Selected candidate clears declared search-adjusted benchmark.",
+      "reading_status": "Full manuscript accessible; equations/examples/conclusion inspected"
+    },
+    {
+      "id": "L07",
+      "title": "The Probability of Backtest Overfitting",
+      "authors": [
+        "David H. Bailey",
+        "Jonathan M. Borwein",
+        "Marcos Lopez de Prado",
+        "Qiji Jim Zhu"
+      ],
+      "institution": "UC Davis/LBNL; Newcastle; Guggenheim; Western Michigan",
+      "publication_date": "2015-02-27 revised manuscript",
+      "source": "Author manuscript",
+      "url": "https://www.davidhbailey.com/dhbpapers/backtest-prob.pdf",
+      "dataset": "Simulation and seasonal-strategy examples",
+      "methodology": "Combinatorially symmetric cross-validation",
+      "mathematical_model": "PBO = frequency(logit(relative OOS rank of IS winner) < 0)",
+      "main_finding": "Relative-rank degradation quantifies selection failure.",
+      "limitations": "Needs complete aligned trial matrix; not forward-market probability or leakage test.",
+      "reproducibility": "Procedure public; hidden discarded project trials not reconstructible.",
+      "relevance": "PBO complements chronological/prospective testing.",
+      "testable_hypothesis": "A complete new candidate family retains ranks across partitions.",
+      "reading_status": "Full manuscript accessible; procedure and limitations inspected"
+    },
+    {
+      "id": "L08",
+      "title": "Gold Return Attribution Model",
+      "authors": [
+        "World Gold Council Research"
+      ],
+      "institution": "World Gold Council",
+      "publication_date": "Undated current methodology landing page; accessed 2026-11-18",
+      "source": "Goldhub institutional model",
+      "url": "https://www.gold.org/goldhub/tools/gold-return-attribution-model",
+      "dataset": "Weekly/monthly gold-driver attribution; tool requires login",
+      "methodology": "Historical driver attribution",
+      "mathematical_model": "Driver-factor attribution; detailed PDF not retrieved",
+      "main_finding": "Framework separates economic growth, risk, FX/rates opportunity cost and momentum.",
+      "limitations": "Industry organization; explanatory fit is not forecasting evidence; PDF403.",
+      "reproducibility": "Landing page accessible; methodology download forbidden; authenticated tool not used.",
+      "relevance": "Taxonomy for economic controls only.",
+      "testable_hypothesis": "Lagged vintage-correct macro features improve chronological forecasts beyond gold-only controls.",
+      "reading_status": "Landing page only; methodology PDF inaccessible (HTTP403)"
+    },
+    {
+      "id": "L09",
+      "title": "Real-Time Periods",
+      "authors": [
+        "Federal Reserve Bank of St. Louis"
+      ],
+      "institution": "Federal Reserve Bank of St. Louis",
+      "publication_date": "Undated API documentation; accessed 2026-11-18",
+      "source": "FRED/ALFRED primary documentation",
+      "url": "https://fred.stlouisfed.org/docs/api/fred/realtime_period.html",
+      "dataset": "Vintage-dated economic observations",
+      "methodology": "Retrieve information known at historical dates",
+      "mathematical_model": "Observation usable only when real-time availability precedes decision",
+      "main_finding": "Revisions and current information differ from historical information sets.",
+      "limitations": "Daily vintages do not supply intraday consensus timestamps.",
+      "reproducibility": "Documented API; actual feature vintage availability must be checked.",
+      "relevance": "Prevents revised CPI/PPI/NFP from leaking into past decisions.",
+      "testable_hypothesis": "Any macro forecast survives publication-lag and first-release reconstruction.",
+      "reading_status": "Primary documentation read"
+    },
+    {
+      "id": "L10",
+      "title": "Gold Futures Contract Specifications",
+      "authors": [
+        "CME Group"
+      ],
+      "institution": "CME/COMEX",
+      "publication_date": "Current page; accessed 2026-11-18",
+      "source": "Exchange primary specifications",
+      "url": "https://www.cmegroup.com/markets/metals/precious/gold-futures.contractSpecs.html",
+      "dataset": "Contract metadata, not empirical performance data",
+      "methodology": "Exchange product definition",
+      "mathematical_model": "GC notional = gold_price * 100 troy ounces",
+      "main_finding": "GC is exchange-traded gold exposure with defined specifications.",
+      "limitations": "Futures specifications cannot determine CFD/Atlas contract settings.",
+      "reproducibility": "Public metadata; historical contracts and roll rules still required.",
+      "relevance": "Prevents confusing GC volume and broker tick volume.",
+      "testable_hypothesis": "Cross-venue features require synchronized quotes and explicit basis/roll controls.",
+      "reading_status": "Official specification/overview inspected"
+    }
+  ],
+  "exclusions": [
+    "Vendor/forum performance without audited fills",
+    "Protected-source indicator claims",
+    "News after 2026-11-01 as model-selection input",
+    "Studies with unavailable methods treated as established alpha"
+  ],
+  "retrieval_limitations": [
+    "PMC recaptcha; used PLOS publisher full text instead",
+    "WGC methodology PDF403; landing-page review only",
+    "No paid futures or announcement-consensus data"
+  ]
+}
