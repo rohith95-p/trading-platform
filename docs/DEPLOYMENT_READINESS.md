@@ -1,0 +1,78 @@
+# Deployment readiness — 18 November 2026
+
+## Current classification
+
+**Research-capable local checkout; demo release not yet operationally certified; real-money readiness not established.** The older runbook describes an AWS Windows VPS/Exness rehearsal, not a newly verified deployment. No remote connection, MT5 initialization, broker order, Telegram notification, account purchase, service restart or production configuration mutation was performed in this readiness review.
+
+A November22 deadline cannot turn a short prospective sample into proof of positive expectancy. Deliver tested software and explicit no-edge/abstention status if research does not qualify a strategy.
+
+## Local code inspected
+
+`.agents/AGENTS.md`, README, research decision/audit logs, `src/core/main_loop.py` startup, `atlas_bridge.py`, `risk_rules.py`, portions of `resilience.py`, `execution_handler.py` references, watchdog/startup/update scripts, CI workflow, requirements and test isolation. This is a bounded source review, not a full security certification or a check of currently running services. Source-backed defects are not assumed repaired unless another finalization artifact cites the actual change and tests.
+
+## Release blockers
+
+| Priority | Observation | Evidence / required closure |
+|---|---|---|
+| P0 | No qualified trading edge from recovered studies | `research/STRATEGY_VALIDATION_REPORT.md`; final research policy is abstain unless a new candidate passes |
+| P0 | Atlas state loader returns fresh state after corruption or phase mismatch | `src/core/atlas_bridge.py::_load_atlas_state`; bind account/server/program/phase and reconcile authoritative equity/strikes before resuming |
+| P0 | Broker/account-specific Atlas rules and XAUUSD contract unverified | User is researching before buying; current official-page review cannot substitute for signed account terms and broker probe |
+| P0 | No independently reconciled real-tick / demo execution record for final candidate | Need signal→intent→request→order→deal→position journal, unknown/partial fill recovery and equity/cost reconciliation |
+| P1 | Validation ledger can be bypassed with `ULTRA_ALLOW_UNVALIDATED=1` | Startup source; a release must explicitly reject/record this override and require a validated release identity |
+| P1 | Existing demo switch relaxes daily and some streak/hard controls | `risk_rules.py`; demo does not imply same risk behavior or a no-order mode |
+| P1 | Broker profile differences warn and continue | Startup source; define which contract, clock, account or margin discrepancies must prevent orders |
+| P1 | Legacy updater kills all Python processes and deploys latest master ZIP | `scripts/vps_update.ps1`; must target owned process identities, pin approved immutable release, verify checksums and support rollback |
+| P1 | Runbook includes all-Python stop and state deletion advice | `OPS_RUNBOOK.md`; follow a reviewed targeted procedure, never delete account risk history casually |
+| P1 | Watchdog heartbeat timeout is300 seconds | `scripts/watchdog.py`; heartbeat recovery is not independent quote-speed risk supervision; test stale/blocked-loop and network-loss behavior |
+| P1 | Dependency/CI runtime compatibility not certified | CI says Python3.11 while current requirements contain newer pinned numpy/pandas/scipy; fresh clean installation must prove compatibility |
+| P1 | Research files remain outside committed release | November11 source/data/results were untracked at recovery; committing old results now does not retroactively establish preregistration |
+| P1 | Historical experiment provenance remains incomplete | Repaired `prereg_check.py` now rejects uncommitted/dirty evidence and uses Git ancestry. Current registry check:14 verified,3 explicitly weak,12 failed. Failures must be honestly classified, not retroactively relabeled |
+| P2 | README foregrounds superseded selected-period PFs | Recovery/validation reports supersede those promotion claims; align documentation before distribution |
+
+The execution-audit workstream owns backtesting fixes and additional defects in `BACKTEST_REALITY_AUDIT.md`. Do not infer that every P0 above belongs to the backtester or that a unit-test pass closes a live-account issue.
+
+## Useful controls already present
+
+Startup checks account connectivity, symbol, halt state, portfolio-owned magic numbers, recorded configuration and hedging mode; blocks foreign exposure by policy. `ULTRA_MEASURE_ONLY` is explicitly logged as no-order intent in startup and is checked in order flow. Durable halt state, deduplication, broker profile measurement, feed freshness/repair, attached broker stops and alert journaling provide a useful foundation. Their existence does not certify every fault path.
+
+Test fixtures disable live alerts, redirect runtime state to temporary directories and suppress research trial-ledger writes for synthetic tests. Linux CI uses an MT5 stub when the native package is unavailable: this tests offline logic, not Windows terminal integration.
+
+## Reproducible demo release sequence
+
+1. Finish current offline tests and source/data audit; save exact commands, complete outputs and SHA in `FINALIZATION_STATUS.md`. Check `git diff --check` and verify production strategy/freeze settings unchanged.
+2. Create a coherent experimental release from explicitly reviewed files. Preserve dirty local research as evidence; exclude secrets, unrelated files and provider data whose redistribution rights are unverified. Pin compatible interpreter and resolved dependencies; reproduce installation in a clean environment.
+3. Prepare a dedicated Windows demo terminal/account and isolated runtime directory. Verify account type, login/server, hedging mode, symbol contract, quote decimals, UTC/server clock, minimum lot/step, stops/freeze levels, margin, commissions and swap. No real account should be reachable by this release.
+4. Begin measurement-only with verified no-order enforcement. Validate event-calendar age/status, market-hour/DST interpretation, quote/bar freshness and signal parity. Capture a timestamped broker profile and configuration fingerprint without exposing secrets.
+5. Test restart, corrupt state, stale quote, failed calendar, rejected/unknown/partial response, lost connection, duplicate submission, local write failure and watchdog recovery using mocks first; close all fail-open outcomes before order-enabled demo.
+6. A qualified frozen candidate, if available, can then enter an explicitly isolated demo-only trial. Reconcile every request and deal, including gap stops, spread, latency, swaps and risk-floor movement. Keep the original production portfolio/settings untouched.
+7. Record enough prospective observations to meet predeclared sample and uncertainty requirements. No sufficient sample means “not yet verified,” regardless of deadline. Account-rule simulation must use verified phase-specific terms and model evaluation→funded→eligible payout with residual equity.
+8. Produce a pinned artifact, deployment/rollback manifest and targeted start/stop procedure. Verify task/service identity and restart without killing unrelated Python processes. Record observed demo status separately from prepared instructions.
+
+These are execution prerequisites, not a claim they were completed. No automatic background monitoring was configured here.
+
+## Safe offline commands
+
+Run from the repository with its own virtual environment. These commands do not intentionally initialize MT5 or send notifications:
+
+```powershell
+.\venv\Scripts\python.exe -m pytest -m "not live" -q
+.\venv\Scripts\python.exe -m pytest tests/test_live_freeze.py tests/test_config_integrity.py -q
+.\venv\Scripts\python.exe -I scripts/validation/prereg_check.py
+git diff --check
+git status --short
+```
+
+The parent finalization workstream runs the full suite and reports the actual count. `prereg_check` now fails closed on uncommitted evidence; `--strict-weak` also rejects legacy same-commit records. A prior-ancestor result checks recorded introduction order, not the actual runtime or protocol compliance. Do not run the historical updater, broker probe, watchdog, halt-clear or live-loop commands merely because they appear in old documentation.
+
+## Remaining external inputs
+
+An actual accessible dedicated demo terminal and deployment host, broker-native demo fills/quotes, approved release identity, and exact account-specific prop-firm terms are not established by this local review. No paid historical futures data is available. Managed Linux research/cloud work does not automatically provide native Windows MT5 execution. Prepare offline research portability separately from Windows broker integration.
+
+## Files produced by this review
+
+- `research/PROJECT_RECOVERY_2026-11-18.md`
+- `research/STRATEGY_VALIDATION_REPORT.md`
+- `research/FINAL_STRATEGY_SPECIFICATION.md`
+- `docs/DEPLOYMENT_READINESS.md`
+
+No trading or production configuration was changed. Current operational status remains **unverified**, not “deployed successfully.”
