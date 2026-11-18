@@ -1,0 +1,1211 @@
+{
+  "cutoff": "2026-11-01 UTC exclusive for analytical exports",
+  "external": [
+    {
+      "source": "https://fred.stlouisfed.org/graph/fredgraph.csv",
+      "parameters": {
+        "id": "DGS2,DGS10,DGS30,DFII5,DFII10,T5YIE,T10YIE,DFF",
+        "cosd": "2004-01-01",
+        "coed": "2026-10-31"
+      },
+      "file": "fred_rates.csv",
+      "observations": {
+        "DGS2": 5712,
+        "DGS10": 5712,
+        "DGS30": 5712,
+        "DFII5": 5712,
+        "DFII10": 5712,
+        "T5YIE": 5712,
+        "T10YIE": 5712,
+        "DFF": 8340
+      },
+      "first": "2004-01-01",
+      "last": "2026-10-31",
+      "status": "stored",
+      "path": "payload/reference/fred_rates.csv",
+      "sha256": "d50c84d8ef252a557460a8d3caf553343c089395cc279bc526d943a06f4d757b",
+      "bytes": 349875
+    },
+    {
+      "source": "https://fred.stlouisfed.org/graph/fredgraph.csv",
+      "parameters": {
+        "id": "DTWEXBGS,DEXCHUS,DEXUSEU,DEXJPUS,VIXCLS,DCOILWTICO",
+        "cosd": "2004-01-01",
+        "coed": "2026-10-31"
+      },
+      "file": "fred_markets.csv",
+      "observations": {
+        "DTWEXBGS": 5222,
+        "DEXCHUS": 5724,
+        "DEXUSEU": 5723,
+        "DEXJPUS": 5723,
+        "VIXCLS": 5778,
+        "DCOILWTICO": 5534
+      },
+      "first": "2004-01-01",
+      "last": "2026-10-30",
+      "status": "stored",
+      "path": "payload/reference/fred_markets.csv",
+      "sha256": "9515133bf5ef35df3fa31025858fdd4836b2d176d018b95e581637346e35e10a",
+      "bytes": 295332
+    },
+    {
+      "source": "https://fred.stlouisfed.org/graph/fredgraph.csv",
+      "parameters": {
+        "id": "CPIAUCSL,PPIACO,PAYEMS,UNRATE,INDPRO",
+        "cosd": "2004-01-01",
+        "coed": "2026-10-31"
+      },
+      "file": "fred_economy.csv",
+      "observations": {
+        "CPIAUCSL": 273,
+        "PPIACO": 274,
+        "PAYEMS": 274,
+        "UNRATE": 273,
+        "INDPRO": 274
+      },
+      "first": "2004-01-01",
+      "last": "2026-10-01",
+      "status": "stored",
+      "path": "payload/reference/fred_economy.csv",
+      "sha256": "5ddfe586f9568b0f0f8d1740bbd2475237e77ea4bedb458945e970360cb6d222",
+      "bytes": 12772
+    },
+    {
+      "source": "https://www.gold.org/download/file/11657/gold-premiums.xlsx",
+      "parameters": {},
+      "file": "gold_premiums.xlsx",
+      "status": "unavailable",
+      "reason": "403 Client Error: Forbidden for url: https://www.gold.org/download/file/11657/gold-premiums.xlsx"
+    },
+    {
+      "source": "https://www.gold.org/download/file/8052/Quarterly_gold_and_FX_Reserves_Q3_2026.xlsx",
+      "parameters": {},
+      "file": "central_bank_reserves_quarterly.xlsx",
+      "status": "unavailable",
+      "reason": "403 Client Error: Forbidden for url: https://www.gold.org/download/file/8052/Quarterly_gold_and_FX_Reserves_Q3_2026.xlsx"
+    },
+    {
+      "source": "https://www.gold.org/download/file/21341/ETF_Flows_2026-11-03.xlsx",
+      "parameters": {},
+      "file": "gold_etf_flows_october.xlsx",
+      "status": "unavailable",
+      "reason": "403 Client Error: Forbidden for url: https://www.gold.org/download/file/21341/ETF_Flows_2026-11-03.xlsx"
+    },
+    {
+      "source": "https://www.gold.org/download/file/11658/Chinese_premium-discount_methodology.pdf",
+      "parameters": {},
+      "file": "chinese_premium_methodology.pdf",
+      "status": "unavailable",
+      "reason": "403 Client Error: Forbidden for url: https://www.gold.org/download/file/11658/Chinese_premium-discount_methodology.pdf"
+    },
+    {
+      "source": "https://www.gold.org/download/file/12491/central_bank_data_methodology.pdf",
+      "parameters": {},
+      "file": "central_bank_methodology.pdf",
+      "status": "unavailable",
+      "reason": "403 Client Error: Forbidden for url: https://www.gold.org/download/file/12491/central_bank_data_methodology.pdf"
+    },
+    {
+      "source": "https://www.gold.org/download/file/16223/ETF-Flows-Data-Methodology.pdf",
+      "parameters": {},
+      "file": "etf_flows_methodology.pdf",
+      "status": "unavailable",
+      "reason": "403 Client Error: Forbidden for url: https://www.gold.org/download/file/16223/ETF-Flows-Data-Methodology.pdf"
+    },
+    {
+      "source": "https://thedocs.worldbank.org/en/doc/74e8be41ceb20fa0da750cda2f6b9e4e-0050012026/related/CMO-Historical-Data-Monthly.xlsx",
+      "parameters": {},
+      "file": "world_bank_monthly_commodities.xlsx",
+      "sheets": [
+        "Mismatch Details",
+        "Monthly Prices",
+        "Monthly Indices",
+        "Description",
+        "Index Weights"
+      ],
+      "use": "Unfiltered source workbook and original sheet structure. May include sealed dates. Respect release dates when selecting historical columns.",
+      "status": "stored",
+      "path": "payload/reference/world_bank_monthly_commodities.xlsx",
+      "sha256": "3c8d9d8dbb48342fdbf24777c39a8ce8964cc2fd0958f72f6779e6e4ad99cde2",
+      "bytes": 587760
+    },
+    {
+      "source": "https://api.imf.org/external/sdmx/3.0/data/dataflow/IMF.STA/IRFCL/12.0.0/*.IRFCLDT1_IRFCL56V_FTO.*.M",
+      "parameters": {},
+      "file": "imf_official_gold_reserves.csv",
+      "rows": 23989,
+      "countries_or_areas": 88,
+      "first": "2004-M01",
+      "last": "2026-M10",
+      "use": "Provider-reported stocks. Preserve SCALE, sector and units. Historical revisions and publication timestamps unknown.",
+      "status": "stored",
+      "path": "payload/reference/imf_official_gold_reserves.csv",
+      "sha256": "9242634e33f4ab9cdde4d7373ed9a2becc6c9a14bcd0379abaf6bb4c62c9c5bd",
+      "bytes": 2519251
+    },
+    {
+      "source": "https://www.gold.org/sites/default/files/downloads/2019-01/Chinese-premium-discount-methodology.pdf",
+      "parameters": {},
+      "file": "premium_methodology_2019.pdf",
+      "status": "stored",
+      "path": "payload/reference/premium_methodology_2019.pdf",
+      "sha256": "1d6e8069e0250ad6c124420dcb1970dc750b68a002de47c2c3f7176ec74f2e6d",
+      "bytes": 94623
+    },
+    {
+      "source": "https://api.spdrgoldshares.com/api/v1/historical-archive",
+      "parameters": {
+        "product": "gld",
+        "exchange": "NYSE",
+        "lang": "en"
+      },
+      "file": "spdr_gld_historical.xlsx",
+      "sheets": [
+        "Disclaimer",
+        "US GLD Historical Archive"
+      ],
+      "use": "Unfiltered source workbook and original sheet structure. May include sealed dates. Respect release dates when selecting historical columns.",
+      "status": "stored",
+      "path": "payload/reference/spdr_gld_historical.xlsx",
+      "sha256": "71dda624c8d72cbb9cdfbc10a8f6d3a0afa5141b25f46041c09cb409b58ab6e3",
+      "bytes": 544209
+    },
+    {
+      "source": "https://www.philadelphiafed.org/-/media/FRBP/Assets/Surveys-And-Data/real-time-data/data-files/xlsx/pcpiMvMd.xlsx",
+      "parameters": {},
+      "file": "pcpiMvMd.xlsx",
+      "sheets": [
+        "pcpi"
+      ],
+      "use": "Unfiltered source workbook and original sheet structure. May include sealed dates. Respect release dates when selecting historical columns.",
+      "status": "stored",
+      "path": "payload/reference/pcpiMvMd.xlsx",
+      "sha256": "2edd776f458f0c6d563e038ba364f0702d86b0b1da7e37fa3b097a0419076ece",
+      "bytes": 829636
+    },
+    {
+      "source": "https://www.philadelphiafed.org/-/media/FRBP/Assets/Surveys-And-Data/real-time-data/data-files/xlsx/pcpi_first_second_third.xlsx",
+      "parameters": {},
+      "file": "pcpi_first_second_third.xlsx",
+      "sheets": [
+        "NOTES",
+        "DATA"
+      ],
+      "use": "Unfiltered source workbook and original sheet structure. May include sealed dates. Respect release dates when selecting historical columns.",
+      "status": "stored",
+      "path": "payload/reference/pcpi_first_second_third.xlsx",
+      "sha256": "829c8ef1b3842a0c945fdf805086f045798b61084211b8f5937629024d7bfc4b",
+      "bytes": 17962
+    },
+    {
+      "source": "https://www.philadelphiafed.org/-/media/FRBP/Assets/Surveys-And-Data/real-time-data/data-files/xlsx/employMvMd.xlsx",
+      "parameters": {},
+      "file": "employMvMd.xlsx",
+      "sheets": [
+        "employ"
+      ],
+      "use": "Unfiltered source workbook and original sheet structure. May include sealed dates. Respect release dates when selecting historical columns.",
+      "status": "stored",
+      "path": "payload/reference/employMvMd.xlsx",
+      "sha256": "49553e6a60fa5e807f2039e4699400cfd407a51104b32ba670b7ba2260ce5437",
+      "bytes": 2238603
+    },
+    {
+      "source": "https://www.philadelphiafed.org/-/media/FRBP/Assets/Surveys-And-Data/real-time-data/data-files/xlsx/employ_level_first_second_third.xlsx",
+      "parameters": {},
+      "file": "employ_level_first_second_third.xlsx",
+      "sheets": [
+        "NOTES",
+        "DATA"
+      ],
+      "use": "Unfiltered source workbook and original sheet structure. May include sealed dates. Respect release dates when selecting historical columns.",
+      "status": "stored",
+      "path": "payload/reference/employ_level_first_second_third.xlsx",
+      "sha256": "da5f3a884e5092c94bb53a8b5af828e111ccb25fdf8f39050769ca5ecd0dd406",
+      "bytes": 30749
+    },
+    {
+      "source": "https://www.philadelphiafed.org/-/media/FRBP/Assets/Surveys-And-Data/real-time-data/data-files/xlsx/rucQvMd.xlsx",
+      "parameters": {},
+      "file": "rucQvMd.xlsx",
+      "sheets": [
+        "ruc"
+      ],
+      "use": "Unfiltered source workbook and original sheet structure. May include sealed dates. Respect release dates when selecting historical columns.",
+      "status": "stored",
+      "path": "payload/reference/rucQvMd.xlsx",
+      "sha256": "d971e59d3ed5f1322a46631743508fb1ad5eee39bfbe12425a641a277fdd9b9a",
+      "bytes": 575288
+    },
+    {
+      "source": "https://www.philadelphiafed.org/-/media/FRBP/Assets/Surveys-And-Data/real-time-data/data-files/documentation/Release_-Dates-Employment_Situation-BLS.xls",
+      "parameters": {},
+      "file": "Release_-Dates-Employment_Situation-BLS.xls",
+      "status": "stored",
+      "path": "payload/reference/Release_-Dates-Employment_Situation-BLS.xls",
+      "sha256": "b583847169fd5ca4074917e1105887b0bc5b8e3b4d2f9576023388b5b57565ee",
+      "bytes": 34816
+    },
+    {
+      "source": "https://publicreporting.cftc.gov/resource/72hh-3qpy.csv",
+      "parameters": {
+        "cftc_contract_market_code": "088691",
+        "$where": "report_date_as_yyyy_mm_dd < '2026-11-01T00:00:00'",
+        "$limit": "5000",
+        "$order": "report_date_as_yyyy_mm_dd"
+      },
+      "file": "cftc_comex_gold.csv",
+      "rows": 1064,
+      "first": "2006-06-13",
+      "last": "2026-10-27",
+      "status": "stored",
+      "path": "payload/reference/cftc_comex_gold.csv",
+      "sha256": "ac5aa32088c725ce2d94062b8801a7dbd0fb6a3f1d0d14b8b23445df1f0a5208",
+      "bytes": 1447201
+    }
+  ],
+  "project_inputs": [
+    {
+      "source": "research/data/bls_windows/f62546278584c219520d700632d932bb22917cec8c910b7329092fd764d6a32e.npy",
+      "path": "payload/project/research/data/bls_windows/f62546278584c219520d700632d932bb22917cec8c910b7329092fd764d6a32e.npy",
+      "sha256": "6db48cdd2f44b7c7052ec664abbd7964a1a9cef8e65098dc839f37e2657603b5",
+      "bytes": 596836
+    },
+    {
+      "source": "research/data/d1_study/dxy.csv",
+      "path": "payload/project/research/data/d1_study/dxy.csv",
+      "sha256": "312b4ad3ac22112c2e0b38cb7bedb46ddb31fc3284f8c6d6db8b8c2184a16c9b",
+      "bytes": 1169509
+    },
+    {
+      "source": "research/data/d1_study/gld.csv",
+      "path": "payload/project/research/data/d1_study/gld.csv",
+      "sha256": "bdc469f6d34f4d66a30de9f3389a76626db0aad0cc42acab71aa920bb5edaae3",
+      "bytes": 459063
+    },
+    {
+      "source": "research/data/d1_study/gold.csv",
+      "path": "payload/project/research/data/d1_study/gold.csv",
+      "sha256": "b8eae7ee61b70e97872eac1d5a81af1a053565f27fcd78aca319926c9ab8ac4f",
+      "bytes": 470045
+    },
+    {
+      "source": "research/data/d1_study/master.csv",
+      "path": "payload/project/research/data/d1_study/master.csv",
+      "sha256": "ec4fa4f6d3ea2587f98ebeb3d354b163b71fb4815d5b04caf6303d72d4ed2663",
+      "bytes": 886800
+    },
+    {
+      "source": "research/data/d1_study/spx.csv",
+      "path": "payload/project/research/data/d1_study/spx.csv",
+      "sha256": "a6bd77c926eef9034d94d61aa59bacdd5f803b3d24fdbddba203427664151685",
+      "bytes": 2047092
+    },
+    {
+      "source": "research/data/d1_study/vix.csv",
+      "path": "payload/project/research/data/d1_study/vix.csv",
+      "sha256": "80e040b43f6487b36777db84f4cf7e03b72e842988165e7559f1f13683b2a575",
+      "bytes": 780416
+    },
+    {
+      "source": "research/data/d1_study/y10.csv",
+      "path": "payload/project/research/data/d1_study/y10.csv",
+      "sha256": "a092aaa25892647e20a8491e444138eebb8cc7f07c037d22e2d06d5972789cfb",
+      "bytes": 1349203
+    },
+    {
+      "source": "research/data/dukascopy_2025/A_1735063139999.response.gz",
+      "path": "payload/project/research/data/dukascopy_2025/A_1735063139999.response.gz",
+      "sha256": "57f53900ec4a783e23f9f708d288fce7e4872bc9b1f1a60e84bc046b38cb21b5",
+      "bytes": 463081
+    },
+    {
+      "source": "research/data/dukascopy_2025/A_1738000859999.response.gz",
+      "path": "payload/project/research/data/dukascopy_2025/A_1738000859999.response.gz",
+      "sha256": "9b8a7500133ac28affaba5db9564c501771e1a4c89c276685e68369392ddc521",
+      "bytes": 455957
+    },
+    {
+      "source": "research/data/dukascopy_2025/A_1740580919999.response.gz",
+      "path": "payload/project/research/data/dukascopy_2025/A_1740580919999.response.gz",
+      "sha256": "163696350fc00024883c0b2375c75ae3387d0b1a30fdbead8841ff959ba08452",
+      "bytes": 456950
+    },
+    {
+      "source": "research/data/dukascopy_2025/A_1743147839999.response.gz",
+      "path": "payload/project/research/data/dukascopy_2025/A_1743147839999.response.gz",
+      "sha256": "0c6b2cbea960cfaefb5fd19e5e56f35b53c99f2f3bcc83c967d682c07c6eec3b",
+      "bytes": 457742
+    },
+    {
+      "source": "research/data/dukascopy_2025/A_1745979239999.response.gz",
+      "path": "payload/project/research/data/dukascopy_2025/A_1745979239999.response.gz",
+      "sha256": "a8687b34e44c8540a7a2c942b9a6cd552e11f63cffa789f05295999b49932a20",
+      "bytes": 477917
+    },
+    {
+      "source": "research/data/dukascopy_2025/A_1748558819999.response.gz",
+      "path": "payload/project/research/data/dukascopy_2025/A_1748558819999.response.gz",
+      "sha256": "3fc7845073d3853e03bd570da0beb53b58e7472ff14db0baae7e6ba32e99258d",
+      "bytes": 469414
+    },
+    {
+      "source": "research/data/dukascopy_2025/A_1751307479999.response.gz",
+      "path": "payload/project/research/data/dukascopy_2025/A_1751307479999.response.gz",
+      "sha256": "4c4299569a9a9a27189583f77199e02aea2696bee792e104325389a30aca12c3",
+      "bytes": 461454
+    },
+    {
+      "source": "research/data/dukascopy_2025/A_1753892459999.response.gz",
+      "path": "payload/project/research/data/dukascopy_2025/A_1753892459999.response.gz",
+      "sha256": "f5d5c417419277440a1ab4f48679e80ddaf1c74bba17457102bed187aaaeb022",
+      "bytes": 451511
+    },
+    {
+      "source": "research/data/dukascopy_2025/A_1756463519999.response.gz",
+      "path": "payload/project/research/data/dukascopy_2025/A_1756463519999.response.gz",
+      "sha256": "408088d3b6b26f43058aea992d57601d6e4fafe54fc18114bb72a86a2c494d32",
+      "bytes": 450654
+    },
+    {
+      "source": "research/data/dukascopy_2025/A_1759215779999.response.gz",
+      "path": "payload/project/research/data/dukascopy_2025/A_1759215779999.response.gz",
+      "sha256": "472bc88082428ef0179d70b295134287085bc1fff85145fb19f39a815f37626b",
+      "bytes": 462348
+    },
+    {
+      "source": "research/data/dukascopy_2025/A_1761786179999.response.gz",
+      "path": "payload/project/research/data/dukascopy_2025/A_1761786179999.response.gz",
+      "sha256": "5acd1b1b02c5b9566115b88cc6a8edd64760bc2a3494fd4f1bed6517ff680379",
+      "bytes": 494521
+    },
+    {
+      "source": "research/data/dukascopy_2025/A_1764551099999.response.gz",
+      "path": "payload/project/research/data/dukascopy_2025/A_1764551099999.response.gz",
+      "sha256": "6d7ab46d929f15871ddace6f0816d2799de41bbd74f50e3009768c649374f34a",
+      "bytes": 481699
+    },
+    {
+      "source": "research/data/dukascopy_2025/A_1767225600000.response.gz",
+      "path": "payload/project/research/data/dukascopy_2025/A_1767225600000.response.gz",
+      "sha256": "eb42b4b7aae010b26675468bba1234e74497bef23dc861ea32fb577043fdc3ab",
+      "bytes": 477399
+    },
+    {
+      "source": "research/data/dukascopy_2025/B_1735063139999.response.gz",
+      "path": "payload/project/research/data/dukascopy_2025/B_1735063139999.response.gz",
+      "sha256": "0a93bda0f0bcb6ee0368d4481217c91cdfa2dd0108b022c257eaef835e649fcf",
+      "bytes": 462345
+    },
+    {
+      "source": "research/data/dukascopy_2025/B_1738000859999.response.gz",
+      "path": "payload/project/research/data/dukascopy_2025/B_1738000859999.response.gz",
+      "sha256": "77edf873013f7da572903e7df88df524b0e669311db1a1a0cf4237f9bfea1786",
+      "bytes": 454178
+    },
+    {
+      "source": "research/data/dukascopy_2025/B_1740580919999.response.gz",
+      "path": "payload/project/research/data/dukascopy_2025/B_1740580919999.response.gz",
+      "sha256": "ec8f34fb7c3889e5576822cfd6bdff51e0b4ef47551062b060f75b01e6afd115",
+      "bytes": 456137
+    },
+    {
+      "source": "research/data/dukascopy_2025/B_1743147839999.response.gz",
+      "path": "payload/project/research/data/dukascopy_2025/B_1743147839999.response.gz",
+      "sha256": "a1d4b99a257909083bb4e48b98801cd7c4141bec38a034660d4a129f49ed018b",
+      "bytes": 458729
+    },
+    {
+      "source": "research/data/dukascopy_2025/B_1745979239999.response.gz",
+      "path": "payload/project/research/data/dukascopy_2025/B_1745979239999.response.gz",
+      "sha256": "19ebd4a27de0000f802df02c1f733cedac1a429db3839293e64034a4392a8cce",
+      "bytes": 476360
+    },
+    {
+      "source": "research/data/dukascopy_2025/B_1748558819999.response.gz",
+      "path": "payload/project/research/data/dukascopy_2025/B_1748558819999.response.gz",
+      "sha256": "705df35d50cafd304b2729badeed727b4aefe7f21f0b6e70ab70564bc845a5f5",
+      "bytes": 469811
+    },
+    {
+      "source": "research/data/dukascopy_2025/B_1751307479999.response.gz",
+      "path": "payload/project/research/data/dukascopy_2025/B_1751307479999.response.gz",
+      "sha256": "2bfa3fcbea435140e6e5008cdd3983cef826cacde5b688e135dca3c89892f3ba",
+      "bytes": 461603
+    },
+    {
+      "source": "research/data/dukascopy_2025/B_1753892459999.response.gz",
+      "path": "payload/project/research/data/dukascopy_2025/B_1753892459999.response.gz",
+      "sha256": "f84e59ef31a70fcdbc114212af954731ed6f04dca68853f59bb4ac478fd950c8",
+      "bytes": 452385
+    },
+    {
+      "source": "research/data/dukascopy_2025/B_1756463519999.response.gz",
+      "path": "payload/project/research/data/dukascopy_2025/B_1756463519999.response.gz",
+      "sha256": "994c2378fe1d92beb638937405fac6da4f8b3dd8b0386b41405e58bebccb429b",
+      "bytes": 451113
+    },
+    {
+      "source": "research/data/dukascopy_2025/B_1759215779999.response.gz",
+      "path": "payload/project/research/data/dukascopy_2025/B_1759215779999.response.gz",
+      "sha256": "12cc492bb2a78f4ad0ae025217d960f5607fdeaea91e274df10ca470119c095c",
+      "bytes": 462911
+    },
+    {
+      "source": "research/data/dukascopy_2025/B_1761786179999.response.gz",
+      "path": "payload/project/research/data/dukascopy_2025/B_1761786179999.response.gz",
+      "sha256": "5629be7c840aecacf8fef95036eb65ceadb4f9140509ff4f4710abf7bb033d01",
+      "bytes": 493447
+    },
+    {
+      "source": "research/data/dukascopy_2025/B_1764551099999.response.gz",
+      "path": "payload/project/research/data/dukascopy_2025/B_1764551099999.response.gz",
+      "sha256": "40427308918cc723d2edac561d18e24c6897357582a960316d3c4c608e4aecab",
+      "bytes": 481466
+    },
+    {
+      "source": "research/data/dukascopy_2025/B_1767225600000.response.gz",
+      "path": "payload/project/research/data/dukascopy_2025/B_1767225600000.response.gz",
+      "sha256": "61c17ab348b6bd029b0c9c2712dd63aed6285c2ebd84f5ecc395fab0e2cc154a",
+      "bytes": 478315
+    },
+    {
+      "source": "research/data/dukascopy_2025/manifest.json",
+      "path": "payload/project/research/data/dukascopy_2025/manifest.json",
+      "sha256": "6604ec9a63eca42c2ba930568cbed2afff7c5549db5f81b09c6a2094e64f7f8e",
+      "bytes": 14480
+    },
+    {
+      "source": "research/data/dukascopy_2025/tick_crosscheck.json",
+      "path": "payload/project/research/data/dukascopy_2025/tick_crosscheck.json",
+      "sha256": "d8fe5b6234a8d7fa63d98c13f6d062a4ffe9660ff757c0353c50aafddbc937d0",
+      "bytes": 315
+    },
+    {
+      "source": "research/data/dukascopy_2025/XAUUSD_M1_bidask.npy",
+      "path": "payload/project/research/data/dukascopy_2025/XAUUSD_M1_bidask.npy",
+      "sha256": "71b2a48870e0b53bf8e634fb3ebc8589dd88d44a828559e618d2b0dd104328f8",
+      "bytes": 26590784
+    },
+    {
+      "source": "research/data/dukascopy_probe/A.json",
+      "path": "payload/project/research/data/dukascopy_probe/A.json",
+      "sha256": "1ab428ae880fd9385f00c1e1d46777b629bc72b3c70d5171406f2976093483b6",
+      "bytes": 367
+    },
+    {
+      "source": "research/data/dukascopy_probe/A.response",
+      "path": "payload/project/research/data/dukascopy_probe/A.response",
+      "sha256": "597e754a1ba0b32b3b20a9c057223ad11d73f49a60f65fb3cc1373c6345b26e1",
+      "bytes": 2190019
+    },
+    {
+      "source": "research/data/dukascopy_probe/B.json",
+      "path": "payload/project/research/data/dukascopy_probe/B.json",
+      "sha256": "c3c9fa02ad6d45c4a0f7307091bea454d5600dc5976eac3bba6bb60925313eb7",
+      "bytes": 367
+    },
+    {
+      "source": "research/data/dukascopy_probe/B.response",
+      "path": "payload/project/research/data/dukascopy_probe/B.response",
+      "sha256": "9c42242dbc271ad954281dbae2604ea0b56b4e8f0c01e99c1f9f7f3d620ed0bd",
+      "bytes": 2190019
+    },
+    {
+      "source": "research/data/genesis/2013.json",
+      "path": "payload/project/research/data/genesis/2013.json",
+      "sha256": "e00d05317433b0d20b93680a8fe4406dba3fc53908d56129e1ff8f007e95600b",
+      "bytes": 522
+    },
+    {
+      "source": "research/data/genesis/2013_M1.npy",
+      "path": "payload/project/research/data/genesis/2013_M1.npy",
+      "sha256": "b67902dc104ebbe44c7ba135ea45d98f24569785e3b5b2d40784dd9b0c32fd5b",
+      "bytes": 21200956
+    },
+    {
+      "source": "research/data/genesis/2013_M5.npy",
+      "path": "payload/project/research/data/genesis/2013_M5.npy",
+      "sha256": "ef1cbb964f25e08ee3ef34cc56cb75d7e44a49b576a97cddc351b801983a2a1d",
+      "bytes": 4224556
+    },
+    {
+      "source": "research/data/genesis/2018.json",
+      "path": "payload/project/research/data/genesis/2018.json",
+      "sha256": "6b8793500fb3303a2f6ca081af34f3529f8b707e38ca9b4bb498895a46139043",
+      "bytes": 522
+    },
+    {
+      "source": "research/data/genesis/2018_M1.npy",
+      "path": "payload/project/research/data/genesis/2018_M1.npy",
+      "sha256": "add19b2a887913254efa5f69bdaee04c1e6e5046dabaa9d71699cb7543a8dcfc",
+      "bytes": 21282916
+    },
+    {
+      "source": "research/data/genesis/2018_M5.npy",
+      "path": "payload/project/research/data/genesis/2018_M5.npy",
+      "sha256": "51a4473f401916d910a68ca70444f313c22eef5df26908f052f6a8c7d96a4274",
+      "bytes": 4254976
+    },
+    {
+      "source": "research/data/genesis/2025.json",
+      "path": "payload/project/research/data/genesis/2025.json",
+      "sha256": "e901623e99c37e74453d5113abbfe2b4843dcf9141f7318751f0fb726173c1ad",
+      "bytes": 522
+    },
+    {
+      "source": "research/data/genesis/2025_M1.npy",
+      "path": "payload/project/research/data/genesis/2025_M1.npy",
+      "sha256": "ef2ace1573a2477cb5ed529b864f0f382a3b5b96e68e91876857da37ca39c85f",
+      "bytes": 19642396
+    },
+    {
+      "source": "research/data/genesis/2025_M5.npy",
+      "path": "payload/project/research/data/genesis/2025_M5.npy",
+      "sha256": "64183c094c6286bea0a7d18de8d5d9fad113e849d5a591a2c8a5b984df8e6cb2",
+      "bytes": 3921316
+    },
+    {
+      "source": "research/data/gold_cftc_through_2025.json",
+      "path": "payload/project/research/data/gold_cftc_through_2025.json",
+      "sha256": "b59683d126173b80af936dcf0868c704ca8ccaadd6987e23a4e19e44d1b88a1e",
+      "bytes": 172324
+    },
+    {
+      "source": "research/data/gvz_through_2025.csv",
+      "path": "payload/project/research/data/gvz_through_2025.csv",
+      "sha256": "56608febc9c16b50962aadf25cfb181b1c26e072a1ffc93f61eb3139ef9be6c6",
+      "bytes": 73264
+    },
+    {
+      "source": "research/data/kaggle_22yr/XAUUSDm_D1.manifest.json",
+      "path": "payload/project/research/data/kaggle_22yr/XAUUSDm_D1.manifest.json",
+      "sha256": "16526ed52d528d5b48d248fd834f9262d16fce32c487f111051a302d2ec6725e",
+      "bytes": 643
+    },
+    {
+      "source": "research/data/kaggle_22yr/XAUUSDm_D1.npy",
+      "path": "payload/project/research/data/kaggle_22yr/XAUUSDm_D1.npy",
+      "sha256": "cafbd527cf50c54c04ea9e96f984c866858b6fb7b7fee14cd6c2ade1e90f5a3a",
+      "bytes": 333736
+    },
+    {
+      "source": "research/data/kaggle_22yr/XAUUSDm_M1.manifest.json",
+      "path": "payload/project/research/data/kaggle_22yr/XAUUSDm_M1.manifest.json",
+      "sha256": "a4c9bd331073cdf06affa9db2340ec1b62754a29d3d27e8cdeb0a104bab210d1",
+      "bytes": 646
+    },
+    {
+      "source": "research/data/kaggle_22yr/XAUUSDm_M1.npy",
+      "path": "payload/project/research/data/kaggle_22yr/XAUUSDm_M1.npy",
+      "sha256": "dd04f177a9f9274ed25e1ea09c7d9faf1b318d25d1da3191870acd8d512c11f0",
+      "bytes": 409363096
+    },
+    {
+      "source": "research/data/kaggle_22yr/XAUUSDm_M15.manifest.json",
+      "path": "payload/project/research/data/kaggle_22yr/XAUUSDm_M15.manifest.json",
+      "sha256": "95e441964e059f813c96cf82cef4d86df9e98afa12d9cd82514888e3257d4972",
+      "bytes": 646
+    },
+    {
+      "source": "research/data/kaggle_22yr/XAUUSDm_M15.npy",
+      "path": "payload/project/research/data/kaggle_22yr/XAUUSDm_M15.npy",
+      "sha256": "12d190a2473a7f8332bbbe8351185b6c50dd6b6a5520780d7b688c69e1ce002a",
+      "bytes": 29793616
+    },
+    {
+      "source": "research/data/kaggle_22yr/XAUUSDm_M5.manifest.json",
+      "path": "payload/project/research/data/kaggle_22yr/XAUUSDm_M5.manifest.json",
+      "sha256": "26fea4627ecbf249af0c9bb397bb7c9ca7ea8b359c83789983561d48a9f5b809",
+      "bytes": 646
+    },
+    {
+      "source": "research/data/kaggle_22yr/XAUUSDm_M5.npy",
+      "path": "payload/project/research/data/kaggle_22yr/XAUUSDm_M5.npy",
+      "sha256": "2bcb2b048c9400dadebad372f454318ba937c1f6f09c467fbbbbf2a56381751f",
+      "bytes": 87022336
+    },
+    {
+      "source": "research/data/miners_factor_closes_through_2025.csv",
+      "path": "payload/project/research/data/miners_factor_closes_through_2025.csv",
+      "sha256": "944c4726eeb9bff9d3e0c4399a1aead4bb660a8461d230e3af953cae793a1b99",
+      "bytes": 324707
+    },
+    {
+      "source": "research/data/selection_inputs/7132368ef74b14883d2a84045c37f158db70a97e38d7a728486845d942baa3cf.csv",
+      "path": "payload/project/research/data/selection_inputs/7132368ef74b14883d2a84045c37f158db70a97e38d7a728486845d942baa3cf.csv",
+      "sha256": "7132368ef74b14883d2a84045c37f158db70a97e38d7a728486845d942baa3cf",
+      "bytes": 258665
+    },
+    {
+      "source": "research/data/tick_reconciliation_2026-11-18/acquisition_alternate.json",
+      "path": "payload/project/research/data/tick_reconciliation_2026-11-18/acquisition_alternate.json",
+      "sha256": "ed28871e52fb765fab4eed0c2f54b893b47f534a2c373c7159bfd8e041210c47",
+      "bytes": 296
+    },
+    {
+      "source": "research/data/tick_reconciliation_2026-11-18/acquisition_first.json",
+      "path": "payload/project/research/data/tick_reconciliation_2026-11-18/acquisition_first.json",
+      "sha256": "d81692d807b5e01c1e00f219b3dcb7fa1a940d4de253b7ba3eedbac57a0c80b9",
+      "bytes": 217
+    },
+    {
+      "source": "research/data/tick_reconciliation_2026-11-18/alternate.response",
+      "path": "payload/project/research/data/tick_reconciliation_2026-11-18/alternate.response",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "source": "research/data/XAUUSDm_D1.manifest.json",
+      "path": "payload/project/research/data/XAUUSDm_D1.manifest.json",
+      "sha256": "bc70aee66ddfbeca436c49aba493952ef76a2db1596d6094c22fed81e12fa722",
+      "bytes": 34348
+    },
+    {
+      "source": "research/data/XAUUSDm_D1.npy",
+      "path": "payload/project/research/data/XAUUSDm_D1.npy",
+      "sha256": "0f82eb6186585e642167e256dc7241f27094b5e06063d436dfbd5619ec5bed51",
+      "bytes": 92896
+    },
+    {
+      "source": "research/data/XAUUSDm_H1.manifest.json",
+      "path": "payload/project/research/data/XAUUSDm_H1.manifest.json",
+      "sha256": "45c955a52a7c0c41b98c20549cd5ece7a866c01ece1a53e1df6eb5294985562e",
+      "bytes": 162608
+    },
+    {
+      "source": "research/data/XAUUSDm_H1.npy",
+      "path": "payload/project/research/data/XAUUSDm_H1.npy",
+      "sha256": "4209082455441b0a441c7fbc89a4e92a452507565ee3c77b34218ed99a83736d",
+      "bytes": 1716196
+    },
+    {
+      "source": "research/data/XAUUSDm_H4.manifest.json",
+      "path": "payload/project/research/data/XAUUSDm_H4.manifest.json",
+      "sha256": "3cf4bb8178ebc0054ab8d003eac8caf6d068415db45e066810c5e359bd87e925",
+      "bytes": 33163
+    },
+    {
+      "source": "research/data/XAUUSDm_H4.npy",
+      "path": "payload/project/research/data/XAUUSDm_H4.npy",
+      "sha256": "55b35aaa3878f68c3a943f28957c426d0d3f72b66b51fa9c543445333c0f71cc",
+      "bytes": 450136
+    },
+    {
+      "source": "research/data/XAUUSDm_M1.manifest.json",
+      "path": "payload/project/research/data/XAUUSDm_M1.manifest.json",
+      "sha256": "66bd30005d893c9f8a3df0c16cc0edaf58061e4165a19a4a0faedc984e66e98e",
+      "bytes": 10081
+    },
+    {
+      "source": "research/data/XAUUSDm_M1.npy",
+      "path": "payload/project/research/data/XAUUSDm_M1.npy",
+      "sha256": "de1af69ec631ab326f65be29122ef32bff18ef09986878d0b6970e4ed6f92c61",
+      "bytes": 6000256
+    },
+    {
+      "source": "research/data/XAUUSDm_M15.manifest.json",
+      "path": "payload/project/research/data/XAUUSDm_M15.manifest.json",
+      "sha256": "9cffd0c1c6ce3fd7afc5233743d4b5d1e6ac61525e1adce76f204c468368fed1",
+      "bytes": 142792
+    },
+    {
+      "source": "research/data/XAUUSDm_M15.npy",
+      "path": "payload/project/research/data/XAUUSDm_M15.npy",
+      "sha256": "988cffa2af21f28a19dd7d058a9bcef1f8dfe7e240b352f5651d010549393b94",
+      "bytes": 6000256
+    },
+    {
+      "source": "research/data/XAUUSDm_M5.manifest.json",
+      "path": "payload/project/research/data/XAUUSDm_M5.manifest.json",
+      "sha256": "eb0efbf4c11198a7ebba9bbcaff103ffb5f9af0648c22e44759971a969066429",
+      "bytes": 48670
+    },
+    {
+      "source": "research/data/XAUUSDm_M5.npy",
+      "path": "payload/project/research/data/XAUUSDm_M5.npy",
+      "sha256": "2237a939d90058bc274ab22863995218cb00452ef57074a5b2482a5c0a250342",
+      "bytes": 6000256
+    },
+    {
+      "source": "research/data_2026-10-30/XAUUSDm_D1.manifest.json",
+      "path": "payload/project/research/data_2026-10-30/XAUUSDm_D1.manifest.json",
+      "sha256": "433d341301d5592c82187782914d2e17d0412c983b117001489c598e2df69a70",
+      "bytes": 34608
+    },
+    {
+      "source": "research/data_2026-10-30/XAUUSDm_D1.npy",
+      "path": "payload/project/research/data_2026-10-30/XAUUSDm_D1.npy",
+      "sha256": "043b66f5a71ce6b062abe7f9d99087fbb01e478aa4186654b1aac099ea717951",
+      "bytes": 93736
+    },
+    {
+      "source": "research/data_2026-10-30/XAUUSDm_M1.manifest.json",
+      "path": "payload/project/research/data_2026-10-30/XAUUSDm_M1.manifest.json",
+      "sha256": "7be9582cd7d952e39dc72fe28da5a9186c0b577b3012217f68e3a4f30c1198b0",
+      "bytes": 10078
+    },
+    {
+      "source": "research/data_2026-10-30/XAUUSDm_M1.npy",
+      "path": "payload/project/research/data_2026-10-30/XAUUSDm_M1.npy",
+      "sha256": "2c831428c5850ce56b18b58b12f7a17a3ec84f2096e7af371c74773090f4d90b",
+      "bytes": 6000256
+    },
+    {
+      "source": "research/data_2026-10-30/XAUUSDm_M15.manifest.json",
+      "path": "payload/project/research/data_2026-10-30/XAUUSDm_M15.manifest.json",
+      "sha256": "2e2698202862e7fa06252e5fbbc3d15de3ee7996bfe282de726c31d6c3c4d740",
+      "bytes": 142660
+    },
+    {
+      "source": "research/data_2026-10-30/XAUUSDm_M15.npy",
+      "path": "payload/project/research/data_2026-10-30/XAUUSDm_M15.npy",
+      "sha256": "5c1748117a23ec5a24e83a549e08bdaea47d141e483223eab8a4d0906a51ff48",
+      "bytes": 6000256
+    },
+    {
+      "source": "research/data_live_parity/XAUUSDm_D1.manifest.json",
+      "path": "payload/project/research/data_live_parity/XAUUSDm_D1.manifest.json",
+      "sha256": "0bb5f9f633d52527d14cbfbc430ee29bac5f0b9960a7ed472eb7ad4bc8fccf3e",
+      "bytes": 4832
+    },
+    {
+      "source": "research/data_live_parity/XAUUSDm_D1.npy",
+      "path": "payload/project/research/data_live_parity/XAUUSDm_D1.npy",
+      "sha256": "e801d4780b143272b566e4a5e6c422631fcad5165afb681eb00b4245b1aca58f",
+      "bytes": 12076
+    },
+    {
+      "source": "research/data_live_parity/XAUUSDm_M1.manifest.json",
+      "path": "payload/project/research/data_live_parity/XAUUSDm_M1.manifest.json",
+      "sha256": "dfb3c2dc6ac49281403d7d5fec5899a5dd9b87af9529cd7206eb4cbae9627829",
+      "bytes": 3152
+    },
+    {
+      "source": "research/data_live_parity/XAUUSDm_M1.npy",
+      "path": "payload/project/research/data_live_parity/XAUUSDm_M1.npy",
+      "sha256": "828ecfe26f84dc04acf5944db13e2279864b6339d0c4d56fab651699d1ef41b4",
+      "bytes": 1653616
+    },
+    {
+      "source": "research/data_live_parity/XAUUSDm_M15.manifest.json",
+      "path": "payload/project/research/data_live_parity/XAUUSDm_M15.manifest.json",
+      "sha256": "65c778d8017a0fddaa9d3283c67b95588fa87452ad4613ba272a034c6e50dea7",
+      "bytes": 7671
+    },
+    {
+      "source": "research/data_live_parity/XAUUSDm_M15.npy",
+      "path": "payload/project/research/data_live_parity/XAUUSDm_M15.npy",
+      "sha256": "c826b20f2d958d1bc201114942f98f98f035ad12368ba2284bd935a048f51d07",
+      "bytes": 302536
+    },
+    {
+      "source": "research/data_live_parity/XAUUSDm_M5.manifest.json",
+      "path": "payload/project/research/data_live_parity/XAUUSDm_M5.manifest.json",
+      "sha256": "4c32f5e254c483c8e0dda75c9a195937cbe6a01b6aac1518ea516d9aaa18f4f6",
+      "bytes": 4975
+    },
+    {
+      "source": "research/data_live_parity/XAUUSDm_M5.npy",
+      "path": "payload/project/research/data_live_parity/XAUUSDm_M5.npy",
+      "sha256": "5977525a6a5e7433c84182c921b32125a84dab822fbd77d70b15b3b45e252564",
+      "bytes": 559996
+    },
+    {
+      "source": "research/events/bls_december_2018_release_links.json",
+      "path": "payload/project/research/events/bls_december_2018_release_links.json",
+      "sha256": "fb6ca4db731c33f585e4dea1a8818f779f94c9f5b5ef71db9c147812754ddb31",
+      "bytes": 134
+    },
+    {
+      "source": "research/events/bls_release_archive_links_2019_2025.json",
+      "path": "payload/project/research/events/bls_release_archive_links_2019_2025.json",
+      "sha256": "9f546ebc6b7e90d79ed23efaa2f1a2ba595c36ad52e2bf432bb3b61b10dde5e8",
+      "bytes": 16182
+    },
+    {
+      "source": "research/events/README.md",
+      "path": "payload/project/research/events/README.md",
+      "sha256": "1d4b206678c14b9a2677811d572eba4156e7d9d20d347da8767f536013388961",
+      "bytes": 4538
+    },
+    {
+      "source": "research/events/usd_high_impact_2022_2026.csv",
+      "path": "payload/project/research/events/usd_high_impact_2022_2026.csv",
+      "sha256": "01e6256fc3550c6bfb4eaed121c796747c14100cf76e1e6e9d3405245915e930",
+      "bytes": 49467
+    },
+    {
+      "source": "research/market/timeframe_study.json",
+      "path": "payload/project/research/market/timeframe_study.json",
+      "sha256": "8800ff478a673ae6ac81f026027a3c52eb5325981472efb3bf59058fe049fb81",
+      "bytes": 4863
+    },
+    {
+      "source": "research/market/xauusd_market_study.json",
+      "path": "payload/project/research/market/xauusd_market_study.json",
+      "sha256": "2f61a195fcde5c448cc923c934b6c2be4c5e05bf3d6de16015152e83942a7590",
+      "bytes": 11399
+    },
+    {
+      "source": "research/results/finalization_2026-11-18/data_inventory.json",
+      "path": "payload/project/research/results/finalization_2026-11-18/data_inventory.json",
+      "sha256": "8ff2b87a27ab319a397aedaef5785d51d9396bcbfd7964a68b18e6d4fc23ce59",
+      "bytes": 57856
+    },
+    {
+      "source": "research/results/finalization_2026-11-18/economic_hurdle.json",
+      "path": "payload/project/research/results/finalization_2026-11-18/economic_hurdle.json",
+      "sha256": "7dc45eb93d8eba9a2f3ba3dbecbf6468744ecdf22ad7192707975c79459272a1",
+      "bytes": 3015
+    },
+    {
+      "source": "research/results/finalization_2026-11-18/literature.json",
+      "path": "payload/project/research/results/finalization_2026-11-18/literature.json",
+      "sha256": "58dcd548b0ee302b7bcdcc2ed38522fa0e96b79a9b9e50db4d8631d59559599a",
+      "bytes": 14948
+    },
+    {
+      "source": "research/results/finalization_2026-11-18/market_atlas.json",
+      "path": "payload/project/research/results/finalization_2026-11-18/market_atlas.json",
+      "sha256": "d5d733176e7a7bef84ee27d15fdb26432ccef19a24a305fe6e66d2969100bcb8",
+      "bytes": 91605
+    },
+    {
+      "source": "research/results/finalization_2026-11-18/path_risk.json",
+      "path": "payload/project/research/results/finalization_2026-11-18/path_risk.json",
+      "sha256": "ef5c8d9f59a73a430a86851103a9702ae311d60e78c933460cd8e0e719fc2ffa",
+      "bytes": 80130
+    },
+    {
+      "source": "research/results/finalization_2026-11-18/quote_side_replication.json",
+      "path": "payload/project/research/results/finalization_2026-11-18/quote_side_replication.json",
+      "sha256": "2d8725594d795d163186db73e666b03737f8c452a86563fa43c8c4faf83fabc7",
+      "bytes": 9908
+    },
+    {
+      "source": "research/results/gold_m15_forecast_2026-11-18.json",
+      "path": "payload/project/research/results/gold_m15_forecast_2026-11-18.json",
+      "sha256": "98d3fbef90e7a54c800d7b1d052281096b5ba499e421dcbd4817fad217c9c05f",
+      "bytes": 5006
+    },
+    {
+      "source": "research/results/treasury_auction_gold_2026-11-18/calendar.json",
+      "path": "payload/project/research/results/treasury_auction_gold_2026-11-18/calendar.json",
+      "sha256": "d510974d280e3de667df1dc577d1893e7ff4cb7bd5a07c77762482f7f96f82ab",
+      "bytes": 93866
+    },
+    {
+      "source": "research/sources/chandelier_zlsma/CEZLSMA.pine",
+      "path": "payload/project/research/sources/chandelier_zlsma/CEZLSMA.pine",
+      "sha256": "92ba0dd8d402e287268751bf625214873406cf7f5a8ec34ab484044c5111f977",
+      "bytes": 2499
+    },
+    {
+      "source": "research/sources/chandelier_zlsma/LICENSE",
+      "path": "payload/project/research/sources/chandelier_zlsma/LICENSE",
+      "sha256": "e80e545e160471060c1f11c257bd4d599b474a1f89b803db4617b895b4172798",
+      "bytes": 1064
+    },
+    {
+      "source": "research/sources/chandelier_zlsma/manifest.json",
+      "path": "payload/project/research/sources/chandelier_zlsma/manifest.json",
+      "sha256": "a7454d58c4140ff2abcd9449e82ad126e4823fe80c12159823a86a5a6a805d2a",
+      "bytes": 475
+    },
+    {
+      "source": "research/sources/fomc_usmpd_20261118/calendar.json",
+      "path": "payload/project/research/sources/fomc_usmpd_20261118/calendar.json",
+      "sha256": "87253edd54411d1a12ece37cb23733f6e70f820c0ee52998429fa4a253b9a393",
+      "bytes": 22023
+    },
+    {
+      "source": "research/sources/fomc_usmpd_20261118/manifest.json",
+      "path": "payload/project/research/sources/fomc_usmpd_20261118/manifest.json",
+      "sha256": "a78407d41dcf41419cbf4e5cfcdd4dd26ece965f83b3283a5d53cd8067af8360",
+      "bytes": 312
+    },
+    {
+      "source": "research/sources/fomc_usmpd_20261118/USMPD.xlsx",
+      "path": "payload/project/research/sources/fomc_usmpd_20261118/USMPD.xlsx",
+      "sha256": "2b91297c42cf692dd74f65eabf7ee97f81d452676e23fa02edb222bfa60f0d0a",
+      "bytes": 199373
+    },
+    {
+      "source": "research/sources/xauusd_001A/manifest.json",
+      "path": "payload/project/research/sources/xauusd_001A/manifest.json",
+      "sha256": "c48f0dcca2eb806df26b7ebd9da6998aedb74385d81064026227cc193ae7f309",
+      "bytes": 905
+    },
+    {
+      "source": "research/sources/xauusd_001A/oos_grid.csv",
+      "path": "payload/project/research/sources/xauusd_001A/oos_grid.csv",
+      "sha256": "60bac0d5e6977c76cfff344eb976cbd2766853cbe1fc709550f21645ee3b0526",
+      "bytes": 1525
+    },
+    {
+      "source": "research/sources/xauusd_001A/oos_meta.json",
+      "path": "payload/project/research/sources/xauusd_001A/oos_meta.json",
+      "sha256": "ec397f1d8103324e56acc20d6e1eaee20b023987a769765d36cd2e2794104f0d",
+      "bytes": 1304
+    },
+    {
+      "source": "research/sources/xauusd_001A/README.md",
+      "path": "payload/project/research/sources/xauusd_001A/README.md",
+      "sha256": "8e13b6f3915a9f9ef5368940bbb097b0a37b595c7a09c2a4daed0e572aca80e0",
+      "bytes": 3252
+    }
+  ],
+  "master": [
+    {
+      "timeframe": "M1",
+      "rows": 6887193,
+      "first_utc": "2004-06-11 04:18:00+00:00",
+      "last_utc": "2026-10-29 20:36:00+00:00",
+      "fields": [
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "tick_volume",
+        "spread",
+        "real_volume"
+      ],
+      "path": "payload/master/XAUUSDm_M1.npy",
+      "sha256": "ba8cae50141445e6fc454255f704f5fc538ebadf9a7c014d218eb8f7b17ffb8e",
+      "bytes": 413231836,
+      "provenance": [
+        {
+          "source": "kaggle",
+          "timeframe": "M1",
+          "bars": 6770558,
+          "first": 1086927480,
+          "last": 1767218340,
+          "clock": "athens",
+          "note": "22-year third-party archive; diverges from the broker after Feb 2026"
+        },
+        {
+          "source": "broker",
+          "timeframe": "M1",
+          "bars": 100000,
+          "first": 1783033200,
+          "last": 1791917700,
+          "clock": "utc",
+          "note": "the bot's own Exness terminal"
+        },
+        {
+          "source": "topup",
+          "timeframe": "M1",
+          "bars": 100000,
+          "first": 1784608800,
+          "last": 1793306160,
+          "clock": "utc",
+          "note": "later pull of the same terminal"
+        }
+      ]
+    },
+    {
+      "timeframe": "M5",
+      "rows": 100000,
+      "first_utc": "2025-05-16 13:30:00+00:00",
+      "last_utc": "2026-10-13 18:55:00+00:00",
+      "fields": [
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "tick_volume",
+        "spread",
+        "real_volume"
+      ],
+      "path": "payload/master/XAUUSDm_M5.npy",
+      "sha256": "2237a939d90058bc274ab22863995218cb00452ef57074a5b2482a5c0a250342",
+      "bytes": 6000256,
+      "provenance": [
+        {
+          "source": "broker",
+          "timeframe": "M5",
+          "bars": 100000,
+          "first": 1747402200,
+          "last": 1791917700,
+          "clock": "utc",
+          "note": "the bot's own Exness terminal"
+        }
+      ]
+    },
+    {
+      "timeframe": "M15",
+      "rows": 514712,
+      "first_utc": "2004-06-11 04:15:00+00:00",
+      "last_utc": "2026-10-29 20:30:00+00:00",
+      "fields": [
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "tick_volume",
+        "spread",
+        "real_volume"
+      ],
+      "path": "payload/master/XAUUSDm_M15.npy",
+      "sha256": "8d18645e30a986961f564a3e0ab30c635c0dd3848d062754423ab8cb827e38b8",
+      "bytes": 30882976,
+      "provenance": [
+        {
+          "source": "kaggle",
+          "timeframe": "M15",
+          "bars": 492964,
+          "first": 1086927300,
+          "last": 1767217500,
+          "clock": "athens",
+          "note": "22-year third-party archive; diverges from the broker after Feb 2026"
+        },
+        {
+          "source": "broker",
+          "timeframe": "M15",
+          "bars": 100000,
+          "first": 1658344500,
+          "last": 1791917100,
+          "clock": "utc",
+          "note": "the bot's own Exness terminal"
+        },
+        {
+          "source": "topup",
+          "timeframe": "M15",
+          "bars": 100000,
+          "first": 1659909600,
+          "last": 1793305800,
+          "clock": "utc",
+          "note": "later pull of the same terminal"
+        }
+      ]
+    },
+    {
+      "timeframe": "H1",
+      "rows": 126553,
+      "first_utc": "2004-06-11 05:00:00+00:00",
+      "last_utc": "2026-10-29 19:00:00+00:00",
+      "fields": [
+        "time",
+        "open",
+        "high",
+        "low",
+        "close"
+      ],
+      "path": "payload/master/XAUUSDm_H1.npy",
+      "sha256": "cbb0105d7bcb968ab5c39eeae9d766750c4fcb25b4de35a4da96fcf8abd31460",
+      "bytes": 5062312,
+      "provenance": [
+        {
+          "source": "kaggle",
+          "timeframe": "M15",
+          "bars": 492964,
+          "first": 1086927300,
+          "last": 1767217500,
+          "clock": "athens",
+          "note": "22-year third-party archive; diverges from the broker after Feb 2026"
+        },
+        {
+          "source": "broker",
+          "timeframe": "M15",
+          "bars": 100000,
+          "first": 1658344500,
+          "last": 1791917100,
+          "clock": "utc",
+          "note": "the bot's own Exness terminal"
+        },
+        {
+          "source": "topup",
+          "timeframe": "M15",
+          "bars": 100000,
+          "first": 1659909600,
+          "last": 1793305800,
+          "clock": "utc",
+          "note": "later pull of the same terminal"
+        }
+      ]
+    },
+    {
+      "timeframe": "H4",
+      "rows": 7498,
+      "first_utc": "2022-01-02 20:00:00+00:00",
+      "last_utc": "2026-09-09 12:00:00+00:00",
+      "fields": [
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "tick_volume",
+        "spread",
+        "real_volume"
+      ],
+      "path": "payload/master/XAUUSDm_H4.npy",
+      "sha256": "55b35aaa3878f68c3a943f28957c426d0d3f72b66b51fa9c543445333c0f71cc",
+      "bytes": 450136,
+      "provenance": [
+        {
+          "source": "broker",
+          "timeframe": "H4",
+          "bars": 7498,
+          "first": 1641153600,
+          "last": 1788955200,
+          "clock": "utc",
+          "note": "the bot's own Exness terminal"
+        }
+      ]
+    },
+    {
+      "timeframe": "D1",
+      "rows": 7074,
+      "first_utc": "2004-06-10 21:00:00+00:00",
+      "last_utc": "2026-10-29 00:00:00+00:00",
+      "fields": [
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "tick_volume",
+        "spread",
+        "real_volume"
+      ],
+      "path": "payload/master/XAUUSDm_D1.npy",
+      "sha256": "50b27a62ab6adf608dd1145beeea637f24fc94f26499229da4205cbc501d0a64",
+      "bytes": 424696,
+      "provenance": [
+        {
+          "source": "kaggle",
+          "timeframe": "D1",
+          "bars": 5516,
+          "first": 1086901200,
+          "last": 1767132000,
+          "clock": "athens",
+          "note": "22-year third-party archive; diverges from the broker after Feb 2026"
+        },
+        {
+          "source": "broker",
+          "timeframe": "D1",
+          "bars": 1544,
+          "first": 1635292800,
+          "last": 1791849600,
+          "clock": "utc",
+          "note": "the bot's own Exness terminal"
+        },
+        {
+          "source": "topup",
+          "timeframe": "D1",
+          "bars": 1558,
+          "first": 1635292800,
+          "last": 1793232000,
+          "clock": "utc",
+          "note": "later pull of the same terminal"
+        }
+      ]
+    }
+  ]
+}
