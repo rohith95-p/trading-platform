@@ -201,3 +201,17 @@ def test_asking_and_not_asking_are_cached_apart(tmp_path, monkeypatch):
     judging = master.load_master(("M15",), allow_holdout=True)
     assert after not in plain.m15["time"].tolist()
     assert after in judging.m15["time"].tolist()
+
+
+def test_merged_data_identity_hashes_actual_observations_and_contract():
+    from dataclasses import replace
+    from src.backtesting.data import BarSet, SymbolSpec
+
+    spec = SymbolSpec("XAUUSDm", 3, .001, .001, .1, .01, 200., .01, 100.)
+    bars = BarSet("XAUUSDm", make([900, 1800]), None, None, None, spec, {})
+    first = bars.hash_key()
+    assert replace(bars, m15=bars.m15.copy()).hash_key() == first
+    assert replace(bars, m15=bars.m15[:1]).hash_key() != first
+    assert replace(bars, spec=replace(spec, contract_size=10.)).hash_key() != first
+    bars.m15["close"][-1] += 1.
+    assert bars.hash_key() != first

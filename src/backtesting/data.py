@@ -293,8 +293,13 @@ class BarSet:
 
     def hash_key(self) -> str:
         """Combined hash of every series backing this set."""
-        joined = "|".join(f"{k}:{v.sha256}" for k, v in sorted(self.manifests.items()))
-        return hashlib.sha256(joined.encode()).hexdigest()[:16]
+        digest = hashlib.sha256(json.dumps(asdict(self.spec), sort_keys=True).encode())
+        for name in ("m1", "m5", "m15", "h4", "d1"):
+            series = getattr(self, name)
+            if series is not None:
+                digest.update(repr((name, series.shape, series.dtype.descr)).encode())
+                digest.update(np.ascontiguousarray(series).view(np.uint8))
+        return digest.hexdigest()[:16]
 
 
 def load_bars(
