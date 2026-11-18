@@ -1,0 +1,84 @@
+{
+  "script_sha256": "fd1cb0538c4d8c2c25af58ba1b3b745ef872d6d68b7b83eb094a80e2eef6f7dd",
+  "classification": "exploratory_economic_hurdle_not_backtest",
+  "effects": {
+    "M1": {
+      "n_extreme": 398154,
+      "conditional_reference_move_usd_per_oz": 0.018614191996061666,
+      "modeled_round_trip_hurdle_usd_per_oz": 0.3347923918885657,
+      "difference_not_trade_expectancy": -0.316178199892504,
+      "cost_model": "spread=bar:260 x1 slip=20 comm=3.5 swap=True/-515.5/0 roll=0 triple=None",
+      "point": 0.001,
+      "contract_size": 100.0,
+      "caveat": "Previous close reference is not a fill; short/long spread timing and slippage approximate. No financing, stops, sizing, paths, positions or account results evaluated.",
+      "provenance": [
+        {
+          "source": "kaggle",
+          "timeframe": "M1",
+          "bars": 6770558,
+          "first": 1086927480,
+          "last": 1767218340,
+          "clock": "athens",
+          "note": "22-year third-party archive; diverges from the broker after Feb 2026"
+        },
+        {
+          "source": "broker",
+          "timeframe": "M1",
+          "bars": 100000,
+          "first": 1783033200,
+          "last": 1791917700,
+          "clock": "utc",
+          "note": "the bot's own Exness terminal"
+        },
+        {
+          "source": "topup",
+          "timeframe": "M1",
+          "bars": 100000,
+          "first": 1784608800,
+          "last": 1793306160,
+          "clock": "utc",
+          "note": "later pull of the same terminal"
+        }
+      ]
+    },
+    "M15": {
+      "n_extreme": 34985,
+      "conditional_reference_move_usd_per_oz": 0.053107303129912596,
+      "modeled_round_trip_hurdle_usd_per_oz": 0.32287566099757037,
+      "difference_not_trade_expectancy": -0.2697683578676578,
+      "cost_model": "spread=bar:260 x1 slip=20 comm=3.5 swap=True/-515.5/0 roll=0 triple=None",
+      "point": 0.001,
+      "contract_size": 100.0,
+      "caveat": "Previous close reference is not a fill; short/long spread timing and slippage approximate. No financing, stops, sizing, paths, positions or account results evaluated.",
+      "provenance": [
+        {
+          "source": "kaggle",
+          "timeframe": "M15",
+          "bars": 492964,
+          "first": 1086927300,
+          "last": 1767217500,
+          "clock": "athens",
+          "note": "22-year third-party archive; diverges from the broker after Feb 2026"
+        },
+        {
+          "source": "broker",
+          "timeframe": "M15",
+          "bars": 100000,
+          "first": 1658344500,
+          "last": 1791917100,
+          "clock": "utc",
+          "note": "the bot's own Exness terminal"
+        },
+        {
+          "source": "topup",
+          "timeframe": "M15",
+          "bars": 100000,
+          "first": 1659909600,
+          "last": 1793305800,
+          "clock": "utc",
+          "note": "later pull of the same terminal"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "date": "2026-11-18",
+  "pytest": {
+    "command": "venv/Scripts/python.exe -m pytest -m not_live (actual quoted marker: not live)",
+    "passed": 634,
+    "seconds": 28.39,
+    "exit_code": 0,
+    "log": "pytest.log"
+  },
+  "provenance": {
+    "exit_code": 1,
+    "verified": 14,
+    "weak": 3,
+    "failed": 12,
+    "log": "provenance_check.log"
+  },
+  "market_data_files": 36,
+  "market_resolutions": 6,
+  "qualified_strategy": false,
+  "demo_deployed": false,
+  "real_money_enabled": false,
+  "production_settings_changed": false,
+  "holdout_evaluated": false,
+  "last_execution_commit": "0ce4a01",
+  "source_hashes": {
+    "scripts/research/market_atlas.py": "79ef812a872f5586017f6b45d09ba1305f7c2f144ca37873b18258dea1ba1cc0",
+    "scripts/research/market_edge_discovery.py": "fd1cb0538c4d8c2c25af58ba1b3b745ef872d6d68b7b83eb094a80e2eef6f7dd",
+    "src/backtesting/engine.py": "7630f518473e9f44a8b6e84021f442d95e70a192d2af9196d97a68712febeb77",
+    "src/research/access_rules_20261118.py": "f346bfa11079784940a12ebc77d6c495ebd1da07c720abd016ce3d52a8ae06cb",
+    "scripts/validation/prereg_check.py": "e6a41c5fa7cff99be58afbc6667ad0691ef800ed95d4dc18e81ee5e987cb068c"
+  }
+}

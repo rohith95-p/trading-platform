@@ -1,6 +1,10 @@
 # Ultra Core — XAUUSD Algorithmic Trading System
 
-An automated XAUUSD (gold) trading system built on MetaTrader 5, designed for Atlas Funded prop-firm evaluation accounts. Runs a 4-strategy portfolio with full risk management, position sizing, and prop-firm rule compliance. Day-to-day operation (Telegram messages, strategy times, VPS commands): [docs/OPS_RUNBOOK.md](docs/OPS_RUNBOOK.md).
+An XAUUSD (gold) trading and research system built on MetaTrader 5, with a four-strategy portfolio, risk controls and experimental prop-firm accounting. Day-to-day operation (Telegram messages, strategy times, VPS commands): [docs/OPS_RUNBOOK.md](docs/OPS_RUNBOOK.md).
+
+**Research status, 18 November 2026:** no strategy has established the required independent after-cost edge. The original portfolio lost across its previously untouched2004–2022 evaluation (PF0.90,2,556 trades). Favorable selected-period figures below are historical research artifacts, not deployment approval. Current Atlas public rules differ from the stored production profile; compliance is not certified. Production settings have not been changed by the finalization research.
+
+Start with [finalization status](docs/FINALIZATION_STATUS.md), [gold market atlas](research/GOLD_MARKET_ATLAS.md), [execution audit](docs/BACKTEST_REALITY_AUDIT.md), [current Atlas rule verification](docs/ATLAS_RULES_VERIFICATION.md), and [deployment readiness](docs/DEPLOYMENT_READINESS.md).
 
 ## Architecture
 
