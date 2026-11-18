@@ -1,0 +1,320 @@
+{
+  "protocol_sha256": "ee74a347970a28c5d552444e5808700ca387b637c9197f273e62ee9a28a30035",
+  "script_sha256": "0305f43133ef028fc719fa8599c43eb60c940d31c162c5781bfd43b8113b7064",
+  "input_sha256": "71b2a48870e0b53bf8e634fb3ebc8589dd88d44a828559e618d2b0dd104328f8",
+  "git_head_before_eval": "c871366ecd6a787816efea34c1da0a642000a91c",
+  "input_rows": 369312,
+  "sample": "2025 endpoints only; December2024 warmup; not untouched",
+  "studies": {
+    "M1": {
+      "resolution_seconds": 60,
+      "complete_bars": 369312,
+      "valid_endpoint_observations": 352553,
+      "extreme_events": 21087,
+      "matched_events": 20925,
+      "unique_controls": 18623,
+      "max_control_reuse": 7,
+      "reference_move_mean": 0.03851761748945024,
+      "causal_mid_open_mean": 0.03766621615213237,
+      "quote_side_mean": -0.6015499122682306,
+      "observed_endpoint_spread_hurdle_mean": 0.6392161284203626,
+      "same_timestamp_balanced_side_default_mean": -0.7142161284203626,
+      "matched_ordinary_default_mean": -1.5344680525687078,
+      "primary_default_net": {
+        "n": 21087,
+        "mean": -0.6765499122682307,
+        "ci95": [
+          -0.7084979834707653,
+          -0.6477409662821607
+        ],
+        "utc_weeks": 53,
+        "p_centered": 0.0005,
+        "p_bonferroni4": 0.002,
+        "bootstrap_draws": 1999,
+        "limitation": "One explored calendar year; resampled weeks not independent prospective trials."
+      },
+      "primary_matched_difference": {
+        "n": 20925,
+        "mean": 0.8618594026284364,
+        "ci95": [
+          0.7582911613230728,
+          0.9832505051631365
+        ],
+        "utc_weeks": 53,
+        "p_centered": 0.0005,
+        "p_bonferroni4": 0.002,
+        "bootstrap_draws": 1999,
+        "limitation": "One explored calendar year; resampled weeks not independent prospective trials."
+      },
+      "default_spread_multiple": 1.0,
+      "default_commission": 0.035,
+      "default_slippage": 0.04,
+      "cost_stress": [
+        {
+          "spread_multiplier": 1.0,
+          "round_trip_slippage": 0.0,
+          "commission": 0.035,
+          "mean": -0.6365499122682302
+        },
+        {
+          "spread_multiplier": 1.0,
+          "round_trip_slippage": 0.04,
+          "commission": 0.035,
+          "mean": -0.6765499122682302
+        },
+        {
+          "spread_multiplier": 1.0,
+          "round_trip_slippage": 0.1,
+          "commission": 0.035,
+          "mean": -0.7365499122682301
+        },
+        {
+          "spread_multiplier": 1.5,
+          "round_trip_slippage": 0.0,
+          "commission": 0.035,
+          "mean": -0.9561579764784115
+        },
+        {
+          "spread_multiplier": 1.5,
+          "round_trip_slippage": 0.04,
+          "commission": 0.035,
+          "mean": -0.9961579764784115
+        },
+        {
+          "spread_multiplier": 1.5,
+          "round_trip_slippage": 0.1,
+          "commission": 0.035,
+          "mean": -1.0561579764784115
+        },
+        {
+          "spread_multiplier": 2.0,
+          "round_trip_slippage": 0.0,
+          "commission": 0.035,
+          "mean": -1.275766040688593
+        },
+        {
+          "spread_multiplier": 2.0,
+          "round_trip_slippage": 0.04,
+          "commission": 0.035,
+          "mean": -1.3157660406885925
+        },
+        {
+          "spread_multiplier": 2.0,
+          "round_trip_slippage": 0.1,
+          "commission": 0.035,
+          "mean": -1.3757660406885928
+        }
+      ],
+      "months": {
+        "1": {
+          "n": 1790,
+          "default_net_mean": -0.5770301675977672
+        },
+        "2": {
+          "n": 1754,
+          "default_net_mean": -0.6341305587229268
+        },
+        "3": {
+          "n": 1717,
+          "default_net_mean": -0.5758474082702505
+        },
+        "4": {
+          "n": 1722,
+          "default_net_mean": -0.6868524970964047
+        },
+        "5": {
+          "n": 1703,
+          "default_net_mean": -0.7887639459776967
+        },
+        "6": {
+          "n": 1737,
+          "default_net_mean": -0.7031128382268503
+        },
+        "7": {
+          "n": 1918,
+          "default_net_mean": -0.6203222106361007
+        },
+        "8": {
+          "n": 1696,
+          "default_net_mean": -0.6204887971698203
+        },
+        "9": {
+          "n": 1834,
+          "default_net_mean": -0.6375316248636912
+        },
+        "10": {
+          "n": 1920,
+          "default_net_mean": -0.7530619791666803
+        },
+        "11": {
+          "n": 1538,
+          "default_net_mean": -0.772946033810147
+        },
+        "12": {
+          "n": 1758,
+          "default_net_mean": -0.7617559726962333
+        }
+      },
+      "promoted": false,
+      "classification": "mechanism_quote_hurdle_only_not_strategy_or_account_simulation"
+    },
+    "M15": {
+      "resolution_seconds": 900,
+      "complete_bars": 24578,
+      "valid_endpoint_observations": 22773,
+      "extreme_events": 1457,
+      "matched_events": 1407,
+      "unique_controls": 1243,
+      "max_control_reuse": 4,
+      "reference_move_mean": 0.07101956074125539,
+      "causal_mid_open_mean": 0.07014378860672846,
+      "quote_side_mean": -0.5896273164035749,
+      "observed_endpoint_spread_hurdle_mean": 0.6597711050103007,
+      "same_timestamp_balanced_side_default_mean": -0.7347711050103006,
+      "matched_ordinary_default_mean": -3.8976410803127273,
+      "primary_default_net": {
+        "n": 1457,
+        "mean": -0.6646273164035748,
+        "ci95": [
+          -0.9624697259777666,
+          -0.31281654318215363
+        ],
+        "utc_weeks": 53,
+        "p_centered": 0.0005,
+        "p_bonferroni4": 0.002,
+        "bootstrap_draws": 1999,
+        "limitation": "One explored calendar year; resampled weeks not independent prospective trials."
+      },
+      "primary_matched_difference": {
+        "n": 1407,
+        "mean": 3.254506751954512,
+        "ci95": [
+          2.596122108483662,
+          3.9978941115781756
+        ],
+        "utc_weeks": 53,
+        "p_centered": 0.0005,
+        "p_bonferroni4": 0.002,
+        "bootstrap_draws": 1999,
+        "limitation": "One explored calendar year; resampled weeks not independent prospective trials."
+      },
+      "default_spread_multiple": 1.0,
+      "default_commission": 0.035,
+      "default_slippage": 0.04,
+      "cost_stress": [
+        {
+          "spread_multiplier": 1.0,
+          "round_trip_slippage": 0.0,
+          "commission": 0.035,
+          "mean": -0.6246273164035722
+        },
+        {
+          "spread_multiplier": 1.0,
+          "round_trip_slippage": 0.04,
+          "commission": 0.035,
+          "mean": -0.6646273164035722
+        },
+        {
+          "spread_multiplier": 1.0,
+          "round_trip_slippage": 0.1,
+          "commission": 0.035,
+          "mean": -0.7246273164035723
+        },
+        {
+          "spread_multiplier": 1.5,
+          "round_trip_slippage": 0.0,
+          "commission": 0.035,
+          "mean": -0.9545128689087224
+        },
+        {
+          "spread_multiplier": 1.5,
+          "round_trip_slippage": 0.04,
+          "commission": 0.035,
+          "mean": -0.9945128689087226
+        },
+        {
+          "spread_multiplier": 1.5,
+          "round_trip_slippage": 0.1,
+          "commission": 0.035,
+          "mean": -1.0545128689087226
+        },
+        {
+          "spread_multiplier": 2.0,
+          "round_trip_slippage": 0.0,
+          "commission": 0.035,
+          "mean": -1.2843984214138728
+        },
+        {
+          "spread_multiplier": 2.0,
+          "round_trip_slippage": 0.04,
+          "commission": 0.035,
+          "mean": -1.324398421413873
+        },
+        {
+          "spread_multiplier": 2.0,
+          "round_trip_slippage": 0.1,
+          "commission": 0.035,
+          "mean": -1.3843984214138727
+        }
+      ],
+      "months": {
+        "1": {
+          "n": 139,
+          "default_net_mean": -0.4067266187050434
+        },
+        "2": {
+          "n": 105,
+          "default_net_mean": -1.239485714285703
+        },
+        "3": {
+          "n": 116,
+          "default_net_mean": -0.4835603448275865
+        },
+        "4": {
+          "n": 112,
+          "default_net_mean": -0.8337678571428567
+        },
+        "5": {
+          "n": 125,
+          "default_net_mean": -1.181864000000012
+        },
+        "6": {
+          "n": 120,
+          "default_net_mean": -0.975366666666669
+        },
+        "7": {
+          "n": 122,
+          "default_net_mean": -0.959918032786919
+        },
+        "8": {
+          "n": 127,
+          "default_net_mean": -1.0842125984252147
+        },
+        "9": {
+          "n": 124,
+          "default_net_mean": -0.8240000000000017
+        },
+        "10": {
+          "n": 129,
+          "default_net_mean": -0.37135658914731845
+        },
+        "11": {
+          "n": 110,
+          "default_net_mean": -0.5299909090909048
+        },
+        "12": {
+          "n": 128,
+          "default_net_mean": 0.7480937500000265
+        }
+      },
+      "promoted": false,
+      "classification": "mechanism_quote_hurdle_only_not_strategy_or_account_simulation"
+    }
+  },
+  "caveats": [
+    "Separate minute Bid/Ask aggregates are not certified synchronous ticks.",
+    "No broker fills, actual slippage or Atlas fees observed.",
+    "Overlapping event outcomes and reused controls are not an attainable portfolio.",
+    "No financing, barriers, account rules or strategy qualification tested."
+  ]
+}
