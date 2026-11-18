@@ -104,3 +104,6 @@ research/results/sltp_sweep_2026-10-30.json
 research/results/structure_stops_2026-10-31.json
 research/results/strategy_stops_2026-10-31.json
 research/results/stop_robustness_2026-11-01.json
+
+# Immutable local deployment/rollback artifacts (manifests stay with artifacts)
+/release_staging/

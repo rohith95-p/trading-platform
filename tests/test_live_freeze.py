@@ -133,30 +133,28 @@ def test_the_price_archive_stops_where_it_stops_agreeing_with_the_broker():
     assert master.window("TEST")[1] == master.KAGGLE_END
 
 
-def test_the_validation_ledger_is_in_a_folder_the_vps_update_actually_copies():
-    """The gate is only a gate if the VPS has the file.
+def test_the_validation_ledger_is_in_the_prepared_release(tmp_path):
+    """The deployment artifact must carry the ledger needed by startup's gate.
 
-    `scripts/vps_update.ps1` copies the repository with
-    `robocopy /XD venv logs .git research`. The ledger used to live in
-    `research/`, so it never reached the VPS: the gate failed there and the bot
-    could only start with the guard switched off (found 2026-11-01).
+    The old updater excluded research/ and once lost this file. The replacement
+    prepares an immutable code/config release rather than parsing robocopy flags.
+    Verify the actual packaged bytes and manifest, not a source-text convention.
     """
-    import re
-
+    from pathlib import Path
+    from scripts import demo_release
     from src.core import validation_ledger
 
-    assert os.path.exists(validation_ledger.LEDGER_PATH), "the ledger file is missing"
-    rel = os.path.relpath(validation_ledger.LEDGER_PATH,
-                          os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    folder = rel.replace("\\", "/").split("/")[0]
-
-    script = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-                          "scripts", "vps_update.ps1")
-    with open(script, encoding="utf-8") as fh:
-        excluded = re.search(r"/XD\s+([^/\n]+)", fh.read()).group(1).split()
-    assert folder not in excluded, (
-        f"{rel} lives in {folder}/, which vps_update.ps1 excludes from the copy, "
-        f"so the VPS would never receive it")
+    source = Path(validation_ledger.LEDGER_PATH)
+    assert source.is_file(), "the ledger file is missing"
+    repository = Path(__file__).resolve().parents[1]
+    relative = source.resolve().relative_to(repository)
+    staged_source = tmp_path / relative
+    staged_source.parent.mkdir(parents=True)
+    staged_source.write_bytes(source.read_bytes())
+    release = demo_release.snapshot_current(tmp_path, "ledger_gate")
+    manifest = demo_release.verify_release(release)
+    assert relative.as_posix() in manifest["files"]
+    assert (release / relative).read_bytes() == source.read_bytes()
 
 
 def test_the_conviction_ranking_is_the_validated_one():

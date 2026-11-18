@@ -21,7 +21,7 @@ A November22 deadline cannot turn a short prospective sample into proof of posit
 | P1 | Validation ledger can be bypassed with `ULTRA_ALLOW_UNVALIDATED=1` | Startup source; a release must explicitly reject/record this override and require a validated release identity |
 | P1 | Existing demo switch relaxes daily and some streak/hard controls | `risk_rules.py`; demo does not imply same risk behavior or a no-order mode |
 | P1 | Broker profile differences warn and continue | Startup source; define which contract, clock, account or margin discrepancies must prevent orders |
-| P1 | Legacy updater kills all Python processes and deploys latest master ZIP | `scripts/vps_update.ps1`; must target owned process identities, pin approved immutable release, verify checksums and support rollback |
+| P1 | Release activation and runtime rollback remain unverified | Unsafe latest-master/all-Python updater was replaced with pinned, hash-verified prepare-only workflow. No production stop/start/copy remains. A reviewed activation, account-state preservation and rollback drill are still required |
 | P1 | Runbook includes all-Python stop and state deletion advice | `OPS_RUNBOOK.md`; follow a reviewed targeted procedure, never delete account risk history casually |
 | P1 | Watchdog heartbeat timeout is300 seconds | `scripts/watchdog.py`; heartbeat recovery is not independent quote-speed risk supervision; test stale/blocked-loop and network-loss behavior |
 | P1 | Dependency/CI runtime compatibility not certified | CI says Python3.11 while current requirements contain newer pinned numpy/pandas/scipy; fresh clean installation must prove compatibility |
@@ -76,3 +76,31 @@ An actual accessible dedicated demo terminal and deployment host, broker-native 
 - `docs/DEPLOYMENT_READINESS.md`
 
 No trading or production configuration was changed. Current operational status remains **unverified**, not “deployed successfully.”
+
+## Demo release tooling completed in this workstream
+
+`vps_update.ps1` now **prepares only**. It requires an exact40-character revision, a local GitHub revision archive and an independently supplied SHA256. It no longer fetches latest master, kills Python, overwrites the running checkout, installs dependencies into the live environment or starts the watchdog. Existing updater invocations without these mandatory inputs intentionally no longer deploy.
+
+`scripts/demo_release.py` provides immutable staged extraction, per-file SHA256 manifests, code/config rollback snapshots, tamper verification and a read-only owned-process plan. Archive roots must match the pinned revision; traversal, symbolic links, duplicate/case-colliding files, excessive expanded size and incorrect checksums are rejected. Secrets filenames, runtime logs, environments and research datasets are excluded. This is an allowlisted code/config artifact, not a full research-data transfer or a secret-scanning certification. It performs no process termination, service control, broker action or release activation. Rollback code snapshots do not include account history: preserve and reconcile actual runtime state separately, never roll risk peaks back with code.
+
+`scripts/demo_preflight.py` defaults to presence-only inspection, without loading `.env.local` or initializing MT5. An explicitly requested read-only diagnostic can verify the currently connected terminal against supplied demo login/server, hedging mode, valid XAUUSD contract fields and an empty dedicated account. Real/unknown/wrong accounts or failed exposure reads refuse. Its adapter exposes only permitted read calls and denies order methods. Passing this diagnostic does not activate a bot or authorize order-enabled deployment; time-sensitive spread/fill/news behavior is still unverified.
+
+Actual local presence check in this workstream: project Python present, local settings file present, native MT5 package available. **No terminal connection was made, no account demo identity was verified, and VPS access was not established.** File/package presence is not evidence of a logged-in funded or demo account.
+
+Offline validation:23 safety tests passed for release/archive integrity, no live overwrite, rollback-state exclusion, owned-process planning, demo identity and denied order API; the PowerShell updater parses successfully without execution. Parent checkpoint records the final full-suite count and commit.
+
+Preparation examples (never activate or trade):
+
+```powershell
+# Presence only; reads no secrets and does not connect a terminal.
+.\venv\Scripts\python.exe scripts/demo_preflight.py
+
+# Preserve an immutable code/config rollback snapshot before any maintenance.
+.\venv\Scripts\python.exe scripts/demo_release.py --snapshot-current before_demo_release
+.\venv\Scripts\python.exe scripts/demo_release.py --verify-release release_staging/rollback_before_demo_release
+
+# Use exact trusted revision/hash values in place of the placeholders.
+powershell -NoProfile -File scripts/vps_update.ps1 -Revision <40-character-SHA> -ArchivePath <local-revision.zip> -ArchiveSha256 <64-character-SHA256>
+```
+
+Do not run a connected preflight merely to satisfy a deadline. An isolated terminal/account and explicit intended identity must be available first. Current package remains **prepared, not deployed**, and the selected strategy remains unqualified unless separate final evidence changes that verdict.
