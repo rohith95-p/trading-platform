@@ -101,3 +101,23 @@ def test_unverified_active_gap_refuses_even_when_flat():
     policy=CalendarPolicy('evaluation',start)
     with pytest.raises(IndeterminatePath,match='unverified_active'):
         policy.observe(fake_engine(phase='open',ts=end),end)
+
+
+def test_actual_reopening_quote_preserves_adverse_gap_stop_fill():
+    from src.backtesting.engine import Position
+    engine=engine_with_calendar_quotes()
+    ts=T0+22*3600
+    bar=engine.m1[engine.m1['time']==ts][0].copy()
+    for field in ('open','high','low','close'):
+        bar[field]=3900.
+    position=Position(ticket=1,strategy='TEST',magic=1,is_buy=True,lots=.02,
+                      entry_price=4000.,entry_time=T0+20*3600+57*60,
+                      sl=3950.,tp=4200.,initial_sl=3950.,atr_at_entry=10.,session='TEST',
+                      mfe_price=4000.,mae_price=4000.,price_current=4000.)
+    engine.positions=[position]
+    hit=engine._walk_minute(position,bar,ts,engine.spec.point,False)
+    assert hit==(3900.,'SL')
+    engine._close(position,hit[0],ts,hit[1])
+    assert engine.trades[-1].exit_price==3900.
+    assert engine.trades[-1].net_pl==-200.
+    assert engine.positions==[]

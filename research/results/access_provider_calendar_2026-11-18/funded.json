@@ -1,0 +1,754 @@
+{
+  "phase": "funded",
+  "status": "indeterminate",
+  "reason": "missing_active_or_close_only_minutes_not_explained_by_calendar",
+  "opened_at": 1784812500,
+  "finished_at": 1787090400,
+  "ledger_balance": "4806.476999999988134",
+  "ledger_equity": "4806.476999999992",
+  "peak_equity": "5003.342000000001",
+  "daily_floor": "4774.83954999999418",
+  "trailing_floor": "4703.14148000000094",
+  "trades": 12,
+  "net_trade_cash": -193.52300000001185,
+  "profit_factor": 0.47263045735352677,
+  "sampled_max_drawdown_usd": 196.86500000000888,
+  "minimum_sampled_net_liquidation_equity": 4806.476999999992,
+  "observations": 50525,
+  "reset_evidence": {
+    "proven_flat_cash": 25,
+    "exact_00utc_open_quote": 1
+  },
+  "eligibility_block_observations": {
+    "payout_window": 46170,
+    "account_not_in_profit": 46170,
+    "profit_threshold": 46170,
+    "qualifying_days": 41627,
+    "weekend_request": 948
+  },
+  "conditional_settlements": [],
+  "actual_receipts": 0,
+  "actual_cash_received": 0,
+  "protector_hits_observed": 0,
+  "cash_reconciliation_max_error": 3.637978807091713e-12,
+  "unledgered_terminal_settlements": [],
+  "open_positions_at_termination": 0,
+  "events": [
+    {
+      "time": 1784844000,
+      "kind": "calendar_assumed_closed_gap",
+      "from": 1784840280,
+      "to": 1784844000,
+      "open_positions": 0,
+      "no_interpolated_marks": true
+    },
+    {
+      "time": 1784851200,
+      "kind": "utc_reset",
+      "evidence": "proven_flat_cash",
+      "equity": "5000",
+      "daily_floor": "4850.00"
+    },
+    {
+      "time": 1784906100,
+      "kind": "closed_trade",
+      "strategy": "NY_SESSION_REVERSAL_V6",
+      "net": -37.867999999999775,
+      "reason": "SL"
+    },
+    {
+      "time": 1785103260,
+      "kind": "calendar_assumed_closed_gap",
+      "from": 1784926680,
+      "to": 1785103260,
+      "open_positions": 0,
+      "no_interpolated_marks": true
+    },
+    {
+      "time": 1784937600,
+      "kind": "utc_reset",
+      "evidence": "proven_flat_cash",
+      "equity": "4962.132000000000225",
+      "daily_floor": "4813.26804000000021825"
+    },
+    {
+      "time": 1785024000,
+      "kind": "utc_reset",
+      "evidence": "proven_flat_cash",
+      "equity": "4962.132000000000225",
+      "daily_floor": "4813.26804000000021825"
+    },
+    {
+      "time": 1785110400,
+      "kind": "utc_reset",
+      "evidence": "proven_flat_cash",
+      "equity": "4962.132000000000225",
+      "daily_floor": "4813.26804000000021825"
+    },
+    {
+      "time": 1785162480,
+      "kind": "closed_trade",
+      "strategy": "NY_SESSION_REVERSAL_V6",
+      "net": -35.08199999999881,
+      "reason": "SL"
+    },
+    {
+      "time": 1785189600,
+      "kind": "calendar_assumed_closed_gap",
+      "from": 1785185880,
+      "to": 1785189600,
+      "open_positions": 0,
+      "no_interpolated_marks": true
+    },
+    {
+      "time": 1785196800,
+      "kind": "utc_reset",
+      "evidence": "proven_flat_cash",
+      "equity": "4927.050000000001415",
+      "daily_floor": "4779.23850000000137255"
+    },
+    {
+      "time": 1785276000,
+      "kind": "calendar_assumed_closed_gap",
+      "from": 1785272280,
+      "to": 1785276000,
+      "open_positions": 0,
+      "no_interpolated_marks": true
+    },
+    {
+      "time": 1785283200,
+      "kind": "utc_reset",
+      "evidence": "proven_flat_cash",
+      "equity": "4927.050000000001415",
+      "daily_floor": "4779.23850000000137255"
+    },
+    {
+      "time": 1785362400,
+      "kind": "calendar_assumed_closed_gap",
+      "from": 1785358680,
+      "to": 1785362400,
+      "open_positions": 0,
+      "no_interpolated_marks": true
+    },
+    {
+      "time": 1785369600,
+      "kind": "utc_reset",
+      "evidence": "proven_flat_cash",
+      "equity": "4927.050000000001415",
+      "daily_floor": "4779.23850000000137255"
+    },
+    {
+      "time": 1785448800,
+      "kind": "calendar_assumed_closed_gap",
+      "from": 1785445080,
+      "to": 1785448800,
+      "open_positions": 0,
+      "no_interpolated_marks": true
+    },
+    {
+      "time": 1785456000,
+      "kind": "utc_reset",
+      "evidence": "proven_flat_cash",
+      "equity": "4927.050000000001415",
+      "daily_floor": "4779.23850000000137255"
+    },
+    {
+      "time": 1785708060,
+      "kind": "calendar_assumed_closed_gap",
+      "from": 1785531480,
+      "to": 1785708060,
+      "open_positions": 0,
+      "no_interpolated_marks": true
+    },
+    {
+      "time": 1785542400,
+      "kind": "utc_reset",
+      "evidence": "proven_flat_cash",
+      "equity": "4927.050000000001415",
+      "daily_floor": "4779.23850000000137255"
+    },
+    {
+      "time": 1785628800,
+      "kind": "utc_reset",
+      "evidence": "proven_flat_cash",
+      "equity": "4927.050000000001415",
+      "daily_floor": "4779.23850000000137255"
+    },
+    {
+      "time": 1785715200,
+      "kind": "utc_reset",
+      "evidence": "proven_flat_cash",
+      "equity": "4927.050000000001415",
+      "daily_floor": "4779.23850000000137255"
+    },
+    {
+      "time": 1785794400,
+      "kind": "calendar_assumed_closed_gap",
+      "from": 1785790680,
+      "to": 1785794400,
+      "open_positions": 0,
+      "no_interpolated_marks": true
+    },
+    {
+      "time": 1785801600,
+      "kind": "utc_reset",
+      "evidence": "proven_flat_cash",
+      "equity": "4927.050000000001415",
+      "daily_floor": "4779.23850000000137255"
+    },
+    {
+      "time": 1785846900,
+      "kind": "closed_trade",
+      "strategy": "NY_SESSION_REVERSAL_V6",
+      "net": -34.71999999999964,
+      "reason": "SL"
+    },
+    {
+      "time": 1785880800,
+      "kind": "calendar_assumed_closed_gap",
+      "from": 1785877080,
+      "to": 1785880800,
+      "open_positions": 0,
+      "no_interpolated_marks": true
+    },
+    {
+      "time": 1785888000,
+      "kind": "utc_reset",
+      "evidence": "proven_flat_cash",
+      "equity": "4892.330000000001775",
+      "daily_floor": "4745.56010000000172175"
+    },
+    {
+      "time": 1785939000,
+      "kind": "closed_trade",
+      "strategy": "LONDON_MOMENTUM_TIGHT_V6",
+      "net": 65.82799999999924,
+      "reason": "TP"
+    },
+    {
+      "time": 1785967200,
+      "kind": "calendar_assumed_closed_gap",
+      "from": 1785963480,
+      "to": 1785967200,
+      "open_positions": 0,
+      "no_interpolated_marks": true
+    },
+    {
+      "time": 1785974400,
+      "kind": "utc_reset",
+      "evidence": "proven_flat_cash",
+      "equity": "4958.158000000001015",
+      "daily_floor": "4809.41326000000098455"
+    },
+    {
+      "time": 1786031580,
+      "kind": "closed_trade",
+      "strategy": "NY_SESSION_REVERSAL_V6",
+      "net": -56.20600000000042,
+      "reason": "SL"
+    },
+    {
+      "time": 1786053600,
+      "kind": "calendar_assumed_closed_gap",
+      "from": 1786049880,
+      "to": 1786053600,
+      "open_positions": 0,
+      "no_interpolated_marks": true
+    },
+    {
+      "time": 1786060800,
+      "kind": "utc_reset",
+      "evidence": "proven_flat_cash",
+      "equity": "4901.952000000000595",
+      "daily_floor": "4754.89344000000057715"
+    },
+    {
+      "time": 1786100580,
+      "kind": "closed_trade",
+      "strategy": "ASIAN_RANGE_FILTERED_V6",
+      "net": 58.87000000000051,
+      "reason": "TP"
+    },
+    {
+      "time": 1786312860,
+      "kind": "calendar_assumed_closed_gap",
+      "from": 1786136280,
+      "to": 1786312860,
+      "open_positions": 0,
+      "no_interpolated_marks": true
+    },
+    {
+      "time": 1786147200,
+      "kind": "utc_reset",
+      "evidence": "proven_flat_cash",
+      "equity": "4960.822000000001105",
+      "daily_floor": "4811.99734000000107185"
+    },
+    {
+      "time": 1786233600,
+      "kind": "utc_reset",
+      "evidence": "proven_flat_cash",
+      "equity": "4960.822000000001105",
+      "daily_floor": "4811.99734000000107185"
+    },
+    {
+      "time": 1786320000,
+      "kind": "utc_reset",
+      "evidence": "proven_flat_cash",
+      "equity": "4960.822000000001105",
+      "daily_floor": "4811.99734000000107185"
+    },
+    {
+      "time": 1786369920,
+      "kind": "closed_trade",
+      "strategy": "NY_SESSION_REVERSAL_V6",
+      "net": -32.540000000001164,
+      "reason": "SL"
+    },
+    {
+      "time": 1786399200,
+      "kind": "calendar_assumed_closed_gap",
+      "from": 1786395480,
+      "to": 1786399200,
+      "open_positions": 0,
+      "no_interpolated_marks": true
+    },
+    {
+      "time": 1786406400,
+      "kind": "utc_reset",
+      "evidence": "proven_flat_cash",
+      "equity": "4928.281999999999941",
+      "daily_floor": "4780.43353999999994277"
+    },
+    {
+      "time": 1786446060,
+      "kind": "closed_trade",
+      "strategy": "ASIAN_RANGE_FILTERED_V6",
+      "net": -45.788000000002576,
+      "reason": "SL"
+    },
+    {
+      "time": 1786485600,
+      "kind": "calendar_assumed_closed_gap",
+      "from": 1786481880,
+      "to": 1786485600,
+      "open_positions": 0,
+      "no_interpolated_marks": true
+    },
+    {
+      "time": 1786492800,
+      "kind": "utc_reset",
+      "evidence": "proven_flat_cash",
+      "equity": "4882.493999999997365",
+      "daily_floor": "4736.01917999999744405"
+    },
+    {
+      "time": 1786572000,
+      "kind": "calendar_assumed_closed_gap",
+      "from": 1786568280,
+      "to": 1786572000,
+      "open_positions": 0,
+      "no_interpolated_marks": true
+    },
+    {
+      "time": 1786579200,
+      "kind": "utc_reset",
+      "evidence": "proven_flat_cash",
+      "equity": "4882.493999999997365",
+      "daily_floor": "4736.01917999999744405"
+    },
+    {
+      "time": 1786624200,
+      "kind": "closed_trade",
+      "strategy": "ASIAN_RANGE_FILTERED_V6",
+      "net": -40.77000000000255,
+      "reason": "SL"
+    },
+    {
+      "time": 1786658400,
+      "kind": "calendar_assumed_closed_gap",
+      "from": 1786654680,
+      "to": 1786658400,
+      "open_positions": 0,
+      "no_interpolated_marks": true
+    },
+    {
+      "time": 1786665600,
+      "kind": "utc_reset",
+      "evidence": "proven_flat_cash",
+      "equity": "4841.723999999994815",
+      "daily_floor": "4696.47227999999497055"
+    },
+    {
+      "time": 1786714680,
+      "kind": "closed_trade",
+      "strategy": "LONDON_MOMENTUM_TIGHT_V6",
+      "net": 48.737999999997264,
+      "reason": "TP"
+    },
+    {
+      "time": 1786917660,
+      "kind": "calendar_assumed_closed_gap",
+      "from": 1786741080,
+      "to": 1786917660,
+      "open_positions": 0,
+      "no_interpolated_marks": true
+    },
+    {
+      "time": 1786752000,
+      "kind": "utc_reset",
+      "evidence": "proven_flat_cash",
+      "equity": "4890.461999999992079",
+      "daily_floor": "4743.74813999999231663"
+    },
+    {
+      "time": 1786838400,
+      "kind": "utc_reset",
+      "evidence": "proven_flat_cash",
+      "equity": "4890.461999999992079",
+      "daily_floor": "4743.74813999999231663"
+    },
+    {
+      "time": 1786924800,
+      "kind": "utc_reset",
+      "evidence": "proven_flat_cash",
+      "equity": "4890.461999999992079",
+      "daily_floor": "4743.74813999999231663"
+    },
+    {
+      "time": 1787004000,
+      "kind": "calendar_assumed_closed_gap",
+      "from": 1787000280,
+      "to": 1787004000,
+      "open_positions": 1,
+      "no_interpolated_marks": true
+    },
+    {
+      "time": 1787011200,
+      "kind": "utc_reset",
+      "evidence": "exact_00utc_open_quote",
+      "equity": "4922.514999999994",
+      "daily_floor": "4774.83954999999418"
+    },
+    {
+      "time": 1787031060,
+      "kind": "closed_trade",
+      "strategy": "NY_SESSION_REVERSAL_V6",
+      "net": -44.70500000000118,
+      "reason": "SL"
+    },
+    {
+      "time": 1787063940,
+      "kind": "closed_trade",
+      "strategy": "NY_SESSION_REVERSAL_V6",
+      "net": -39.280000000002765,
+      "reason": "SL"
+    },
+    {
+      "time": 1787090400,
+      "kind": "unexpected_missing_quote_minutes",
+      "minutes": [
+        1787090400,
+        1787090460,
+        1787090520,
+        1787090580
+      ]
+    },
+    {
+      "time": 1787090400,
+      "kind": "indeterminate",
+      "reason": "missing_active_or_close_only_minutes_not_explained_by_calendar"
+    }
+  ],
+  "config": {
+    "symbol": "XAUUSDm",
+    "starting_balance": 5000.0,
+    "risk_pct": 0.02,
+    "history_bars": 7500,
+    "m5_history_bars": 100,
+    "d1_history_bars": 50,
+    "loop_interval_sec": 60,
+    "resignal_interval_sec": 300,
+    "dedup_per_candle": true,
+    "max_concurrent": 3,
+    "max_same_direction": 3,
+    "enable_pyramiding": false,
+    "enable_consolidation_exit": true,
+    "enable_trailing": false,
+    "close_only_trail": false,
+    "enable_d1_bias_gate": true,
+    "direction_gate": "d1_ema20",
+    "d1_ema_period": 20,
+    "structure_len": 10,
+    "gate_prox_atr": 0.5,
+    "choch_lookback_h4": 3,
+    "be_trigger_atr": 0.0,
+    "be_offset_atr": 0.1,
+    "equity_pause_dd": 0.0,
+    "equity_resume_dd": 0.0,
+    "ambiguous_resolution": "sl_first",
+    "gap_fill_stops": true,
+    "spread_gate_points": 350.0,
+    "spread_gate_blocks_management": false,
+    "lot_cap": null,
+    "daily_loss_limit_mode": "balance_pct",
+    "daily_loss_limit_pct": 0.06,
+    "load_macro_rules": false,
+    "walk_entry_bar_coarse": true,
+    "walk_entry_bar_m1": true,
+    "causal_minute_order": true,
+    "record_equity_samples": true,
+    "warmup_bars": 260,
+    "min_tradeable_balance": 5.0,
+    "leverage": 50.0,
+    "enforce_margin": true,
+    "margin_call_level_pct": 100.0,
+    "sizing_mode": "fixed",
+    "tp_atr_mult": null,
+    "structural_tp": false,
+    "structural_tp_len": 10,
+    "structural_tp_buffer_atr": 0.1,
+    "structural_tp_min_atr": 1.0,
+    "trail_activation_atr": null,
+    "trail_distance_atr": null,
+    "sl_atr_mult_override": null,
+    "fixed_lots": 0.02,
+    "use_time_of_day_atr": false,
+    "tod_atr_bucket_minutes": 60,
+    "live_parity": true,
+    "live_exec_order": true,
+    "risk_rules_enforce": true,
+    "risk_rules_enforce_from_ts": 0,
+    "skip_overlap_session": true,
+    "enforce_strategy_max_spread": true,
+    "sizing_ladder_caps": true,
+    "sizing_ladder_schedule": null,
+    "d1_intraday_override": true,
+    "d1_intraday_override_mult": 1.0,
+    "d1_override_tighten_only": false,
+    "protect_profit": false,
+    "protect_giveback_peak": 6.0,
+    "protect_giveback_floor": 1.0,
+    "protect_min_green": 0.5,
+    "protect_cooldown_min": 45,
+    "entry_delay_sec": 0,
+    "entry_delay_model": "reject",
+    "news_blackout": true,
+    "streak_blind_spot": true,
+    "disabled_windows": null,
+    "record_decisions": false,
+    "m1_policy": "coarse"
+  },
+  "diagnostics": {
+    "equity_kind": "closed_balance",
+    "floating_drawdown_verified": false,
+    "sampled_equity_available": true,
+    "sampled_equity_kind": "opening_and_interval_end_marks_not_continuous_ticks",
+    "signals_generated": 47,
+    "signals_deduped": 143,
+    "entries_blocked_caps": 0,
+    "entries_blocked_spread": 6,
+    "entries_blocked_d1_bias": 80,
+    "duplicate_entries": 0,
+    "pyramid_entries": 0,
+    "ambiguous_bars": 0,
+    "ambiguous_given_to_tp": 0,
+    "gapped_stops": 0,
+    "gapped_stop_extra_usd": 0.0,
+    "management_skipped_spread": 0,
+    "daily_shutdowns": 0,
+    "bars_without_m1": 0,
+    "bars_skipped_no_m1": 0,
+    "exits_unchecked_no_m1": 0,
+    "partial_m1_candles": 23,
+    "partial_m1_minutes_missing": 42,
+    "entries_blocked_insufficient_equity": 0,
+    "entries_blocked_margin": 0,
+    "same_candle_refires": 0,
+    "swap_nights_charged": 1,
+    "swap_paid": -1.031,
+    "noncausal_legacy_entry_interpolation": false,
+    "legacy_minute_chronology": false,
+    "scans_overlap_skipped": 2160,
+    "d1_intraday_overrides": 2
+  },
+  "total_engine_marks": 75789,
+  "scheduled_partial_blocks": [
+    {
+      "start": 1784839500,
+      "end": 1784840400,
+      "missing_closed_minutes": 2,
+      "observed_minutes": 13,
+      "open_positions": 0
+    },
+    {
+      "start": 1784925900,
+      "end": 1784926800,
+      "missing_closed_minutes": 2,
+      "observed_minutes": 13,
+      "open_positions": 0
+    },
+    {
+      "start": 1785103200,
+      "end": 1785104100,
+      "missing_closed_minutes": 1,
+      "observed_minutes": 14,
+      "open_positions": 0
+    },
+    {
+      "start": 1785185100,
+      "end": 1785186000,
+      "missing_closed_minutes": 2,
+      "observed_minutes": 13,
+      "open_positions": 0
+    },
+    {
+      "start": 1785271500,
+      "end": 1785272400,
+      "missing_closed_minutes": 2,
+      "observed_minutes": 13,
+      "open_positions": 0
+    },
+    {
+      "start": 1785357900,
+      "end": 1785358800,
+      "missing_closed_minutes": 2,
+      "observed_minutes": 13,
+      "open_positions": 0
+    },
+    {
+      "start": 1785444300,
+      "end": 1785445200,
+      "missing_closed_minutes": 2,
+      "observed_minutes": 13,
+      "open_positions": 0
+    },
+    {
+      "start": 1785530700,
+      "end": 1785531600,
+      "missing_closed_minutes": 2,
+      "observed_minutes": 13,
+      "open_positions": 0
+    },
+    {
+      "start": 1785708000,
+      "end": 1785708900,
+      "missing_closed_minutes": 1,
+      "observed_minutes": 14,
+      "open_positions": 0
+    },
+    {
+      "start": 1785789900,
+      "end": 1785790800,
+      "missing_closed_minutes": 2,
+      "observed_minutes": 13,
+      "open_positions": 0
+    },
+    {
+      "start": 1785876300,
+      "end": 1785877200,
+      "missing_closed_minutes": 2,
+      "observed_minutes": 13,
+      "open_positions": 0
+    },
+    {
+      "start": 1785962700,
+      "end": 1785963600,
+      "missing_closed_minutes": 2,
+      "observed_minutes": 13,
+      "open_positions": 0
+    },
+    {
+      "start": 1786049100,
+      "end": 1786050000,
+      "missing_closed_minutes": 2,
+      "observed_minutes": 13,
+      "open_positions": 0
+    },
+    {
+      "start": 1786135500,
+      "end": 1786136400,
+      "missing_closed_minutes": 2,
+      "observed_minutes": 13,
+      "open_positions": 0
+    },
+    {
+      "start": 1786312800,
+      "end": 1786313700,
+      "missing_closed_minutes": 1,
+      "observed_minutes": 14,
+      "open_positions": 0
+    },
+    {
+      "start": 1786394700,
+      "end": 1786395600,
+      "missing_closed_minutes": 2,
+      "observed_minutes": 13,
+      "open_positions": 0
+    },
+    {
+      "start": 1786481100,
+      "end": 1786482000,
+      "missing_closed_minutes": 2,
+      "observed_minutes": 13,
+      "open_positions": 0
+    },
+    {
+      "start": 1786567500,
+      "end": 1786568400,
+      "missing_closed_minutes": 2,
+      "observed_minutes": 13,
+      "open_positions": 0
+    },
+    {
+      "start": 1786653900,
+      "end": 1786654800,
+      "missing_closed_minutes": 2,
+      "observed_minutes": 13,
+      "open_positions": 0
+    },
+    {
+      "start": 1786740300,
+      "end": 1786741200,
+      "missing_closed_minutes": 2,
+      "observed_minutes": 13,
+      "open_positions": 0
+    },
+    {
+      "start": 1786917600,
+      "end": 1786918500,
+      "missing_closed_minutes": 1,
+      "observed_minutes": 14,
+      "open_positions": 0
+    },
+    {
+      "start": 1786999500,
+      "end": 1787000400,
+      "missing_closed_minutes": 2,
+      "observed_minutes": 13,
+      "open_positions": 1
+    },
+    {
+      "start": 1787085900,
+      "end": 1787086800,
+      "missing_closed_minutes": 2,
+      "observed_minutes": 13,
+      "open_positions": 0
+    }
+  ],
+  "close_only_entry_blocks": 0,
+  "no_M15_price_fills": true,
+  "cost": {
+    "spread_source": "bar",
+    "fixed_spread_points": 260.0,
+    "spread_multiplier": 1.0,
+    "slippage_points": 20.0,
+    "commission_per_lot_roundtrip": 3.5,
+    "swap_long_points": -515.5,
+    "swap_short_points": 0.0,
+    "enable_swap": true,
+    "rollover_hour_utc": 0.0,
+    "triple_swap_weekday": null
+  },
+  "data_hash": "eaf8af36498787f7"
+}
