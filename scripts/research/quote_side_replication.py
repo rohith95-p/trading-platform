@@ -137,6 +137,10 @@ def match_controls(x, step):
         key = (date.strftime("%Y-%m"), date.hour, int(np.sign(x["return_"][i])))
         if x["extreme"][i]:
             for j in reversed(history[key]):
+                # Never condition a control on the extreme signal that its
+                # own forward interval would contain.
+                if int(x["time"][j]) + 2 * step > int(x["time"][i]):
+                    continue
                 if stamp - int(x["time"][j] + step) > 7 * 86400:
                     continue
                 if .5 * x["rms"][i] <= x["rms"][j] <= 2 * x["rms"][i]:
@@ -172,6 +176,7 @@ def study(a, step):
     x = outcomes(bars, a["time"].astype(np.int64), step)
     event = np.flatnonzero(x["extreme"])
     paired, controls = match_controls(x, step)
+    assert np.all(x["time"][controls] + 2 * step <= x["time"][paired])
     default = x["side"] - .035 - .04
     primary = uncertainty(default[event], x["time"][event] + step)
     difference = uncertainty(default[paired] - default[controls], x["time"][paired] + step)
@@ -213,6 +218,7 @@ def main():
     payload = dict(protocol_sha256=sha(PROTOCOL), script_sha256=sha(Path(__file__)), input_sha256=sha(SOURCE),
                    git_head_before_eval=subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
                    input_rows=len(a), sample="2025 endpoints only; December2024 warmup; not untouched",
+                   amendment="Matched-control overlap repaired after first computation; original contrast invalid, corrected contrast exploratory.",
                    studies={label: study(a, step) for label, step in (("M1", 60), ("M15", 900))},
                    caveats=["Separate minute Bid/Ask aggregates are not certified synchronous ticks.",
                             "No broker fills, actual slippage or Atlas fees observed.",
@@ -233,6 +239,7 @@ def main():
         delta = d["primary_matched_difference"]
         lines.append(f"- {label}: {d['matched_events']} matched observations, {d['unique_controls']} unique prior controls, maximum reuse{d['max_control_reuse']}. Matched extreme-minus-ordinary default mean{delta['mean']:.5f} $/oz, interval{delta['ci95']}; Bonferroni4 p={delta['p_bonferroni4']:.4f}. Default event mean uses{p['utc_weeks']} UTC-week clusters; Bonferroni4 p={p['p_bonferroni4']:.4f}. Balanced-direction same-time default outcome={d['same_timestamp_balanced_side_default_mean']:.5f} $/oz.")
     lines += ["", "A significant negative default mean is evidence against economic feasibility, not evidence of a profitable inverted strategy. Comparing extremes to ordinary observations can detect relative information while absolute outcomes remain negative. No threshold, holding interval or cost assumption is tuned to rescue the result.", "",
+              "## Disclosed control repair", "", "The first run allowed an ordinary control whose outcome overlapped the extreme signal interval, creating an invalid positive relative contrast. That artifact is preserved as `quote_side_replication_superseded_overlap.json` and its matched contrasts must not be used. A committed protocol amendment and synthetic regression test now require every control outcome to end at or before the extreme signal interval starts. Absolute event outcomes were unaffected; corrected relative comparisons remain exploratory after inspection.", "",
               "## Causality and limitations", "", "Signals use completed mid-close returns and only previous60 valid-return RMS. Endpoints begin at the next quote open and end exactly one interval later. Missing boundary/intervening minutes are excluded rather than filled. Bid/ask side marking reconciles independently with mid movement minus endpoint half-spread sum. Matched controls are prior observations with the same month, UTC hour and return sign and comparable lagged volatility; their outcomes never select them. Overlap and reused controls limit independence even with week clustering. Separate bid/ask minute aggregates do not prove synchronous tick quotes or obtainable fills. Financing, latency beyond assumed slippage, stop execution, account constraints and Atlas contract verification remain outside scope.", "",
               "## Decision", "", "This study does not promote a strategy. Consult every fixed cost cell and primary interval in the machine-readable artifact before proposing a separately committed BacktestEngine candidate. No PF, account drawdown or payout rate has been manufactured for these descriptive event outcomes.", "",
               "Reproduce: `.\\venv\\Scripts\\python.exe -m scripts.research.quote_side_replication`. Protocol: `registry/PREREG_QuoteSideReplication_2026-11-18.md`."]

@@ -2,7 +2,7 @@
 import numpy as np
 import pytest
 
-from scripts.research.quote_side_replication import START, aggregate, features, outcomes, validate
+from scripts.research.quote_side_replication import START, aggregate, features, match_controls, outcomes, validate
 
 
 def quotes(count=120):
@@ -68,6 +68,16 @@ def test_aggregation_never_fills_incomplete_utc_group():
     c = aggregate(reduced, 900)
     assert len(c) == 7
     assert START + 900 not in c["time"]
+
+
+def test_ordinary_control_outcome_cannot_include_extreme_signal_interval():
+    x = dict(time=np.array([START, START + 60, START + 120]),
+             return_=np.array([.1, .1, 2.]), rms=np.ones(3),
+             extreme=np.array([False, False, True]), valid=np.ones(3, dtype=bool))
+    paired, controls = match_controls(x, 60)
+    np.testing.assert_array_equal(paired, [2])
+    # Index1's forward outcome overlaps index2's signal interval.
+    np.testing.assert_array_equal(controls, [0])
 
 
 @pytest.mark.parametrize("defect", ["duplicate", "crossed", "nonfinite", "bad_ohlc"])
