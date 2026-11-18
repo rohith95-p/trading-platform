@@ -1,0 +1,47 @@
+{
+  "source_sha256": "ba8cae50141445e6fc454255f704f5fc538ebadf9a7c014d218eb8f7b17ffb8e",
+  "source_rows": 6887193,
+  "time_zone": "UTC",
+  "files": [
+    {
+      "timeframe": "M5",
+      "path": "payload/from_master_m1/M5.npy",
+      "bytes": 89243686,
+      "rows": 1463006,
+      "full_clock_intervals": 1283297,
+      "sha256": "c20e39a79c59884b5a952eda04bf884c4b2579c79e5730237ddd10b7f0e6d619"
+    },
+    {
+      "timeframe": "M15",
+      "path": "payload/from_master_m1/M15.npy",
+      "bytes": 30546253,
+      "rows": 500753,
+      "full_clock_intervals": 405094,
+      "sha256": "77765c49f361f293a917456bd388677991920a5815d88da77ab7236bb579ce62"
+    },
+    {
+      "timeframe": "H1",
+      "path": "payload/from_master_m1/H1.npy",
+      "bytes": 7737255,
+      "rows": 126835,
+      "full_clock_intervals": 90780,
+      "sha256": "48bd240f9a7244e9bbcf299eb5a2dd93bfff2c1805aff12cd2f7dc593111b9d7"
+    },
+    {
+      "timeframe": "H4",
+      "path": "payload/from_master_m1/H4.npy",
+      "bytes": 2094328,
+      "rows": 34328,
+      "full_clock_intervals": 19967,
+      "sha256": "6ff946b469b6de6b82bd749f9c0351b7ccdcce1e73ea4c31f542015fb254a4f3"
+    },
+    {
+      "timeframe": "D1",
+      "path": "payload/from_master_m1/D1.npy",
+      "bytes": 410545,
+      "rows": 6725,
+      "full_clock_intervals": 0,
+      "sha256": "920f80b0b0f638673412f044ae2c92943cad89a54cfc44ff21e6652d58a96017"
+    }
+  ]
+}

@@ -1,5 +1,13 @@
 # Finalization checkpoint — 18 November 2026
 
+## Market-data phase closed
+
+The local [XAUUSD market archive and guide](../research/xauusd_archive/README.md) are ready for later strategy research. [The file index](../research/xauusd_archive/FILE_INDEX.md) lists the actual files and their contents. The final verifier rehashed 382 catalogued files totaling 7,673,529,951 bytes. The 217 original Exness monthly ZIPs contain 685,204,992 quote updates across two distinct account feeds. Standard coverage runs August 2015–October 2026. Raw Spread coverage runs January 2020–October 2026. The November 2026 strategy holdout remains sealed.
+
+The six historical master exports contain 7,643,030 bars across overlapping timeframes. The separately derived January–October 2026 Standard series has 294,988 bid/ask minutes. An independent reader matched count, both sides' OHLC and mean spread for one observed minute in each of the ten months. Additional files preserve five same-source clock aggregations, the project's original data inputs, economic vintages, official gold reserve stocks, CFTC positioning, the SPDR archive and accessible reference literature. The archive guide documents source access limits and the Atlas payout objective. Data payloads are stored locally; Git tracks their catalogs and research tools.
+
+Verification ran with `python -m scripts.validation.gold_archive_verify` and `python -m pytest -q -m "not live"` (824 selected tests, successful exit). File-index and guide links resolved locally. The [verification record](../research/xauusd_archive/verification.json) includes exact row totals and independent minute checks. No strategy was created or promoted in this phase. A candidate capable of positive net payouts under Atlas rules remains a future research objective.
+
 ## Gold market research update
 
 The original research objective remains open. The most recent strategy experiment rejected the nominal Treasury auction short across 186 eligible auctions (PF 0.963, net −$18.21 at 0.02 lots). Its implementation and result are in commit 9a44c77. [Auction study](../research/registry/RESULT_TreasuryAuctionGold_2026-11-18.md)

@@ -40,15 +40,22 @@ def check_minute(zip_path, bars):
 def main():
     manifest = json.loads((STORE/"reference_catalog.json").read_text())
     entries = manifest["project_inputs"]+manifest["master"]+[r for r in manifest["external"] if r["status"]=="stored"]
+    library = json.loads((STORE/"literature_catalog.json").read_text())
+    entries.extend(r for r in library["records"] if r["status"]=="stored")
+    clock_bars = json.loads((STORE/"clock_bars.json").read_text())
+    if clock_bars["source_sha256"]!=next(r["sha256"] for r in manifest["master"] if r["timeframe"]=="M1"):
+        raise ValueError("Clock aggregates refer to a different M1 snapshot")
+    entries.extend(clock_bars["files"])
     ticks = {}
-    for symbol in ["XAUUSDm","XAUUSD_Raw_Spread"]:
-        months = json.loads((STORE/f"ticks_{symbol}.json").read_text())
-        wanted = {f"{y}-{m:02d}" for y in range(2019,2027) for m in range(1,13) if (y,m)<(2026,11)}
+    for symbol,first,last in [("XAUUSDm",2019,2026),("XAUUSD_Raw_Spread",2019,2026),("XAUUSDm",2004,2018)]:
+        key = symbol if first==2019 else f"{symbol}_{first}_{last}"
+        months = json.loads((STORE/f"ticks_{key}.json").read_text())
+        wanted = {f"{y}-{m:02d}" for y in range(first,last+1) for m in range(1,13) if (y,m)<(2026,11)}
         if {r["month"] for r in months}!=wanted or len(months)!=len(wanted):
             raise ValueError(f"Incomplete inventory {symbol}")
         verified = [r for r in months if r["status"]=="verified"]
         entries.extend(verified)
-        ticks[symbol] = dict(months_requested=len(months),months_verified=len(verified),
+        ticks[key] = dict(months_requested=len(months),months_verified=len(verified),
                              missing={r["month"]:r["status"] for r in months if r["status"]!="verified"},
                              quote_rows=sum(r["quote_rows"] for r in verified),bytes=sum(r["bytes"] for r in verified))
     raw = {r["month"]:r for r in entries if r.get("symbol")=="XAUUSDm" and r["month"].startswith("2026")}

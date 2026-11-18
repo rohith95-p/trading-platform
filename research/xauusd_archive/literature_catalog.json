@@ -1,0 +1,184 @@
+{
+  "captured_utc": "2026-11-18T13:22:18.313042+00:00",
+  "records": [
+    {
+      "id": "L01",
+      "title": "Stylized facts of intraday precious metals",
+      "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0174232",
+      "status": "stored",
+      "content_scope": "extracted public page text",
+      "final_url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0174232",
+      "path": "payload/literature/L01.txt",
+      "bytes": 47961,
+      "sha256": "5add7d82d0ccca39a65c40471d0e8da5c4c72bb61ecab9807182c51d819905ba"
+    },
+    {
+      "id": "L02",
+      "title": "Who sets the price of gold? London or New York",
+      "url": "https://www.pure.ed.ac.uk/ws/files/82358957/GoldILS_JFutMkt_Forthcoming.pdf",
+      "status": "stored",
+      "content_scope": "original PDF",
+      "final_url": "https://www.pure.ed.ac.uk/ws/files/82358957/GoldILS_JFutMkt_Forthcoming.pdf",
+      "path": "payload/literature/L02.pdf",
+      "bytes": 910036,
+      "sha256": "9f070a114935a49f019927ba3d45cadca8ca77e2ce9497c1939a15e2680921fa"
+    },
+    {
+      "id": "L03",
+      "title": "Impact of macroeconomic news on metal futures",
+      "url": "https://mountainscholar.org/bitstream/10217/206884/1/Miao_H_BanFin_2012.pdf",
+      "status": "stored",
+      "content_scope": "original PDF",
+      "final_url": "https://api.mountainscholar.org/server/api/core/bitstreams/21623442-a01d-45a6-879d-d645e781e52a/content",
+      "path": "payload/literature/L03.pdf",
+      "bytes": 744472,
+      "sha256": "80b8073e34ffddd5570e3adcbcc68c333d97c61012a7a6b77f986d7aacb8fcf6"
+    },
+    {
+      "id": "L04",
+      "title": "A Simple Approximate Long-Memory Model of Realized Volatility",
+      "url": "https://statmath.wu.ac.at/~hauser/LVs/FinEtricsQF/References/Corsi2009JFinEtrics_LMmodelRealizedVola.pdf",
+      "status": "stored",
+      "content_scope": "original PDF",
+      "final_url": "https://statmath.wu.ac.at/~hauser/LVs/FinEtricsQF/References/Corsi2009JFinEtrics_LMmodelRealizedVola.pdf",
+      "path": "payload/literature/L04.pdf",
+      "bytes": 1058248,
+      "sha256": "18c305635feefc152a0522791de67677b5db037dd10958a09134c7d55cf222e5"
+    },
+    {
+      "id": "L05",
+      "title": "Time Series Momentum: Original Paper Data",
+      "url": "https://www.aqr.com/Insights/Datasets/Time-Series-Momentum-Original-Paper-Data",
+      "status": "stored",
+      "content_scope": "extracted public page text",
+      "final_url": "https://www.aqr.com/Insights/Datasets/Time-Series-Momentum-Original-Paper-Data",
+      "path": "payload/literature/L05.txt",
+      "bytes": 2635,
+      "sha256": "89587eccc9c75891618734b21118c3f4dfa831dade7163a962ef4b035183c51a"
+    },
+    {
+      "id": "L06",
+      "title": "The Deflated Sharpe Ratio: Correcting for Selection Bias, Backtest Overfitting and Non-Normality",
+      "url": "https://davidhbailey.com/dhbpapers/deflated-sharpe.pdf",
+      "status": "stored",
+      "content_scope": "original PDF",
+      "final_url": "https://davidhbailey.com/dhbpapers/deflated-sharpe.pdf",
+      "path": "payload/literature/L06.pdf",
+      "bytes": 1048118,
+      "sha256": "ca4a1e834a2954b84eb560776e903329cd9cef318d458aadf6d67bc8166d10b5"
+    },
+    {
+      "id": "L07",
+      "title": "The Probability of Backtest Overfitting",
+      "url": "https://www.davidhbailey.com/dhbpapers/backtest-prob.pdf",
+      "status": "stored",
+      "content_scope": "original PDF",
+      "final_url": "https://www.davidhbailey.com/dhbpapers/backtest-prob.pdf",
+      "path": "payload/literature/L07.pdf",
+      "bytes": 1145522,
+      "sha256": "d8bfbadaaedb430d9dec929646d92f3580fdf18238f34121ae7738fa1c69a63d"
+    },
+    {
+      "id": "L08",
+      "title": "Gold Return Attribution Model",
+      "url": "https://www.gold.org/goldhub/tools/gold-return-attribution-model",
+      "status": "stored",
+      "content_scope": "extracted public page text",
+      "final_url": "https://www.gold.org/goldhub/tools/gold-return-attribution-model",
+      "path": "payload/literature/L08.txt",
+      "bytes": 1248,
+      "sha256": "d9fe67bc633c3e2445133039368fa1354ac78a71ba75f62059826de35bfd1968"
+    },
+    {
+      "id": "L09",
+      "title": "Real-Time Periods",
+      "url": "https://fred.stlouisfed.org/docs/api/fred/realtime_period.html",
+      "status": "stored",
+      "content_scope": "extracted public page text",
+      "final_url": "https://fred.stlouisfed.org/docs/api/fred/realtime_period.html",
+      "path": "payload/literature/L09.txt",
+      "bytes": 3852,
+      "sha256": "f02f4f9e4b7be2bde2ba8ebdd04a738c97e134a5e77f753b2d0b1ad24ee1dad6"
+    },
+    {
+      "id": "L10",
+      "title": "Gold Futures Contract Specifications",
+      "url": "https://www.cmegroup.com/markets/metals/precious/gold-futures.contractSpecs.html",
+      "status": "unavailable",
+      "reason": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+    },
+    {
+      "id": "L11",
+      "title": "Financial Market Effects of FOMC Communication: Evidence from a New Event-Study Database",
+      "url": "https://www.frbsf.org/wp-content/uploads/wp2025-30.pdf",
+      "status": "stored",
+      "content_scope": "original PDF",
+      "final_url": "https://www.frbsf.org/wp-content/uploads/wp2025-30.pdf",
+      "path": "payload/literature/L11.pdf",
+      "bytes": 644635,
+      "sha256": "d5ec6ce65460a28f9c48993b5ac5d453e24cb55026a1e575c08e8705b81fc5c4"
+    },
+    {
+      "id": "L12",
+      "title": "Intraday price pressure and order flow around US Treasury auctions",
+      "url": "https://www.newyorkfed.org/medialibrary/media/research/staff_reports/sr1188.pdf",
+      "status": "stored",
+      "content_scope": "original PDF",
+      "final_url": "https://www.newyorkfed.org/medialibrary/media/research/staff_reports/sr1188.pdf",
+      "path": "payload/literature/L12.pdf",
+      "bytes": 3487798,
+      "sha256": "0e996bbb751af2d93a18d1673595270a327bddcbaed83ca778c441ae58ae1075"
+    },
+    {
+      "id": "V01",
+      "title": "Exness historical quote feed",
+      "url": "https://www.exness.com/tick-history/",
+      "status": "stored",
+      "content_scope": "publisher access notice only",
+      "final_url": "https://www.exness.com/tick-history/",
+      "path": "payload/literature/V01.txt",
+      "bytes": 606,
+      "sha256": "7379c62ed9e86643ed57deba9734f5c46ea5755920775e7ebabd89d5ae74578d"
+    },
+    {
+      "id": "V02",
+      "title": "Precious metal benchmark auctions",
+      "url": "https://www.lbma.org.uk/prices-and-data/lbma-precious-metal-prices",
+      "status": "stored",
+      "content_scope": "extracted public page text",
+      "final_url": "https://www.lbma.org.uk/prices-and-data/lbma-precious-metal-prices",
+      "path": "payload/literature/V02.txt",
+      "bytes": 3442,
+      "sha256": "a66070e00974c99a7f4f4f9e60ef860be6a9ad5713770ee6a24d65ad32741d90"
+    },
+    {
+      "id": "V03",
+      "title": "Shanghai gold benchmark contract specification",
+      "url": "https://en.sge.com.cn/upload/file/201703/24/RGDmtsfPVEzy935O.pdf",
+      "status": "unavailable",
+      "reason": "403 Client Error: Forbidden for url: https://en.sge.com.cn/upload/file/201703/24/RGDmtsfPVEzy935O.pdf"
+    },
+    {
+      "id": "V04",
+      "title": "CFTC release schedule",
+      "url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/ReleaseSchedule/index.htm",
+      "status": "stored",
+      "content_scope": "extracted public page text",
+      "final_url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/ReleaseSchedule/index.htm",
+      "path": "payload/literature/V04.txt",
+      "bytes": 682,
+      "sha256": "d8fcbd548c9cbaa1323e9a7813f8a74cb1a8a1a1e00bdf2d6e9d17a9bdcfc062"
+    },
+    {
+      "id": "V05",
+      "title": "Philadelphia Fed real-time macro vintages",
+      "url": "https://www.philadelphiafed.org/surveys-and-data/real-time-data-research/real-time-data-set-for-macroeconomists",
+      "status": "stored",
+      "content_scope": "extracted public page text",
+      "final_url": "https://www.philadelphiafed.org/surveys-and-data/real-time-data-research/real-time-data-set-for-macroeconomists",
+      "path": "payload/literature/V05.txt",
+      "bytes": 5579,
+      "sha256": "31a872dfde64d6608b94f822d9c9b1a25bde586632fd4462570349a5c9680364"
+    }
+  ]
+}

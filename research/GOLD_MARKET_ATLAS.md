@@ -1,5 +1,7 @@
 # Gold market atlas — 2026-11-18
 
+The [market archive](xauusd_archive/README.md) stores the research inputs and source catalogs. The [six-timeframe dependence study](registry/RESULT_GoldMarketStructure_2026-11-18.md) adds partial autocorrelation, mutual information and a calendar-block test for changes in typical movement. The [2026 quote study](registry/RESULT_GoldQuoteArchiveProfile_2026-11-18.md) describes 80.48 million observed Standard-account quote updates. During London–New York overlap the median observed minute had 337 updates and a $3.010/oz bid range. London-only minutes had 165 updates and a $1.857/oz range.
+
 The [frozen four-lag M15 study](registry/RESULT_GoldM15Forecast_2026-11-18.md) measured how well the last hour of returns predicted the next move. Relative to a fixed training mean, the size forecast reduced squared error by 12.38% to 23.58% across three evaluation periods. The direction model failed its criterion.
 
 Exploratory empirical evidence, not a profitable strategy or independent holdout test.

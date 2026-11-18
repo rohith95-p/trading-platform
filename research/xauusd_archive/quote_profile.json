@@ -1,0 +1,171 @@
+{
+  "protocol_commit": "9e6e899",
+  "months": [
+    {
+      "month": "2026-01",
+      "source_sha256": "922ec2c19e1277dae28bbf284e90aa9c3214bb3329db9fbabc1111b6e7172133",
+      "processor_sha256": "41b2ea5ee286ccf062adb6dd6fb781b7f913624d9b3ae959dcf9275e8142a193",
+      "sha256": "6dacecc13239bee2319e129fb06395b75145e83a3703904f2219b48b68bae3f4",
+      "bytes": 2988200,
+      "path": "payload/standard_m1/2026-01.npy",
+      "source_rows": 13431248,
+      "valid_quotes": 13431248,
+      "invalid_quotes": 0,
+      "tied_ms": 107319,
+      "out_of_order_quotes": 0,
+      "minutes": 28729
+    },
+    {
+      "month": "2026-02",
+      "source_sha256": "f9c543de40af4d4eeec1c636295a16d1c88665b967189a1ec8869fadc4715425",
+      "processor_sha256": "41b2ea5ee286ccf062adb6dd6fb781b7f913624d9b3ae959dcf9275e8142a193",
+      "sha256": "49227a7ed6a5489d1721e79f4a4002f1a1a8795a54dd10cd2382546da0016507",
+      "bytes": 2847800,
+      "path": "payload/standard_m1/2026-02.npy",
+      "source_rows": 8007912,
+      "valid_quotes": 8007912,
+      "invalid_quotes": 0,
+      "tied_ms": 53410,
+      "out_of_order_quotes": 0,
+      "minutes": 27379
+    },
+    {
+      "month": "2026-03",
+      "source_sha256": "429602a452abd85c2ab5b434cc1ea9bda8a7e3a778ffdec7db3e293321542486",
+      "processor_sha256": "41b2ea5ee286ccf062adb6dd6fb781b7f913624d9b3ae959dcf9275e8142a193",
+      "sha256": "7cc24d8fd1f3cefcf2905323cb7a9eec473e410c1b75ebd329b7acbb5cfcfb4b",
+      "bytes": 3162608,
+      "path": "payload/standard_m1/2026-03.npy",
+      "source_rows": 12360568,
+      "valid_quotes": 12360568,
+      "invalid_quotes": 0,
+      "tied_ms": 190001,
+      "out_of_order_quotes": 0,
+      "minutes": 30406
+    },
+    {
+      "month": "2026-04",
+      "source_sha256": "89c5fced768b469991295fc0502f8c99749373f3933e7740013490d51096af9c",
+      "processor_sha256": "41b2ea5ee286ccf062adb6dd6fb781b7f913624d9b3ae959dcf9275e8142a193",
+      "sha256": "df88a0aad336367386b6401966564b0a7c42413a3b2c774ba839f924c411f3bd",
+      "bytes": 3005776,
+      "path": "payload/standard_m1/2026-04.npy",
+      "source_rows": 6875952,
+      "valid_quotes": 6875952,
+      "invalid_quotes": 0,
+      "tied_ms": 56597,
+      "out_of_order_quotes": 0,
+      "minutes": 28898
+    },
+    {
+      "month": "2026-05",
+      "source_sha256": "498e0392d15e06593962b151f0afe0bc253e4e7fc946e181828c4330ad5e2e42",
+      "processor_sha256": "41b2ea5ee286ccf062adb6dd6fb781b7f913624d9b3ae959dcf9275e8142a193",
+      "sha256": "dcb2c216bec9bf0f306ac90d28f6bac5503a53db041205c502bfcb54834ca898",
+      "bytes": 2992776,
+      "path": "payload/standard_m1/2026-05.npy",
+      "source_rows": 6023835,
+      "valid_quotes": 6023835,
+      "invalid_quotes": 0,
+      "tied_ms": 38417,
+      "out_of_order_quotes": 0,
+      "minutes": 28773
+    },
+    {
+      "month": "2026-06",
+      "source_sha256": "1104ff552ea3c966b01e6086f533ecffecb0fc0f7abcceb5044e3982f828cfda",
+      "processor_sha256": "41b2ea5ee286ccf062adb6dd6fb781b7f913624d9b3ae959dcf9275e8142a193",
+      "sha256": "6d9da990ed6f5bee2a8bd4e3b3d7ee78046f41eeea3a0800a9210621fb45ffc8",
+      "bytes": 3127976,
+      "path": "payload/standard_m1/2026-06.npy",
+      "source_rows": 8038573,
+      "valid_quotes": 8038573,
+      "invalid_quotes": 0,
+      "tied_ms": 116588,
+      "out_of_order_quotes": 0,
+      "minutes": 30073
+    },
+    {
+      "month": "2026-07",
+      "source_sha256": "c704fb3ec1fe6898aa3c1e4c572dcc40e294b6aac914f1bad41227a5bbdc63b1",
+      "processor_sha256": "41b2ea5ee286ccf062adb6dd6fb781b7f913624d9b3ae959dcf9275e8142a193",
+      "sha256": "3c04f750810adace6aac74d11abddd350af977d0ee8fb487074458ff4aaa70de",
+      "bytes": 3258912,
+      "path": "payload/standard_m1/2026-07.npy",
+      "source_rows": 6739207,
+      "valid_quotes": 6739207,
+      "invalid_quotes": 0,
+      "tied_ms": 26050,
+      "out_of_order_quotes": 0,
+      "minutes": 31332
+    },
+    {
+      "month": "2026-08",
+      "source_sha256": "baa514c5a9422a0726164f0a6cbe0785dcd74da553951afe8ad31783c5902f2b",
+      "processor_sha256": "41b2ea5ee286ccf062adb6dd6fb781b7f913624d9b3ae959dcf9275e8142a193",
+      "sha256": "cc2da557c65b599d0f04717f3d5ad4ea9d7bede237b307be51bb0128ad04f25e",
+      "bytes": 3021480,
+      "path": "payload/standard_m1/2026-08.npy",
+      "source_rows": 6493208,
+      "valid_quotes": 6493208,
+      "invalid_quotes": 0,
+      "tied_ms": 29000,
+      "out_of_order_quotes": 0,
+      "minutes": 29049
+    },
+    {
+      "month": "2026-09",
+      "source_sha256": "2f85861bfc1cbacb5fabc241832a58a6552159ceee84f25952bfc0706a500df8",
+      "processor_sha256": "41b2ea5ee286ccf062adb6dd6fb781b7f913624d9b3ae959dcf9275e8142a193",
+      "sha256": "169532310d4e33b4805020ec9d90f6b6e069dc13938a71e87ddaf31eefb35261",
+      "bytes": 3136712,
+      "path": "payload/standard_m1/2026-09.npy",
+      "source_rows": 6593803,
+      "valid_quotes": 6593803,
+      "invalid_quotes": 0,
+      "tied_ms": 9534,
+      "out_of_order_quotes": 0,
+      "minutes": 30157
+    },
+    {
+      "month": "2026-10",
+      "source_sha256": "f9066c09dc1d8d6e55b5a89dda37f33994fd69a605c96eccf29ead9c05278feb",
+      "processor_sha256": "41b2ea5ee286ccf062adb6dd6fb781b7f913624d9b3ae959dcf9275e8142a193",
+      "sha256": "572c0d8bacaaea00c23c6c4edb9b5831aa2375017f74ab1cfa563326517f8092",
+      "bytes": 3140352,
+      "path": "payload/standard_m1/2026-10.npy",
+      "source_rows": 5914197,
+      "valid_quotes": 5914197,
+      "invalid_quotes": 0,
+      "tied_ms": 12147,
+      "out_of_order_quotes": 0,
+      "minutes": 30192
+    }
+  ],
+  "sessions": {
+    "London only": {
+      "minutes": 63300,
+      "median_quotes_per_minute": 165.0,
+      "median_minute_mean_spread_usd_oz": 0.259999999999998,
+      "median_bid_range_usd_oz": 1.856999999999971
+    },
+    "New York only": {
+      "minutes": 61800,
+      "median_quotes_per_minute": 156.0,
+      "median_minute_mean_spread_usd_oz": 0.2599999999999883,
+      "median_bid_range_usd_oz": 1.7120000000004438
+    },
+    "outside both": {
+      "minutes": 117088,
+      "median_quotes_per_minute": 169.0,
+      "median_minute_mean_spread_usd_oz": 0.26000000000000717,
+      "median_bid_range_usd_oz": 1.9590000000007421
+    },
+    "overlap": {
+      "minutes": 52800,
+      "median_quotes_per_minute": 337.0,
+      "median_minute_mean_spread_usd_oz": 0.2600000000000028,
+      "median_bid_range_usd_oz": 3.009999999999991
+    }
+  }
+}

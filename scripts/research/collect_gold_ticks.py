@@ -84,10 +84,15 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--symbol", choices=["XAUUSDm", "XAUUSD_Raw_Spread"], required=True)
     parser.add_argument("--workers", type=int, default=6)
-    parser.add_argument("--first-year", type=int, default=2019, choices=range(2019,2027))
+    parser.add_argument("--first-year", type=int, default=2019, choices=range(2004,2027))
+    parser.add_argument("--last-year", type=int, default=2026, choices=range(2004,2027))
     args = parser.parse_args()
-    months = [(args.symbol,y,m) for y in range(args.first_year,2027) for m in range(1,13) if (y,m)<(2026,11)]
+    if args.last_year < args.first_year:
+        parser.error("last year must be at or after first year")
+    months = [(args.symbol,y,m) for y in range(args.first_year,args.last_year+1) for m in range(1,13) if (y,m)<(2026,11)]
     suffix = "" if args.first_year == 2019 else f"_{args.first_year}"
+    if args.last_year != 2026:
+        suffix += f"_{args.last_year}"
     output = STORE/f"ticks_{args.symbol}{suffix}.json"
     rows = []
     with ThreadPoolExecutor(max_workers=args.workers) as pool:
