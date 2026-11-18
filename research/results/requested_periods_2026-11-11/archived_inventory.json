@@ -1,0 +1,634 @@
+{
+  "caveat": "Archived realized cash by exit date, not exact start-flat/end-liquidated reruns. Dates outside declared coverage unknown. No claim exhaustive of all historical experiments.",
+  "archived_inventory": [
+    {
+      "name": "auction_fade",
+      "net_2019_2024": -1076.829999999992,
+      "declared_start": "2005-01-01",
+      "declared_end": "2025-12-31",
+      "full_period_declared": true,
+      "annual_net": {
+        "2019": -144.02999999999224,
+        "2020": -269.29999999998836,
+        "2021": -210.53999999998604,
+        "2022": -382.30999999999466,
+        "2023": -115.95999999999411,
+        "2024": 45.309999999930696
+      },
+      "source_files": [
+        "C:\\projects\\ultra_core\\research\\dated_results\\27b78e876b0a5432a2de067ef5f3be334f484f57a4b957883d5385609640c46a.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\d68a26ce72a3a73eeecf5d6a9873ddd76e77ce8a519eaef16f9a207dd2e02ae5.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\fd46851cca37d3c45b27c068ef15598810a3e96d0f4b4f123e1d333b398090eb.json"
+      ]
+    },
+    {
+      "name": "auction_follow",
+      "net_2019_2024": -612.750000000037,
+      "declared_start": "2005-01-01",
+      "declared_end": "2025-12-31",
+      "full_period_declared": true,
+      "annual_net": {
+        "2019": -149.3699999999848,
+        "2020": -79.47999999999048,
+        "2021": -44.35999999998812,
+        "2022": 56.23000000001048,
+        "2023": -201.07999999999515,
+        "2024": -194.69000000007685
+      },
+      "source_files": [
+        "C:\\projects\\ultra_core\\research\\dated_results\\170a9d2f56d9dd982cb7e2c00f7d173ee1dbf6e35d69f21b72fc07b052e8cbfb.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\1e44dfadc908dca2d05a5ec264ab3d7502f7a8fd439923c51a055963c2ed572e.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\8789aebd9f485873b43165523356d9a061e2b03432f517375f6188c696ea4423.json"
+      ]
+    },
+    {
+      "name": "clock_asia_long",
+      "net_2019_2024": 168.40800000012433,
+      "declared_start": "2005-01-01",
+      "declared_end": "2025-12-31",
+      "full_period_declared": true,
+      "annual_net": {
+        "2019": -142.53999999997654,
+        "2020": -93.33999999996837,
+        "2021": 268.280000000027,
+        "2022": -302.0319999999925,
+        "2023": -13.658000000002495,
+        "2024": 451.698000000036
+      },
+      "source_files": [
+        "C:\\projects\\ultra_core\\research\\dated_results\\682f4b76b06cfcc09d26eb3830b86bb09b3a1571b139ce382ec742d87b84b925.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\6f522a44d4c32c7135edc64bf8578d6b48b197d8c9412fd251fae2258b457901.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\a8712ba40b90448dd78504c95d3255b7acb92c6b57ca42331e2e9e7f4daa71fb.json"
+      ]
+    },
+    {
+      "name": "clock_london_intraday_short",
+      "net_2019_2024": -564.4439999999768,
+      "declared_start": "2005-01-01",
+      "declared_end": "2025-12-31",
+      "full_period_declared": true,
+      "annual_net": {
+        "2019": -219.11999999997428,
+        "2020": -426.70999999997775,
+        "2021": 162.28000000001583,
+        "2022": 21.176000000014596,
+        "2023": -161.30600000000499,
+        "2024": 59.23599999997833
+      },
+      "source_files": [
+        "C:\\projects\\ultra_core\\research\\dated_results\\2f1e33f1a3411818d004e0a2df4bb16ac61e904ed24b71780993bd5a89614a72.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\5daaaeb08ff7bfb7f39ed39c8bd152392293613e743f567ee279c37b0816cefa.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\a1e39248df11615c436701b96fe6c3bdda8025d52055ca44662ecf195725d903.json"
+      ]
+    },
+    {
+      "name": "clock_london_overnight_long",
+      "net_2019_2024": -354.9389999999563,
+      "declared_start": "2005-01-01",
+      "declared_end": "2025-12-31",
+      "full_period_declared": true,
+      "annual_net": {
+        "2019": -93.77199999997671,
+        "2020": 234.52600000002315,
+        "2021": -487.61899999997524,
+        "2022": -602.0759999999899,
+        "2023": -147.68900000000804,
+        "2024": 741.6909999999879
+      },
+      "source_files": [
+        "C:\\projects\\ultra_core\\research\\dated_results\\30ca06c169a8f28ab43f6fb94305809ce8fdc095498c8f3841329657f76c70db.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\4bf52dae566aa7125eb4802059c31d68f2bb2ecbcdc723b55cec8d71ec9f946b.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\b075e0ce54157175acec02eb107e223679d9b53d657f8c37a6b2751537baaa4a.json"
+      ]
+    },
+    {
+      "name": "cot_fade",
+      "net_2019_2024": 69.80199999999269,
+      "declared_start": "2010-01-01",
+      "declared_end": "2025-12-31",
+      "full_period_declared": true,
+      "annual_net": {
+        "2019": -157.28999999999786,
+        "2020": -229.39999999999975,
+        "2021": 347.5599999999968,
+        "2022": 9.565999999997459,
+        "2023": 200.71399999999772,
+        "2024": -101.34800000000068
+      },
+      "source_files": [
+        "C:\\projects\\ultra_core\\research\\dated_results\\026386828cf6c03b86d63194b362d7d7f6d5e1fc403cdbc2cdeff46130d1bfd1.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\3a6263cdcd4ef35444d2dd09eecb63a09e9c9dd8aedd0d133e1ebdbbc1268da9.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\58355a7d7ec30debdf81f57539ef5c7448f859244e57fec3e9763dbec3a83889.json"
+      ]
+    },
+    {
+      "name": "cot_follow",
+      "net_2019_2024": -835.613999999986,
+      "declared_start": "2010-01-01",
+      "declared_end": "2025-12-31",
+      "full_period_declared": true,
+      "annual_net": {
+        "2019": 43.389999999998324,
+        "2020": 41.79999999999994,
+        "2021": -457.43999999999704,
+        "2022": -146.14599999999717,
+        "2023": -271.0879999999979,
+        "2024": -46.12999999999947
+      },
+      "source_files": [
+        "C:\\projects\\ultra_core\\research\\dated_results\\20f010a93b48fae210aa321228fc21f24c78ed6c8a767d68e58c31892c18b9a4.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\b7f4575696c71bd28dd55362351272f6e82cb3a286882d62ed97012aad100ee0.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\e952d174efd63dc71dd06fb6a3440c9b1c7bdc92856d0e82aed79f9d80c07df6.json"
+      ]
+    },
+    {
+      "name": "forecast_fill_core",
+      "net_2019_2024": 865.5313571428703,
+      "declared_start": "2015-01-02",
+      "declared_end": "2025-12-31",
+      "full_period_declared": true,
+      "annual_net": {
+        "2019": -123.94499999999624,
+        "2020": 282.41071428571547,
+        "2021": -382.76985714285547,
+        "2022": 88.3985000000026,
+        "2023": -48.70321428571516,
+        "2024": 1050.1402142857191
+      },
+      "source_files": [
+        "C:\\projects\\ultra_core\\research\\dated_results\\6f420ae1f4e5f32d97d7f65bf036f6bab7a533713ef4e679d0fd0926d9139e59.json"
+      ]
+    },
+    {
+      "name": "gld_creations",
+      "net_2019_2024": 148.9019999999973,
+      "declared_start": "2005-01-01",
+      "declared_end": "2025-12-31",
+      "full_period_declared": true,
+      "annual_net": {
+        "2019": -171.229999999997,
+        "2020": -48.700000000003,
+        "2021": 257.5399999999997,
+        "2022": 149.99199999999678,
+        "2023": 36.18200000000175,
+        "2024": -74.88200000000009
+      },
+      "source_files": [
+        "C:\\projects\\ultra_core\\research\\dated_results\\0832268d029e9e9fc7a1f9a6921d291c4b182f5728a481566f21bac40b0d2a1a.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\36d1e2b5a8a5c8da14135112f4c58eed138cbafcc969793ce6aae593daca5ce2.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\81bebc1fea3b8fbc0ed98d5c1f71604ed2f58090c98b8a7b3c66a4475a6f82cc.json"
+      ]
+    },
+    {
+      "name": "gold_iv_premium",
+      "net_2019_2024": -195.14199999999954,
+      "declared_start": "2011-01-01",
+      "declared_end": "2025-12-31",
+      "full_period_declared": true,
+      "annual_net": {
+        "2019": -38.30000000000091,
+        "2020": -45.49000000000022,
+        "2021": -84.93999999999984,
+        "2022": 111.85599999999904,
+        "2023": -125.81999999999931,
+        "2024": -12.447999999998029
+      },
+      "source_files": [
+        "C:\\projects\\ultra_core\\research\\dated_results\\4aa347bf246bef8ea6abff06c7aca79ef35eea76ab3656ce35c6c5d75914bf60.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\cb4d4c898d5c54cd022a52ddca98713c708061aef7dfe18cde8bb56b1907c4dd.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\eb9c38d74ea046b63d112ab78a06ed1af42223e6f948424943af3fbafdd4e0f1.json"
+      ]
+    },
+    {
+      "name": "miners_residual",
+      "net_2019_2024": -553.0480000000027,
+      "declared_start": "2007-01-01",
+      "declared_end": "2025-12-31",
+      "full_period_declared": true,
+      "annual_net": {
+        "2019": -82.93000000000075,
+        "2020": -32.40000000000117,
+        "2021": -108.24000000000123,
+        "2022": -84.79800000000016,
+        "2023": -41.277999999999714,
+        "2024": -203.40199999999922
+      },
+      "source_files": [
+        "C:\\projects\\ultra_core\\research\\dated_results\\481051a590f6d88d459a24ae605d766dac59dd36e21f73ee3e12939c9d07ece8.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\b2cb918e62e2b2060049b6c264964318ecdcbca9474a69aacaf4c22e0920b4ed.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\d0c7c84022aa46f3c27e5474b2b40420415c0d30c07c1bc944c7c089d1855c35.json"
+      ]
+    },
+    {
+      "name": "orb_target_1",
+      "net_2019_2024": -607.2699999999651,
+      "declared_start": "2005-01-01",
+      "declared_end": "2025-12-31",
+      "full_period_declared": true,
+      "annual_net": {
+        "2019": -53.099999999991326,
+        "2020": -19.339999999994006,
+        "2021": -167.76999999999362,
+        "2022": 35.45000000000914,
+        "2023": -72.73999999999202,
+        "2024": -329.77000000000163
+      },
+      "source_files": [
+        "C:\\projects\\ultra_core\\research\\dated_results\\0b653179fd8d214f6217552a35389dc1f3621bb50432a975e6ebfd92cf9835a8.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\29e61f14200fa906600720020c0db9f94f94aadc3a187293e81f6219380c0368.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\b7f08c00c4dfca0e8496673647a39b0472fcf3b277e949a58bd167624b80c853.json"
+      ]
+    },
+    {
+      "name": "orb_target_2",
+      "net_2019_2024": -656.6099999999628,
+      "declared_start": "2005-01-01",
+      "declared_end": "2025-12-31",
+      "full_period_declared": true,
+      "annual_net": {
+        "2019": 5.540000000008939,
+        "2020": 32.08000000000918,
+        "2021": -260.78999999998905,
+        "2022": -70.28999999998982,
+        "2023": -15.189999999990142,
+        "2024": -347.9600000000049
+      },
+      "source_files": [
+        "C:\\projects\\ultra_core\\research\\dated_results\\04fdcf267326a3b6071e7504616be27d9a95a652475743c3b0d0b56aebad6960.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\ab0c850688e0ce907ae91354a592db5ca2cb39c6396f6bde709c9431f95aa30e.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\ea8ff78ebed82e5ee40aeb7a2817a17606f8315998babf1750de3ab89d223834.json"
+      ]
+    },
+    {
+      "name": "paxg_flow",
+      "net_2019_2024": 60.7339999999962,
+      "declared_start": "2022-01-01",
+      "declared_end": "2025-12-31",
+      "full_period_declared": false,
+      "annual_net": {
+        "2019": 0,
+        "2020": 0,
+        "2021": 0,
+        "2022": 110.55600000000042,
+        "2023": 87.11000000000124,
+        "2024": -136.932000000005
+      },
+      "source_files": [
+        "C:\\projects\\ultra_core\\research\\dated_results\\b6c27233dfa6f8cb9ed2bff1e6927de804a40aa85944b8938f025150131f99b2.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\d330fea0ece31f0316b9f09b3e802c2cc2463231d9869bc2a21c4c7ddb6df69b.json"
+      ]
+    },
+    {
+      "name": "post_bls_fade",
+      "net_2019_2024": 104.83000000000652,
+      "declared_start": "2019-01-01",
+      "declared_end": "2025-12-31",
+      "full_period_declared": true,
+      "annual_net": {
+        "2019": -14.879999999998006,
+        "2020": -33.349999999997515,
+        "2021": 6.830000000001867,
+        "2022": 47.76000000000193,
+        "2023": 59.01000000000262,
+        "2024": 39.459999999994864
+      },
+      "source_files": [
+        "C:\\projects\\ultra_core\\research\\dated_results\\25342f26eeb36644314f7d2797e630f47ec590afd9ea3a24b2b649dbed3f652a.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\5d35e3cf6a9388456927523b982bad29181c6bc49d4711569335a81fac0c75ed.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\6bfa8973ad1446986564c676890b5b09de1bd025a1ecd21ceff2a3011d89e6ad.json"
+      ]
+    },
+    {
+      "name": "post_bls_follow",
+      "net_2019_2024": -364.8099999999958,
+      "declared_start": "2019-01-01",
+      "declared_end": "2025-12-31",
+      "full_period_declared": true,
+      "annual_net": {
+        "2019": -11.559999999998297,
+        "2020": -40.2699999999985,
+        "2021": -59.26999999999848,
+        "2022": -90.09999999999727,
+        "2023": -75.54999999999774,
+        "2024": -88.060000000006
+      },
+      "source_files": [
+        "C:\\projects\\ultra_core\\research\\dated_results\\8cbc72e8fefde4bb9028d03a8bae423a73ab835ea833ca93072017b72dd071ac.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\d18ba0564949cd65fa3ee86263851e4e889841cea6cb16866a293d9f0dc762df.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\dc954cdcb4a9c681a4288a843fcecd365432b886323698d1bf28110d8db66a99.json"
+      ]
+    },
+    {
+      "name": "prior_day_breakout",
+      "net_2019_2024": -187.11899999992247,
+      "declared_start": "2005-01-01",
+      "declared_end": "2025-12-31",
+      "full_period_declared": true,
+      "annual_net": {
+        "2019": -188.1389999999834,
+        "2020": 405.52700000001846,
+        "2021": -577.3169999999843,
+        "2022": 159.4830000000112,
+        "2023": -96.28000000000482,
+        "2024": 109.60700000001509
+      },
+      "source_files": [
+        "C:\\projects\\ultra_core\\research\\dated_results\\1dd4e899cf3636a17458219a23c3847eb4a9a04763c069336af99cbd52a53700.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\784390a1531613af2edbfc192f25f1908442312924a808f1ec5266663e1e17e7.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\ac5fc2ce15b2109ede2154116ebd977d4cb37cdd22025bcf0e1a5c0438078147.json"
+      ]
+    },
+    {
+      "name": "supertrend_1h",
+      "net_2019_2024": 64.41653847312998,
+      "declared_start": "2005-01-01",
+      "declared_end": "2025-12-31",
+      "full_period_declared": true,
+      "annual_net": {
+        "2019": -84.99303727435607,
+        "2020": 665.4783777295776,
+        "2021": -283.82018298196505,
+        "2022": -110.2080030281623,
+        "2023": -110.70696338837814,
+        "2024": -11.3336525835864
+      },
+      "source_files": [
+        "C:\\projects\\ultra_core\\research\\dated_results\\086ea8c22a0e65e9ccbd822793cc3b9c99e37c819aa03d69fb11fea8733fe27a.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\52d7d87350e2fdf48344e1e9120cce1b1f85118ef51dc579de36ac493a19735d.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\fd8e3e4d5508c2b5770f24e19b050d875987c08f85989652b32fd5ec7282ba5e.json"
+      ]
+    },
+    {
+      "name": "supertrend_4h",
+      "net_2019_2024": -1610.9345392358305,
+      "declared_start": "2005-01-01",
+      "declared_end": "2025-12-31",
+      "full_period_declared": true,
+      "annual_net": {
+        "2019": -579.5574752524154,
+        "2020": 63.66865161355357,
+        "2021": -617.1130930011412,
+        "2022": -695.1897596703443,
+        "2023": 70.47366288203948,
+        "2024": 146.78347419247663
+      },
+      "source_files": [
+        "C:\\projects\\ultra_core\\research\\dated_results\\67fb508e9e6f185fdd9672d3249dc3d975d516edb791c4250415e869d40f2bfb.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\991404d4d852c765055ae37b9c3b6acbfa5461a985e0ed86fd7eac10133c6f52.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\d3d9a92d8cb5343195ae8bcfd6aa4a4da6263689585ca18914a4dd8b404726b3.json"
+      ]
+    },
+    {
+      "name": "sweep_ema",
+      "net_2019_2024": -1964.5519999999503,
+      "declared_start": "2005-01-01",
+      "declared_end": "2025-12-31",
+      "full_period_declared": true,
+      "annual_net": {
+        "2019": -327.7600000000001,
+        "2020": -235.80999999998903,
+        "2021": -320.2199999999877,
+        "2022": -221.31999999999033,
+        "2023": -510.42999999999216,
+        "2024": -349.01199999998187
+      },
+      "source_files": [
+        "C:\\projects\\ultra_core\\research\\dated_results\\64347306aa20f0a1de60e5749c92a7f80a676728b6640e85d1e52b7f47470495.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\858a5f89c9aaf99da3a807f481a7d86851bbd880b053f08ae3042462f2718eed.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\9ad078d0a0bf16d6d99db9ed2e9568a0128e23415139bf6d58964af9b9b66e64.json"
+      ]
+    },
+    {
+      "name": "sweep_ema_executable_open",
+      "net_2019_2024": -519.8199999999513,
+      "declared_start": "2005-01-01",
+      "declared_end": "2025-12-31",
+      "full_period_declared": true,
+      "annual_net": {
+        "2019": -207.1579999999962,
+        "2020": 5.4920000000085665,
+        "2021": -75.69199999998912,
+        "2022": -11.795999999995225,
+        "2023": -161.05999999999946,
+        "2024": -69.60599999998448
+      },
+      "source_files": [
+        "C:\\projects\\ultra_core\\research\\dated_results\\2389b585431b670ecd51d04fa7fd384dacd885686cdff43d8e2ea8e1e48d0f27.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\705b2f94361b3397306c892fe0303407e73498a0ef2b2249ec3afeed5f1232d7.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\bc9dd1c64e3bb018dbfadbbba0694b12742235556344e92e97b7ea43ca1cf152.json"
+      ]
+    },
+    {
+      "name": "sweep_raw",
+      "net_2019_2024": -15386.10699999981,
+      "declared_start": "2005-01-01",
+      "declared_end": "2025-12-31",
+      "full_period_declared": true,
+      "annual_net": {
+        "2019": -1557.6409999999798,
+        "2020": -3559.2679999999764,
+        "2021": -2833.3459999999823,
+        "2022": -2214.2079999999855,
+        "2023": -2190.161999999984,
+        "2024": -3031.481999999981
+      },
+      "source_files": [
+        "C:\\projects\\ultra_core\\research\\dated_results\\4acad30e003fecc0f4970fbcd3cce193df226a48f6be05101d01db042f7031f4.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\95ef272df0c32ed5ad12674852d006236e162f55ec8fc3111cbf0013fd876867.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\b186a314aa41fb8b23420d2f9e5e8dea7655074fa9c083930a0e34ac61863a45.json"
+      ]
+    },
+    {
+      "name": "sweep_raw_executable_open",
+      "net_2019_2024": -3074.3689999999247,
+      "declared_start": "2005-01-01",
+      "declared_end": "2025-12-31",
+      "full_period_declared": true,
+      "annual_net": {
+        "2019": -551.7989999999771,
+        "2020": -917.48199999998,
+        "2021": -638.0439999999767,
+        "2022": -227.16799999997397,
+        "2023": -424.2339999999966,
+        "2024": -315.6419999999789
+      },
+      "source_files": [
+        "C:\\projects\\ultra_core\\research\\dated_results\\2549c5f890d777f8924b063e223d97b08ad2fa56ec322f0ed45f45d3b452e302.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\62491abcb393e175604225e20b12f713ba20b1e071354fc97e5c688b2b8cfb51.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\c059e4586b468b004661c25d57a81cc86152dd041bcdcd3964e8891d3049adef.json"
+      ]
+    },
+    {
+      "name": "turtle_s2_1unit",
+      "net_2019_2024": 100.69899213081672,
+      "declared_start": "2005-01-01",
+      "declared_end": "2025-12-31",
+      "full_period_declared": true,
+      "annual_net": {
+        "2019": 104.84900000000061,
+        "2020": -88.98232922620772,
+        "2021": -143.20136384836522,
+        "2022": -102.97512412417777,
+        "2023": -128.56744583296455,
+        "2024": 459.5762551625313
+      },
+      "source_files": [
+        "C:\\projects\\ultra_core\\research\\dated_results\\01cad7a026e0495d18a7298bb1a0ed396b3b0e4b628fceaade888a0d645f4879.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\0bd2e49aff4fdc4e514a88aae3d741787d66278833beef53922f7e5b31edca08.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\4bed9b877d3ac2d8a82a03747f996870d5274a1adbe4704d55291982d81de742.json"
+      ]
+    },
+    {
+      "name": "turtle_s2_4unit",
+      "net_2019_2024": -1630.7484693719289,
+      "declared_start": "2005-01-01",
+      "declared_end": "2025-12-31",
+      "full_period_declared": true,
+      "annual_net": {
+        "2019": 136.76881091107242,
+        "2020": -694.5857545094939,
+        "2021": -599.9375756337024,
+        "2022": -635.6425729577585,
+        "2023": -1498.8617439937752,
+        "2024": 1661.510366811729
+      },
+      "source_files": [
+        "C:\\projects\\ultra_core\\research\\dated_results\\71b277d42dc62bba219a875ca37883d813891eca09270fbcab76139520154cb6.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\b5f15a224aafbc7519eddc966bc32596f20163b5d28c19b5bf1c117479d6735a.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\cc781c39ada5916591f38d64985bddfcf4ef15108c53748bd0b290ff92a8aecf.json"
+      ]
+    },
+    {
+      "name": "turtle_s2_m1_1unit",
+      "net_2019_2024": 100.03699213081555,
+      "declared_start": "2005-01-01",
+      "declared_end": "2025-12-31",
+      "full_period_declared": true,
+      "annual_net": {
+        "2019": 104.84900000000061,
+        "2020": -88.98232922620772,
+        "2021": -143.20136384836522,
+        "2022": -102.97512412417777,
+        "2023": -128.80744583296433,
+        "2024": 459.1542551625299
+      },
+      "source_files": [
+        "C:\\projects\\ultra_core\\research\\dated_results\\14b55094ae265924f0c628dab32d05dd9009951cc5d8cd600c169c3e91189fec.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\2146dc02a9342921463b8ed93f98a9662b4c0e89fb79f2b5d81219ad383bf7c3.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\e4a046d4fd0d81f31d96760cef320d174d84b286edcc9895f91a1ebc433f9d44.json"
+      ]
+    },
+    {
+      "name": "turtle_s2_m1_4unit",
+      "net_2019_2024": -1540.9907619550954,
+      "declared_start": "2005-01-01",
+      "declared_end": "2025-12-31",
+      "full_period_declared": true,
+      "annual_net": {
+        "2019": 136.76881091107242,
+        "2020": -694.5857545094939,
+        "2021": -599.9375756337024,
+        "2022": -635.6425729577585,
+        "2023": -1406.5780365769315,
+        "2024": 1658.9843668117192
+      },
+      "source_files": [
+        "C:\\projects\\ultra_core\\research\\dated_results\\3812e37af8a517f8f27b7bbe3752ebd76ced6d0ac40ae2112e491cbccc6ff2ff.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\ab958f47e35a103059e58488d660c58629e4abcbe462f8e330e9f7abfd577a4b.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\eb937909b8fc9e033dbb594a389e0f67e699988927c436e61106482b4190ac4a.json"
+      ]
+    },
+    {
+      "name": "us_intraday_momentum",
+      "net_2019_2024": -788.8159999999835,
+      "declared_start": "2005-01-01",
+      "declared_end": "2025-12-31",
+      "full_period_declared": true,
+      "annual_net": {
+        "2019": -127.33999999999654,
+        "2020": -218.29999999999816,
+        "2021": -85.66000000000253,
+        "2022": -161.0480000000003,
+        "2023": -118.75800000000069,
+        "2024": -77.70999999999881
+      },
+      "source_files": [
+        "C:\\projects\\ultra_core\\research\\dated_results\\3afbd4dc3135f4bd3eccc02c10f4e6406c6e0c98c54a416a0c50d091183298e0.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\8f01d8b06bf2c4f611846cf1d7d1d39e2b88ded7acf167892bfa931b050cfa75.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\e8f02e8e633bf03c624ad7bee34fe287ecda4357b80a6b0ac926809803fdb469.json"
+      ]
+    },
+    {
+      "name": "vwap_ema_github_core",
+      "net_2019_2024": -2500.035571428338,
+      "declared_start": "2005-01-01",
+      "declared_end": "2025-12-31",
+      "full_period_declared": true,
+      "annual_net": {
+        "2019": -633.2658571427862,
+        "2020": -530.4075714285075,
+        "2021": -636.9355714285208,
+        "2022": -307.89521428567326,
+        "2023": -360.16592857143144,
+        "2024": -31.36542857140109
+      },
+      "source_files": [
+        "C:\\projects\\ultra_core\\research\\dated_results\\2c5e9af3b988d424d4d649017554a2939592b0ecf39926b775c17f1a9a49621d.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\3d6c24f23af727ffcd87c8d24d0ec18139a1e6806f8cd79ec29bfd49b1ab8d94.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\fad0f50ee29a28e05f061087ed5030e47fb26c1ce9a49aa173ff6a776f1c05f2.json"
+      ]
+    },
+    {
+      "name": "vwap_ema_paper_core",
+      "net_2019_2024": -6.53032353710983,
+      "declared_start": "2005-01-01",
+      "declared_end": "2025-12-31",
+      "full_period_declared": true,
+      "annual_net": {
+        "2019": 30.709771498098263,
+        "2020": -75.22338588071327,
+        "2021": -98.5607360647476,
+        "2022": -33.25071353128095,
+        "2023": 121.11082634008645,
+        "2024": 48.68391410144672
+      },
+      "source_files": [
+        "C:\\projects\\ultra_core\\research\\dated_results\\618ff0bb8841d1c3834e6c17254c9a2b462ce4fe4029a2d494f3689904f225ec.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\d39801c20e3015a34b440c0424ca249e3bb93ef0bf9a1493c4ff50e1eb7de074.json",
+        "C:\\projects\\ultra_core\\research\\dated_results\\e5a8ef5e842931b51fbb1cee23eb3a7f7dc469e14d23ee2ee438ba9dda6c75c2.json"
+      ]
+    }
+  ],
+  "audited_2026": {
+    "start": "2026-07-06",
+    "end_exclusive": "2026-10-30",
+    "source": "C:\\projects\\ultra_core\\research\\results\\fresh_recent_2026-11-11\\trades.json",
+    "sha256": "60d554f8b3666dc5d1bd2cb4fefcfd9bfcff03030a1c4a80d2f7580de18d1574",
+    "results": {
+      "ASIAN_BREAKOUT_V6": {
+        "trades": 1,
+        "net": 79.82900000000126,
+        "profit_factor": null,
+        "win_pct": 100.0
+      },
+      "ASIAN_RANGE_FILTERED_V6": {
+        "trades": 11,
+        "net": 141.3329999999828,
+        "profit_factor": 1.7237416850588425,
+        "win_pct": 54.54545454545455
+      },
+      "LONDON_MOMENTUM_TIGHT_V6": {
+        "trades": 21,
+        "net": 340.77599999997113,
+        "profit_factor": 2.1498756575638187,
+        "win_pct": 52.38095238095238
+      },
+      "NY_SESSION_REVERSAL_V6": {
+        "trades": 21,
+        "net": 228.20199999998314,
+        "profit_factor": 1.4704022295468127,
+        "win_pct": 42.857142857142854
+      }
+    }
+  }
+}
