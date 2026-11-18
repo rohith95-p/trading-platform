@@ -174,7 +174,11 @@ a new edge, holdout evaluation, Atlas pass/payout simulation or broker fill audi
 See `research/registry/RESULT_SampledEquity_2026-11-18.md` and full machine-readable
 records under `research/results/sampled_equity_2026-11-18/`.
 
-## Raw-tick source attempt and read-only demo capture fallback
+## Independent historical quote test
+
+An Exness archive subsequently supplied 8,991 ordered XAUUSD Raw Spread bid/ask updates in the frozen hour. The two fixed orders produced matching entry prices and exit reasons on tick and minute paths. The minute engine understated maximum net-liquidation drawdown by $1.426 on the buy and $0.544 on the sell. Replaying the same archive reproduced the result file byte for byte. This validates a two-order comparison on this feed. Actual slippage and Atlas account fills remain unmeasured. [Quote comparison and reproduction instructions](../research/registry/RESULT_ExnessTickFixture_2026-11-18.md)
+
+## Earlier Dukascopy attempt and read-only demo capture fallback
 
 The precommitted `PREREG_TickReconciliation_2026-11-18.md` fixed a Jan 6, 2025,
 12:00–13:00 UTC raw-quote comparison. The official archive connection reset;

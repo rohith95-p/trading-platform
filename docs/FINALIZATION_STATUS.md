@@ -1,6 +1,36 @@
 # Finalization checkpoint — 18 November 2026
 
-## Outcome
+## Current decision
+
+**Zero strategies qualify for Atlas deployment.** A positive evaluation result and an eligible reward are distinct milestones. The frozen four-leg system can pass the evaluation on one previously explored path under the provider-calendar assumption. That path alone cannot establish expected trader cash after funded losses, fees and program restrictions.
+
+| Verification | Measured outcome |
+| --- | --- |
+| Historical strategy performance | The original portfolio lost $1,311.35 over 2,556 out-of-selection trades. Among the 12 price-rule variants tested for 2019–2024 and available 2026, Forecast-to-Fill alone was profitable in both, with PF 1.266 and 1.278. Its samples used coarse execution. |
+| Independent data and new mechanisms | 2025 Dukascopy minute reversal lost across all 18 cost cases. Delayed macro agreement earned $0.0015/oz at base cost and lost $0.3178/oz at doubled cost. FOMC earned $63.35 across 47 base-case trades and failed its uncertainty, sample size and control gates. |
+| Strategy selection | The training winner ranked in the bottom half on complementary dates in 144 of 252 splits of a frozen 16-strategy panel. |
+| Risk and reporting | On the September sample, closed-balance drawdown was $90.31 and sampled net-liquidation drawdown was $119.50. The report now uses calendar CAGR for Calmar, unrounded cash for PF and the full lower partial second moment for Sortino. Undefined ratios carry a status. |
+| Real historical quotes | A second venue's archive supplied 8,991 ticks in a fixed pre-holdout hour. Both minute-engine test orders reached the same stops as the ordered quotes. Minute-based drawdowns of $3.616 and $2.332 compared with $5.042 and $2.876 on quotes. |
+| Account engineering | The strict July–October replay stopped on the first incomplete M1 block while exposed. A separate Exness-hours sensitivity processed the 13 observed minutes, advanced through the scheduled closure and passed the $5,000 evaluation on July 23. The calendar-only funded replay closed 12 trades for −$193.52 before an August 18 open-session gap. |
+| Operations | Account-bound state now refuses corrupt or mismatched history and failed writes. Existing installations require reviewed state migration. Local rollback preparation and offline integrity checks succeeded. The intended Atlas account, terminal contract and prospective fills are unavailable. |
+
+The first flat-window continuation undercounted missing minutes across a multi-block gap. Its September 13 funded endpoint is superseded. It contributes no accepted funded P&L or payout evidence.
+
+The corrected continuation required a source M15 aggregate for every missing minute. The funded record ends September 7 at 22:01 UTC when that proof fails. On the supported path the fresh $5,000 funded account had six wins in 19 closes, PF 0.681, net −$174.33, an ending balance of $4,825.67 and maximum sampled drawdown of $220.95. The first payout window opened August 20. No eligible $100 request or settlement occurred. Later trading and survival are indeterminate. The simulated evaluation gain of $184.75 stayed in the evaluation account. [Accepted result and traces](../research/results/access_flat_clock_2026-11-18/summary.json)
+
+Detailed evidence is in the [strategy validation report](../research/STRATEGY_VALIDATION_REPORT.md), [Access lifecycle study](../research/results/access_lifecycle_2026-11-18/REPORT.md), [quote-path check](../research/registry/RESULT_ExnessTickFixture_2026-11-18.md), [reporting arithmetic audit](REPORTING_MATH_AUDIT.md) and [state recovery instructions](ATLAS_STATE_RECOVERY.md). Strategy thresholds, live lot sizes and production session settings were preserved. The November holdout has not been used in these experiments.
+
+### What would change the decision
+
+Recover a dated, instrument-specific holiday notice or matching broker quote archive around September 7. Exness lists that date as US Labor Day. A holiday label alone does not establish the gold trading interval, and the frozen run ends at its first unsupported transition. A new account study would also require the signed program profile, actual activation charge and verified instrument costs. For strategy promotion, the outstanding evidence is positive after-cost expectancy on an independent sample, with drawdown and withdrawal conditions measured along the same path. [Exness holiday calendar](https://get.exness.help/hc/en-us/articles/17923046759836-Holiday-trading-hours)
+
+The initial checkpoint below records earlier test counts, unresolved questions and input hashes at that revision. Later engineering and research evidence above supersedes it.
+
+### Verification at the corrected result
+
+The accepted path and the superseded run are preserved in commit `b2c78c8`. A fresh Windows Python 3.11.9 environment installed from `requirements.txt` passed `pip check`. With the local research inputs available, `python -m pytest -m "not live"` passed 824 tests in 22.09 seconds. Compilation of src, scripts and tests passed. The terminal preflight detected local package availability only. The strict provenance check still exits 1 with 24 verified, three weak and 12 failed records. Legacy omissions prevent historical qualification. These test and provenance results apply to distinct checks. [Verification record](../research/results/finalization_2026-11-18/verification_current.json)
+
+## Earlier checkpoint
 
 Substantial research and engineering execution completed; **no independently qualified profitable strategy selected**. Demo deployment not performed. Real-money readiness not established. Production strategy, risk settings and account configuration unchanged. November1 onward holdout outcomes unused. No terminal/broker orders, notifications, purchases, remote restarts or push to GitHub.
 

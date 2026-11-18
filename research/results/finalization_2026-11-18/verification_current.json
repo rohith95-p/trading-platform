@@ -1,0 +1,20 @@
+{
+  "source_revision": "b2c78c8c763a85005ced54f720152450885ca622",
+  "local_clean_env": "Windows Python 3.11.9 with requirements.txt",
+  "pip_check": "No broken requirements found",
+  "working_tree_nonlive_tests": "824 passed in 22.09s",
+  "compileall": "src scripts tests passed",
+  "preflight": "PRESENCE_ONLY_NOT_CONNECTED",
+  "clean_checkout_63b858c": {
+    "passed": 687,
+    "skipped": 3
+  },
+  "provenance_summary": "Provenance summary: 24 verified, 3 weak, 12 failed.",
+  "strict_provenance_exit_code": 1,
+  "qualified_strategies": 0,
+  "broker_orders_sent": 0,
+  "demo_deployed": false,
+  "actual_cash_received": 0,
+  "holdout_used": false,
+  "corrected_result": "../access_flat_clock_2026-11-18/REPORT.md"
+}

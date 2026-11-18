@@ -1,0 +1,63 @@
+study/result                                     prereg commit  result commit  order
+RESULT_AbnormalFade_2026-10-18.md                be2d28c62c5a   761b43fe40ca   VERIFIED (prereg ancestor)
+RESULT_AccessFlatClock_2026-11-18.md             07117855f394   b2c78c8c763a   VERIFIED (prereg ancestor)
+RESULT_AccessLifecycle_2026-11-18.md             da8e5a474ce7   54268e8c8869   VERIFIED (prereg ancestor)
+RESULT_AccessProviderCalendar_2026-11-18.md      465ae18c627d   2d1b8b1bc4da   VERIFIED (prereg ancestor)
+RESULT_AsianRangeLondon_2026-10-18.md            a023252304e3   ffc2d2ea143a   VERIFIED (prereg ancestor)
+RESULT_BiasAudit_2026-11-09.md                   cb5124b600a1   7eab2397aad9   VERIFIED (prereg ancestor)
+RESULT_ChandelierZLSMA_2026-11-11.md             -              -              FAIL (not committed)
+RESULT_DelayedMacroAgreement_2026-11-18.md       2a7d84787829   f83e82c51726   VERIFIED (prereg ancestor)
+RESULT_DxyYieldConfirm_2026-10-18.md             2ae645053ca7   c740d9a3f951   VERIFIED (prereg ancestor)
+RESULT_EighteenYearHoldout_2026-11-07.md         499e306bd09f   034caebdfb1f   VERIFIED (prereg ancestor)
+RESULT_EntrySearch_2026-11-07.md                 29e8524d9f05   a7c412cb33a7   VERIFIED (prereg ancestor)
+RESULT_EventStudy_2026-10-18.md                  30f29a981b42   181cd6c3fd57   VERIFIED (prereg ancestor)
+RESULT_ExnessTickFixture_2026-11-18.md           7f4e22755ee9   94e378ed49ee   VERIFIED (prereg ancestor)
+RESULT_ForecastFillCore_2026-11-11.md            -              -              FAIL (not committed)
+RESULT_GoldClockWindows_2026-11-11.md            -              -              FAIL (not committed)
+RESULT_MetricSuite_2026-11-09.md                 MISSING        -              FAIL
+RESULT_MonthlyStrategySelection_2026-11-11.md    -              -              FAIL (not committed)
+RESULT_PathRisk_2026-11-18.md                    f503601843d8   a09943b0f266   VERIFIED (prereg ancestor)
+RESULT_PostBLSReaction_2026-11-11.md             -              -              FAIL (not committed)
+RESULT_PriorDayBreakout_2026-11-11.md            -              -              FAIL (not committed)
+RESULT_PublicGoldScalperFeasibility_2026-11-11.md MISSING        -              FAIL
+RESULT_PublicSweep_2026-11-11.md                 -              -              FAIL (not committed)
+RESULT_RegimeTrend_2026-10-18.md                 d570fc461f2b   c8f73807fc67   VERIFIED (prereg ancestor)
+RESULT_ReportingMath_2026-11-18.md               f83e82c51726   d8009ededd03   VERIFIED (prereg ancestor)
+RESULT_SampledEquity_2026-11-18.md               893c8bbfe51e   45f81780c367   VERIFIED (prereg ancestor)
+RESULT_SelectionPBO_2026-11-18.md                5f76b3638d97   a09943b0f266   VERIFIED (prereg ancestor)
+RESULT_SessionTiming_2026-10-19.md               29e8b9b7f405   27f6902e2534   VERIFIED (prereg ancestor)
+RESULT_SignalOrCost_2026-11-07.md                21ff87609907   0c557fff32f5   VERIFIED (prereg ancestor)
+RESULT_StopRobustness_2026-11-01.md              e875e1121694   e875e1121694   WEAK (same commit; order unproven)
+RESULT_StrategyStops_2026-10-31.md               e61688e9657b   e61688e9657b   WEAK (same commit; order unproven)
+RESULT_StructureStops_2026-10-31.md              f8d4108d6ba6   f8d4108d6ba6   WEAK (same commit; order unproven)
+RESULT_ThreeIndicators_2026-10-19.md             2703b1bae568   e68b4e08962e   VERIFIED (prereg ancestor)
+RESULT_TickReconciliation_2026-11-18.md          69fc3534b19d   69341eb2555f   VERIFIED (prereg ancestor)
+RESULT_TurtleMinuteAudit_2026-11-11.md           -              -              FAIL (not committed)
+RESULT_TurtleS2_2026-11-11.md                    -              -              FAIL (not committed)
+RESULT_VWAPEMA_2026-11-11.md                     -              -              FAIL (not committed)
+RESULT_VolGovernor_2026-10-18.md                 6eb6200081a3   b0f1e067c7d0   VERIFIED (prereg ancestor)
+RESULT_VolTiming_2026-11-09.md                   dc338643882f   aa84c8527a96   VERIFIED (prereg ancestor)
+RESULT_VolumeSearch_2026-11-09.md                9477ada832c3   1ee9f4d983e9   VERIFIED (prereg ancestor)
+
+Pre-registered, not yet reported: EquityShockGold, ExecutionReality, FOMCShockPropagation, GLDCreations, GVZRangeSizing, Genesis, GoldCOT, GoldFuturesFlow, GoldIVPremium, LaggedMacroScreen, LegSubsets, LondonAuction, MarketAtlas, MinersResidual, MinuteChronology, MomentumPortfolio, PAXGFlow, PublicGoldORB, PublicRules, PublicSupertrend, QuoteSideReplication, USAsiaContinuation, USIntradayMomentum
+
+WEAK historical records; not verified pre-registration:
+  - RESULT_StopRobustness_2026-11-01.md: protocol and result first appear in the same commit
+  - RESULT_StrategyStops_2026-10-31.md: protocol and result first appear in the same commit
+  - RESULT_StructureStops_2026-10-31.md: protocol and result first appear in the same commit
+
+FAILURES:
+  - RESULT_ChandelierZLSMA_2026-11-11.md: pre-registration and result must both be committed
+  - RESULT_ForecastFillCore_2026-11-11.md: pre-registration and result must both be committed
+  - RESULT_GoldClockWindows_2026-11-11.md: pre-registration and result must both be committed
+  - RESULT_MetricSuite_2026-11-09.md: no matching PREREG_MetricSuite_*.md or PROTOCOL_MetricSuite_*.md
+  - RESULT_MonthlyStrategySelection_2026-11-11.md: pre-registration and result must both be committed
+  - RESULT_PostBLSReaction_2026-11-11.md: pre-registration and result must both be committed
+  - RESULT_PriorDayBreakout_2026-11-11.md: pre-registration and result must both be committed
+  - RESULT_PublicGoldScalperFeasibility_2026-11-11.md: no matching PREREG_PublicGoldScalperFeasibility_*.md or PROTOCOL_PublicGoldScalperFeasibility_*.md
+  - RESULT_PublicSweep_2026-11-11.md: pre-registration and result must both be committed
+  - RESULT_TurtleMinuteAudit_2026-11-11.md: pre-registration and result must both be committed
+  - RESULT_TurtleS2_2026-11-11.md: pre-registration and result must both be committed
+  - RESULT_VWAPEMA_2026-11-11.md: pre-registration and result must both be committed
+
+Provenance summary: 24 verified, 3 weak, 12 failed.

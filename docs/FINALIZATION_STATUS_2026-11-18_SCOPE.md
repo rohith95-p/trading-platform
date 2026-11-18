@@ -1,5 +1,7 @@
 # Finalization scope and evidence map — 2026-11-18
 
+This is the initial scope audit. Follow-up work completed the native archive quote fixture, conditional path/PACF/MI diagnostics, finite-panel CSCV, independent quote-side reversal, FOMC experiment, clean-install test and sampled evaluation/funded replay. See [current results and remaining evidence](FINALIZATION_STATUS.md).
+
 The mission is active work, not a declaration of complete profitability or deployment. This bounded execution produced market studies, engine corrections, rule accounting and validation evidence. Remaining requirements must not be represented as finished.
 
 | Stage | Evidence produced | Remaining qualification |

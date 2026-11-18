@@ -24,10 +24,20 @@ def main():
         paths.add(ROOT / name)
     for p in (ROOT / "research").glob("*.md"):
         paths.add(p)
-    for p in (ROOT / "research/registry").glob("PREREG_*_2026-11-18.md"):
-        paths.add(p)
-    for name in ("market_atlas.json", "data_inventory.json", "literature.json", "economic_hurdle.json", "verification.json"):
+    for kind in ("PREREG", "RESULT"):
+        paths.update((ROOT / "research/registry").glob(f"{kind}_*_2026-11-18.md"))
+    for name in ("market_atlas.json", "data_inventory.json", "literature.json", "economic_hurdle.json",
+                 "verification.json", "verification_current.json", "path_risk.json", "selection_pbo.json", "delayed_macro_agreement.json",
+                 "quote_side_replication.json", "fomc_shock_propagation.json", "fomc_shock_independent_audit.json"):
         path = OUT / name
+        if path.exists():
+            paths.add(path)
+    for name in ("sampled_equity_2026-11-18/benchmark.json", "access_lifecycle_2026-11-18/summary.json",
+                 "access_lifecycle_2026-11-18/REPORT.md", "access_provider_calendar_2026-11-18/REPORT.md",
+                 "access_provider_calendar_2026-11-18/summary.json", "access_flat_clock_2026-11-18/summary.json",
+                 "access_flat_clock_2026-11-18/REPORT.md", "requested_periods_2026-11-11/REPORT.md",
+                 "project_review_2026-11-11/DEPLOYMENT_AND_EDGE_PLAN.md", "exness_tick_fixture_2026-11-18/comparison.json"):
+        path = ROOT / "research/results" / name
         if path.exists():
             paths.add(path)
     files = {p.relative_to(ROOT).as_posix():p.read_bytes() for p in sorted(paths)}
