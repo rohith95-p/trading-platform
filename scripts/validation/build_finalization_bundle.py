@@ -26,6 +26,7 @@ def main():
         paths.add(p)
     for kind in ("PREREG", "RESULT"):
         paths.update((ROOT / "research/registry").glob(f"{kind}_*_2026-11-18.md"))
+    paths.add(ROOT / "research/registry/access_flat_clock_source_lock_20261118.json")
     for name in ("market_atlas.json", "data_inventory.json", "literature.json", "economic_hurdle.json",
                  "verification.json", "verification_current.json", "path_risk.json", "selection_pbo.json", "delayed_macro_agreement.json",
                  "quote_side_replication.json", "fomc_shock_propagation.json", "fomc_shock_independent_audit.json"):
