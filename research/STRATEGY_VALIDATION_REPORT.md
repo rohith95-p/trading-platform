@@ -4,6 +4,14 @@
 
 **No previously researched strategy currently has sufficient evidence for promotion to a profitable live system.** Some historical samples are positive. Engineering checks and PF arithmetic do not establish future positive expectancy. This report assesses the recovered evidence; newly completed finalization experiments must be appended with their actual protocol and artifacts before changing the decision.
 
+## Latest validation results
+
+The FOMC experiment produced a positive base case in both eras, with a pooled 95% interval on mean cash per trade of −$2.43 to +$5.09. Independent reconstruction verified all 654 scenario trade records, including controls and repeated scenarios. Only 47 distinct base candidate trades entered the main comparison. Neither the FOMC candidate nor either additional quote-side or delayed macro experiment qualified. See [strategy decisions and evidence](ORIGINAL_STRATEGY_RESEARCH.md).
+
+In a separate test on the 16 recovered strategy return series, the training winner ranked in the lower half on complementary dates in 144 of 252 splits. This measures selection risk within that particular research panel. [Frozen-panel CSCV study](registry/RESULT_SelectionPBO_2026-11-18.md)
+
+For the September four-leg benchmark, measuring net liquidation equity at sampled minute boundaries raised observed maximum drawdown from $90.31 on closed balance to $119.50. Peak-to-trough movements between samples remain unknown. [Engine replay and audit](results/sampled_equity_2026-11-18/benchmark.json)
+
 ## Evidence hierarchy
 
 1. Observed broker-demo deals and reproducible signal/fill reconciliation: operational evidence, currently incomplete.

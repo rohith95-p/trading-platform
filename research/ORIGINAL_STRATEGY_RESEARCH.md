@@ -31,3 +31,11 @@ Recovered portfolio, Genesis, public-rule and macro studies are catalogued in PR
 3. Spot–futures price discovery only after synchronized executable futures/spot observations exist. Free bars and quote-volume proxies do not establish aggressor flow or cross-market tradeability.
 
 No new costly data subscription or provider account was purchased. No order-book architecture was added. These research gates are recorded so the next session can distinguish a justified experiment from another arbitrary search.
+
+## Completed follow-up experiments
+
+| Mechanism | Observation | Decision |
+| --- | --- | --- |
+| Reversal after an extreme signed return on separate Dukascopy bid/ask quotes | 2025 next-quote mean losses of $0.677/oz on M1 and $0.665/oz on M15. All 18 friction cases lost money. | Reject both horizons. [Replication](QUOTE_SIDE_REPLICATION.md) |
+| Delayed dollar and yield agreement during New York hours | Net average $0.0015/oz over 2,755 sessions, with a loss in the middle era. The 95% interval for advantage over buying the same dates crosses zero. | Failed before strategy construction. [Registered result](registry/RESULT_DelayedMacroAgreement_2026-11-18.md) |
+| Propagation of the first half-hour gold move after a scheduled FOMC statement | The engine recorded 32 and 15 base-case trades in the two eras. Both samples gained, but removing the later era's best trade reverses its sign. | Reject promotion. Sample size, matched controls and uncertainty failed the frozen criteria. [All 24 comparisons](FOMC_SHOCK_PROPAGATION.md) |
