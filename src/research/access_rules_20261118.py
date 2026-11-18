@@ -32,6 +32,7 @@ class AccessRuleProfile:
         "https://help.atlasfunded.com/consistency",
         "https://help.atlasfunded.com/atlas-protector",
         "https://help.atlasfunded.com/payout-eligibility",
+        "https://help.atlasfunded.com/request-a-payout",
     )
     evaluation_target: Decimal = Decimal("0.03")
     evaluation_trailing: Decimal = Decimal("0.10")
@@ -134,6 +135,8 @@ class ExperimentalAccessLedger:
             reset = amount(midnight_equity)
             if reset <= 0:
                 raise ValueError("midnight equity must be positive")
+            if self.pending is not None and reset != self.balance:
+                raise ValueError("pending payout pauses this flat account")
             self.daily_floor = reset * (1 - self.daily_rate)
             self.utc_day = day
             self._mark_equity(reset)
@@ -141,6 +144,8 @@ class ExperimentalAccessLedger:
 
     def observe(self, ts, equity, *, midnight_equity=None):
         value = amount(equity)
+        if self.pending is not None and value != self.balance:
+            raise ValueError("pending payout pauses this flat account")
         self._advance(ts, midnight_equity)
         self._mark_equity(value)
         return self.status
@@ -171,6 +176,8 @@ class ExperimentalAccessLedger:
         breached account and never assumes that closing a leg makes it flat.
         """
         value = amount(net_profit)
+        if self.pending is not None:
+            raise ValueError("pending payout pauses trading")
         self._advance(ts, midnight_equity)
         self.balance += value
         self.cycle_profit += value
@@ -190,6 +197,7 @@ class ExperimentalAccessLedger:
 
     def eligibility(self, ts, *, kyc_verified: bool | None, open_positions: int,
                     midnight_equity=None):
+        self._check_positions(open_positions)
         self._advance(ts, midnight_equity)
         reasons = []
         qualified = sum(p >= self.initial_balance * PROFILE.qualifying_day
@@ -203,7 +211,6 @@ class ExperimentalAccessLedger:
             reasons.append("pending_payout")
         if kyc_verified is not True:
             reasons.append("kyc_unverified")
-        self._check_positions(open_positions)
         if open_positions:
             reasons.append("open_positions")
         if ts < self.next_payout_at:

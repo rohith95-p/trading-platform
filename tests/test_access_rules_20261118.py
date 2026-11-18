@@ -248,3 +248,18 @@ def test_profit_request_cannot_withdraw_principal():
     ledger = ready()
     with pytest.raises(ValueError, match="exceeds"):
         ledger.request_payout(MONDAY + 28 * DAY, target_cash=1000, kyc_verified=True, open_positions=0)
+
+
+def test_pending_flat_account_cannot_collect_trades_during_review():
+    ledger = ready()
+    ts = MONDAY + 28 * DAY
+    ledger.request_payout(ts, kyc_verified=True, open_positions=0)
+    with pytest.raises(ValueError, match="pauses"):
+        ledger.record_closed_profit(ts + 1, 30)
+    with pytest.raises(ValueError, match="pauses"):
+        ledger.observe(ts + 1, ledger.balance - 20)
+    assert ledger.last_at == ts
+    ledger.observe(ts + DAY, ledger.balance, midnight_equity=ledger.balance)
+    ledger.settle_payout(ts + DAY, approved=False, open_positions=0)
+    ledger.record_closed_profit(ts + DAY + 1, 30)
+    assert ledger.balance == D("5155")
