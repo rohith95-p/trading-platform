@@ -3,7 +3,9 @@
 Scope: synthetic regression tests of the existing BacktestEngine, not a strategy search.
 No production settings, live orders, broker connections, or November holdout data.
 
-Before implementation, fix the following acceptance criteria:
+Acceptance criteria fixed before running synthetic tests (the first draft of
+engine edits existed uncommitted when this protocol was committed; therefore
+this is not represented as a pre-implementation Git commitment):
 
 1. M1 OHLC must not manufacture a subminute executable quote. Nonzero delay
    requests fail closed unless explicitly marked legacy reproduction. The legacy
