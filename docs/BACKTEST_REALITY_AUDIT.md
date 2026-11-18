@@ -29,6 +29,7 @@ These are synthetic implementation checks, not strategy selection experiments.
 | Cross-experiment geometry leakage | `_make_risk_manager` overwrote module TP/trailing constants | Production method code bound to per-manager globals; module constants unchanged | Construct custom then default managers; execute both stop formulas and recheck the custom manager |
 | Auditor stale fill assumptions | Excluded entry minute and assumed stop-level fills | Independent helper honors recorded entry-minute, gap and ambiguity policies; exporter records config/cost/spec | Archived-versus-new entry indices, long/short gaps, both-touch, configured triple swap |
 | Same-minute future account state | Later range exits released cash and slots before entries at the earlier minute open | Default `causal_minute_order=True`: only opening-quote events precede entry gates; full minute range runs afterward, including scan-skip branches | Both gate paths preserve occupied slot until later exit; future cash/floating values excluded; genuine opening gaps settle first; entry range walked once; protection survives downtime/spread/cadence skips |
+| Balance-only drawdown evidence | Equity output contained only realized balance | Separate opt-in open/end samples expose gross floating and assumed net-liquidation equity and sampled drawdowns | Synthetic side/spread/fee/swap/recovery/invariance tests and fixed real-cache replay with independent quote/cash/mark/DD reconciliation |
 | Delayed daily realized loss | Daily totals refreshed only after M15 block | `_close` immediately updates the IST exit-date total used by next scan | Later signal in same M15 blocks after loss; IST-midnight date boundary checked |
 | Equity evidence classification | Balance path could be mislabeled floating equity | Diagnostics declare `equity_kind="closed_balance"`, `floating_drawdown_verified=False` | Exported result evidence flags checked |
 
@@ -72,11 +73,14 @@ scheduled closure from missing observations. No interpolation or padding is used
    minute-level holding periods and financing at boundaries need interval-aware
    treatment. Recorded MAE/MFE include the entire exit minute, potentially moves
    after the true exit. They are bar-range bounds, not exact realized excursions.
-4. **Floating drawdown.** `BacktestResult.equity` is appended on realized closes
-   as balance. It is not a continuously sampled mark-to-market equity series.
-   Closed-balance DD cannot certify prop-firm equity floors or pathwise ruin.
-   Diagnostics now explicitly classify this curve as `closed_balance` and set
-   `floating_drawdown_verified=False`; consumers must not promote it to MTM DD.
+4. **Floating drawdown.** `BacktestResult.equity` remains realized closed balance.
+   `record_equity_samples=True` now emits a separate `equity_samples` record at
+   open, post-order open and interval end. It includes gross floating equity and
+   modeled net-liquidation equity after accrued swap/pending commission reserves.
+   Sampled drawdowns are measured separately for each. These quotes miss any
+   intraminute adverse extremes and do not certify continuous broker equity
+   floors or pathwise ruin. `floating_drawdown_verified=False` remains explicit;
+   consumers must distinguish sampled marks from continuous tick equity.
 5. **Remaining shared module bindings.** TP/trailing geometry isolation is fixed.
    The engine still replaces risk-manager and strategy module MT5 references with
    its offline stub. Run research in a dedicated process; do not run a live
@@ -132,7 +136,9 @@ scheduled closure from missing observations. No interpolation or padding is used
 .\venv\Scripts\python.exe -m pytest tests/test_execution_reality.py tests/test_execution_audit_helpers.py tests/test_bias_audit_knobs.py tests/test_engine_live_parity.py tests/test_execution_delay.py -q
 ```
 
-**82 passed** on 2026-11-18. The chronology extension and follow-up daily-loss/
+The original correction set passed **82 tests**; with sampled-equity checks,
+the same command plus `tests/test_sampled_equity.py` passed **87 focused tests**
+on 2026-11-18. The chronology extension and follow-up daily-loss/
 equity-evidence criteria were committed before their
 implementation/tests in `PREREG_MinuteChronology_2026-11-18.md`. Synthetic tests establish these contracts only.
 They provide no profit factor, execution accuracy percentage or account pass
@@ -140,7 +146,7 @@ probability. Broader regression suite remains the parent finalization task's job
 
 ## Required next validation
 
-First complete full-equity recording and quote-level state reconciliation. Extend auditor
+First complete intended-broker quote-level state reconciliation. Extend auditor
 compatibility for dynamic management. Re-run a fixed committed candidate with its exact input hashes and
 record all changed trades and costs against the old engine. Then acquire intended
 broker demo quote/deal logs, estimate conditional fill costs and implement an
@@ -150,3 +156,20 @@ candidate rules and all acceptance criteria are fixed.
 
 Current release classification: **offline research only; no execution-certified
 strategy and no new deployment approval**.
+
+## Frozen real-cache verification, sampled equity extension
+
+The precommitted `PREREG_SampledEquity_2026-11-18.md` fixed an unchanged original
+four-leg replay on Sep 1–15, 2026, $5,000 / 0.02 lots and existing ECN costs.
+Actual result: **5 trades, +$0.858, PF 1.007196**; closed-balance DD **$90.306**
+versus sampled gross/net equity DD **$119.50** (approximately **2.3648%**).
+All **40,366 samples** reconciled independently against raw cached M1 quotes,
+trade positions, cash, fees and drawdown, with **0 errors**; all five trade
+arithmetic checks also passed. Source files were unchanged during the run.
+
+Coverage excluded 13 partial M15 candles containing 27 missing M1 observations;
+no position was open across those skipped candles (`exits_unchecked_no_m1=0`).
+The short previously explored benchmark is engineering evidence only. It is not
+a new edge, holdout evaluation, Atlas pass/payout simulation or broker fill audit.
+See `research/registry/RESULT_SampledEquity_2026-11-18.md` and full machine-readable
+records under `research/results/sampled_equity_2026-11-18/`.

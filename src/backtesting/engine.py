@@ -360,6 +360,9 @@ class EngineConfig:
     walk_entry_bar_m1: bool = True
     # Open-quote decisions precede later range events; False reproduces old runs.
     causal_minute_order: bool = True
+    # Opt-in: detailed open/end marks can be large on multi-decade replays.
+    # Closed balance remains a separate legacy output; no tick path is inferred.
+    record_equity_samples: bool = False
 
     warmup_bars: int = 260
     min_tradeable_balance: float = 5.0
@@ -580,6 +583,7 @@ class BacktestResult:
     config: Dict[str, Any]
     data_hash: str
     diagnostics: Dict[str, Any] = field(default_factory=dict)
+    equity_samples: List[Dict[str, Any]] = field(default_factory=list)
 
 
 # ---------------------------------------------------------------------------
@@ -614,10 +618,16 @@ class BacktestEngine:
         self.positions: List[Position] = []
         self.trades: List[Trade] = []
         self.equity: List[Tuple[int, float]] = []
+        self.equity_samples: List[Dict[str, Any]] = []
+        self._sample_peaks = {"gross_equity": self.balance, "net_liquidation_equity": self.balance}
+        self._sample_drawdowns = {key: {"maximum_usd": 0.0, "maximum_pct": 0.0}
+                                  for key in self._sample_peaks}
         self.realized_daily_pl: Dict[Any, float] = {}
         self.diag: Dict[str, Any] = {
             "equity_kind": "closed_balance",
             "floating_drawdown_verified": False,
+            "sampled_equity_available": config.record_equity_samples,
+            "sampled_equity_kind": "opening_and_interval_end_marks_not_continuous_ticks",
             "signals_generated": 0,
             "signals_deduped": 0,
             "entries_blocked_caps": 0,
@@ -655,6 +665,8 @@ class BacktestEngine:
         if config.entry_delay_sec and config.causal_minute_order:
             raise ValueError("Legacy interpolated delay also requires causal_minute_order=False; "
                              "it cannot run under causal execution semantics.")
+        if config.record_equity_samples and not config.causal_minute_order:
+            raise ValueError("Sampled equity evidence requires causal_minute_order=True")
         self.diag["noncausal_legacy_entry_interpolation"] = bool(config.entry_delay_sec)
         self.diag["legacy_minute_chronology"] = not config.causal_minute_order
         self.rr_state = _rr.RiskState()
@@ -772,6 +784,50 @@ class BacktestEngine:
             * self._value_per_price(p.lots)
             for p in self.positions
         )
+
+    def _sample_equity(self, ts: int, bid: float, spread_pts: Optional[float], phase: str) -> None:
+        """Record model marks without changing price state, cash or decisions.
+
+        Gross equity is cash + marked open P&L. Net liquidation also reserves the
+        configured full round-trip commission and accrues configured swap. The
+        latter is an estimated liquidation value, not a broker balance statement.
+        Neither path observes intraminute extrema between sampled quotes.
+        """
+        if not self.cfg.record_equity_samples:
+            return
+        ask = self.cost.ask(bid, self.spec.point, spread_pts)
+        floating, swap, reserve = 0.0, 0.0, 0.0
+        positions = []
+        for pos in self.positions:
+            mark = bid if pos.is_buy else ask
+            pnl = (mark - pos.entry_price) * (1.0 if pos.is_buy else -1.0) * self._value_per_price(pos.lots)
+            accrued = self.cost.swap(pos.lots, pos.is_buy, pos.entry_time, ts,
+                                     self.spec.point, self.spec.value_per_price_unit_per_lot)
+            commission = self.cost.commission(pos.lots)
+            floating += pnl
+            swap += accrued
+            reserve += commission
+            positions.append({"ticket": pos.ticket, "is_buy": pos.is_buy, "lots": pos.lots,
+                              "entry_time": pos.entry_time, "entry_price": pos.entry_price,
+                              "mark_price": mark, "floating_pl": pnl,
+                              "accrued_swap": accrued, "pending_commission": commission})
+        gross = self.balance + floating
+        net = gross + swap - reserve
+        record = {"time": int(ts), "phase": phase, "bid": bid, "ask": ask,
+                  "balance": self.balance, "floating_pl": floating,
+                  "accrued_swap": swap, "pending_commission": reserve,
+                  "gross_equity": gross, "net_liquidation_equity": net,
+                  "positions": positions}
+        self.equity_samples.append(record)
+        for key in self._sample_peaks:
+            self._sample_peaks[key] = max(self._sample_peaks[key], record[key])
+            peak = self._sample_peaks[key]
+            drawdown = max(0.0, peak - record[key])
+            self._sample_drawdowns[key]["maximum_usd"] = max(
+                self._sample_drawdowns[key]["maximum_usd"], drawdown)
+            if peak > 0:
+                self._sample_drawdowns[key]["maximum_pct"] = max(
+                    self._sample_drawdowns[key]["maximum_pct"], drawdown / peak * 100.0)
 
     def free_margin(self) -> float:
         """Equity minus locked margin. Equity includes floating P&L, as MT5 does."""
@@ -1402,6 +1458,7 @@ class BacktestEngine:
                 current_ist = datetime.fromtimestamp(ts, tz=timezone.utc).astimezone(IST)
 
                 path_bar = bar
+                self._sample_equity(ts, float(path_bar["open"]), spread_pts, "open")
                 if cfg.causal_minute_order:
                     # Only the opening quote is known to this scan. Never let a
                     # later stop/target or minute close finance an earlier order.
@@ -1608,6 +1665,7 @@ class BacktestEngine:
                     self._manage(rm, m15_view, bar, point, spread_pts)
                 finally:
                     if cfg.causal_minute_order:
+                        self._sample_equity(ts, float(path_bar["open"]), spread_pts, "open_after_orders")
                         # Broker protection runs after open-time decisions even
                         # when a scan gate takes an early continue above.
                         for pos in list(self.positions):
@@ -1628,6 +1686,8 @@ class BacktestEngine:
                                 pos.minutes_to_mfe = pos.minutes_open
                             if hit is not None:
                                 self._close(pos, hit[0], ts, hit[1])
+                        self._sample_equity(ts + (900 if coarse else 60),
+                                            float(path_bar["close"]), spread_pts, "interval_end")
                         if account_policy is not None and account_policy.observe(self, ts + (900 if coarse else 60)):
                             account_finished = True
 
@@ -1642,6 +1702,12 @@ class BacktestEngine:
                     price = self.cost.ask(price, point, spread)
                 self._close(pos, price, int(last["time"]), "END_OF_DATA")
 
+        if self.equity_samples and last_simulated is not None:
+            spread = float(last_simulated["spread"]) if "spread" in last_simulated.dtype.names else None
+            self._sample_equity(self.equity_samples[-1]["time"], float(last_simulated["close"]),
+                                spread, "final_settlement")
+            self.diag["sampled_drawdown"] = self._sample_drawdowns
+            self.diag["equity_sample_count"] = len(self.equity_samples)
         if cfg.record_decisions:
             self.diag["decisions"] = self.decisions
         if cfg.risk_rules_enforce:
@@ -1675,6 +1741,7 @@ class BacktestEngine:
             config=cfg.as_dict(),
             data_hash=self.bars.hash_key(),
             diagnostics=self.diag,
+            equity_samples=self.equity_samples,
         )
 
     # -- loop components -------------------------------------------------
