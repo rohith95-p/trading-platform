@@ -33,8 +33,10 @@ def iso(t):
 
 
 def timestamp_column(frame):
-    for col in ("time", "Date", "date", "scheduled_utc", "timestamp", "datetime"):
+    for col in ("time", "Date", "DATE", "date", "scheduled_utc", "timestamp", "datetime", "Unnamed: 0"):
         if col in frame:
+            if col == "Unnamed: 0" and not frame[col].astype(str).str.match(r"^\d{4}-\d{2}-\d{2}").all():
+                continue
             if pd.api.types.is_numeric_dtype(frame[col]):
                 return pd.to_datetime(frame[col], unit="s", utc=True, errors="coerce")
             return pd.to_datetime(frame[col], utc=True, errors="coerce", format="mixed")
@@ -52,7 +54,7 @@ def quality(frame, step=None):
                    first=str(stamp.min()), last=str(stamp.max()),
                    holdout_rows_excluded=int((stamp >= pd.Timestamp(HOLDOUT_FROM, unit="s", tz="UTC")).sum()))
         frame = frame.loc[stamp < pd.Timestamp(HOLDOUT_FROM, unit="s", tz="UTC")]
-        times = stamp.loc[frame.index].dropna().astype("int64").to_numpy() // 10**9
+        times = stamp.loc[frame.index].dt.as_unit("s").astype("int64").to_numpy()
         gaps = np.diff(times)
         if len(gaps):
             out["largest_elapsed_gap_seconds"] = int(gaps.max())
@@ -62,7 +64,12 @@ def quality(frame, step=None):
                 out.update(adjacent_gaps_gt_step=int(len(ix)), off_grid_timestamps=int((times % step != 0).sum()),
                            largest_gaps=[{"after": iso(times[i]), "before": iso(times[i+1]),
                                           "elapsed_seconds": int(gaps[i])} for i in top])
+    if stamp is None:
+        out["status"] = "No recognized time column; only schema and row count available"
+        return out
     out["analyzed_preholdout_rows"] = len(frame)
+    if frame.empty:
+        return out
     out["missing_values_preholdout"] = {str(k): int(v) for k, v in frame.isna().sum().items() if v}
     for prefix in ("", "bid_", "ask_"):
         cols = [prefix + x for x in ("open", "high", "low", "close")]

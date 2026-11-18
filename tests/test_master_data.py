@@ -4,6 +4,8 @@ These tests build tiny .npy caches in a temp directory and point
 `MASTER_SOURCES` at them, so nothing here touches the real 400 MB archive.
 """
 import datetime as dt
+import hashlib
+import json
 
 from types import SimpleNamespace
 
@@ -32,6 +34,25 @@ def make(times, close=1.0):
 def write(root, tf, arr):
     root.mkdir(parents=True, exist_ok=True)
     np.save(str(root / f"{master.SYMBOL}_{tf}.npy"), arr)
+    manifest = dict(sha256=hashlib.sha256(arr.view(np.uint8)).hexdigest(),
+                    symbol=master.SYMBOL, timeframe=tf, bars=len(arr))
+    (root / f"{master.SYMBOL}_{tf}.manifest.json").write_text(json.dumps(manifest))
+
+
+def test_source_checks_raw_bytes_before_timestamp_conversion(tmp_path):
+    arr = make([utc(2025, 1, 2)])
+    write(tmp_path, "M15", arr)
+    arr["close"] *= 2
+    np.save(tmp_path / f"{master.SYMBOL}_M15.npy", arr)
+    source = master.Source("archive", str(tmp_path), ("M15",), 0, utc(2030,1,1), clock="athens")
+    with pytest.raises(ValueError, match="manifest mismatch"):
+        master.read_source(source, "M15")
+
+
+def test_multiweek_outage_starting_friday_is_reported():
+    start = utc(2025, 9, 12, 20, 47)
+    end = utc(2025, 10, 15, 4, 59)
+    assert master.non_weekend_gaps(make([start,end]), "M1")[0]["seconds"] == end-start
 
 
 # ---------------------------------------------------------------------------

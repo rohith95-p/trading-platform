@@ -37,6 +37,8 @@ archive agrees with the broker.
 from __future__ import annotations
 
 import datetime as dt
+import hashlib
+import json
 import os
 from dataclasses import dataclass
 from typing import Any, Dict, List, Optional, Sequence, Tuple
@@ -146,6 +148,12 @@ def read_source(src: Source, timeframe: str) -> Optional[np.ndarray]:
     if not os.path.exists(stem + ".npy"):
         return None
     arr = np.asarray(np.load(stem + ".npy", mmap_mode="r"))
+    with open(stem + ".manifest.json", encoding="utf-8") as manifest_file:
+        manifest = json.load(manifest_file)
+    digest = hashlib.sha256(np.ascontiguousarray(arr).view(np.uint8)).hexdigest()
+    if (digest != manifest.get("sha256") or manifest.get("symbol") != SYMBOL
+            or manifest.get("timeframe") != timeframe or manifest.get("bars") != len(arr)):
+        raise ValueError(f"Source manifest mismatch for {src.name} {timeframe}: {stem}")
     if src.clock == "athens":
         arr = _athens_to_utc(arr)
     return arr
@@ -273,7 +281,7 @@ def non_weekend_gaps(arr: np.ndarray, timeframe: str) -> List[Dict[str, int]]:
     for i in np.nonzero(d > step)[0]:
         after = int(t[i])
         wd = dt.datetime.fromtimestamp(after, dt.timezone.utc).weekday()
-        if wd >= 4 and d[i] > 12 * 3600:          # Friday close into Sunday open
+        if wd == 4 and 36 * 3600 <= d[i] <= 84 * 3600:
             continue
         out.append(dict(after=after, missing_bars=int(d[i] // step) - 1, seconds=int(d[i])))
     return sorted(out, key=lambda g: -g["missing_bars"])

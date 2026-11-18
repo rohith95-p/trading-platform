@@ -39,6 +39,15 @@ def test_holdout_bad_prices_never_enter_quality_counts():
     assert report["analyzed_preholdout_rows"] == 1
 
 
+def test_elapsed_seconds_match_for_epoch_and_iso_dates():
+    for times in ({"time": [1609459200, 1609459260, 1609459440]},
+                  {"DATE": ["2021-01-01T00:00Z", "2021-01-01T00:01Z", "2021-01-01T00:04Z"]}):
+        report = quality(pd.DataFrame(times), 60)
+        assert report["largest_elapsed_gap_seconds"] == 180
+        assert report["adjacent_gaps_gt_step"] == 1
+        assert report["largest_gaps"][0]["after"].startswith("2021-01-01T00:01:00")
+
+
 def test_hourly_aggregation_refuses_missing_quarter():
     a = bars([0, 900, 1800, 2700, 3600, 4500, 6300], [100]*7)
     out = hour_from_m15(a)
