@@ -127,3 +127,26 @@ def test_cash_mismatch_fails_closed_instead_of_passing_account():
     with pytest.raises(IndeterminatePath, match="reconcile"):
         policy.observe(fake_engine(5200., ts=MONDAY+60), MONDAY+60)
     assert policy.status == "indeterminate"
+
+
+@pytest.mark.parametrize("phase,low,margin,reason", [
+    ("evaluation", 3840., 10., "daily_or_trailing"),
+    ("funded", 3950., 10., "protector"),
+    ("funded", 4000., 4500., "margin"),
+])
+def test_intraminute_rule_intervention_is_indeterminate_without_fake_closes(phase, low, margin, reason):
+    policy = LifecyclePolicy(phase, MONDAY)
+    engine = fake_engine(phase="interval_end", ts=MONDAY+60)
+    row = np.zeros(1, dtype=[("time", "i8"), ("low", "f8"), ("high", "f8"), ("spread", "i8")])
+    row["time"], row["low"], row["high"] = MONDAY, low, 4000.
+    engine.m1 = row
+    engine.margin_required = lambda *args: margin
+    engine.equity_samples.insert(0, {"time": MONDAY, "phase": "open_after_orders", "balance": 5000.,
+        "positions": [{"is_buy": True, "lots": .02, "entry_price": 4000., "accrued_swap": 0., "pending_commission": 0.}]})
+    with pytest.raises(IndeterminatePath, match=reason):
+        policy.observe(engine, MONDAY+60)
+    assert policy.ledger.balance == 5000
+    assert policy.ledger.status == "active"
+    assert policy.status == "indeterminate"
+    assert not policy.conditional_settlements
+    assert engine.trades == []
