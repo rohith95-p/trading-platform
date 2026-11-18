@@ -1,0 +1,11 @@
+{
+  "src/strategies/portfolio_atlas.py": "b57a0bff99b8e802de77b35ef9bdb952f7b9030e6dbca738482b45e1de1ea618",
+  "src/strategies/asian_range_filtered.py": "8e5e90d69ce6ae840fa6918b2a0e349425b7ded4e8f82603c7e8ecb7f4a9b047",
+  "src/strategies/asian_breakout.py": "a166d81b5181724315979d943ae8aa10645c514fd0f0b4d1f5b76e56e707d4da",
+  "src/strategies/london_momentum_tight.py": "d95739c9f658e1bd1de2f3f9ae98c53b1659cbf7d9969cbd3c775c33b2c87a36",
+  "src/strategies/ny_session_reversal.py": "c0e82b8b7446c7e5ea22e0d9ae04f056e3480643ec31e8f1985784180cc43da8",
+  "src/strategies/base_strategy.py": "c0f8ebceeb97b2375b5f385fc41aa960abd8145fd7131d496d59f6034d3b8e51",
+  "src/backtesting/engine.py": "4f52ab500a8ca352d8d501ed8887ddd547f472c42ffca77e8fdb222b08861151",
+  "scripts/validation/access_lifecycle_20261118.py": "da459fba87c8d3ac2e1a4f6412e89bb20537de8ec75dfe12d5d9d99e9d735c73",
+  "scripts/validation/access_provider_calendar_20261118.py": "e7d20ef8f33975a88e40dfc98d39c020ffb001deb55fd8e59f9429bfca742a0a"
+}
