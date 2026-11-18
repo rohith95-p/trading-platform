@@ -18,3 +18,7 @@ A signal can be proposed for a separately committed candidate preregistration on
 ## Deliverables
 
 scripts/research/market_atlas.py, machine-readable forensics/atlas results, research/DATA_FORENSICS_REPORT.md, research/GOLD_MARKET_ATLAS.md, research/MARKET_EDGE_DISCOVERY.md. Record defects and unsupported areas rather than replacing missing evidence with estimates.
+
+## Implementation clarification before second computation
+
+The first run computed all six resolutions but failed JSON serialization because empty H1/H4/D1 extreme groups produced NaN. Inspection found that requiring60 consecutive elapsed bars makes historical volatility undefined on hourly/daily series with routine market closures. Use the previous60 valid adjacent returns, across closures, without including a return across any gap. The current and next return must still be adjacent. This is a disclosed methodology correction after observing empty groups, not a new threshold or an independently untouched test. Empty summaries are null. Commit this amendment before rerunning.
