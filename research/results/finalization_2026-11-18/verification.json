@@ -1,11 +1,17 @@
 {
   "date": "2026-11-18",
   "pytest": {
-    "command": "venv/Scripts/python.exe -m pytest -m not_live (actual quoted marker: not live)",
     "passed": 634,
     "seconds": 28.39,
     "exit_code": 0,
-    "log": "pytest.log"
+    "log": "pytest.log",
+    "argv": [
+      "venv/Scripts/python.exe",
+      "-m",
+      "pytest",
+      "-m",
+      "not live"
+    ]
   },
   "provenance": {
     "exit_code": 1,
@@ -28,5 +34,6 @@
     "src/backtesting/engine.py": "7630f518473e9f44a8b6e84021f442d95e70a192d2af9196d97a68712febeb77",
     "src/research/access_rules_20261118.py": "f346bfa11079784940a12ebc77d6c495ebd1da07c720abd016ce3d52a8ae06cb",
     "scripts/validation/prereg_check.py": "e6a41c5fa7cff99be58afbc6667ad0691ef800ed95d4dc18e81ee5e987cb068c"
-  }
+  },
+  "market_results_commit": "0fcdbbd"
 }

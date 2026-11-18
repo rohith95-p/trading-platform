@@ -58,3 +58,9 @@ Preexisting modifications in full_metric_suite.py, data.py, metrics.py, report.p
 8. Only after a frozen candidate passes engineering and evidence gates, authorize one untouched confirmation and prospective demo reconciliation. The22November deadline does not substitute for an adequate forward sample.
 
 No background job is configured or promised. This checkpoint preserves completed work and explicit blockers for the next active session.
+
+## Packaged checkpoint
+
+Market/source/checkpoint commit: **0fcdbbd**. The local source review/demo-preparation ZIP was built and CRC plus per-file SHA256 verification passed for286 files. It is saved as `research/results/finalization_2026-11-18/finalization_demo_review.zip`; its generated `bundle_manifest.json` identifies the actual source revision and archive hash. Source is the explicitly hashed working tree, including preserved earlier pending code, not a claim of a clean immutable deployment release. No credentials, historical data, terminal binaries or installed dependencies are bundled. It does not enable no-order mode or start/deploy software. Prospective demo validation still requires the readiness steps and a dedicated verified account.
+
+The engineering/research execution is saved. The mission's profitability and deployment qualification remain **not achieved**; the missing evidence is listed above. No research process is left running or scheduled to continue after this checkpoint.
