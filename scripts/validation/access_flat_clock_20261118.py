@@ -60,7 +60,19 @@ def flat_inert_proof(engine, missing, *, block_start):
     days = {ts//86400 for ts in missing}
     if len(days) != 1 or any(not 16*3600+30*60 <= ts%86400 < 23*3600+45*60 for ts in missing):
         return None
-    # Retain broker-native aggregate information; never make a missing M15 bar.
+    # Every unexplained minute needs its own actual broker M15 aggregate.
+    # Checking only the destination bar would silently waive missing off-clock
+    # history that can affect later ATR/features; the frozen protocol forbids it.
+    aggregate_labels = sorted({block_start, *(minute//900*900 for minute in missing)})
+    for label in aggregate_labels:
+        candidate = int(np.searchsorted(engine._m15_t, label))
+        if candidate >= len(engine.m15) or int(engine._m15_t[candidate]) != label:
+            return None
+        aggregate = engine.m15[candidate]
+        values = [float(aggregate[name]) for name in ("open","high","low","close")]
+        if (not all(np.isfinite(value) and value > 0 for value in values)
+                or not values[2] <= min(values[0],values[3]) <= max(values[0],values[3]) <= values[1]):
+            return None
     index = int(np.searchsorted(engine._m15_t, block_start))
     if index <= 0 or index >= len(engine.m15) or int(engine._m15_t[index]) != block_start:
         return None
@@ -79,7 +91,7 @@ def flat_inert_proof(engine, missing, *, block_start):
             "block_start":int(block_start), "actual_signal_bar":signal_bar,
             "known_positions_before":0,"known_positions_now":0,
             "entry_impossibility":"frozen four hard signal clocks; no pending confirmations/pyramiding; reevaluation precedes entries",
-            "broker_M15_aggregate_retained":True,"no_prices_invented":True}
+            "broker_M15_aggregate_retained":True,"aggregate_labels_verified":aggregate_labels,"no_prices_invented":True}
 
 
 class FlatClockPolicy(CalendarPolicy):

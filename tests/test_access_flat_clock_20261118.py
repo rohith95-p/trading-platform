@@ -107,3 +107,12 @@ def test_fixed_source_lock_detects_unreviewed_changes(monkeypatch):
     with pytest.raises(ValueError,match='Frozen source changed'):
         flat.verify_source_lock()
 
+
+
+def test_missing_offclock_M15_and_M1_history_cannot_borrow_destination_aggregate():
+    engine=make_engine()
+    start,end=T0+18*3600+30*60,T0+22*3600
+    engine.m15=engine.m15[~((engine.m15['time']>=start)&(engine.m15['time']<end))]
+    engine._m15_t=engine.m15['time']
+    missing=[start]
+    assert flat.flat_inert_proof(engine,missing,block_start=end) is None
