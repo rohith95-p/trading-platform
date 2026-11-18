@@ -579,7 +579,10 @@ def test_entry_delay_fills_at_the_interpolated_price_inside_the_first_minute():
     # price rises 0.6 per minute -> 30s in is 0.3 above the minute's open
     bars = make_bars(price_fn=lambda t: 4000.0 + 0.6 * (t - T0) / 60.0 * 0.05)
     _, none = run(bars, [Fire(is_buy=False, candles=[C_NY])], live_exec_order=True)
-    _, late = run(bars, [Fire(is_buy=False, candles=[C_NY])], live_exec_order=True, entry_delay_sec=30)
+    _, late = run(bars, [Fire(is_buy=False, candles=[C_NY])], live_exec_order=True,
+                  entry_delay_sec=30, entry_delay_model="legacy_interpolated",
+                  walk_entry_bar_m1=False)
+    assert late.diagnostics["noncausal_legacy_entry_interpolation"] is True
     dp = late.trades[0].entry_price - none.trades[0].entry_price
     assert dp == pytest.approx(0.5 * 0.6 * 0.05, abs=1e-6)                # SELL fills on bid
     assert late.trades[0].entry_time - none.trades[0].entry_time == 30
@@ -642,7 +645,7 @@ def test_news_blackout_blocks_entries_when_flagged(monkeypatch, flat_bars):
 
 def test_live_parity_preset_runs_end_to_end(flat_bars):
     cfg = EngineConfig.live_parity_preset(symbol="XAUUSDm", starting_balance=150.0, record_decisions=True,
-                                          enable_d1_bias_gate=False)
+                                          enable_d1_bias_gate=False, entry_delay_sec=0)
     eng = BacktestEngine(bars=flat_bars, cost=SCENARIOS["observed"], config=cfg)
     res = eng.run([Fire(candles=[C_NY])], DAY, DAY + 86400 - 3600)
     assert len(res.trades) == 1

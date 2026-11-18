@@ -68,7 +68,7 @@ def job(name, a, b, protect=False):
 
     cfg = EngineConfig.live_parity_preset(sizing_mode="fixed", fixed_lots=0.02, starting_balance=5000.0,
                                           max_concurrent=3, max_same_direction=3, history_bars=7500,
-                                          protect_profit=protect, m1_policy="skip")
+                                          protect_profit=protect, m1_policy="skip", entry_delay_sec=0)
     eng = AtlasGuarded(bars=_B, cost=SCENARIOS["realistic_ecn"], config=cfg)
     res = eng.run([c() for c in PORTFOLIO], a, b)
     keep = ("ticket strategy is_buy lots entry_time exit_time entry_price exit_price sl tp initial_sl exit_reason "
@@ -76,7 +76,10 @@ def job(name, a, b, protect=False):
     tr = [{k: (v.item() if hasattr(v, "item") else v) for k, v in dataclasses.asdict(t).items() if k in keep}
           for t in res.trades]
     d = res.diagnostics
-    m1 = dict(bars_skipped_no_m1=d["bars_skipped_no_m1"],
+    m1 = dict(execution_config=res.config,
+              cost_model=dataclasses.asdict(SCENARIOS["realistic_ecn"]),
+              symbol_spec=dataclasses.asdict(_B.spec),
+              bars_skipped_no_m1=d["bars_skipped_no_m1"],
               exits_unchecked_no_m1=d["exits_unchecked_no_m1"],
               bars_without_m1=d["bars_without_m1"],
               partial_m1_candles=d["partial_m1_candles"],

@@ -1,25 +1,46 @@
 """Step 2 of the independent audit (run independent_audit_run.py first).
 
 Re-derive every engine trade from raw M1 bars (numpy only, no engine code)."""
-import sys, os, json
+import sys, os, json, argparse
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 import numpy as np
 from scripts.validation import independent_audit_run as ar
+from scripts.validation.execution_audit_helpers import first_replayed_minute, protective_fill, swap_charge
 
-OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "research", "results", "audit_2026-10-30")
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument("--run-dir", default=ar.OUT, help="Directory containing the exact trades.json to audit")
+args = parser.parse_args()
+OUT = os.path.abspath(args.run_dir)
+print("Auditing", os.path.join(OUT, "trades.json"))
 D = json.load(open(os.path.join(OUT, "trades.json")))
-B = ar.bars()
+all_trades = [t for run in D.values() for t in run["trades"]]
+B = ar.bars(min(t["entry_time"] for t in all_trades)-60,
+            max(t["exit_time"] for t in all_trades)+120)
 m1 = B.m1
 T, O, H, L, C = (m1[k].astype(np.int64 if k == "time" else float) for k in ("time", "open", "high", "low", "close"))
 SPR = np.where(m1["spread"] > 0, m1["spread"].astype(float), 260.0) * 0.001   # fallback = CostModel.fixed_spread_points
 POINT, VPP, SLIP, COMM, SWAP_LONG = 0.001, 100.0, 20 * 0.001, 3.50, -515.5
 
 out = {}
-for w in ("DEV", "TEST", "RECENT"):
+for w in (name for name in ("DEV", "TEST", "RECENT") if name in D):
+    metadata = D[w].get("m1", {})
+    config = D[w].get("config", metadata.get("execution_config", {}))
+    costs = D[w].get("cost_model", metadata.get("cost_model", {}))
+    spec = D[w].get("symbol_spec", metadata.get("symbol_spec", {}))
+    legacy_assumptions = not (config and costs and spec)
+    POINT = spec.get("point", 0.001)
+    VPP = spec.get("trade_tick_value", .1) / spec.get("trade_tick_size", .001)
+    SLIP = costs.get("slippage_points", 20.) * POINT
+    COMM = costs.get("commission_per_lot_roundtrip", 3.50)
+    recorded_spread = m1["spread"].astype(float)
+    fallback = costs.get("fixed_spread_points", 260.)
+    SPR = (np.where(np.isfinite(recorded_spread) & (recorded_spread > 0), recorded_spread, fallback)
+           if costs.get("spread_source", "bar") == "bar" else np.full(len(T), fallback))
+    SPR = SPR * POINT * costs.get("spread_multiplier", 1.)
     tr = D[w]["trades"]
     bad = {"pnl": 0, "comm": 0, "swap": 0, "exit_bar": 0, "exit_px": 0, "missed_hit": 0, "balance_chain": 0}
     gap_cost, gap_n, entry_bar_touch, amb, coarse = 0.0, 0, 0, 0, 0
-    bal = 5000.0
+    bal = config.get("starting_balance", 5000.0)
     examples = []
     for t in tr:
         d = 1.0 if t["is_buy"] else -1.0
@@ -28,13 +49,12 @@ for w in ("DEV", "TEST", "RECENT"):
         if abs(gross - t["gross_pl"]) > 1e-6: bad["pnl"] += 1
         if abs(t["commission"] - COMM * lots) > 1e-9: bad["comm"] += 1
         nights = (t["exit_time"] // 86400) - (t["entry_time"] // 86400)
-        sw = SWAP_LONG * POINT * VPP * lots * nights if t["is_buy"] else 0.0
+        sw = swap_charge(t, costs, POINT, VPP)
         if abs(sw - t["swap"]) > 1e-6: bad["swap"] += 1
         if abs(gross - COMM * lots + sw - t["net_pl"]) > 1e-6: bad["pnl"] += 1
         bal += t["net_pl"]
         if abs(bal - t["balance_after"]) > 1e-4: bad["balance_chain"] += 1
-        # first bar strictly after the entry minute
-        i0 = np.searchsorted(T, (t["entry_time"] // 60) * 60, side="right")
+        i0 = first_replayed_minute(T, t["entry_time"], config)
         ie = np.searchsorted(T, t["exit_time"], side="left")
         if (i0 >= len(T) or T[i0] - t["entry_time"] > 3 * 86400       # no M1 bars here: engine ran on M15 (coarse)
                 or (t["exit_reason"] in ("SL", "TP") and (ie >= len(T) or T[ie] != t["exit_time"]))):
@@ -48,7 +68,7 @@ for w in ("DEV", "TEST", "RECENT"):
         any_hit = sl_hit | tp_hit
         first = int(np.argmax(any_hit)) if any_hit.any() else None
         # entry minute itself (engine does not walk the rest of it): could it have touched a level?
-        j = i0 - 1
+        j = np.searchsorted(T, (t["entry_time"] // 60) * 60, side="left")
         if t["is_buy"]:
             if L[j] <= t["sl"] or H[j] >= t["tp"]: entry_bar_touch += 1
         elif H[j] + SPR[j] >= t["sl"] or L[j] + SPR[j] <= t["tp"]: entry_bar_touch += 1
@@ -58,8 +78,9 @@ for w in ("DEV", "TEST", "RECENT"):
                 bad["exit_bar"] += 1; examples.append(("exit_bar", t))
             k = i0 + first if first is not None else ie
             want = "SL" if (sl_hit[first] if first is not None else False) else "TP"
-            if sl_hit[first] and tp_hit[first]: amb += 1
-            exp_px = (t["sl"] - SLIP if t["is_buy"] else t["sl"] + SLIP) if want == "SL" else t["tp"]
+            if first is not None and sl_hit[first] and tp_hit[first]: amb += 1
+            exp_px, want = protective_fill({**t, "exit_reason": want}, O[k], SPR[k], SLIP,
+                                          config, both=bool(first is not None and sl_hit[first] and tp_hit[first]))
             if want != r or abs(exp_px - t["exit_price"]) > 1e-6:
                 bad["exit_px"] += 1; examples.append(("exit_px", t))
             if r == "SL":   # gap through the stop: real fill = bar open, engine = stop level
@@ -72,7 +93,8 @@ for w in ("DEV", "TEST", "RECENT"):
             if first is not None and T[i0 + first] < t["exit_time"]:
                 bad["missed_hit"] += 1; examples.append(("missed", t))
     pl = np.array([t["net_pl"] for t in tr])
-    out[w] = dict(n=len(tr), net=round(float(pl.sum()), 2), coarse_m15_trades_skipped=coarse, bad=bad, ambiguous_bars=amb,
+    out[w] = dict(n=len(tr), net=round(float(pl.sum()), 2), legacy_assumptions_unverified=legacy_assumptions,
+                  execution_config=config, coarse_m15_trades_skipped=coarse, bad=bad, ambiguous_bars=amb,
                   sl_gaps=gap_n, sl_gap_extra_cost=round(gap_cost, 2), entry_bar_touch=entry_bar_touch,
                   reasons={r: sum(1 for t in tr if t["exit_reason"] == r) for r in {t["exit_reason"] for t in tr}})
     print(w, json.dumps(out[w]))
@@ -85,7 +107,7 @@ cut = D["RECENT_CUT"]["trades"]
 cut_end = max(t["exit_time"] for t in cut)
 same = diff = 0
 for t in cut:
-    if t["exit_reason"] == "end_of_data" or t["exit_time"] >= cut_end - 3600:
+    if t["exit_reason"].upper() == "END_OF_DATA" or t["exit_time"] >= cut_end - 3600:
         continue
     f = full.get((t["entry_time"], t["strategy"]))
     if f and all(abs(f[k] - t[k]) < 1e-9 for k in ("entry_price", "exit_price", "sl", "tp", "exit_time")):
@@ -95,3 +117,5 @@ for t in cut:
         print("   lookahead diff:", t["strategy"], t["entry_time"], f and f["exit_time"])
 print("LOOKAHEAD probe: identical", same, "different", diff)
 json.dump(out, open(os.path.join(OUT, "check.json"), "w"), indent=1)
+if diff or any(any(window["bad"].values()) or window["coarse_m15_trades_skipped"] for window in out.values()):
+    raise SystemExit(1)

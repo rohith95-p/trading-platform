@@ -1,27 +1,21 @@
-"""The bias-audit knobs must default to the behaviour every published result used.
-
-PREREG_BiasAudit_2026-11-09 added two EngineConfig fields so the engine's known
-intrabar biases could be bounded by measurement. If either one's default drifts,
-every number in research/registry/ silently changes meaning.
-"""
+"""Conservative new defaults and explicit optimistic historical reproduction."""
 import numpy as np
 import pytest
 
 from src.backtesting.engine import EngineConfig
 
 
-def test_defaults_preserve_published_behaviour():
+def test_defaults_keep_stop_first_and_include_gap_losses():
     c = EngineConfig()
     assert c.ambiguous_resolution == "sl_first", (
         "every published result resolved intrabar ambiguity stop-first")
-    assert c.gap_fill_stops is False, (
-        "every published result filled stops exactly at the level")
+    assert c.gap_fill_stops is True, "new research must include adverse stop gaps"
 
 
-def test_live_parity_preset_does_not_enable_them():
+def test_live_parity_preset_keeps_conservative_protective_fills():
     c = EngineConfig.live_parity_preset()
     assert c.ambiguous_resolution == "sl_first"
-    assert c.gap_fill_stops is False
+    assert c.gap_fill_stops is True
 
 
 def test_knobs_are_settable_through_the_preset():
@@ -71,7 +65,7 @@ def _engine_shell(gap_fill):
     return s
 
 
-def test_long_stop_fills_at_level_by_default_even_on_a_gap():
+def test_explicit_legacy_stop_mode_fills_at_level_even_on_a_gap():
     s = _engine_shell(gap_fill=False)
     pos = _Pos(is_buy=True, sl=2000.0)
     # bar opens 10 dollars BELOW the stop: a real fill would be far worse

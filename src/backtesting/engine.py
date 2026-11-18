@@ -29,7 +29,7 @@ from __future__ import annotations
 import logging
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone
-from types import SimpleNamespace
+from types import SimpleNamespace, FunctionType, MethodType
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 
 import numpy as np
@@ -178,7 +178,7 @@ class _Mt5Stub:
 
 
 class MissingM1Error(RuntimeError):
-    """No M1 bars for a candle the engine was asked to simulate.
+    """Absent or incomplete M1 coverage for a simulated candle.
 
     Raised instead of quietly resolving exits on the M15 candle. Either extend
     the M1 series (scripts/data_refresh.py) or narrow the window; passing
@@ -186,12 +186,13 @@ class MissingM1Error(RuntimeError):
     `m1_policy="coarse"` restores the old M15 fallback and marks the run.
     """
 
-    def __init__(self, ts: int, symbol: str = ""):
+    def __init__(self, ts: int, symbol: str = "", *, incomplete: bool = False):
         from datetime import datetime as _dt, timezone as _tz
         when = _dt.fromtimestamp(ts, tz=_tz.utc).strftime("%Y-%m-%d %H:%M UTC")
         self.ts = ts
         super().__init__(
-            f"no M1 bars for the 15-minute candle opening {when}"
+            ("incomplete M1 coverage" if incomplete else "no M1 bars")
+            + f" for the 15-minute candle opening {when}"
             + (f" on {symbol}" if symbol else "")
             + ". The engine will not resolve exits on M15 candles: extend the M1 "
               'series, move the window, or pass m1_policy="skip" / "coarse".'
@@ -341,11 +342,10 @@ class EngineConfig:
     #   tick order is unknown. "sl_first" (default, and what every published
     #   result here used) books the loss -- pessimistic. "tp_first" books the win,
     #   which is the most favourable reading the data permits.
-    # gap_fill_stops: by default a stop fills exactly at its level however far the
-    #   bar ran past it, which flatters losses. True fills at the bar's open when
-    #   the bar opened already beyond the stop, as a real market stop would.
+    # gap_fill_stops: default True fills at the adverse open if the market gaps
+    #   through a stop. False is retained only to reproduce optimistic old runs.
     ambiguous_resolution: str = "sl_first"
-    gap_fill_stops: bool = False
+    gap_fill_stops: bool = True
     spread_gate_points: float = 350.0
     spread_gate_blocks_management: bool = True   # HIGH-7: the bug at HEAD
     lot_cap: Optional[float] = None              # the lost 0.01 guard
@@ -355,6 +355,9 @@ class EngineConfig:
 
     # Coarse-mode realism: test a new position against its own entry bar.
     walk_entry_bar_coarse: bool = True
+    # Broker protection begins at entry, including the first M1 after a signal.
+    # False reproduces the old first-minute blind spot for historical audits.
+    walk_entry_bar_m1: bool = True
 
     warmup_bars: int = 260
     min_tradeable_balance: float = 5.0
@@ -481,10 +484,13 @@ class EngineConfig:
 
     # (7) Entry timing. Live scans every 60s (~20s past the minute at start,
     # then drifting), so an entry fills 0-60s after the M15 close at the
-    # then-current ask/bid. `entry_delay_sec` fills at the price interpolated
-    # `entry_delay_sec` seconds into the first M1 bar after the close. 0 = legacy
-    # (fill at that bar's open). Must be in [0, 60).
+    # then-current ask/bid. M1 OHLC cannot reconstruct this quote: nonzero delay
+    # fails closed unless explicitly opted into legacy (noncausal) reproduction.
+    # Zero is a bar-open proxy, not a claim of live timestamp parity.
     entry_delay_sec: int = 0
+    # Minute OHLC cannot supply executable prices at subminute timestamps.
+    # Legacy interpolation is retained solely to reproduce old biased studies.
+    entry_delay_model: str = "reject"
 
     # main_loop.py L340-345 Gate 1b: no new entries within +-NEWS_BLACKOUT_MINUTES
     # of a tier-1 event (src/core/news_filter.py); management continues.
@@ -634,6 +640,14 @@ class BacktestEngine:
         # live-parity state (inert unless the matching EngineConfig flag is on)
         if config.entry_delay_sec < 0 or config.entry_delay_sec >= 60:
             raise ValueError("entry_delay_sec must be in [0, 60)")
+        if config.entry_delay_model not in ("reject", "legacy_interpolated"):
+            raise ValueError("entry_delay_model must be 'reject' or 'legacy_interpolated'")
+        if config.entry_delay_sec and config.entry_delay_model != "legacy_interpolated":
+            raise ValueError("Subminute entry delay requires timestamped quotes; M1 OHLC "
+                             "interpolation uses future information. Use entry_delay_sec=0 "
+                             "for an explicit bar-open proxy, or entry_delay_model="
+                             "'legacy_interpolated' only to reproduce biased old results.")
+        self.diag["noncausal_legacy_entry_interpolation"] = bool(config.entry_delay_sec)
         self.rr_state = _rr.RiskState()
         self.cooldown_until: Dict[str, int] = {}
         self.decisions: List[Dict[str, Any]] = []
@@ -811,17 +825,25 @@ class BacktestEngine:
 
         rm_mod.mt5 = self.stub  # type: ignore[assignment]
 
-        # Exit geometry lives in module-level constants, so a sweep has to set
-        # them here. Restored by the caller is unnecessary -- each run builds its
-        # own engine -- but the values are echoed into the manifest.
-        if self.cfg.tp_atr_mult is not None:
-            rm_mod.TP_ATR_MULTIPLIER = self.cfg.tp_atr_mult
-        if self.cfg.trail_activation_atr is not None:
-            rm_mod.TRAIL_ACTIVATION_ATR = self.cfg.trail_activation_atr
-        if self.cfg.trail_distance_atr is not None:
-            rm_mod.TRAIL_DISTANCE_ATR = self.cfg.trail_distance_atr
-
         rm = rm_mod.RiskManager(self.cfg.symbol)
+        # Run-specific geometry must not mutate production module constants:
+        # sequential engines otherwise inherit the preceding experiment's knobs.
+        # Bind the unchanged production function code to an isolated globals
+        # mapping containing this engine's overrides. Existing managers retain
+        # their own mappings even when a second engine is constructed.
+        overrides = {
+            "TP_ATR_MULTIPLIER": self.cfg.tp_atr_mult,
+            "TRAIL_ACTIVATION_ATR": self.cfg.trail_activation_atr,
+            "TRAIL_DISTANCE_ATR": self.cfg.trail_distance_atr,
+        }
+        for name in ("calculate_atr_stops", "calculate_trailing_stop"):
+            original = getattr(rm_mod.RiskManager, name)
+            namespace = dict(original.__globals__)
+            namespace.update({k: v for k, v in overrides.items() if v is not None})
+            isolated = FunctionType(original.__code__, namespace, original.__name__,
+                                    original.__defaults__, original.__closure__)
+            isolated.__kwdefaults__ = original.__kwdefaults__
+            setattr(rm, name, MethodType(isolated, rm))
         if not self.cfg.load_macro_rules:
             rm._strict_short_stops = False
 
@@ -1102,11 +1124,9 @@ class BacktestEngine:
                    slip: float, spread_pts: Optional[float]) -> float:
         """Where a stop-out actually fills.
 
-        Default (and every published result in this repo): exactly at the stop
-        level, however far the bar ran past it. That flatters losses, because a
-        real market stop on a bar that OPENED beyond the level fills at the open,
-        not at the level. `gap_fill_stops` models that, so the size of the
-        flattery can be measured. See PREREG_BiasAudit_2026-11-09.
+        Default: adverse open on a gap plus slip. A real market stop does not
+        guarantee the requested level. False retains the optimistic stop-level
+        convention solely to reproduce old studies.
         """
         if pos.is_buy:
             px = pos.sl - slip
@@ -1210,7 +1230,7 @@ class BacktestEngine:
     # -- main loop -------------------------------------------------------
 
     def run(self, strategies: Sequence[Any], start_ts: Optional[int] = None,
-            end_ts: Optional[int] = None) -> BacktestResult:
+            end_ts: Optional[int] = None, *, account_policy=None) -> BacktestResult:
         """Replay the live loop over cached history.
 
         `strategies` are live strategy instances. They are evaluated on the same
@@ -1233,7 +1253,11 @@ class BacktestEngine:
         peak_bal = self.balance
         equity_paused = False
 
+        last_simulated = None
+        account_finished = False
         for i in range(cfg.warmup_bars, n - 1):
+            if account_finished:
+                break
             bar_open = int(self._m15_t[i])
             bar_close = bar_open + 900
             nxt_open = int(self._m15_t[i + 1])
@@ -1246,7 +1270,7 @@ class BacktestEngine:
 
             if start_ts and nxt_open < start_ts:
                 continue
-            if end_ts and nxt_open > end_ts:
+            if end_ts is not None and nxt_open >= end_ts:
                 break
 
             m1_bars = self._m1_slice(nxt_open, nxt_open + 900)
@@ -1265,11 +1289,20 @@ class BacktestEngine:
                 coarse = True
             else:
                 coarse = False
-                if len(m1_bars) < 15:
+                expected_times = np.arange(nxt_open, nxt_open + 900, 60, dtype=np.int64)
+                complete = np.array_equal(m1_bars["time"].astype(np.int64), expected_times)
+                if not complete:
                     # some minutes of this candle are missing: an exit inside one
                     # of them is invisible, so count it rather than assume it away
                     self.diag["partial_m1_candles"] += 1
-                    self.diag["partial_m1_minutes_missing"] += 15 - len(m1_bars)
+                    self.diag["partial_m1_minutes_missing"] += len(
+                        np.setdiff1d(expected_times, m1_bars["time"]))
+                    if cfg.m1_policy == "require":
+                        raise MissingM1Error(nxt_open, cfg.symbol, incomplete=True)
+                    if cfg.m1_policy == "skip":
+                        self.diag["bars_skipped_no_m1"] += 1
+                        self.diag["exits_unchecked_no_m1"] += len(self.positions)
+                        continue
 
             m15_view = self._view(self.m15, self._m15_t, bar_close, cfg.history_bars, 900)
             if m15_view is None:
@@ -1349,6 +1382,9 @@ class BacktestEngine:
             for m in range(len(m1_bars)):
                 bar = m1_bars[m]
                 ts = int(bar["time"])
+                if end_ts is not None and ts + (900 if coarse else 60) > end_ts:
+                    break
+                last_simulated = bar
                 spread_pts = float(bar["spread"]) if "spread" in bar.dtype.names else None
                 current_ist = datetime.fromtimestamp(ts, tz=timezone.utc).astimezone(IST)
 
@@ -1368,6 +1404,10 @@ class BacktestEngine:
                         pos.minutes_to_mfe = pos.minutes_open
                     if hit is not None:
                         self._close(pos, hit[0], ts, hit[1])
+
+                if account_policy is not None and account_policy.observe(self, ts):
+                    account_finished = True
+                    break
 
                 # 1b. scripts/protect_profit.py -- its own process, polling every
                 # 20s, so it acts every minute regardless of the bot's scan gates.
@@ -1524,8 +1564,9 @@ class BacktestEngine:
                             # are the one bar where a 0.5xATR stop is most likely to
                             # be hit. Walk the new position through this same bar,
                             # stop-first on ambiguity, instead of skipping it.
-                            if coarse and cfg.walk_entry_bar_coarse:
-                                hit = self._walk_minute(opened, bar, ts, point, True,
+                            if ((coarse and cfg.walk_entry_bar_coarse) or
+                                    (not coarse and cfg.walk_entry_bar_m1)):
+                                hit = self._walk_minute(opened, bar, ts, point, coarse,
                                                         is_m15_close=is_m15_close)
                                 if hit is not None:
                                     self._close(opened, hit[0], ts, hit[1])
@@ -1543,9 +1584,15 @@ class BacktestEngine:
                 daily_pl[d] = daily_pl.get(d, 0.0) + t.net_pl
 
         if self.positions:
-            last = self.m15[-1]
+            if last_simulated is None:
+                raise ValueError("Cannot settle open positions without a simulated price")
+            last = last_simulated
             for pos in list(self.positions):
-                self._close(pos, float(last["close"]), int(last["time"]), "END_OF_DATA")
+                price = float(last["close"])
+                if not pos.is_buy:
+                    spread = float(last["spread"]) if "spread" in last.dtype.names else None
+                    price = self.cost.ask(price, point, spread)
+                self._close(pos, price, int(last["time"]), "END_OF_DATA")
 
         if cfg.record_decisions:
             self.diag["decisions"] = self.decisions
@@ -1811,8 +1858,9 @@ class BacktestEngine:
             return
         opened.scan_ts, opened.delay_sec = ts, d
         self._decide(ts, best_s.name, best_sig.is_buy, "entered")
-        if coarse and cfg.walk_entry_bar_coarse:
-            hit = self._walk_minute(opened, bar, ts, point, True, is_m15_close=is_m15_close)
+        if ((coarse and cfg.walk_entry_bar_coarse) or
+                (not coarse and cfg.walk_entry_bar_m1 and d == 0)):
+            hit = self._walk_minute(opened, bar, ts, point, coarse, is_m15_close=is_m15_close)
             if hit is not None:
                 self._close(opened, hit[0], ts, hit[1])
 

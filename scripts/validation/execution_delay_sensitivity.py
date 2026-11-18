@@ -1,7 +1,7 @@
-"""Execution Delay Sensitivity Analysis (P2-2).
+"""Heuristic P&L penalty scenario, NOT historical execution-delay replay.
 
-Evaluates strategy robustness against execution latency by shifting trade entries
-by +1, +5, and +15 bars and calculating Profit Factor decay.
+No entry is shifted and no market observations are consulted. These assumed
+penalties cannot establish latency sensitivity or be used as validation evidence.
 """
 from typing import Dict, List, Any
 import numpy as np
@@ -12,7 +12,7 @@ def evaluate_delay_sensitivity(
     delays: List[int] = [0, 1, 5, 15],
     decay_rate_per_bar: float = 0.015,
 ) -> Dict[str, Any]:
-    """Evaluate performance impact when entries are delayed by N bars.
+    """Apply an assumed per-delay penalty to already-realized trade P&L.
     
     In latency-sensitive regimes (e.g. M15 / M5 breakouts), entering N bars late
     suffers adverse price excursion and spread decay.
@@ -52,6 +52,8 @@ def evaluate_delay_sensitivity(
             decay_pct = round(((base_pf - pf) / base_pf) * 100.0, 2) if base_pf and base_pf > 0 else 0.0
             
         results[f"delay_{delay}_bars"] = {
+            "method": "assumed_pnl_penalty_not_execution_replay",
+            "empirically_calibrated": False,
             "delay_bars": delay,
             "profit_factor": pf,
             "net_pl": net,
