@@ -1,0 +1,707 @@
+{
+  "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+  "workbook_sha256": "2b91297c42cf692dd74f65eabf7ee97f81d452676e23fa02edb222bfa60f0d0a",
+  "downloaded_metadata_version": "2026-10-30",
+  "timezone": "Eastern Time in source; America/New_York conversion",
+  "records": [
+    {
+      "date": "2016-01-27",
+      "local_time": "2016-01-27T14:00:00",
+      "event_time": 1453921200,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2016-03-16",
+      "local_time": "2016-03-16T14:00:00",
+      "event_time": 1458151200,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2016-04-27",
+      "local_time": "2016-04-27T14:00:00",
+      "event_time": 1461780000,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2016-06-15",
+      "local_time": "2016-06-15T14:00:00",
+      "event_time": 1466013600,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2016-07-27",
+      "local_time": "2016-07-27T14:00:00",
+      "event_time": 1469642400,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2016-09-21",
+      "local_time": "2016-09-21T14:00:00",
+      "event_time": 1474480800,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2016-11-02",
+      "local_time": "2016-11-02T14:00:00",
+      "event_time": 1478109600,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2016-12-14",
+      "local_time": "2016-12-14T14:00:00",
+      "event_time": 1481742000,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2017-02-01",
+      "local_time": "2017-02-01T14:00:00",
+      "event_time": 1485975600,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2017-03-15",
+      "local_time": "2017-03-15T14:00:00",
+      "event_time": 1489600800,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2017-05-03",
+      "local_time": "2017-05-03T14:00:00",
+      "event_time": 1493834400,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2017-06-14",
+      "local_time": "2017-06-14T14:00:00",
+      "event_time": 1497463200,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2017-07-26",
+      "local_time": "2017-07-26T14:00:00",
+      "event_time": 1501092000,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2017-09-20",
+      "local_time": "2017-09-20T14:00:00",
+      "event_time": 1505930400,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2017-11-01",
+      "local_time": "2017-11-01T14:00:00",
+      "event_time": 1509559200,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2017-12-13",
+      "local_time": "2017-12-13T14:00:00",
+      "event_time": 1513191600,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2018-01-31",
+      "local_time": "2018-01-31T14:00:00",
+      "event_time": 1517425200,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2018-03-21",
+      "local_time": "2018-03-21T14:00:00",
+      "event_time": 1521655200,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2018-05-02",
+      "local_time": "2018-05-02T14:00:00",
+      "event_time": 1525284000,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2018-06-13",
+      "local_time": "2018-06-13T14:00:00",
+      "event_time": 1528912800,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2018-08-01",
+      "local_time": "2018-08-01T14:00:00",
+      "event_time": 1533146400,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2018-09-26",
+      "local_time": "2018-09-26T14:00:00",
+      "event_time": 1537984800,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2018-11-08",
+      "local_time": "2018-11-08T14:00:00",
+      "event_time": 1541703600,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2018-12-19",
+      "local_time": "2018-12-19T14:00:00",
+      "event_time": 1545246000,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2019-01-30",
+      "local_time": "2019-01-30T14:00:00",
+      "event_time": 1548874800,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2019-03-20",
+      "local_time": "2019-03-20T14:00:00",
+      "event_time": 1553104800,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2019-05-01",
+      "local_time": "2019-05-01T14:00:00",
+      "event_time": 1556733600,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2019-06-19",
+      "local_time": "2019-06-19T14:00:00",
+      "event_time": 1560967200,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2019-07-31",
+      "local_time": "2019-07-31T14:00:00",
+      "event_time": 1564596000,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2019-09-18",
+      "local_time": "2019-09-18T14:00:00",
+      "event_time": 1568829600,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2019-10-30",
+      "local_time": "2019-10-30T14:00:00",
+      "event_time": 1572458400,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2019-12-11",
+      "local_time": "2019-12-11T14:00:00",
+      "event_time": 1576090800,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2020-01-29",
+      "local_time": "2020-01-29T14:00:00",
+      "event_time": 1580324400,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2020-04-29",
+      "local_time": "2020-04-29T14:00:00",
+      "event_time": 1588183200,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2020-06-10",
+      "local_time": "2020-06-10T14:00:00",
+      "event_time": 1591812000,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2020-07-29",
+      "local_time": "2020-07-29T14:00:00",
+      "event_time": 1596045600,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2020-09-16",
+      "local_time": "2020-09-16T14:00:00",
+      "event_time": 1600279200,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2020-11-05",
+      "local_time": "2020-11-05T14:00:00",
+      "event_time": 1604602800,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2020-12-16",
+      "local_time": "2020-12-16T14:00:00",
+      "event_time": 1608145200,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2021-01-27",
+      "local_time": "2021-01-27T14:00:00",
+      "event_time": 1611774000,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2021-03-17",
+      "local_time": "2021-03-17T14:00:00",
+      "event_time": 1616004000,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2021-04-28",
+      "local_time": "2021-04-28T14:00:00",
+      "event_time": 1619632800,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2021-06-16",
+      "local_time": "2021-06-16T14:00:00",
+      "event_time": 1623866400,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2021-07-28",
+      "local_time": "2021-07-28T14:00:00",
+      "event_time": 1627495200,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2021-09-22",
+      "local_time": "2021-09-22T14:00:00",
+      "event_time": 1632333600,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2021-11-03",
+      "local_time": "2021-11-03T14:00:00",
+      "event_time": 1635962400,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2021-12-15",
+      "local_time": "2021-12-15T14:00:00",
+      "event_time": 1639594800,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2022-01-26",
+      "local_time": "2022-01-26T14:00:00",
+      "event_time": 1643223600,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2022-03-16",
+      "local_time": "2022-03-16T14:00:00",
+      "event_time": 1647453600,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2022-05-04",
+      "local_time": "2022-05-04T14:00:00",
+      "event_time": 1651687200,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2022-06-15",
+      "local_time": "2022-06-15T14:00:00",
+      "event_time": 1655316000,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2022-07-27",
+      "local_time": "2022-07-27T14:00:00",
+      "event_time": 1658944800,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2022-09-21",
+      "local_time": "2022-09-21T14:00:00",
+      "event_time": 1663783200,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2022-11-02",
+      "local_time": "2022-11-02T14:00:00",
+      "event_time": 1667412000,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2022-12-14",
+      "local_time": "2022-12-14T14:00:00",
+      "event_time": 1671044400,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2023-02-01",
+      "local_time": "2023-02-01T14:00:00",
+      "event_time": 1675278000,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2023-03-22",
+      "local_time": "2023-03-22T14:00:00",
+      "event_time": 1679508000,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2023-05-03",
+      "local_time": "2023-05-03T14:00:00",
+      "event_time": 1683136800,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2023-06-14",
+      "local_time": "2023-06-14T14:00:00",
+      "event_time": 1686765600,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2023-07-26",
+      "local_time": "2023-07-26T14:00:00",
+      "event_time": 1690394400,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2023-09-20",
+      "local_time": "2023-09-20T14:00:00",
+      "event_time": 1695232800,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2023-11-01",
+      "local_time": "2023-11-01T14:00:00",
+      "event_time": 1698861600,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2023-12-13",
+      "local_time": "2023-12-13T14:00:00",
+      "event_time": 1702494000,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2024-01-31",
+      "local_time": "2024-01-31T14:00:00",
+      "event_time": 1706727600,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2024-03-20",
+      "local_time": "2024-03-20T14:00:00",
+      "event_time": 1710957600,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2024-05-01",
+      "local_time": "2024-05-01T14:00:00",
+      "event_time": 1714586400,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2024-06-12",
+      "local_time": "2024-06-12T14:00:00",
+      "event_time": 1718215200,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2024-07-31",
+      "local_time": "2024-07-31T14:00:00",
+      "event_time": 1722448800,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2024-09-18",
+      "local_time": "2024-09-18T14:00:00",
+      "event_time": 1726682400,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2024-11-07",
+      "local_time": "2024-11-07T14:00:00",
+      "event_time": 1731006000,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2024-12-18",
+      "local_time": "2024-12-18T14:00:00",
+      "event_time": 1734548400,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2025-01-29",
+      "local_time": "2025-01-29T14:00:00",
+      "event_time": 1738177200,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2025-03-19",
+      "local_time": "2025-03-19T14:00:00",
+      "event_time": 1742407200,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2025-05-07",
+      "local_time": "2025-05-07T14:00:00",
+      "event_time": 1746640800,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2025-06-18",
+      "local_time": "2025-06-18T14:00:00",
+      "event_time": 1750269600,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2025-07-30",
+      "local_time": "2025-07-30T14:00:00",
+      "event_time": 1753898400,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2025-09-17",
+      "local_time": "2025-09-17T14:00:00",
+      "event_time": 1758132000,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    },
+    {
+      "date": "2025-10-29",
+      "local_time": "2025-10-29T14:00:00",
+      "event_time": 1761760800,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": false
+    },
+    {
+      "date": "2025-12-10",
+      "local_time": "2025-12-10T14:00:00",
+      "event_time": 1765393200,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": true,
+      "unscheduled": false
+    }
+  ],
+  "excluded": [
+    {
+      "date": "2019-10-04",
+      "local_time": "2019-10-04T11:00:00",
+      "event_time": 1570201200,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": true,
+      "reason": "not_scheduled_1400_statement"
+    },
+    {
+      "date": "2020-03-03",
+      "local_time": "2020-03-03T10:00:00",
+      "event_time": 1583247600,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": true,
+      "reason": "not_scheduled_1400_statement"
+    },
+    {
+      "date": "2020-03-15",
+      "local_time": "2020-03-15T17:00:00",
+      "event_time": 1584306000,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": true,
+      "reason": "not_scheduled_1400_statement"
+    },
+    {
+      "date": "2020-03-19",
+      "local_time": "2020-03-19T09:00:00",
+      "event_time": 1584622800,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": true,
+      "reason": "not_scheduled_1400_statement"
+    },
+    {
+      "date": "2020-03-23",
+      "local_time": "2020-03-23T08:00:00",
+      "event_time": 1584964800,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": true,
+      "reason": "not_scheduled_1400_statement"
+    },
+    {
+      "date": "2020-03-31",
+      "local_time": "2020-03-31T08:30:00",
+      "event_time": 1585657800,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": true,
+      "reason": "not_scheduled_1400_statement"
+    },
+    {
+      "date": "2020-08-27",
+      "local_time": "2020-08-27T09:10:00",
+      "event_time": 1598533800,
+      "source_url": "https://www.frbsf.org/wp-content/uploads/USMPD.xlsx",
+      "sep": false,
+      "unscheduled": true,
+      "reason": "not_scheduled_1400_statement"
+    }
+  ],
+  "excluded_financial_columns": "All columns E onward; not features",
+  "availability": "Calendar is retrospective historical metadata. Gold response is observed causally; published surprise series is not presumed historically available."
+}
