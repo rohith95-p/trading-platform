@@ -581,7 +581,7 @@ def test_entry_delay_fills_at_the_interpolated_price_inside_the_first_minute():
     _, none = run(bars, [Fire(is_buy=False, candles=[C_NY])], live_exec_order=True)
     _, late = run(bars, [Fire(is_buy=False, candles=[C_NY])], live_exec_order=True,
                   entry_delay_sec=30, entry_delay_model="legacy_interpolated",
-                  walk_entry_bar_m1=False)
+                  walk_entry_bar_m1=False, causal_minute_order=False)
     assert late.diagnostics["noncausal_legacy_entry_interpolation"] is True
     dp = late.trades[0].entry_price - none.trades[0].entry_price
     assert dp == pytest.approx(0.5 * 0.6 * 0.05, abs=1e-6)                # SELL fills on bid

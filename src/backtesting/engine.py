@@ -358,6 +358,8 @@ class EngineConfig:
     # Broker protection begins at entry, including the first M1 after a signal.
     # False reproduces the old first-minute blind spot for historical audits.
     walk_entry_bar_m1: bool = True
+    # Open-quote decisions precede later range events; False reproduces old runs.
+    causal_minute_order: bool = True
 
     warmup_bars: int = 260
     min_tradeable_balance: float = 5.0
@@ -647,7 +649,11 @@ class BacktestEngine:
                              "interpolation uses future information. Use entry_delay_sec=0 "
                              "for an explicit bar-open proxy, or entry_delay_model="
                              "'legacy_interpolated' only to reproduce biased old results.")
+        if config.entry_delay_sec and config.causal_minute_order:
+            raise ValueError("Legacy interpolated delay also requires causal_minute_order=False; "
+                             "it cannot run under causal execution semantics.")
         self.diag["noncausal_legacy_entry_interpolation"] = bool(config.entry_delay_sec)
+        self.diag["legacy_minute_chronology"] = not config.causal_minute_order
         self.rr_state = _rr.RiskState()
         self.cooldown_until: Dict[str, int] = {}
         self.decisions: List[Dict[str, Any]] = []
@@ -1163,7 +1169,7 @@ class BacktestEngine:
         hi, lo = float(bar["high"]), float(bar["low"])
         cl = float(bar["close"])
         slip = self.cost.slip(point)
-        
+
         is_trailing = pos.trail_active
         close_only = self.cfg.close_only_trail and is_trailing
 
@@ -1172,13 +1178,13 @@ class BacktestEngine:
             pos.price_current = cl
             pos.mfe_price = max(pos.mfe_price, hi)
             pos.mae_price = min(pos.mae_price, lo)
-            
+
             if close_only:
                 # If close-only, we only check SL on the close of the M15 candle using the M15 close price
                 hit_sl = is_m15_close and cl <= pos.sl
             else:
                 hit_sl = lo <= pos.sl
-                
+
             hit_tp = hi >= pos.tp
             if hit_sl and hit_tp:
                 pos.intrabar_ambiguous = True
@@ -1198,16 +1204,16 @@ class BacktestEngine:
             ask_hi = self.cost.ask(hi, point, spread_pts)
             ask_lo = self.cost.ask(lo, point, spread_pts)
             ask_cl = self.cost.ask(cl, point, spread_pts)
-            
+
             pos.price_current = ask_cl
             pos.mfe_price = min(pos.mfe_price, ask_lo)
             pos.mae_price = max(pos.mae_price, ask_hi)
-            
+
             if close_only:
                 hit_sl = is_m15_close and ask_cl >= pos.sl
             else:
                 hit_sl = ask_hi >= pos.sl
-                
+
             hit_tp = ask_lo <= pos.tp
             if hit_sl and hit_tp:
                 pos.intrabar_ambiguous = True
@@ -1380,6 +1386,8 @@ class BacktestEngine:
 
             last_signal_eval = -(10 ** 9)
             for m in range(len(m1_bars)):
+                if account_finished:
+                    break
                 bar = m1_bars[m]
                 ts = int(bar["time"])
                 if end_ts is not None and ts + (900 if coarse else 60) > end_ts:
@@ -1388,18 +1396,32 @@ class BacktestEngine:
                 spread_pts = float(bar["spread"]) if "spread" in bar.dtype.names else None
                 current_ist = datetime.fromtimestamp(ts, tz=timezone.utc).astimezone(IST)
 
+                path_bar = bar
+                if cfg.causal_minute_order:
+                    # Only the opening quote is known to this scan. Never let a
+                    # later stop/target or minute close finance an earlier order.
+                    bar = path_bar.copy()
+                    for field_name in ("high", "low", "close"):
+                        bar[field_name] = bar["open"]
+                    for pos in self.positions:
+                        base = float(bar["open"])
+                        pos.price_current = (base if pos.is_buy else
+                                             self.cost.ask(base, point, spread_pts))
+
                 # Friday Kill Switch
                 if market_hours.should_flatten_for_weekend(current_ist):
                     for pos in list(self.positions):
                         self._close(pos, pos.price_current, ts, "Weekend Gap Avoidance")
 
                 is_m15_close = (m == len(m1_bars) - 1)
-                
+
                 # 1. Broker side: stops and targets fire on ticks, not on our loop.
                 for pos in list(self.positions):
-                    pos.minutes_open += 1
+                    if not cfg.causal_minute_order:
+                        pos.minutes_open += 1
                     prev_mfe = pos.mfe_price
-                    hit = self._walk_minute(pos, bar, ts, point, coarse, is_m15_close=is_m15_close)
+                    hit = self._walk_minute(pos, bar, ts, point, coarse,
+                                            is_m15_close=is_m15_close and not cfg.causal_minute_order)
                     if pos.mfe_price != prev_mfe:
                         pos.minutes_to_mfe = pos.minutes_open
                     if hit is not None:
@@ -1407,6 +1429,7 @@ class BacktestEngine:
 
                 if account_policy is not None and account_policy.observe(self, ts):
                     account_finished = True
+                    last_simulated = bar
                     break
 
                 # 1b. scripts/protect_profit.py -- its own process, polling every
@@ -1414,168 +1437,194 @@ class BacktestEngine:
                 if cfg.protect_profit and self.positions and not self._is_down("@protect_profit", ts):
                     self._protect_profit_step(bar, ts, m, m15_view)
 
-                # 2. Bot side: the 60s scan.
-                if m != 0 and (ts - bar_open) % cfg.loop_interval_sec != 0:
-                    continue
-
-                if self._down_windows and self._is_down("*", ts):
-                    # bot not running: no evaluation/entries/management; a signal
-                    # cached before the outage is not carried across it.
-                    last_signal_eval = -(10 ** 9)
-                    for k in cached:
-                        cached[k] = None
-                    continue
-
-                spread_ok = spread_pts is None or spread_pts <= cfg.spread_gate_points
-                if not spread_ok:
-                    self.diag["entries_blocked_spread"] += 1
-                    if cfg.spread_gate_blocks_management:
-                        # HIGH-7: at HEAD the spread gate skips the rest of the
-                        # iteration, so trailing stops freeze exactly when
-                        # spreads blow out.
-                        self.diag["management_skipped_spread"] += 1
+                try:
+                    # 2. Bot side: the 60s scan.
+                    if m != 0 and (ts - bar_open) % cfg.loop_interval_sec != 0:
                         continue
-                if not spread_ok and cfg.live_exec_order:
-                    # main_loop L329-332: wide spread -> manage, sleep, next scan
-                    self._manage(rm, m15_view, bar, point, spread_pts)
-                    continue
 
-                # Gate 1b (main_loop L340-345): news blackout
-                if cfg.news_blackout and self._news_blocked(current_ist):
-                    self.diag["scans_news_blackout"] = self.diag.get("scans_news_blackout", 0) + 1
-                    self._manage(rm, m15_view, bar, point, spread_pts)
-                    continue
+                    if self._down_windows and self._is_down("*", ts):
+                        # bot not running: no evaluation/entries/management; a signal
+                        # cached before the outage is not carried across it.
+                        last_signal_eval = -(10 ** 9)
+                        for k in cached:
+                            cached[k] = None
+                        continue
 
-                # 3. Daily drawdown gate.
-                if shutdown_date == today:
-                    self._manage(rm, m15_view, bar, point, spread_pts)
-                    continue
-                pl_today = daily_pl.get(today, 0.0)
-                if self._drawdown_breached(rm, d1_view, pl_today):
-                    shutdown_date = today
-                    self.diag["daily_shutdowns"] += 1
-                    self._manage(rm, m15_view, bar, point, spread_pts)
-                    continue
-
-                # 3b. Equity-curve pause (opt-in). Manage open positions but
-                # open nothing new while the account is deep below its peak.
-                if cfg.equity_pause_dd > 0:
-                    peak_bal = max(peak_bal, self.balance)
-                    if not equity_paused and self.balance < peak_bal * (1 - cfg.equity_pause_dd):
-                        equity_paused = True
-                        self.diag["equity_pauses"] = self.diag.get("equity_pauses", 0) + 1
-                    elif equity_paused and self.balance >= peak_bal * (1 - cfg.equity_resume_dd):
-                        equity_paused = False
-                    if equity_paused:
+                    spread_ok = spread_pts is None or spread_pts <= cfg.spread_gate_points
+                    if not spread_ok:
+                        self.diag["entries_blocked_spread"] += 1
+                        if cfg.spread_gate_blocks_management:
+                            # HIGH-7: at HEAD the spread gate skips the rest of the
+                            # iteration, so trailing stops freeze exactly when
+                            # spreads blow out.
+                            self.diag["management_skipped_spread"] += 1
+                            continue
+                    if not spread_ok and cfg.live_exec_order:
+                        # main_loop L329-332: wide spread -> manage, sleep, next scan
                         self._manage(rm, m15_view, bar, point, spread_pts)
                         continue
 
-                # main_loop L448-451: no strategy evaluation in LONDON_NY_OVERLAP
-                if cfg.skip_overlap_session and rm.get_session_name(current_ist) == "LONDON_NY_OVERLAP":
-                    self.diag["scans_overlap_skipped"] = self.diag.get("scans_overlap_skipped", 0) + 1
-                    self._manage(rm, m15_view, bar, point, spread_pts)
-                    continue
-
-                # 4. Strategy evaluation, on M5 boundaries as the M5 view advances.
-                if spread_ok and ts - last_signal_eval >= cfg.resignal_interval_sec:
-                    last_signal_eval = ts
-                    m5_view = (
-                        self._view(self.m5, self._m5_t, ts, cfg.m5_history_bars, 300)
-                        if self.m5 is not None else None
-                    )
-                    for s in strategies:
-                        if self._down_windows and self._is_down(s.name, ts):
-                            cached[s.name] = None
-                            continue
-                        try:
-                            cached[s.name] = s.evaluate(m15_view, m5_view)
-                        except Exception as exc:
-                            log.debug("%s raised at %s: %s", s.name, ts, exc)
-                            cached[s.name] = None
-                        if cached[s.name] is not None:
-                            self.diag["signals_generated"] += 1
-
-                # 5. Entries (with Highlander Rule)
-                if spread_ok and cfg.live_exec_order:
-                    self._parity_entries(strategies, cached, fired_on, bar_open, bar, ts,
-                                         current_ist, spread_pts, m15_view, d1_view, d1_bias,
-                                         choch_override, rm, point, coarse, is_m15_close,
-                                         session_mult)
-                elif spread_ok:
-                    mh_ok, _ = market_hours.allow_new_entry(current_ist)
-                    if not mh_ok:
-                        # Time lock or rollover blocked entry
+                    # Gate 1b (main_loop L340-345): news blackout
+                    if cfg.news_blackout and self._news_blocked(current_ist):
+                        self.diag["scans_news_blackout"] = self.diag.get("scans_news_blackout", 0) + 1
+                        self._manage(rm, m15_view, bar, point, spread_pts)
                         continue
-                        
-                    actionable_signals = []
-                    for s in strategies:
-                        sig = cached[s.name]
-                        if sig is None:
+
+                    # 3. Daily drawdown gate.
+                    if shutdown_date == today:
+                        self._manage(rm, m15_view, bar, point, spread_pts)
+                        continue
+                    pl_today = daily_pl.get(today, 0.0)
+                    if self._drawdown_breached(rm, d1_view, pl_today):
+                        shutdown_date = today
+                        self.diag["daily_shutdowns"] += 1
+                        self._manage(rm, m15_view, bar, point, spread_pts)
+                        continue
+
+                    # 3b. Equity-curve pause (opt-in). Manage open positions but
+                    # open nothing new while the account is deep below its peak.
+                    if cfg.equity_pause_dd > 0:
+                        peak_bal = max(peak_bal, self.balance)
+                        if not equity_paused and self.balance < peak_bal * (1 - cfg.equity_pause_dd):
+                            equity_paused = True
+                            self.diag["equity_pauses"] = self.diag.get("equity_pauses", 0) + 1
+                        elif equity_paused and self.balance >= peak_bal * (1 - cfg.equity_resume_dd):
+                            equity_paused = False
+                        if equity_paused:
+                            self._manage(rm, m15_view, bar, point, spread_pts)
                             continue
-                        if cfg.dedup_per_candle and fired_on[s.name] == bar_open:
-                            self.diag["signals_deduped"] += 1
+
+                    # main_loop L448-451: no strategy evaluation in LONDON_NY_OVERLAP
+                    if cfg.skip_overlap_session and rm.get_session_name(current_ist) == "LONDON_NY_OVERLAP":
+                        self.diag["scans_overlap_skipped"] = self.diag.get("scans_overlap_skipped", 0) + 1
+                        self._manage(rm, m15_view, bar, point, spread_pts)
+                        continue
+
+                    # 4. Strategy evaluation, on M5 boundaries as the M5 view advances.
+                    if spread_ok and ts - last_signal_eval >= cfg.resignal_interval_sec:
+                        last_signal_eval = ts
+                        m5_view = (
+                            self._view(self.m5, self._m5_t, ts, cfg.m5_history_bars, 300)
+                            if self.m5 is not None else None
+                        )
+                        for s in strategies:
+                            if self._down_windows and self._is_down(s.name, ts):
+                                cached[s.name] = None
+                                continue
+                            try:
+                                cached[s.name] = s.evaluate(m15_view, m5_view)
+                            except Exception as exc:
+                                log.debug("%s raised at %s: %s", s.name, ts, exc)
+                                cached[s.name] = None
+                            if cached[s.name] is not None:
+                                self.diag["signals_generated"] += 1
+
+                    # 5. Entries (with Highlander Rule)
+                    if spread_ok and cfg.live_exec_order:
+                        self._parity_entries(strategies, cached, fired_on, bar_open, bar, ts,
+                                             current_ist, spread_pts, m15_view, d1_view, d1_bias,
+                                             choch_override, rm, point, coarse, is_m15_close,
+                                             session_mult)
+                    elif spread_ok:
+                        mh_ok, _ = market_hours.allow_new_entry(current_ist)
+                        if not mh_ok:
+                            # Time lock or rollover blocked entry
                             continue
-                        if d1_bias and not getattr(s, "skip_d1_gate", False):   # main_loop._d1_bias_allows
-                            sig_dir = "BULLISH" if sig.is_buy else "BEARISH"
-                            _ovr = (cfg.direction_gate == "d1_choch" and choch_override == sig_dir)
-                            if not _ovr:
-                                if d1_bias == "CONFLICT" or (sig.is_buy and d1_bias == "BEARISH") or (not sig.is_buy and d1_bias == "BULLISH"):
-                                    self.diag["entries_blocked_d1_bias"] += 1
-                                    continue
-                        if not self._caps_allow(sig.is_buy):
-                            self.diag["entries_blocked_caps"] += 1
-                            continue
-                            
-                        # If passed all gates, it's actionable
-                        actionable_signals.append((s, sig))
 
-                    if actionable_signals:
-                        # HIGHLANDER RULE: only the highest-conviction signal trades.
-                        # The ranking is shared with the live loop
-                        # (src/core/conviction.py); each side used to carry its own
-                        # table, and this one named sixteen strategies that no
-                        # longer exist (2026-11-02).
-                        (best_s, best_sig), _losers = _conviction.pick(actionable_signals)
+                        actionable_signals = []
+                        for s in strategies:
+                            sig = cached[s.name]
+                            if sig is None:
+                                continue
+                            if cfg.dedup_per_candle and fired_on[s.name] == bar_open:
+                                self.diag["signals_deduped"] += 1
+                                continue
+                            if d1_bias and not getattr(s, "skip_d1_gate", False):   # main_loop._d1_bias_allows
+                                sig_dir = "BULLISH" if sig.is_buy else "BEARISH"
+                                _ovr = (cfg.direction_gate == "d1_choch" and choch_override == sig_dir)
+                                if not _ovr:
+                                    if d1_bias == "CONFLICT" or (sig.is_buy and d1_bias == "BEARISH") or (not sig.is_buy and d1_bias == "BULLISH"):
+                                        self.diag["entries_blocked_d1_bias"] += 1
+                                        continue
+                            if not self._caps_allow(sig.is_buy):
+                                self.diag["entries_blocked_caps"] += 1
+                                continue
 
-                        # Block others
-                        for other_s, _ in _losers:
-                            fired_on[other_s.name] = bar_open
-                            self.diag["signals_deduped"] += 1
+                            # If passed all gates, it's actionable
+                            actionable_signals.append((s, sig))
 
-                        dup_of = None
-                        same = [p for p in self.positions if p.strategy == best_s.name and p.is_buy == best_sig.is_buy]
-                        if same:
-                            dup_of = same[0].ticket
-                        if fired_on[best_s.name] == bar_open:
-                            self.diag["same_candle_refires"] += 1
+                        if actionable_signals:
+                            # HIGHLANDER RULE: only the highest-conviction signal trades.
+                            # The ranking is shared with the live loop
+                            # (src/core/conviction.py); each side used to carry its own
+                            # table, and this one named sixteen strategies that no
+                            # longer exist (2026-11-02).
+                            (best_s, best_sig), _losers = _conviction.pick(actionable_signals)
 
-                        base = float(bar["open"])
-                        fill = self.cost.ask(base, point, spread_pts) if best_sig.is_buy else base
-                        fill += self.cost.slip(point) * (1 if best_sig.is_buy else -1)
+                            # Block others
+                            for other_s, _ in _losers:
+                                fired_on[other_s.name] = bar_open
+                                self.diag["signals_deduped"] += 1
 
-                        opened = self._open(best_s.name, best_s.magic, best_sig.is_buy, fill, ts, rm,
-                                            m15_view, session_mult, session_name,
-                                            duplicate_of=dup_of,
-                                            sl_atr_mult=getattr(best_s, "sl_atr_mult", None),
-                                            tp_atr_mult=getattr(best_s, "tp_atr_mult", None))
-                        if opened is not None:
-                            fired_on[best_s.name] = bar_open
-                            # Coarse (no-M1) bars: the 15 minutes right after entry
-                            # are the one bar where a 0.5xATR stop is most likely to
-                            # be hit. Walk the new position through this same bar,
-                            # stop-first on ambiguity, instead of skipping it.
-                            if ((coarse and cfg.walk_entry_bar_coarse) or
-                                    (not coarse and cfg.walk_entry_bar_m1)):
-                                hit = self._walk_minute(opened, bar, ts, point, coarse,
-                                                        is_m15_close=is_m15_close)
-                                if hit is not None:
-                                    self._close(opened, hit[0], ts, hit[1])
+                            dup_of = None
+                            same = [p for p in self.positions if p.strategy == best_s.name and p.is_buy == best_sig.is_buy]
+                            if same:
+                                dup_of = same[0].ticket
+                            if fired_on[best_s.name] == bar_open:
+                                self.diag["same_candle_refires"] += 1
 
-                # 6. Pyramiding, then management -- the order main_loop uses.
-                if spread_ok and cfg.enable_pyramiding:
-                    self._pyramid(rm, m15_view, bar, ts, point, spread_pts,
-                                  session_mult, session_name)
-                self._manage(rm, m15_view, bar, point, spread_pts)
+                            base = float(bar["open"])
+                            fill = self.cost.ask(base, point, spread_pts) if best_sig.is_buy else base
+                            fill += self.cost.slip(point) * (1 if best_sig.is_buy else -1)
+
+                            opened = self._open(best_s.name, best_s.magic, best_sig.is_buy, fill, ts, rm,
+                                                m15_view, session_mult, session_name,
+                                                duplicate_of=dup_of,
+                                                sl_atr_mult=getattr(best_s, "sl_atr_mult", None),
+                                                tp_atr_mult=getattr(best_s, "tp_atr_mult", None))
+                            if opened is not None:
+                                fired_on[best_s.name] = bar_open
+                                # Coarse (no-M1) bars: the 15 minutes right after entry
+                                # are the one bar where a 0.5xATR stop is most likely to
+                                # be hit. Walk the new position through this same bar,
+                                # stop-first on ambiguity, instead of skipping it.
+                                if (not cfg.causal_minute_order and
+                                        ((coarse and cfg.walk_entry_bar_coarse) or
+                                         (not coarse and cfg.walk_entry_bar_m1))):
+                                    hit = self._walk_minute(opened, bar, ts, point, coarse,
+                                                            is_m15_close=is_m15_close)
+                                    if hit is not None:
+                                        self._close(opened, hit[0], ts, hit[1])
+
+                    # 6. Pyramiding, then management -- the order main_loop uses.
+                    if spread_ok and cfg.enable_pyramiding:
+                        self._pyramid(rm, m15_view, bar, ts, point, spread_pts,
+                                      session_mult, session_name)
+                    self._manage(rm, m15_view, bar, point, spread_pts)
+                finally:
+                    if cfg.causal_minute_order:
+                        # Broker protection runs after open-time decisions even
+                        # when a scan gate takes an early continue above.
+                        for pos in list(self.positions):
+                            is_new = pos.entry_time >= ts
+                            if is_new and ((coarse and not cfg.walk_entry_bar_coarse) or
+                                           (not coarse and not cfg.walk_entry_bar_m1)):
+                                continue
+                            if is_new and pos.entry_time > ts:
+                                # Explicit legacy interpolated fills have no
+                                # defensible entry-minute path; never use its
+                                # pre-entry extrema as executed quotes.
+                                continue
+                            pos.minutes_open += 1
+                            prev_mfe = pos.mfe_price
+                            hit = self._walk_minute(pos, path_bar, ts, point, coarse,
+                                                    is_m15_close=is_m15_close)
+                            if pos.mfe_price != prev_mfe:
+                                pos.minutes_to_mfe = pos.minutes_open
+                            if hit is not None:
+                                self._close(pos, hit[0], ts, hit[1])
+                        if account_policy is not None and account_policy.observe(self, ts + (900 if coarse else 60)):
+                            account_finished = True
 
             # attribute closed P/L to its IST day for the drawdown gate
             daily_pl = {}
@@ -1858,8 +1907,9 @@ class BacktestEngine:
             return
         opened.scan_ts, opened.delay_sec = ts, d
         self._decide(ts, best_s.name, best_sig.is_buy, "entered")
-        if ((coarse and cfg.walk_entry_bar_coarse) or
-                (not coarse and cfg.walk_entry_bar_m1 and d == 0)):
+        if (not cfg.causal_minute_order and
+                ((coarse and cfg.walk_entry_bar_coarse) or
+                 (not coarse and cfg.walk_entry_bar_m1 and d == 0))):
             hit = self._walk_minute(opened, bar, ts, point, coarse, is_m15_close=is_m15_close)
             if hit is not None:
                 self._close(opened, hit[0], ts, hit[1])

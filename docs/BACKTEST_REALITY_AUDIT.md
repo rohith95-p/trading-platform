@@ -28,6 +28,7 @@ These are synthetic implementation checks, not strategy selection experiments.
 | Purported delay sensitivity | Applied assumed monetary penalties but described shifted entries | Explicitly labeled assumed P&L penalties, no empirical calibration | Existing arithmetic test passes; output identifies method |
 | Cross-experiment geometry leakage | `_make_risk_manager` overwrote module TP/trailing constants | Production method code bound to per-manager globals; module constants unchanged | Construct custom then default managers; execute both stop formulas and recheck the custom manager |
 | Auditor stale fill assumptions | Excluded entry minute and assumed stop-level fills | Independent helper honors recorded entry-minute, gap and ambiguity policies; exporter records config/cost/spec | Archived-versus-new entry indices, long/short gaps, both-touch, configured triple swap |
+| Same-minute future account state | Later range exits released cash and slots before entries at the earlier minute open | Default `causal_minute_order=True`: only opening-quote events precede entry gates; full minute range runs afterward, including scan-skip branches | Both gate paths preserve occupied slot until later exit; future cash/floating values excluded; genuine opening gaps settle first; entry range walked once; protection survives downtime/spread/cadence skips |
 
 `walk_entry_bar_m1=False`, `gap_fill_stops=False`, and legacy interpolation are
 reproduction options. Their explicit config identities must accompany historical
@@ -37,7 +38,8 @@ old summary statistics cannot be promoted to the corrected engine.
 `EngineConfig.live_parity_preset()` still records the nonzero live scan phase.
 It now correctly refuses execution from minute bars unless the caller explicitly
 chooses `entry_delay_sec=0` (bar-open approximation) or biased legacy reproduction.
-Zero-delay replay is not verified live latency parity. No causal tick/pending-order
+Legacy interpolation also requires `causal_minute_order=False`. Zero-delay replay
+is not verified live latency parity. No causal tick/pending-order
 delay engine has been implemented in this change.
 
 Strict partial coverage checks deliberately err on the side of rejecting a
@@ -47,14 +49,18 @@ scheduled closure from missing observations. No interpolation or padding is used
 
 ## Material unresolved limitations
 
-1. **Within-minute chronology of old positions versus new entries.** The loop
-   walks existing positions over an entire minute before evaluating entries at
-   that minute's open. It can therefore make same-minute exit cash or floating
-   P&L visible to entry risk/cap decisions before those exits actually occur.
-   Correcting only fill interpolation does not solve this. A timestamped event
-   loop separating open-quote decisions and later protective fills is required.
-   Results relying on concurrency, dynamic sizing or account gates must not be
-   certified before this is resolved.
+1. **Minute chronology scope.** The open/range order is corrected and the old
+   behavior survives only under explicit `causal_minute_order=False`, recorded in
+   configuration and diagnostics. At each opening, existing positions are marked
+   to that quote; opening protective events may settle; entry gates and management
+   then see only opening prices; full range protective fills follow. A finally
+   block preserves broker protection when scan gates skip the minute. Account
+   policies see opening state and subsequently interval-end state. This is a
+   causal bar approximation, not a timestamped tick event engine. Exact ordering
+   within the subsequent minute remains unknown. The main engine's daily realized
+   P&L accumulator is refreshed per M15 block, so same-block realized losses may
+   reach that daily gate late; account certification still requires finer state
+   reconciliation.
 2. **Ask reconstruction.** Shorts test ask extrema as bid extrema plus one
    minute spread. A bar spread is not a synchronized ask high/low. The existing
    separate 2025 Dukascopy bid/ask snapshot is not integrated into this engine
@@ -77,11 +83,13 @@ scheduled closure from missing observations. No interpolation or padding is used
    lots are not explicitly checked against volume_min/max/step in `_open`.
    Broker stop/freeze distance, tick rounding, dynamic margin tiers, stop-out,
    fill policy, reject/retry behavior and conversion currency are not fully modeled.
-7. **Forced closes and management.** Weekend flatten uses stale position mark
-   before the current minute update. End-of-data close omits explicit market
+7. **Forced closes and management.** Causal mode now marks the current opening
+   quote before weekend flatten. End-of-data close still omits explicit market
    slippage; protection/consolidation exits have simplifying poll assumptions.
-   Pyramiding is disabled in production but its optional simulation has no
-   entry-minute protection path equivalent to normal entries.
+   Causal protection/giveback management sees the opening quote and prior extrema,
+   rather than the later minute low/high. Pyramiding is disabled in production;
+   optional additions now receive the same deferred range protection, but this
+   audit does not establish full pyramiding/live parity.
 8. **Costs uncalibrated for target account.** Spread, fixed adverse slippage,
    commission and asymmetric swap are scenario assumptions or prior broker
    observations. Current Atlas contract terms, historical financing, exact triple
@@ -121,13 +129,14 @@ scheduled closure from missing observations. No interpolation or padding is used
 .\venv\Scripts\python.exe -m pytest tests/test_execution_reality.py tests/test_execution_audit_helpers.py tests/test_bias_audit_knobs.py tests/test_engine_live_parity.py tests/test_execution_delay.py -q
 ```
 
-**71 passed** on 2026-11-18. Synthetic tests establish these contracts only.
+**79 passed** on 2026-11-18. The chronology extension was committed before its
+implementation/tests in `PREREG_MinuteChronology_2026-11-18.md`. Synthetic tests establish these contracts only.
 They provide no profit factor, execution accuracy percentage or account pass
 probability. Broader regression suite remains the parent finalization task's job.
 
 ## Required next validation
 
-First repair event chronology and full-equity recording. Extend auditor
+First complete full-equity recording and finer daily-risk state reconciliation. Extend auditor
 compatibility for dynamic management. Re-run a fixed committed candidate with its exact input hashes and
 record all changed trades and costs against the old engine. Then acquire intended
 broker demo quote/deal logs, estimate conditional fill costs and implement an
