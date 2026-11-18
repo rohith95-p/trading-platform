@@ -1,0 +1,757 @@
+{
+  "costs": {
+    "base": "spread=bar:260 x1 slip=20 comm=3.5 swap=True/-515.5/0 roll=0 triple=None",
+    "stress": "spread=bar:260 x2 slip=60 comm=3.5 swap=True/-515.5/0 roll=0 triple=None"
+  },
+  "master_hash": "07cf67cd9ff1b5f6",
+  "records": [
+    {
+      "date": "2019-01-11",
+      "status": "tie"
+    },
+    {
+      "date": "2019-02-13",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2019-02-06",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2019-03-12",
+      "status": "tie"
+    },
+    {
+      "date": "2019-04-10",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2019-04-03",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2019-05-10",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2019-04-26",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2019-06-12",
+      "status": "tie"
+    },
+    {
+      "date": "2019-07-11",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2019-07-04",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2019-08-13",
+      "status": "tie"
+    },
+    {
+      "date": "2019-09-12",
+      "status": "tie"
+    },
+    {
+      "date": "2019-10-10",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2019-10-03",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2019-11-13",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2019-11-06",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2019-12-11",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2019-12-04",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2020-01-14",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2020-01-07",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2020-02-13",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2020-02-06",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2020-03-11",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2020-03-04",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2020-04-10",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "missing M1"
+      },
+      "control_date": "2020-03-27",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2020-05-12",
+      "status": "tie"
+    },
+    {
+      "date": "2020-06-10",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2020-06-03",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2020-07-14",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2020-07-07",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2020-08-12",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2020-08-05",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2020-09-11",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2020-08-28",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2020-10-13",
+      "status": "tie"
+    },
+    {
+      "date": "2020-11-12",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2020-11-05",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2020-12-10",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2020-12-03",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2021-01-13",
+      "status": "tie"
+    },
+    {
+      "date": "2021-02-10",
+      "status": "tie"
+    },
+    {
+      "date": "2021-03-10",
+      "status": "tie"
+    },
+    {
+      "date": "2021-04-13",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2021-04-06",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2021-05-12",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2021-05-05",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2021-06-10",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2021-06-03",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2021-07-13",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2021-07-06",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2021-08-11",
+      "status": "tie"
+    },
+    {
+      "date": "2021-09-14",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2021-09-07",
+      "control": {
+        "status": "missing M1"
+      }
+    },
+    {
+      "date": "2021-10-13",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2021-10-06",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2021-11-10",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2021-11-03",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2021-12-10",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2021-11-26",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2022-01-12",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2022-01-05",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2022-02-10",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2022-02-03",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2022-03-10",
+      "status": "tie"
+    },
+    {
+      "date": "2022-04-12",
+      "status": "tie"
+    },
+    {
+      "date": "2022-05-11",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2022-05-04",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2022-06-10",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2022-05-27",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2022-07-13",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2022-07-06",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2022-08-10",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2022-08-03",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2022-09-13",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2022-09-06",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2022-10-13",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2022-10-06",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2022-11-10",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2022-11-03",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2022-12-13",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2022-12-06",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2023-01-12",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2023-01-05",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2023-02-14",
+      "status": "tie"
+    },
+    {
+      "date": "2023-03-14",
+      "status": "tie"
+    },
+    {
+      "date": "2023-04-12",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2023-04-05",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2023-05-10",
+      "status": "tie"
+    },
+    {
+      "date": "2023-06-13",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2023-06-06",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2023-07-12",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2023-07-05",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2023-08-10",
+      "status": "missing forecast"
+    },
+    {
+      "date": "2023-09-13",
+      "status": "tie"
+    },
+    {
+      "date": "2023-10-12",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2023-10-05",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2023-11-14",
+      "status": "missing forecast"
+    },
+    {
+      "date": "2023-12-12",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2023-12-05",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2024-01-11",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2024-01-04",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2024-02-13",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2024-02-06",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2024-03-12",
+      "status": "tie"
+    },
+    {
+      "date": "2024-04-10",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2024-04-03",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2024-05-15",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2024-05-08",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2024-06-12",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2024-06-05",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2024-07-11",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2024-07-04",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2024-08-14",
+      "status": "tie"
+    },
+    {
+      "date": "2024-09-11",
+      "status": "tie"
+    },
+    {
+      "date": "2024-10-10",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "missing observed spread"
+      },
+      "control_date": "2024-10-03",
+      "control": {
+        "status": "missing observed spread"
+      }
+    },
+    {
+      "date": "2024-11-13",
+      "status": "tie"
+    },
+    {
+      "date": "2024-12-11",
+      "status": "tie"
+    },
+    {
+      "date": "2026-01-13",
+      "status": "tie"
+    },
+    {
+      "date": "2026-02-13",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "missing M1"
+      },
+      "control_date": "2026-02-06",
+      "control": {
+        "status": "missing M1"
+      }
+    },
+    {
+      "date": "2026-03-11",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "missing M1"
+      },
+      "control_date": "2026-03-04",
+      "control": {
+        "status": "missing M1"
+      }
+    },
+    {
+      "date": "2026-04-10",
+      "status": "missing forecast"
+    },
+    {
+      "date": "2026-05-12",
+      "status": "tie"
+    },
+    {
+      "date": "2026-06-10",
+      "status": "tie"
+    },
+    {
+      "date": "2026-07-14",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "filled",
+        "base": 14.148000000000756,
+        "base_entry": 1784034900,
+        "base_exit": 1784038500,
+        "stress": 13.508000000000429,
+        "stress_entry": 1784034900,
+        "stress_exit": 1784038500
+      },
+      "control_date": "2026-07-07",
+      "control": {
+        "status": "filled",
+        "base": -38.204000000001834,
+        "base_entry": 1783430100,
+        "base_exit": 1783433280,
+        "stress": -38.28399999999994,
+        "stress_entry": 1783430100,
+        "stress_exit": 1783433280
+      }
+    },
+    {
+      "date": "2026-08-12",
+      "status": "tie"
+    },
+    {
+      "date": "2026-09-11",
+      "status": "tie"
+    },
+    {
+      "date": "2026-10-14",
+      "status": "tie"
+    }
+  ]
+}

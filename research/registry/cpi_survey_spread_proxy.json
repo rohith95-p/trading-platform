@@ -1,0 +1,1162 @@
+{
+  "costs": {
+    "base": "spread=bar:260 x1 slip=20 comm=3.5 swap=True/-515.5/0 roll=0 triple=None",
+    "stress": "spread=bar:260 x2 slip=60 comm=3.5 swap=True/-515.5/0 roll=0 triple=None"
+  },
+  "master_hash": "07cf67cd9ff1b5f6",
+  "records": [
+    {
+      "date": "2019-01-11",
+      "status": "tie"
+    },
+    {
+      "date": "2019-02-13",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "filled",
+        "base": 8.089999999999854,
+        "base_entry": 1550067300,
+        "base_exit": 1550070180,
+        "stress": 8.089999999999854,
+        "stress_entry": 1550067300,
+        "stress_exit": 1550070180
+      },
+      "control_date": "2019-02-06",
+      "control": {
+        "status": "filled",
+        "base": -3.725999999999949,
+        "base_entry": 1549462500,
+        "base_exit": 1549463820,
+        "stress": -3.805999999999876,
+        "stress_entry": 1549462500,
+        "stress_exit": 1549463760
+      }
+    },
+    {
+      "date": "2019-03-12",
+      "status": "tie"
+    },
+    {
+      "date": "2019-04-10",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "filled",
+        "base": -4.5379999999998475,
+        "base_entry": 1554902100,
+        "base_exit": 1554902640,
+        "stress": -4.617999999999775,
+        "stress_entry": 1554902100,
+        "stress_exit": 1554902640
+      },
+      "control_date": "2019-04-03",
+      "control": {
+        "status": "filled",
+        "base": -0.5420000000002074,
+        "base_entry": 1554297300,
+        "base_exit": 1554300900,
+        "stress": -1.1539999999998327,
+        "stress_entry": 1554297300,
+        "stress_exit": 1554300900
+      }
+    },
+    {
+      "date": "2019-05-10",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "filled",
+        "base": -1.7059999999999673,
+        "base_entry": 1557494100,
+        "base_exit": 1557497700,
+        "stress": -2.3419999999999344,
+        "stress_entry": 1557494100,
+        "stress_exit": 1557497700
+      },
+      "control_date": "2019-04-26",
+      "control": {
+        "status": "filled",
+        "base": 7.98600000000004,
+        "base_entry": 1556284500,
+        "base_exit": 1556288100,
+        "stress": 7.382000000000225,
+        "stress_entry": 1556284500,
+        "stress_exit": 1556288100
+      }
+    },
+    {
+      "date": "2019-06-12",
+      "status": "tie"
+    },
+    {
+      "date": "2019-07-11",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "filled",
+        "base": 0.5499999999998908,
+        "base_entry": 1562850900,
+        "base_exit": 1562854500,
+        "stress": -0.12999999999994544,
+        "stress_entry": 1562850900,
+        "stress_exit": 1562854500
+      },
+      "control_date": "2019-07-04",
+      "control": {
+        "status": "direction filter",
+        "base": 0.0,
+        "stress": 0.0
+      }
+    },
+    {
+      "date": "2019-08-13",
+      "status": "tie"
+    },
+    {
+      "date": "2019-09-12",
+      "status": "tie"
+    },
+    {
+      "date": "2019-10-10",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "direction filter",
+        "base": 0.0,
+        "stress": 0.0
+      },
+      "control_date": "2019-10-03",
+      "control": {
+        "status": "direction filter",
+        "base": 0.0,
+        "stress": 0.0
+      }
+    },
+    {
+      "date": "2019-11-13",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "filled",
+        "base": -1.2499999999998364,
+        "base_entry": 1573654500,
+        "base_exit": 1573658100,
+        "stress": -1.9299999999996726,
+        "stress_entry": 1573654500,
+        "stress_exit": 1573658100
+      },
+      "control_date": "2019-11-06",
+      "control": {
+        "status": "direction filter",
+        "base": 0.0,
+        "stress": 0.0
+      }
+    },
+    {
+      "date": "2019-12-11",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "direction filter",
+        "base": 0.0,
+        "stress": 0.0
+      },
+      "control_date": "2019-12-04",
+      "control": {
+        "status": "filled",
+        "base": 4.989999999999945,
+        "base_entry": 1575468900,
+        "base_exit": 1575472500,
+        "stress": 4.310000000000109,
+        "stress_entry": 1575468900,
+        "stress_exit": 1575472500
+      }
+    },
+    {
+      "date": "2020-01-14",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "direction filter",
+        "base": 0.0,
+        "stress": 0.0
+      },
+      "control_date": "2020-01-07",
+      "control": {
+        "status": "filled",
+        "base": 5.190000000000218,
+        "base_entry": 1578406500,
+        "base_exit": 1578410100,
+        "stress": 4.510000000000382,
+        "stress_entry": 1578406500,
+        "stress_exit": 1578410100
+      }
+    },
+    {
+      "date": "2020-02-13",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "filled",
+        "base": 3.469999999999964,
+        "base_entry": 1581603300,
+        "base_exit": 1581606900,
+        "stress": 2.7900000000001275,
+        "stress_entry": 1581603300,
+        "stress_exit": 1581606900
+      },
+      "control_date": "2020-02-06",
+      "control": {
+        "status": "direction filter",
+        "base": 0.0,
+        "stress": 0.0
+      }
+    },
+    {
+      "date": "2020-03-11",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "filled",
+        "base": 14.449999999999982,
+        "base_entry": 1583932500,
+        "base_exit": 1583936100,
+        "stress": 13.770000000000145,
+        "stress_entry": 1583932500,
+        "stress_exit": 1583936100
+      },
+      "control_date": "2020-03-04",
+      "control": {
+        "status": "filled",
+        "base": -3.369999999999727,
+        "base_entry": 1583331300,
+        "base_exit": 1583334900,
+        "stress": -13.48399999999976,
+        "stress_entry": 1583331300,
+        "stress_exit": 1583333940
+      }
+    },
+    {
+      "date": "2020-04-10",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "missing M1"
+      },
+      "control_date": "2020-03-27",
+      "control": {
+        "status": "missing quote window"
+      }
+    },
+    {
+      "date": "2020-05-12",
+      "status": "tie"
+    },
+    {
+      "date": "2020-06-10",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "direction filter",
+        "base": 0.0,
+        "stress": 0.0
+      },
+      "control_date": "2020-06-03",
+      "control": {
+        "status": "direction filter",
+        "base": 0.0,
+        "stress": 0.0
+      }
+    },
+    {
+      "date": "2020-07-14",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "filled",
+        "base": -12.904000000000288,
+        "base_entry": 1594732500,
+        "base_exit": 1594735800,
+        "stress": -12.984000000000215,
+        "stress_entry": 1594732500,
+        "stress_exit": 1594735260
+      },
+      "control_date": "2020-07-07",
+      "control": {
+        "status": "direction filter",
+        "base": 0.0,
+        "stress": 0.0
+      }
+    },
+    {
+      "date": "2020-08-12",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "spread filter",
+        "base": 0.0,
+        "stress": 0.0
+      },
+      "control_date": "2020-08-05",
+      "control": {
+        "status": "filled",
+        "base": -16.685999999999986,
+        "base_entry": 1596633300,
+        "base_exit": 1596634860,
+        "stress": -16.765999999999913,
+        "stress_entry": 1596633300,
+        "stress_exit": 1596634860
+      }
+    },
+    {
+      "date": "2020-09-11",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "direction filter",
+        "base": 0.0,
+        "stress": 0.0
+      },
+      "control_date": "2020-08-28",
+      "control": {
+        "status": "filled",
+        "base": -0.6899999999994362,
+        "base_entry": 1598620500,
+        "base_exit": 1598624100,
+        "stress": -1.4499999999991997,
+        "stress_entry": 1598620500,
+        "stress_exit": 1598624100
+      }
+    },
+    {
+      "date": "2020-10-13",
+      "status": "tie"
+    },
+    {
+      "date": "2020-11-12",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "filled",
+        "base": 3.350000000000073,
+        "base_entry": 1605190500,
+        "base_exit": 1605194100,
+        "stress": 2.5900000000003094,
+        "stress_entry": 1605190500,
+        "stress_exit": 1605194100
+      },
+      "control_date": "2020-11-05",
+      "control": {
+        "status": "filled",
+        "base": 26.112000000000243,
+        "base_entry": 1604585700,
+        "base_exit": 1604589180,
+        "stress": 26.112000000000243,
+        "stress_entry": 1604585700,
+        "stress_exit": 1604589240
+      }
+    },
+    {
+      "date": "2020-12-10",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "direction filter",
+        "base": 0.0,
+        "stress": 0.0
+      },
+      "control_date": "2020-12-03",
+      "control": {
+        "status": "filled",
+        "base": 9.7100000000002,
+        "base_entry": 1607004900,
+        "base_exit": 1607008500,
+        "stress": 8.950000000000436,
+        "stress_entry": 1607004900,
+        "stress_exit": 1607008500
+      }
+    },
+    {
+      "date": "2021-01-13",
+      "status": "tie"
+    },
+    {
+      "date": "2021-02-10",
+      "status": "tie"
+    },
+    {
+      "date": "2021-03-10",
+      "status": "tie"
+    },
+    {
+      "date": "2021-04-13",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "direction filter",
+        "base": 0.0,
+        "stress": 0.0
+      },
+      "control_date": "2021-04-06",
+      "control": {
+        "status": "direction filter",
+        "base": 0.0,
+        "stress": 0.0
+      }
+    },
+    {
+      "date": "2021-05-12",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "direction filter",
+        "base": 0.0,
+        "stress": 0.0
+      },
+      "control_date": "2021-05-05",
+      "control": {
+        "status": "direction filter",
+        "base": 0.0,
+        "stress": 0.0
+      }
+    },
+    {
+      "date": "2021-06-10",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "direction filter",
+        "base": 0.0,
+        "stress": 0.0
+      },
+      "control_date": "2021-06-03",
+      "control": {
+        "status": "filled",
+        "base": 25.72800000000023,
+        "base_entry": 1622726100,
+        "base_exit": 1622728200,
+        "stress": 12.370000000000509,
+        "stress_entry": 1622726100,
+        "stress_exit": 1622729700
+      }
+    },
+    {
+      "date": "2021-07-13",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "filled",
+        "base": 0.7500000000001636,
+        "base_entry": 1626182100,
+        "base_exit": 1626185700,
+        "stress": -0.009999999999599829,
+        "stress_entry": 1626182100,
+        "stress_exit": 1626185700
+      },
+      "control_date": "2021-07-06",
+      "control": {
+        "status": "filled",
+        "base": -10.12199999999968,
+        "base_entry": 1625577300,
+        "base_exit": 1625580000,
+        "stress": -10.201999999999607,
+        "stress_entry": 1625577300,
+        "stress_exit": 1625578620
+      }
+    },
+    {
+      "date": "2021-08-11",
+      "status": "tie"
+    },
+    {
+      "date": "2021-09-14",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "filled",
+        "base": -13.619999999999727,
+        "base_entry": 1631625300,
+        "base_exit": 1631626740,
+        "stress": -13.699999999999655,
+        "stress_entry": 1631625300,
+        "stress_exit": 1631626740
+      },
+      "control_date": "2021-09-07",
+      "control": {
+        "status": "missing M1"
+      }
+    },
+    {
+      "date": "2021-10-13",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "filled",
+        "base": -13.715999999999731,
+        "base_entry": 1634130900,
+        "base_exit": 1634131800,
+        "stress": -13.795999999999658,
+        "stress_entry": 1634130900,
+        "stress_exit": 1634131800
+      },
+      "control_date": "2021-10-06",
+      "control": {
+        "status": "filled",
+        "base": -2.8700000000001817,
+        "base_entry": 1633526100,
+        "base_exit": 1633529700,
+        "stress": -3.430000000000127,
+        "stress_entry": 1633526100,
+        "stress_exit": 1633529700
+      }
+    },
+    {
+      "date": "2021-11-10",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "direction filter",
+        "base": 0.0,
+        "stress": 0.0
+      },
+      "control_date": "2021-11-03",
+      "control": {
+        "status": "spread filter",
+        "base": 0.0,
+        "stress": 0.0
+      }
+    },
+    {
+      "date": "2021-12-10",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "direction filter",
+        "base": 0.0,
+        "stress": 0.0
+      },
+      "control_date": "2021-11-26",
+      "control": {
+        "status": "missing quote window"
+      }
+    },
+    {
+      "date": "2022-01-12",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "missing quote window"
+      },
+      "control_date": "2022-01-05",
+      "control": {
+        "status": "direction filter",
+        "base": 0.0,
+        "stress": 0.0
+      }
+    },
+    {
+      "date": "2022-02-10",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "spread filter",
+        "base": 0.0,
+        "stress": 0.0
+      },
+      "control_date": "2022-02-03",
+      "control": {
+        "status": "direction filter",
+        "base": 0.0,
+        "stress": 0.0
+      }
+    },
+    {
+      "date": "2022-03-10",
+      "status": "tie"
+    },
+    {
+      "date": "2022-04-12",
+      "status": "tie"
+    },
+    {
+      "date": "2022-05-11",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "filled",
+        "base": -16.560000000000237,
+        "base_entry": 1652274900,
+        "base_exit": 1652276520,
+        "stress": -16.63999999999971,
+        "stress_entry": 1652274900,
+        "stress_exit": 1652276520
+      },
+      "control_date": "2022-05-04",
+      "control": {
+        "status": "direction filter",
+        "base": 0.0,
+        "stress": 0.0
+      }
+    },
+    {
+      "date": "2022-06-10",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "direction filter",
+        "base": 0.0,
+        "stress": 0.0
+      },
+      "control_date": "2022-05-27",
+      "control": {
+        "status": "direction filter",
+        "base": 0.0,
+        "stress": 0.0
+      }
+    },
+    {
+      "date": "2022-07-13",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "filled",
+        "base": -17.43399999999958,
+        "base_entry": 1657718100,
+        "base_exit": 1657719600,
+        "stress": -17.513999999999506,
+        "stress_entry": 1657718100,
+        "stress_exit": 1657719600
+      },
+      "control_date": "2022-07-06",
+      "control": {
+        "status": "direction filter",
+        "base": 0.0,
+        "stress": 0.0
+      }
+    },
+    {
+      "date": "2022-08-10",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "filled",
+        "base": -2.169999999999909,
+        "base_entry": 1660137300,
+        "base_exit": 1660140900,
+        "stress": -2.7299999999998543,
+        "stress_entry": 1660137300,
+        "stress_exit": 1660140900
+      },
+      "control_date": "2022-08-03",
+      "control": {
+        "status": "filled",
+        "base": -10.564000000000142,
+        "base_entry": 1659532500,
+        "base_exit": 1659535200,
+        "stress": -10.64400000000007,
+        "stress_entry": 1659532500,
+        "stress_exit": 1659534300
+      }
+    },
+    {
+      "date": "2022-09-13",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "filled",
+        "base": -16.063999999999687,
+        "base_entry": 1663074900,
+        "base_exit": 1663076460,
+        "stress": -16.143999999999615,
+        "stress_entry": 1663074900,
+        "stress_exit": 1663076460
+      },
+      "control_date": "2022-09-06",
+      "control": {
+        "status": "filled",
+        "base": -8.684000000000033,
+        "base_entry": 1662470100,
+        "base_exit": 1662471840,
+        "stress": -8.76399999999996,
+        "stress_entry": 1662470100,
+        "stress_exit": 1662470700
+      }
+    },
+    {
+      "date": "2022-10-13",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "filled",
+        "base": -0.43000000000012734,
+        "base_entry": 1665666900,
+        "base_exit": 1665670500,
+        "stress": -0.9900000000000728,
+        "stress_entry": 1665666900,
+        "stress_exit": 1665670500
+      },
+      "control_date": "2022-10-06",
+      "control": {
+        "status": "filled",
+        "base": 4.629999999999818,
+        "base_entry": 1665062100,
+        "base_exit": 1665065700,
+        "stress": 4.069999999999872,
+        "stress_entry": 1665062100,
+        "stress_exit": 1665065700
+      }
+    },
+    {
+      "date": "2022-11-10",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "filled",
+        "base": 14.169999999999781,
+        "base_entry": 1668089700,
+        "base_exit": 1668093300,
+        "stress": 13.609999999999836,
+        "stress_entry": 1668089700,
+        "stress_exit": 1668093300
+      },
+      "control_date": "2022-11-03",
+      "control": {
+        "status": "direction filter",
+        "base": 0.0,
+        "stress": 0.0
+      }
+    },
+    {
+      "date": "2022-12-13",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "spread filter",
+        "base": 0.0,
+        "stress": 0.0
+      },
+      "control_date": "2022-12-06",
+      "control": {
+        "status": "direction filter",
+        "base": 0.0,
+        "stress": 0.0
+      }
+    },
+    {
+      "date": "2023-01-12",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "filled",
+        "base": -18.685999999999986,
+        "base_entry": 1673532900,
+        "base_exit": 1673535180,
+        "stress": -18.765999999999913,
+        "stress_entry": 1673532900,
+        "stress_exit": 1673535180
+      },
+      "control_date": "2023-01-05",
+      "control": {
+        "status": "direction filter",
+        "base": 0.0,
+        "stress": 0.0
+      }
+    },
+    {
+      "date": "2023-02-14",
+      "status": "tie"
+    },
+    {
+      "date": "2023-03-14",
+      "status": "tie"
+    },
+    {
+      "date": "2023-04-12",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "filled",
+        "base": -14.908000000000193,
+        "base_entry": 1681305300,
+        "base_exit": 1681306320,
+        "stress": -14.98800000000012,
+        "stress_entry": 1681305300,
+        "stress_exit": 1681306320
+      },
+      "control_date": "2023-04-05",
+      "control": {
+        "status": "filled",
+        "base": -9.37600000000004,
+        "base_entry": 1680700500,
+        "base_exit": 1680701220,
+        "stress": -9.455999999999968,
+        "stress_entry": 1680700500,
+        "stress_exit": 1680701220
+      }
+    },
+    {
+      "date": "2023-05-10",
+      "status": "tie"
+    },
+    {
+      "date": "2023-06-13",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "filled",
+        "base": -14.666000000000004,
+        "base_entry": 1686662100,
+        "base_exit": 1686663900,
+        "stress": -14.745999999999931,
+        "stress_entry": 1686662100,
+        "stress_exit": 1686663900
+      },
+      "control_date": "2023-06-06",
+      "control": {
+        "status": "filled",
+        "base": -8.774000000000179,
+        "base_entry": 1686057300,
+        "base_exit": 1686058680,
+        "stress": -8.854000000000106,
+        "stress_entry": 1686057300,
+        "stress_exit": 1686058680
+      }
+    },
+    {
+      "date": "2023-07-12",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "filled",
+        "base": 21.797999999999938,
+        "base_entry": 1689167700,
+        "base_exit": 1689170040,
+        "stress": 21.797999999999938,
+        "stress_entry": 1689167700,
+        "stress_exit": 1689170040
+      },
+      "control_date": "2023-07-05",
+      "control": {
+        "status": "filled",
+        "base": -7.214000000000233,
+        "base_entry": 1688562900,
+        "base_exit": 1688564400,
+        "stress": -7.29400000000016,
+        "stress_entry": 1688562900,
+        "stress_exit": 1688564160
+      }
+    },
+    {
+      "date": "2023-08-10",
+      "status": "missing forecast"
+    },
+    {
+      "date": "2023-09-13",
+      "status": "tie"
+    },
+    {
+      "date": "2023-10-12",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "filled",
+        "base": 2.8700000000000547,
+        "base_entry": 1697116500,
+        "base_exit": 1697120100,
+        "stress": 2.3100000000001093,
+        "stress_entry": 1697116500,
+        "stress_exit": 1697120100
+      },
+      "control_date": "2023-10-05",
+      "control": {
+        "status": "filled",
+        "base": -8.555999999999877,
+        "base_entry": 1696511700,
+        "base_exit": 1696512480,
+        "stress": -8.635999999999804,
+        "stress_entry": 1696511700,
+        "stress_exit": 1696512420
+      }
+    },
+    {
+      "date": "2023-11-14",
+      "status": "missing forecast"
+    },
+    {
+      "date": "2023-12-12",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "filled",
+        "base": 12.109999999999836,
+        "base_entry": 1702390500,
+        "base_exit": 1702394100,
+        "stress": 11.54999999999989,
+        "stress_entry": 1702390500,
+        "stress_exit": 1702394100
+      },
+      "control_date": "2023-12-05",
+      "control": {
+        "status": "filled",
+        "base": 16.31000000000011,
+        "base_entry": 1701785700,
+        "base_exit": 1701789300,
+        "stress": 15.750000000000163,
+        "stress_entry": 1701785700,
+        "stress_exit": 1701789300
+      }
+    },
+    {
+      "date": "2024-01-11",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "filled",
+        "base": 8.04999999999989,
+        "base_entry": 1704982500,
+        "base_exit": 1704986100,
+        "stress": 7.489999999999945,
+        "stress_entry": 1704982500,
+        "stress_exit": 1704986100
+      },
+      "control_date": "2024-01-04",
+      "control": {
+        "status": "filled",
+        "base": -9.873999999999633,
+        "base_entry": 1704377700,
+        "base_exit": 1704381240,
+        "stress": -9.95399999999956,
+        "stress_entry": 1704377700,
+        "stress_exit": 1704381180
+      }
+    },
+    {
+      "date": "2024-02-13",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "filled",
+        "base": 19.989999999999945,
+        "base_entry": 1707833700,
+        "base_exit": 1707837300,
+        "stress": 19.43,
+        "stress_entry": 1707833700,
+        "stress_exit": 1707837300
+      },
+      "control_date": "2024-02-06",
+      "control": {
+        "status": "direction filter",
+        "base": 0.0,
+        "stress": 0.0
+      }
+    },
+    {
+      "date": "2024-03-12",
+      "status": "tie"
+    },
+    {
+      "date": "2024-04-10",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "filled",
+        "base": -22.343999999999433,
+        "base_entry": 1712754900,
+        "base_exit": 1712756700,
+        "stress": -22.42399999999936,
+        "stress_entry": 1712754900,
+        "stress_exit": 1712756640
+      },
+      "control_date": "2024-04-03",
+      "control": {
+        "status": "direction filter",
+        "base": 0.0,
+        "stress": 0.0
+      }
+    },
+    {
+      "date": "2024-05-15",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "filled",
+        "base": -15.651999999999425,
+        "base_entry": 1715778900,
+        "base_exit": 1715779380,
+        "stress": -15.732000000000262,
+        "stress_entry": 1715778900,
+        "stress_exit": 1715779320
+      },
+      "control_date": "2024-05-08",
+      "control": {
+        "status": "direction filter",
+        "base": 0.0,
+        "stress": 0.0
+      }
+    },
+    {
+      "date": "2024-06-12",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "filled",
+        "base": -14.282000000000444,
+        "base_entry": 1718198100,
+        "base_exit": 1718199120,
+        "stress": -14.362000000000371,
+        "stress_entry": 1718198100,
+        "stress_exit": 1718199120
+      },
+      "control_date": "2024-06-05",
+      "control": {
+        "status": "filled",
+        "base": -10.95000000000011,
+        "base_entry": 1717593300,
+        "base_exit": 1717596900,
+        "stress": -11.51000000000051,
+        "stress_entry": 1717593300,
+        "stress_exit": 1717596900
+      }
+    },
+    {
+      "date": "2024-07-11",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "filled",
+        "base": -17.870000000000182,
+        "base_entry": 1720703700,
+        "base_exit": 1720705320,
+        "stress": -17.944000000000706,
+        "stress_entry": 1720703700,
+        "stress_exit": 1720705260
+      },
+      "control_date": "2024-07-04",
+      "control": {
+        "status": "filled",
+        "base": 2.43,
+        "base_entry": 1720098900,
+        "base_exit": 1720102500,
+        "stress": 1.8699999999995998,
+        "stress_entry": 1720098900,
+        "stress_exit": 1720102500
+      }
+    },
+    {
+      "date": "2024-08-14",
+      "status": "tie"
+    },
+    {
+      "date": "2024-09-11",
+      "status": "tie"
+    },
+    {
+      "date": "2024-10-10",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "direction filter",
+        "base": 0.0,
+        "stress": 0.0
+      },
+      "control_date": "2024-10-03",
+      "control": {
+        "status": "filled",
+        "base": -14.732000000000262,
+        "base_entry": 1727961300,
+        "base_exit": 1727964780,
+        "stress": -14.81200000000019,
+        "stress_entry": 1727961300,
+        "stress_exit": 1727964780
+      }
+    },
+    {
+      "date": "2024-11-13",
+      "status": "tie"
+    },
+    {
+      "date": "2024-12-11",
+      "status": "tie"
+    },
+    {
+      "date": "2026-01-13",
+      "status": "tie"
+    },
+    {
+      "date": "2026-02-13",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "missing M1"
+      },
+      "control_date": "2026-02-06",
+      "control": {
+        "status": "missing M1"
+      }
+    },
+    {
+      "date": "2026-03-11",
+      "status": "directional",
+      "side": -1,
+      "event": {
+        "status": "missing M1"
+      },
+      "control_date": "2026-03-04",
+      "control": {
+        "status": "missing M1"
+      }
+    },
+    {
+      "date": "2026-04-10",
+      "status": "missing forecast"
+    },
+    {
+      "date": "2026-05-12",
+      "status": "tie"
+    },
+    {
+      "date": "2026-06-10",
+      "status": "tie"
+    },
+    {
+      "date": "2026-07-14",
+      "status": "directional",
+      "side": 1,
+      "event": {
+        "status": "filled",
+        "base": 14.148000000000756,
+        "base_entry": 1784034900,
+        "base_exit": 1784038500,
+        "stress": 13.508000000000429,
+        "stress_entry": 1784034900,
+        "stress_exit": 1784038500
+      },
+      "control_date": "2026-07-07",
+      "control": {
+        "status": "filled",
+        "base": -38.204000000001834,
+        "base_entry": 1783430100,
+        "base_exit": 1783433280,
+        "stress": -38.28399999999994,
+        "stress_entry": 1783430100,
+        "stress_exit": 1783433280
+      }
+    },
+    {
+      "date": "2026-08-12",
+      "status": "tie"
+    },
+    {
+      "date": "2026-09-11",
+      "status": "tie"
+    },
+    {
+      "date": "2026-10-14",
+      "status": "tie"
+    }
+  ],
+  "spread_scenario": "Exness Standard opening quote spreads on master bid OHLC",
+  "requested_minutes": 13152,
+  "observed_minutes": 13075
+}
