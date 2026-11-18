@@ -1,0 +1,66 @@
+{
+  "code_sha256": "c873ef9adedfe1ceaa8a9fb2aad1642874b638f6f191458549d9cb6015e0a64f",
+  "macro_sha256": "ec4fa4f6d3ea2587f98ebeb3d354b163b71fb4815d5b04caf6303d72d4ed2663",
+  "bar_sha256": "7fe3db2897c5f4a84cf9a128c455e4622a475fbafd22aa69df087808726ea6cd",
+  "eras": {
+    "early": {
+      "n": 922,
+      "long": 492,
+      "first": "2005-01-03 00:00:00",
+      "last": "2013-12-27 00:00:00",
+      "candidate_mean": 0.05574837310195356,
+      "always_long_mean": -0.5596746203904549,
+      "always_short_mean": -0.11032537960954579,
+      "balanced_mean": -0.33500000000000013,
+      "advantage_over_long": 0.6154229934924085,
+      "double_cost_mean": -0.27925162689804667
+    },
+    "middle": {
+      "n": 982,
+      "long": 502,
+      "first": "2014-01-02 00:00:00",
+      "last": "2020-12-30 00:00:00",
+      "candidate_mean": -0.41958248472505544,
+      "always_long_mean": -0.45357433808553793,
+      "always_short_mean": -0.21642566191446297,
+      "balanced_mean": -0.33500000000000013,
+      "advantage_over_long": 0.033991853360482424,
+      "double_cost_mean": -0.7545824847250555
+    },
+    "recent": {
+      "n": 851,
+      "long": 396,
+      "first": "2021-01-04 00:00:00",
+      "last": "2026-09-03 00:00:00",
+      "candidate_mean": 0.42858166862514235,
+      "always_long_mean": -0.6384582843713262,
+      "always_short_mean": 0.06922796709753024,
+      "balanced_mean": -0.2846151586368979,
+      "advantage_over_long": 1.0670399529964683,
+      "double_cost_mean": 0.1443971797884794
+    }
+  },
+  "all": {
+    "n": 2755,
+    "long": 1390,
+    "first": "2005-01-03 00:00:00",
+    "last": "2026-09-03 00:00:00",
+    "candidate_mean": 0.0014856624319393304,
+    "always_long_mean": -0.5461916515426484,
+    "always_short_mean": -0.09268130671506562,
+    "balanced_mean": -0.31943647912885675,
+    "advantage_over_long": 0.5476773139745875,
+    "double_cost_mean": -0.31781778584392295
+  },
+  "ci95_advantage": [
+    -0.14664144049264458,
+    1.363916749393409
+  ],
+  "gate": false,
+  "missing_grid_session_starts": 472,
+  "proxy_columns": [
+    "dxy",
+    "y10"
+  ],
+  "units": "USD per ounce, session endpoint screen"
+}
