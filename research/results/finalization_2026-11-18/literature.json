@@ -216,6 +216,30 @@
       "relevance": "Prevents confusing GC volume and broker tick volume.",
       "testable_hypothesis": "Cross-venue features require synchronized quotes and explicit basis/roll controls.",
       "reading_status": "Official specification/overview inspected"
+    },
+    {
+      "id": "L11",
+      "title": "Financial Market Effects of FOMC Communication: Evidence from a New Event-Study Database",
+      "authors": [
+        "Miguel Acosta",
+        "Andrea Ajello",
+        "Michael Bauer",
+        "Francesca Loria",
+        "Silvia Miranda-Agrippino"
+      ],
+      "institution": "Wisconsin; Federal Reserve Board; SF Fed; Oxford",
+      "publication_date": "2026-08-27 revision; Working Paper2025-30",
+      "source": "Federal Reserve Bank of San Francisco",
+      "url": "https://www.frbsf.org/wp-content/uploads/wp2025-30.pdf",
+      "dataset": "USMPD FOMC event-window asset changes",
+      "methodology": "High-frequency event studies",
+      "mathematical_model": "Money-market futures first principal component",
+      "main_finding": "Press conferences convey substantial policy information.",
+      "limitations": "Retrospective estimates; not XAUUSD strategy profitability.",
+      "reproducibility": "Public workbook; exact downloaded hash pinned locally.",
+      "relevance": "Use calendar metadata without inventing historical surprise availability.",
+      "testable_hypothesis": "Frozen gold-only delayed-response experiment; results in FOMC_SHOCK_PROPAGATION.md.",
+      "reading_status": "Full text accessible; introduction/methodology inspected, not independently reproduced"
     }
   ],
   "exclusions": [

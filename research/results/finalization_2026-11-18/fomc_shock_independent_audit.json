@@ -1,0 +1,8 @@
+{
+  "checked_scenario_trade_records": 654,
+  "errors": [],
+  "ambiguous_scenario_records": 0,
+  "result_sha256": "4b6333d67cc7c926d1d14d563cd66d9bc519b6687b5f50cc575e2a4e1084fcb6",
+  "auditor_sha256": "c613c95bff6f822335ba70e8eeecb0db32f595c2f75b73073b1780e9ace0c053",
+  "classification": "Independent implementation of declared bar-model arithmetic; overlapping scenario records are not independent trades or broker/tick validation."
+}

@@ -1,6 +1,6 @@
 # Gold research literature — bounded primary-source review
 
-Review date: 18 November 2026. This is a mechanism and validation review, not evidence that any local strategy is profitable. Ten selected primary records, their 13 requested metadata fields, reading depth and limitations are in [literature.json](results/finalization_2026-11-18/literature.json). No strategy evaluation or November holdout access was performed for this review.
+Review date: 18 November 2026. This is a mechanism and validation review, not evidence that any local strategy is profitable. Eleven selected primary records, their 13 requested metadata fields, reading depth and limitations are in [literature.json](results/finalization_2026-11-18/literature.json). No strategy evaluation or November holdout access was performed for this review.
 
 ## Search and inclusion method
 
@@ -22,6 +22,7 @@ The resulting inventory is deliberately bounded. Google/Scholar-style indexing, 
 | L08 | [World Gold Council GRAM](https://www.gold.org/goldhub/tools/gold-return-attribution-model) | Landing page only; methodology PDF403 | Economic factor taxonomy, not forecast proof |
 | L09 | [FRED/ALFRED real-time periods](https://fred.stlouisfed.org/docs/api/fred/realtime_period.html) | Documentation read | Point-in-time macro reconstruction |
 | L10 | [CME Gold specifications](https://www.cmegroup.com/markets/metals/precious/gold-futures.contractSpecs.html) | Specification/overview inspected | Separate futures market from CFD assumptions |
+| L11 | [Acosta et al., revised August2026](https://www.frbsf.org/wp-content/uploads/wp2025-30.pdf) | Introduction/methodology inspected | Public event calendar and availability discipline |
 
 Full-text accessibility is different from a line-by-line reading or an independent reproduction. Neither is claimed where it was not done. The original licensed samples were not obtained. Links allow verification but are mutable; this inventory is not a frozen archive of all source contents.
 
@@ -44,3 +45,7 @@ The existing external database correctly labels its external performance numbers
 Keep a complete experiment ledger with unsuccessful trials and aligned return vectors. The number of effective historical searches is uncertain, so existing DSR values must remain sensitivity analyses. CSCV/PBO needs the full comparable candidate matrix, not only winners; its estimated selection instability is not the probability of tomorrow's loss. Neither DSR nor PBO repairs future-information leakage or incorrect fills. Chronological tests, execution audits and prospective demo reconciliation remain separate requirements.
 
 A useful new mechanism may fail the trading test. The appropriate next output is a small falsifiable experiment with costs and controls, rather than another catalog of promising strategy names.
+
+## Executed macro mechanism follow-up
+
+The original project FOMC normalized-shock propagation experiment was preregistered and executed through BacktestEngine with strict minute coverage. Public calendar metadata was used; retrospective financial surprise columns were excluded. Positive small historical samples failed uncertainty and control gates. See [FOMC_SHOCK_PROPAGATION.md](FOMC_SHOCK_PROPAGATION.md), including an independent fill/accounting audit and an explicitly preserved invalid bootstrap run. The literature prompted a falsifiable experiment, not a profitability endorsement.

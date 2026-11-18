@@ -11,6 +11,7 @@ from scripts.research.fomc_shock_propagation import (
 from src.backtesting.costs import SCENARIOS
 from src.backtesting.engine import EngineConfig
 from tests.test_engine_live_parity import make_bars, DAY
+from scripts.validation.fomc_shock_audit import first_hit
 
 
 def test_features_use_only_completed_pre_and_shock_minutes():
@@ -102,3 +103,20 @@ def test_night_window_requires_explicit_research_process_configuration(monkeypat
     allowed, _ = replay_one(bars, release, feature, SCENARIOS["observed"], 5000., "candidate")
     assert len(allowed.trades) == 1
     assert allowed.trades[0].entry_time == release + 45 * 60
+
+
+@pytest.mark.parametrize("buy,opening,expected", [(True, 80., 79.98), (False, 120., 120.28)])
+def test_independent_auditor_prices_adverse_gap_stop(buy, opening, expected):
+    dtype = [("time", "i8"), ("open", "f8"), ("high", "f8"), ("low", "f8"), ("spread", "i4")]
+    row = np.array([(100, opening, opening + 1, opening - 1, 0)], dtype=dtype)
+    result = first_hit(row, buy, 90. if buy else 110., 110. if buy else 90., 200, .001, 1., .02)
+    assert result[0] == 100
+    assert result[1] == pytest.approx(expected)
+    assert result[2] == "SL"
+
+
+def test_independent_time_exit_cannot_see_later_minute_extrema():
+    dtype = [("time", "i8"), ("open", "f8"), ("high", "f8"), ("low", "f8"), ("spread", "i4")]
+    row = np.array([(100, 100., 200., 1., 0)], dtype=dtype)
+    stamp, fill, reason = first_hit(row, True, 90., 110., 100, .001, 1., .02)
+    assert stamp == 100 and fill == pytest.approx(99.98) and reason == "FOMC_FIXED_TIME"
