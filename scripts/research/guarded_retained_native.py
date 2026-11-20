@@ -27,10 +27,14 @@ def test(roster, mask, year, start, phase, policy="uniform", attempt="", guard=T
     html = OUT / f"{stem}.htm"
     deals = OUT / f"{stem}_deals.csv"
     output = OUT / f"{stem}_audit.json"
+    end = pd.to_datetime(until or ("2026-11-01" if year == 2026 else f"{year+1}-01-01"), utc=True)
+    if end <= start:
+        raise ValueError("Tester cutoff must be later than the start date")
     if output.exists():
         existing = json.loads(output.read_text())
-        if existing["start"] != start.isoformat():
-            raise ValueError("Prior audit has a different activation date")
+        expected = {"start": start.isoformat(), "end_exclusive": end.isoformat(), "guard": guard}
+        if any(existing.get(key) != value for key, value in expected.items()):
+            raise ValueError(f"Prior audit has different settings for {stem}; use a fresh attempt label")
         return existing
     if not (html.exists() and deals.exists()):
         cmd = ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File",
@@ -38,13 +42,16 @@ def test(roster, mask, year, start, phase, policy="uniform", attempt="", guard=T
                "-Year", str(year), "-Mask", str(mask), "-Phase", phase,
                "-FromDate", start.strftime("%Y.%m.%d"), "-Policy", policy]
         if until:
-            cmd.extend(["-ToDate", pd.Timestamp(until).strftime("%Y.%m.%d")])
+            cmd.extend(["-ToDate", end.strftime("%Y.%m.%d")])
         if guard:
             cmd.append("-PayoutGuard")
         if attempt:
             cmd.extend(["-Attempt", attempt])
         subprocess.run(cmd, check=True)
     props, booked = read_report(html)
+    expected_period = f"M15 ({start:%Y.%m.%d} - {end:%Y.%m.%d})"
+    if props.get("Period") != expected_period or props.get("Leverage") != ("1:50" if phase == "funded" else "1:100"):
+        raise ValueError(f"Native report has different dates or leverage for {stem}; use a fresh attempt label")
     exports = read_export(deals)
     assert len(booked) == len(exports)
     for fill, deal in zip(exports.itertuples(), booked):
@@ -55,7 +62,6 @@ def test(roster, mask, year, start, phase, policy="uniform", attempt="", guard=T
     raw.to_csv(OUT / f"{stem}_trades.csv", index=False)
     net = raw.net_pl.sum()
     assert abs(net - float(props["Total Net Profit"].replace(" ", ""))) < .011
-    end = pd.Timestamp(until or ("2026-11-01" if year == 2026 else f"{year+1}-01-01"), tz="UTC")
     cfg = dict(name=stem, phase=phase, net=net, start=int(start.timestamp()), end_exclusive=int(end.timestamp()))
     native = audit_trade_ledger(cfg, raw, NativeAccount, False)
     if phase == "funded" and native["unrestricted"]["max_floating_loss"] >= 100:

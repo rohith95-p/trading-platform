@@ -41,6 +41,23 @@ def test_bad_archive_hash_leaves_no_release(tmp_path):
     assert not (tmp_path / "project").exists()
 
 
+def test_failed_manifest_write_can_retry_same_revision(tmp_path, monkeypatch):
+    bundle = archive(tmp_path)
+    root = tmp_path / "project"
+    digest = demo_release.sha256(bundle)
+
+    def fail_write(*args):
+        raise OSError("disk full")
+
+    with monkeypatch.context() as patch:
+        patch.setattr(demo_release, "_finish", fail_write)
+        with pytest.raises(OSError, match="disk full"):
+            demo_release.prepare_archive(root, bundle, SHA, digest)
+    assert not list((root / "release_staging").iterdir())
+    release = demo_release.prepare_archive(root, bundle, SHA, digest)
+    assert demo_release.verify_release(release)["revision"] == SHA
+
+
 @pytest.mark.parametrize("name", ["src/../../escaped.py", "src/..\\..\\escaped.py", "src/C:escape.py"])
 def test_archive_path_traversal_rejected_before_extract(tmp_path, name):
     bundle = archive(tmp_path, {name: "bad"})

@@ -1,7 +1,6 @@
-# Operations runbook (current as of 2026-10-30)
+# Operations runbook
 
-The bot runs on the AWS Windows VPS only (never also on the PC). Account: Exness demo 198874999, server
-Exness-MT5Trial11, Atlas "1 Step Access $5K" rehearsal (`ULTRA_ATLAS_MODE=1`).
+The runtime inventory below describes the October 30, 2026 rehearsal on the AWS Windows VPS, using Exness demo and the stored Atlas Access $5K profile. Confirm the account and process identity on the VPS before maintenance. [Atlas rule verification](ATLAS_RULES_VERIFICATION.md)
 
 ## What runs
 | Process | Started by | Job |
@@ -24,12 +23,13 @@ Only problems make a sound. Routine messages arrive silently.
 | 📅 `Day summary` at 23:59 IST (every trade of the day, day net, balance; also written to `logs/trade_journal.csv`) | silent | Nothing |
 | 💚 `All good · HH:00` (hourly, Mon–Fri) | silent | Nothing. **If it stops arriving, something is wrong** |
 
-In the pulse, **Daily limit: $X left** is how much equity can still fall today before the Atlas daily rule trips. It is measured from the day's reference (the previous day's highest equity), so profit made today adds to it: up $50 today means $250 + $50 = $300 left. **Max-loss limit** is measured from the highest equity ever reached minus $500, so it does not grow with today's profit until that profit sets a new high.
 | 📊 open trades, 📰 news pause, ℹ️ bot started | silent | Nothing |
 | ℹ️ `Bot stopped: restarting it (attempt 1/3)` | silent | Nothing. It healed itself |
 | ⚠️ MT5 connection lost / order rejected / restart attempt 2 / losses in a row | yes | Usually nothing; the message says if it needs you |
 | ⚠️ `Atlas daily limit: … paused until tomorrow` | yes | Nothing. The bot restarts by itself at 05:30 IST (the new Atlas day) |
 | 🚨 `Atlas safety stop` / `Bot halted` / `Bot is down: watchdog gave up` / other trades found | yes | **Act.** The message ends with 👉 and the exact step |
+
+The pulse's **Daily limit** and **Max-loss limit** show the runtime's remaining equity headroom under its stored rule profile. Compare those limits with the account dashboard before relying on them. [Atlas rule verification](ATLAS_RULES_VERIFICATION.md)
 
 ## When each strategy trades (IST, Mon–Fri)
 | Time (IST) | Strategy | Trades/month (backtest) | Usually closes |
@@ -49,19 +49,23 @@ Every trade is **one order of 0.02 lots**. Not 0.03, and not split into smaller 
 at once (0.06 lots total). At 0.02 lots a $1 move in gold is $2. A typical stop-loss costs $17–35 (0.3–0.7% of $5,000)
 and a take-profit pays about twice that. The size comes from `risk_rules.SIZING_LADDER` (0.02 above $800 balance).
 
-## Commands (PowerShell on the VPS)
+## Stage a pinned VPS release
+
+Use the downloaded GitHub revision ZIP, its exact commit, and the SHA-256 received from the release owner. These commands inspect and stage code. Production activation and account-state recovery have separate procedures. [Deployment readiness](DEPLOYMENT_READINESS.md) · [Atlas state recovery](ATLAS_STATE_RECOVERY.md)
+
 ```powershell
-# health check (read-only)
-powershell -ExecutionPolicy Bypass -File C:\projects\ultra_core\scripts\vps_check.ps1
-# update to the latest GitHub version and restart (keeps .env.local and logs)
-powershell -ExecutionPolicy Bypass -File C:\projects\ultra_core\scripts\vps_update.ps1
-# halt latch
-cd C:\projects\ultra_core; venv\Scripts\python.exe -m scripts.halt status
-cd C:\projects\ultra_core; venv\Scripts\python.exe -m scripts.halt clear --note "checked"
-# stop the bot without touching open trades (their stop/target stay at the broker)
-Get-Process python -ErrorAction SilentlyContinue | Stop-Process -Force
+Set-Location C:\projects\ultra_core
+powershell -NoProfile -File scripts\vps_check.ps1
+.\venv\Scripts\python.exe -m scripts.halt status
+
+$revision = '<full 40-character commit SHA>'
+$archive = '<absolute path to downloaded revision ZIP>'
+$archiveSha = '<verified 64-character SHA-256>'
+powershell -NoProfile -File scripts\vps_update.ps1 -Revision $revision -ArchivePath $archive -ArchiveSha256 $archiveSha
+.\venv\Scripts\python.exe scripts\demo_release.py --verify-release "release_staging\$revision"
 ```
-Do **not** create a `STOP` file to stop the bot: that closes every open trade.
+
+The `STOP` file requests liquidation of open trades. For a maintenance shutdown, identify the exact watchdog and trading-loop processes on the VPS and follow the account-state procedure.
 
 ## Halts
 A halt is stored in `logs/HALT_LATCH.json` and survives restarts. While it is set the watchdog does not restart the
@@ -70,7 +74,7 @@ trading loop. It sends one message and then waits.
 - **Atlas stop caused only by the daily-loss limit**: the latch carries an expiry at the next 00:00 UTC (05:30 IST,
   the new Atlas day). It clears itself and the watchdog restarts the bot (owner decision 2026-10-30).
 - **Everything else** (total drawdown, open-trade loss, margin, a rule-engine error, risk-rules hard halt,
-  `halt set`): stays until you clear it with the command above. The watchdog restarts the bot within a minute.
+  `halt set`): stays latched until an operator clears it after investigating. The watchdog can restart the bot once the latch clears.
 
 The Atlas peak equity and daily reference are saved in `logs/atlas_state.json` every scan. **Do not delete or reset this file to make startup pass.** The18 November2026 schema2 implementation requires account/server/program/phase/rule binding and refuses missing, corrupt or legacy unbound history. Prepare an explicitly reviewed offline migration using [ATLAS_STATE_RECOVERY.md](ATLAS_STATE_RECOVERY.md) before upgrading an established account. No automatic phase change or fresh reset is allowed.
 

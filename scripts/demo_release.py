@@ -7,6 +7,7 @@ maintenance procedure and demo reconciliation. No shell commands are executed.
 from __future__ import annotations
 
 import argparse
+from contextlib import contextmanager
 import hashlib
 import json
 import os
@@ -14,6 +15,7 @@ from pathlib import Path, PurePosixPath
 import re
 import shlex
 import stat
+from tempfile import TemporaryDirectory
 import zipfile
 
 CODE_DIRS = {"src", "scripts", "config", "docs", "tests", ".agents", ".github"}
@@ -47,6 +49,19 @@ def _destination(root: Path, label: str) -> Path:
     if destination.exists():
         raise ValueError("Release directory already exists; immutable releases are never overwritten")
     return destination
+
+
+@contextmanager
+def _stage(destination: Path):
+    """Publish a complete package only after all writes and hashes succeed."""
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    with TemporaryDirectory(prefix=".preparing-", dir=destination.parent) as workspace:
+        staged = Path(workspace) / "release"
+        staged.mkdir()
+        yield staged
+        if destination.exists() or destination.is_symlink():
+            raise ValueError("Release directory already exists; immutable releases are never overwritten")
+        staged.rename(destination)
 
 
 def _finish(destination: Path, manifest: dict) -> dict:
@@ -97,18 +112,18 @@ def prepare_archive(root: Path, archive: Path, revision: str, expected_sha256: s
             selected.append((item, relative))
         if not selected:
             raise ValueError("No permitted release files found")
-        destination.mkdir(parents=True)
-        for item, relative in selected:
-            target = destination.joinpath(*relative.parts)
-            target.parent.mkdir(parents=True, exist_ok=True)
-            with bundle.open(item) as source, target.open("xb") as output:
-                while block := source.read(1024 * 1024):
-                    output.write(block)
-    _finish(destination, {
-        "schema": 1, "kind": "pinned_archive", "revision": revision,
-        "archive_sha256": expected_sha256.lower(), "activation": "NOT_ACTIVATED",
-        "runtime_state_included": False,
-    })
+        with _stage(destination) as staged:
+            for item, relative in selected:
+                target = staged.joinpath(*relative.parts)
+                target.parent.mkdir(parents=True, exist_ok=True)
+                with bundle.open(item) as source, target.open("xb") as output:
+                    while block := source.read(1024 * 1024):
+                        output.write(block)
+            _finish(staged, {
+                "schema": 1, "kind": "pinned_archive", "revision": revision,
+                "archive_sha256": expected_sha256.lower(), "activation": "NOT_ACTIVATED",
+                "runtime_state_included": False,
+            })
     return destination
 
 
@@ -135,16 +150,16 @@ def snapshot_current(root: Path, label: str) -> Path:
             selected.append((source, relative))
     if not selected:
         raise ValueError("No permitted snapshot files found")
-    destination.mkdir(parents=True)
-    for source, relative in selected:
-        target = destination.joinpath(*relative.parts)
-        target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_bytes(source.read_bytes())
-    _finish(destination, {
-        "schema": 1, "kind": "local_code_rollback", "label": label,
-        "activation": "NOT_ACTIVATED", "runtime_state_included": False,
-        "warning": "Code/config snapshot only; preserve and reconcile account runtime state separately",
-    })
+    with _stage(destination) as staged:
+        for source, relative in selected:
+            target = staged.joinpath(*relative.parts)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(source.read_bytes())
+        _finish(staged, {
+            "schema": 1, "kind": "local_code_rollback", "label": label,
+            "activation": "NOT_ACTIVATED", "runtime_state_included": False,
+            "warning": "Code/config snapshot only; preserve and reconcile account runtime state separately",
+        })
     return destination
 
 
@@ -154,6 +169,8 @@ def verify_release(directory: Path) -> dict:
     if manifest_path.is_symlink():
         raise ValueError("Release manifest symlinks are not supported")
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    if not isinstance(manifest, dict):
+        raise ValueError("Invalid release manifest")
     files = manifest.get("files")
     if manifest.get("schema") != 1 or not isinstance(files, dict) or not files:
         raise ValueError("Invalid release manifest")

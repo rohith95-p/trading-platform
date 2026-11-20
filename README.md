@@ -1,122 +1,46 @@
-# Ultra Core — XAUUSD Algorithmic Trading System
+# Ultra Core | XAUUSD trading research on MT5
 
-An XAUUSD (gold) trading and research system built on MetaTrader 5, with a four-strategy portfolio, risk controls and experimental prop-firm accounting. Day-to-day operation (Telegram messages, strategy times, VPS commands): [docs/OPS_RUNBOOK.md](docs/OPS_RUNBOOK.md).
+Ultra Core tests gold strategies, reconciles native MetaTrader 5 fills, and models the path from a $5,000 Atlas Access evaluation to eligible withdrawals. **The current research candidate is Asian Range Filtered + London Momentum Tight for forward demo testing. Funded deployment remains unapproved.** The checked-in runtime still uses the four-strategy configuration documented in the operations runbook. [Research roster](research/results/guarded_retained_mt5/payout_roster.json) · [Runtime and VPS runbook](docs/OPS_RUNBOOK.md)
 
-**Research status, 18 November 2026:** no strategy has established the required independent after-cost edge. The original portfolio lost across its previously untouched2004–2022 evaluation (PF0.90,2,556 trades). Favorable selected-period figures below are historical research artifacts, not deployment approval. Current Atlas public rules differ from the stored production profile; compliance is not certified. Production settings have not been changed by the finalization research.
+## What the MT5 records show
 
-Start with [finalization status](docs/FINALIZATION_STATUS.md), [gold market atlas](research/GOLD_MARKET_ATLAS.md), [execution audit](docs/BACKTEST_REALITY_AUDIT.md), [current Atlas rule verification](docs/ATLAS_RULES_VERIFICATION.md), and [deployment readiness](docs/DEPLOYMENT_READINESS.md).
+The native batch completed **69 evaluation and funded phase runs**, including **37 funded runs**, on Exness Standard XAUUSDm bid/ask ticks. The annual windows were January–December 2025 and January–October 2026. The phased policy traded 0.02 lots in evaluation. It restarted with a fresh funded balance, traded 0.01 lots with one position at a time, and attached a broker-visible stop. November 2026 remains the reserved holdout. [Run index and individual trade ledgers](research/results/guarded_retained_mt5/report.md) · [Native tester source](research/mt5_retained/RetainedAtlas.mq5)
 
-## Architecture
+| Two-strategy portfolio, January evaluation start | Funded trading P&L | Profit factor | Wins / trades | Max modeled funded equity drawdown | First modeled receipt | Cash after fees |
+|---|---:|---:|---:|---:|---|---:|
+| 2025 | +$350.76 | 1.77 | 37 / 80 | 1.76% | $100 on Oct 28 | +$17 |
+| 2026 through October | +$317.05 | 1.59 | 29 / 59 | 3.54% | $100 on Oct 19 | +$17 |
 
-```
-src/
-  core/           Trading engine: main_loop, risk_manager, execution_handler,
-                  sizing_ladder, risk_rules, pre_trade_veto, market_hours,
-                  news_filter, resilience, trade_log, alerts, validation_ledger
-  strategies/     Active portfolio (portfolio_atlas.py) + BaseStrategy interface
-  backtesting/    Replay engine with M1/M15 fills, realistic cost models, D1 gate
-  atlas/          Atlas Funded rule engine (trailing DD, daily loss, consistency)
-  research/       Feature library, candidate screening
-scripts/          Watchdog, VPS update/check scripts, halt CLI, research and validation runners
-research/         Results summaries (results/), pre-registrations (registry/), decision log (DECISIONS.md);
-                  cached XAUUSDm bars are git-ignored
-tests/            pytest suite: strategy logic, risk rules, no-lookahead, engine parity,
-                  sizing ladder, alert priorities, live-config freeze guard
-config/           Atlas rules (atlas_access.json), magic numbers (ultra_magics.json)
-docs/             OPS_RUNBOOK (daily operation), VPS_WINDOWS_SETUP, ATLAS_TEST_PLAN
-```
+[2025 native MT5 report](research/results/guarded_retained_mt5/2025_portfolio_funded_mask5_phase_split_m01d01x5.htm) · [2025 payout audit](research/results/guarded_retained_mt5/2025_portfolio_funded_mask5_phase_split_m01d01x5_audit.json) · [2026 native MT5 report](research/results/guarded_retained_mt5/2026_portfolio_funded_mask5_phase_split_m01d01x5.htm) · [2026 payout audit](research/results/guarded_retained_mt5/2026_portfolio_funded_mask5_phase_split_m01d01x5_audit.json)
 
-## Active Portfolio
+- **Start date changed the result.** Eight fresh quarterly starts produced four modeled $100 payouts, three funded accounts still unpaid, and one evaluation still active at cutoff. Zero breaches were observed under the modeled rules. Receipts of $400 minus seven $83 activated attempts and one $5 entry-only attempt left **−$186 total, or −$23.25 per attempt by cutoff**. The scenarios overlap and later starts had less time to pay. [Quarterly records](research/results/guarded_retained_mt5/report.md) · [Payout decision](research/results/guarded_retained_mt5/payout_decision.md)
+- **The continuous account paid infrequently.** Carrying the April 2025 funded account through October 2026 generated +$626.42 of native trading P&L and two modeled $100 receipts, 356 days apart. Modeled cash after one set of fees was **+$117**. [Continuous funded ledger](research/results/guarded_retained_mt5/2025_portfolio_funded_mask5_phase_split_continuous_audit.json)
+- **The third strategy improved timing.** Adding Asian Breakout brought the 2026 January-start payout forward by 20 days. Both portfolios produced four receipts across the eight quarterly starts. At an added $1 per 0.01-lot round trip, both portfolios lost the January-start payouts in both years. [Portfolio comparisons and cost sensitivity](research/results/guarded_retained_mt5/payout_decision.md)
+- **Luna failed.** The revised Luna executable lost $412.71 with PF 0.75 in the 2026 test. In a separate matched native funded comparison, the retained portfolio with the Luna signal follower breached trailing drawdown before paying. [Luna MT5 report](research/results/luna_payout_candidate/report.md) · [Joint-account comparison](research/results/mt5_joint/report.md)
 
-Four strategies (`src/strategies/portfolio_atlas.py`), each one order of 0.02 lots with a fixed stop and target:
+**Actual cash received was $0.** MT5 supplied fills and trading P&L. The payout ledger applies the modeled Atlas rules and fees to those fills. The test used previously explored dates, broker-specific costs, and a partial historical news calendar. Broker-specific Atlas costs and full event coverage are needed before relying on these payout estimates. [Robustness results](research/results/guarded_retained_mt5/robustness.json) · [Execution audit](docs/BACKTEST_REALITY_AUDIT.md) · [Atlas payout rules](https://help.atlasfunded.com/access)
 
-| Strategy | Magic | Entry (IST) | Logic | SL / TP (ATR14) |
-|---|---|---|---|---|
-| **AsianRangeFilteredV6** | 7320 | 12:45 | Asian range breakout at London open, range-size gate | 2.5x / 3.5x |
-| **AsianBreakoutV6** | 7311 | 12:45 | Unfiltered Asian breakout | 3.0x / 5.0x |
-| **LondonMomentumTightV6** | 7324 | 17:45 | London/NY overlap continuation | 2.0x / 4.0x |
-| **NYSessionReversalV6** | 7313 | 17:45-21:30 | NY session sweep reversal | 2.5x / 4.5x |
+## Code and verification
 
-Independent audit 2026-10-30 (M1 data only, $5K, 0.02 lots, protector off, 24h, daily trend gate on, Atlas guard,
-realistic ECN costs; `research/results/audit_2026-10-30/README.md`): PF 1.08 DEV (2022-08 to 2024-06),
-1.48 TEST (2024-06 to 2026-02), 1.81 RECENT (2026-07 to 2026-10), +$2,020 over all three; about 12 trades a month,
-29% of months lose money. Stops/targets checked against 60 alternatives per leg (`research/results/sltp_sweep_2026-10-30.md`).
-DonchianTrendV6 was removed the same day: on its own it was break-even (89 trades, −$11, PF 0.98).
-These are the numbers with the daily trend gate on, which live applies to every leg since 2026-10-30;
-skipping the gate (as live did before) was break-even (pooled PF 0.99). See section 3 of the audit.
+| Path | Purpose |
+|---|---|
+| `src/core/` | MT5 runtime, order gates, account state, and trade logs |
+| `src/strategies/portfolio_atlas.py` | Existing runtime strategy configuration |
+| `src/backtesting/` | Historical execution engine. Requires M1 coverage by default |
+| `src/atlas/` | Account-rule engine. See the rule verification notes before account use |
+| `research/mt5_retained/` | MT5 tester-only EA and PowerShell runner |
+| `research/results/` | Native reports, chronological deal exports, and account audits |
+| `scripts/demo_release.py` | Hash-verified release staging and code rollback snapshots |
 
-## How It Works
+~~~powershell
+py -3.11 -m venv venv
+.\venv\Scripts\python.exe -m pip install -r requirements.txt
+.\venv\Scripts\python.exe -m pytest tests/ -q
+.\venv\Scripts\python.exe -I scripts/validation/prereg_check.py
+~~~
 
-**60-second loop**, IST clock, symbol `XAUUSDm`, fixed SL/TP in ATR14 multiples.
+GitHub CI runs the Python suite and checks recorded research provenance. Native MT5 reproduction requires a dedicated Windows demo tester and the archived bid/ask data. [CI workflow](https://github.com/rohith95-p/trading-platform/actions/workflows/ci.yml) · [Quote archive documentation](research/xauusd_archive/README.md) · [Atlas rule verification](docs/ATLAS_RULES_VERIFICATION.md)
 
-1. **Safety gates**: single-instance lock, `STOP` file kill switch, Friday 22:30 IST flatten, spread filter, ±15-min news blackout, daily-loss cap, data freshness check.
-2. **D1 EMA20 gate**: bearish daily trend blocks buys, bullish blocks sells. Fails closed (no entries) if D1 data unavailable.
-3. **Trading window**: 06:00–21:30 IST by default; `ULTRA_TRADE_24H=1` (set live) lifts it. Weekend and Friday cut-offs always apply.
-4. **Signal generation**: strategies evaluate on M15/M5 bars, one signal per candle via Highlander ranking (best strategy wins when multiple fire).
-5. **Order path**: `SizingLadder` → `PreTradeVeto` → `risk_rules` (ENFORCE=True) → market order with SL/TP attached.
+## VPS staging
 
-## Risk Management
-
-**Position sizing ladder** (balance-based):
-
-| Balance | Lots | Max Positions | Max Exposure |
-|---|---|---|---|
-| $50–$200 | 0.01 | 1 | 0.01 |
-| $200–$400 | 0.01 | 2 | 0.02 |
-| $400–$800 | 0.01 | 3 | 0.03 |
-| $800+ | 0.02 | 3 | 0.06 |
-
-**Circuit breakers**: 3-consecutive-loss pause (4h), 5-loss day stop, daily loss cap (3%/6%), weekly cap (15%), monthly cap (25%), 30% peak-drawdown hard halt. Demo mode relaxes streak breakers and hard halts for forward testing.
-
-## Atlas Funded Compliance
-
-`src/atlas/rules.py` encodes Atlas **Access** rules from `config/atlas_access.json`:
-- 3% profit target (evaluation), no target when funded
-- 10% trailing equity drawdown (evaluation), 6% (funded)
-- 5% daily loss (evaluation), 3% (funded)
-- News ±5 min blackout, 3-minute minimum hold, 80% margin cap
-- Consistency rule (40%), weekend entry restrictions
-
-`AtlasRuleEngine.check_order()` vets every order pre-send; `monitor()` returns OK / STOP_NEW / FLATTEN. Activated with `ULTRA_ATLAS_MODE=1`.
-
-## Backtesting
-
-`BacktestEngine` replays the live loop: M1 fills where M1 bars exist, M15 with entry-bar testing otherwise (coarse M15 is optimistic; the M1 merge has a hole 2025-09-12 to 2025-10-15). Includes D1 gate, live trading window, dedup, Highlander ranking, realistic ECN costs (spread from bar data + 20pt slippage + $3.50/lot commission).
-
-Data splits used for the live portfolio: **DEV** (2022-08 to 2024-06), **TEST** (2024-06 to 2026-02), **RECENT** (2026-07 to 2026-10).
-
-## Setup
-
-```bash
-python -m venv venv && venv\Scripts\activate
-pip install -r requirements.txt
-copy .env.example .env.local   # MT5_LOGIN, MT5_PASSWORD, MT5_SERVER
-python -m pytest tests -q
-```
-
-**Running the bot**: `start_ultra_core.bat` (starts the watchdog, which starts and supervises the trading loop).
-On the VPS, update with `scripts\vps_update.ps1` and check with `scripts\vps_check.ps1` (see the runbook).
-
-**Environment variables**:
-- `ULTRA_ATLAS_MODE=1` — activate Atlas rule engine
-- `ULTRA_DEMO_MODE=1` — relax streak breakers and hard halts (demo accounts only)
-- `ULTRA_ALLOW_UNVALIDATED=1` — bypass validation ledger check at startup
-- `ULTRA_TRADE_24H=1` — lift the 06:00–21:30 IST entry window
-- `ULTRA_PROTECT_PROFIT=0` — do not run the profit protector (live setting since 2026-10-30)
-- `ULTRA_PULSE_EVERY_H` — hourly Telegram pulse interval (default 1, 0 = off)
-
-## Security
-
-Credentials only via `.env.local` (git-ignored). No API keys, tokens or secrets in the repository.
-
-## Test Suite
-
-Tests cover:
-- Strategy signal generation and no-lookahead bias
-- Risk rules, sizing ladder, circuit breakers
-- Demo relaxation flags (DEMO_RELAX_HARD_HALTS, DEMO_RELAX_STREAK_BREAKERS, DEMO_RELAX_DAILY_CAP)
-- Engine-vs-live parity (sizing ladder caps, execution order)
-- Atlas portfolio integrity (magic uniqueness, config alignment)
-- D1 gate, EMA calculation, market hours, ATR causality
-- Telegram priorities and layout, hourly pulse, halt stand-down
-- Live-config freeze guard (`tests/test_live_freeze.py`)
+The updater prepares a pinned release from a local GitHub revision ZIP, the exact 40-character commit, and the verified SHA-256 of that ZIP. Activation is a separate operations step. Preserve account state and review the documented migration before an upgrade. Store credentials in the local `.env.local` file. [Staging commands](docs/OPS_RUNBOOK.md#stage-a-pinned-vps-release) · [Atlas state recovery](docs/ATLAS_STATE_RECOVERY.md) · [Deployment readiness](docs/DEPLOYMENT_READINESS.md)
