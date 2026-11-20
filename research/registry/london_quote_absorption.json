@@ -1,0 +1,8 @@
+{
+  "counts": {
+    "missing warmup": 6,
+    "no signal": 1748,
+    "missing minute window": 9
+  },
+  "records": []
+}

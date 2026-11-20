@@ -1,0 +1,182 @@
+{
+  "2019\u201321": {
+    "trades": 43,
+    "net": -12.7,
+    "profit_factor": 0.847,
+    "win_pct": 37.2,
+    "expectancy": -0.2953,
+    "max_dd_usd": 29.9,
+    "max_dd_pct": 0.6,
+    "recovery_factor": -0.425,
+    "closed_balance_nonpositive": false,
+    "first_nonpositive_after_trade": null,
+    "annualised_return_pct": -0.08,
+    "calmar_ratio": -0.142,
+    "omega_ratio": 0.847,
+    "sortino_ratio": -0.1041,
+    "sharpe_per_trade": -0.062,
+    "skew": 1.918,
+    "kurtosis": 9.347,
+    "bootstrap": {
+      "mean": -0.2866,
+      "p05": -1.4086,
+      "p50": -0.3148,
+      "p95": 0.9452,
+      "prob_negative": 0.6662
+    },
+    "permutation": {
+      "median_max_dd": 34.91,
+      "p95_max_dd": 49.74,
+      "worst_max_dd": 64.8,
+      "median_final": 4987.3,
+      "p05_final": 4987.3,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 1.0
+    },
+    "ablation": {
+      "net_pl": -12.7,
+      "drop_best_1": -33.35,
+      "drop_worst_1": -5.38,
+      "drop_best_3": -45.47,
+      "drop_worst_3": 7.43,
+      "drop_best_5": -54.65,
+      "drop_worst_5": 18.06,
+      "top3_share_of_gross_profit": 46.7
+    }
+  },
+  "2022\u201324": {
+    "trades": 53,
+    "net": 4.05,
+    "profit_factor": 1.036,
+    "win_pct": 47.2,
+    "expectancy": 0.0765,
+    "max_dd_usd": 53.01,
+    "max_dd_pct": 1.05,
+    "recovery_factor": 0.076,
+    "closed_balance_nonpositive": false,
+    "first_nonpositive_after_trade": null,
+    "annualised_return_pct": 0.03,
+    "calmar_ratio": 0.026,
+    "omega_ratio": 1.036,
+    "sortino_ratio": 0.0215,
+    "sharpe_per_trade": 0.0124,
+    "skew": 1.61,
+    "kurtosis": 8.205,
+    "bootstrap": {
+      "mean": 0.058,
+      "p05": -1.2626,
+      "p50": 0.0322,
+      "p95": 1.5297,
+      "prob_negative": 0.4874
+    },
+    "permutation": {
+      "median_max_dd": 40.25,
+      "p95_max_dd": 60.61,
+      "worst_max_dd": 80.82,
+      "median_final": 5004.05,
+      "p05_final": 5004.05,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "ablation": {
+      "net_pl": 4.05,
+      "drop_best_1": -22.99,
+      "drop_worst_1": 14.09,
+      "drop_best_3": -45.56,
+      "drop_worst_3": 31.93,
+      "drop_best_5": -65.24,
+      "drop_worst_5": 48.13,
+      "top3_share_of_gross_profit": 42.7
+    }
+  },
+  "2026": {
+    "trades": 15,
+    "net": 42.94,
+    "profit_factor": 1.386,
+    "win_pct": 40.0,
+    "expectancy": 2.8628,
+    "max_dd_usd": 77.16,
+    "max_dd_pct": 1.51,
+    "recovery_factor": 0.557,
+    "closed_balance_nonpositive": false,
+    "first_nonpositive_after_trade": null,
+    "annualised_return_pct": 1.03,
+    "calmar_ratio": 0.685,
+    "omega_ratio": 1.386,
+    "sortino_ratio": 0.2139,
+    "sharpe_per_trade": 0.1082,
+    "skew": 1.041,
+    "kurtosis": 3.564,
+    "bootstrap": {
+      "mean": 2.9146,
+      "p05": -7.6152,
+      "p50": 2.5195,
+      "p95": 14.9119,
+      "prob_negative": 0.3508
+    },
+    "permutation": {
+      "median_max_dd": 66.43,
+      "p95_max_dd": 100.99,
+      "worst_max_dd": 111.34,
+      "median_final": 5042.94,
+      "p05_final": 5042.94,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "ablation": {
+      "net_pl": 42.94,
+      "drop_best_1": -17.93,
+      "drop_worst_1": 78.2,
+      "drop_best_3": -101.01,
+      "drop_worst_3": 123.65,
+      "drop_best_5": -110.6,
+      "drop_worst_5": 145.75,
+      "top3_share_of_gross_profit": 93.3
+    }
+  },
+  "pooled": {
+    "trades": 111,
+    "net": 34.3,
+    "profit_factor": 1.112,
+    "win_pct": 42.3,
+    "expectancy": 0.309,
+    "max_dd_usd": 77.16,
+    "max_dd_pct": 1.51,
+    "recovery_factor": 0.445,
+    "closed_balance_nonpositive": false,
+    "first_nonpositive_after_trade": null,
+    "annualised_return_pct": 0.1,
+    "calmar_ratio": 0.066,
+    "omega_ratio": 1.112,
+    "sortino_ratio": 0.0535,
+    "sharpe_per_trade": 0.0279,
+    "skew": 2.629,
+    "kurtosis": 18.222,
+    "bootstrap": {
+      "mean": 0.3296,
+      "p05": -1.3068,
+      "p50": 0.2724,
+      "p95": 2.1882,
+      "prob_negative": 0.396
+    },
+    "permutation": {
+      "median_max_dd": 93.82,
+      "p95_max_dd": 140.36,
+      "worst_max_dd": 204.51,
+      "median_final": 5034.3,
+      "p05_final": 5034.3,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "ablation": {
+      "net_pl": 34.3,
+      "drop_best_1": -26.58,
+      "drop_worst_1": 69.55,
+      "drop_best_3": -114.2,
+      "drop_worst_3": 115.0,
+      "drop_best_5": -157.35,
+      "drop_worst_5": 137.1,
+      "top3_share_of_gross_profit": 43.6
+    }
+  }
+}
