@@ -1,0 +1,106 @@
+{
+  "metrics": {
+    "Period": "M15 (2026.01.01 - 2026.11.01)",
+    "Leverage": "1:100",
+    "History Quality": "100% real ticks",
+    "Ticks": "80478503",
+    "Total Net Profit": "-822.02",
+    "Gross Profit": "782.34",
+    "Equity Drawdown Maximal": "1 050.06 (20.09%)",
+    "Gross Loss": "-1 604.36",
+    "Equity Drawdown Relative": "20.09% (1 050.06)",
+    "Profit Factor": "0.49",
+    "Total Trades": "145",
+    "Profit Trades (% of total)": "110 (75.86%)"
+  },
+  "evaluation_first_event": "daily",
+  "events": {
+    "target": "2026-02-03T07:45:03+00:00",
+    "inactivity": "2026-04-17T13:15:00+00:00",
+    "daily": "2026-01-29T15:28:00.146000+00:00",
+    "trailing": "2026-03-18T13:01:13.069000+00:00"
+  },
+  "crossings": {
+    "daily": {
+      "equity": 4858.825,
+      "balance": 5118.53,
+      "reference_equity": 5116.51,
+      "peak_equity": 5120.494
+    },
+    "trailing": {
+      "equity": 4704.479999999996,
+      "balance": 5228.04,
+      "reference_equity": 5221.53,
+      "peak_equity": 5229.752
+    }
+  },
+  "max_floating_loss": 1075.27,
+  "max_daily_loss": 1068.76,
+  "max_open_lots": 0.64,
+  "max_order_lots": 0.32,
+  "months": "2026-01-01 to 2026-11-01 exclusive",
+  "tick_count": 80478503,
+  "wins": 110,
+  "trade_expectancy": -5.669,
+  "pnl_without_best": -989.24,
+  "full_window_days_at_least_25_before_deductions": 0,
+  "risk_metrics": {
+    "closed_trades": {
+      "profit_factor": 0.48763369817248,
+      "profit_factor_status": "finite",
+      "sortino_ratio": -0.12804809631429595,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 782.34,
+      "gross_loss_unrounded": 1604.3600000000001
+    },
+    "omega_at_zero": 0.48763369817248,
+    "closed_balance": {
+      "years": 0.8323066392881588,
+      "annualised_return_pct": -19.410185358121225,
+      "max_drawdown": 1050.0600000000004,
+      "max_drawdown_pct": 20.085156196203556,
+      "max_drawdown_duration_days": 227.50962962962964,
+      "end_balance": 4177.98,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": -0.9663945437372345,
+      "recovery_factor": -0.7828314572500615,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "shuffled_closed_trades": {
+      "median_max_dd": 968.09,
+      "p95_max_dd": 1178.53,
+      "worst_max_dd": 1369.69,
+      "median_final": 4177.98,
+      "p05_final": 4177.98,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 1.0
+    },
+    "ablation": {
+      "net_pl": -822.02,
+      "drop_best_1": -989.24,
+      "drop_worst_1": -493.46,
+      "drop_best_3": -1104.3,
+      "drop_worst_3": -24.41,
+      "drop_best_5": -1211.48,
+      "drop_worst_5": 249.55,
+      "top3_share_of_gross_profit": 36.1
+    }
+  },
+  "native_tick_count": 80478503,
+  "phase": "evaluation",
+  "daily_first_crossing_seconds_since_fill": 780.146,
+  "trailing_first_crossing_seconds_since_fill": 73.069,
+  "trading_rule_diagnostics": {
+    "2026": {
+      "closed": 145,
+      "short_duration": 66,
+      "short_wins": 66,
+      "short_win_dollars": 176.77,
+      "entry_orders": 145,
+      "entry_orders_without_sl": 145
+    }
+  }
+}

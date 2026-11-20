@@ -1,0 +1,114 @@
+{
+  "metrics": {
+    "Period": "M15 (2025.02.21 - 2026.01.01)",
+    "Leverage": "1:50",
+    "History Quality": "100% real ticks",
+    "Ticks": "67935139",
+    "Total Net Profit": "-789.83",
+    "Gross Profit": "595.44",
+    "Equity Drawdown Maximal": "1 063.67 (20.23%)",
+    "Gross Loss": "-1 385.27",
+    "Equity Drawdown Relative": "20.23% (1 063.67)",
+    "Profit Factor": "0.43",
+    "Total Trades": "227",
+    "Profit Trades (% of total)": "151 (66.52%)"
+  },
+  "events": {
+    "inactivity": "2025-06-04T10:00:00+00:00",
+    "daily": "2025-04-16T01:03:16.605000+00:00",
+    "protector": "2025-04-16T01:02:32.785000+00:00",
+    "trailing": "2025-05-05T09:58:34.191000+00:00"
+  },
+  "crossings": {
+    "daily": {
+      "equity": 5022.729999999996,
+      "balance": 5178.17,
+      "reference_equity": 5178.17,
+      "peak_equity": 5178.224
+    },
+    "protector": {
+      "equity": 5078.106,
+      "balance": 5178.17,
+      "reference_equity": 5178.17,
+      "peak_equity": 5178.224
+    },
+    "trailing": {
+      "equity": 4943.116999999998,
+      "balance": 5257.8,
+      "reference_equity": 5253.8,
+      "peak_equity": 5259.514999999999
+    }
+  },
+  "max_floating_loss": 1088.12,
+  "max_daily_loss": 1084.12,
+  "max_open_lots": 0.64,
+  "max_order_lots": 0.32,
+  "months": "2025-02-21 to 2026-01-01 exclusive",
+  "tick_count": 67935139,
+  "wins": 151,
+  "trade_expectancy": -3.479,
+  "pnl_without_best": -846.35,
+  "full_window_days_at_least_25_before_deductions": 0,
+  "risk_metrics": {
+    "closed_trades": {
+      "profit_factor": 0.429836782721058,
+      "profit_factor_status": "finite",
+      "sortino_ratio": -0.1061844067301777,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 595.4399999999999,
+      "gross_loss_unrounded": 1385.2699999999998
+    },
+    "omega_at_zero": 0.429836782721058,
+    "closed_balance": {
+      "years": 0.8596851471594799,
+      "annualised_return_pct": -18.12672051291786,
+      "max_drawdown": 1047.63,
+      "max_drawdown_pct": 19.925253908478833,
+      "max_drawdown_duration_days": 240.90703703703704,
+      "end_balance": 4210.17,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": -0.909735986109786,
+      "recovery_factor": -0.7539207544648397,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "shuffled_closed_trades": {
+      "median_max_dd": 873.9,
+      "p95_max_dd": 982.54,
+      "worst_max_dd": 1114.1,
+      "median_final": 4210.17,
+      "p05_final": 4210.17,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 1.0
+    },
+    "ablation": {
+      "net_pl": -789.83,
+      "drop_best_1": -846.35,
+      "drop_worst_1": -438.44,
+      "drop_best_3": -901.53,
+      "drop_worst_3": -26.35,
+      "drop_best_5": -940.21,
+      "drop_worst_5": 167.47,
+      "top3_share_of_gross_profit": 18.8
+    }
+  },
+  "native_tick_count": 67935139,
+  "phase": "funded",
+  "daily_first_crossing_seconds_since_fill": 196.605,
+  "trailing_first_crossing_seconds_since_fill": 814.191,
+  "protector_first_crossing_seconds_since_fill": 152.785,
+  "trading_rule_diagnostics": {
+    "2025": {
+      "closed": 227,
+      "short_duration": 43,
+      "short_wins": 43,
+      "short_win_dollars": 182.51,
+      "entry_orders": 227,
+      "entry_orders_without_sl": 227
+    }
+  },
+  "first_funded_event_on_unchanged_fills": "protector",
+  "funded_assumption": "Quote reconstruction uses unmodified EA fills. The first Protector event calls for liquidation. Native positions after that event cannot establish subsequent account status or payouts."
+}

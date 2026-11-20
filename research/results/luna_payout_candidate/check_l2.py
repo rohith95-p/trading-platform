@@ -11,14 +11,16 @@ from scripts.research.luna_six_month_audit import portfolio_states, read_report,
 from src.backtesting.metrics import closed_balance_metrics, drop_best_worst, monte_carlo_paths, pnl_ratios
 
 
-def check(report, cache, start, end):
+def check(report, cache, start, end, *, allowed_tick_count_delta=0, phase="evaluation"):
     metrics, deals = read_report(report)
     times, longs, shorts, cash, balances = portfolio_states(deals)
     assert deals and {row["symbol"] for row in deals} == {"XAUUSDm.L48"}
     realized = [d["profit"] + d["swap"] + d["fee"] for d in deals if d["action"] == "out"]
     entries = [d for d in deals if d["action"] == "in"]
     target = next((d for d in deals if d["action"] == "out" and d["balance"] >= 5150), None)
-    events = {"target": stamp(target["ts"] * 1000)} if target else {}
+    funded = phase == "funded"
+    events = {"target": stamp(target["ts"] * 1000)} if target and not funded else {}
+    crossings = {}
     opened = [pd.Timestamp(d["ts"], unit="s", tz="UTC") for d in entries]
     for first, second in zip([start, *opened], [*opened, end]):
         if second - first >= pd.Timedelta(days=30):
@@ -56,12 +58,22 @@ def check(report, cache, start, end):
                     anchor, last_day = previous, day
                 e = eq[lo:hi]
                 peaks = np.maximum.accumulate(np.maximum(peak, e))
-                for label, mask in [("daily", e < anchor * .95), ("trailing", e < peaks * .90)]:
+                checks = [("daily", e < anchor * (.97 if funded else .95)),
+                          ("trailing", e < peaks * (.94 if funded else .90))]
+                if funded:
+                    checks.append(("protector", balances[ix[lo:hi]] - e >= 100))
+                for label, mask in checks:
                     if label not in events and mask.any():
-                        events[label] = stamp(t[lo + int(mask.argmax())])
+                        offset = int(mask.argmax())
+                        quote = lo + offset
+                        events[label] = stamp(t[quote])
+                        crossings[label] = dict(equity=float(e[offset]), balance=float(balances[ix[quote]]),
+                                                reference_equity=float(anchor), peak_equity=float(peaks[offset]))
                 worst_daily = max(worst_daily, anchor - float(e.min()))
                 peak, previous = float(peaks[-1]), float(e[-1])
-    assert tick_count == int(metrics["Ticks"].replace(" ", "")), (tick_count, metrics["Ticks"])
+    assert abs(tick_count - int(metrics["Ticks"].replace(" ", ""))) <= allowed_tick_count_delta, (
+        tick_count, metrics["Ticks"]
+    )
     assert abs(float(metrics["Total Net Profit"].replace(" ", "")) - deals[-1]["balance"] + 5000.) < .01
     # The project measures these ratios on closed-trade P&L. Grid entries can
     # share the same basket; iid reshuffling is a descriptive sensitivity only.
@@ -74,7 +86,7 @@ def check(report, cache, start, end):
                                                       end_ts=end.timestamp()),
                 shuffled_closed_trades=monte_carlo_paths(samples, 5000.), ablation=drop_best_worst(samples))
     return dict(metrics=metrics, evaluation_first_event=min(events, key=lambda k: events[k], default="pending"),
-                events=events, max_floating_loss=round(worst_floating, 2), max_daily_loss=round(worst_daily, 2),
+                events=events, crossings=crossings, max_floating_loss=round(worst_floating, 2), max_daily_loss=round(worst_daily, 2),
                 max_open_lots=round(max_volume, 2), max_order_lots=max(d["volume"] for d in entries),
                 months=str(start.date()) + " to " + str(end.date()) + " exclusive",
                 tick_count=tick_count, wins=sum(x > 0 for x in realized),
