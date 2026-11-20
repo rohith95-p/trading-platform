@@ -1,0 +1,3 @@
+# Luna, six-month Atlas Access trial
+
+Frozen before replay. Test 2026-05-01 through the final October session on XAUUSDm, M15, supplied Luna defaults, $5,000 and native MT5 broker real ticks. Use current standard Access rules prospectively, $5 entry fee, 1:100 evaluation, 1:50 funded. Stop at first breach or pass. If passed, begin fresh funded simulation from next trading date, assuming immediate activation. Check floating equity including daily reset and inactivity; deduct ineligible funded profits and apply payout windows, split and verified fees. Report gaps and avoid imputing a pass where the evidence is ambiguous.
