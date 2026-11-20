@@ -18,7 +18,8 @@ BOOKS = [("portfolio", 7), ("filtered", 7), ("breakout", 7), ("london", 7),
          ("portfolio", 5), ("portfolio", 6), ("portfolio", 3)]
 
 
-def test(roster, mask, year, start, phase, policy="uniform", attempt="", guard=True, until=None):
+def test(roster, mask, year, start, phase, policy="uniform", attempt="", guard=True, until=None,
+         expected_ticks=None):
     stem = f"{year}_{roster}" + ("_funded" if phase == "funded" else "") + (f"_mask{mask}" if mask != 7 else "")
     if policy == "phase_split":
         stem += "_phase_split"
@@ -35,23 +36,30 @@ def test(roster, mask, year, start, phase, policy="uniform", attempt="", guard=T
         expected = {"start": start.isoformat(), "end_exclusive": end.isoformat(), "guard": guard}
         if any(existing.get(key) != value for key, value in expected.items()):
             raise ValueError(f"Prior audit has different settings for {stem}; use a fresh attempt label")
+        if expected_ticks is not None:
+            verify_tick_count(existing["terminal"], expected_ticks, stem)
         return existing
     if not (html.exists() and deals.exists()):
         cmd = ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File",
                "research/mt5_retained/run_tester.ps1", "-Terminal", str(TERMINAL), "-Roster", roster,
                "-Year", str(year), "-Mask", str(mask), "-Phase", phase,
-               "-FromDate", start.strftime("%Y.%m.%d"), "-Policy", policy]
+               "-FromDate", start.strftime("%Y.%m.%d"), "-Policy", policy,
+               "-OutputDirectory", str(OUT.resolve())]
         if until:
             cmd.extend(["-ToDate", end.strftime("%Y.%m.%d")])
         if guard:
             cmd.append("-PayoutGuard")
         if attempt:
             cmd.extend(["-Attempt", attempt])
+        if expected_ticks is not None:
+            cmd.extend(["-ExpectedTicks", str(expected_ticks)])
         subprocess.run(cmd, check=True)
     props, booked = read_report(html)
     expected_period = f"M15 ({start:%Y.%m.%d} - {end:%Y.%m.%d})"
     if props.get("Period") != expected_period or props.get("Leverage") != ("1:50" if phase == "funded" else "1:100"):
         raise ValueError(f"Native report has different dates or leverage for {stem}; use a fresh attempt label")
+    if expected_ticks is not None:
+        verify_tick_count(props, expected_ticks, stem)
     exports = read_export(deals)
     assert len(booked) == len(exports)
     for fill, deal in zip(exports.itertuples(), booked):
@@ -75,6 +83,12 @@ def test(roster, mask, year, start, phase, policy="uniform", attempt="", guard=T
     output.write_text(json.dumps(result, indent=2))
     print(stem, native["atlas"]["status"], native["atlas"]["time"], net, flush=True)
     return result
+
+
+def verify_tick_count(report, expected_ticks, stem):
+    actual = int(report["Ticks"].replace(" ", ""))
+    if actual != expected_ticks:
+        raise ValueError(f"{stem} used {actual} ticks, archive count is {expected_ticks}")
 
 
 def run(year):

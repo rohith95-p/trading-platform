@@ -20,6 +20,8 @@ The native batch completed **69 evaluation and funded phase runs**, including **
 
 **Actual cash received was $0.** MT5 supplied fills and trading P&L. The payout ledger applies the modeled Atlas rules and fees to those fills. The test used previously explored dates, broker-specific costs, and a partial historical news calendar. Broker-specific Atlas costs and full event coverage are needed before relying on these payout estimates. [Robustness results](research/results/guarded_retained_mt5/robustness.json) · [Execution audit](docs/BACKTEST_REALITY_AUDIT.md) · [Atlas payout rules](https://help.atlasfunded.com/access)
 
+**Earlier-year check without Luna.** Both portfolios lost money in 2022 and 2023 and stayed in evaluation. Both passed in 2024, then lost money once funded. Across the six January-start portfolio attempts, modeled payouts totaled $0 and cash after fees totaled −$186. [2022–2024 MT5 reports and individual strategy results](research/results/retained_early_years/report.md)
+
 ## Code and verification
 
 | Path | Purpose |

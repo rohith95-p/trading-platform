@@ -10,10 +10,11 @@ param(
     [ValidateSet('uniform','phase_split')][string]$Policy='uniform',
     [ValidatePattern('^[a-zA-Z0-9]+$')][string]$Attempt,
     [string]$OutputDirectory,
+    [long]$ExpectedTicks=0,
     [switch]$Compile
 )
 $ErrorActionPreference='Stop'
-if($Year -notin 2025,2026){throw 'This research batch covers 2025 and 2026 only.'}
+if($Year -notin (2022..2026)){throw 'This research batch covers 2022 through 2026.'}
 $terminalRoot=(Resolve-Path -LiteralPath $Terminal).Path
 $root=(Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $resultDir=Join-Path $root 'research/results/retained_mt5'
@@ -60,7 +61,16 @@ $proc.WaitForExit()
 $html=Get-Item (Join-Path $terminalRoot ($base+'.htm'))
 if($html.LastWriteTime -lt $time -or $html.Length -lt 10000){throw 'New complete report missing.'}
 $report=Get-Content $html.FullName -Raw -Encoding Unicode
-if(!$report.Contains("M15 ($FromDate - $ToDate)") -or !$report.Contains('100% real ticks')){throw "Tester did not complete the requested real-tick period for $name."}
+if(!$report.Contains("M15 ($FromDate - $ToDate)") -or
+   (!$report.Contains('100% real ticks') -and !($ExpectedTicks -gt 0 -and $report.Contains('99% real ticks')))){
+    throw "Tester did not complete the requested real-tick period for $name."
+}
+if($ExpectedTicks -gt 0){
+    $count=[regex]::Match($report,'>Ticks:</td>\s*<td[^>]*><b>([\d ]+)</b></td>')
+    if(!$count.Success -or [long]($count.Groups[1].Value -replace ' ','') -ne $ExpectedTicks){
+        throw "Tester tick count does not match the verified archive for $name."
+    }
+}
 $common=Join-Path $env:APPDATA 'MetaQuotes/Terminal/Common/Files'
 $dealFile=Get-Item -LiteralPath (Join-Path $common ($recordId+'.csv')) -ErrorAction SilentlyContinue
 if(!$dealFile -or $dealFile.Length -eq 0){throw "Missing deal export for $recordId. Compile the matching EA and retry."}

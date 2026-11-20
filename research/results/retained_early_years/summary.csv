@@ -1,0 +1,16 @@
+year,book,native_evaluation_net,evaluation_pf,wins,trades,evaluation_drawdown,evaluation_status,evaluation_event,evaluation_end_balance,funded_net,funded_pf,funded_drawdown,funded_status,funded_event,funded_end_balance,first_payout,cash_payout,fees,net_cash,evidence,funded_evidence
+2022,Asian Breakout,-192.27,0.5123,12,48,4.56% (228.48),inactivity_breach,2022-02-20T07:15:00.070000+00:00,4994.26,,,,,,,,0,5,-5,2022_breakout_phase_split_early,
+2022,Asian Range Filtered,-111.91,0.6059,14,45,3.06% (153.30),inactivity_breach,2022-02-20T07:15:00.070000+00:00,4993.16,,,,,,,,0,5,-5,2022_filtered_phase_split_early,
+2022,London Momentum Tight,-103.96,0.7533,17,65,3.25% (164.63),active,,4896.04,,,,,,,,0,5,-5,2022_london_phase_split_early,
+2022,2 strategies,-212.96,0.6899,30,107,4.89% (246.18),active,,4787.04,,,,,,,,0,5,-5,2022_portfolio_mask5_phase_split_early,
+2022,3 strategies,-240.23,0.6635,30,110,5.43% (273.45),active,,4759.77,,,,,,,,0,5,-5,2022_portfolio_phase_split_early,
+2023,Asian Breakout,-61.46,0.8198,16,48,3.31% (166.90),inactivity_breach,2023-09-02T07:15:00.070000+00:00,4908.47,,,,,,,,0,5,-5,2023_breakout_phase_split_early,
+2023,Asian Range Filtered,-93.48,0.6021,13,38,2.65% (133.10),inactivity_breach,2023-09-02T07:15:00.070000+00:00,4899.28,,,,,,,,0,5,-5,2023_filtered_phase_split_early,
+2023,London Momentum Tight,-22.58,0.9313,22,70,2.12% (106.87),inactivity_breach,2023-12-13T12:15:00.165000+00:00,4988.33,,,,,,,,0,5,-5,2023_london_phase_split_early,
+2023,2 strategies,-108.26,0.8052,35,107,4.34% (218.82),active,,4891.74,,,,,,,,0,5,-5,2023_portfolio_mask5_phase_split_early,
+2023,3 strategies,-111.18,0.8203,37,116,4.76% (239.84),active,,4888.82,,,,,,,,0,5,-5,2023_portfolio_phase_split_early,
+2024,Asian Breakout,217.57,1.5795,22,48,2.53% (133.10),inactivity_breach,2024-02-28T07:15:00.620000+00:00,4959.84,,,,,,,,0,5,-5,2024_breakout_phase_split_early,
+2024,Asian Range Filtered,36.21,1.1207,16,41,2.26% (114.93),inactivity_breach,2024-02-28T07:15:00.620000+00:00,4966.61,,,,,,,,0,5,-5,2024_filtered_phase_split_early,
+2024,London Momentum Tight,-41.38,0.9225,24,74,4.78% (245.00),active,,4958.62,,,,,,,,0,5,-5,2024_london_phase_split_early,
+2024,2 strategies,-5.17,0.9938,40,115,6.22% (322.61),passed,2024-05-02T09:35:44.759000+00:00,5152.83,-120.14,0.634,3.25% (162.44),active,,4869.59,,0.0,83,-83.0,2024_portfolio_mask5_phase_split_early,2024_portfolio_funded_mask5_phase_split_early
+2024,3 strategies,100.61,1.1186,46,122,4.31% (223.41),passed,2024-05-02T09:35:44.759000+00:00,5152.83,-73.95,0.7796,2.39% (119.55),active,,4915.78,,0.0,83,-83.0,2024_portfolio_phase_split_early,2024_portfolio_funded_phase_split_early

@@ -29,7 +29,14 @@ BAR = np.dtype([('time','<i8'),('open','<f8'),('high','<f8'),('low','<f8'),
 
 @lru_cache(None)
 def coverage():
-    return {row['month']:row for row in json.loads(COVERAGE.read_text())}
+    verified = json.loads((ARCHIVE.parents[2] / 'ticks_XAUUSDm.json').read_text())
+    rows = {
+        row['month']: dict(ticks=row['quote_rows'], first=row['first_utc'],
+                           last=row['last_utc'], sha256=row['sha256'])
+        for row in verified if row['status'] == 'verified'
+    }
+    rows.update({row['month']: row for row in json.loads(COVERAGE.read_text())})
+    return rows
 
 
 def _source(year, month):
