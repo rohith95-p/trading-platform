@@ -95,19 +95,13 @@ Start-ScheduledTask -TaskName "UltraCore"
 When you leave, **close the Remote Desktop window (X)** -- do not "Sign out".
 Signing out kills MT5 and the bot; closing the window keeps them running.
 
-## 7. Update to the latest code
+## 7. Identify the existing deployment before an update
 
-The STOP file **closes all open bot trades** and halts the bot, so only update
-when no trade is open (e.g. on the weekend).
+In the November 21, 2026 inspection, the existing EC2 application directory `C:\projects\ultra_core` was a deployed file copy. `VERSION.txt` identified revision `4b0b6ad`. The trading loop, portfolio, and Atlas profile matched that commit by file hash. It had no Git metadata, so `git pull` there will fail.
 
-```powershell
-cd C:\projects\ultra_core
-New-Item STOP -ItemType File   # flattens bot trades and halts
-git pull
-.\venv\Scripts\pip install -r requirements.txt
-Remove-Item STOP
-Start-ScheduledTask -TaskName "UltraCore"
-```
+For a Git-based update without an archive, prepare a separate checkout on the same VPS, pin the intended commit, and validate it before switching the bot. Keep the current application directory, credentials, logs, and Atlas account state available for the reviewed cutover and rollback. The existing `start_ultra_core.bat` points to `C:\projects\ultra_core`, so a side-by-side checkout by itself never switches the runtime.
+
+The `STOP` file requests liquidation. Use the operations and Atlas state procedures when planning a maintenance shutdown and upgrade. [Operations runbook](OPS_RUNBOOK.md) · [Atlas state recovery](ATLAS_STATE_RECOVERY.md)
 
 ## Troubleshooting
 
