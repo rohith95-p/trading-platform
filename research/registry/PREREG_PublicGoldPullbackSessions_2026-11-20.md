@@ -1,0 +1,3 @@
+# Amendment, 20 November 2026
+
+The initial 60-clock-bar condition spans 15 hours before 10:00 London and crosses the nightly gold trading break. It produced zero trades. Preserve that result. For a separate trial, use 60 successive observed complete M15 bars, allow gaps up to two hours between opens (the nightly maintenance gap), and still require the final bar to close exactly at 10:00. Keep all signal, execution and rejection settings fixed. Weekends and longer outages remain excluded. This assumption admits short historical gaps as well as maintenance. No profitable parameter value has been selected.
