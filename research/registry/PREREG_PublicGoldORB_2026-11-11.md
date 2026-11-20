@@ -1,0 +1,5 @@
+# Gold ORB description transfer
+
+Source: https://www.tradingview.com/script/oYW9gdag-Gold-ORB-Strategy-15-min-Range-5-min-Entry/
+
+The visible description conflicts on target distance. Freeze both interpretations: half the opening range as risk, and target either one or two full ranges from entry. New York local clock including DST. First five-minute close outside the 09:30–09:45 range; enter next minute before noon, one trade per day, exit outstanding positions at 16:00. Require complete minute records through 16:00 for this descriptive screen and report excluded weekdays. This retrospective coverage filter is not an executable signal. Bid-based bars, ask-side short exits, stop first if ambiguous, gap-aware stops, adverse 20 points on market/stop and $3.50/lot round trip, 0.02 lots. Compare with shuffled entry directions across the same era and timestamps. Score 2005–2011, 2012–2018, 2019–2025. No tuning. Source publication in 2025; earlier years are retrospective. Minimum PF 1.30 every era and pooled target 1.40 before further validation.

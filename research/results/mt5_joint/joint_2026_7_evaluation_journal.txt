@@ -1,0 +1,2 @@
+KM	0	22:20:03.385	Core 01	2026.01.01 00:00:00   JOINT_CHART_PROBE chart=0 error=0
+QS	0	22:20:36.964	Core 01	2026.10.30 20:57:59   JOINT_COUNTS accepted=486 same_blocked=0 opposite_blocked=25 ignored_adds=207 max_positions=1

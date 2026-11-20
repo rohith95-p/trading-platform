@@ -1,0 +1,57 @@
+{
+  "method": "Offline C++ execution of the native include logic after translating MQL container signatures and stubbing CopyRates with the observed chronological archive. Compares exact production strategy evaluate, engine live D1 bias, risk manager ATR and consolidation. Native MetaEditor compilation succeeded with zero warnings and errors. This check excludes MT5 history construction and execution.",
+  "columns": [
+    "UTC",
+    "AsianRangeFiltered",
+    "AsianBreakout",
+    "LondonMomentumTight",
+    "D1Bias",
+    "entryATR",
+    "managementATR",
+    "consolidates"
+  ],
+  "years": [
+    {
+      "year": 2025,
+      "candidate_minutes": 1545,
+      "raw_detections": [
+        168,
+        189,
+        255
+      ],
+      "mismatches_by_column": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "entry_atr_max_abs_diff": 4.618527782440651e-14,
+      "management_atr_max_abs_diff": 4.973799150320701e-14
+    },
+    {
+      "year": 2026,
+      "candidate_minutes": 1290,
+      "raw_detections": [
+        99,
+        117,
+        249
+      ],
+      "mismatches_by_column": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "entry_atr_max_abs_diff": 4.973799150320701e-14,
+      "management_atr_max_abs_diff": 4.973799150320701e-14
+    }
+  ]
+}

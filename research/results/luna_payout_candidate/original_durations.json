@@ -1,0 +1,42 @@
+{
+  "2022": {
+    "closed": 148,
+    "short_duration": 4,
+    "short_wins": 4,
+    "short_win_dollars": 8.68,
+    "entry_orders": 148,
+    "entry_orders_without_sl": 148
+  },
+  "2023": {
+    "closed": 884,
+    "short_duration": 58,
+    "short_wins": 58,
+    "short_win_dollars": 220.98,
+    "entry_orders": 884,
+    "entry_orders_without_sl": 884
+  },
+  "2024": {
+    "closed": 1022,
+    "short_duration": 141,
+    "short_wins": 141,
+    "short_win_dollars": 541.52,
+    "entry_orders": 1022,
+    "entry_orders_without_sl": 1022
+  },
+  "2025": {
+    "closed": 1062,
+    "short_duration": 267,
+    "short_wins": 267,
+    "short_win_dollars": 996.87,
+    "entry_orders": 1062,
+    "entry_orders_without_sl": 1062
+  },
+  "2026": {
+    "closed": 749,
+    "short_duration": 342,
+    "short_wins": 342,
+    "short_win_dollars": 1254.62,
+    "entry_orders": 749,
+    "entry_orders_without_sl": 749
+  }
+}

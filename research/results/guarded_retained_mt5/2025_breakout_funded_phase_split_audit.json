@@ -1,0 +1,182 @@
+{
+  "name": "2025_breakout_funded_phase_split",
+  "attempt": "",
+  "guard": true,
+  "policy": "phase_split",
+  "year": 2025,
+  "roster": "breakout",
+  "mask": 7,
+  "phase": "funded",
+  "start": "2025-04-17T00:00:00+00:00",
+  "end_exclusive": "2026-01-01T00:00:00+00:00",
+  "terminal": {
+    "Period": "M15 (2025.04.17 - 2026.01.01)",
+    "Leverage": "1:50",
+    "History Quality": "100% real ticks",
+    "Ticks": "57544307",
+    "Total Net Profit": "256.48",
+    "Gross Profit": "506.14",
+    "Equity Drawdown Maximal": "64.72 (1.25%)",
+    "Gross Loss": "-249.66",
+    "Equity Drawdown Relative": "1.25% (64.72)",
+    "Profit Factor": "2.03",
+    "Total Trades": "35",
+    "Profit Trades (% of total)": "20 (57.14%)"
+  },
+  "trading": {
+    "trades": 35,
+    "wins": 20,
+    "win_rate_pct": 57.14285714285714,
+    "net": 256.48,
+    "pf": 2.0273171513258035,
+    "gross_profit": 506.14000000000004,
+    "gross_loss": 249.66
+  },
+  "standardized_ecn": {
+    "trades": 35,
+    "wins": 20,
+    "win_rate_pct": 57.14285714285714,
+    "net": 254.9944999999987,
+    "pf": 2.02035144863019,
+    "gross_profit": 504.90299999999957,
+    "gross_loss": 249.90850000000083
+  },
+  "native": {
+    "name": "2025_breakout_funded_phase_split",
+    "phase": "funded",
+    "start": "2025-04-17T00:00:00+00:00",
+    "end_exclusive": "2026-01-01T00:00:00+00:00",
+    "unrestricted": {
+      "status": "active",
+      "time": null,
+      "entries": 35,
+      "closes": 35,
+      "balance": 5256.479999999998,
+      "equity": 5256.479999999998,
+      "minimum_equity": 4977.338999999999,
+      "first_trade": "2025-04-21T07:15:00.207000+00:00",
+      "payout_anchor": 5000.0,
+      "next_payout_window": null,
+      "max_equity_drawdown_usd": 68.16500000000087,
+      "max_equity_drawdown_pct": 1.311346547925679,
+      "max_floating_loss": 28.015000000000327,
+      "max_used_margin_to_equity": 0.00845940486564259,
+      "overnight_resets": 9,
+      "peak_equity": 5256.479999999998,
+      "rule_events": [],
+      "protector_strikes": 0,
+      "qualifying_days": 9,
+      "deductions": 0.0,
+      "modeled_payouts": [],
+      "modeled_cash_received": 0.0
+    },
+    "atlas": {
+      "status": "active",
+      "time": null,
+      "entries": 35,
+      "closes": 35,
+      "balance": 5122.629999999998,
+      "equity": 5122.629999999998,
+      "minimum_equity": 4977.338999999999,
+      "first_trade": "2025-04-21T07:15:00.207000+00:00",
+      "payout_anchor": 5122.629999999998,
+      "next_payout_window": "2026-01-05T21:26:38.753000+00:00",
+      "max_equity_drawdown_usd": 68.16500000000087,
+      "max_equity_drawdown_pct": 1.317108478804937,
+      "max_floating_loss": 28.015000000000327,
+      "max_used_margin_to_equity": 0.016992880088930552,
+      "overnight_resets": 9,
+      "peak_equity": 5122.629999999998,
+      "rule_events": [
+        {
+          "time": "2025-06-11T12:30:13.359000+00:00",
+          "event": "profit_deduction",
+          "amount": 22.740000000000002,
+          "ticket": 16
+        }
+      ],
+      "protector_strikes": 0,
+      "qualifying_days": 0,
+      "deductions": 22.740000000000002,
+      "modeled_payouts": [
+        {
+          "time": "2025-12-22T21:26:38.753000+00:00",
+          "gross": 111.11,
+          "modeled_cash": 100.0
+        }
+      ],
+      "modeled_cash_received": 100.0
+    },
+    "news_coverage": "Selected USD releases only; historical Atlas all-currency restrictions unverified.",
+    "payout_assumption": "Request USD 100 cash while flat, normal 90% split (50% after first Protector), immediate settlement and verified KYC assumed; no real payments."
+  },
+  "ecn": {
+    "name": "2025_breakout_funded_phase_split",
+    "phase": "funded",
+    "start": "2025-04-17T00:00:00+00:00",
+    "end_exclusive": "2026-01-01T00:00:00+00:00",
+    "unrestricted": {
+      "status": "active",
+      "time": null,
+      "entries": 35,
+      "closes": 35,
+      "balance": 5254.994499999997,
+      "equity": 5254.994499999997,
+      "minimum_equity": 4977.157999999999,
+      "first_trade": "2025-04-21T07:15:00.207000+00:00",
+      "payout_anchor": 5000.0,
+      "next_payout_window": null,
+      "max_equity_drawdown_usd": 68.39200000000164,
+      "max_equity_drawdown_pct": 1.3159574561221963,
+      "max_floating_loss": 28.07000000000062,
+      "max_used_margin_to_equity": 0.008461842957618142,
+      "overnight_resets": 9,
+      "peak_equity": 5254.994499999997,
+      "rule_events": [],
+      "protector_strikes": 0,
+      "qualifying_days": 8,
+      "deductions": 0.0,
+      "modeled_payouts": [],
+      "modeled_cash_received": 0.0
+    },
+    "atlas": {
+      "status": "active",
+      "time": null,
+      "entries": 35,
+      "closes": 35,
+      "balance": 5121.263999999997,
+      "equity": 5121.263999999997,
+      "minimum_equity": 4977.157999999999,
+      "first_trade": "2025-04-21T07:15:00.207000+00:00",
+      "payout_anchor": 5121.263999999997,
+      "next_payout_window": "2026-01-05T21:26:38.753000+00:00",
+      "max_equity_drawdown_usd": 68.39200000000164,
+      "max_equity_drawdown_pct": 1.3217101993078695,
+      "max_floating_loss": 28.07000000000062,
+      "max_used_margin_to_equity": 0.016997407567315256,
+      "overnight_resets": 9,
+      "peak_equity": 5121.263999999997,
+      "rule_events": [
+        {
+          "time": "2025-06-11T12:30:13.359000+00:00",
+          "event": "profit_deduction",
+          "amount": 22.620500000000277,
+          "ticket": 16
+        }
+      ],
+      "protector_strikes": 0,
+      "qualifying_days": 0,
+      "deductions": 22.620500000000277,
+      "modeled_payouts": [
+        {
+          "time": "2025-12-22T21:26:38.753000+00:00",
+          "gross": 111.11,
+          "modeled_cash": 100.0
+        }
+      ],
+      "modeled_cash_received": 100.0
+    },
+    "news_coverage": "Selected USD releases only; historical Atlas all-currency restrictions unverified.",
+    "payout_assumption": "Request USD 100 cash while flat, normal 90% split (50% after first Protector), immediate settlement and verified KYC assumed; no real payments."
+  }
+}

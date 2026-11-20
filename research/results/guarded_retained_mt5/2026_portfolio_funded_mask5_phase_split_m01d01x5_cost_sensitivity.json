@@ -1,0 +1,52 @@
+{
+  "note": "Hypothetical extra execution cost. Same native entries, exits and evaluation handoff. Native spread and charges already included. No broker quotation implied.",
+  "rows": [
+    {
+      "extra_roundtrip_per_001_usd": 0,
+      "full_window_trading_net": 317.05,
+      "funded_outcome": "active",
+      "payouts": [
+        {
+          "time": "2026-10-19T15:51:46.388000+00:00",
+          "gross": 111.11,
+          "modeled_cash": 100.0
+        }
+      ],
+      "cash_after_attempt_fees": 17.0
+    },
+    {
+      "extra_roundtrip_per_001_usd": 0.25,
+      "full_window_trading_net": 302.3,
+      "funded_outcome": "active",
+      "payouts": [
+        {
+          "time": "2026-10-19T15:51:46.388000+00:00",
+          "gross": 111.11,
+          "modeled_cash": 100.0
+        }
+      ],
+      "cash_after_attempt_fees": 17.0
+    },
+    {
+      "extra_roundtrip_per_001_usd": 0.5,
+      "full_window_trading_net": 287.55,
+      "funded_outcome": "active",
+      "payouts": [],
+      "cash_after_attempt_fees": -83.0
+    },
+    {
+      "extra_roundtrip_per_001_usd": 1.0,
+      "full_window_trading_net": 258.05,
+      "funded_outcome": "active",
+      "payouts": [],
+      "cash_after_attempt_fees": -83.0
+    },
+    {
+      "extra_roundtrip_per_001_usd": 2.0,
+      "full_window_trading_net": 199.05,
+      "funded_outcome": "active",
+      "payouts": [],
+      "cash_after_attempt_fees": -83.0
+    }
+  ]
+}

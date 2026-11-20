@@ -1,0 +1,80 @@
+{
+  "name": "AsianBreakoutV6",
+  "phase": "funded",
+  "start": "2026-02-05T00:00:00+00:00",
+  "end_exclusive": "2026-11-01T00:00:00+00:00",
+  "unrestricted": {
+    "status": "active",
+    "time": null,
+    "entries": 27,
+    "closes": 27,
+    "balance": 5302.45999999997,
+    "equity": 5302.45999999997,
+    "minimum_equity": 4814.774999999986,
+    "first_trade": "2026-02-19T07:15:00.099000+00:00",
+    "payout_anchor": 5000.0,
+    "next_payout_window": null,
+    "max_equity_drawdown_usd": 305.85700000000816,
+    "max_equity_drawdown_pct": 5.9730322350836484,
+    "max_floating_loss": 100.26400000000103,
+    "max_used_margin_to_equity": 0.020459858929183155,
+    "overnight_resets": 2,
+    "peak_equity": 5302.7699999999695,
+    "rule_events": [],
+    "protector_strikes": 0,
+    "qualifying_days": 13,
+    "deductions": 0.0,
+    "modeled_payouts": [],
+    "modeled_cash_received": 0.0
+  },
+  "atlas": {
+    "status": "inactivity_breach",
+    "time": "2026-10-28T07:15:00.084000+00:00",
+    "entries": 26,
+    "closes": 26,
+    "balance": 5144.17999999997,
+    "equity": 5144.17999999997,
+    "minimum_equity": 4814.774999999986,
+    "first_trade": "2026-02-19T07:15:00.099000+00:00",
+    "payout_anchor": 5000.0,
+    "next_payout_window": "2026-03-05T00:00:00+00:00",
+    "max_equity_drawdown_usd": 305.85700000000816,
+    "max_equity_drawdown_pct": 5.9730322350836484,
+    "max_floating_loss": 100.26400000000103,
+    "max_used_margin_to_equity": 0.04091971785836631,
+    "overnight_resets": 2,
+    "peak_equity": 5144.221999999972,
+    "rule_events": [
+      {
+        "event": "protector_liquidation",
+        "strike": 1,
+        "time": "2026-03-23T07:36:41.115000+00:00",
+        "equity": 4956.413999999993,
+        "tickets": [
+          4
+        ]
+      },
+      {
+        "time": "2026-08-07T12:30:04.979000+00:00",
+        "event": "profit_deduction",
+        "amount": 84.00599999999912,
+        "ticket": 17
+      },
+      {
+        "time": "2026-10-28T07:15:00.084000+00:00",
+        "event": "inactivity_breach",
+        "equity": 5144.18,
+        "balance": 5144.18,
+        "midnight_equity": 5144.18,
+        "peak": 5144.222
+      }
+    ],
+    "protector_strikes": 1,
+    "qualifying_days": 11,
+    "deductions": 84.00599999999912,
+    "modeled_payouts": [],
+    "modeled_cash_received": 0.0
+  },
+  "news_coverage": "Selected USD releases only; historical Atlas all-currency restrictions unverified.",
+  "payout_assumption": "Request USD 100 cash while flat, normal 90% split (50% after first Protector), immediate settlement and verified KYC assumed; no real payments."
+}

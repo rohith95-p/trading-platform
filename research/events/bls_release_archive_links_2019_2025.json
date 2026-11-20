@@ -1,0 +1,504 @@
+{
+  "fetched_on": "2026-11-11",
+  "method": "Official BLS archive links resolved through web tool; date encoded in release filename, 08:30 America/New_York assumed except direct spot checks. Data-reference years 2019-2025, actual release years may extend into 2026. Not original scheduled-vintage calendar.",
+  "records": [
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_01132026.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_12182025.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_10242025.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_09112025.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_08122025.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_07152025.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_06112025.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_05132025.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_04102025.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_03122025.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_02122025.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_01152025.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_12112024.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_11132024.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_10102024.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_09112024.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_08142024.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_07112024.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_06122024.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_05152024.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_04102024.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_03122024.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_02132024.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_01112024.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_12122023.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_11142023.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_10122023.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_09132023.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_08102023.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_07122023.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_06132023.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_05102023.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_04122023.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_03142023.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_02142023.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_01122023.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_12132022.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_11102022.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_10132022.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_09132022.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_08102022.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_07132022.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_06102022.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_05112022.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_04122022.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_03102022.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_02102022.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_01122022.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_12102021.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_11102021.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_10132021.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_09142021.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_08112021.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_07132021.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_06102021.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_05122021.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_04132021.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_03102021.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_02102021.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_01132021.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_12102020.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_11122020.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_10132020.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_09112020.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_08122020.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_07142020.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_06102020.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_05122020.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_04102020.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_03112020.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_02132020.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_01142020.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_12112019.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_11132019.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_10102019.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_09122019.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_08132019.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_07112019.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_06122019.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_05102019.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_04102019.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_03122019.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_02132019.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_01092026.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_12162025.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_11202025.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_09052025.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_08012025.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_07032025.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_06062025.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_05022025.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_04042025.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_03072025.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_02072025.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_01102025.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_12062024.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_11012024.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_10042024.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_09062024.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_08022024.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_07052024.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_06072024.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_05032024.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_04052024.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_03082024.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_02022024.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_01052024.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_12082023.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_11032023.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_10062023.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_09012023.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_08042023.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_07072023.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_06022023.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_05052023.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_04072023.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_03102023.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_02032023.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_01062023.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_12022022.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_11042022.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_10072022.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_09022022.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_08052022.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_07082022.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_06032022.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_05062022.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_04012022.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_03042022.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_02042022.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_01072022.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_12032021.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_11052021.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_10082021.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_09032021.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_08062021.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_07022021.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_06042021.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_05072021.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_04022021.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_03052021.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_02052021.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_01082021.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_12042020.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_11062020.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_10022020.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_09042020.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_08072020.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_07022020.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_06052020.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_05082020.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_04032020.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_03062020.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_02072020.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_01102020.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_12062019.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_11012019.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_10042019.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_09062019.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_08022019.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_07052019.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_06072019.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_05032019.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_04052019.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_03082019.htm"
+    },
+    {
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_02012019.htm"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "expert_sha256": "F3F0725EACC5AF95E86974C48B905BC0F186206F3E5B582EEF0235848FB01567",
+  "preset_sha256": "98D42DAE68E00C82C7687D18BCE1EF7AA456055B6AE69AED65F11CCC20B59772",
+  "symbol": "XAUUSDm.L48",
+  "archive": "Exness Standard, bid/ask",
+  "model": 4,
+  "tester": "MetaTrader 5 Strategy Tester",
+  "period": "M15",
+  "initial_balance_usd": 5000,
+  "leverage": "1:100",
+  "start_utc": "2026-01-01",
+  "end_exclusive_utc": "2026-11-01",
+  "quote_manifest": "../luna_four_year_20261120/tick_coverage.json",
+  "stop_risk_interpretation": "post-fill grid stops; submitted orders must be audited",
+  "rules": [
+    "https://help.atlasfunded.com/access",
+    "https://help.atlasfunded.com/stop-loss",
+    "https://help.atlasfunded.com/short-trades"
+  ]
+}

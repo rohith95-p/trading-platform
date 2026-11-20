@@ -1,0 +1,77 @@
+{
+  "comparison": "Each complete source ZIP matched the previous four-year archive digest. Reconciled monthly tick and aggregated-minute volume, first/last millisecond, and directly decoded the first 256 source rows per month for UTC ms and both bid/ask sides.",
+  "months": [
+    {
+      "month": "2025-01",
+      "minute_count": 30019,
+      "tick_count": 4587443,
+      "sha256": "4e4c8b40d1e1c404fd7bc002962a8299801baa2349b4ce049eb986d9b5f19e22"
+    },
+    {
+      "month": "2025-02",
+      "minute_count": 27351,
+      "tick_count": 5126024,
+      "sha256": "089ad981044eefbfee303d246b57d6c36f62f28bc6927fbe1b6bfdd074f33053"
+    },
+    {
+      "month": "2025-03",
+      "minute_count": 29013,
+      "tick_count": 4385357,
+      "sha256": "1a71174e5897b3a540f924356e0887a23ba88ed9d8eef7a6eba63bd66f0f64c1"
+    },
+    {
+      "month": "2025-04",
+      "minute_count": 28847,
+      "tick_count": 7867201,
+      "sha256": "e6684c4572303366ccfca1f7e3704ae6550410e76c28ee7fecfc7a468fe062a6"
+    },
+    {
+      "month": "2025-05",
+      "minute_count": 29984,
+      "tick_count": 6576405,
+      "sha256": "797e6ce6bd622aaad2bb50d18fd92c3a0c11a43db35db53b360d61698b9c23e4"
+    },
+    {
+      "month": "2025-06",
+      "minute_count": 28780,
+      "tick_count": 5158156,
+      "sha256": "b7d5a48562076be27f70a33ea3fb6f8e64e957fa619e50718f7bc89625b026d7"
+    },
+    {
+      "month": "2025-07",
+      "minute_count": 31383,
+      "tick_count": 4161535,
+      "sha256": "ba7b592391ed3cd9757aa76ee972f48efe0473bf3c5605198df6df0a922ea343"
+    },
+    {
+      "month": "2025-08",
+      "minute_count": 28881,
+      "tick_count": 3619594,
+      "sha256": "95a0944b58037efbaf47502ead466340b7dac4ceceeb9da3af98b3b9eb7650bf"
+    },
+    {
+      "month": "2025-09",
+      "minute_count": 30096,
+      "tick_count": 5232883,
+      "sha256": "150b5a41a892e6f8482ca7c7ea471943a3389d34e177984152d701005dd6f0d8"
+    },
+    {
+      "month": "2025-10",
+      "minute_count": 31518,
+      "tick_count": 12491166,
+      "sha256": "55a0cbdf3d0f0ce0ae6693135e47acdd8b64fdd02a6c12795a3bb8a9158ab0ad"
+    },
+    {
+      "month": "2025-11",
+      "minute_count": 27227,
+      "tick_count": 8106671,
+      "sha256": "533a824186ef5d34088e74d15dcce767244d49ce08c83aef4777a16e62c2a6fc"
+    },
+    {
+      "month": "2025-12",
+      "minute_count": 29982,
+      "tick_count": 8971105,
+      "sha256": "15e77eac5f35daa7372543946b4107a80ad4e22e232e7a9f9e3ba4df80367de5"
+    }
+  ]
+}

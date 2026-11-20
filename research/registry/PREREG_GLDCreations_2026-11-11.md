@@ -1,0 +1,3 @@
+# GLD creations and subsequent spot gold
+
+Estimate outstanding GLD shares from trust ounces divided by ounces per share in the sponsor's historical archive. Test following the direction of a daily change exceeding 0.25% in magnitude. Use the report two GLD observations earlier, allowing an intervening full publication session. Trade XAUUSD 09:45–15:45 New York on GLD report dates with both price observations. Reject stale source observations older than seven days. Use 0.02 lots and realistic ECN spread, commission and slip. No stop or tuning at screening stage. Eras 2005–2011, 2012–2018, 2019–2025. Randomize the sides on the same opportunities within each year. Existing 1.30 era and 1.40 pooled PF gates. Historical revised file is a point-in-time limitation.

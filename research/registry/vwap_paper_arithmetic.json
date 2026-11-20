@@ -1,0 +1,12 @@
+{
+  "source": "https://ssrn.com/abstract=6650958",
+  "full_text_mirror": "https://www.scribd.com/document/1063631287/ssrn-6650958",
+  "headline_expectancy_R": 0.414,
+  "headline_profit_factor": 1.76,
+  "implied_expectancy_from_summary": 0.3750700000000001,
+  "implied_pf_from_summary": 1.6408276239129322,
+  "bucket_count": 247,
+  "implied_expectancy_from_buckets": 0.5929959514170039,
+  "implied_pf_from_buckets": 2.2871957113981893,
+  "interpretation": "Published rounded summaries do not reconcile; no unpublished trade ledger available to resolve definitions. This is not a historical performance verification."
+}

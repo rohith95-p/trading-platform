@@ -1,0 +1,14 @@
+{
+  "month": "2021-08",
+  "source_sha256": "c7d96216f7c5416547ec399266b1e6f540b8fa7c52eca145e73fb63732057bff",
+  "processor_sha256": "41b2ea5ee286ccf062adb6dd6fb781b7f913624d9b3ae959dcf9275e8142a193",
+  "sha256": "89dd6d3090ddd02c93017df3f316ea0a3b55fb6f142f6dca18a1055200e89113",
+  "bytes": 3155432,
+  "path": "payload/standard_m1/2021-08.npy",
+  "source_rows": 1562007,
+  "valid_quotes": 1562007,
+  "invalid_quotes": 0,
+  "tied_ms": 1,
+  "out_of_order_quotes": 0,
+  "minutes": 30337
+}

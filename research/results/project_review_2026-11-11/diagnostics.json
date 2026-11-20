@@ -1,0 +1,363 @@
+{
+  "inventory": {
+    "src": {
+      "files": 86,
+      "lines": 20646,
+      "functions": 812,
+      "classes": 113
+    },
+    "scripts": {
+      "files": 55,
+      "lines": 8435,
+      "functions": 301,
+      "classes": 25
+    },
+    "tests": {
+      "files": 36,
+      "lines": 6154,
+      "functions": 548,
+      "classes": 41
+    }
+  },
+  "data": [
+    {
+      "path": "research\\data\\XAUUSDm_D1.npy",
+      "rows": 1544,
+      "bytes": 92896,
+      "first": 1635292800,
+      "last": 1791849600,
+      "duplicate_or_reversed": 0,
+      "manifest_hash_matches": true
+    },
+    {
+      "path": "research\\data\\XAUUSDm_H1.npy",
+      "rows": 28599,
+      "bytes": 1716196,
+      "first": 1635354000,
+      "last": 1788195600,
+      "duplicate_or_reversed": 0,
+      "manifest_hash_matches": true
+    },
+    {
+      "path": "research\\data\\XAUUSDm_H4.npy",
+      "rows": 7498,
+      "bytes": 450136,
+      "first": 1641153600,
+      "last": 1788955200,
+      "duplicate_or_reversed": 0,
+      "manifest_hash_matches": true
+    },
+    {
+      "path": "research\\data\\XAUUSDm_M1.npy",
+      "rows": 100000,
+      "bytes": 6000256,
+      "first": 1783033200,
+      "last": 1791917700,
+      "duplicate_or_reversed": 0,
+      "manifest_hash_matches": true
+    },
+    {
+      "path": "research\\data\\XAUUSDm_M15.npy",
+      "rows": 100000,
+      "bytes": 6000256,
+      "first": 1658344500,
+      "last": 1791917100,
+      "duplicate_or_reversed": 0,
+      "manifest_hash_matches": true
+    },
+    {
+      "path": "research\\data\\XAUUSDm_M5.npy",
+      "rows": 100000,
+      "bytes": 6000256,
+      "first": 1747402200,
+      "last": 1791917700,
+      "duplicate_or_reversed": 0,
+      "manifest_hash_matches": true
+    },
+    {
+      "path": "research\\data\\kaggle_22yr\\XAUUSDm_D1.npy",
+      "rows": 5558,
+      "bytes": 333736,
+      "first": 1086912000,
+      "last": 1772150400,
+      "duplicate_or_reversed": 0,
+      "manifest_hash_matches": true
+    },
+    {
+      "path": "research\\data\\kaggle_22yr\\XAUUSDm_M1.npy",
+      "rows": 6822714,
+      "bytes": 409363096,
+      "first": 1086938280,
+      "last": 1772170860,
+      "duplicate_or_reversed": 0,
+      "manifest_hash_matches": true
+    },
+    {
+      "path": "research\\data\\kaggle_22yr\\XAUUSDm_M15.npy",
+      "rows": 496556,
+      "bytes": 29793616,
+      "first": 1086938100,
+      "last": 1772170200,
+      "duplicate_or_reversed": 0,
+      "manifest_hash_matches": true
+    },
+    {
+      "path": "research\\data\\kaggle_22yr\\XAUUSDm_M5.npy",
+      "rows": 1450368,
+      "bytes": 87022336,
+      "first": 1086938100,
+      "last": 1772170800,
+      "duplicate_or_reversed": 0,
+      "manifest_hash_matches": true
+    },
+    {
+      "path": "research\\data_2026-10-30\\XAUUSDm_D1.npy",
+      "rows": 1558,
+      "bytes": 93736,
+      "first": 1635292800,
+      "last": 1793232000,
+      "duplicate_or_reversed": 0,
+      "manifest_hash_matches": true
+    },
+    {
+      "path": "research\\data_2026-10-30\\XAUUSDm_M1.npy",
+      "rows": 100000,
+      "bytes": 6000256,
+      "first": 1784608800,
+      "last": 1793306160,
+      "duplicate_or_reversed": 0,
+      "manifest_hash_matches": true
+    },
+    {
+      "path": "research\\data_2026-10-30\\XAUUSDm_M15.npy",
+      "rows": 100000,
+      "bytes": 6000256,
+      "first": 1659909600,
+      "last": 1793305800,
+      "duplicate_or_reversed": 0,
+      "manifest_hash_matches": true
+    },
+    {
+      "path": "research\\data_live_parity\\XAUUSDm_D1.npy",
+      "rows": 197,
+      "bytes": 12076,
+      "first": 1772323200,
+      "last": 1792108800,
+      "duplicate_or_reversed": 0,
+      "manifest_hash_matches": true
+    },
+    {
+      "path": "research\\data_live_parity\\XAUUSDm_M1.npy",
+      "rows": 27556,
+      "bytes": 1653616,
+      "first": 1789941660,
+      "last": 1792184220,
+      "duplicate_or_reversed": 0,
+      "manifest_hash_matches": true
+    },
+    {
+      "path": "research\\data_live_parity\\XAUUSDm_M15.npy",
+      "rows": 5038,
+      "bytes": 302536,
+      "first": 1785708000,
+      "last": 1792172700,
+      "duplicate_or_reversed": 0,
+      "manifest_hash_matches": true
+    },
+    {
+      "path": "research\\data_live_parity\\XAUUSDm_M5.npy",
+      "rows": 9329,
+      "bytes": 559996,
+      "first": 1788220800,
+      "last": 1792184100,
+      "duplicate_or_reversed": 0,
+      "manifest_hash_matches": true
+    }
+  ],
+  "sortino_demonstration": {
+    "example": [
+      2.0,
+      -1.0,
+      2.0,
+      -1.0
+    ],
+    "current_downside_std": 0.0,
+    "target_semideviation": 0.7071067811865476,
+    "target_sortino": 0.7071067811865475
+  },
+  "keff_without_date_alignment": {
+    "k_raw": 2,
+    "k_eff": 1.0,
+    "reduction_pct": 50.0,
+    "eigenvalues": [
+      2.0,
+      0.0
+    ],
+    "bonferroni_raw": 0.025,
+    "bonferroni_keff": 0.05,
+    "interpretation": "Your 2 tested configs are effectively 1.0 independent experiments (50% correlation overlap). Use p < 0.0500 as your significance threshold, not p < 0.0250."
+  },
+  "distinct_master_arrays_same_hash": [
+    "e3b0c44298fc1c14",
+    "e3b0c44298fc1c14"
+  ],
+  "sizing_example": {
+    "balance": 5000,
+    "lots": 0.02,
+    "gold_price_stop_distance": 10,
+    "helper_risk_fraction": 4e-05,
+    "contract_aware_risk_fraction": 0.004
+  },
+  "ledger_id_inputs": "strategy names, window, EngineConfig, costs; no strategy parameters/code/data hash",
+  "sample_ledger_id": "0f1803863fd95ca2",
+  "local_trade_log_summary": {
+    "2026-09-07.jsonl": {
+      "rows": 60,
+      "malformed": 0,
+      "events": {
+        "unknown": 60
+      }
+    },
+    "2026-09-08.jsonl": {
+      "rows": 15,
+      "malformed": 0,
+      "events": {
+        "unknown": 15
+      }
+    },
+    "2026-09-09.jsonl": {
+      "rows": 98,
+      "malformed": 0,
+      "events": {
+        "unknown": 98
+      }
+    },
+    "2026-09-16.jsonl": {
+      "rows": 14,
+      "malformed": 0,
+      "events": {
+        "unknown": 14
+      }
+    },
+    "2026-09-21.jsonl": {
+      "rows": 158,
+      "malformed": 0,
+      "events": {
+        "unknown": 158
+      }
+    },
+    "2026-09-28.jsonl": {
+      "rows": 314,
+      "malformed": 0,
+      "events": {
+        "unknown": 314
+      }
+    },
+    "2026-09-30.jsonl": {
+      "rows": 58,
+      "malformed": 0,
+      "events": {
+        "unknown": 58
+      }
+    },
+    "2026-10-02.jsonl": {
+      "rows": 257,
+      "malformed": 0,
+      "events": {
+        "unknown": 257
+      }
+    },
+    "2026-10-05.jsonl": {
+      "rows": 182,
+      "malformed": 0,
+      "events": {
+        "unknown": 182
+      }
+    },
+    "2026-10-06.jsonl": {
+      "rows": 155,
+      "malformed": 0,
+      "events": {
+        "unknown": 155
+      }
+    },
+    "2026-10-07.jsonl": {
+      "rows": 55,
+      "malformed": 0,
+      "events": {
+        "unknown": 55
+      }
+    },
+    "2026-10-09.jsonl": {
+      "rows": 90,
+      "malformed": 0,
+      "events": {
+        "unknown": 90
+      }
+    },
+    "2026-10-12.jsonl": {
+      "rows": 117,
+      "malformed": 0,
+      "events": {
+        "unknown": 117
+      }
+    },
+    "2026-10-13.jsonl": {
+      "rows": 51,
+      "malformed": 0,
+      "events": {
+        "unknown": 51
+      }
+    },
+    "2026-10-14.jsonl": {
+      "rows": 25,
+      "malformed": 0,
+      "events": {
+        "unknown": 24,
+        "watchdog_restart": 1
+      }
+    },
+    "2026-10-15.jsonl": {
+      "rows": 93,
+      "malformed": 0,
+      "events": {
+        "unknown": 93
+      }
+    },
+    "2026-10-19.jsonl": {
+      "rows": 117,
+      "malformed": 0,
+      "events": {
+        "unknown": 117
+      }
+    },
+    "2026-10-21.jsonl": {
+      "rows": 143,
+      "malformed": 0,
+      "events": {
+        "unknown": 143
+      }
+    },
+    "2026-10-22.jsonl": {
+      "rows": 5,
+      "malformed": 0,
+      "events": {
+        "unknown": 5
+      }
+    },
+    "2026-10-26.jsonl": {
+      "rows": 3,
+      "malformed": 0,
+      "events": {
+        "watchdog_restart": 3
+      }
+    },
+    "2026-10-27.jsonl": {
+      "rows": 3,
+      "malformed": 0,
+      "events": {
+        "watchdog_restart": 3
+      }
+    }
+  }
+}

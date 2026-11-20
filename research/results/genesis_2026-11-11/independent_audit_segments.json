@@ -1,0 +1,18 @@
+{
+  "2025.segments": {
+    "trades": 41480,
+    "legs": 50745,
+    "static_verified": 8211,
+    "cash_errors": 0,
+    "entry_errors": 0,
+    "exit_errors": 0
+  },
+  "2025.repair.segments": {
+    "trades": 3681,
+    "legs": 4260,
+    "static_verified": 1213,
+    "cash_errors": 0,
+    "entry_errors": 0,
+    "exit_errors": 0
+  }
+}

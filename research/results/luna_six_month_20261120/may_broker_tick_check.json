@@ -1,0 +1,382 @@
+{
+  "metrics": {
+    "Period": "M15 (2026.05.01 - 2026.05.30)",
+    "Leverage": "1:100",
+    "History Quality": "100% real ticks",
+    "Ticks": "5913519",
+    "Total Net Profit": "18.42",
+    "Gross Profit": "18.42",
+    "Equity Drawdown Maximal": "12.42 (0.25%)",
+    "Gross Loss": "0.00",
+    "Equity Drawdown Relative": "0.25% (12.42)",
+    "Profit Factor": "0.00",
+    "Total Trades": "9",
+    "Profit Trades (% of total)": "9 (100.00%)"
+  },
+  "phase": "eval",
+  "first_event": null,
+  "events": {},
+  "days": {
+    "2026-05-01": {
+      "anchor": 5000.0,
+      "minimum": 4995.5430000000015,
+      "ticks": 219052
+    },
+    "2026-05-03": {
+      "anchor": 5002.05,
+      "minimum": 5002.05,
+      "ticks": 11676
+    },
+    "2026-05-04": {
+      "anchor": 5002.05,
+      "minimum": 4985.642000000001,
+      "ticks": 343632
+    },
+    "2026-05-05": {
+      "anchor": 5010.29,
+      "minimum": 5009.247,
+      "ticks": 194843
+    },
+    "2026-05-06": {
+      "anchor": 5012.36,
+      "minimum": 5011.071999999998,
+      "ticks": 259827
+    },
+    "2026-05-07": {
+      "anchor": 5014.37,
+      "minimum": 5012.913000000001,
+      "ticks": 294411
+    },
+    "2026-05-08": {
+      "anchor": 5016.39,
+      "minimum": 5016.39,
+      "ticks": 235715
+    },
+    "2026-05-10": {
+      "anchor": 5016.39,
+      "minimum": 5016.39,
+      "ticks": 12939
+    },
+    "2026-05-11": {
+      "anchor": 5016.39,
+      "minimum": 5016.39,
+      "ticks": 255917
+    },
+    "2026-05-12": {
+      "anchor": 5016.39,
+      "minimum": 5016.39,
+      "ticks": 280684
+    },
+    "2026-05-13": {
+      "anchor": 5016.39,
+      "minimum": 5016.39,
+      "ticks": 217591
+    },
+    "2026-05-14": {
+      "anchor": 5016.39,
+      "minimum": 5016.39,
+      "ticks": 254390
+    },
+    "2026-05-15": {
+      "anchor": 5016.39,
+      "minimum": 5016.39,
+      "ticks": 376185
+    },
+    "2026-05-17": {
+      "anchor": 5016.39,
+      "minimum": 5016.39,
+      "ticks": 19269
+    },
+    "2026-05-18": {
+      "anchor": 5016.39,
+      "minimum": 5016.39,
+      "ticks": 405528
+    },
+    "2026-05-19": {
+      "anchor": 5016.39,
+      "minimum": 5016.39,
+      "ticks": 330515
+    },
+    "2026-05-20": {
+      "anchor": 5016.39,
+      "minimum": 5016.39,
+      "ticks": 355819
+    },
+    "2026-05-21": {
+      "anchor": 5016.39,
+      "minimum": 5016.39,
+      "ticks": 341859
+    },
+    "2026-05-22": {
+      "anchor": 5016.39,
+      "minimum": 5016.39,
+      "ticks": 240884
+    },
+    "2026-05-24": {
+      "anchor": 5016.39,
+      "minimum": 5016.39,
+      "ticks": 15814
+    },
+    "2026-05-25": {
+      "anchor": 5016.39,
+      "minimum": 5016.39,
+      "ticks": 156789
+    },
+    "2026-05-26": {
+      "anchor": 5016.39,
+      "minimum": 5016.39,
+      "ticks": 242841
+    },
+    "2026-05-27": {
+      "anchor": 5016.39,
+      "minimum": 5016.39,
+      "ticks": 283051
+    },
+    "2026-05-28": {
+      "anchor": 5016.39,
+      "minimum": 5016.39,
+      "ticks": 311171
+    },
+    "2026-05-29": {
+      "anchor": 5016.39,
+      "minimum": 5010.214,
+      "ticks": 253117
+    }
+  },
+  "deals": [
+    {
+      "ts": 1777644900.0,
+      "order": 2,
+      "side": "sell",
+      "action": "in",
+      "volume": 0.01,
+      "price": 4656.167,
+      "fee": 0.0,
+      "swap": 0.0,
+      "profit": 0.0,
+      "balance": 5000.0,
+      "symbol": "XAUUSDm"
+    },
+    {
+      "ts": 1777645056.0,
+      "order": 3,
+      "side": "buy",
+      "action": "out",
+      "volume": 0.01,
+      "price": 4654.124,
+      "fee": 0.0,
+      "swap": 0.0,
+      "profit": 2.05,
+      "balance": 5002.05,
+      "symbol": "XAUUSDm"
+    },
+    {
+      "ts": 1777889700.0,
+      "order": 4,
+      "side": "buy",
+      "action": "in",
+      "volume": 0.01,
+      "price": 4542.123,
+      "fee": 0.0,
+      "swap": 0.0,
+      "profit": 0.0,
+      "balance": 5002.05,
+      "symbol": "XAUUSDm"
+    },
+    {
+      "ts": 1777890413.0,
+      "order": 5,
+      "side": "sell",
+      "action": "out",
+      "volume": 0.01,
+      "price": 4544.125,
+      "fee": 0.0,
+      "swap": 0.0,
+      "profit": 2.01,
+      "balance": 5004.06,
+      "symbol": "XAUUSDm"
+    },
+    {
+      "ts": 1777910400.0,
+      "order": 6,
+      "side": "buy",
+      "action": "in",
+      "volume": 0.01,
+      "price": 4521.749,
+      "fee": 0.0,
+      "swap": 0.0,
+      "profit": 0.0,
+      "balance": 5004.06,
+      "symbol": "XAUUSDm"
+    },
+    {
+      "ts": 1777910438.0,
+      "order": 7,
+      "side": "sell",
+      "action": "out",
+      "volume": 0.01,
+      "price": 4523.81,
+      "fee": 0.0,
+      "swap": 0.0,
+      "profit": 2.06,
+      "balance": 5006.12,
+      "symbol": "XAUUSDm"
+    },
+    {
+      "ts": 1777911300.0,
+      "order": 8,
+      "side": "buy",
+      "action": "in",
+      "volume": 0.01,
+      "price": 4509.853,
+      "fee": 0.0,
+      "swap": 0.0,
+      "profit": 0.0,
+      "balance": 5006.12,
+      "symbol": "XAUUSDm"
+    },
+    {
+      "ts": 1777911318.0,
+      "order": 9,
+      "side": "sell",
+      "action": "out",
+      "volume": 0.01,
+      "price": 4511.925,
+      "fee": 0.0,
+      "swap": 0.0,
+      "profit": 2.08,
+      "balance": 5008.2,
+      "symbol": "XAUUSDm"
+    },
+    {
+      "ts": 1777912200.0,
+      "order": 10,
+      "side": "buy",
+      "action": "in",
+      "volume": 0.01,
+      "price": 4515.024,
+      "fee": 0.0,
+      "swap": 0.0,
+      "profit": 0.0,
+      "balance": 5008.2,
+      "symbol": "XAUUSDm"
+    },
+    {
+      "ts": 1777912250.0,
+      "order": 11,
+      "side": "sell",
+      "action": "out",
+      "volume": 0.01,
+      "price": 4517.108,
+      "fee": 0.0,
+      "swap": 0.0,
+      "profit": 2.09,
+      "balance": 5010.29,
+      "symbol": "XAUUSDm"
+    },
+    {
+      "ts": 1778022900.0,
+      "order": 12,
+      "side": "sell",
+      "action": "in",
+      "volume": 0.01,
+      "price": 4588.8,
+      "fee": 0.0,
+      "swap": 0.0,
+      "profit": 0.0,
+      "balance": 5010.29,
+      "symbol": "XAUUSDm"
+    },
+    {
+      "ts": 1778022933.0,
+      "order": 13,
+      "side": "buy",
+      "action": "out",
+      "volume": 0.01,
+      "price": 4586.725,
+      "fee": 0.0,
+      "swap": 0.0,
+      "profit": 2.07,
+      "balance": 5012.36,
+      "symbol": "XAUUSDm"
+    },
+    {
+      "ts": 1778054400.0,
+      "order": 14,
+      "side": "sell",
+      "action": "in",
+      "volume": 0.01,
+      "price": 4681.348,
+      "fee": 0.0,
+      "swap": 0.0,
+      "profit": 0.0,
+      "balance": 5012.36,
+      "symbol": "XAUUSDm"
+    },
+    {
+      "ts": 1778054445.0,
+      "order": 15,
+      "side": "buy",
+      "action": "out",
+      "volume": 0.01,
+      "price": 4679.339,
+      "fee": 0.0,
+      "swap": 0.0,
+      "profit": 2.01,
+      "balance": 5014.37,
+      "symbol": "XAUUSDm"
+    },
+    {
+      "ts": 1778136300.0,
+      "order": 16,
+      "side": "sell",
+      "action": "in",
+      "volume": 0.01,
+      "price": 4745.903,
+      "fee": 0.0,
+      "swap": 0.0,
+      "profit": 0.0,
+      "balance": 5014.37,
+      "symbol": "XAUUSDm"
+    },
+    {
+      "ts": 1778136346.0,
+      "order": 17,
+      "side": "buy",
+      "action": "out",
+      "volume": 0.01,
+      "price": 4743.875,
+      "fee": 0.0,
+      "swap": 0.0,
+      "profit": 2.02,
+      "balance": 5016.39,
+      "symbol": "XAUUSDm"
+    },
+    {
+      "ts": 1780017300.0,
+      "order": 18,
+      "side": "sell",
+      "action": "in",
+      "volume": 0.01,
+      "price": 4514.931,
+      "fee": 0.0,
+      "swap": 0.0,
+      "profit": 0.0,
+      "balance": 5016.39,
+      "symbol": "XAUUSDm"
+    },
+    {
+      "ts": 1780017912.0,
+      "order": 19,
+      "side": "buy",
+      "action": "out",
+      "volume": 0.01,
+      "price": 4512.9,
+      "fee": 0.0,
+      "swap": 0.0,
+      "profit": 2.03,
+      "balance": 5018.42,
+      "symbol": "XAUUSDm"
+    }
+  ]
+}

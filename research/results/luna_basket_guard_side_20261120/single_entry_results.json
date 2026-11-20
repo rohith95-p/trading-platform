@@ -1,0 +1,16 @@
+{
+  "broker_evaluation": {
+    "trades": 284,
+    "net": -135.74,
+    "pf": 0.831,
+    "win_pct": 71.13,
+    "best_removed": -152.39
+  },
+  "evaluation": {
+    "trades": 333,
+    "net": -184.8,
+    "pf": 0.804,
+    "win_pct": 71.17,
+    "best_removed": -201.41
+  }
+}

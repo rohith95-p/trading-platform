@@ -1,0 +1,77 @@
+{
+  "name": "retained_portfolio",
+  "phase": "funded",
+  "start": "2026-02-09T00:00:00+00:00",
+  "end_exclusive": "2026-11-01T00:00:00+00:00",
+  "unrestricted": {
+    "status": "active",
+    "time": null,
+    "entries": 72,
+    "closes": 72,
+    "balance": 5806.430999999927,
+    "equity": 5806.430999999927,
+    "minimum_equity": 4842.443999999994,
+    "first_trade": "2026-02-11T12:15:00.101000+00:00",
+    "payout_anchor": 5000.0,
+    "next_payout_window": null,
+    "max_equity_drawdown_usd": 433.42900000003647,
+    "max_equity_drawdown_pct": 8.02895788728492,
+    "max_floating_loss": 100.26400000000103,
+    "max_used_margin_to_equity": 0.03562972214699934,
+    "overnight_resets": 3,
+    "peak_equity": 5806.6349999999275,
+    "rule_events": [],
+    "protector_strikes": 0,
+    "qualifying_days": 28,
+    "deductions": 0.0,
+    "modeled_payouts": [],
+    "modeled_cash_received": 0.0
+  },
+  "atlas": {
+    "status": "trailing_breach",
+    "time": "2026-03-30T14:21:31.690000+00:00",
+    "entries": 11,
+    "closes": 10,
+    "balance": 5112.423999999988,
+    "equity": 5073.809999999987,
+    "minimum_equity": 4842.443999999994,
+    "first_trade": "2026-02-11T12:15:00.101000+00:00",
+    "payout_anchor": 5000.0,
+    "next_payout_window": "2026-03-09T00:00:00+00:00",
+    "max_equity_drawdown_usd": 324.5120000000061,
+    "max_equity_drawdown_pct": 6.011349452663374,
+    "max_floating_loss": 100.26400000000103,
+    "max_used_margin_to_equity": 0.07125944429399868,
+    "overnight_resets": 0,
+    "peak_equity": 5398.321999999993,
+    "rule_events": [
+      {
+        "event": "protector_liquidation",
+        "strike": 1,
+        "time": "2026-03-23T07:36:41.115000+00:00",
+        "equity": 5234.103999999992,
+        "tickets": [
+          8
+        ]
+      },
+      {
+        "time": "2026-03-30T14:21:31.690000+00:00",
+        "event": "trailing_breach",
+        "equity": 5073.81,
+        "balance": 5112.424,
+        "midnight_equity": 5165.77,
+        "peak": 5398.322,
+        "tickets": [
+          10
+        ]
+      }
+    ],
+    "protector_strikes": 1,
+    "qualifying_days": 3,
+    "deductions": 0.0,
+    "modeled_payouts": [],
+    "modeled_cash_received": 0.0
+  },
+  "news_coverage": "Selected USD releases only; historical Atlas all-currency restrictions unverified.",
+  "payout_assumption": "Request USD 100 cash while flat, normal 90% split (50% after first Protector), immediate settlement and verified KYC assumed; no real payments."
+}

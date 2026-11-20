@@ -1,0 +1,11 @@
+{
+  "requested_end": 1704346200,
+  "loaded_end": 1704426300,
+  "exits": [
+    {
+      "time": 1704346140,
+      "reason": "END_OF_DATA",
+      "after_requested_end": false
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "commit": "57a8af6d1d023ee25295ef63eca2f537ac859b5c",
+  "files": {
+    "out_oos/oos_grid.csv": {
+      "url": "https://raw.githubusercontent.com/anirudhatalmale6-alt/xauusd-strategy-backtest/57a8af6d1d023ee25295ef63eca2f537ac859b5c/out_oos/oos_grid.csv",
+      "sha256": "60bac0d5e6977c76cfff344eb976cbd2766853cbe1fc709550f21645ee3b0526"
+    },
+    "out_oos/oos_meta.json": {
+      "url": "https://raw.githubusercontent.com/anirudhatalmale6-alt/xauusd-strategy-backtest/57a8af6d1d023ee25295ef63eca2f537ac859b5c/out_oos/oos_meta.json",
+      "sha256": "ec397f1d8103324e56acc20d6e1eaee20b023987a769765d36cd2e2794104f0d"
+    },
+    "README.md": {
+      "url": "https://raw.githubusercontent.com/anirudhatalmale6-alt/xauusd-strategy-backtest/57a8af6d1d023ee25295ef63eca2f537ac859b5c/README.md",
+      "sha256": "8e13b6f3915a9f9ef5368940bbb097b0a37b595c7a09c2a4daed0e572aca80e0"
+    }
+  }
+}

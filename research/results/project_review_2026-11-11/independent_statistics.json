@@ -1,0 +1,462 @@
+{
+  "accounting": {
+    "DEV": {
+      "gross_identity": 0,
+      "net_identity": 0,
+      "commission": 0,
+      "balance_chain": 0,
+      "exit_before_entry": 0,
+      "exit_after_window": 0
+    },
+    "TEST": {
+      "gross_identity": 0,
+      "net_identity": 0,
+      "commission": 0,
+      "balance_chain": 0,
+      "exit_before_entry": 0,
+      "exit_after_window": 0
+    },
+    "RECENT": {
+      "gross_identity": 0,
+      "net_identity": 0,
+      "commission": 0,
+      "balance_chain": 0,
+      "exit_before_entry": 0,
+      "exit_after_window": 0
+    },
+    "OOS_1": {
+      "gross_identity": 0,
+      "net_identity": 0,
+      "commission": 0,
+      "balance_chain": 0,
+      "exit_before_entry": 0,
+      "exit_after_window": 0
+    },
+    "OOS_2": {
+      "gross_identity": 0,
+      "net_identity": 0,
+      "commission": 0,
+      "balance_chain": 0,
+      "exit_before_entry": 0,
+      "exit_after_window": 0
+    },
+    "OOS_3": {
+      "gross_identity": 0,
+      "net_identity": 0,
+      "commission": 0,
+      "balance_chain": 0,
+      "exit_before_entry": 0,
+      "exit_after_window": 0
+    },
+    "OOS_4": {
+      "gross_identity": 0,
+      "net_identity": 0,
+      "commission": 0,
+      "balance_chain": 0,
+      "exit_before_entry": 0,
+      "exit_after_window": 0
+    },
+    "OOS_5": {
+      "gross_identity": 0,
+      "net_identity": 0,
+      "commission": 0,
+      "balance_chain": 0,
+      "exit_before_entry": 0,
+      "exit_after_window": 0
+    }
+  },
+  "metrics": {
+    "DEV": {
+      "trades": 132,
+      "net": -294.904999999991,
+      "pf": 0.6582234177310621,
+      "win_pct": 28.030303030303028,
+      "expectancy": -2.2341287878787197,
+      "realized_max_dd": 305.8689999999906,
+      "per_trade_sortino_target_zero": -0.27588179049147676,
+      "per_trade_sharpe": -0.19023495159124298,
+      "iid_bootstrap_expectancy_95": [
+        -4.154790909090869,
+        -0.2578499999999451
+      ],
+      "month_block_bootstrap_expectancy_95": [
+        -4.403305568181787,
+        -0.38248706783073516
+      ],
+      "trade_bearing_months": 10,
+      "permutation_max_dd_p50_p95": [
+        333.53799999999,
+        405.1823999999906
+      ],
+      "iid_resampled_final_p025_p50_p975": [
+        4446.42985000001,
+        4701.28300000001,
+        4967.148350000008
+      ],
+      "iid_resampled_fraction_final_below_start": 0.9856,
+      "caveat": "Exploratory conditional resampling, not a posterior or a forecast; pooled eras reset engine state."
+    },
+    "TEST": {
+      "trades": 253,
+      "net": 1058.477999999926,
+      "pf": 1.3952690704952517,
+      "win_pct": 42.29249011857708,
+      "expectancy": 4.18370750988113,
+      "realized_max_dd": 238.9900000000025,
+      "per_trade_sortino_target_zero": 0.2555396593071068,
+      "per_trade_sharpe": 0.13601235047215715,
+      "iid_bootstrap_expectancy_95": [
+        0.3737359683791794,
+        8.003821541501747
+      ],
+      "month_block_bootstrap_expectancy_95": [
+        0.034272322451039436,
+        8.846055825181033
+      ],
+      "trade_bearing_months": 18,
+      "permutation_max_dd_p50_p95": [
+        266.60050000000365,
+        427.6257000000257
+      ],
+      "iid_resampled_final_p025_p50_p975": [
+        5117.198299999923,
+        6063.012999999921,
+        7011.09792499993
+      ],
+      "iid_resampled_fraction_final_below_start": 0.0128,
+      "caveat": "Exploratory conditional resampling, not a posterior or a forecast; pooled eras reset engine state."
+    },
+    "RECENT": {
+      "trades": 54,
+      "net": 790.1399999999379,
+      "pf": 1.80893893183687,
+      "win_pct": 50.0,
+      "expectancy": 14.632222222221072,
+      "realized_max_dd": 193.52200000001176,
+      "per_trade_sortino_target_zero": 0.5588621931073566,
+      "per_trade_sharpe": 0.27703719231550655,
+      "iid_bootstrap_expectancy_95": [
+        0.4115666666654435,
+        28.823570370369318
+      ],
+      "month_block_bootstrap_expectancy_95": [
+        6.658384615383776,
+        23.075682926828406
+      ],
+      "trade_bearing_months": 4,
+      "permutation_max_dd_p50_p95": [
+        196.8910000000069,
+        322.0340500000359
+      ],
+      "iid_resampled_final_p025_p50_p975": [
+        5032.713249999949,
+        5784.285499999929,
+        6549.37832499994
+      ],
+      "iid_resampled_fraction_final_below_start": 0.021,
+      "caveat": "Exploratory conditional resampling, not a posterior or a forecast; pooled eras reset engine state."
+    },
+    "OOS_1": {
+      "trades": 331,
+      "net": -254.97299999997824,
+      "pf": 0.7481576522252057,
+      "win_pct": 31.1178247734139,
+      "expectancy": -0.7703111782476684,
+      "realized_max_dd": 254.9729999999763,
+      "per_trade_sortino_target_zero": -0.18131590036379105,
+      "per_trade_sharpe": -0.1260635049571416,
+      "iid_bootstrap_expectancy_95": [
+        -1.415863519637393,
+        -0.10304856495462077
+      ],
+      "month_block_bootstrap_expectancy_95": [
+        -1.2712575095163905,
+        -0.2995048644521901
+      ],
+      "trade_bearing_months": 39,
+      "permutation_max_dd_p50_p95": [
+        287.4619999999795,
+        340.4614999999802
+      ],
+      "iid_resampled_final_p025_p50_p975": [
+        4528.865625000023,
+        4743.898500000024,
+        4969.11805000002
+      ],
+      "iid_resampled_fraction_final_below_start": 0.9866,
+      "caveat": "Exploratory conditional resampling, not a posterior or a forecast; pooled eras reset engine state."
+    },
+    "OOS_2": {
+      "trades": 643,
+      "net": -742.800999999956,
+      "pf": 0.8203068906457235,
+      "win_pct": 34.52566096423017,
+      "expectancy": -1.1552115085535863,
+      "realized_max_dd": 886.3929999999636,
+      "per_trade_sortino_target_zero": -0.12351945104413241,
+      "per_trade_sharpe": -0.08231465501897156,
+      "iid_bootstrap_expectancy_95": [
+        -2.210771073094787,
+        -0.06883425349915769
+      ],
+      "month_block_bootstrap_expectancy_95": [
+        -2.477843020055141,
+        0.07523885089082416
+      ],
+      "trade_bearing_months": 48,
+      "permutation_max_dd_p50_p95": [
+        859.9634999999707,
+        1035.4648999999754
+      ],
+      "iid_resampled_final_p025_p50_p975": [
+        3564.2467000000493,
+        4261.568500000043,
+        4938.564550000043
+      ],
+      "iid_resampled_fraction_final_below_start": 0.9834,
+      "caveat": "Exploratory conditional resampling, not a posterior or a forecast; pooled eras reset engine state."
+    },
+    "OOS_3": {
+      "trades": 567,
+      "net": 5.275000000045274,
+      "pf": 1.0019131852739667,
+      "win_pct": 38.095238095238095,
+      "expectancy": 0.009303350970097485,
+      "realized_max_dd": 309.5219999999672,
+      "per_trade_sortino_target_zero": 0.0013622868065328291,
+      "per_trade_sharpe": 0.0008249856784781158,
+      "iid_bootstrap_expectancy_95": [
+        -0.8595895943561837,
+        0.9182986772487431
+      ],
+      "month_block_bootstrap_expectancy_95": [
+        -0.9399743857589142,
+        0.9769033503979069
+      ],
+      "trade_bearing_months": 48,
+      "permutation_max_dd_p50_p95": [
+        283.09199999997327,
+        426.4386999999713
+      ],
+      "iid_resampled_final_p025_p50_p975": [
+        4483.699225000049,
+        5004.111000000044,
+        5545.651000000039
+      ],
+      "iid_resampled_fraction_final_below_start": 0.4952,
+      "caveat": "Exploratory conditional resampling, not a posterior or a forecast; pooled eras reset engine state."
+    },
+    "OOS_4": {
+      "trades": 578,
+      "net": -146.49599999995607,
+      "pf": 0.9306928725726664,
+      "win_pct": 35.813148788927336,
+      "expectancy": -0.2534532871971558,
+      "realized_max_dd": 247.42999999998028,
+      "per_trade_sortino_target_zero": -0.05116002510306128,
+      "per_trade_sharpe": -0.03167024874402472,
+      "iid_bootstrap_expectancy_95": [
+        -0.9028003027680813,
+        0.3968113321800055
+      ],
+      "month_block_bootstrap_expectancy_95": [
+        -0.9013309761828697,
+        0.39986747986239546
+      ],
+      "trade_bearing_months": 48,
+      "permutation_max_dd_p50_p95": [
+        277.11099999996577,
+        386.4657999999758
+      ],
+      "iid_resampled_final_p025_p50_p975": [
+        4474.1731500000415,
+        4855.891500000045,
+        5234.553050000041
+      ],
+      "iid_resampled_fraction_final_below_start": 0.7718,
+      "caveat": "Exploratory conditional resampling, not a posterior or a forecast; pooled eras reset engine state."
+    },
+    "OOS_5": {
+      "trades": 437,
+      "net": -172.35999999997648,
+      "pf": 0.9435264822004961,
+      "win_pct": 37.29977116704806,
+      "expectancy": -0.39441647597248625,
+      "realized_max_dd": 375.8939999999884,
+      "per_trade_sortino_target_zero": -0.04077310288951868,
+      "per_trade_sharpe": -0.025958499266181833,
+      "iid_bootstrap_expectancy_95": [
+        -1.7895025171624255,
+        1.0439243135012033
+      ],
+      "month_block_bootstrap_expectancy_95": [
+        -2.0151768138554518,
+        1.3254485575480428
+      ],
+      "trade_bearing_months": 31,
+      "permutation_max_dd_p50_p95": [
+        416.9439999999927,
+        591.6351499999905
+      ],
+      "iid_resampled_final_p025_p50_p975": [
+        4203.961675000026,
+        4822.717500000024,
+        5446.359575000013
+      ],
+      "iid_resampled_fraction_final_below_start": 0.7114,
+      "caveat": "Exploratory conditional resampling, not a posterior or a forecast; pooled eras reset engine state."
+    },
+    "OOS_POOLED": {
+      "trades": 2556,
+      "net": -1311.3549999998218,
+      "pf": 0.899659923154659,
+      "win_pct": 35.641627543035995,
+      "expectancy": -0.5130496870108849,
+      "realized_max_dd": 1412.9059999998644,
+      "per_trade_sortino_target_zero": -0.06841516468316516,
+      "per_trade_sharpe": -0.04387497559720474,
+      "iid_bootstrap_expectancy_95": [
+        -0.9654064358371681,
+        -0.04558934859148222
+      ],
+      "month_block_bootstrap_expectancy_95": [
+        -1.024256937743587,
+        0.0057696046774401155
+      ],
+      "trade_bearing_months": 214,
+      "permutation_max_dd_p50_p95": [
+        1505.1519999998636,
+        1788.3920999998809
+      ],
+      "iid_resampled_final_p025_p50_p975": [
+        2563.8306750001834,
+        3690.2700000001646,
+        4887.640500000191
+      ],
+      "iid_resampled_fraction_final_below_start": 0.9844,
+      "caveat": "Exploratory conditional resampling, not a posterior or a forecast; pooled eras reset engine state."
+    }
+  },
+  "oos_per_strategy": {
+    "LONDON_MOMENTUM_TIGHT_V6": {
+      "trades": 1106,
+      "net": -483.71399999991485,
+      "pf": 0.9009368234019239,
+      "win_pct": 32.00723327305606,
+      "expectancy": -0.43735443037966987,
+      "realized_max_dd": 681.8199999999233,
+      "per_trade_sortino_target_zero": -0.07096828329258711,
+      "per_trade_sharpe": -0.04261578886115263,
+      "iid_bootstrap_expectancy_95": [
+        -1.0370974005424167,
+        0.1863466320073087
+      ],
+      "month_block_bootstrap_expectancy_95": [
+        -0.9355853041761288,
+        0.052487171224490856
+      ],
+      "trade_bearing_months": 210,
+      "permutation_max_dd_p50_p95": [
+        646.0064999999368,
+        829.4164999999451
+      ],
+      "iid_resampled_final_p025_p50_p975": [
+        3847.0740250000813,
+        4527.476000000081,
+        5210.373975000082
+      ],
+      "iid_resampled_fraction_final_below_start": 0.9122,
+      "caveat": "Exploratory conditional resampling, not a posterior or a forecast; pooled eras reset engine state."
+    },
+    "NY_SESSION_REVERSAL_V6": {
+      "trades": 780,
+      "net": -305.68599999994973,
+      "pf": 0.9373781357946844,
+      "win_pct": 37.17948717948718,
+      "expectancy": -0.39190512820506374,
+      "realized_max_dd": 313.35799999997926,
+      "per_trade_sortino_target_zero": -0.04424222441135926,
+      "per_trade_sharpe": -0.027598270460091705,
+      "iid_bootstrap_expectancy_95": [
+        -1.348013237179431,
+        0.5714025641026249
+      ],
+      "month_block_bootstrap_expectancy_95": [
+        -1.353451860142218,
+        0.5448706235857186
+      ],
+      "trade_bearing_months": 195,
+      "permutation_max_dd_p50_p95": [
+        570.2969999999632,
+        796.6546499999663
+      ],
+      "iid_resampled_final_p025_p50_p975": [
+        3919.043500000064,
+        4682.696500000049,
+        5461.587150000045
+      ],
+      "iid_resampled_fraction_final_below_start": 0.7816,
+      "caveat": "Exploratory conditional resampling, not a posterior or a forecast; pooled eras reset engine state."
+    },
+    "ASIAN_RANGE_FILTERED_V6": {
+      "trades": 651,
+      "net": -224.1279999999589,
+      "pf": 0.9233772955735452,
+      "win_pct": 40.39938556067588,
+      "expectancy": -0.34428264208903053,
+      "realized_max_dd": 269.6219999999612,
+      "per_trade_sortino_target_zero": -0.05397233962900109,
+      "per_trade_sharpe": -0.03586619190579228,
+      "iid_bootstrap_expectancy_95": [
+        -1.0882917818739897,
+        0.3882532642089787
+      ],
+      "month_block_bootstrap_expectancy_95": [
+        -1.1478935241241857,
+        0.5111221402336701
+      ],
+      "trade_bearing_months": 190,
+      "permutation_max_dd_p50_p95": [
+        376.1624999999767,
+        516.3299499999598
+      ],
+      "iid_resampled_final_p025_p50_p975": [
+        4301.716625000045,
+        4776.329000000036,
+        5275.838500000039
+      ],
+      "iid_resampled_fraction_final_below_start": 0.8156,
+      "caveat": "Exploratory conditional resampling, not a posterior or a forecast; pooled eras reset engine state."
+    },
+    "ASIAN_BREAKOUT_V6": {
+      "trades": 19,
+      "net": -297.82699999999835,
+      "pf": 0.21557797812351237,
+      "win_pct": 21.052631578947366,
+      "expectancy": -15.675105263157809,
+      "realized_max_dd": 307.85699999999906,
+      "per_trade_sortino_target_zero": -0.5766131615206247,
+      "per_trade_sharpe": -0.6417626799761076,
+      "iid_bootstrap_expectancy_95": [
+        -26.5554171052631,
+        -4.538623684210526
+      ],
+      "month_block_bootstrap_expectancy_95": [
+        -27.32010695488707,
+        -4.186659374999909
+      ],
+      "trade_bearing_months": 15,
+      "permutation_max_dd_p50_p95": [
+        309.30199999999877,
+        346.2569999999987
+      ],
+      "iid_resampled_final_p025_p50_p975": [
+        4495.859375000002,
+        4707.580000000002,
+        4907.479525000002
+      ],
+      "iid_resampled_fraction_final_below_start": 0.998,
+      "caveat": "Exploratory conditional resampling, not a posterior or a forecast; pooled eras reset engine state."
+    }
+  }
+}

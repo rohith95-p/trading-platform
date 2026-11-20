@@ -1,0 +1,2598 @@
+{
+  "calendar_events": 166,
+  "used_events": 163,
+  "skipped": [
+    {
+      "category": "CPI",
+      "release_utc": "2020-04-10T12:30:00+00:00",
+      "event_time": 1586521800,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_04102020.htm",
+      "reason": "incomplete_minute_window"
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2021-04-02T12:30:00+00:00",
+      "event_time": 1617366600,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_04022021.htm",
+      "reason": "incomplete_minute_window"
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2023-04-07T12:30:00+00:00",
+      "event_time": 1680870600,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_04072023.htm",
+      "reason": "incomplete_minute_window"
+    }
+  ],
+  "calendar_sha256": "9f546ebc6b7e90d79ed23efaa2f1a2ba595c36ad52e2bf432bb3b61b10dde5e8",
+  "windows_snapshot": "research\\data\\bls_windows\\f62546278584c219520d700632d932bb22917cec8c910b7329092fd764d6a32e.npy",
+  "windows_content_sha256": "f62546278584c219520d700632d932bb22917cec8c910b7329092fd764d6a32e",
+  "runner_sha256": "19cdd6b622d966bfce093a51c181784f9439fc9de721c509ab734cdbbfe8d834",
+  "events": [
+    {
+      "category": "NFP",
+      "release_utc": "2019-01-04T13:30:00+00:00",
+      "event_time": 1546608600,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_01042019.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2019-01-11T13:30:00+00:00",
+      "event_time": 1547213400,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_01112019.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2019-02-01T13:30:00+00:00",
+      "event_time": 1549027800,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_02012019.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2019-02-13T13:30:00+00:00",
+      "event_time": 1550064600,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_02132019.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2019-03-08T13:30:00+00:00",
+      "event_time": 1552051800,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_03082019.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2019-03-12T12:30:00+00:00",
+      "event_time": 1552393800,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_03122019.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2019-04-05T12:30:00+00:00",
+      "event_time": 1554467400,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_04052019.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2019-04-10T12:30:00+00:00",
+      "event_time": 1554899400,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_04102019.htm",
+      "signal": -1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2019-05-03T12:30:00+00:00",
+      "event_time": 1556886600,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_05032019.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2019-05-10T12:30:00+00:00",
+      "event_time": 1557491400,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_05102019.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2019-06-07T12:30:00+00:00",
+      "event_time": 1559910600,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_06072019.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2019-06-12T12:30:00+00:00",
+      "event_time": 1560342600,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_06122019.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2019-07-05T12:30:00+00:00",
+      "event_time": 1562329800,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_07052019.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2019-07-11T12:30:00+00:00",
+      "event_time": 1562848200,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_07112019.htm",
+      "signal": -1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2019-08-02T12:30:00+00:00",
+      "event_time": 1564749000,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_08022019.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2019-08-13T12:30:00+00:00",
+      "event_time": 1565699400,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_08132019.htm",
+      "signal": -1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2019-09-06T12:30:00+00:00",
+      "event_time": 1567773000,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_09062019.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2019-09-12T12:30:00+00:00",
+      "event_time": 1568291400,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_09122019.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2019-10-04T12:30:00+00:00",
+      "event_time": 1570192200,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_10042019.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2019-10-10T12:30:00+00:00",
+      "event_time": 1570710600,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_10102019.htm",
+      "signal": -1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2019-11-01T12:30:00+00:00",
+      "event_time": 1572611400,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_11012019.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2019-11-13T13:30:00+00:00",
+      "event_time": 1573651800,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_11132019.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2019-12-06T13:30:00+00:00",
+      "event_time": 1575639000,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_12062019.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2019-12-11T13:30:00+00:00",
+      "event_time": 1576071000,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_12112019.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2020-01-10T13:30:00+00:00",
+      "event_time": 1578663000,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_01102020.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2020-01-14T13:30:00+00:00",
+      "event_time": 1579008600,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_01142020.htm",
+      "signal": -1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2020-02-07T13:30:00+00:00",
+      "event_time": 1581082200,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_02072020.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2020-02-13T13:30:00+00:00",
+      "event_time": 1581600600,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_02132020.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2020-03-06T13:30:00+00:00",
+      "event_time": 1583501400,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_03062020.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2020-03-11T12:30:00+00:00",
+      "event_time": 1583929800,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_03112020.htm",
+      "signal": -1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2020-04-03T12:30:00+00:00",
+      "event_time": 1585917000,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_04032020.htm",
+      "signal": -1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2020-05-08T12:30:00+00:00",
+      "event_time": 1588941000,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_05082020.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2020-05-12T12:30:00+00:00",
+      "event_time": 1589286600,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_05122020.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2020-06-05T12:30:00+00:00",
+      "event_time": 1591360200,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_06052020.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2020-06-10T12:30:00+00:00",
+      "event_time": 1591792200,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_06102020.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2020-07-02T12:30:00+00:00",
+      "event_time": 1593693000,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_07022020.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2020-07-14T12:30:00+00:00",
+      "event_time": 1594729800,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_07142020.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2020-08-07T12:30:00+00:00",
+      "event_time": 1596803400,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_08072020.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2020-08-12T12:30:00+00:00",
+      "event_time": 1597235400,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_08122020.htm",
+      "signal": -1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2020-09-04T12:30:00+00:00",
+      "event_time": 1599222600,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_09042020.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2020-09-11T12:30:00+00:00",
+      "event_time": 1599827400,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_09112020.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2020-10-02T12:30:00+00:00",
+      "event_time": 1601641800,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_10022020.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2020-10-13T12:30:00+00:00",
+      "event_time": 1602592200,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_10132020.htm",
+      "signal": -1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2020-11-06T13:30:00+00:00",
+      "event_time": 1604669400,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_11062020.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2020-11-12T13:30:00+00:00",
+      "event_time": 1605187800,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_11122020.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2020-12-04T13:30:00+00:00",
+      "event_time": 1607088600,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_12042020.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2020-12-10T13:30:00+00:00",
+      "event_time": 1607607000,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_12102020.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2021-01-08T13:30:00+00:00",
+      "event_time": 1610112600,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_01082021.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2021-01-13T13:30:00+00:00",
+      "event_time": 1610544600,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_01132021.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2021-02-05T13:30:00+00:00",
+      "event_time": 1612531800,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_02052021.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2021-02-10T13:30:00+00:00",
+      "event_time": 1612963800,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_02102021.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2021-03-05T13:30:00+00:00",
+      "event_time": 1614951000,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_03052021.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2021-03-10T13:30:00+00:00",
+      "event_time": 1615383000,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_03102021.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2021-04-13T12:30:00+00:00",
+      "event_time": 1618317000,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_04132021.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2021-05-07T12:30:00+00:00",
+      "event_time": 1620390600,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_05072021.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2021-05-12T12:30:00+00:00",
+      "event_time": 1620822600,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_05122021.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2021-06-04T12:30:00+00:00",
+      "event_time": 1622809800,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_06042021.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2021-06-10T12:30:00+00:00",
+      "event_time": 1623328200,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_06102021.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2021-07-02T12:30:00+00:00",
+      "event_time": 1625229000,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_07022021.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2021-07-13T12:30:00+00:00",
+      "event_time": 1626179400,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_07132021.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2021-08-06T12:30:00+00:00",
+      "event_time": 1628253000,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_08062021.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2021-08-11T12:30:00+00:00",
+      "event_time": 1628685000,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_08112021.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2021-09-03T12:30:00+00:00",
+      "event_time": 1630672200,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_09032021.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2021-09-14T12:30:00+00:00",
+      "event_time": 1631622600,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_09142021.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2021-10-08T12:30:00+00:00",
+      "event_time": 1633696200,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_10082021.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2021-10-13T12:30:00+00:00",
+      "event_time": 1634128200,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_10132021.htm",
+      "signal": -1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2021-11-05T12:30:00+00:00",
+      "event_time": 1636115400,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_11052021.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2021-11-10T13:30:00+00:00",
+      "event_time": 1636551000,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_11102021.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2021-12-03T13:30:00+00:00",
+      "event_time": 1638538200,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_12032021.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2021-12-10T13:30:00+00:00",
+      "event_time": 1639143000,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_12102021.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2022-01-07T13:30:00+00:00",
+      "event_time": 1641562200,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_01072022.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2022-01-12T13:30:00+00:00",
+      "event_time": 1641994200,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_01122022.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2022-02-04T13:30:00+00:00",
+      "event_time": 1643981400,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_02042022.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2022-02-10T13:30:00+00:00",
+      "event_time": 1644499800,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_02102022.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2022-03-04T13:30:00+00:00",
+      "event_time": 1646400600,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_03042022.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2022-03-10T13:30:00+00:00",
+      "event_time": 1646919000,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_03102022.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2022-04-01T12:30:00+00:00",
+      "event_time": 1648816200,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_04012022.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2022-04-12T12:30:00+00:00",
+      "event_time": 1649766600,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_04122022.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2022-05-06T12:30:00+00:00",
+      "event_time": 1651840200,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_05062022.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2022-05-11T12:30:00+00:00",
+      "event_time": 1652272200,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_05112022.htm",
+      "signal": -1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2022-06-03T12:30:00+00:00",
+      "event_time": 1654259400,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_06032022.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2022-06-10T12:30:00+00:00",
+      "event_time": 1654864200,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_06102022.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2022-07-08T12:30:00+00:00",
+      "event_time": 1657283400,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_07082022.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2022-07-13T12:30:00+00:00",
+      "event_time": 1657715400,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_07132022.htm",
+      "signal": -1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2022-08-05T12:30:00+00:00",
+      "event_time": 1659702600,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_08052022.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2022-08-10T12:30:00+00:00",
+      "event_time": 1660134600,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_08102022.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2022-09-02T12:30:00+00:00",
+      "event_time": 1662121800,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_09022022.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2022-09-13T12:30:00+00:00",
+      "event_time": 1663072200,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_09132022.htm",
+      "signal": -1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2022-10-07T12:30:00+00:00",
+      "event_time": 1665145800,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_10072022.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2022-10-13T12:30:00+00:00",
+      "event_time": 1665664200,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_10132022.htm",
+      "signal": -1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2022-11-04T12:30:00+00:00",
+      "event_time": 1667565000,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_11042022.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2022-11-10T13:30:00+00:00",
+      "event_time": 1668087000,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_11102022.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2022-12-02T13:30:00+00:00",
+      "event_time": 1669987800,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_12022022.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2022-12-13T13:30:00+00:00",
+      "event_time": 1670938200,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_12132022.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2023-01-06T13:30:00+00:00",
+      "event_time": 1673011800,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_01062023.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2023-01-12T13:30:00+00:00",
+      "event_time": 1673530200,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_01122023.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2023-02-03T13:30:00+00:00",
+      "event_time": 1675431000,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_02032023.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2023-02-14T13:30:00+00:00",
+      "event_time": 1676381400,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_02142023.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2023-03-10T13:30:00+00:00",
+      "event_time": 1678455000,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_03102023.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2023-03-14T12:30:00+00:00",
+      "event_time": 1678797000,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_03142023.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2023-04-12T12:30:00+00:00",
+      "event_time": 1681302600,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_04122023.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2023-05-05T12:30:00+00:00",
+      "event_time": 1683289800,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_05052023.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2023-05-10T12:30:00+00:00",
+      "event_time": 1683721800,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_05102023.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2023-06-02T12:30:00+00:00",
+      "event_time": 1685709000,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_06022023.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2023-06-13T12:30:00+00:00",
+      "event_time": 1686659400,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_06132023.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2023-07-07T12:30:00+00:00",
+      "event_time": 1688733000,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_07072023.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2023-07-12T12:30:00+00:00",
+      "event_time": 1689165000,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_07122023.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2023-08-04T12:30:00+00:00",
+      "event_time": 1691152200,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_08042023.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2023-08-10T12:30:00+00:00",
+      "event_time": 1691670600,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_08102023.htm",
+      "signal": -1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2023-09-01T12:30:00+00:00",
+      "event_time": 1693571400,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_09012023.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2023-09-13T12:30:00+00:00",
+      "event_time": 1694608200,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_09132023.htm",
+      "signal": -1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2023-10-06T12:30:00+00:00",
+      "event_time": 1696595400,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_10062023.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2023-10-12T12:30:00+00:00",
+      "event_time": 1697113800,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_10122023.htm",
+      "signal": -1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2023-11-03T12:30:00+00:00",
+      "event_time": 1699014600,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_11032023.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2023-11-14T13:30:00+00:00",
+      "event_time": 1699968600,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_11142023.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2023-12-08T13:30:00+00:00",
+      "event_time": 1702042200,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_12082023.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2023-12-12T13:30:00+00:00",
+      "event_time": 1702387800,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_12122023.htm",
+      "signal": -1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2024-01-05T13:30:00+00:00",
+      "event_time": 1704461400,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_01052024.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2024-01-11T13:30:00+00:00",
+      "event_time": 1704979800,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_01112024.htm",
+      "signal": -1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2024-02-02T13:30:00+00:00",
+      "event_time": 1706880600,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_02022024.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2024-02-13T13:30:00+00:00",
+      "event_time": 1707831000,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_02132024.htm",
+      "signal": -1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2024-03-08T13:30:00+00:00",
+      "event_time": 1709904600,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_03082024.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2024-03-12T12:30:00+00:00",
+      "event_time": 1710246600,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_03122024.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2024-04-05T12:30:00+00:00",
+      "event_time": 1712320200,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_04052024.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2024-04-10T12:30:00+00:00",
+      "event_time": 1712752200,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_04102024.htm",
+      "signal": -1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2024-05-03T12:30:00+00:00",
+      "event_time": 1714739400,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_05032024.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2024-05-15T12:30:00+00:00",
+      "event_time": 1715776200,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_05152024.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2024-06-07T12:30:00+00:00",
+      "event_time": 1717763400,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_06072024.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2024-06-12T12:30:00+00:00",
+      "event_time": 1718195400,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_06122024.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2024-07-05T12:30:00+00:00",
+      "event_time": 1720182600,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_07052024.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2024-07-11T12:30:00+00:00",
+      "event_time": 1720701000,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_07112024.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2024-08-02T12:30:00+00:00",
+      "event_time": 1722601800,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_08022024.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2024-08-14T12:30:00+00:00",
+      "event_time": 1723638600,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_08142024.htm",
+      "signal": -1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2024-09-06T12:30:00+00:00",
+      "event_time": 1725625800,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_09062024.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2024-09-11T12:30:00+00:00",
+      "event_time": 1726057800,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_09112024.htm",
+      "signal": -1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2024-10-04T12:30:00+00:00",
+      "event_time": 1728045000,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_10042024.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2024-10-10T12:30:00+00:00",
+      "event_time": 1728563400,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_10102024.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2024-11-01T12:30:00+00:00",
+      "event_time": 1730464200,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_11012024.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2024-11-13T13:30:00+00:00",
+      "event_time": 1731504600,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_11132024.htm",
+      "signal": -1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2024-12-06T13:30:00+00:00",
+      "event_time": 1733491800,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_12062024.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2024-12-11T13:30:00+00:00",
+      "event_time": 1733923800,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_12112024.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2025-01-10T13:30:00+00:00",
+      "event_time": 1736515800,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_01102025.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2025-01-15T13:30:00+00:00",
+      "event_time": 1736947800,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_01152025.htm",
+      "signal": -1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2025-02-07T13:30:00+00:00",
+      "event_time": 1738935000,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_02072025.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2025-02-12T13:30:00+00:00",
+      "event_time": 1739367000,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_02122025.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2025-03-07T13:30:00+00:00",
+      "event_time": 1741354200,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_03072025.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2025-03-12T12:30:00+00:00",
+      "event_time": 1741782600,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_03122025.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2025-04-04T12:30:00+00:00",
+      "event_time": 1743769800,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_04042025.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2025-04-10T12:30:00+00:00",
+      "event_time": 1744288200,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_04102025.htm",
+      "signal": -1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2025-05-02T12:30:00+00:00",
+      "event_time": 1746189000,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_05022025.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2025-05-13T12:30:00+00:00",
+      "event_time": 1747139400,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_05132025.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2025-06-06T12:30:00+00:00",
+      "event_time": 1749213000,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_06062025.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2025-06-11T12:30:00+00:00",
+      "event_time": 1749645000,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_06112025.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2025-07-03T12:30:00+00:00",
+      "event_time": 1751545800,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_07032025.htm",
+      "signal": -1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2025-07-15T12:30:00+00:00",
+      "event_time": 1752582600,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_07152025.htm",
+      "signal": -1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2025-08-01T12:30:00+00:00",
+      "event_time": 1754051400,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_08012025.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2025-08-12T12:30:00+00:00",
+      "event_time": 1755001800,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_08122025.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2025-09-05T12:30:00+00:00",
+      "event_time": 1757075400,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_09052025.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2025-09-11T12:30:00+00:00",
+      "event_time": 1757593800,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_09112025.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2025-10-24T12:30:00+00:00",
+      "event_time": 1761309000,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_10242025.htm",
+      "signal": 1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2025-11-20T13:30:00+00:00",
+      "event_time": 1763645400,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_11202025.htm",
+      "signal": -1
+    },
+    {
+      "category": "NFP",
+      "release_utc": "2025-12-16T13:30:00+00:00",
+      "event_time": 1765891800,
+      "source_url": "https://www.bls.gov/news.release/archives/empsit_12162025.htm",
+      "signal": 1
+    },
+    {
+      "category": "CPI",
+      "release_utc": "2025-12-18T13:30:00+00:00",
+      "event_time": 1766064600,
+      "source_url": "https://www.bls.gov/news.release/archives/cpi_12182025.htm",
+      "signal": 1
+    }
+  ],
+  "results": {
+    "base follow 2019-2021": {
+      "trades": 70,
+      "net": -111.1,
+      "profit_factor": 0.668,
+      "win_pct": 40.0,
+      "expectancy": -1.5871,
+      "max_dd_usd": 144.84,
+      "max_dd_pct": 2.89,
+      "recovery_factor": -0.767,
+      "closed_balance_nonpositive": false,
+      "first_nonpositive_after_trade": null,
+      "annualised_return_pct": -0.75,
+      "calmar_ratio": -0.258,
+      "omega_ratio": 0.668,
+      "sortino_ratio": -0.1888,
+      "sharpe_per_trade": -0.1533,
+      "skew": -0.189,
+      "kurtosis": 3.511,
+      "wins": 28,
+      "ablation": {
+        "net_pl": -111.1,
+        "drop_best_1": -139.01,
+        "drop_worst_1": -82.95,
+        "drop_best_3": -171.29,
+        "drop_worst_3": -32.21,
+        "drop_best_5": -200.19,
+        "drop_worst_5": 7.37,
+        "top3_share_of_gross_profit": 26.9
+      },
+      "monte_carlo": {
+        "median_max_dd": 146.73,
+        "p95_max_dd": 192.09,
+        "worst_max_dd": 248.23,
+        "median_final": 4888.9,
+        "p05_final": 4888.9,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 1.0
+      },
+      "CPI": {
+        "trades": 35,
+        "net": -69.81,
+        "profit_factor": 0.612,
+        "win_pct": 34.3,
+        "expectancy": -1.9946,
+        "max_dd_usd": 98.41,
+        "max_dd_pct": 1.97,
+        "recovery_factor": -0.709,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": -0.47,
+        "calmar_ratio": -0.238,
+        "omega_ratio": 0.612,
+        "sortino_ratio": -0.232,
+        "sharpe_per_trade": -0.1837,
+        "skew": 0.229,
+        "kurtosis": 3.698
+      },
+      "NFP": {
+        "trades": 35,
+        "net": -41.29,
+        "profit_factor": 0.733,
+        "win_pct": 45.7,
+        "expectancy": -1.1797,
+        "max_dd_usd": 72.92,
+        "max_dd_pct": 1.45,
+        "recovery_factor": -0.566,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": -0.28,
+        "calmar_ratio": -0.19,
+        "omega_ratio": 0.733,
+        "sortino_ratio": -0.1437,
+        "sharpe_per_trade": -0.1202,
+        "skew": -0.726,
+        "kurtosis": 3.32
+      },
+      "random_direction_median_net": -78.16999999999432,
+      "bonferroni_p_vs_random": 1.0,
+      "month_block_net_interval_95": [
+        -289.53574999999495,
+        56.475000000007626
+      ]
+    },
+    "base follow 2022-2023": {
+      "trades": 47,
+      "net": -165.65,
+      "profit_factor": 0.491,
+      "win_pct": 38.3,
+      "expectancy": -3.5245,
+      "max_dd_usd": 205.01,
+      "max_dd_pct": 4.1,
+      "recovery_factor": -0.808,
+      "closed_balance_nonpositive": false,
+      "first_nonpositive_after_trade": null,
+      "annualised_return_pct": -1.67,
+      "calmar_ratio": -0.408,
+      "omega_ratio": 0.491,
+      "sortino_ratio": -0.3289,
+      "sharpe_per_trade": -0.2823,
+      "skew": 0.27,
+      "kurtosis": 3.311,
+      "wins": 18,
+      "ablation": {
+        "net_pl": -165.65,
+        "drop_best_1": -198.0,
+        "drop_worst_1": -135.6,
+        "drop_best_3": -236.34,
+        "drop_worst_3": -84.86,
+        "drop_best_5": -260.18,
+        "drop_worst_5": -42.38,
+        "top3_share_of_gross_profit": 44.2
+      },
+      "monte_carlo": {
+        "median_max_dd": 186.93,
+        "p95_max_dd": 230.4,
+        "worst_max_dd": 273.11,
+        "median_final": 4834.35,
+        "p05_final": 4834.35,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 1.0
+      },
+      "CPI": {
+        "trades": 24,
+        "net": -112.5,
+        "profit_factor": 0.402,
+        "win_pct": 33.3,
+        "expectancy": -4.6875,
+        "max_dd_usd": 121.7,
+        "max_dd_pct": 2.43,
+        "recovery_factor": -0.924,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": -1.13,
+        "calmar_ratio": -0.465,
+        "omega_ratio": 0.402,
+        "sortino_ratio": -0.4013,
+        "sharpe_per_trade": -0.3741,
+        "skew": 0.121,
+        "kurtosis": 2.328
+      },
+      "NFP": {
+        "trades": 23,
+        "net": -53.15,
+        "profit_factor": 0.614,
+        "win_pct": 43.5,
+        "expectancy": -2.3109,
+        "max_dd_usd": 86.93,
+        "max_dd_pct": 1.74,
+        "recovery_factor": -0.611,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": -0.53,
+        "calmar_ratio": -0.307,
+        "omega_ratio": 0.614,
+        "sortino_ratio": -0.2405,
+        "sharpe_per_trade": -0.1875,
+        "skew": 0.452,
+        "kurtosis": 4.289
+      },
+      "random_direction_median_net": -30.969999999994613,
+      "bonferroni_p_vs_random": 1.0,
+      "month_block_net_interval_95": [
+        -312.22024999999206,
+        -12.59724999999445
+      ]
+    },
+    "base follow 2024-2025": {
+      "trades": 46,
+      "net": -162.4,
+      "profit_factor": 0.682,
+      "win_pct": 37.0,
+      "expectancy": -3.5304,
+      "max_dd_usd": 274.11,
+      "max_dd_pct": 5.48,
+      "recovery_factor": -0.592,
+      "closed_balance_nonpositive": false,
+      "first_nonpositive_after_trade": null,
+      "annualised_return_pct": -1.64,
+      "calmar_ratio": -0.299,
+      "omega_ratio": 0.682,
+      "sortino_ratio": -0.2128,
+      "sharpe_per_trade": -0.1545,
+      "skew": 0.716,
+      "kurtosis": 3.224,
+      "wins": 17,
+      "ablation": {
+        "net_pl": -162.4,
+        "drop_best_1": -222.85,
+        "drop_worst_1": -120.07,
+        "drop_best_3": -309.29,
+        "drop_worst_3": -42.15,
+        "drop_best_5": -376.39,
+        "drop_worst_5": 17.21,
+        "top3_share_of_gross_profit": 42.2
+      },
+      "monte_carlo": {
+        "median_max_dd": 236.18,
+        "p95_max_dd": 320.59,
+        "worst_max_dd": 400.15,
+        "median_final": 4837.6,
+        "p05_final": 4837.6,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 1.0
+      },
+      "CPI": {
+        "trades": 23,
+        "net": -0.29,
+        "profit_factor": 0.999,
+        "win_pct": 39.1,
+        "expectancy": -0.0126,
+        "max_dd_usd": 107.55,
+        "max_dd_pct": 2.13,
+        "recovery_factor": -0.003,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": -0.0,
+        "calmar_ratio": -0.001,
+        "omega_ratio": 0.999,
+        "sortino_ratio": -0.0008,
+        "sharpe_per_trade": -0.0005,
+        "skew": 0.581,
+        "kurtosis": 2.84
+      },
+      "NFP": {
+        "trades": 23,
+        "net": -162.11,
+        "profit_factor": 0.408,
+        "win_pct": 34.8,
+        "expectancy": -7.0483,
+        "max_dd_usd": 230.23,
+        "max_dd_pct": 4.6,
+        "recovery_factor": -0.704,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": -1.63,
+        "calmar_ratio": -0.355,
+        "omega_ratio": 0.408,
+        "sortino_ratio": -0.4106,
+        "sharpe_per_trade": -0.3658,
+        "skew": 0.638,
+        "kurtosis": 3.028
+      },
+      "random_direction_median_net": -58.09000000001508,
+      "bonferroni_p_vs_random": 1.0,
+      "month_block_net_interval_95": [
+        -445.62250000000876,
+        118.82349999997933
+      ]
+    },
+    "base fade 2019-2021": {
+      "trades": 70,
+      "net": -41.4,
+      "profit_factor": 0.861,
+      "win_pct": 48.6,
+      "expectancy": -0.5914,
+      "max_dd_usd": 74.55,
+      "max_dd_pct": 1.49,
+      "recovery_factor": -0.555,
+      "closed_balance_nonpositive": false,
+      "first_nonpositive_after_trade": null,
+      "annualised_return_pct": -0.28,
+      "calmar_ratio": -0.186,
+      "omega_ratio": 0.861,
+      "sortino_ratio": -0.0814,
+      "sharpe_per_trade": -0.06,
+      "skew": 0.064,
+      "kurtosis": 2.462,
+      "wins": 34,
+      "ablation": {
+        "net_pl": -41.4,
+        "drop_best_1": -62.05,
+        "drop_worst_1": -20.53,
+        "drop_best_3": -98.95,
+        "drop_worst_3": 17.47,
+        "drop_best_5": -131.81,
+        "drop_worst_5": 51.17,
+        "top3_share_of_gross_profit": 22.4
+      },
+      "monte_carlo": {
+        "median_max_dd": 100.27,
+        "p95_max_dd": 145.29,
+        "worst_max_dd": 210.0,
+        "median_final": 4958.6,
+        "p05_final": 4958.6,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 1.0
+      },
+      "CPI": {
+        "trades": 35,
+        "net": 14.13,
+        "profit_factor": 1.114,
+        "win_pct": 51.4,
+        "expectancy": 0.4037,
+        "max_dd_usd": 38.03,
+        "max_dd_pct": 0.75,
+        "recovery_factor": 0.372,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": 0.09,
+        "calmar_ratio": 0.125,
+        "omega_ratio": 1.114,
+        "sortino_ratio": 0.0597,
+        "sharpe_per_trade": 0.0421,
+        "skew": -0.196,
+        "kurtosis": 2.529
+      },
+      "NFP": {
+        "trades": 35,
+        "net": -55.53,
+        "profit_factor": 0.681,
+        "win_pct": 45.7,
+        "expectancy": -1.5866,
+        "max_dd_usd": 77.37,
+        "max_dd_pct": 1.55,
+        "recovery_factor": -0.718,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": -0.37,
+        "calmar_ratio": -0.24,
+        "omega_ratio": 0.681,
+        "sortino_ratio": -0.205,
+        "sharpe_per_trade": -0.1585,
+        "skew": 0.319,
+        "kurtosis": 2.573
+      },
+      "random_direction_median_net": -74.72999999999425,
+      "bonferroni_p_vs_random": 1.0,
+      "month_block_net_interval_95": [
+        -196.28174999999374,
+        108.1037500000061
+      ]
+    },
+    "base fade 2022-2023": {
+      "trades": 47,
+      "net": 106.77,
+      "profit_factor": 1.577,
+      "win_pct": 59.6,
+      "expectancy": 2.2717,
+      "max_dd_usd": 57.1,
+      "max_dd_pct": 1.12,
+      "recovery_factor": 1.87,
+      "closed_balance_nonpositive": false,
+      "first_nonpositive_after_trade": null,
+      "annualised_return_pct": 1.06,
+      "calmar_ratio": 0.949,
+      "omega_ratio": 1.577,
+      "sortino_ratio": 0.3008,
+      "sharpe_per_trade": 0.1833,
+      "skew": -0.01,
+      "kurtosis": 2.728,
+      "wins": 28,
+      "ablation": {
+        "net_pl": 106.77,
+        "drop_best_1": 78.4,
+        "drop_worst_1": 133.14,
+        "drop_best_3": 27.2,
+        "drop_worst_3": 174.16,
+        "drop_best_5": -16.76,
+        "drop_worst_5": 202.7,
+        "top3_share_of_gross_profit": 27.3
+      },
+      "monte_carlo": {
+        "median_max_dd": 53.89,
+        "p95_max_dd": 86.87,
+        "worst_max_dd": 124.48,
+        "median_final": 5106.77,
+        "p05_final": 5106.77,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 0.0
+      },
+      "CPI": {
+        "trades": 24,
+        "net": 73.38,
+        "profit_factor": 1.838,
+        "win_pct": 62.5,
+        "expectancy": 3.0575,
+        "max_dd_usd": 47.9,
+        "max_dd_pct": 0.94,
+        "recovery_factor": 1.532,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": 0.73,
+        "calmar_ratio": 0.774,
+        "omega_ratio": 1.838,
+        "sortino_ratio": 0.4256,
+        "sharpe_per_trade": 0.2483,
+        "skew": -0.097,
+        "kurtosis": 2.439
+      },
+      "NFP": {
+        "trades": 23,
+        "net": 33.39,
+        "profit_factor": 1.343,
+        "win_pct": 56.5,
+        "expectancy": 1.4517,
+        "max_dd_usd": 29.17,
+        "max_dd_pct": 0.58,
+        "recovery_factor": 1.145,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": 0.33,
+        "calmar_ratio": 0.575,
+        "omega_ratio": 1.343,
+        "sortino_ratio": 0.1833,
+        "sharpe_per_trade": 0.1169,
+        "skew": 0.081,
+        "kurtosis": 3.061
+      },
+      "random_direction_median_net": -31.859999999995853,
+      "bonferroni_p_vs_random": 0.355128974205159,
+      "month_block_net_interval_95": [
+        -36.88324999999434,
+        244.92775000000339
+      ]
+    },
+    "base fade 2024-2025": {
+      "trades": 46,
+      "net": 46.12,
+      "profit_factor": 1.127,
+      "win_pct": 56.5,
+      "expectancy": 1.0026,
+      "max_dd_usd": 108.66,
+      "max_dd_pct": 2.11,
+      "recovery_factor": 0.424,
+      "closed_balance_nonpositive": false,
+      "first_nonpositive_after_trade": null,
+      "annualised_return_pct": 0.46,
+      "calmar_ratio": 0.218,
+      "omega_ratio": 1.127,
+      "sortino_ratio": 0.0644,
+      "sharpe_per_trade": 0.0482,
+      "skew": -0.717,
+      "kurtosis": 3.579,
+      "wins": 26,
+      "ablation": {
+        "net_pl": 46.12,
+        "drop_best_1": 11.27,
+        "drop_worst_1": 111.75,
+        "drop_best_3": -53.55,
+        "drop_worst_3": 180.55,
+        "drop_best_5": -108.13,
+        "drop_worst_5": 230.69,
+        "top3_share_of_gross_profit": 24.4
+      },
+      "monte_carlo": {
+        "median_max_dd": 124.45,
+        "p95_max_dd": 192.11,
+        "worst_max_dd": 266.13,
+        "median_final": 5046.12,
+        "p05_final": 5046.12,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 0.0
+      },
+      "CPI": {
+        "trades": 23,
+        "net": -46.29,
+        "profit_factor": 0.795,
+        "win_pct": 56.5,
+        "expectancy": -2.0126,
+        "max_dd_usd": 76.53,
+        "max_dd_pct": 1.53,
+        "recovery_factor": -0.605,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": -0.46,
+        "calmar_ratio": -0.303,
+        "omega_ratio": 0.795,
+        "sortino_ratio": -0.1055,
+        "sharpe_per_trade": -0.0886,
+        "skew": -0.872,
+        "kurtosis": 3.677
+      },
+      "NFP": {
+        "trades": 23,
+        "net": 92.41,
+        "profit_factor": 1.676,
+        "win_pct": 56.5,
+        "expectancy": 4.0178,
+        "max_dd_usd": 52.76,
+        "max_dd_pct": 1.03,
+        "recovery_factor": 1.752,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": 0.92,
+        "calmar_ratio": 0.897,
+        "omega_ratio": 1.676,
+        "sortino_ratio": 0.3649,
+        "sharpe_per_trade": 0.2202,
+        "skew": -0.176,
+        "kurtosis": 1.889
+      },
+      "random_direction_median_net": -56.740000000015435,
+      "bonferroni_p_vs_random": 1.0,
+      "month_block_net_interval_95": [
+        -198.99675000000875,
+        299.2577499999875
+      ]
+    },
+    "stress follow 2019-2021": {
+      "trades": 70,
+      "net": -163.98,
+      "profit_factor": 0.555,
+      "win_pct": 40.0,
+      "expectancy": -2.3426,
+      "max_dd_usd": 194.52,
+      "max_dd_pct": 3.89,
+      "recovery_factor": -0.843,
+      "closed_balance_nonpositive": false,
+      "first_nonpositive_after_trade": null,
+      "annualised_return_pct": -1.11,
+      "calmar_ratio": -0.284,
+      "omega_ratio": 0.555,
+      "sortino_ratio": -0.2682,
+      "sharpe_per_trade": -0.2278,
+      "skew": -0.118,
+      "kurtosis": 3.45,
+      "wins": 28,
+      "ablation": {
+        "net_pl": -163.98,
+        "drop_best_1": -191.21,
+        "drop_worst_1": -135.75,
+        "drop_best_3": -222.13,
+        "drop_worst_3": -84.85,
+        "drop_best_5": -249.67,
+        "drop_worst_5": -43.91,
+        "top3_share_of_gross_profit": 28.4
+      },
+      "monte_carlo": {
+        "median_max_dd": 187.43,
+        "p95_max_dd": 229.45,
+        "worst_max_dd": 280.27,
+        "median_final": 4836.02,
+        "p05_final": 4836.02,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 1.0
+      },
+      "CPI": {
+        "trades": 35,
+        "net": -95.37,
+        "profit_factor": 0.517,
+        "win_pct": 34.3,
+        "expectancy": -2.7249,
+        "max_dd_usd": 122.61,
+        "max_dd_pct": 2.45,
+        "recovery_factor": -0.778,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": -0.64,
+        "calmar_ratio": -0.261,
+        "omega_ratio": 0.517,
+        "sortino_ratio": -0.3072,
+        "sharpe_per_trade": -0.254,
+        "skew": 0.305,
+        "kurtosis": 3.754
+      },
+      "NFP": {
+        "trades": 35,
+        "net": -68.61,
+        "profit_factor": 0.599,
+        "win_pct": 45.7,
+        "expectancy": -1.9603,
+        "max_dd_usd": 84.09,
+        "max_dd_pct": 1.68,
+        "recovery_factor": -0.816,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": -0.46,
+        "calmar_ratio": -0.274,
+        "omega_ratio": 0.599,
+        "sortino_ratio": -0.2281,
+        "sharpe_per_trade": -0.1999,
+        "skew": -0.648,
+        "kurtosis": 3.114
+      }
+    },
+    "stress follow 2022-2023": {
+      "trades": 47,
+      "net": -194.61,
+      "profit_factor": 0.432,
+      "win_pct": 38.3,
+      "expectancy": -4.1406,
+      "max_dd_usd": 231.25,
+      "max_dd_pct": 4.62,
+      "recovery_factor": -0.842,
+      "closed_balance_nonpositive": false,
+      "first_nonpositive_after_trade": null,
+      "annualised_return_pct": -1.97,
+      "calmar_ratio": -0.425,
+      "omega_ratio": 0.432,
+      "sortino_ratio": -0.3746,
+      "sharpe_per_trade": -0.3336,
+      "skew": 0.285,
+      "kurtosis": 3.329,
+      "wins": 18,
+      "ablation": {
+        "net_pl": -194.61,
+        "drop_best_1": -226.28,
+        "drop_worst_1": -164.48,
+        "drop_best_3": -263.26,
+        "drop_worst_3": -112.38,
+        "drop_best_5": -285.74,
+        "drop_worst_5": -69.14,
+        "top3_share_of_gross_profit": 46.4
+      },
+      "monte_carlo": {
+        "median_max_dd": 210.98,
+        "p95_max_dd": 251.88,
+        "worst_max_dd": 292.39,
+        "median_final": 4805.39,
+        "p05_final": 4805.39,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 1.0
+      },
+      "CPI": {
+        "trades": 24,
+        "net": -128.22,
+        "profit_factor": 0.354,
+        "win_pct": 33.3,
+        "expectancy": -5.3425,
+        "max_dd_usd": 133.34,
+        "max_dd_pct": 2.67,
+        "recovery_factor": -0.962,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": -1.29,
+        "calmar_ratio": -0.484,
+        "omega_ratio": 0.354,
+        "sortino_ratio": -0.4413,
+        "sharpe_per_trade": -0.4272,
+        "skew": 0.121,
+        "kurtosis": 2.338
+      },
+      "NFP": {
+        "trades": 23,
+        "net": -66.39,
+        "profit_factor": 0.539,
+        "win_pct": 43.5,
+        "expectancy": -2.8865,
+        "max_dd_usd": 98.81,
+        "max_dd_pct": 1.98,
+        "recovery_factor": -0.672,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": -0.67,
+        "calmar_ratio": -0.337,
+        "omega_ratio": 0.539,
+        "sortino_ratio": -0.2934,
+        "sharpe_per_trade": -0.2368,
+        "skew": 0.494,
+        "kurtosis": 4.335
+      }
+    },
+    "stress follow 2024-2025": {
+      "trades": 46,
+      "net": -188.88,
+      "profit_factor": 0.641,
+      "win_pct": 37.0,
+      "expectancy": -4.1061,
+      "max_dd_usd": 292.35,
+      "max_dd_pct": 5.84,
+      "recovery_factor": -0.646,
+      "closed_balance_nonpositive": false,
+      "first_nonpositive_after_trade": null,
+      "annualised_return_pct": -1.91,
+      "calmar_ratio": -0.326,
+      "omega_ratio": 0.641,
+      "sortino_ratio": -0.2433,
+      "sharpe_per_trade": -0.1806,
+      "skew": 0.73,
+      "kurtosis": 3.24,
+      "wins": 17,
+      "ablation": {
+        "net_pl": -188.88,
+        "drop_best_1": -248.65,
+        "drop_worst_1": -146.47,
+        "drop_best_3": -333.73,
+        "drop_worst_3": -67.79,
+        "drop_best_5": -399.47,
+        "drop_worst_5": -8.27,
+        "top3_share_of_gross_profit": 43.0
+      },
+      "monte_carlo": {
+        "median_max_dd": 253.95,
+        "p95_max_dd": 337.77,
+        "worst_max_dd": 415.4,
+        "median_final": 4811.12,
+        "p05_final": 4811.12,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 1.0
+      },
+      "CPI": {
+        "trades": 23,
+        "net": -12.93,
+        "profit_factor": 0.947,
+        "win_pct": 39.1,
+        "expectancy": -0.5622,
+        "max_dd_usd": 113.99,
+        "max_dd_pct": 2.26,
+        "recovery_factor": -0.113,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": -0.13,
+        "calmar_ratio": -0.057,
+        "omega_ratio": 0.947,
+        "sortino_ratio": -0.0347,
+        "sharpe_per_trade": -0.0222,
+        "skew": 0.596,
+        "kurtosis": 2.849
+      },
+      "NFP": {
+        "trades": 23,
+        "net": -175.95,
+        "profit_factor": 0.377,
+        "win_pct": 34.8,
+        "expectancy": -7.65,
+        "max_dd_usd": 241.35,
+        "max_dd_pct": 4.83,
+        "recovery_factor": -0.729,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": -1.78,
+        "calmar_ratio": -0.368,
+        "omega_ratio": 0.377,
+        "sortino_ratio": -0.4369,
+        "sharpe_per_trade": -0.3989,
+        "skew": 0.65,
+        "kurtosis": 3.05
+      }
+    },
+    "stress fade 2019-2021": {
+      "trades": 70,
+      "net": -86.06,
+      "profit_factor": 0.731,
+      "win_pct": 47.1,
+      "expectancy": -1.2294,
+      "max_dd_usd": 102.09,
+      "max_dd_pct": 2.04,
+      "recovery_factor": -0.843,
+      "closed_balance_nonpositive": false,
+      "first_nonpositive_after_trade": null,
+      "annualised_return_pct": -0.58,
+      "calmar_ratio": -0.283,
+      "omega_ratio": 0.731,
+      "sortino_ratio": -0.162,
+      "sharpe_per_trade": -0.1255,
+      "skew": 0.082,
+      "kurtosis": 2.457,
+      "wins": 33,
+      "ablation": {
+        "net_pl": -86.06,
+        "drop_best_1": -106.03,
+        "drop_worst_1": -65.11,
+        "drop_best_3": -141.57,
+        "drop_worst_3": -25.87,
+        "drop_best_5": -173.07,
+        "drop_worst_5": 8.59,
+        "top3_share_of_gross_profit": 23.7
+      },
+      "monte_carlo": {
+        "median_max_dd": 125.95,
+        "p95_max_dd": 171.06,
+        "worst_max_dd": 228.34,
+        "median_final": 4913.94,
+        "p05_final": 4913.94,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 1.0
+      },
+      "CPI": {
+        "trades": 35,
+        "net": -9.13,
+        "profit_factor": 0.933,
+        "win_pct": 48.6,
+        "expectancy": -0.2609,
+        "max_dd_usd": 40.73,
+        "max_dd_pct": 0.81,
+        "recovery_factor": -0.224,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": -0.06,
+        "calmar_ratio": -0.075,
+        "omega_ratio": 0.933,
+        "sortino_ratio": -0.0368,
+        "sharpe_per_trade": -0.0273,
+        "skew": -0.183,
+        "kurtosis": 2.514
+      },
+      "NFP": {
+        "trades": 35,
+        "net": -76.93,
+        "profit_factor": 0.583,
+        "win_pct": 45.7,
+        "expectancy": -2.198,
+        "max_dd_usd": 97.41,
+        "max_dd_pct": 1.95,
+        "recovery_factor": -0.79,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": -0.52,
+        "calmar_ratio": -0.265,
+        "omega_ratio": 0.583,
+        "sortino_ratio": -0.2728,
+        "sharpe_per_trade": -0.2214,
+        "skew": 0.342,
+        "kurtosis": 2.578
+      }
+    },
+    "stress fade 2022-2023": {
+      "trades": 47,
+      "net": 76.01,
+      "profit_factor": 1.385,
+      "win_pct": 57.4,
+      "expectancy": 1.6172,
+      "max_dd_usd": 63.9,
+      "max_dd_pct": 1.25,
+      "recovery_factor": 1.19,
+      "closed_balance_nonpositive": false,
+      "first_nonpositive_after_trade": null,
+      "annualised_return_pct": 0.76,
+      "calmar_ratio": 0.603,
+      "omega_ratio": 1.385,
+      "sortino_ratio": 0.2061,
+      "sharpe_per_trade": 0.131,
+      "skew": 0.005,
+      "kurtosis": 2.71,
+      "wins": 27,
+      "ablation": {
+        "net_pl": 76.01,
+        "drop_best_1": 48.32,
+        "drop_worst_1": 102.46,
+        "drop_best_3": -1.52,
+        "drop_worst_3": 144.84,
+        "drop_best_5": -44.12,
+        "drop_worst_5": 174.14,
+        "top3_share_of_gross_profit": 28.4
+      },
+      "monte_carlo": {
+        "median_max_dd": 59.73,
+        "p95_max_dd": 95.53,
+        "worst_max_dd": 135.86,
+        "median_final": 5076.01,
+        "p05_final": 5076.01,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 0.0
+      },
+      "CPI": {
+        "trades": 24,
+        "net": 57.06,
+        "profit_factor": 1.606,
+        "win_pct": 58.3,
+        "expectancy": 2.3775,
+        "max_dd_usd": 50.62,
+        "max_dd_pct": 1.0,
+        "recovery_factor": 1.127,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": 0.57,
+        "calmar_ratio": 0.569,
+        "omega_ratio": 1.606,
+        "sortino_ratio": 0.3156,
+        "sharpe_per_trade": 0.1931,
+        "skew": -0.097,
+        "kurtosis": 2.439
+      },
+      "NFP": {
+        "trades": 23,
+        "net": 18.95,
+        "profit_factor": 1.184,
+        "win_pct": 56.5,
+        "expectancy": 0.8239,
+        "max_dd_usd": 33.93,
+        "max_dd_pct": 0.68,
+        "recovery_factor": 0.559,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": 0.19,
+        "calmar_ratio": 0.28,
+        "omega_ratio": 1.184,
+        "sortino_ratio": 0.101,
+        "sharpe_per_trade": 0.0668,
+        "skew": 0.111,
+        "kurtosis": 3.039
+      }
+    },
+    "stress fade 2024-2025": {
+      "trades": 46,
+      "net": 19.64,
+      "profit_factor": 1.053,
+      "win_pct": 56.5,
+      "expectancy": 0.427,
+      "max_dd_usd": 112.9,
+      "max_dd_pct": 2.2,
+      "recovery_factor": 0.174,
+      "closed_balance_nonpositive": false,
+      "first_nonpositive_after_trade": null,
+      "annualised_return_pct": 0.2,
+      "calmar_ratio": 0.089,
+      "omega_ratio": 1.053,
+      "sortino_ratio": 0.0272,
+      "sharpe_per_trade": 0.0207,
+      "skew": -0.707,
+      "kurtosis": 3.578,
+      "wins": 26,
+      "ablation": {
+        "net_pl": 19.64,
+        "drop_best_1": -14.53,
+        "drop_worst_1": 85.35,
+        "drop_best_3": -77.99,
+        "drop_worst_3": 154.31,
+        "drop_best_5": -131.21,
+        "drop_worst_5": 205.21,
+        "top3_share_of_gross_profit": 24.9
+      },
+      "monte_carlo": {
+        "median_max_dd": 131.33,
+        "p95_max_dd": 199.68,
+        "worst_max_dd": 274.92,
+        "median_final": 5019.64,
+        "p05_final": 5019.64,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 0.0
+      },
+      "CPI": {
+        "trades": 23,
+        "net": -58.93,
+        "profit_factor": 0.744,
+        "win_pct": 56.5,
+        "expectancy": -2.5622,
+        "max_dd_usd": 78.13,
+        "max_dd_pct": 1.56,
+        "recovery_factor": -0.754,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": -0.59,
+        "calmar_ratio": -0.378,
+        "omega_ratio": 0.744,
+        "sortino_ratio": -0.1334,
+        "sharpe_per_trade": -0.1137,
+        "skew": -0.866,
+        "kurtosis": 3.686
+      },
+      "NFP": {
+        "trades": 23,
+        "net": 78.57,
+        "profit_factor": 1.554,
+        "win_pct": 56.5,
+        "expectancy": 3.4161,
+        "max_dd_usd": 57.0,
+        "max_dd_pct": 1.11,
+        "recovery_factor": 1.378,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": 0.78,
+        "calmar_ratio": 0.705,
+        "omega_ratio": 1.554,
+        "sortino_ratio": 0.3048,
+        "sharpe_per_trade": 0.1885,
+        "skew": -0.161,
+        "kurtosis": 1.876
+      }
+    },
+    "frictionless follow 2019-2021": {
+      "trades": 70,
+      "net": -65.58,
+      "profit_factor": 0.788,
+      "win_pct": 42.9,
+      "expectancy": -0.9369,
+      "max_dd_usd": 111.04,
+      "max_dd_pct": 2.21,
+      "recovery_factor": -0.591,
+      "closed_balance_nonpositive": false,
+      "first_nonpositive_after_trade": null,
+      "annualised_return_pct": -0.44,
+      "calmar_ratio": -0.198,
+      "omega_ratio": 0.788,
+      "sortino_ratio": -0.1149,
+      "sharpe_per_trade": -0.0896,
+      "skew": -0.233,
+      "kurtosis": 3.535,
+      "wins": 30,
+      "ablation": {
+        "net_pl": -65.58,
+        "drop_best_1": -94.16,
+        "drop_worst_1": -37.54,
+        "drop_best_3": -127.78,
+        "drop_worst_3": 12.98,
+        "drop_best_5": -158.02,
+        "drop_worst_5": 51.22,
+        "top3_share_of_gross_profit": 25.6
+      },
+      "monte_carlo": {
+        "median_max_dd": 117.52,
+        "p95_max_dd": 164.3,
+        "worst_max_dd": 220.24,
+        "median_final": 4934.42,
+        "p05_final": 4934.42,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 1.0
+      },
+      "CPI": {
+        "trades": 35,
+        "net": -46.62,
+        "profit_factor": 0.718,
+        "win_pct": 37.1,
+        "expectancy": -1.332,
+        "max_dd_usd": 76.56,
+        "max_dd_pct": 1.53,
+        "recovery_factor": -0.609,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": -0.31,
+        "calmar_ratio": -0.204,
+        "omega_ratio": 0.718,
+        "sortino_ratio": -0.1595,
+        "sharpe_per_trade": -0.1215,
+        "skew": 0.174,
+        "kurtosis": 3.671
+      },
+      "NFP": {
+        "trades": 35,
+        "net": -18.96,
+        "profit_factor": 0.868,
+        "win_pct": 48.6,
+        "expectancy": -0.5417,
+        "max_dd_usd": 64.1,
+        "max_dd_pct": 1.27,
+        "recovery_factor": -0.296,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": -0.13,
+        "calmar_ratio": -0.099,
+        "omega_ratio": 0.868,
+        "sortino_ratio": -0.0681,
+        "sharpe_per_trade": -0.0548,
+        "skew": -0.758,
+        "kurtosis": 3.401
+      }
+    },
+    "frictionless follow 2022-2023": {
+      "trades": 47,
+      "net": -136.96,
+      "profit_factor": 0.558,
+      "win_pct": 40.4,
+      "expectancy": -2.914,
+      "max_dd_usd": 179.0,
+      "max_dd_pct": 3.58,
+      "recovery_factor": -0.765,
+      "closed_balance_nonpositive": false,
+      "first_nonpositive_after_trade": null,
+      "annualised_return_pct": -1.38,
+      "calmar_ratio": -0.385,
+      "omega_ratio": 0.558,
+      "sortino_ratio": -0.2805,
+      "sharpe_per_trade": -0.2321,
+      "skew": 0.256,
+      "kurtosis": 3.295,
+      "wins": 19,
+      "ablation": {
+        "net_pl": -136.96,
+        "drop_best_1": -169.98,
+        "drop_worst_1": -107.02,
+        "drop_best_3": -209.66,
+        "drop_worst_3": -57.62,
+        "drop_best_5": -234.84,
+        "drop_worst_5": -15.92,
+        "top3_share_of_gross_profit": 42.1
+      },
+      "monte_carlo": {
+        "median_max_dd": 164.0,
+        "p95_max_dd": 210.32,
+        "worst_max_dd": 255.14,
+        "median_final": 4863.04,
+        "p05_final": 4863.04,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 1.0
+      },
+      "CPI": {
+        "trades": 24,
+        "net": -96.98,
+        "profit_factor": 0.457,
+        "win_pct": 37.5,
+        "expectancy": -4.0408,
+        "max_dd_usd": 110.2,
+        "max_dd_pct": 2.2,
+        "recovery_factor": -0.88,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": -0.97,
+        "calmar_ratio": -0.442,
+        "omega_ratio": 0.457,
+        "sortino_ratio": -0.3585,
+        "sharpe_per_trade": -0.3219,
+        "skew": 0.12,
+        "kurtosis": 2.319
+      },
+      "NFP": {
+        "trades": 23,
+        "net": -39.98,
+        "profit_factor": 0.695,
+        "win_pct": 43.5,
+        "expectancy": -1.7383,
+        "max_dd_usd": 75.1,
+        "max_dd_pct": 1.5,
+        "recovery_factor": -0.532,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": -0.4,
+        "calmar_ratio": -0.267,
+        "omega_ratio": 0.695,
+        "sortino_ratio": -0.1852,
+        "sharpe_per_trade": -0.1396,
+        "skew": 0.412,
+        "kurtosis": 4.247
+      }
+    },
+    "frictionless follow 2024-2025": {
+      "trades": 46,
+      "net": -136.06,
+      "profit_factor": 0.726,
+      "win_pct": 37.0,
+      "expectancy": -2.9578,
+      "max_dd_usd": 255.92,
+      "max_dd_pct": 5.11,
+      "recovery_factor": -0.532,
+      "closed_balance_nonpositive": false,
+      "first_nonpositive_after_trade": null,
+      "annualised_return_pct": -1.37,
+      "calmar_ratio": -0.268,
+      "omega_ratio": 0.726,
+      "sortino_ratio": -0.1814,
+      "sharpe_per_trade": -0.1289,
+      "skew": 0.702,
+      "kurtosis": 3.208,
+      "wins": 17,
+      "ablation": {
+        "net_pl": -136.06,
+        "drop_best_1": -197.18,
+        "drop_worst_1": -93.84,
+        "drop_best_3": -284.96,
+        "drop_worst_3": -16.7,
+        "drop_best_5": -353.4,
+        "drop_worst_5": 42.44,
+        "top3_share_of_gross_profit": 41.4
+      },
+      "monte_carlo": {
+        "median_max_dd": 219.33,
+        "p95_max_dd": 304.1,
+        "worst_max_dd": 388.88,
+        "median_final": 4863.94,
+        "p05_final": 4863.94,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 1.0
+      },
+      "CPI": {
+        "trades": 23,
+        "net": 12.32,
+        "profit_factor": 1.054,
+        "win_pct": 39.1,
+        "expectancy": 0.5357,
+        "max_dd_usd": 102.04,
+        "max_dd_pct": 2.02,
+        "recovery_factor": 0.121,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": 0.12,
+        "calmar_ratio": 0.061,
+        "omega_ratio": 1.054,
+        "sortino_ratio": 0.034,
+        "sharpe_per_trade": 0.0209,
+        "skew": 0.567,
+        "kurtosis": 2.832
+      },
+      "NFP": {
+        "trades": 23,
+        "net": -148.38,
+        "profit_factor": 0.441,
+        "win_pct": 34.8,
+        "expectancy": -6.4513,
+        "max_dd_usd": 219.18,
+        "max_dd_pct": 4.38,
+        "recovery_factor": -0.677,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": -1.49,
+        "calmar_ratio": -0.341,
+        "omega_ratio": 0.441,
+        "sortino_ratio": -0.3834,
+        "sharpe_per_trade": -0.3334,
+        "skew": 0.627,
+        "kurtosis": 3.009
+      }
+    },
+    "frictionless fade 2019-2021": {
+      "trades": 70,
+      "net": 3.3,
+      "profit_factor": 1.012,
+      "win_pct": 54.3,
+      "expectancy": 0.0471,
+      "max_dd_usd": 54.48,
+      "max_dd_pct": 1.08,
+      "recovery_factor": 0.061,
+      "closed_balance_nonpositive": false,
+      "first_nonpositive_after_trade": null,
+      "annualised_return_pct": 0.02,
+      "calmar_ratio": 0.02,
+      "omega_ratio": 1.012,
+      "sortino_ratio": 0.0068,
+      "sharpe_per_trade": 0.0047,
+      "skew": 0.027,
+      "kurtosis": 2.516,
+      "wins": 38,
+      "ablation": {
+        "net_pl": 3.3,
+        "drop_best_1": -18.02,
+        "drop_worst_1": 24.38,
+        "drop_best_3": -56.26,
+        "drop_worst_3": 62.32,
+        "drop_best_5": -90.46,
+        "drop_worst_5": 95.24,
+        "top3_share_of_gross_profit": 21.2
+      },
+      "monte_carlo": {
+        "median_max_dd": 81.09,
+        "p95_max_dd": 124.2,
+        "worst_max_dd": 194.58,
+        "median_final": 5003.3,
+        "p05_final": 5003.3,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 0.0
+      },
+      "CPI": {
+        "trades": 35,
+        "net": 34.3,
+        "profit_factor": 1.293,
+        "win_pct": 62.9,
+        "expectancy": 0.98,
+        "max_dd_usd": 38.18,
+        "max_dd_pct": 0.76,
+        "recovery_factor": 0.898,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": 0.23,
+        "calmar_ratio": 0.302,
+        "omega_ratio": 1.293,
+        "sortino_ratio": 0.1475,
+        "sharpe_per_trade": 0.1004,
+        "skew": -0.25,
+        "kurtosis": 2.602
+      },
+      "NFP": {
+        "trades": 35,
+        "net": -31.0,
+        "profit_factor": 0.806,
+        "win_pct": 45.7,
+        "expectancy": -0.8857,
+        "max_dd_usd": 56.94,
+        "max_dd_pct": 1.14,
+        "recovery_factor": -0.544,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": -0.21,
+        "calmar_ratio": -0.182,
+        "omega_ratio": 0.806,
+        "sortino_ratio": -0.1213,
+        "sharpe_per_trade": -0.0885,
+        "skew": 0.299,
+        "kurtosis": 2.617
+      }
+    },
+    "frictionless fade 2022-2023": {
+      "trades": 47,
+      "net": 137.14,
+      "profit_factor": 1.791,
+      "win_pct": 59.6,
+      "expectancy": 2.9179,
+      "max_dd_usd": 51.06,
+      "max_dd_pct": 1.0,
+      "recovery_factor": 2.686,
+      "closed_balance_nonpositive": false,
+      "first_nonpositive_after_trade": null,
+      "annualised_return_pct": 1.36,
+      "calmar_ratio": 1.364,
+      "omega_ratio": 1.791,
+      "sortino_ratio": 0.4012,
+      "sharpe_per_trade": 0.2346,
+      "skew": -0.025,
+      "kurtosis": 2.747,
+      "wins": 28,
+      "ablation": {
+        "net_pl": 137.14,
+        "drop_best_1": 108.1,
+        "drop_worst_1": 163.4,
+        "drop_best_3": 55.56,
+        "drop_worst_3": 203.08,
+        "drop_best_5": 10.26,
+        "drop_worst_5": 230.84,
+        "top3_share_of_gross_profit": 26.3
+      },
+      "monte_carlo": {
+        "median_max_dd": 49.21,
+        "p95_max_dd": 79.5,
+        "worst_max_dd": 118.9,
+        "median_final": 5137.14,
+        "p05_final": 5137.14,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 0.0
+      },
+      "CPI": {
+        "trades": 24,
+        "net": 89.46,
+        "profit_factor": 2.097,
+        "win_pct": 62.5,
+        "expectancy": 3.7275,
+        "max_dd_usd": 45.22,
+        "max_dd_pct": 0.89,
+        "recovery_factor": 1.978,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": 0.89,
+        "calmar_ratio": 1.0,
+        "omega_ratio": 2.097,
+        "sortino_ratio": 0.5444,
+        "sharpe_per_trade": 0.3027,
+        "skew": -0.097,
+        "kurtosis": 2.439
+      },
+      "NFP": {
+        "trades": 23,
+        "net": 47.68,
+        "profit_factor": 1.519,
+        "win_pct": 56.5,
+        "expectancy": 2.073,
+        "max_dd_usd": 26.26,
+        "max_dd_pct": 0.52,
+        "recovery_factor": 1.816,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": 0.48,
+        "calmar_ratio": 0.919,
+        "omega_ratio": 1.519,
+        "sortino_ratio": 0.2695,
+        "sharpe_per_trade": 0.1658,
+        "skew": 0.052,
+        "kurtosis": 3.082
+      }
+    },
+    "frictionless fade 2024-2025": {
+      "trades": 46,
+      "net": 72.46,
+      "profit_factor": 1.205,
+      "win_pct": 58.7,
+      "expectancy": 1.5752,
+      "max_dd_usd": 104.42,
+      "max_dd_pct": 2.02,
+      "recovery_factor": 0.694,
+      "closed_balance_nonpositive": false,
+      "first_nonpositive_after_trade": null,
+      "annualised_return_pct": 0.72,
+      "calmar_ratio": 0.357,
+      "omega_ratio": 1.205,
+      "sortino_ratio": 0.1021,
+      "sharpe_per_trade": 0.0751,
+      "skew": -0.727,
+      "kurtosis": 3.581,
+      "wins": 27,
+      "ablation": {
+        "net_pl": 72.46,
+        "drop_best_1": 36.94,
+        "drop_worst_1": 137.98,
+        "drop_best_3": -29.22,
+        "drop_worst_3": 206.56,
+        "drop_best_5": -85.14,
+        "drop_worst_5": 256.46,
+        "top3_share_of_gross_profit": 23.8
+      },
+      "monte_carlo": {
+        "median_max_dd": 117.82,
+        "p95_max_dd": 184.36,
+        "worst_max_dd": 258.66,
+        "median_final": 5072.46,
+        "p05_final": 5072.46,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 0.0
+      },
+      "CPI": {
+        "trades": 23,
+        "net": -33.68,
+        "profit_factor": 0.849,
+        "win_pct": 60.9,
+        "expectancy": -1.4643,
+        "max_dd_usd": 74.86,
+        "max_dd_pct": 1.5,
+        "recovery_factor": -0.45,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": -0.34,
+        "calmar_ratio": -0.226,
+        "omega_ratio": 0.849,
+        "sortino_ratio": -0.0772,
+        "sharpe_per_trade": -0.064,
+        "skew": -0.877,
+        "kurtosis": 3.669
+      },
+      "NFP": {
+        "trades": 23,
+        "net": 106.14,
+        "profit_factor": 1.806,
+        "win_pct": 56.5,
+        "expectancy": 4.6148,
+        "max_dd_usd": 50.38,
+        "max_dd_pct": 0.98,
+        "recovery_factor": 2.107,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": 1.06,
+        "calmar_ratio": 1.081,
+        "omega_ratio": 1.806,
+        "sortino_ratio": 0.4266,
+        "sharpe_per_trade": 0.2514,
+        "skew": -0.191,
+        "kurtosis": 1.901
+      }
+    }
+  }
+}

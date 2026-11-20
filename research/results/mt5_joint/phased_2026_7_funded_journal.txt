@@ -1,0 +1,1 @@
+LK	0	22:26:18.179	Core 01	2026.10.30 20:57:59   JOINT_COUNTS accepted=408 same_blocked=0 opposite_blocked=24 ignored_adds=186 max_positions=1

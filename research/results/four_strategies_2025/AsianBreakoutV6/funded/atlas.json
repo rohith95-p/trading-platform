@@ -1,0 +1,63 @@
+{
+  "name": "AsianBreakoutV6",
+  "phase": "funded",
+  "start": "2025-04-17T00:00:00+00:00",
+  "end_exclusive": "2026-01-01T00:00:00+00:00",
+  "unrestricted": {
+    "status": "active",
+    "time": null,
+    "entries": 38,
+    "closes": 38,
+    "balance": 5523.842000000003,
+    "equity": 5523.842000000003,
+    "minimum_equity": 4954.294,
+    "first_trade": "2025-04-21T07:15:00.207000+00:00",
+    "payout_anchor": 5000.0,
+    "next_payout_window": null,
+    "max_equity_drawdown_usd": 162.34900000000198,
+    "max_equity_drawdown_pct": 3.0227269130479217,
+    "max_floating_loss": 65.76699999999983,
+    "max_used_margin_to_equity": 0.025743066745033752,
+    "overnight_resets": 10,
+    "peak_equity": 5523.952000000004,
+    "rule_events": [],
+    "protector_strikes": 0,
+    "qualifying_days": 19,
+    "deductions": 0.0,
+    "modeled_payouts": [],
+    "modeled_cash_received": 0.0
+  },
+  "atlas": {
+    "status": "active",
+    "time": null,
+    "entries": 38,
+    "closes": 38,
+    "balance": 5478.6910000000025,
+    "equity": 5478.6910000000025,
+    "minimum_equity": 4954.294,
+    "first_trade": "2025-04-21T07:15:00.207000+00:00",
+    "payout_anchor": 5000.0,
+    "next_payout_window": "2025-05-15T00:00:00+00:00",
+    "max_equity_drawdown_usd": 162.34900000000198,
+    "max_equity_drawdown_pct": 3.048352977978527,
+    "max_floating_loss": 65.76699999999983,
+    "max_used_margin_to_equity": 0.05193610490304506,
+    "overnight_resets": 10,
+    "peak_equity": 5478.801000000003,
+    "rule_events": [
+      {
+        "time": "2025-06-11T12:30:13.359000+00:00",
+        "event": "profit_deduction",
+        "amount": 45.15100000000041,
+        "ticket": 8
+      }
+    ],
+    "protector_strikes": 0,
+    "qualifying_days": 18,
+    "deductions": 45.15100000000041,
+    "modeled_payouts": [],
+    "modeled_cash_received": 0.0
+  },
+  "news_coverage": "Selected USD releases only; historical Atlas all-currency restrictions unverified.",
+  "payout_assumption": "Request USD 100 cash while flat, normal 90% split (50% after first Protector), immediate settlement and verified KYC assumed; no real payments."
+}

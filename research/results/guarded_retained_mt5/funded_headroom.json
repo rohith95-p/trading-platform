@@ -1,0 +1,104 @@
+{
+  "2025_portfolio_funded_phase_split": {
+    "orders": 82,
+    "after_withdrawal": 19,
+    "negative_margins": 0,
+    "min_after_reserve": 65.23499999999967,
+    "worst": {
+      "run": "2025_portfolio_funded_phase_split",
+      "time": "2025-10-21T12:15:00.036000+00:00",
+      "ticket": 120,
+      "strategy": "LONDON_MOMENTUM_TIGHT_V6",
+      "cash": 5126.179999999999,
+      "midnight_anchor": 5126.179999999999,
+      "peak": 5157.486999999999,
+      "settled_payouts": 0,
+      "initial_sl": 4255.323,
+      "lots": 0.01,
+      "native_entry_price": 4225.558,
+      "stop_risk": 29.765000000000327,
+      "reserved_risk": 34.76500000000033,
+      "tightest": "protector",
+      "daily_headroom": 153.78539999999975,
+      "trailing_headroom": 278.14222000000063,
+      "protector_headroom": 100.0,
+      "daily_after_reserve": 119.02039999999943,
+      "trailing_after_reserve": 243.3772200000003,
+      "protector_after_reserve": 65.23499999999967,
+      "minimum_after_reserve": 65.23499999999967
+    },
+    "minimums": {
+      "daily": 110.18129999999974,
+      "trailing": 208.19771999999966,
+      "protector": 65.23499999999967
+    }
+  },
+  "2026_portfolio_funded_phase_split": {
+    "orders": 64,
+    "after_withdrawal": 6,
+    "negative_margins": 0,
+    "min_after_reserve": 65.08099999999922,
+    "worst": {
+      "run": "2026_portfolio_funded_phase_split",
+      "time": "2026-03-31T12:19:00.251000+00:00",
+      "ticket": 14,
+      "strategy": "LONDON_MOMENTUM_TIGHT_V6",
+      "cash": 4996.360000000001,
+      "midnight_anchor": 4996.360000000001,
+      "peak": 5044.796000000001,
+      "settled_payouts": 0,
+      "initial_sl": 4549.663,
+      "lots": 0.01,
+      "native_entry_price": 4579.582,
+      "stop_risk": 29.91900000000078,
+      "reserved_risk": 34.91900000000078,
+      "tightest": "protector",
+      "daily_headroom": 149.89080000000013,
+      "trailing_headroom": 254.2517600000001,
+      "protector_headroom": 100.0,
+      "daily_after_reserve": 114.97179999999935,
+      "trailing_after_reserve": 219.33275999999933,
+      "protector_after_reserve": 65.08099999999922,
+      "minimum_after_reserve": 65.08099999999922
+    },
+    "minimums": {
+      "daily": 114.97179999999935,
+      "trailing": 115.88718000000017,
+      "protector": 65.08099999999922
+    }
+  },
+  "2025_portfolio_funded_phase_split_continuous": {
+    "orders": 153,
+    "after_withdrawal": 90,
+    "negative_margins": 0,
+    "min_after_reserve": 65.08099999999922,
+    "worst": {
+      "run": "2025_portfolio_funded_phase_split_continuous",
+      "time": "2026-03-31T12:19:00.251000+00:00",
+      "ticket": 192,
+      "strategy": "LONDON_MOMENTUM_TIGHT_V6",
+      "cash": 5152.14,
+      "midnight_anchor": 5152.14,
+      "peak": 5242.059,
+      "settled_payouts": 1,
+      "initial_sl": 4549.663,
+      "lots": 0.01,
+      "native_entry_price": 4579.582,
+      "stop_risk": 29.91900000000078,
+      "reserved_risk": 34.91900000000078,
+      "tightest": "protector",
+      "daily_headroom": 154.5641999999998,
+      "trailing_headroom": 224.60454000000027,
+      "protector_headroom": 100.0,
+      "daily_after_reserve": 119.64519999999902,
+      "trailing_after_reserve": 189.6855399999995,
+      "protector_after_reserve": 65.08099999999922,
+      "minimum_after_reserve": 65.08099999999922
+    },
+    "minimums": {
+      "daily": 110.18129999999974,
+      "trailing": 125.23398000000043,
+      "protector": 65.08099999999922
+    }
+  }
+}

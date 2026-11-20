@@ -1,0 +1,154 @@
+{
+  "method": "Overlapping alternative starts on recorded native fills, with daily quote-by-quote Atlas audit; excludes trades open at each boundary. Assumes same later signals, leverage eligibility, fills and costs; no fresh EA state. Next weekday funding. Diagnostic only. Later starts have less time. Never sum the alternative accounts.",
+  "rows": [
+    {
+      "start": "2026-01-01",
+      "evaluation": "passed",
+      "eval_event": "2026-03-19T13:01:56.865000+00:00",
+      "funded_start": "2026-03-20",
+      "funded": "active",
+      "funded_event": null,
+      "payouts": [
+        {
+          "time": "2026-10-19T15:51:46.388000+00:00",
+          "gross": 111.11,
+          "modeled_cash": 100.0
+        }
+      ],
+      "fees": 83,
+      "net_cash": 17.0,
+      "max_floating_loss": 26.597999999999956
+    },
+    {
+      "start": "2026-02-01",
+      "evaluation": "passed",
+      "eval_event": "2026-03-18T13:01:28.006000+00:00",
+      "funded_start": "2026-03-19",
+      "funded": "active",
+      "funded_event": null,
+      "payouts": [
+        {
+          "time": "2026-10-19T15:51:46.388000+00:00",
+          "gross": 111.11,
+          "modeled_cash": 100.0
+        }
+      ],
+      "fees": 83,
+      "net_cash": 17.0,
+      "max_floating_loss": 26.597999999999956
+    },
+    {
+      "start": "2026-03-01",
+      "evaluation": "passed",
+      "eval_event": "2026-03-19T08:05:40.561000+00:00",
+      "funded_start": "2026-03-20",
+      "funded": "active",
+      "funded_event": null,
+      "payouts": [
+        {
+          "time": "2026-10-19T15:51:46.388000+00:00",
+          "gross": 111.11,
+          "modeled_cash": 100.0
+        }
+      ],
+      "fees": 83,
+      "net_cash": 17.0,
+      "max_floating_loss": 26.597999999999956
+    },
+    {
+      "start": "2026-04-01",
+      "evaluation": "passed",
+      "eval_event": "2026-05-12T15:12:10.934000+00:00",
+      "funded_start": "2026-05-13",
+      "funded": "active",
+      "funded_event": null,
+      "payouts": [],
+      "fees": 83,
+      "net_cash": -83.0,
+      "max_floating_loss": 25.208999999999833
+    },
+    {
+      "start": "2026-05-01",
+      "evaluation": "passed",
+      "eval_event": "2026-05-05T23:57:05.542000+00:00",
+      "funded_start": "2026-05-06",
+      "funded": "active",
+      "funded_event": null,
+      "payouts": [
+        {
+          "time": "2026-10-19T15:51:46.388000+00:00",
+          "gross": 111.11,
+          "modeled_cash": 100.0
+        }
+      ],
+      "fees": 83,
+      "net_cash": 17.0,
+      "max_floating_loss": 25.208999999999833
+    },
+    {
+      "start": "2026-06-01",
+      "evaluation": "passed",
+      "eval_event": "2026-09-14T13:08:13.157000+00:00",
+      "funded_start": "2026-09-15",
+      "funded": "active",
+      "funded_event": null,
+      "payouts": [],
+      "fees": 83,
+      "net_cash": -83.0,
+      "max_floating_loss": 19.647000000000844
+    },
+    {
+      "start": "2026-07-01",
+      "evaluation": "passed",
+      "eval_event": "2026-08-05T14:10:45.291000+00:00",
+      "funded_start": "2026-08-06",
+      "funded": "active",
+      "funded_event": null,
+      "payouts": [
+        {
+          "time": "2026-10-19T15:51:46.388000+00:00",
+          "gross": 111.11,
+          "modeled_cash": 100.0
+        }
+      ],
+      "fees": 83,
+      "net_cash": 17.0,
+      "max_floating_loss": 22.912000000000262
+    },
+    {
+      "start": "2026-08-01",
+      "evaluation": "passed",
+      "eval_event": "2026-09-03T12:38:27.427000+00:00",
+      "funded_start": "2026-09-04",
+      "funded": "active",
+      "funded_event": null,
+      "payouts": [],
+      "fees": 83,
+      "net_cash": -83.0,
+      "max_floating_loss": 19.647000000000844
+    },
+    {
+      "start": "2026-09-01",
+      "evaluation": "passed",
+      "eval_event": "2026-09-17T12:11:13.900000+00:00",
+      "funded_start": "2026-09-18",
+      "funded": "active",
+      "funded_event": null,
+      "payouts": [],
+      "fees": 83,
+      "net_cash": -83.0,
+      "max_floating_loss": 19.647000000000844
+    },
+    {
+      "start": "2026-10-01",
+      "evaluation": "active",
+      "eval_event": null,
+      "funded_start": null,
+      "funded": null,
+      "funded_event": null,
+      "payouts": [],
+      "fees": 5,
+      "net_cash": -5
+    }
+  ]
+}

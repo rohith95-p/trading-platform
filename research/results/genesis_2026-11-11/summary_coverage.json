@@ -1,0 +1,2194 @@
+{
+  "candidates": 36,
+  "sample_calendar_days": 1095,
+  "years": [
+    2013,
+    2018,
+    2025
+  ],
+  "caveats": [
+    "Inspected disjoint calendar years, not untouched forward validation.",
+    "Pooled trade arithmetic is not continuous multi-year account equity.",
+    "DSR on fixed-$5000 daily realized cash; counts are sensitivities, full historical search unknown.",
+    "Month bootstrap uses36 calendar-month allocations, including incomplete source coverage; no future profit probability.",
+    "Missing source dates are encoded as zero cash for aggregation, not evidence of flat exposure or zero returns.",
+    "Coverage-segment mode uses independent 2025 samples with retrospective boundary liquidation and renewed warmup; not a continuous account.",
+    "Trade-order permutations preserve final profit; not a future-loss forecast.",
+    "Original app forming-candle timing, full risk/MTF/news/confirmation and broker constraints excluded."
+  ],
+  "cross_trial_daily_sharpe_variance": 0.012297060739764814,
+  "expected_max_sr_sensitivities": {
+    "36": 0.23814435497070213,
+    "640": 0.3466465214311419,
+    "1000": 0.36096730292848683,
+    "2000": 0.3822774521368801
+  },
+  "results": {
+    "TrendFollowing static": {
+      "trades": 2020,
+      "net": -1293.4894000000038,
+      "profit_factor": 0.8296812489066129,
+      "wins": 557,
+      "win_pct": 27.574257425742577,
+      "mean_pnl": -0.6403412871287147,
+      "per_year": {
+        "2013": {
+          "trades": 753,
+          "profit_factor": 0.683,
+          "net": -710.81,
+          "win_pct": 27.0,
+          "sampled_liquidation_max_dd_pct": 14.502670970072579
+        },
+        "2018": {
+          "trades": 701,
+          "profit_factor": 0.613,
+          "net": -435.19,
+          "win_pct": 24.3,
+          "sampled_liquidation_max_dd_pct": 8.804158017026415
+        },
+        "2025": {
+          "trades": 566,
+          "profit_factor": 0.965,
+          "net": -147.5,
+          "win_pct": 32.5,
+          "sampled_liquidation_max_dd_pct": 9.481511504457439
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -2148.7172789999563,
+        -377.1050299999602
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": -1293.49,
+        "drop_best_1": -1368.78,
+        "drop_worst_1": -1247.02,
+        "drop_best_3": -1501.27,
+        "drop_worst_3": -1163.36,
+        "drop_best_5": -1623.72,
+        "drop_worst_5": -1091.56,
+        "top3_share_of_gross_profit": 3.3
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 1418.03,
+        "p95_max_dd": 1617.22,
+        "worst_max_dd": 1882.58,
+        "median_final": 3706.51,
+        "p05_final": 3706.51,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 1.0
+      },
+      "dsr_sensitivities": {
+        "36": 7.2672462706076295e-22,
+        "640": 1.6513485945426143e-37,
+        "1000": 6.632788529788773e-40,
+        "2000": 1.296653383064068e-43
+      }
+    },
+    "TrendFollowing original_wiring": {
+      "trades": 2560,
+      "net": -1589.6891000001542,
+      "profit_factor": 0.7459647469009055,
+      "wins": 1300,
+      "win_pct": 50.78125,
+      "mean_pnl": -0.6209723046875603,
+      "per_year": {
+        "2013": {
+          "trades": 952,
+          "profit_factor": 0.684,
+          "net": -564.83,
+          "win_pct": 51.5,
+          "sampled_liquidation_max_dd_pct": 11.357022910374152
+        },
+        "2018": {
+          "trades": 861,
+          "profit_factor": 0.446,
+          "net": -555.51,
+          "win_pct": 44.3,
+          "sampled_liquidation_max_dd_pct": 11.201208820974143
+        },
+        "2025": {
+          "trades": 747,
+          "profit_factor": 0.865,
+          "net": -469.35,
+          "win_pct": 57.4,
+          "sampled_liquidation_max_dd_pct": 10.693273345736337
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -2300.6277735003036,
+        -894.6477707500693
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": -1589.69,
+        "drop_best_1": -1627.02,
+        "drop_worst_1": -1543.22,
+        "drop_best_3": -1689.85,
+        "drop_worst_3": -1460.88,
+        "drop_best_5": -1749.83,
+        "drop_worst_5": -1389.07,
+        "top3_share_of_gross_profit": 2.1
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 1632.36,
+        "p95_max_dd": 1720.26,
+        "worst_max_dd": 1805.83,
+        "median_final": 3410.31,
+        "p05_final": 3410.31,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 1.0
+      },
+      "dsr_sensitivities": {
+        "36": 8.24300240146694e-24,
+        "640": 2.0666537314209227e-38,
+        "1000": 1.3015076252009624e-40,
+        "2000": 5.26248768951142e-44
+      }
+    },
+    "TrendFollowing constant_initial_risk": {
+      "trades": 2501,
+      "net": -1669.3708200000804,
+      "profit_factor": 0.7283988294230591,
+      "wins": 1249,
+      "win_pct": 49.94002399040384,
+      "mean_pnl": -0.6674813354658458,
+      "per_year": {
+        "2013": {
+          "trades": 935,
+          "profit_factor": 0.671,
+          "net": -577.94,
+          "win_pct": 50.9,
+          "sampled_liquidation_max_dd_pct": 11.62007243887354
+        },
+        "2018": {
+          "trades": 849,
+          "profit_factor": 0.435,
+          "net": -566.68,
+          "win_pct": 43.3,
+          "sampled_liquidation_max_dd_pct": 11.470488937308078
+        },
+        "2025": {
+          "trades": 717,
+          "profit_factor": 0.845,
+          "net": -524.76,
+          "win_pct": 56.5,
+          "sampled_liquidation_max_dd_pct": 12.864265387317655
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -2397.6414455002373,
+        -892.9760164999511
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": -1669.37,
+        "drop_best_1": -1721.19,
+        "drop_worst_1": -1622.9,
+        "drop_best_3": -1794.89,
+        "drop_worst_3": -1540.59,
+        "drop_best_5": -1863.84,
+        "drop_worst_5": -1470.36,
+        "top3_share_of_gross_profit": 2.8
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 1716.74,
+        "p95_max_dd": 1818.55,
+        "worst_max_dd": 1954.87,
+        "median_final": 3330.63,
+        "p05_final": 3330.63,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 1.0
+      },
+      "dsr_sensitivities": {
+        "36": 2.658596576057643e-28,
+        "640": 1.5322727935065938e-45,
+        "1000": 3.89848591564688e-48,
+        "2000": 3.911375155451664e-52
+      }
+    },
+    "RangeTrading static": {
+      "trades": 4050,
+      "net": -3079.2296999999917,
+      "profit_factor": 0.6855913498854279,
+      "wins": 484,
+      "win_pct": 11.950617283950617,
+      "mean_pnl": -0.7603036296296276,
+      "per_year": {
+        "2013": {
+          "trades": 1261,
+          "profit_factor": 0.649,
+          "net": -839.96,
+          "win_pct": 13.2,
+          "sampled_liquidation_max_dd_pct": 16.964540585225457
+        },
+        "2018": {
+          "trades": 1730,
+          "profit_factor": 0.415,
+          "net": -1144.58,
+          "win_pct": 8.8,
+          "sampled_liquidation_max_dd_pct": 23.143446461775316
+        },
+        "2025": {
+          "trades": 1059,
+          "profit_factor": 0.799,
+          "net": -1094.7,
+          "win_pct": 15.7,
+          "sampled_liquidation_max_dd_pct": 23.42309454797757
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -4006.7645245002545,
+        -2133.7580729999886
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": -3079.23,
+        "drop_best_1": -3172.41,
+        "drop_worst_1": -3011.24,
+        "drop_best_3": -3350.8,
+        "drop_worst_3": -2912.86,
+        "drop_best_5": -3516.01,
+        "drop_worst_5": -2864.54,
+        "top3_share_of_gross_profit": 4.0
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 3133.87,
+        "p95_max_dd": 3261.12,
+        "worst_max_dd": 3479.02,
+        "median_final": 1920.77,
+        "p05_final": 1920.77,
+        "prob_50pct_drawdown": 1.0,
+        "prob_final_below_start": 1.0
+      },
+      "dsr_sensitivities": {
+        "36": 4.5018612245993196e-39,
+        "640": 1.4311235937796478e-60,
+        "1000": 9.020858472035584e-64,
+        "2000": 1.0864207930682957e-68
+      }
+    },
+    "RangeTrading original_wiring": {
+      "trades": 6566,
+      "net": -4382.8916600003195,
+      "profit_factor": 0.5608401072890902,
+      "wins": 2521,
+      "win_pct": 38.3947608894304,
+      "mean_pnl": -0.6675131982942917,
+      "per_year": {
+        "2013": {
+          "trades": 2124,
+          "profit_factor": 0.488,
+          "net": -1301.34,
+          "win_pct": 41.3,
+          "sampled_liquidation_max_dd_pct": 26.06769774251982
+        },
+        "2018": {
+          "trades": 2593,
+          "profit_factor": 0.25,
+          "net": -1657.82,
+          "win_pct": 27.6,
+          "sampled_liquidation_max_dd_pct": 33.19512906678684
+        },
+        "2025": {
+          "trades": 1849,
+          "profit_factor": 0.728,
+          "net": -1423.73,
+          "win_pct": 50.2,
+          "sampled_liquidation_max_dd_pct": 28.769314319291468
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -5020.252222000832,
+        -3688.2309435004768
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": -4382.89,
+        "drop_best_1": -4428.58,
+        "drop_worst_1": -4314.9,
+        "drop_best_3": -4484.89,
+        "drop_worst_3": -4240.83,
+        "drop_best_5": -4521.96,
+        "drop_worst_5": -4197.68,
+        "top3_share_of_gross_profit": 1.8
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 4392.52,
+        "p95_max_dd": 4422.65,
+        "worst_max_dd": 4507.53,
+        "median_final": 617.11,
+        "p05_final": 617.11,
+        "prob_50pct_drawdown": 1.0,
+        "prob_final_below_start": 1.0
+      },
+      "dsr_sensitivities": {
+        "36": 1.758226486262616e-93,
+        "640": 1.7024099286629275e-125,
+        "1000": 4.447076049384053e-130,
+        "2000": 4.719788629032357e-137
+      }
+    },
+    "RangeTrading constant_initial_risk": {
+      "trades": 6377,
+      "net": -4389.509630000208,
+      "profit_factor": 0.5418497801421066,
+      "wins": 2441,
+      "win_pct": 38.27818723537714,
+      "mean_pnl": -0.6883345820919253,
+      "per_year": {
+        "2013": {
+          "trades": 2051,
+          "profit_factor": 0.483,
+          "net": -1238.0,
+          "win_pct": 41.8,
+          "sampled_liquidation_max_dd_pct": 24.81286914610769
+        },
+        "2018": {
+          "trades": 2555,
+          "profit_factor": 0.251,
+          "net": -1633.19,
+          "win_pct": 27.5,
+          "sampled_liquidation_max_dd_pct": 32.71417068470255
+        },
+        "2025": {
+          "trades": 1771,
+          "profit_factor": 0.697,
+          "net": -1518.33,
+          "win_pct": 49.8,
+          "sampled_liquidation_max_dd_pct": 30.942525289054295
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -5151.401000500169,
+        -3587.07694900007
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": -4389.51,
+        "drop_best_1": -4433.71,
+        "drop_worst_1": -4321.52,
+        "drop_best_3": -4490.38,
+        "drop_worst_3": -4247.45,
+        "drop_best_5": -4537.27,
+        "drop_worst_5": -4204.3,
+        "top3_share_of_gross_profit": 1.9
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 4400.38,
+        "p95_max_dd": 4436.12,
+        "worst_max_dd": 4465.04,
+        "median_final": 610.49,
+        "p05_final": 610.49,
+        "prob_50pct_drawdown": 1.0,
+        "prob_final_below_start": 1.0
+      },
+      "dsr_sensitivities": {
+        "36": 6.909587192711438e-83,
+        "640": 4.509969798409964e-112,
+        "1000": 2.935041643455555e-116,
+        "2000": 1.2397456067812282e-122
+      }
+    },
+    "Breakout static": {
+      "trades": 180,
+      "net": -109.38194000000048,
+      "profit_factor": 0.7954998194529869,
+      "wins": 54,
+      "win_pct": 30.0,
+      "mean_pnl": -0.6076774444444472,
+      "per_year": {
+        "2013": {
+          "trades": 56,
+          "profit_factor": 1.742,
+          "net": 69.85,
+          "win_pct": 42.9,
+          "sampled_liquidation_max_dd_pct": 0.6891092119685635
+        },
+        "2018": {
+          "trades": 63,
+          "profit_factor": 0.527,
+          "net": -41.74,
+          "win_pct": 23.8,
+          "sampled_liquidation_max_dd_pct": 1.0029372059636805
+        },
+        "2025": {
+          "trades": 61,
+          "profit_factor": 0.61,
+          "net": -137.49,
+          "win_pct": 24.6,
+          "sampled_liquidation_max_dd_pct": 4.582685103492452
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -309.1179044999998,
+        99.18104999999385
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": -109.38,
+        "drop_best_1": -147.84,
+        "drop_worst_1": -85.79,
+        "drop_best_3": -187.95,
+        "drop_worst_3": -47.06,
+        "drop_best_5": -222.72,
+        "drop_worst_5": -14.46,
+        "top3_share_of_gross_profit": 18.5
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 160.33,
+        "p95_max_dd": 215.48,
+        "worst_max_dd": 263.62,
+        "median_final": 4890.62,
+        "p05_final": 4890.62,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 1.0
+      },
+      "dsr_sensitivities": {
+        "36": 1.66688128367874e-18,
+        "640": 2.4804939765905137e-34,
+        "1000": 8.310913361560913e-37,
+        "2000": 1.1748449850189522e-40
+      }
+    },
+    "Breakout original_wiring": {
+      "trades": 180,
+      "net": -53.94883000001591,
+      "profit_factor": 0.8311582476180235,
+      "wins": 94,
+      "win_pct": 52.22222222222223,
+      "mean_pnl": -0.29971572222231063,
+      "per_year": {
+        "2013": {
+          "trades": 56,
+          "profit_factor": 1.003,
+          "net": 0.21,
+          "win_pct": 53.6,
+          "sampled_liquidation_max_dd_pct": 0.5811651352625352
+        },
+        "2018": {
+          "trades": 63,
+          "profit_factor": 0.571,
+          "net": -24.37,
+          "win_pct": 47.6,
+          "sampled_liquidation_max_dd_pct": 0.5637120901152998
+        },
+        "2025": {
+          "trades": 61,
+          "profit_factor": 0.842,
+          "net": -29.79,
+          "win_pct": 55.7,
+          "sampled_liquidation_max_dd_pct": 1.5708491154014201
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -186.81137075001374,
+        87.64115799998932
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": -53.95,
+        "drop_best_1": -79.66,
+        "drop_worst_1": -34.1,
+        "drop_best_3": -116.04,
+        "drop_worst_3": -4.45,
+        "drop_best_5": -133.71,
+        "drop_worst_5": 17.54,
+        "top3_share_of_gross_profit": 23.4
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 91.83,
+        "p95_max_dd": 132.96,
+        "worst_max_dd": 161.51,
+        "median_final": 4946.05,
+        "p05_final": 4946.05,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 1.0
+      },
+      "dsr_sensitivities": {
+        "36": 6.220998066276289e-18,
+        "640": 7.272375929173728e-34,
+        "1000": 2.2852952294863872e-36,
+        "2000": 2.895788834281366e-40
+      }
+    },
+    "Breakout constant_initial_risk": {
+      "trades": 180,
+      "net": -27.485060000014705,
+      "profit_factor": 0.9139809761448974,
+      "wins": 94,
+      "win_pct": 52.22222222222223,
+      "mean_pnl": -0.15269477777785948,
+      "per_year": {
+        "2013": {
+          "trades": 56,
+          "profit_factor": 1.076,
+          "net": 5.67,
+          "win_pct": 53.6,
+          "sampled_liquidation_max_dd_pct": 0.5752682911731634
+        },
+        "2018": {
+          "trades": 63,
+          "profit_factor": 0.512,
+          "net": -27.72,
+          "win_pct": 47.6,
+          "sampled_liquidation_max_dd_pct": 0.6286872189999997
+        },
+        "2025": {
+          "trades": 61,
+          "profit_factor": 0.971,
+          "net": -5.43,
+          "win_pct": 55.7,
+          "sampled_liquidation_max_dd_pct": 1.62015951876487
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -174.02812249999735,
+        140.0174589999959
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": -27.49,
+        "drop_best_1": -65.94,
+        "drop_worst_1": -7.63,
+        "drop_best_3": -104.11,
+        "drop_worst_3": 22.01,
+        "drop_best_5": -131.59,
+        "drop_worst_5": 44.01,
+        "top3_share_of_gross_profit": 26.2
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 86.94,
+        "p95_max_dd": 130.26,
+        "worst_max_dd": 170.04,
+        "median_final": 4972.51,
+        "p05_final": 4972.51,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 1.0
+      },
+      "dsr_sensitivities": {
+        "36": 4.58556190585675e-16,
+        "640": 4.27524341828198e-31,
+        "1000": 1.7915274166056154e-33,
+        "2000": 3.5042179985700245e-37
+      }
+    },
+    "Pullback static": {
+      "trades": 5197,
+      "net": -3258.1997399999755,
+      "profit_factor": 0.7921491967805967,
+      "wins": 1265,
+      "win_pct": 24.340965941889554,
+      "mean_pnl": -0.6269385684048442,
+      "per_year": {
+        "2013": {
+          "trades": 1934,
+          "profit_factor": 0.736,
+          "net": -1266.59,
+          "win_pct": 25.2,
+          "sampled_liquidation_max_dd_pct": 25.79563481407786
+        },
+        "2018": {
+          "trades": 1906,
+          "profit_factor": 0.461,
+          "net": -1467.13,
+          "win_pct": 18.9,
+          "sampled_liquidation_max_dd_pct": 29.383073911039098
+        },
+        "2025": {
+          "trades": 1357,
+          "profit_factor": 0.936,
+          "net": -524.48,
+          "win_pct": 30.7,
+          "sampled_liquidation_max_dd_pct": 14.104598199647736
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -4540.040467499894,
+        -1723.0725819999284
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": -3258.2,
+        "drop_best_1": -3351.96,
+        "drop_worst_1": -3209.01,
+        "drop_best_3": -3510.42,
+        "drop_worst_3": -3139.35,
+        "drop_best_5": -3633.59,
+        "drop_worst_5": -3076.29,
+        "top3_share_of_gross_profit": 2.0
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 3334.17,
+        "p95_max_dd": 3518.0,
+        "worst_max_dd": 3803.81,
+        "median_final": 1741.8,
+        "p05_final": 1741.8,
+        "prob_50pct_drawdown": 1.0,
+        "prob_final_below_start": 1.0
+      },
+      "dsr_sensitivities": {
+        "36": 3.2183770236754923e-27,
+        "640": 6.522615680322412e-43,
+        "1000": 2.9139424311790556e-45,
+        "2000": 7.034201913616639e-49
+      }
+    },
+    "Pullback original_wiring": {
+      "trades": 6774,
+      "net": -4373.848180000354,
+      "profit_factor": 0.6835414472776369,
+      "wins": 3058,
+      "win_pct": 45.14319456746384,
+      "mean_pnl": -0.6456817508119802,
+      "per_year": {
+        "2013": {
+          "trades": 2561,
+          "profit_factor": 0.618,
+          "net": -1684.85,
+          "win_pct": 46.4,
+          "sampled_liquidation_max_dd_pct": 33.8319654280218
+        },
+        "2018": {
+          "trades": 2397,
+          "profit_factor": 0.353,
+          "net": -1709.72,
+          "win_pct": 35.3,
+          "sampled_liquidation_max_dd_pct": 34.24735758640901
+        },
+        "2025": {
+          "trades": 1816,
+          "profit_factor": 0.855,
+          "net": -979.27,
+          "win_pct": 56.4,
+          "sampled_liquidation_max_dd_pct": 21.088158400011753
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -5229.234736750475,
+        -3408.9702847504736
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": -4373.85,
+        "drop_best_1": -4414.06,
+        "drop_worst_1": -4324.66,
+        "drop_best_3": -4489.64,
+        "drop_worst_3": -4255.0,
+        "drop_best_5": -4557.93,
+        "drop_worst_5": -4192.68,
+        "top3_share_of_gross_profit": 1.2
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 4397.13,
+        "p95_max_dd": 4456.98,
+        "worst_max_dd": 4552.41,
+        "median_final": 626.15,
+        "p05_final": 626.15,
+        "prob_50pct_drawdown": 1.0,
+        "prob_final_below_start": 1.0
+      },
+      "dsr_sensitivities": {
+        "36": 1.4580328178874434e-36,
+        "640": 3.3885944936638996e-52,
+        "1000": 1.7830934487854363e-54,
+        "2000": 5.848832880560658e-58
+      }
+    },
+    "Pullback constant_initial_risk": {
+      "trades": 6563,
+      "net": -4289.222860000223,
+      "profit_factor": 0.6798606504101503,
+      "wins": 2940,
+      "win_pct": 44.79658692671035,
+      "mean_pnl": -0.6535460703946705,
+      "per_year": {
+        "2013": {
+          "trades": 2473,
+          "profit_factor": 0.605,
+          "net": -1666.38,
+          "win_pct": 46.5,
+          "sampled_liquidation_max_dd_pct": 33.51373842549484
+        },
+        "2018": {
+          "trades": 2345,
+          "profit_factor": 0.355,
+          "net": -1674.86,
+          "win_pct": 34.8,
+          "sampled_liquidation_max_dd_pct": 33.55050655450708
+        },
+        "2025": {
+          "trades": 1745,
+          "profit_factor": 0.856,
+          "net": -947.98,
+          "win_pct": 55.8,
+          "sampled_liquidation_max_dd_pct": 20.062441082697244
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -5293.737442750303,
+        -3235.1114864999695
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": -4289.22,
+        "drop_best_1": -4346.78,
+        "drop_worst_1": -4240.03,
+        "drop_best_3": -4451.61,
+        "drop_worst_3": -4170.37,
+        "drop_best_5": -4542.7,
+        "drop_worst_5": -4106.82,
+        "top3_share_of_gross_profit": 1.8
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 4321.69,
+        "p95_max_dd": 4400.02,
+        "worst_max_dd": 4553.81,
+        "median_final": 710.78,
+        "p05_final": 710.78,
+        "prob_50pct_drawdown": 1.0,
+        "prob_final_below_start": 1.0
+      },
+      "dsr_sensitivities": {
+        "36": 1.2587572690262217e-38,
+        "640": 5.564577271311836e-56,
+        "1000": 1.607645763542771e-58,
+        "2000": 2.090387962187183e-62
+      }
+    },
+    "Reversal static": {
+      "trades": 0,
+      "net": 0.0,
+      "profit_factor": null,
+      "wins": 0,
+      "win_pct": null,
+      "mean_pnl": null,
+      "per_year": {
+        "2013": {
+          "trades": 0,
+          "profit_factor": null,
+          "net": 0.0,
+          "win_pct": null,
+          "sampled_liquidation_max_dd_pct": 0.0
+        },
+        "2018": {
+          "trades": 0,
+          "profit_factor": null,
+          "net": 0.0,
+          "win_pct": null,
+          "sampled_liquidation_max_dd_pct": 0.0
+        },
+        "2025": {
+          "trades": 0,
+          "profit_factor": null,
+          "net": 0.0,
+          "win_pct": null,
+          "sampled_liquidation_max_dd_pct": 0.0
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        0.0,
+        0.0
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": null,
+      "trade_order_monte_carlo": null,
+      "dsr_sensitivities": null
+    },
+    "Reversal original_wiring": {
+      "trades": 0,
+      "net": 0.0,
+      "profit_factor": null,
+      "wins": 0,
+      "win_pct": null,
+      "mean_pnl": null,
+      "per_year": {
+        "2013": {
+          "trades": 0,
+          "profit_factor": null,
+          "net": 0.0,
+          "win_pct": null,
+          "sampled_liquidation_max_dd_pct": 0.0
+        },
+        "2018": {
+          "trades": 0,
+          "profit_factor": null,
+          "net": 0.0,
+          "win_pct": null,
+          "sampled_liquidation_max_dd_pct": 0.0
+        },
+        "2025": {
+          "trades": 0,
+          "profit_factor": null,
+          "net": 0.0,
+          "win_pct": null,
+          "sampled_liquidation_max_dd_pct": 0.0
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        0.0,
+        0.0
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": null,
+      "trade_order_monte_carlo": null,
+      "dsr_sensitivities": null
+    },
+    "Reversal constant_initial_risk": {
+      "trades": 0,
+      "net": 0.0,
+      "profit_factor": null,
+      "wins": 0,
+      "win_pct": null,
+      "mean_pnl": null,
+      "per_year": {
+        "2013": {
+          "trades": 0,
+          "profit_factor": null,
+          "net": 0.0,
+          "win_pct": null,
+          "sampled_liquidation_max_dd_pct": 0.0
+        },
+        "2018": {
+          "trades": 0,
+          "profit_factor": null,
+          "net": 0.0,
+          "win_pct": null,
+          "sampled_liquidation_max_dd_pct": 0.0
+        },
+        "2025": {
+          "trades": 0,
+          "profit_factor": null,
+          "net": 0.0,
+          "win_pct": null,
+          "sampled_liquidation_max_dd_pct": 0.0
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        0.0,
+        0.0
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": null,
+      "trade_order_monte_carlo": null,
+      "dsr_sensitivities": null
+    },
+    "Momentum static": {
+      "trades": 1448,
+      "net": 89.96629999996395,
+      "profit_factor": 1.007687594535899,
+      "wins": 430,
+      "win_pct": 29.696132596685082,
+      "mean_pnl": 0.0621314226519088,
+      "per_year": {
+        "2013": {
+          "trades": 734,
+          "profit_factor": 0.955,
+          "net": -163.6,
+          "win_pct": 29.0,
+          "sampled_liquidation_max_dd_pct": 7.278336253908077
+        },
+        "2018": {
+          "trades": 101,
+          "profit_factor": 0.832,
+          "net": -51.97,
+          "win_pct": 28.7,
+          "sampled_liquidation_max_dd_pct": 1.8071507999999812
+        },
+        "2025": {
+          "trades": 613,
+          "profit_factor": 1.04,
+          "net": 305.53,
+          "win_pct": 30.7,
+          "sampled_liquidation_max_dd_pct": 14.637281085652956
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -1566.046347500081,
+        2024.5029625000266
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": 89.97,
+        "drop_best_1": -38.06,
+        "drop_worst_1": 138.98,
+        "drop_best_3": -266.98,
+        "drop_worst_3": 231.97,
+        "drop_best_5": -467.84,
+        "drop_worst_5": 317.39,
+        "top3_share_of_gross_profit": 3.0
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 868.17,
+        "p95_max_dd": 1289.72,
+        "worst_max_dd": 1765.38,
+        "median_final": 5089.97,
+        "p05_final": 5089.97,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 0.0
+      },
+      "dsr_sensitivities": {
+        "36": 3.0700171877580757e-15,
+        "640": 1.8715275178166872e-30,
+        "1000": 7.004412656643967e-33,
+        "2000": 1.1297075028407682e-36
+      }
+    },
+    "Momentum original_wiring": {
+      "trades": 2336,
+      "net": -478.1717100003722,
+      "profit_factor": 0.9606003064712566,
+      "wins": 1317,
+      "win_pct": 56.37842465753424,
+      "mean_pnl": -0.20469679366454288,
+      "per_year": {
+        "2013": {
+          "trades": 1153,
+          "profit_factor": 0.896,
+          "net": -403.04,
+          "win_pct": 53.6,
+          "sampled_liquidation_max_dd_pct": 12.287269418998523
+        },
+        "2018": {
+          "trades": 141,
+          "profit_factor": 0.856,
+          "net": -40.42,
+          "win_pct": 54.6,
+          "sampled_liquidation_max_dd_pct": 1.2142835999998534
+        },
+        "2025": {
+          "trades": 1042,
+          "profit_factor": 0.996,
+          "net": -34.71,
+          "win_pct": 59.7,
+          "sampled_liquidation_max_dd_pct": 8.667373231408796
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -1406.7817547503696,
+        569.270207999289
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": -478.17,
+        "drop_best_1": -534.09,
+        "drop_worst_1": -422.23,
+        "drop_best_3": -630.23,
+        "drop_worst_3": -325.95,
+        "drop_best_5": -711.84,
+        "drop_worst_5": -234.25,
+        "top3_share_of_gross_profit": 1.3
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 909.73,
+        "p95_max_dd": 1260.21,
+        "worst_max_dd": 1760.03,
+        "median_final": 4521.83,
+        "p05_final": 4521.83,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 1.0
+      },
+      "dsr_sensitivities": {
+        "36": 1.0136078036450182e-17,
+        "640": 1.4585701395943145e-33,
+        "1000": 4.713355189315518e-36,
+        "2000": 6.227421786878661e-40
+      }
+    },
+    "Momentum constant_initial_risk": {
+      "trades": 2147,
+      "net": -638.0203500002549,
+      "profit_factor": 0.9419902036071227,
+      "wins": 1196,
+      "win_pct": 55.70563577084303,
+      "mean_pnl": -0.29716830461120397,
+      "per_year": {
+        "2013": {
+          "trades": 1081,
+          "profit_factor": 0.833,
+          "net": -612.58,
+          "win_pct": 52.5,
+          "sampled_liquidation_max_dd_pct": 14.681347318619803
+        },
+        "2018": {
+          "trades": 132,
+          "profit_factor": 0.909,
+          "net": -24.49,
+          "win_pct": 53.0,
+          "sampled_liquidation_max_dd_pct": 1.0767287999999462
+        },
+        "2025": {
+          "trades": 934,
+          "profit_factor": 1.0,
+          "net": -0.95,
+          "win_pct": 59.7,
+          "sampled_liquidation_max_dd_pct": 10.504695709324839
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -1832.4612047504002,
+        670.0536224991552
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": -638.02,
+        "drop_best_1": -743.78,
+        "drop_worst_1": -582.08,
+        "drop_best_3": -906.02,
+        "drop_worst_3": -485.7,
+        "drop_best_5": -1030.18,
+        "drop_worst_5": -394.16,
+        "top3_share_of_gross_profit": 2.6
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 1043.24,
+        "p95_max_dd": 1443.38,
+        "worst_max_dd": 1731.08,
+        "median_final": 4361.98,
+        "p05_final": 4361.98,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 1.0
+      },
+      "dsr_sensitivities": {
+        "36": 1.5694840176387297e-18,
+        "640": 1.5286731971576226e-34,
+        "1000": 4.762157983976168e-37,
+        "2000": 5.996701435376621e-41
+      }
+    },
+    "SwingTrend static": {
+      "trades": 1022,
+      "net": -1726.3250600000226,
+      "profit_factor": 0.8351060347367525,
+      "wins": 165,
+      "win_pct": 16.14481409001957,
+      "mean_pnl": -1.6891634637964996,
+      "per_year": {
+        "2013": {
+          "trades": 384,
+          "profit_factor": 0.897,
+          "net": -303.81,
+          "win_pct": 16.4,
+          "sampled_liquidation_max_dd_pct": 9.997507458648421
+        },
+        "2018": {
+          "trades": 322,
+          "profit_factor": 0.983,
+          "net": -22.69,
+          "win_pct": 17.4,
+          "sampled_liquidation_max_dd_pct": 3.37550739903371
+        },
+        "2025": {
+          "trades": 316,
+          "profit_factor": 0.775,
+          "net": -1399.82,
+          "win_pct": 14.6,
+          "sampled_liquidation_max_dd_pct": 38.19953054713659
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -3387.648389000057,
+        -213.44450650000715
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": -1726.33,
+        "drop_best_1": -2017.24,
+        "drop_worst_1": -1628.29,
+        "drop_best_3": -2530.75,
+        "drop_worst_3": -1454.23,
+        "drop_best_5": -2971.29,
+        "drop_worst_5": -1304.18,
+        "top3_share_of_gross_profit": 9.2
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 2181.76,
+        "p95_max_dd": 2780.52,
+        "worst_max_dd": 3380.4,
+        "median_final": 3273.67,
+        "p05_final": 3273.67,
+        "prob_50pct_drawdown": 0.036,
+        "prob_final_below_start": 1.0
+      },
+      "dsr_sensitivities": {
+        "36": 1.0128332498678169e-19,
+        "640": 1.5228010425258127e-35,
+        "1000": 5.3366165091409e-38,
+        "2000": 8.219398474313786e-42
+      }
+    },
+    "SwingTrend original_wiring": {
+      "trades": 3227,
+      "net": -3190.838610000171,
+      "profit_factor": 0.7875098055599489,
+      "wins": 1813,
+      "win_pct": 56.182212581344906,
+      "mean_pnl": -0.9887941152774004,
+      "per_year": {
+        "2013": {
+          "trades": 1189,
+          "profit_factor": 0.773,
+          "net": -925.31,
+          "win_pct": 56.6,
+          "sampled_liquidation_max_dd_pct": 18.715982399998403
+        },
+        "2018": {
+          "trades": 1086,
+          "profit_factor": 0.656,
+          "net": -743.44,
+          "win_pct": 53.2,
+          "sampled_liquidation_max_dd_pct": 15.081287019874933
+        },
+        "2025": {
+          "trades": 952,
+          "profit_factor": 0.826,
+          "net": -1522.08,
+          "win_pct": 59.0,
+          "sampled_liquidation_max_dd_pct": 33.34926474566372
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -4014.440557750318,
+        -2382.843802500242
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": -3190.84,
+        "drop_best_1": -3267.36,
+        "drop_worst_1": -3092.8,
+        "drop_best_3": -3399.93,
+        "drop_worst_3": -2918.75,
+        "drop_best_5": -3516.11,
+        "drop_worst_5": -2764.42,
+        "top3_share_of_gross_profit": 1.8
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 3302.52,
+        "p95_max_dd": 3515.3,
+        "worst_max_dd": 3885.48,
+        "median_final": 1809.16,
+        "p05_final": 1809.16,
+        "prob_50pct_drawdown": 1.0,
+        "prob_final_below_start": 1.0
+      },
+      "dsr_sensitivities": {
+        "36": 5.0337765211375414e-39,
+        "640": 3.0674446906245767e-63,
+        "1000": 6.935414524284291e-67,
+        "2000": 1.6664904579699177e-72
+      }
+    },
+    "SwingTrend constant_initial_risk": {
+      "trades": 3005,
+      "net": -3442.0131800001177,
+      "profit_factor": 0.7577666502280245,
+      "wins": 1637,
+      "win_pct": 54.475873544093176,
+      "mean_pnl": -1.1454286788685917,
+      "per_year": {
+        "2013": {
+          "trades": 1107,
+          "profit_factor": 0.754,
+          "net": -963.51,
+          "win_pct": 54.5,
+          "sampled_liquidation_max_dd_pct": 19.73657359999933
+        },
+        "2018": {
+          "trades": 1026,
+          "profit_factor": 0.606,
+          "net": -820.96,
+          "win_pct": 52.1,
+          "sampled_liquidation_max_dd_pct": 16.610457749046986
+        },
+        "2025": {
+          "trades": 872,
+          "profit_factor": 0.798,
+          "net": -1657.54,
+          "win_pct": 57.2,
+          "sampled_liquidation_max_dd_pct": 37.9232594256755
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -4585.827867500047,
+        -2347.4353957502485
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": -3442.01,
+        "drop_best_1": -3543.89,
+        "drop_worst_1": -3343.97,
+        "drop_best_3": -3723.48,
+        "drop_worst_3": -3169.92,
+        "drop_best_5": -3876.87,
+        "drop_worst_5": -3023.12,
+        "top3_share_of_gross_profit": 2.6
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 3560.07,
+        "p95_max_dd": 3800.94,
+        "worst_max_dd": 4133.58,
+        "median_final": 1557.99,
+        "p05_final": 1557.99,
+        "prob_50pct_drawdown": 1.0,
+        "prob_final_below_start": 1.0
+      },
+      "dsr_sensitivities": {
+        "36": 1.9766185737003847e-31,
+        "640": 4.764881188699447e-51,
+        "1000": 5.250080364723639e-54,
+        "2000": 1.4434161559989584e-58
+      }
+    },
+    "selector_top_fitness static": {
+      "trades": 4511,
+      "net": -2706.874899999972,
+      "profit_factor": 0.819149347985565,
+      "wins": 866,
+      "win_pct": 19.197517180226114,
+      "mean_pnl": -0.6000609399246225,
+      "per_year": {
+        "2013": {
+          "trades": 1534,
+          "profit_factor": 0.716,
+          "net": -1162.48,
+          "win_pct": 20.3,
+          "sampled_liquidation_max_dd_pct": 23.82947731233965
+        },
+        "2018": {
+          "trades": 1678,
+          "profit_factor": 0.51,
+          "net": -1055.77,
+          "win_pct": 14.6,
+          "sampled_liquidation_max_dd_pct": 21.317047035900234
+        },
+        "2025": {
+          "trades": 1299,
+          "profit_factor": 0.944,
+          "net": -488.62,
+          "win_pct": 23.9,
+          "sampled_liquidation_max_dd_pct": 18.119022798469267
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -4431.776782500012,
+        -599.0884664999521
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": -2706.87,
+        "drop_best_1": -2821.06,
+        "drop_worst_1": -2657.88,
+        "drop_best_3": -3006.82,
+        "drop_worst_3": -2565.73,
+        "drop_best_5": -3182.0,
+        "drop_worst_5": -2481.76,
+        "top3_share_of_gross_profit": 2.4
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 2852.23,
+        "p95_max_dd": 3118.58,
+        "worst_max_dd": 3428.51,
+        "median_final": 2293.13,
+        "p05_final": 2293.13,
+        "prob_50pct_drawdown": 1.0,
+        "prob_final_below_start": 1.0
+      },
+      "dsr_sensitivities": {
+        "36": 6.888548963101984e-20,
+        "640": 7.484825587760839e-33,
+        "1000": 8.053855599415156e-35,
+        "2000": 7.346426250909394e-38
+      }
+    },
+    "selector_top_fitness original_wiring": {
+      "trades": 6768,
+      "net": -4297.753080000388,
+      "profit_factor": 0.6906744234297458,
+      "wins": 2911,
+      "win_pct": 43.0112293144208,
+      "mean_pnl": -0.6350107978723978,
+      "per_year": {
+        "2013": {
+          "trades": 2335,
+          "profit_factor": 0.636,
+          "net": -1392.63,
+          "win_pct": 45.0,
+          "sampled_liquidation_max_dd_pct": 27.892435389672265
+        },
+        "2018": {
+          "trades": 2387,
+          "profit_factor": 0.335,
+          "net": -1476.24,
+          "win_pct": 32.6,
+          "sampled_liquidation_max_dd_pct": 29.665333100972607
+        },
+        "2025": {
+          "trades": 2046,
+          "profit_factor": 0.818,
+          "net": -1428.88,
+          "win_pct": 52.9,
+          "sampled_liquidation_max_dd_pct": 28.84726343586857
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -5263.360081250687,
+        -3334.031064000565
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": -4297.75,
+        "drop_best_1": -4348.4,
+        "drop_worst_1": -4248.76,
+        "drop_best_3": -4423.96,
+        "drop_worst_3": -4153.87,
+        "drop_best_5": -4497.83,
+        "drop_worst_5": -4067.91,
+        "top3_share_of_gross_profit": 1.3
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 4331.23,
+        "p95_max_dd": 4411.7,
+        "worst_max_dd": 4504.05,
+        "median_final": 702.25,
+        "p05_final": 702.25,
+        "prob_50pct_drawdown": 1.0,
+        "prob_final_below_start": 1.0
+      },
+      "dsr_sensitivities": {
+        "36": 1.2288088328148898e-50,
+        "640": 8.492338147262958e-74,
+        "1000": 3.4509530360230853e-77,
+        "2000": 2.225614509947126e-82
+      }
+    },
+    "selector_top_fitness constant_initial_risk": {
+      "trades": 6562,
+      "net": -4341.942550000237,
+      "profit_factor": 0.673808172786803,
+      "wins": 2802,
+      "win_pct": 42.70039622066443,
+      "mean_pnl": -0.6616797546480093,
+      "per_year": {
+        "2013": {
+          "trades": 2258,
+          "profit_factor": 0.595,
+          "net": -1506.78,
+          "win_pct": 44.6,
+          "sampled_liquidation_max_dd_pct": 30.170057525318146
+        },
+        "2018": {
+          "trades": 2347,
+          "profit_factor": 0.339,
+          "net": -1444.51,
+          "win_pct": 32.3,
+          "sampled_liquidation_max_dd_pct": 29.04811623025754
+        },
+        "2025": {
+          "trades": 1957,
+          "profit_factor": 0.812,
+          "net": -1390.66,
+          "win_pct": 52.9,
+          "sampled_liquidation_max_dd_pct": 28.451786014095344
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -5488.611060250034,
+        -3316.4552237500598
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": -4341.94,
+        "drop_best_1": -4397.96,
+        "drop_worst_1": -4292.95,
+        "drop_best_3": -4497.28,
+        "drop_worst_3": -4197.96,
+        "drop_best_5": -4588.46,
+        "drop_worst_5": -4113.28,
+        "top3_share_of_gross_profit": 1.7
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 4378.04,
+        "p95_max_dd": 4464.41,
+        "worst_max_dd": 4620.04,
+        "median_final": 658.06,
+        "p05_final": 658.06,
+        "prob_50pct_drawdown": 1.0,
+        "prob_final_below_start": 1.0
+      },
+      "dsr_sensitivities": {
+        "36": 5.670276280081072e-60,
+        "640": 5.554916231196843e-88,
+        "1000": 4.348155604817895e-92,
+        "2000": 2.2433644751492766e-98
+      }
+    },
+    "neutral_history_first_actionable static": {
+      "trades": 4551,
+      "net": -2052.875619999995,
+      "profit_factor": 0.9102828357119961,
+      "wins": 993,
+      "win_pct": 21.819380355965723,
+      "mean_pnl": -0.45108231597450993,
+      "per_year": {
+        "2013": {
+          "trades": 1693,
+          "profit_factor": 0.888,
+          "net": -766.05,
+          "win_pct": 22.5,
+          "sampled_liquidation_max_dd_pct": 17.251893356545487
+        },
+        "2018": {
+          "trades": 1388,
+          "profit_factor": 0.7,
+          "net": -839.55,
+          "win_pct": 17.4,
+          "sampled_liquidation_max_dd_pct": 17.010915971348687
+        },
+        "2025": {
+          "trades": 1470,
+          "profit_factor": 0.966,
+          "net": -447.27,
+          "win_pct": 25.2,
+          "sampled_liquidation_max_dd_pct": 32.43361059574272
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -4433.270830999833,
+        269.49855800009095
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": -2052.88,
+        "drop_best_1": -2363.86,
+        "drop_worst_1": -1973.67,
+        "drop_best_3": -2804.39,
+        "drop_worst_3": -1855.91,
+        "drop_best_5": -3129.9,
+        "drop_worst_5": -1744.92,
+        "top3_share_of_gross_profit": 3.6
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 2526.25,
+        "p95_max_dd": 3170.65,
+        "worst_max_dd": 4076.15,
+        "median_final": 2947.12,
+        "p05_final": 2947.12,
+        "prob_50pct_drawdown": 0.201,
+        "prob_final_below_start": 1.0
+      },
+      "dsr_sensitivities": {
+        "36": 1.0133992978610694e-20,
+        "640": 2.564444256679919e-37,
+        "1000": 6.838926333781766e-40,
+        "2000": 6.90116322733421e-44
+      }
+    },
+    "neutral_history_first_actionable original_wiring": {
+      "trades": 14496,
+      "net": -8735.30866000087,
+      "profit_factor": 0.7781190228113265,
+      "wins": 6857,
+      "win_pct": 47.302704194260485,
+      "mean_pnl": -0.6026013148455346,
+      "per_year": {
+        "2013": {
+          "trades": 5240,
+          "profit_factor": 0.728,
+          "net": -3129.52,
+          "win_pct": 48.8,
+          "sampled_liquidation_max_dd_pct": 62.69310649428827
+        },
+        "2018": {
+          "trades": 4861,
+          "profit_factor": 0.462,
+          "net": -3153.56,
+          "win_pct": 37.9,
+          "sampled_liquidation_max_dd_pct": 63.09701427120227
+        },
+        "2025": {
+          "trades": 4395,
+          "profit_factor": 0.889,
+          "net": -2452.23,
+          "win_pct": 56.0,
+          "sampled_liquidation_max_dd_pct": 52.63550289615914
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -10912.127226499895,
+        -6231.372758250497
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": -8735.31,
+        "drop_best_1": -8811.83,
+        "drop_worst_1": -8659.02,
+        "drop_best_3": -8944.4,
+        "drop_worst_3": -8532.46,
+        "drop_best_5": -9060.58,
+        "drop_worst_5": -8420.09,
+        "top3_share_of_gross_profit": 0.7
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 8808.45,
+        "p95_max_dd": 8951.71,
+        "worst_max_dd": 9167.53,
+        "median_final": -3735.31,
+        "p05_final": -3735.31,
+        "prob_50pct_drawdown": 1.0,
+        "prob_final_below_start": 1.0
+      },
+      "dsr_sensitivities": {
+        "36": 6.723987957231898e-29,
+        "640": 8.537946263134835e-42,
+        "1000": 1.1053516738939837e-43,
+        "2000": 1.4256773728494565e-46
+      }
+    },
+    "neutral_history_first_actionable constant_initial_risk": {
+      "trades": 13304,
+      "net": -8254.971590000523,
+      "profit_factor": 0.7691954216078345,
+      "wins": 6210,
+      "win_pct": 46.67769092002405,
+      "mean_pnl": -0.6204879427240321,
+      "per_year": {
+        "2013": {
+          "trades": 4824,
+          "profit_factor": 0.692,
+          "net": -3277.98,
+          "win_pct": 48.1,
+          "sampled_liquidation_max_dd_pct": 65.65196335887788
+        },
+        "2018": {
+          "trades": 4524,
+          "profit_factor": 0.458,
+          "net": -2978.83,
+          "win_pct": 37.6,
+          "sampled_liquidation_max_dd_pct": 59.6133610233977
+        },
+        "2025": {
+          "trades": 3956,
+          "profit_factor": 0.898,
+          "net": -1998.17,
+          "win_pct": 55.4,
+          "sampled_liquidation_max_dd_pct": 45.018890048085886
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -10301.58473874967,
+        -5925.665742751387
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": -8254.97,
+        "drop_best_1": -8360.73,
+        "drop_worst_1": -8178.68,
+        "drop_best_3": -8547.4,
+        "drop_worst_3": -8047.19,
+        "drop_best_5": -8709.64,
+        "drop_worst_5": -7933.3,
+        "top3_share_of_gross_profit": 1.1
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 8337.72,
+        "p95_max_dd": 8520.43,
+        "worst_max_dd": 8825.05,
+        "median_final": -3254.97,
+        "p05_final": -3254.97,
+        "prob_50pct_drawdown": 1.0,
+        "prob_final_below_start": 1.0
+      },
+      "dsr_sensitivities": {
+        "36": 4.0431481886777414e-27,
+        "640": 1.8393125065366352e-39,
+        "1000": 2.8480519186813453e-41,
+        "2000": 4.816583559782249e-44
+      }
+    },
+    "learning_first_actionable static": {
+      "trades": 4549,
+      "net": -2076.886499999994,
+      "profit_factor": 0.9092343483501863,
+      "wins": 992,
+      "win_pct": 21.806990547373047,
+      "mean_pnl": -0.456558914047042,
+      "per_year": {
+        "2013": {
+          "trades": 1691,
+          "profit_factor": 0.886,
+          "net": -778.22,
+          "win_pct": 22.5,
+          "sampled_liquidation_max_dd_pct": 17.492096582201466
+        },
+        "2018": {
+          "trades": 1388,
+          "profit_factor": 0.7,
+          "net": -839.55,
+          "win_pct": 17.4,
+          "sampled_liquidation_max_dd_pct": 17.010915971348687
+        },
+        "2025": {
+          "trades": 1470,
+          "profit_factor": 0.965,
+          "net": -459.12,
+          "win_pct": 25.2,
+          "sampled_liquidation_max_dd_pct": 32.66210388291121
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -4403.269711999927,
+        243.94799599989153
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": -2076.89,
+        "drop_best_1": -2387.87,
+        "drop_worst_1": -1997.68,
+        "drop_best_3": -2828.4,
+        "drop_worst_3": -1879.92,
+        "drop_best_5": -3153.91,
+        "drop_worst_5": -1768.94,
+        "top3_share_of_gross_profit": 3.6
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 2532.32,
+        "p95_max_dd": 3165.91,
+        "worst_max_dd": 3914.09,
+        "median_final": 2923.11,
+        "p05_final": 2923.11,
+        "prob_50pct_drawdown": 0.231,
+        "prob_final_below_start": 1.0
+      },
+      "dsr_sensitivities": {
+        "36": 8.704812610839254e-21,
+        "640": 2.105464377583367e-37,
+        "1000": 5.5837283309615965e-40,
+        "2000": 5.589017195750009e-44
+      }
+    },
+    "learning_first_actionable original_wiring": {
+      "trades": 14489,
+      "net": -8625.316180000871,
+      "profit_factor": 0.780655223428589,
+      "wins": 6859,
+      "win_pct": 47.33936089447167,
+      "mean_pnl": -0.5953009993788992,
+      "per_year": {
+        "2013": {
+          "trades": 5237,
+          "profit_factor": 0.729,
+          "net": -3114.29,
+          "win_pct": 48.8,
+          "sampled_liquidation_max_dd_pct": 62.38885194524422
+        },
+        "2018": {
+          "trades": 4861,
+          "profit_factor": 0.462,
+          "net": -3153.56,
+          "win_pct": 37.9,
+          "sampled_liquidation_max_dd_pct": 63.09701427120227
+        },
+        "2025": {
+          "trades": 4391,
+          "profit_factor": 0.893,
+          "net": -2357.47,
+          "win_pct": 56.1,
+          "sampled_liquidation_max_dd_pct": 50.741324700471694
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -10643.688841751175,
+        -6224.9383045018085
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": -8625.32,
+        "drop_best_1": -8701.84,
+        "drop_worst_1": -8549.03,
+        "drop_best_3": -8834.41,
+        "drop_worst_3": -8422.47,
+        "drop_best_5": -8950.58,
+        "drop_worst_5": -8310.1,
+        "top3_share_of_gross_profit": 0.7
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 8694.94,
+        "p95_max_dd": 8841.36,
+        "worst_max_dd": 9141.89,
+        "median_final": -3625.32,
+        "p05_final": -3625.32,
+        "prob_50pct_drawdown": 1.0,
+        "prob_final_below_start": 1.0
+      },
+      "dsr_sensitivities": {
+        "36": 1.103712696547819e-28,
+        "640": 1.4492638844866203e-41,
+        "1000": 1.881027135249025e-43,
+        "2000": 2.4333110250979754e-46
+      }
+    },
+    "learning_first_actionable constant_initial_risk": {
+      "trades": 13302,
+      "net": -8265.742590000526,
+      "profit_factor": 0.7692185857239975,
+      "wins": 6210,
+      "win_pct": 46.68470906630582,
+      "mean_pnl": -0.6213909630131202,
+      "per_year": {
+        "2013": {
+          "trades": 4821,
+          "profit_factor": 0.692,
+          "net": -3269.75,
+          "win_pct": 48.1,
+          "sampled_liquidation_max_dd_pct": 65.48755267299745
+        },
+        "2018": {
+          "trades": 4524,
+          "profit_factor": 0.458,
+          "net": -2978.83,
+          "win_pct": 37.6,
+          "sampled_liquidation_max_dd_pct": 59.6133610233977
+        },
+        "2025": {
+          "trades": 3957,
+          "profit_factor": 0.898,
+          "net": -2017.17,
+          "win_pct": 55.3,
+          "sampled_liquidation_max_dd_pct": 45.39828899416693
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -10330.077245750841,
+        -5888.1453410005415
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": -8265.74,
+        "drop_best_1": -8371.5,
+        "drop_worst_1": -8189.45,
+        "drop_best_3": -8558.17,
+        "drop_worst_3": -8057.96,
+        "drop_best_5": -8720.41,
+        "drop_worst_5": -7944.07,
+        "top3_share_of_gross_profit": 1.1
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 8353.28,
+        "p95_max_dd": 8537.45,
+        "worst_max_dd": 8838.19,
+        "median_final": -3265.74,
+        "p05_final": -3265.74,
+        "prob_50pct_drawdown": 1.0,
+        "prob_final_below_start": 1.0
+      },
+      "dsr_sensitivities": {
+        "36": 2.840447766566564e-27,
+        "640": 1.0632538299331629e-39,
+        "1000": 1.599461597672682e-41,
+        "2000": 2.587537012473072e-44
+      }
+    },
+    "ReversalTriggerOnly static": {
+      "trades": 1715,
+      "net": -1238.3907600000148,
+      "profit_factor": 0.7157759358321538,
+      "wins": 412,
+      "win_pct": 24.02332361516035,
+      "mean_pnl": -0.722093737609338,
+      "per_year": {
+        "2013": {
+          "trades": 523,
+          "profit_factor": 0.673,
+          "net": -320.64,
+          "win_pct": 25.0,
+          "sampled_liquidation_max_dd_pct": 6.468951574596796
+        },
+        "2018": {
+          "trades": 589,
+          "profit_factor": 0.421,
+          "net": -387.46,
+          "win_pct": 18.3,
+          "sampled_liquidation_max_dd_pct": 7.824228399999647
+        },
+        "2025": {
+          "trades": 603,
+          "profit_factor": 0.804,
+          "net": -530.29,
+          "win_pct": 28.7,
+          "sampled_liquidation_max_dd_pct": 11.435722274694117
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -1537.1919699999971,
+        -937.7495184999973
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": -1238.39,
+        "drop_best_1": -1292.56,
+        "drop_worst_1": -1201.74,
+        "drop_best_3": -1378.48,
+        "drop_worst_3": -1144.93,
+        "drop_best_5": -1450.52,
+        "drop_worst_5": -1103.0,
+        "top3_share_of_gross_profit": 4.5
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 1276.11,
+        "p95_max_dd": 1366.61,
+        "worst_max_dd": 1449.61,
+        "median_final": 3761.61,
+        "p05_final": 3761.61,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 1.0
+      },
+      "dsr_sensitivities": {
+        "36": 4.667545815123231e-26,
+        "640": 2.971648075281193e-42,
+        "1000": 1.0709014474585823e-44,
+        "2000": 1.828043274531815e-48
+      }
+    },
+    "ReversalTriggerOnly original_wiring": {
+      "trades": 1739,
+      "net": -1169.291400000107,
+      "profit_factor": 0.6175865185386679,
+      "wins": 726,
+      "win_pct": 41.74813110983324,
+      "mean_pnl": -0.6723929844738971,
+      "per_year": {
+        "2013": {
+          "trades": 530,
+          "profit_factor": 0.491,
+          "net": -379.32,
+          "win_pct": 40.9,
+          "sampled_liquidation_max_dd_pct": 7.6136127978369785
+        },
+        "2018": {
+          "trades": 592,
+          "profit_factor": 0.26,
+          "net": -417.89,
+          "win_pct": 30.1,
+          "sampled_liquidation_max_dd_pct": 8.357821599999443
+        },
+        "2025": {
+          "trades": 617,
+          "profit_factor": 0.787,
+          "net": -372.08,
+          "win_pct": 53.6,
+          "sampled_liquidation_max_dd_pct": 7.7651679326139185
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -1375.0164410000345,
+        -968.6243140000607
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": -1169.29,
+        "drop_best_1": -1200.51,
+        "drop_worst_1": -1132.64,
+        "drop_best_3": -1238.83,
+        "drop_worst_3": -1081.03,
+        "drop_best_5": -1274.49,
+        "drop_worst_5": -1044.74,
+        "top3_share_of_gross_profit": 3.7
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 1184.45,
+        "p95_max_dd": 1217.73,
+        "worst_max_dd": 1277.73,
+        "median_final": 3830.71,
+        "p05_final": 3830.71,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 1.0
+      },
+      "dsr_sensitivities": {
+        "36": 7.978607139669732e-32,
+        "640": 1.513270571357038e-48,
+        "1000": 4.997832186047503e-51,
+        "2000": 7.732126801958542e-55
+      }
+    },
+    "ReversalTriggerOnly constant_initial_risk": {
+      "trades": 1739,
+      "net": -1259.0405600000545,
+      "profit_factor": 0.588235653483615,
+      "wins": 725,
+      "win_pct": 41.69062679700978,
+      "mean_pnl": -0.7240026221966961,
+      "per_year": {
+        "2013": {
+          "trades": 530,
+          "profit_factor": 0.472,
+          "net": -393.16,
+          "win_pct": 40.9,
+          "sampled_liquidation_max_dd_pct": 7.8903750297408095
+        },
+        "2018": {
+          "trades": 592,
+          "profit_factor": 0.226,
+          "net": -437.39,
+          "win_pct": 29.9,
+          "sampled_liquidation_max_dd_pct": 8.74788559999939
+        },
+        "2025": {
+          "trades": 617,
+          "profit_factor": 0.755,
+          "net": -428.48,
+          "win_pct": 53.6,
+          "sampled_liquidation_max_dd_pct": 8.692602725481866
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -1497.8654295002352,
+        -1031.1272819999435
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": -1259.04,
+        "drop_best_1": -1290.26,
+        "drop_worst_1": -1222.39,
+        "drop_best_3": -1343.39,
+        "drop_worst_3": -1170.77,
+        "drop_best_5": -1388.27,
+        "drop_worst_5": -1134.49,
+        "top3_share_of_gross_profit": 4.7
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 1273.97,
+        "p95_max_dd": 1314.11,
+        "worst_max_dd": 1387.73,
+        "median_final": 3740.96,
+        "p05_final": 3740.96,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 1.0
+      },
+      "dsr_sensitivities": {
+        "36": 5.664900772091048e-24,
+        "640": 2.1445972393422557e-36,
+        "1000": 3.076808559008936e-38,
+        "2000": 4.5414501559454015e-41
+      }
+    },
+    "ReversalTriggerAndDirection static": {
+      "trades": 1727,
+      "net": -1164.3161200000095,
+      "profit_factor": 0.7348609086786341,
+      "wins": 430,
+      "win_pct": 24.898668210770122,
+      "mean_pnl": -0.6741842038216616,
+      "per_year": {
+        "2013": {
+          "trades": 526,
+          "profit_factor": 0.645,
+          "net": -353.04,
+          "win_pct": 25.1,
+          "sampled_liquidation_max_dd_pct": 7.134818586453422
+        },
+        "2018": {
+          "trades": 591,
+          "profit_factor": 0.472,
+          "net": -347.89,
+          "win_pct": 19.5,
+          "sampled_liquidation_max_dd_pct": 6.957806799999562
+        },
+        "2025": {
+          "trades": 610,
+          "profit_factor": 0.831,
+          "net": -463.39,
+          "win_pct": 30.0,
+          "sampled_liquidation_max_dd_pct": 10.073840340231163
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -1615.072347000017,
+        -806.3263659999785
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": -1164.32,
+        "drop_best_1": -1221.37,
+        "drop_worst_1": -1110.07,
+        "drop_best_3": -1314.48,
+        "drop_worst_3": -1046.18,
+        "drop_best_5": -1386.52,
+        "drop_worst_5": -999.73,
+        "top3_share_of_gross_profit": 4.7
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 1209.28,
+        "p95_max_dd": 1303.13,
+        "worst_max_dd": 1469.73,
+        "median_final": 3835.68,
+        "p05_final": 3835.68,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 1.0
+      },
+      "dsr_sensitivities": {
+        "36": 1.5383464075570648e-36,
+        "640": 1.285479922792717e-59,
+        "1000": 4.2434985972442183e-63,
+        "2000": 1.8163243760975585e-68
+      }
+    },
+    "ReversalTriggerAndDirection original_wiring": {
+      "trades": 1739,
+      "net": -1133.7276800001368,
+      "profit_factor": 0.6233524522229299,
+      "wins": 747,
+      "win_pct": 42.955721679125936,
+      "mean_pnl": -0.6519423116734542,
+      "per_year": {
+        "2013": {
+          "trades": 530,
+          "profit_factor": 0.456,
+          "net": -411.82,
+          "win_pct": 40.6,
+          "sampled_liquidation_max_dd_pct": 8.274727507639591
+        },
+        "2018": {
+          "trades": 592,
+          "profit_factor": 0.342,
+          "net": -339.86,
+          "win_pct": 34.1,
+          "sampled_liquidation_max_dd_pct": 6.797193999999308
+        },
+        "2025": {
+          "trades": 617,
+          "profit_factor": 0.78,
+          "net": -382.04,
+          "win_pct": 53.5,
+          "sampled_liquidation_max_dd_pct": 8.790047739320475
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -1482.827217000089,
+        -802.1836905001685
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": -1133.73,
+        "drop_best_1": -1163.94,
+        "drop_worst_1": -1106.5,
+        "drop_best_3": -1204.54,
+        "drop_worst_3": -1064.38,
+        "drop_best_5": -1239.32,
+        "drop_worst_5": -1031.49,
+        "top3_share_of_gross_profit": 3.8
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 1147.62,
+        "p95_max_dd": 1184.65,
+        "worst_max_dd": 1218.49,
+        "median_final": 3866.27,
+        "p05_final": 3866.27,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 1.0
+      },
+      "dsr_sensitivities": {
+        "36": 1.5262310392699639e-43,
+        "640": 7.147043518590637e-67,
+        "1000": 2.4575358507176166e-70,
+        "2000": 1.175856657050021e-75
+      }
+    },
+    "ReversalTriggerAndDirection constant_initial_risk": {
+      "trades": 1739,
+      "net": -1213.0593600001073,
+      "profit_factor": 0.5974982912597596,
+      "wins": 744,
+      "win_pct": 42.783208740655546,
+      "mean_pnl": -0.6975614491087448,
+      "per_year": {
+        "2013": {
+          "trades": 530,
+          "profit_factor": 0.463,
+          "net": -408.16,
+          "win_pct": 40.4,
+          "sampled_liquidation_max_dd_pct": 8.201417280936496
+        },
+        "2018": {
+          "trades": 592,
+          "profit_factor": 0.292,
+          "net": -365.97,
+          "win_pct": 34.0,
+          "sampled_liquidation_max_dd_pct": 7.319348399999344
+        },
+        "2025": {
+          "trades": 617,
+          "profit_factor": 0.747,
+          "net": -438.94,
+          "win_pct": 53.3,
+          "sampled_liquidation_max_dd_pct": 9.655746384564695
+        }
+      },
+      "meets_pf_1_3_each_year": false,
+      "month_block_net_interval_95": [
+        -1590.5579425000226,
+        -859.2520780000716
+      ],
+      "bonferroni_month_bootstrap_p": 1.0,
+      "ablation": {
+        "net_pl": -1213.06,
+        "drop_best_1": -1241.45,
+        "drop_worst_1": -1185.83,
+        "drop_best_3": -1290.91,
+        "drop_worst_3": -1143.71,
+        "drop_best_5": -1329.77,
+        "drop_worst_5": -1110.83,
+        "top3_share_of_gross_profit": 4.3
+      },
+      "trade_order_monte_carlo": {
+        "median_max_dd": 1228.98,
+        "p95_max_dd": 1269.68,
+        "worst_max_dd": 1328.88,
+        "median_final": 3786.94,
+        "p05_final": 3786.94,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 1.0
+      },
+      "dsr_sensitivities": {
+        "36": 5.605811055990367e-43,
+        "640": 5.339016324177009e-66,
+        "1000": 2.0395902784322536e-69,
+        "2000": 1.1470404337573707e-74
+      }
+    }
+  }
+}

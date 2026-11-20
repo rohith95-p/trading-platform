@@ -1,0 +1,1861 @@
+{
+  "freezes": [
+    {
+      "freeze": "2015-01-01",
+      "train_last_session": "2014-12-31",
+      "train_count": 2561,
+      "mean": 0.00038906740361678273,
+      "sd": 0.0027713283904544344
+    },
+    {
+      "freeze": "2015-07-01",
+      "train_last_session": "2015-06-30",
+      "train_count": 2562,
+      "mean": 0.0003922132540531244,
+      "sd": 0.002780083885855928
+    },
+    {
+      "freeze": "2016-01-01",
+      "train_last_session": "2015-12-31",
+      "train_count": 2567,
+      "mean": 0.00029193538227521675,
+      "sd": 0.0027843103506380736
+    },
+    {
+      "freeze": "2016-07-01",
+      "train_last_session": "2016-06-30",
+      "train_count": 2569,
+      "mean": 0.00029920477551970674,
+      "sd": 0.0026738899605898993
+    },
+    {
+      "freeze": "2017-01-01",
+      "train_last_session": "2016-12-30",
+      "train_count": 2574,
+      "mean": 0.00023679547584464693,
+      "sd": 0.002658668858767423
+    },
+    {
+      "freeze": "2017-07-01",
+      "train_last_session": "2017-06-30",
+      "train_count": 2574,
+      "mean": 0.00025323350030399095,
+      "sd": 0.0026499368598639226
+    },
+    {
+      "freeze": "2018-01-01",
+      "train_last_session": "2017-12-29",
+      "train_count": 2574,
+      "mean": 0.00017634236833637075,
+      "sd": 0.0026118215068042243
+    },
+    {
+      "freeze": "2018-07-01",
+      "train_last_session": "2018-06-29",
+      "train_count": 2574,
+      "mean": 0.000135749691091568,
+      "sd": 0.002530929626560668
+    },
+    {
+      "freeze": "2019-01-01",
+      "train_last_session": "2018-12-31",
+      "train_count": 2574,
+      "mean": 0.00015745810865315242,
+      "sd": 0.0022536907485351527
+    },
+    {
+      "freeze": "2019-07-01",
+      "train_last_session": "2019-06-28",
+      "train_count": 2574,
+      "mean": 0.00014696967144863172,
+      "sd": 0.0021889777923442596
+    },
+    {
+      "freeze": "2020-01-01",
+      "train_last_session": "2019-12-31",
+      "train_count": 2575,
+      "mean": 0.00011321783054694186,
+      "sd": 0.0021346162466296115
+    },
+    {
+      "freeze": "2020-07-01",
+      "train_last_session": "2020-06-30",
+      "train_count": 2576,
+      "mean": 0.00013464776917060522,
+      "sd": 0.0021669554200504427
+    },
+    {
+      "freeze": "2021-01-01",
+      "train_last_session": "2020-12-31",
+      "train_count": 2578,
+      "mean": 0.00011449678680101026,
+      "sd": 0.002190379133780926
+    },
+    {
+      "freeze": "2021-07-01",
+      "train_last_session": "2021-06-30",
+      "train_count": 2578,
+      "mean": 6.70378880986903e-05,
+      "sd": 0.0022122912250788604
+    },
+    {
+      "freeze": "2022-01-01",
+      "train_last_session": "2021-12-31",
+      "train_count": 2580,
+      "mean": 4.181443585498411e-05,
+      "sd": 0.0020561699322913063
+    },
+    {
+      "freeze": "2022-07-01",
+      "train_last_session": "2022-06-30",
+      "train_count": 2581,
+      "mean": 5.500024219678837e-05,
+      "sd": 0.002046261661042892
+    },
+    {
+      "freeze": "2023-01-01",
+      "train_last_session": "2022-12-30",
+      "train_count": 2581,
+      "mean": 2.575255232495798e-05,
+      "sd": 0.002068079739454636
+    },
+    {
+      "freeze": "2023-07-01",
+      "train_last_session": "2023-06-30",
+      "train_count": 2581,
+      "mean": 0.00014941022646238546,
+      "sd": 0.001976139223327974
+    },
+    {
+      "freeze": "2024-01-01",
+      "train_last_session": "2023-12-29",
+      "train_count": 2579,
+      "mean": 0.00019892756533948578,
+      "sd": 0.001930492202446845
+    },
+    {
+      "freeze": "2024-07-01",
+      "train_last_session": "2024-06-28",
+      "train_count": 2580,
+      "mean": 0.00022675088753202043,
+      "sd": 0.0019480689306883418
+    },
+    {
+      "freeze": "2025-01-01",
+      "train_last_session": "2024-12-31",
+      "train_count": 2580,
+      "mean": 0.0003066281998038666,
+      "sd": 0.001947857953033622
+    },
+    {
+      "freeze": "2025-07-01",
+      "train_last_session": "2025-06-30",
+      "train_count": 2580,
+      "mean": 0.00040203088649132154,
+      "sd": 0.0019780474039759847
+    }
+  ],
+  "results": {
+    "2015-2018": {
+      "metrics": {
+        "trades": 84,
+        "net": -541.31,
+        "profit_factor": 0.657,
+        "win_pct": 34.5,
+        "expectancy": -6.4441,
+        "max_dd_usd": 672.56,
+        "max_dd_pct": 13.26,
+        "recovery_factor": -0.805,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": -2.82,
+        "calmar_ratio": -0.213,
+        "omega_ratio": 0.657,
+        "sortino_ratio": -0.2466,
+        "sharpe_per_trade": -0.1543,
+        "skew": 2.661,
+        "kurtosis": 15.314,
+        "wins": 29,
+        "ablation": {
+          "net_pl": -541.31,
+          "drop_best_1": -780.57,
+          "drop_worst_1": -473.87,
+          "drop_best_3": -948.26,
+          "drop_worst_3": -356.68,
+          "drop_best_5": -1055.02,
+          "drop_worst_5": -265.55,
+          "top3_share_of_gross_profit": 39.3
+        },
+        "monte_carlo": {
+          "median_max_dd": 688.99,
+          "p95_max_dd": 907.31,
+          "worst_max_dd": 1106.81,
+          "median_final": 4458.69,
+          "p05_final": 4458.69,
+          "prob_50pct_drawdown": 0.0,
+          "prob_final_below_start": 1.0
+        }
+      },
+      "trades": [
+        {
+          "time": 1422274500,
+          "entry_time": 1421103600,
+          "pnl": 72.99028571428599,
+          "reason": "stop"
+        },
+        {
+          "time": 1422531900,
+          "entry_time": 1422313200,
+          "pnl": -32.851571428570864,
+          "reason": "stop"
+        },
+        {
+          "time": 1423230300,
+          "entry_time": 1422572400,
+          "pnl": -21.778000000000034,
+          "reason": "stop"
+        },
+        {
+          "time": 1424183400,
+          "entry_time": 1423437300,
+          "pnl": -52.871857142856996,
+          "reason": "stop"
+        },
+        {
+          "time": 1430431200,
+          "entry_time": 1430344800,
+          "pnl": -43.34099999999978,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1432045800,
+          "entry_time": 1431640800,
+          "pnl": -30.972857142856903,
+          "reason": "stop"
+        },
+        {
+          "time": 1432633500,
+          "entry_time": 1432072800,
+          "pnl": -36.77771428571415,
+          "reason": "stop"
+        },
+        {
+          "time": 1433282400,
+          "entry_time": 1432677600,
+          "pnl": 4.392999999999836,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1435010400,
+          "entry_time": 1434924000,
+          "pnl": -31.760999999999854,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1443519900,
+          "entry_time": 1443391200,
+          "pnl": -43.31842857142822,
+          "reason": "stop"
+        },
+        {
+          "time": 1443779100,
+          "entry_time": 1443564000,
+          "pnl": -45.30728571428607,
+          "reason": "stop"
+        },
+        {
+          "time": 1445436000,
+          "entry_time": 1444082400,
+          "pnl": 45.45328571428561,
+          "reason": "stop"
+        },
+        {
+          "time": 1446057900,
+          "entry_time": 1445464800,
+          "pnl": -28.36628571428556,
+          "reason": "stop"
+        },
+        {
+          "time": 1446220800,
+          "entry_time": 1446073200,
+          "pnl": -38.94199999999994,
+          "reason": "stop"
+        },
+        {
+          "time": 1455254100,
+          "entry_time": 1453417200,
+          "pnl": 239.26657142857172,
+          "reason": "stop"
+        },
+        {
+          "time": 1455589800,
+          "entry_time": 1455490800,
+          "pnl": -64.31557142857167,
+          "reason": "stop"
+        },
+        {
+          "time": 1456503300,
+          "entry_time": 1455663600,
+          "pnl": 8.445000000000274,
+          "reason": "stop"
+        },
+        {
+          "time": 1457534700,
+          "entry_time": 1456700400,
+          "pnl": 37.36571428571426,
+          "reason": "stop"
+        },
+        {
+          "time": 1457964900,
+          "entry_time": 1457564400,
+          "pnl": -20.66642857142879,
+          "reason": "stop"
+        },
+        {
+          "time": 1458707400,
+          "entry_time": 1457996400,
+          "pnl": -10.950428571428642,
+          "reason": "stop"
+        },
+        {
+          "time": 1459520100,
+          "entry_time": 1458774000,
+          "pnl": -33.70971428571404,
+          "reason": "stop"
+        },
+        {
+          "time": 1460593800,
+          "entry_time": 1460325600,
+          "pnl": -21.630428571428222,
+          "reason": "stop"
+        },
+        {
+          "time": 1461287700,
+          "entry_time": 1460671200,
+          "pnl": 25.17200000000024,
+          "reason": "stop"
+        },
+        {
+          "time": 1461621600,
+          "entry_time": 1461542400,
+          "pnl": 10.54999999999989,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1462382100,
+          "entry_time": 1461794400,
+          "pnl": 49.663000000000274,
+          "reason": "stop"
+        },
+        {
+          "time": 1462801500,
+          "entry_time": 1462399200,
+          "pnl": -36.69857142857118,
+          "reason": "stop"
+        },
+        {
+          "time": 1463598900,
+          "entry_time": 1462831200,
+          "pnl": -19.44899999999991,
+          "reason": "stop"
+        },
+        {
+          "time": 1463695200,
+          "entry_time": 1463608800,
+          "pnl": -7.620999999999982,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1466115300,
+          "entry_time": 1465250400,
+          "pnl": 57.10000000000002,
+          "reason": "stop"
+        },
+        {
+          "time": 1466537400,
+          "entry_time": 1466373600,
+          "pnl": -45.82128571428523,
+          "reason": "stop"
+        },
+        {
+          "time": 1467042300,
+          "entry_time": 1466546400,
+          "pnl": 94.69828571428602,
+          "reason": "stop"
+        },
+        {
+          "time": 1467981900,
+          "entry_time": 1467064800,
+          "pnl": 14.426142857143136,
+          "reason": "stop"
+        },
+        {
+          "time": 1468339200,
+          "entry_time": 1468188000,
+          "pnl": -67.43700000000028,
+          "reason": "stop"
+        },
+        {
+          "time": 1469018700,
+          "entry_time": 1468360800,
+          "pnl": -43.335857142857336,
+          "reason": "stop"
+        },
+        {
+          "time": 1470401100,
+          "entry_time": 1469052000,
+          "pnl": 39.63257142857154,
+          "reason": "stop"
+        },
+        {
+          "time": 1471825800,
+          "entry_time": 1470607200,
+          "pnl": -12.781428571428622,
+          "reason": "stop"
+        },
+        {
+          "time": 1473454800,
+          "entry_time": 1473285600,
+          "pnl": -37.880571428571265,
+          "reason": "stop"
+        },
+        {
+          "time": 1473717600,
+          "entry_time": 1473631200,
+          "pnl": -3.8609999999997635,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1475046900,
+          "entry_time": 1474840800,
+          "pnl": -30.90014285714277,
+          "reason": "stop"
+        },
+        {
+          "time": 1486076400,
+          "entry_time": 1485990000,
+          "pnl": 10.319000000000072,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1486689300,
+          "entry_time": 1486335600,
+          "pnl": -4.64642857142835,
+          "reason": "stop"
+        },
+        {
+          "time": 1488328200,
+          "entry_time": 1486940400,
+          "pnl": 9.840142857143046,
+          "reason": "stop"
+        },
+        {
+          "time": 1488520800,
+          "entry_time": 1488409200,
+          "pnl": -39.35914285714255,
+          "reason": "stop"
+        },
+        {
+          "time": 1490903100,
+          "entry_time": 1489964400,
+          "pnl": 13.250428571429042,
+          "reason": "stop"
+        },
+        {
+          "time": 1491400800,
+          "entry_time": 1490911200,
+          "pnl": -3.9774285714280775,
+          "reason": "stop"
+        },
+        {
+          "time": 1491786900,
+          "entry_time": 1491429600,
+          "pnl": -11.211428571428405,
+          "reason": "stop"
+        },
+        {
+          "time": 1492610400,
+          "entry_time": 1491861600,
+          "pnl": 34.647428571429074,
+          "reason": "stop"
+        },
+        {
+          "time": 1492985700,
+          "entry_time": 1492639200,
+          "pnl": -26.893999999999817,
+          "reason": "stop"
+        },
+        {
+          "time": 1493654400,
+          "entry_time": 1493071200,
+          "pnl": -40.05271428571424,
+          "reason": "stop"
+        },
+        {
+          "time": 1493841600,
+          "entry_time": 1493676000,
+          "pnl": -34.20414285714235,
+          "reason": "stop"
+        },
+        {
+          "time": 1496929500,
+          "entry_time": 1495144800,
+          "pnl": 42.426857142857,
+          "reason": "stop"
+        },
+        {
+          "time": 1497316500,
+          "entry_time": 1496959200,
+          "pnl": -40.036428571428225,
+          "reason": "stop"
+        },
+        {
+          "time": 1501715700,
+          "entry_time": 1500415200,
+          "pnl": 13.274999999999947,
+          "reason": "stop"
+        },
+        {
+          "time": 1502143200,
+          "entry_time": 1501797600,
+          "pnl": -27.4740000000002,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1502759700,
+          "entry_time": 1502402400,
+          "pnl": -30.430714285714295,
+          "reason": "stop"
+        },
+        {
+          "time": 1502920800,
+          "entry_time": 1502834400,
+          "pnl": 22.899000000000456,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1504096200,
+          "entry_time": 1503266400,
+          "pnl": 33.99785714285747,
+          "reason": "stop"
+        },
+        {
+          "time": 1505084400,
+          "entry_time": 1504130400,
+          "pnl": 41.58399999999989,
+          "reason": "stop"
+        },
+        {
+          "time": 1505738700,
+          "entry_time": 1505167200,
+          "pnl": -39.817714285714565,
+          "reason": "stop"
+        },
+        {
+          "time": 1505977200,
+          "entry_time": 1505772000,
+          "pnl": -30.86442857142855,
+          "reason": "stop"
+        },
+        {
+          "time": 1508222700,
+          "entry_time": 1507845600,
+          "pnl": -16.50642857142848,
+          "reason": "stop"
+        },
+        {
+          "time": 1508762700,
+          "entry_time": 1508277600,
+          "pnl": -30.877428571428624,
+          "reason": "stop"
+        },
+        {
+          "time": 1515029400,
+          "entry_time": 1514502000,
+          "pnl": 15.603000000000328,
+          "reason": "stop"
+        },
+        {
+          "time": 1516238100,
+          "entry_time": 1515106800,
+          "pnl": -6.631857142857465,
+          "reason": "stop"
+        },
+        {
+          "time": 1516910400,
+          "entry_time": 1516316400,
+          "pnl": 24.346571428571487,
+          "reason": "stop"
+        },
+        {
+          "time": 1517279400,
+          "entry_time": 1516921200,
+          "pnl": -26.709285714285308,
+          "reason": "stop"
+        },
+        {
+          "time": 1517584500,
+          "entry_time": 1517353200,
+          "pnl": -17.54871428571413,
+          "reason": "stop"
+        },
+        {
+          "time": 1518009300,
+          "entry_time": 1517785200,
+          "pnl": -21.005857142857156,
+          "reason": "stop"
+        },
+        {
+          "time": 1519114500,
+          "entry_time": 1518649200,
+          "pnl": -33.4759999999998,
+          "reason": "stop"
+        },
+        {
+          "time": 1519747200,
+          "entry_time": 1519167600,
+          "pnl": -28.420571428571485,
+          "reason": "stop"
+        },
+        {
+          "time": 1521210600,
+          "entry_time": 1520463600,
+          "pnl": -39.99471428571435,
+          "reason": "stop"
+        },
+        {
+          "time": 1522236600,
+          "entry_time": 1521759600,
+          "pnl": 4.78471428571433,
+          "reason": "stop"
+        },
+        {
+          "time": 1522620000,
+          "entry_time": 1522274400,
+          "pnl": -1.9139999999997994,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1522879200,
+          "entry_time": 1522792800,
+          "pnl": -0.6609999999999454,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1523829600,
+          "entry_time": 1523570400,
+          "pnl": 10.537000000000273,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1524436200,
+          "entry_time": 1524002400,
+          "pnl": -31.783571428571214,
+          "reason": "stop"
+        },
+        {
+          "time": 1526388300,
+          "entry_time": 1526248800,
+          "pnl": -28.203428571428443,
+          "reason": "stop"
+        },
+        {
+          "time": 1540833300,
+          "entry_time": 1539554400,
+          "pnl": -2.4492857142855957,
+          "reason": "stop"
+        },
+        {
+          "time": 1541685600,
+          "entry_time": 1540854000,
+          "pnl": -29.465714285713947,
+          "reason": "stop"
+        },
+        {
+          "time": 1542009600,
+          "entry_time": 1541718000,
+          "pnl": -41.06328571428553,
+          "reason": "stop"
+        },
+        {
+          "time": 1543334400,
+          "entry_time": 1542668400,
+          "pnl": -27.21228571428516,
+          "reason": "stop"
+        },
+        {
+          "time": 1544795100,
+          "entry_time": 1543359600,
+          "pnl": 23.924428571428717,
+          "reason": "stop"
+        },
+        {
+          "time": 1545262200,
+          "entry_time": 1545001200,
+          "pnl": 8.412000000000273,
+          "reason": "stop"
+        },
+        {
+          "time": 1546282800,
+          "entry_time": 1545346800,
+          "pnl": 25.929000000000144,
+          "reason": "boundary"
+        }
+      ]
+    },
+    "2019-2021": {
+      "metrics": {
+        "trades": 73,
+        "net": -224.3,
+        "profit_factor": 0.877,
+        "win_pct": 37.0,
+        "expectancy": -3.0727,
+        "max_dd_usd": 686.4,
+        "max_dd_pct": 12.67,
+        "recovery_factor": -0.327,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": -1.52,
+        "calmar_ratio": -0.12,
+        "omega_ratio": 0.877,
+        "sortino_ratio": -0.0802,
+        "sharpe_per_trade": -0.0479,
+        "skew": 1.352,
+        "kurtosis": 5.546,
+        "wins": 27,
+        "ablation": {
+          "net_pl": -224.3,
+          "drop_best_1": -465.6,
+          "drop_worst_1": -112.63,
+          "drop_best_3": -797.34,
+          "drop_worst_3": 102.7,
+          "drop_best_5": -1047.66,
+          "drop_worst_5": 268.3,
+          "top3_share_of_gross_profit": 35.9
+        },
+        "monte_carlo": {
+          "median_max_dd": 638.68,
+          "p95_max_dd": 924.09,
+          "worst_max_dd": 1343.7,
+          "median_final": 4775.7,
+          "p05_final": 4775.7,
+          "prob_50pct_drawdown": 0.0,
+          "prob_final_below_start": 1.0
+        }
+      },
+      "trades": [
+        {
+          "time": 1546614000,
+          "entry_time": 1546401600,
+          "pnl": -11.742714285714039,
+          "reason": "stop"
+        },
+        {
+          "time": 1547819100,
+          "entry_time": 1546815600,
+          "pnl": -20.604857142856865,
+          "reason": "stop"
+        },
+        {
+          "time": 1549269000,
+          "entry_time": 1548025200,
+          "pnl": 42.37214285714285,
+          "reason": "stop"
+        },
+        {
+          "time": 1550149200,
+          "entry_time": 1549321200,
+          "pnl": -29.597857142857155,
+          "reason": "stop"
+        },
+        {
+          "time": 1550761200,
+          "entry_time": 1550185200,
+          "pnl": 28.79871428571486,
+          "reason": "stop"
+        },
+        {
+          "time": 1551367800,
+          "entry_time": 1550790000,
+          "pnl": -24.4698571428573,
+          "reason": "stop"
+        },
+        {
+          "time": 1551474000,
+          "entry_time": 1551394800,
+          "pnl": -47.961000000000126,
+          "reason": "stop"
+        },
+        {
+          "time": 1553767200,
+          "entry_time": 1552604400,
+          "pnl": 6.231714285714494,
+          "reason": "stop"
+        },
+        {
+          "time": 1554069600,
+          "entry_time": 1553814000,
+          "pnl": -1.5229999999996726,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1558021500,
+          "entry_time": 1557871200,
+          "pnl": -27.44842857142879,
+          "reason": "stop"
+        },
+        {
+          "time": 1558389600,
+          "entry_time": 1558044000,
+          "pnl": -22.793999999999908,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1559783700,
+          "entry_time": 1559685600,
+          "pnl": 1.2508571428571198,
+          "reason": "stop"
+        },
+        {
+          "time": 1560130200,
+          "entry_time": 1559858400,
+          "pnl": -16.12971428571431,
+          "reason": "stop"
+        },
+        {
+          "time": 1560734100,
+          "entry_time": 1560204000,
+          "pnl": 9.198000000000128,
+          "reason": "stop"
+        },
+        {
+          "time": 1561515300,
+          "entry_time": 1560808800,
+          "pnl": 132.09171428571443,
+          "reason": "stop"
+        },
+        {
+          "time": 1561932900,
+          "entry_time": 1561586400,
+          "pnl": -37.333999999999875,
+          "reason": "stop"
+        },
+        {
+          "time": 1562330700,
+          "entry_time": 1562018400,
+          "pnl": 34.214571428571574,
+          "reason": "stop"
+        },
+        {
+          "time": 1563844500,
+          "entry_time": 1562536800,
+          "pnl": 25.312571428571832,
+          "reason": "stop"
+        },
+        {
+          "time": 1564619400,
+          "entry_time": 1563919200,
+          "pnl": -30.29542857142844,
+          "reason": "stop"
+        },
+        {
+          "time": 1565704800,
+          "entry_time": 1564956000,
+          "pnl": 82.07100000000008,
+          "reason": "stop"
+        },
+        {
+          "time": 1567187100,
+          "entry_time": 1565733600,
+          "pnl": 17.15442857142919,
+          "reason": "stop"
+        },
+        {
+          "time": 1567692900,
+          "entry_time": 1567375200,
+          "pnl": -13.310428571428513,
+          "reason": "stop"
+        },
+        {
+          "time": 1568078100,
+          "entry_time": 1567720800,
+          "pnl": -56.81000000000004,
+          "reason": "stop"
+        },
+        {
+          "time": 1569428100,
+          "entry_time": 1569276000,
+          "pnl": -44.71057142857074,
+          "reason": "stop"
+        },
+        {
+          "time": 1569843900,
+          "entry_time": 1569448800,
+          "pnl": -50.25642857142848,
+          "reason": "stop"
+        },
+        {
+          "time": 1570795200,
+          "entry_time": 1570399200,
+          "pnl": -58.23142857142839,
+          "reason": "stop"
+        },
+        {
+          "time": 1572908400,
+          "entry_time": 1572822000,
+          "pnl": -9.421000000000165,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1578352500,
+          "entry_time": 1577401200,
+          "pnl": 94.79828571428568,
+          "reason": "stop"
+        },
+        {
+          "time": 1578513600,
+          "entry_time": 1578438000,
+          "pnl": -48.91528571428569,
+          "reason": "stop"
+        },
+        {
+          "time": 1580261400,
+          "entry_time": 1578524400,
+          "pnl": 0.0025714285716311736,
+          "reason": "stop"
+        },
+        {
+          "time": 1580805000,
+          "entry_time": 1580338800,
+          "pnl": -18.97528571428589,
+          "reason": "stop"
+        },
+        {
+          "time": 1582586100,
+          "entry_time": 1580857200,
+          "pnl": 187.29000000000002,
+          "reason": "stop"
+        },
+        {
+          "time": 1582869600,
+          "entry_time": 1582671600,
+          "pnl": -19.692285714285834,
+          "reason": "stop"
+        },
+        {
+          "time": 1583870400,
+          "entry_time": 1583103600,
+          "pnl": 118.23028571428603,
+          "reason": "stop"
+        },
+        {
+          "time": 1584017100,
+          "entry_time": 1583881200,
+          "pnl": -88.16628571428593,
+          "reason": "stop"
+        },
+        {
+          "time": 1584322200,
+          "entry_time": 1584054000,
+          "pnl": -108.54399999999944,
+          "reason": "stop"
+        },
+        {
+          "time": 1587103200,
+          "entry_time": 1585177200,
+          "pnl": 144.45700000000025,
+          "reason": "stop"
+        },
+        {
+          "time": 1588263300,
+          "entry_time": 1587333600,
+          "pnl": 2.396857142857302,
+          "reason": "stop"
+        },
+        {
+          "time": 1590070500,
+          "entry_time": 1588284000,
+          "pnl": 62.23257142857166,
+          "reason": "stop"
+        },
+        {
+          "time": 1590552900,
+          "entry_time": 1590098400,
+          "pnl": -49.78314285714319,
+          "reason": "stop"
+        },
+        {
+          "time": 1591189200,
+          "entry_time": 1590962400,
+          "pnl": -52.360857142857625,
+          "reason": "stop"
+        },
+        {
+          "time": 1591361100,
+          "entry_time": 1591221600,
+          "pnl": -29.62271428571415,
+          "reason": "stop"
+        },
+        {
+          "time": 1592226000,
+          "entry_time": 1591826400,
+          "pnl": -71.64071428571432,
+          "reason": "stop"
+        },
+        {
+          "time": 1593695700,
+          "entry_time": 1592258400,
+          "pnl": 46.85585714285729,
+          "reason": "stop"
+        },
+        {
+          "time": 1595922300,
+          "entry_time": 1593727200,
+          "pnl": 241.29114285714263,
+          "reason": "stop"
+        },
+        {
+          "time": 1597108500,
+          "entry_time": 1595973600,
+          "pnl": 91.1302857142854,
+          "reason": "stop"
+        },
+        {
+          "time": 1597861800,
+          "entry_time": 1597183200,
+          "pnl": 39.30985714285747,
+          "reason": "stop"
+        },
+        {
+          "time": 1599147000,
+          "entry_time": 1597874400,
+          "pnl": -25.671428571428493,
+          "reason": "stop"
+        },
+        {
+          "time": 1600681500,
+          "entry_time": 1599775200,
+          "pnl": -37.34671428571386,
+          "reason": "stop"
+        },
+        {
+          "time": 1600841700,
+          "entry_time": 1600725600,
+          "pnl": -77.43271428571408,
+          "reason": "stop"
+        },
+        {
+          "time": 1603663200,
+          "entry_time": 1603404000,
+          "pnl": -10.643000000000018,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1604924100,
+          "entry_time": 1604876400,
+          "pnl": -106.78957142857132,
+          "reason": "stop"
+        },
+        {
+          "time": 1609982100,
+          "entry_time": 1609887600,
+          "pnl": -66.83271428571463,
+          "reason": "stop"
+        },
+        {
+          "time": 1610118000,
+          "entry_time": 1610060400,
+          "pnl": -111.6752857142859,
+          "reason": "stop"
+        },
+        {
+          "time": 1610406000,
+          "entry_time": 1610319600,
+          "pnl": -16.160999999999945,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1611529200,
+          "entry_time": 1611270000,
+          "pnl": -27.242999999999927,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1613430000,
+          "entry_time": 1613084400,
+          "pnl": -17.773999999999926,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1620252000,
+          "entry_time": 1620165600,
+          "pnl": 15.219000000000163,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1620900000,
+          "entry_time": 1620597600,
+          "pnl": -47.78399999999969,
+          "reason": "stop"
+        },
+        {
+          "time": 1622724300,
+          "entry_time": 1620943200,
+          "pnl": 94.68757142857159,
+          "reason": "stop"
+        },
+        {
+          "time": 1623329100,
+          "entry_time": 1622757600,
+          "pnl": -7.934142857142626,
+          "reason": "stop"
+        },
+        {
+          "time": 1623633300,
+          "entry_time": 1623362400,
+          "pnl": -65.64328571428591,
+          "reason": "stop"
+        },
+        {
+          "time": 1626676200,
+          "entry_time": 1625781600,
+          "pnl": -7.6317142857146205,
+          "reason": "stop"
+        },
+        {
+          "time": 1631024100,
+          "entry_time": 1630274400,
+          "pnl": -31.34399999999989,
+          "reason": "stop"
+        },
+        {
+          "time": 1631786400,
+          "entry_time": 1631052000,
+          "pnl": -41.70471428571393,
+          "reason": "stop"
+        },
+        {
+          "time": 1635258600,
+          "entry_time": 1634767200,
+          "pnl": -7.07671428571453,
+          "reason": "stop"
+        },
+        {
+          "time": 1635512400,
+          "entry_time": 1635285600,
+          "pnl": -31.17942857142815,
+          "reason": "stop"
+        },
+        {
+          "time": 1635890400,
+          "entry_time": 1635717600,
+          "pnl": 5.80800000000051,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1636412400,
+          "entry_time": 1636326000,
+          "pnl": 15.478999999999926,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1637343900,
+          "entry_time": 1636498800,
+          "pnl": 12.765000000000438,
+          "reason": "stop"
+        },
+        {
+          "time": 1637622900,
+          "entry_time": 1637535600,
+          "pnl": -70.08100000000002,
+          "reason": "stop"
+        },
+        {
+          "time": 1640775600,
+          "entry_time": 1639954800,
+          "pnl": -22.411428571428477,
+          "reason": "stop"
+        },
+        {
+          "time": 1640977200,
+          "entry_time": 1640818800,
+          "pnl": 45.74800000000011,
+          "reason": "boundary"
+        }
+      ]
+    },
+    "2022-2025": {
+      "metrics": {
+        "trades": 105,
+        "net": 2568.28,
+        "profit_factor": 1.692,
+        "win_pct": 48.6,
+        "expectancy": 24.4598,
+        "max_dd_usd": 793.82,
+        "max_dd_pct": 12.13,
+        "recovery_factor": 3.235,
+        "closed_balance_nonpositive": false,
+        "first_nonpositive_after_trade": null,
+        "annualised_return_pct": 10.92,
+        "calmar_ratio": 0.9,
+        "omega_ratio": 1.692,
+        "sortino_ratio": 0.3881,
+        "sharpe_per_trade": 0.1788,
+        "skew": 1.483,
+        "kurtosis": 6.916,
+        "wins": 51,
+        "ablation": {
+          "net_pl": 2568.28,
+          "drop_best_1": 1942.81,
+          "drop_worst_1": 2874.16,
+          "drop_best_3": 1035.56,
+          "drop_worst_3": 3270.55,
+          "drop_best_5": 347.1,
+          "drop_worst_5": 3542.59,
+          "top3_share_of_gross_profit": 24.4
+        },
+        "monte_carlo": {
+          "median_max_dd": 699.2,
+          "p95_max_dd": 1119.3,
+          "worst_max_dd": 1740.89,
+          "median_final": 7568.28,
+          "p05_final": 7568.28,
+          "prob_50pct_drawdown": 0.0,
+          "prob_final_below_start": 0.0
+        }
+      },
+      "trades": [
+        {
+          "time": 1641251700,
+          "entry_time": 1641164400,
+          "pnl": -58.041000000000054,
+          "reason": "stop"
+        },
+        {
+          "time": 1641563100,
+          "entry_time": 1641423600,
+          "pnl": -54.88128571428563,
+          "reason": "stop"
+        },
+        {
+          "time": 1642633200,
+          "entry_time": 1641942000,
+          "pnl": 31.201999999999984,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1642978800,
+          "entry_time": 1642719600,
+          "pnl": -16.48299999999971,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1645731900,
+          "entry_time": 1644361200,
+          "pnl": 90.5168571428574,
+          "reason": "stop"
+        },
+        {
+          "time": 1646820900,
+          "entry_time": 1645743600,
+          "pnl": 193.3898571428576,
+          "reason": "stop"
+        },
+        {
+          "time": 1647309600,
+          "entry_time": 1646866800,
+          "pnl": -108.131,
+          "reason": "stop"
+        },
+        {
+          "time": 1648543500,
+          "entry_time": 1647381600,
+          "pnl": -31.93114285714237,
+          "reason": "stop"
+        },
+        {
+          "time": 1650374100,
+          "entry_time": 1649023200,
+          "pnl": 58.21471428571458,
+          "reason": "stop"
+        },
+        {
+          "time": 1650853800,
+          "entry_time": 1650405600,
+          "pnl": -60.015999999999764,
+          "reason": "stop"
+        },
+        {
+          "time": 1665093600,
+          "entry_time": 1665007200,
+          "pnl": -8.834999999999924,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1668998700,
+          "entry_time": 1668380400,
+          "pnl": -47.507142857142995,
+          "reason": "stop"
+        },
+        {
+          "time": 1670254200,
+          "entry_time": 1669071600,
+          "pnl": 54.61042857142857,
+          "reason": "stop"
+        },
+        {
+          "time": 1671091200,
+          "entry_time": 1670281200,
+          "pnl": 31.26057142857155,
+          "reason": "stop"
+        },
+        {
+          "time": 1671732900,
+          "entry_time": 1671145200,
+          "pnl": 14.415500000000328,
+          "reason": "stop"
+        },
+        {
+          "time": 1672244100,
+          "entry_time": 1671750000,
+          "pnl": 0.6141428571430367,
+          "reason": "stop"
+        },
+        {
+          "time": 1672932600,
+          "entry_time": 1672268400,
+          "pnl": 44.06985714285723,
+          "reason": "stop"
+        },
+        {
+          "time": 1675145700,
+          "entry_time": 1672959600,
+          "pnl": 136.0009285714284,
+          "reason": "stop"
+        },
+        {
+          "time": 1675350900,
+          "entry_time": 1675206000,
+          "pnl": -24.23157142857138,
+          "reason": "stop"
+        },
+        {
+          "time": 1675448100,
+          "entry_time": 1675378800,
+          "pnl": -100.81242857142877,
+          "reason": "stop"
+        },
+        {
+          "time": 1676385000,
+          "entry_time": 1675638000,
+          "pnl": -40.222428571429035,
+          "reason": "stop"
+        },
+        {
+          "time": 1678230900,
+          "entry_time": 1678143600,
+          "pnl": -66.5129999999998,
+          "reason": "stop"
+        },
+        {
+          "time": 1679401800,
+          "entry_time": 1678744800,
+          "pnl": 91.14621428571421,
+          "reason": "stop"
+        },
+        {
+          "time": 1679922000,
+          "entry_time": 1679436000,
+          "pnl": 8.0616428571428,
+          "reason": "stop"
+        },
+        {
+          "time": 1681137900,
+          "entry_time": 1679954400,
+          "pnl": 36.552357142857,
+          "reason": "stop"
+        },
+        {
+          "time": 1681483500,
+          "entry_time": 1681164000,
+          "pnl": 25.701928571429068,
+          "reason": "stop"
+        },
+        {
+          "time": 1681902900,
+          "entry_time": 1681682400,
+          "pnl": -64.82114285714304,
+          "reason": "stop"
+        },
+        {
+          "time": 1683288000,
+          "entry_time": 1681941600,
+          "pnl": 63.39264285714289,
+          "reason": "stop"
+        },
+        {
+          "time": 1683884700,
+          "entry_time": 1683496800,
+          "pnl": -31.22657142857188,
+          "reason": "stop"
+        },
+        {
+          "time": 1684332000,
+          "entry_time": 1684101600,
+          "pnl": -63.41585714285701,
+          "reason": "stop"
+        },
+        {
+          "time": 1686002400,
+          "entry_time": 1685916000,
+          "pnl": 26.65699999999981,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1693917000,
+          "entry_time": 1693432800,
+          "pnl": -33.87457142857161,
+          "reason": "stop"
+        },
+        {
+          "time": 1694469600,
+          "entry_time": 1693951200,
+          "pnl": -13.895999999999873,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1695247200,
+          "entry_time": 1695160800,
+          "pnl": -4.599000000000047,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1698146100,
+          "entry_time": 1697752800,
+          "pnl": -34.73357142857149,
+          "reason": "stop"
+        },
+        {
+          "time": 1699326000,
+          "entry_time": 1698184800,
+          "pnl": -10.380285714285586,
+          "reason": "stop"
+        },
+        {
+          "time": 1699633800,
+          "entry_time": 1699398000,
+          "pnl": -65.93228571428561,
+          "reason": "stop"
+        },
+        {
+          "time": 1701703800,
+          "entry_time": 1700089200,
+          "pnl": 142.73742857142872,
+          "reason": "stop"
+        },
+        {
+          "time": 1702055700,
+          "entry_time": 1701730800,
+          "pnl": -68.36450000000016,
+          "reason": "stop"
+        },
+        {
+          "time": 1704277800,
+          "entry_time": 1702249200,
+          "pnl": 70.07150000000033,
+          "reason": "stop"
+        },
+        {
+          "time": 1704692700,
+          "entry_time": 1704322800,
+          "pnl": -31.120642857142776,
+          "reason": "stop"
+        },
+        {
+          "time": 1705425300,
+          "entry_time": 1704754800,
+          "pnl": -13.939428571427714,
+          "reason": "stop"
+        },
+        {
+          "time": 1706881500,
+          "entry_time": 1705446000,
+          "pnl": -7.603642857142649,
+          "reason": "stop"
+        },
+        {
+          "time": 1707692400,
+          "entry_time": 1707087600,
+          "pnl": -38.634999999999955,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1709074800,
+          "entry_time": 1708556400,
+          "pnl": 1.4780000000003781,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1710249300,
+          "entry_time": 1709161200,
+          "pnl": 234.08499999999955,
+          "reason": "stop"
+        },
+        {
+          "time": 1711090800,
+          "entry_time": 1710280800,
+          "pnl": 12.549714285714,
+          "reason": "stop"
+        },
+        {
+          "time": 1713132900,
+          "entry_time": 1711317600,
+          "pnl": 381.6956428571425,
+          "reason": "stop"
+        },
+        {
+          "time": 1713784500,
+          "entry_time": 1713218400,
+          "pnl": -72.87828571428572,
+          "reason": "stop"
+        },
+        {
+          "time": 1714536000,
+          "entry_time": 1713823200,
+          "pnl": -99.89642857142991,
+          "reason": "stop"
+        },
+        {
+          "time": 1716387300,
+          "entry_time": 1714687200,
+          "pnl": 168.0687857142862,
+          "reason": "stop"
+        },
+        {
+          "time": 1716502500,
+          "entry_time": 1716415200,
+          "pnl": -101.90299999999968,
+          "reason": "stop"
+        },
+        {
+          "time": 1717764300,
+          "entry_time": 1717020000,
+          "pnl": -32.61671428571465,
+          "reason": "stop"
+        },
+        {
+          "time": 1718748000,
+          "entry_time": 1717970400,
+          "pnl": 68.88699999999989,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1720454400,
+          "entry_time": 1719957600,
+          "pnl": 36.054785714286794,
+          "reason": "stop"
+        },
+        {
+          "time": 1721348100,
+          "entry_time": 1720476000,
+          "pnl": 143.02428571428578,
+          "reason": "stop"
+        },
+        {
+          "time": 1721871900,
+          "entry_time": 1721599200,
+          "pnl": -56.475499999999144,
+          "reason": "stop"
+        },
+        {
+          "time": 1722204000,
+          "entry_time": 1721944800,
+          "pnl": 44.043000000000134,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1722817800,
+          "entry_time": 1722549600,
+          "pnl": -60.81328571428598,
+          "reason": "stop"
+        },
+        {
+          "time": 1725371100,
+          "entry_time": 1722895200,
+          "pnl": 114.84814285714316,
+          "reason": "stop"
+        },
+        {
+          "time": 1726689600,
+          "entry_time": 1725400800,
+          "pnl": 92.50685714285723,
+          "reason": "stop"
+        },
+        {
+          "time": 1727694000,
+          "entry_time": 1726696800,
+          "pnl": 147.1405714285711,
+          "reason": "stop"
+        },
+        {
+          "time": 1728398700,
+          "entry_time": 1727733600,
+          "pnl": -26.792857142856306,
+          "reason": "stop"
+        },
+        {
+          "time": 1730385900,
+          "entry_time": 1728424800,
+          "pnl": 224.39107142857156,
+          "reason": "stop"
+        },
+        {
+          "time": 1730874600,
+          "entry_time": 1730412000,
+          "pnl": -61.2409285714281,
+          "reason": "stop"
+        },
+        {
+          "time": 1731330900,
+          "entry_time": 1730934000,
+          "pnl": -20.08471428571429,
+          "reason": "stop"
+        },
+        {
+          "time": 1732545000,
+          "entry_time": 1732230000,
+          "pnl": -49.13378571428488,
+          "reason": "stop"
+        },
+        {
+          "time": 1733353200,
+          "entry_time": 1732575600,
+          "pnl": 38.29699999999973,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1734087600,
+          "entry_time": 1733871600,
+          "pnl": -58.50792857142777,
+          "reason": "stop"
+        },
+        {
+          "time": 1734390000,
+          "entry_time": 1734303600,
+          "pnl": 4.641000000000189,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1737500400,
+          "entry_time": 1737414000,
+          "pnl": 70.7789999999992,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1737990900,
+          "entry_time": 1737586800,
+          "pnl": -29.8567857142858,
+          "reason": "stop"
+        },
+        {
+          "time": 1738550700,
+          "entry_time": 1738018800,
+          "pnl": 57.76592857142923,
+          "reason": "stop"
+        },
+        {
+          "time": 1739324700,
+          "entry_time": 1738623600,
+          "pnl": 132.8967857142863,
+          "reason": "stop"
+        },
+        {
+          "time": 1740500100,
+          "entry_time": 1739401200,
+          "pnl": -33.758285714285236,
+          "reason": "stop"
+        },
+        {
+          "time": 1740714300,
+          "entry_time": 1740524400,
+          "pnl": -99.48364285714204,
+          "reason": "stop"
+        },
+        {
+          "time": 1742566500,
+          "entry_time": 1741129200,
+          "pnl": 152.2885714285719,
+          "reason": "stop"
+        },
+        {
+          "time": 1743678000,
+          "entry_time": 1742767200,
+          "pnl": 135.5157142857152,
+          "reason": "stop"
+        },
+        {
+          "time": 1743777000,
+          "entry_time": 1743717600,
+          "pnl": -139.62271428571455,
+          "reason": "stop"
+        },
+        {
+          "time": 1744132500,
+          "entry_time": 1743976800,
+          "pnl": -105.58771428571383,
+          "reason": "stop"
+        },
+        {
+          "time": 1745360100,
+          "entry_time": 1744322400,
+          "pnl": 306.7659999999996,
+          "reason": "stop"
+        },
+        {
+          "time": 1746061200,
+          "entry_time": 1745445600,
+          "pnl": -110.02007142857089,
+          "reason": "stop"
+        },
+        {
+          "time": 1746724500,
+          "entry_time": 1746136800,
+          "pnl": 116.55364285714249,
+          "reason": "stop"
+        },
+        {
+          "time": 1747044000,
+          "entry_time": 1746741600,
+          "pnl": -195.29707142857163,
+          "reason": "stop"
+        },
+        {
+          "time": 1747285200,
+          "entry_time": 1747087200,
+          "pnl": -201.09621428571378,
+          "reason": "stop"
+        },
+        {
+          "time": 1748475900,
+          "entry_time": 1747864800,
+          "pnl": -132.4172857142855,
+          "reason": "stop"
+        },
+        {
+          "time": 1749240900,
+          "entry_time": 1748556000,
+          "pnl": -27.084999999999823,
+          "reason": "stop"
+        },
+        {
+          "time": 1750312800,
+          "entry_time": 1749420000,
+          "pnl": 86.72899999999943,
+          "reason": "stop"
+        },
+        {
+          "time": 1750747500,
+          "entry_time": 1750370400,
+          "pnl": -108.19100000000034,
+          "reason": "stop"
+        },
+        {
+          "time": 1751025600,
+          "entry_time": 1750802400,
+          "pnl": -94.83928571428577,
+          "reason": "stop"
+        },
+        {
+          "time": 1751839200,
+          "entry_time": 1751580000,
+          "pnl": 26.919000000000334,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1752703200,
+          "entry_time": 1752530400,
+          "pnl": 10.648000000000655,
+          "reason": "signal_or_age"
+        },
+        {
+          "time": 1753336800,
+          "entry_time": 1753048800,
+          "pnl": 46.78800000000088,
+          "reason": "stop"
+        },
+        {
+          "time": 1753711200,
+          "entry_time": 1753394400,
+          "pnl": -128.5388571428571,
+          "reason": "stop"
+        },
+        {
+          "time": 1754998200,
+          "entry_time": 1754344800,
+          "pnl": -77.43664285714273,
+          "reason": "stop"
+        },
+        {
+          "time": 1756955700,
+          "entry_time": 1756332000,
+          "pnl": 232.7337857142868,
+          "reason": "stop"
+        },
+        {
+          "time": 1758203100,
+          "entry_time": 1757023200,
+          "pnl": 160.30357142857147,
+          "reason": "stop"
+        },
+        {
+          "time": 1760029200,
+          "entry_time": 1758232800,
+          "pnl": 625.4717142857139,
+          "reason": "stop"
+        },
+        {
+          "time": 1760719500,
+          "entry_time": 1760047200,
+          "pnl": 447.231500000001,
+          "reason": "stop"
+        },
+        {
+          "time": 1761048900,
+          "entry_time": 1760911200,
+          "pnl": -55.25550000000151,
+          "reason": "stop"
+        },
+        {
+          "time": 1761578100,
+          "entry_time": 1761084000,
+          "pnl": -305.87800000000027,
+          "reason": "stop"
+        },
+        {
+          "time": 1763124300,
+          "entry_time": 1761602400,
+          "pnl": 225.7643571428577,
+          "reason": "stop"
+        },
+        {
+          "time": 1765260900,
+          "entry_time": 1763334000,
+          "pnl": 152.97435714285749,
+          "reason": "stop"
+        },
+        {
+          "time": 1766992500,
+          "entry_time": 1765321200,
+          "pnl": 460.0152857142844,
+          "reason": "stop"
+        },
+        {
+          "time": 1767160800,
+          "entry_time": 1767049200,
+          "pnl": -125.33557142857391,
+          "reason": "stop"
+        }
+      ]
+    }
+  }
+}

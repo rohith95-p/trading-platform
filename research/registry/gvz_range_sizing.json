@@ -1,0 +1,148 @@
+{
+  "forecast": {
+    "2012-2015": {
+      "sessions": 993,
+      "price": 0.35499341769199194,
+      "augmented": 0.342108609071706,
+      "gain_month_resampled_95": [
+        0.006746106341808206,
+        0.018651903720728114
+      ]
+    },
+    "2016-2020": {
+      "sessions": 1282,
+      "price": 0.3265203638043694,
+      "augmented": 0.31848598995813715,
+      "gain_month_resampled_95": [
+        0.0020402096974931287,
+        0.013717568786112333
+      ]
+    },
+    "2021-2025": {
+      "sessions": 1288,
+      "price": 0.316233445082019,
+      "augmented": 0.3093897004698912,
+      "gain_month_resampled_95": [
+        0.0017461678561623065,
+        0.01177436547106676
+      ]
+    }
+  },
+  "archived_sizing": {
+    "OOS_3": {
+      "baseline": {
+        "trades": 567,
+        "half_sized": 0,
+        "net": 5.28,
+        "pf": 1.002,
+        "realized_dd": 309.52
+      },
+      "price": {
+        "trades": 567,
+        "half_sized": 80,
+        "net": 183.07,
+        "pf": 1.076,
+        "realized_dd": 189.97
+      },
+      "augmented": {
+        "trades": 567,
+        "half_sized": 36,
+        "net": 80.1,
+        "pf": 1.031,
+        "realized_dd": 235.23
+      }
+    },
+    "OOS_4": {
+      "baseline": {
+        "trades": 578,
+        "half_sized": 0,
+        "net": -146.5,
+        "pf": 0.931,
+        "realized_dd": 247.43
+      },
+      "price": {
+        "trades": 578,
+        "half_sized": 26,
+        "net": -130.79,
+        "pf": 0.936,
+        "realized_dd": 247.43
+      },
+      "augmented": {
+        "trades": 578,
+        "half_sized": 12,
+        "net": -132.32,
+        "pf": 0.936,
+        "realized_dd": 247.43
+      }
+    },
+    "OOS_5": {
+      "baseline": {
+        "trades": 437,
+        "half_sized": 0,
+        "net": -172.36,
+        "pf": 0.944,
+        "realized_dd": 375.89
+      },
+      "price": {
+        "trades": 437,
+        "half_sized": 80,
+        "net": -117.74,
+        "pf": 0.955,
+        "realized_dd": 351.11
+      },
+      "augmented": {
+        "trades": 437,
+        "half_sized": 91,
+        "net": -81.64,
+        "pf": 0.968,
+        "realized_dd": 363.91
+      }
+    },
+    "DEV": {
+      "baseline": {
+        "trades": 132,
+        "half_sized": 0,
+        "net": -294.9,
+        "pf": 0.658,
+        "realized_dd": 305.87
+      },
+      "price": {
+        "trades": 132,
+        "half_sized": 12,
+        "net": -311.52,
+        "pf": 0.622,
+        "realized_dd": 322.49
+      },
+      "augmented": {
+        "trades": 132,
+        "half_sized": 4,
+        "net": -320.33,
+        "pf": 0.626,
+        "realized_dd": 331.29
+      }
+    },
+    "TEST": {
+      "baseline": {
+        "trades": 253,
+        "half_sized": 0,
+        "net": 1058.48,
+        "pf": 1.395,
+        "realized_dd": 238.99
+      },
+      "price": {
+        "trades": 253,
+        "half_sized": 71,
+        "net": 720.0,
+        "pf": 1.343,
+        "realized_dd": 200.25
+      },
+      "augmented": {
+        "trades": 253,
+        "half_sized": 54,
+        "net": 700.57,
+        "pf": 1.318,
+        "realized_dd": 199.43
+      }
+    }
+  }
+}

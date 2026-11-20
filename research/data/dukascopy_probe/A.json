@@ -1,0 +1,7 @@
+{
+  "url": "https://freeserv.dukascopy.com/2.0/index.php?path=chart%2Fjson3&instrument=XAU%2FUSD&offer_side=A&interval=1MIN&splits=true&stocks=true&time_direction=P&timestamp=1760504400000&jsonp=_callbacks____0",
+  "sha256": "597e754a1ba0b32b3b20a9c057223ad11d73f49a60f65fb3cc1373c6345b26e1",
+  "rows": 30000,
+  "first": 1757934000000,
+  "last": 1760504340000
+}

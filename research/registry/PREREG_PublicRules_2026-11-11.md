@@ -1,0 +1,3 @@
+# Published-rule transfer to gold
+
+Evaluate three long-only specifications without optimization on 2005–2011, 2012–2018 and 2019–2025 separately. TradingView RSI2 R3 on two-hour bars follows the author's Pine entry (RSI2 lower than previous three, below 10, RSI two bars ago below 60, close above SMA200); exit RSI2 above 70. HATS daily pullback: above SMA200 and RSI2 below 10, exit above SMA5 or RSI2 above 70. Faber monthly long/cash: long above SMA10 at month-end. Enter/exit at next available aggregation-period open. Fixed 0.02 lots, ECN assumptions. Require net PF >=1.30 in every era, target pooled >=1.40. Passing only advances to stop design, deployment-gate and payout verification. Development data only.

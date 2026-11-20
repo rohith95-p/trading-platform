@@ -1,0 +1,29 @@
+{
+  "2005-2011": {
+    "trades": 89,
+    "wins": 56,
+    "pf": 1.2284381570876934,
+    "net": 273.14620000000855,
+    "control_draws": 1000,
+    "control_median_net": -95.81939999999287,
+    "fraction_controls_at_least_as_good": 0.092
+  },
+  "2012-2018": {
+    "trades": 31,
+    "wins": 13,
+    "pf": 0.5022287963196211,
+    "net": -381.8157999999969,
+    "control_draws": 1000,
+    "control_median_net": -111.1831999999985,
+    "fraction_controls_at_least_as_good": 0.937
+  },
+  "2019-2025": {
+    "trades": 68,
+    "wins": 38,
+    "pf": 1.4475779995914666,
+    "net": 691.2238599999977,
+    "control_draws": 1000,
+    "control_median_net": 326.3106400000054,
+    "fraction_controls_at_least_as_good": 0.183
+  }
+}

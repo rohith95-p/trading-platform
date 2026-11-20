@@ -1,0 +1,74 @@
+{
+  "2013": {
+    "trades": 50493,
+    "legs": 59580,
+    "static_verified": 10040,
+    "cash_errors": 0,
+    "entry_errors": 0,
+    "exit_errors": 0
+  },
+  "2013.repair": {
+    "trades": 3169,
+    "legs": 3520,
+    "static_verified": 1049,
+    "cash_errors": 0,
+    "entry_errors": 0,
+    "exit_errors": 0
+  },
+  "2013.frictionless": {
+    "trades": 9043,
+    "legs": 9043,
+    "static_verified": 9043,
+    "cash_errors": 0,
+    "entry_errors": 0,
+    "exit_errors": 0
+  },
+  "2018": {
+    "trades": 46892,
+    "legs": 53206,
+    "static_verified": 9277,
+    "cash_errors": 0,
+    "entry_errors": 0,
+    "exit_errors": 0
+  },
+  "2018.repair": {
+    "trades": 3548,
+    "legs": 3850,
+    "static_verified": 1180,
+    "cash_errors": 0,
+    "entry_errors": 0,
+    "exit_errors": 0
+  },
+  "2018.frictionless": {
+    "trades": 7281,
+    "legs": 7281,
+    "static_verified": 7281,
+    "cash_errors": 0,
+    "entry_errors": 0,
+    "exit_errors": 0
+  },
+  "2025": {
+    "trades": 41700,
+    "legs": 51008,
+    "static_verified": 8226,
+    "cash_errors": 0,
+    "entry_errors": 0,
+    "exit_errors": 0
+  },
+  "2025.repair": {
+    "trades": 3705,
+    "legs": 4290,
+    "static_verified": 1221,
+    "cash_errors": 0,
+    "entry_errors": 0,
+    "exit_errors": 0
+  },
+  "2025.frictionless": {
+    "trades": 7920,
+    "legs": 7920,
+    "static_verified": 7920,
+    "cash_errors": 0,
+    "entry_errors": 0,
+    "exit_errors": 0
+  }
+}

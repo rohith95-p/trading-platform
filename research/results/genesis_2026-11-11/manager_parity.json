@@ -1,0 +1,12 @@
+{
+  "cases": 5000,
+  "all_matched": true,
+  "python": "3.13.18 (main, Oct 26 2026, 14:10:48) [MSC v.1944 64 bit (AMD64)]",
+  "management_bytecode_hashes": {
+    "Trade_Manager/config.pyc": "3fafa261b9a14dbad8887faaf378e8595d236935b5fb417ec0ff1d67e38e42e8",
+    "Trade_Manager/trade_state.pyc": "dfe8d0311d0d47ed33044ceb9d51dbd75dd43fb4812c44b97b77f9ca8e8244a3",
+    "Trade_Manager/trade_manager.pyc": "daf16e30628b87578ce0509d7e9757ce92f3cded6aeb88c345f8fa93998e0921"
+  },
+  "port_sha256": "257dbca9d97db613fb85caa8abc0d42991e4f6499d5983103e2e0a56e538c190",
+  "note": "Action/peak parity only; does not reproduce broker acceptance, cadence or full application."
+}

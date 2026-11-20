@@ -1,0 +1,45 @@
+{
+  "year": 2018,
+  "start": 1514764800,
+  "end": 1546300800,
+  "point": 0.001,
+  "inputs": {
+    "M1": {
+      "path": "C:\\projects\\ultra_core\\research\\data\\genesis\\2018_M1.npy",
+      "sha256": "add19b2a887913254efa5f69bdaee04c1e6e5046dabaa9d71699cb7543a8dcfc",
+      "rows": 354711
+    },
+    "M5": {
+      "path": "C:\\projects\\ultra_core\\research\\data\\genesis\\2018_M5.npy",
+      "sha256": "51a4473f401916d910a68ca70444f313c22eef5df26908f052f6a8c7d96a4274",
+      "rows": 70912
+    }
+  },
+  "decisions": 69913,
+  "elapsed_seconds": 591.9680619999999,
+  "signals_sha256": "550569934dcd873651160feb8b35df2af729435a1871395f8043e3e35dc0dfe1",
+  "runner_sha256": "ad6c4e3592b5214089e7776d6fcb9aae648babb89194cfe122e4c8677a9e0017",
+  "bytecode_manifest": {
+    "Strategies/base_strategy.pyc": "8dfee879b17eb7e0946f23c697fd4a7d93512d21a3c117d8c7b4749854b5756c",
+    "Strategies/breakout.pyc": "b894e1f4a8d67bf22cba65a335f7db2fad6fddebfb6d2505a5a35678201b21cb",
+    "Strategies/momentum.pyc": "a6559c102e3c36f317760826e010ed5a6480f96190ed7b26350db2ba3a11edd4",
+    "Strategies/pullback.pyc": "cdd880f5d12a5da1bdba4ac5538f71d9000e28a06242cadfc29bae66fddb76b7",
+    "Strategies/range_trading.pyc": "995fbbfe5b89cc225f8113b7c1695521c5924fabb7a656639df321277bdbf5ff",
+    "Strategies/reversal.pyc": "e647e046c624ab6e1e8012c7b7e4d48b0708314e6dd41a74ebacfc638aa99cd1",
+    "Strategies/strategy_selector.pyc": "f98cf6adb6be06e3848d39a45e59b77039d5469b82f5d1fca22692683ebd413b",
+    "Strategies/swing_trend.pyc": "90555eab533db0a48d3efd6756b999d4f99cdbdf3a3e604b64b01d33776935e3",
+    "Strategies/trend_following.pyc": "633c021fc1b357863a4e8798b420600286e66baca10ee0e79f1bb3d0ab679e4e",
+    "Market_Analyzer/config.pyc": "af022346c1fde138cce8c6f4cd4e6f91d3b1cd4e3247a9c6b901d8a973374eb7",
+    "Market_Analyzer/indicators.pyc": "ed6ba07f47c0090248382cd79754edb825b9b378d90a3ccf5c6d5286fa52025b",
+    "Market_Analyzer/market_analyzer.pyc": "517c2938b37d90d43914dd976c8553b8d87659f01e7259c5f2caeb8dee8e6575",
+    "Market_Analyzer/market_state.pyc": "f985fe338acf105fff3821ac0b18586f90f722f46689746fdfcfc2c64fdfa66a",
+    "Market_Analyzer/structure.pyc": "a566b4ae0f1712f61e4c72b76b9cd85b08c595020fab5344ab0c25ef741a63f2"
+  },
+  "exclusions": [
+    "full AIBrain",
+    "learning",
+    "confidence/confirmation",
+    "MTF",
+    "original trade management"
+  ]
+}

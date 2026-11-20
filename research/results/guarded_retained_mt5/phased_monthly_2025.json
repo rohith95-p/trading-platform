@@ -1,0 +1,171 @@
+{
+  "method": "Overlapping alternative starts on recorded native fills, with daily quote-by-quote Atlas audit; excludes trades open at each boundary. Assumes same later signals, leverage eligibility, fills and costs; no fresh EA state. Next weekday funding. Diagnostic only. Later starts have less time. Never sum the alternative accounts.",
+  "rows": [
+    {
+      "start": "2025-01-01",
+      "evaluation": "passed",
+      "eval_event": "2025-04-21T12:53:31.459000+00:00",
+      "funded_start": "2025-04-22",
+      "funded": "active",
+      "funded_event": null,
+      "payouts": [
+        {
+          "time": "2025-10-28T08:36:37.373000+00:00",
+          "gross": 111.11,
+          "modeled_cash": 100.0
+        }
+      ],
+      "fees": 83,
+      "net_cash": 17.0,
+      "max_floating_loss": 28.015000000000327
+    },
+    {
+      "start": "2025-02-01",
+      "evaluation": "passed",
+      "eval_event": "2025-04-21T13:06:51.628000+00:00",
+      "funded_start": "2025-04-22",
+      "funded": "active",
+      "funded_event": null,
+      "payouts": [
+        {
+          "time": "2025-10-28T08:36:37.373000+00:00",
+          "gross": 111.11,
+          "modeled_cash": 100.0
+        }
+      ],
+      "fees": 83,
+      "net_cash": 17.0,
+      "max_floating_loss": 28.015000000000327
+    },
+    {
+      "start": "2025-03-01",
+      "evaluation": "passed",
+      "eval_event": "2025-04-21T13:06:51.628000+00:00",
+      "funded_start": "2025-04-22",
+      "funded": "active",
+      "funded_event": null,
+      "payouts": [
+        {
+          "time": "2025-10-28T08:36:37.373000+00:00",
+          "gross": 111.11,
+          "modeled_cash": 100.0
+        }
+      ],
+      "fees": 83,
+      "net_cash": 17.0,
+      "max_floating_loss": 28.015000000000327
+    },
+    {
+      "start": "2025-04-01",
+      "evaluation": "passed",
+      "eval_event": "2025-04-21T13:06:51.628000+00:00",
+      "funded_start": "2025-04-22",
+      "funded": "active",
+      "funded_event": null,
+      "payouts": [
+        {
+          "time": "2025-10-28T08:36:37.373000+00:00",
+          "gross": 111.11,
+          "modeled_cash": 100.0
+        }
+      ],
+      "fees": 83,
+      "net_cash": 17.0,
+      "max_floating_loss": 28.015000000000327
+    },
+    {
+      "start": "2025-05-01",
+      "evaluation": "passed",
+      "eval_event": "2025-06-03T14:05:05.775000+00:00",
+      "funded_start": "2025-06-04",
+      "funded": "active",
+      "funded_event": null,
+      "payouts": [],
+      "fees": 83,
+      "net_cash": -83.0,
+      "max_floating_loss": 23.34900000000016
+    },
+    {
+      "start": "2025-06-01",
+      "evaluation": "passed",
+      "eval_event": "2025-06-16T13:54:57.881000+00:00",
+      "funded_start": "2025-06-17",
+      "funded": "active",
+      "funded_event": null,
+      "payouts": [],
+      "fees": 83,
+      "net_cash": -83.0,
+      "max_floating_loss": 23.34900000000016
+    },
+    {
+      "start": "2025-07-01",
+      "evaluation": "passed",
+      "eval_event": "2025-09-30T00:05:29.671000+00:00",
+      "funded_start": "2025-10-01",
+      "funded": "active",
+      "funded_event": null,
+      "payouts": [],
+      "fees": 83,
+      "net_cash": -83.0,
+      "max_floating_loss": 23.34900000000016
+    },
+    {
+      "start": "2025-08-01",
+      "evaluation": "passed",
+      "eval_event": "2025-10-20T12:39:41.872000+00:00",
+      "funded_start": "2025-10-21",
+      "funded": "active",
+      "funded_event": null,
+      "payouts": [],
+      "fees": 83,
+      "net_cash": -83.0,
+      "max_floating_loss": 23.34900000000016
+    },
+    {
+      "start": "2025-09-01",
+      "evaluation": "passed",
+      "eval_event": "2025-10-21T14:02:34.252000+00:00",
+      "funded_start": "2025-10-22",
+      "funded": "active",
+      "funded_event": null,
+      "payouts": [],
+      "fees": 83,
+      "net_cash": -83.0,
+      "max_floating_loss": 23.34900000000016
+    },
+    {
+      "start": "2025-10-01",
+      "evaluation": "passed",
+      "eval_event": "2025-10-21T14:02:34.252000+00:00",
+      "funded_start": "2025-10-22",
+      "funded": "active",
+      "funded_event": null,
+      "payouts": [],
+      "fees": 83,
+      "net_cash": -83.0,
+      "max_floating_loss": 23.34900000000016
+    },
+    {
+      "start": "2025-11-01",
+      "evaluation": "active",
+      "eval_event": null,
+      "funded_start": null,
+      "funded": null,
+      "funded_event": null,
+      "payouts": [],
+      "fees": 5,
+      "net_cash": -5
+    },
+    {
+      "start": "2025-12-01",
+      "evaluation": "active",
+      "eval_event": null,
+      "funded_start": null,
+      "funded": null,
+      "funded_event": null,
+      "payouts": [],
+      "fees": 5,
+      "net_cash": -5
+    }
+  ]
+}

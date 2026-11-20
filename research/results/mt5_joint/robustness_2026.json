@@ -1,0 +1,79 @@
+{
+  "reports": [
+    {
+      "report": "joint_2026_0_evaluation.htm",
+      "period": "M15 (2026.01.01 - 2026.11.01)",
+      "close_count": 516,
+      "wins": 409,
+      "expectancy_usd": -0.18360465116279068,
+      "net_usd": -94.74,
+      "pf": 0.9099078538213561,
+      "omega_per_close_zero_target": 0.9099078538213561,
+      "sortino_per_close_zero_target": -0.02762981904268873,
+      "realized_calmar": -0.515609478918185,
+      "realized_recovery_factor": -0.426641448257227,
+      "native_equity_dd": "4.41% (222.34)",
+      "drop_extremes": {
+        "net_pl": -94.74,
+        "drop_best_1": -124.81,
+        "drop_worst_1": -64.5,
+        "drop_best_3": -138.61,
+        "drop_worst_3": -4.14,
+        "drop_best_5": -151.22,
+        "drop_worst_5": 56.14,
+        "top3_share_of_gross_profit": 4.6
+      },
+      "monte_carlo_closed_trade_order": {
+        "median_max_dd": 212.39,
+        "p95_max_dd": 301.22,
+        "worst_max_dd": 447.95,
+        "median_final": 4905.26,
+        "p05_final": 4905.26,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 1.0
+      },
+      "weekly_positive_mean_p": 0.7062117052616722,
+      "bonferroni_family_p": 1.0,
+      "dsr_family_sensitivity": 0.12390714023033422
+    },
+    {
+      "report": "joint_2026_7_evaluation.htm",
+      "period": "M15 (2026.01.01 - 2026.11.01)",
+      "close_count": 554,
+      "wins": 418,
+      "expectancy_usd": 0.40436823104693137,
+      "net_usd": 224.02,
+      "pf": 1.1379798838362374,
+      "omega_per_close_zero_target": 1.1379798838362374,
+      "sortino_per_close_zero_target": 0.052061681849434466,
+      "realized_calmar": 1.2018623375126862,
+      "realized_recovery_factor": 0.9944952499334132,
+      "native_equity_dd": "5.06% (254.22)",
+      "drop_extremes": {
+        "net_pl": 224.02,
+        "drop_best_1": 164.17,
+        "drop_worst_1": 254.26,
+        "drop_best_3": 66.08,
+        "drop_worst_3": 314.55,
+        "drop_best_5": -5.11,
+        "drop_worst_5": 374.83,
+        "top3_share_of_gross_profit": 8.5
+      },
+      "monte_carlo_closed_trade_order": {
+        "median_max_dd": 204.57,
+        "p95_max_dd": 325.6,
+        "worst_max_dd": 570.51,
+        "median_final": 5224.02,
+        "p05_final": 5224.02,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 0.0
+      },
+      "weekly_positive_mean_p": 0.17538659599191145,
+      "bonferroni_family_p": 0.3507731919838229,
+      "dsr_family_sensitivity": 0.6481049483669212
+    }
+  ],
+  "family_size": 2,
+  "expected_max_weekly_sharpe": 0.08349858655130303,
+  "scope": "Within supplied family and period only. Strategy variants overlap and years were previously explored. Study-wide trial Sharpe distribution unavailable. Closed-deal permutations do not simulate Atlas rules. Grid legs can be dependent. Native deal charges only."
+}

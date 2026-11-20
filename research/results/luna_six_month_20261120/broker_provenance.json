@@ -1,0 +1,48 @@
+{
+  "source": "Exness-MT5Trial11, native XAUUSDm, MT5 copy_ticks_range in UTC",
+  "layout": "little endian int64 Unix milliseconds, float64 bid, float64 ask",
+  "months": [
+    {
+      "month": 5,
+      "ticks": 5926779,
+      "sha256": "09a530f6d9031d600319cd324a7fdc09632705a23c535b23e0e649296f74a89f",
+      "broker_median_spread_dollars": 0.308,
+      "archive_median_spread_dollars": 0.28
+    },
+    {
+      "month": 6,
+      "ticks": 7967508,
+      "sha256": "c7b34b9032fcefe5fea91f067ec27d1da867eb041bec60e35c3ebb7782947bfa",
+      "broker_median_spread_dollars": 0.26,
+      "archive_median_spread_dollars": 0.26
+    },
+    {
+      "month": 7,
+      "ticks": 6723108,
+      "sha256": "ec7ccbd071794ad3681fac6b24fe65e87f86ec2314f1fa479b9216f4b2bf0311",
+      "broker_median_spread_dollars": 0.24,
+      "archive_median_spread_dollars": 0.24
+    },
+    {
+      "month": 8,
+      "ticks": 6478540,
+      "sha256": "0c5e8f7e4412b5eb1c191c66b05ca0ed06ec22a341f686b20ef11c8315a2861d",
+      "broker_median_spread_dollars": 0.26,
+      "archive_median_spread_dollars": 0.26
+    },
+    {
+      "month": 9,
+      "ticks": 6586246,
+      "sha256": "6e478351bd881c073bd2bc4b4669f04b849597ab762df7fa7aef3f8b56eeee0e",
+      "broker_median_spread_dollars": 0.26,
+      "archive_median_spread_dollars": 0.26
+    },
+    {
+      "month": 10,
+      "ticks": 5902319,
+      "sha256": "c5befa258d399925d9465ed7848483e2367612536efd58e6632ebfce24ca9999",
+      "broker_median_spread_dollars": 0.24,
+      "archive_median_spread_dollars": 0.24
+    }
+  ]
+}

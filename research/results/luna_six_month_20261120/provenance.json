@@ -1,0 +1,54 @@
+{
+  "months": [
+    {
+      "month": "2026-05",
+      "ticks": 6023835,
+      "source": "https://ticks.ex2archive.com/ticks/XAUUSDm/2026/05/Exness_XAUUSDm_2026_05.zip",
+      "raw_sha256": "498e0392d15e06593962b151f0afe0bc253e4e7fc946e181828c4330ad5e2e42",
+      "input_binary_sha256": "7ecf325fbff97c39ca5861e5a4b6150e272213742d64c63f72833cf55a2e473f"
+    },
+    {
+      "month": "2026-06",
+      "ticks": 8038573,
+      "source": "https://ticks.ex2archive.com/ticks/XAUUSDm/2026/06/Exness_XAUUSDm_2026_06.zip",
+      "raw_sha256": "1104ff552ea3c966b01e6086f533ecffecb0fc0f7abcceb5044e3982f828cfda",
+      "input_binary_sha256": "c038f07795a67f5ffd59773de991a9be2b59e746f92dd105b5b77e9c8fd8b500"
+    },
+    {
+      "month": "2026-07",
+      "ticks": 6739207,
+      "source": "https://ticks.ex2archive.com/ticks/XAUUSDm/2026/07/Exness_XAUUSDm_2026_07.zip",
+      "raw_sha256": "c704fb3ec1fe6898aa3c1e4c572dcc40e294b6aac914f1bad41227a5bbdc63b1",
+      "input_binary_sha256": "ee3c0a6482b8e6c6431c5e0eb68c7ba28ee69cd648ddd38b9f5383018249107f"
+    },
+    {
+      "month": "2026-08",
+      "ticks": 6493208,
+      "source": "https://ticks.ex2archive.com/ticks/XAUUSDm/2026/08/Exness_XAUUSDm_2026_08.zip",
+      "raw_sha256": "baa514c5a9422a0726164f0a6cbe0785dcd74da553951afe8ad31783c5902f2b",
+      "input_binary_sha256": "34e61a7d7b0b9b3a634d096afd1f1bc0fca64d0a8daf7a32117da7efd467f694"
+    },
+    {
+      "month": "2026-09",
+      "ticks": 6593803,
+      "source": "https://ticks.ex2archive.com/ticks/XAUUSDm/2026/09/Exness_XAUUSDm_2026_09.zip",
+      "raw_sha256": "2f85861bfc1cbacb5fabc241832a58a6552159ceee84f25952bfc0706a500df8",
+      "input_binary_sha256": "b5798c76fc769daa4fe5f40c58beaf14d861cfae0974092e2a78444e5402e179"
+    },
+    {
+      "month": "2026-10",
+      "ticks": 5914197,
+      "source": "https://ticks.ex2archive.com/ticks/XAUUSDm/2026/10/Exness_XAUUSDm_2026_10.zip",
+      "raw_sha256": "f9066c09dc1d8d6e55b5a89dda37f33994fd69a605c96eccf29ead9c05278feb",
+      "input_binary_sha256": "ce47b36c09810b51c5789207517658496705946583644df4b95006100085d3c5"
+    }
+  ],
+  "period": "May 1 to final October 30 trading session, 2026",
+  "starting_balance": 5000,
+  "symbol_template": "Exness-MT5Trial11:XAUUSDm",
+  "native_archive_symbol": "XAUUSDm.LUNA",
+  "leverage": 100,
+  "ticks": 39802823,
+  "tick_encoding": "little endian int64 Unix milliseconds, float64 bid, float64 ask",
+  "expert_sha256": "f3f0725eacc5af95e86974c48b905bc0f186206f3e5b582eef0235848fb01567"
+}

@@ -1,0 +1,182 @@
+{
+  "name": "2025_portfolio_funded_phase_split",
+  "attempt": "",
+  "guard": true,
+  "policy": "phase_split",
+  "year": 2025,
+  "roster": "portfolio",
+  "mask": 7,
+  "phase": "funded",
+  "start": "2025-04-22T00:00:00+00:00",
+  "end_exclusive": "2026-01-01T00:00:00+00:00",
+  "terminal": {
+    "Period": "M15 (2025.04.22 - 2026.01.01)",
+    "Leverage": "1:50",
+    "History Quality": "100% real ticks",
+    "Ticks": "56916148",
+    "Total Net Profit": "345.38",
+    "Gross Profit": "829.57",
+    "Equity Drawdown Maximal": "91.28 (1.70%)",
+    "Gross Loss": "-484.19",
+    "Equity Drawdown Relative": "1.70% (91.28)",
+    "Profit Factor": "1.71",
+    "Total Trades": "82",
+    "Profit Trades (% of total)": "38 (46.34%)"
+  },
+  "trading": {
+    "trades": 82,
+    "wins": 38,
+    "win_rate_pct": 46.34146341463415,
+    "net": 345.38,
+    "pf": 1.7133150209628447,
+    "gross_profit": 829.5699999999998,
+    "gross_loss": 484.19
+  },
+  "standardized_ecn": {
+    "trades": 82,
+    "wins": 38,
+    "win_rate_pct": 46.34146341463415,
+    "net": 339.9584999999905,
+    "pf": 1.697406561755678,
+    "gross_profit": 827.4194999999991,
+    "gross_loss": 487.46100000000854
+  },
+  "native": {
+    "name": "2025_portfolio_funded_phase_split",
+    "phase": "funded",
+    "start": "2025-04-22T00:00:00+00:00",
+    "end_exclusive": "2026-01-01T00:00:00+00:00",
+    "unrestricted": {
+      "status": "active",
+      "time": null,
+      "entries": 82,
+      "closes": 82,
+      "balance": 5345.38,
+      "equity": 5345.38,
+      "minimum_equity": 4955.691000000001,
+      "first_trade": "2025-04-28T12:15:00.558000+00:00",
+      "payout_anchor": 5000.0,
+      "next_payout_window": null,
+      "max_equity_drawdown_usd": 92.34600000000046,
+      "max_equity_drawdown_pct": 1.7217238194354674,
+      "max_floating_loss": 28.015000000000327,
+      "max_used_margin_to_equity": 0.008459953782018134,
+      "overnight_resets": 4,
+      "peak_equity": 5363.578,
+      "rule_events": [],
+      "protector_strikes": 0,
+      "qualifying_days": 8,
+      "deductions": 0.0,
+      "modeled_payouts": [],
+      "modeled_cash_received": 0.0
+    },
+    "atlas": {
+      "status": "active",
+      "time": null,
+      "entries": 82,
+      "closes": 82,
+      "balance": 5220.13,
+      "equity": 5220.13,
+      "minimum_equity": 4955.691000000001,
+      "first_trade": "2025-04-28T12:15:00.558000+00:00",
+      "payout_anchor": 5193.31,
+      "next_payout_window": "2025-11-11T08:36:37.373000+00:00",
+      "max_equity_drawdown_usd": 92.34600000000046,
+      "max_equity_drawdown_pct": 1.7628907544544836,
+      "max_floating_loss": 28.015000000000327,
+      "max_used_margin_to_equity": 0.01732922474547306,
+      "overnight_resets": 4,
+      "peak_equity": 5238.328,
+      "rule_events": [
+        {
+          "time": "2025-09-05T12:30:02.225000+00:00",
+          "event": "profit_deduction",
+          "amount": 14.14,
+          "ticket": 88
+        }
+      ],
+      "protector_strikes": 0,
+      "qualifying_days": 2,
+      "deductions": 14.14,
+      "modeled_payouts": [
+        {
+          "time": "2025-10-28T08:36:37.373000+00:00",
+          "gross": 111.11,
+          "modeled_cash": 100.0
+        }
+      ],
+      "modeled_cash_received": 100.0
+    },
+    "news_coverage": "Selected USD releases only; historical Atlas all-currency restrictions unverified.",
+    "payout_assumption": "Request USD 100 cash while flat, normal 90% split (50% after first Protector), immediate settlement and verified KYC assumed; no real payments."
+  },
+  "ecn": {
+    "name": "2025_portfolio_funded_phase_split",
+    "phase": "funded",
+    "start": "2025-04-22T00:00:00+00:00",
+    "end_exclusive": "2026-01-01T00:00:00+00:00",
+    "unrestricted": {
+      "status": "active",
+      "time": null,
+      "entries": 82,
+      "closes": 82,
+      "balance": 5339.95849999999,
+      "equity": 5339.95849999999,
+      "minimum_equity": 4955.297,
+      "first_trade": "2025-04-28T12:15:00.558000+00:00",
+      "payout_anchor": 5000.0,
+      "next_payout_window": null,
+      "max_equity_drawdown_usd": 92.71700000000237,
+      "max_equity_drawdown_pct": 1.7301206262635185,
+      "max_floating_loss": 28.07000000000062,
+      "max_used_margin_to_equity": 0.008468520389647119,
+      "overnight_resets": 4,
+      "peak_equity": 5358.990499999995,
+      "rule_events": [],
+      "protector_strikes": 0,
+      "qualifying_days": 8,
+      "deductions": 0.0,
+      "modeled_payouts": [],
+      "modeled_cash_received": 0.0
+    },
+    "atlas": {
+      "status": "active",
+      "time": null,
+      "entries": 82,
+      "closes": 82,
+      "balance": 5214.76449999999,
+      "equity": 5214.76449999999,
+      "minimum_equity": 4955.297,
+      "first_trade": "2025-04-28T12:15:00.558000+00:00",
+      "payout_anchor": 5189.2104999999965,
+      "next_payout_window": "2025-11-11T08:36:37.373000+00:00",
+      "max_equity_drawdown_usd": 92.71700000000237,
+      "max_equity_drawdown_pct": 1.771505636491645,
+      "max_floating_loss": 28.07000000000062,
+      "max_used_margin_to_equity": 0.01734700768836874,
+      "overnight_resets": 4,
+      "peak_equity": 5233.796499999996,
+      "rule_events": [
+        {
+          "time": "2025-09-05T12:30:02.225000+00:00",
+          "event": "profit_deduction",
+          "amount": 14.084000000000142,
+          "ticket": 88
+        }
+      ],
+      "protector_strikes": 0,
+      "qualifying_days": 2,
+      "deductions": 14.084000000000142,
+      "modeled_payouts": [
+        {
+          "time": "2025-10-28T08:36:37.373000+00:00",
+          "gross": 111.11,
+          "modeled_cash": 100.0
+        }
+      ],
+      "modeled_cash_received": 100.0
+    },
+    "news_coverage": "Selected USD releases only; historical Atlas all-currency restrictions unverified.",
+    "payout_assumption": "Request USD 100 cash while flat, normal 90% split (50% after first Protector), immediate settlement and verified KYC assumed; no real payments."
+  }
+}

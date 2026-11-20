@@ -1,0 +1,5455 @@
+{
+  "2025_breakout": {
+    "expectancy": 6.962653061224489,
+    "omega_zero": 2.066856374495763,
+    "ratios": {
+      "profit_factor": 2.066856374495763,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.660258239592121,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 660.96,
+      "gross_loss_unrounded": 319.79
+    },
+    "closed_balance": {
+      "years": 0.999315537303217,
+      "annualised_return_pct": 6.828229611012532,
+      "max_drawdown": 54.279999999999745,
+      "max_drawdown_pct": 1.0288175043025296,
+      "max_drawdown_duration_days": 52.06809027777778,
+      "end_balance": 5341.17,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 6.636968735909699,
+      "recovery_factor": 6.285372144436285,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 49,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 2.066856,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 1.138945,
+        "ci_lower_status": "finite",
+        "median": 2.048167,
+        "median_status": "finite",
+        "ci_upper": 3.834035,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.660258,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.09612,
+        "ci_lower_status": "finite",
+        "median": 0.651104,
+        "median_status": "finite",
+        "ci_upper": 1.510312,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 341.17,
+      "drop_best_1": 299.79,
+      "drop_worst_1": 369.19,
+      "drop_best_3": 219.41,
+      "drop_worst_3": 419.96,
+      "drop_best_5": 152.26,
+      "drop_worst_5": 454.53,
+      "top3_share_of_gross_profit": 18.4
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 68.94,
+      "p95_max_dd": 113.73,
+      "worst_max_dd": 195.73,
+      "median_final": 5341.17,
+      "p05_final": 5341.17,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.009693502867542884,
+    "within_batch_trial_count": 7,
+    "within_batch_daily_SR_variance": 0.000539750386113459,
+    "within_batch_expected_max_sr": 0.03221827736390081,
+    "within_batch_daily_dsr": 0.964695923502079,
+    "within_batch_bonferroni": 0.06785452007280018
+  },
+  "2025_breakout_funded": {
+    "expectancy": 6.392413793103449,
+    "omega_zero": 1.9035874439461884,
+    "ratios": {
+      "profit_factor": 1.9035874439461884,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.5774528212103377,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 390.54,
+      "gross_loss_unrounded": 205.16
+    },
+    "closed_balance": {
+      "years": 0.5804243668720055,
+      "annualised_return_pct": 6.473050529814193,
+      "max_drawdown": 54.279999999999745,
+      "max_drawdown_pct": 1.0601210506682346,
+      "max_drawdown_duration_days": 42.94859953703704,
+      "end_balance": 5185.38,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 6.105954150928315,
+      "recovery_factor": 3.4152542372881523,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 29,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.903587,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.895576,
+        "ci_lower_status": "finite",
+        "median": 1.862999,
+        "median_status": "finite",
+        "ci_upper": 4.294282,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.577453,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.077169,
+        "ci_lower_status": "finite",
+        "median": 0.559392,
+        "median_status": "finite",
+        "ci_upper": 1.655261,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 185.38,
+      "drop_best_1": 144.9,
+      "drop_worst_1": 213.38,
+      "drop_best_3": 81.52,
+      "drop_worst_3": 253.47,
+      "drop_best_5": 23.34,
+      "drop_worst_5": 287.94,
+      "top3_share_of_gross_profit": 26.6
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 60.6,
+      "p95_max_dd": 98.41,
+      "worst_max_dd": 167.84,
+      "median_final": 5185.38,
+      "p05_final": 5185.38,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.0705417307371977
+  },
+  "2025_breakout_funded_phase_split": {
+    "expectancy": 7.328,
+    "omega_zero": 2.0273171513258035,
+    "ratios": {
+      "profit_factor": 2.0273171513258035,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.638475567467895,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 506.14000000000004,
+      "gross_loss_unrounded": 249.65999999999997
+    },
+    "closed_balance": {
+      "years": 0.7091033538672142,
+      "annualised_return_pct": 7.3092846446533715,
+      "max_drawdown": 54.279999999999745,
+      "max_drawdown_pct": 1.0456015580002533,
+      "max_drawdown_duration_days": 42.94859953703704,
+      "end_balance": 5256.48,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 6.99050665019342,
+      "recovery_factor": 4.725128960943279,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 35,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 2.027317,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 1.050932,
+        "ci_lower_status": "finite",
+        "median": 2.003941,
+        "median_status": "finite",
+        "ci_upper": 4.27933,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.638476,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.036666,
+        "ci_lower_status": "finite",
+        "median": 0.628122,
+        "median_status": "finite",
+        "ci_upper": 1.655563,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 256.48,
+      "drop_best_1": 216.0,
+      "drop_worst_1": 284.5,
+      "drop_best_3": 143.58,
+      "drop_worst_3": 335.27,
+      "drop_best_5": 82.53,
+      "drop_worst_5": 369.84,
+      "top3_share_of_gross_profit": 22.3
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 66.06,
+      "p95_max_dd": 107.0,
+      "worst_max_dd": 199.73,
+      "median_final": 5256.48,
+      "p05_final": 5256.48,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.032090305277249646
+  },
+  "2025_filtered": {
+    "expectancy": 5.894680851063828,
+    "omega_zero": 2.182256550311513,
+    "ratios": {
+      "profit_factor": 2.182256550311513,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.7097128701965789,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 511.39,
+      "gross_loss_unrounded": 234.34
+    },
+    "closed_balance": {
+      "years": 0.999315537303217,
+      "annualised_return_pct": 5.544898533678165,
+      "max_drawdown": 54.659999999999854,
+      "max_drawdown_pct": 1.0325890858393962,
+      "max_drawdown_duration_days": 51.46232638888889,
+      "end_balance": 5277.05,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 5.369898452074662,
+      "recovery_factor": 5.068605927552153,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 47,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 2.182257,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 1.193631,
+        "ci_lower_status": "finite",
+        "median": 2.192444,
+        "median_status": "finite",
+        "ci_upper": 4.183599,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.709713,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.137198,
+        "ci_lower_status": "finite",
+        "median": 0.714819,
+        "median_status": "finite",
+        "ci_upper": 1.594982,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 277.05,
+      "drop_best_1": 239.35,
+      "drop_worst_1": 300.4,
+      "drop_best_3": 175.34,
+      "drop_worst_3": 339.18,
+      "drop_best_5": 128.33,
+      "drop_worst_5": 367.66,
+      "top3_share_of_gross_profit": 19.9
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 51.53,
+      "p95_max_dd": 84.55,
+      "worst_max_dd": 148.65,
+      "median_final": 5277.05,
+      "p05_final": 5277.05,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.006303135171806076,
+    "within_batch_trial_count": 7,
+    "within_batch_daily_SR_variance": 0.000539750386113459,
+    "within_batch_expected_max_sr": 0.03221827736390081,
+    "within_batch_daily_dsr": 0.9749192769963149,
+    "within_batch_bonferroni": 0.04412194620264253
+  },
+  "2025_filtered_funded": {
+    "expectancy": 3.7629032258064505,
+    "omega_zero": 1.6063204948282137,
+    "ratios": {
+      "profit_factor": 1.6063204948282137,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.39908178150822954,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 309.0400000000001,
+      "gross_loss_unrounded": 192.39000000000001
+    },
+    "closed_balance": {
+      "years": 0.5776865160848734,
+      "annualised_return_pct": 4.072889962461658,
+      "max_drawdown": 54.659999999999854,
+      "max_drawdown_pct": 1.0648556717298907,
+      "max_drawdown_duration_days": 51.46232638888889,
+      "end_balance": 5116.65,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 3.8248281627172283,
+      "recovery_factor": 2.1341017197219223,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 31,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.60632,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.801025,
+        "ci_lower_status": "finite",
+        "median": 1.618285,
+        "median_status": "finite",
+        "ci_upper": 3.611288,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.399082,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.150789,
+        "ci_lower_status": "finite",
+        "median": 0.41277,
+        "median_status": "finite",
+        "ci_upper": 1.372637,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 116.65,
+      "drop_best_1": 78.95,
+      "drop_worst_1": 140.0,
+      "drop_best_3": 20.07,
+      "drop_worst_3": 178.78,
+      "drop_best_5": -22.59,
+      "drop_worst_5": 206.73,
+      "top3_share_of_gross_profit": 31.3
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 57.91,
+      "p95_max_dd": 93.97,
+      "worst_max_dd": 160.95,
+      "median_final": 5116.65,
+      "p05_final": 5116.65,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.10314950904602292
+  },
+  "2025_filtered_funded_phase_split": {
+    "expectancy": 5.479714285714285,
+    "omega_zero": 1.9968813347887107,
+    "ratios": {
+      "profit_factor": 1.9968813347887107,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.6175184573806352,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 384.18000000000006,
+      "gross_loss_unrounded": 192.39000000000001
+    },
+    "closed_balance": {
+      "years": 0.6379192334017796,
+      "annualised_return_pct": 6.078086879324608,
+      "max_drawdown": 54.659999999999854,
+      "max_drawdown_pct": 1.0494928219375845,
+      "max_drawdown_duration_days": 51.46232638888889,
+      "end_balance": 5191.79,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 5.791451596689514,
+      "recovery_factor": 3.5087815587266826,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 35,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.996881,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 1.005371,
+        "ci_lower_status": "finite",
+        "median": 2.036284,
+        "median_status": "finite",
+        "ci_upper": 4.325449,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.617518,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.003868,
+        "ci_lower_status": "finite",
+        "median": 0.642927,
+        "median_status": "finite",
+        "ci_upper": 1.699955,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 191.79,
+      "drop_best_1": 154.09,
+      "drop_worst_1": 215.14,
+      "drop_best_3": 95.21,
+      "drop_worst_3": 253.92,
+      "drop_best_5": 52.55,
+      "drop_worst_5": 281.87,
+      "top3_share_of_gross_profit": 25.1
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 51.75,
+      "p95_max_dd": 84.5,
+      "worst_max_dd": 127.68,
+      "median_final": 5191.79,
+      "p05_final": 5191.79,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.02990795202585806
+  },
+  "2025_london": {
+    "expectancy": 2.46927536231884,
+    "omega_zero": 1.4410219242616413,
+    "ratios": {
+      "profit_factor": 1.4410219242616413,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.32915284839784303,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 556.7099999999999,
+      "gross_loss_unrounded": 386.33000000000004
+    },
+    "closed_balance": {
+      "years": 0.999315537303217,
+      "annualised_return_pct": 3.4099733219135073,
+      "max_drawdown": 60.779999999999745,
+      "max_drawdown_pct": 1.171441346984083,
+      "max_drawdown_duration_days": 234.99113425925927,
+      "end_balance": 5170.38,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 2.9109210893849733,
+      "recovery_factor": 2.803224744981913,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 69,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.441022,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.786727,
+        "ci_lower_status": "finite",
+        "median": 1.416227,
+        "median_status": "finite",
+        "ci_upper": 2.401082,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.329153,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.174115,
+        "ci_lower_status": "finite",
+        "median": 0.310424,
+        "median_status": "finite",
+        "ci_upper": 0.969073,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 170.38,
+      "drop_best_1": 110.82,
+      "drop_worst_1": 188.52,
+      "drop_best_3": 23.26,
+      "drop_worst_3": 218.35,
+      "drop_best_5": -52.79,
+      "drop_worst_5": 245.05,
+      "top3_share_of_gross_profit": 26.4
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 83.39,
+      "p95_max_dd": 135.6,
+      "worst_max_dd": 220.34,
+      "median_final": 5170.38,
+      "p05_final": 5170.38,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.12321670462688879,
+    "within_batch_trial_count": 7,
+    "within_batch_daily_SR_variance": 0.000539750386113459,
+    "within_batch_expected_max_sr": 0.03221827736390081,
+    "within_batch_daily_dsr": 0.7456489146778229,
+    "within_batch_bonferroni": 0.8625169323882215
+  },
+  "2025_london_funded": {
+    "expectancy": 0.9442857142857147,
+    "omega_zero": 1.1100199733688416,
+    "ratios": {
+      "profit_factor": 1.1100199733688416,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.09100076191715517,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 133.38,
+      "gross_loss_unrounded": 120.16
+    },
+    "closed_balance": {
+      "years": 0.17796030116358658,
+      "annualised_return_pct": 1.494826365578981,
+      "max_drawdown": 60.779999999999745,
+      "max_drawdown_pct": 1.2080328820269781,
+      "max_drawdown_duration_days": 47.44864583333333,
+      "end_balance": 5013.22,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 1.2374053619060332,
+      "recovery_factor": 0.217505758473183,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 14,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.11002,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.191739,
+        "ci_lower_status": "finite",
+        "median": 1.083773,
+        "median_status": "finite",
+        "ci_upper": 3.122823,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.091001,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.767926,
+        "ci_lower_status": "finite",
+        "median": 0.069345,
+        "median_status": "finite",
+        "ci_upper": 1.452992,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 13.22,
+      "drop_best_1": -29.46,
+      "drop_worst_1": 31.36,
+      "drop_best_3": -98.63,
+      "drop_worst_3": 58.98,
+      "drop_best_5": -110.48,
+      "drop_worst_5": 82.67,
+      "top3_share_of_gross_profit": 83.9
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 62.57,
+      "p95_max_dd": 97.88,
+      "worst_max_dd": 120.16,
+      "median_final": 5013.22,
+      "p05_final": 5013.22,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.42322024700787236
+  },
+  "2025_london_funded_phase_split": {
+    "expectancy": 9.010588235294119,
+    "omega_zero": 2.2748002663115847,
+    "ratios": {
+      "profit_factor": 2.2748002663115847,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.9568749728470167,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 273.34000000000003,
+      "gross_loss_unrounded": 120.16
+    },
+    "closed_balance": {
+      "years": 0.1998631074606434,
+      "annualised_return_pct": 16.297779421399312,
+      "max_drawdown": 60.779999999999745,
+      "max_drawdown_pct": 1.17533763400937,
+      "max_drawdown_duration_days": 47.44864583333333,
+      "end_balance": 5153.18,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 13.866466068821024,
+      "recovery_factor": 2.520236920039497,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 17,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 2.2748,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.724653,
+        "ci_lower_status": "finite",
+        "median": 2.327173,
+        "median_status": "finite",
+        "ci_upper": 6.374617,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.956875,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.243524,
+        "ci_lower_status": "finite",
+        "median": 0.991214,
+        "median_status": "finite",
+        "ci_upper": 3.150989,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 153.18,
+      "drop_best_1": 93.62,
+      "drop_worst_1": 171.32,
+      "drop_best_3": 6.06,
+      "drop_worst_3": 198.94,
+      "drop_best_5": -69.99,
+      "drop_worst_5": 222.63,
+      "top3_share_of_gross_profit": 53.8
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 48.55,
+      "p95_max_dd": 79.35,
+      "worst_max_dd": 120.16,
+      "median_final": 5153.18,
+      "p05_final": 5153.18,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.11370753092703693
+  },
+  "2025_portfolio": {
+    "expectancy": 4.039189189189189,
+    "omega_zero": 1.7519118534916485,
+    "ratios": {
+      "profit_factor": 1.7519118534916485,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.49995727603520523,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 1044.63,
+      "gross_loss_unrounded": 596.28
+    },
+    "closed_balance": {
+      "years": 0.999315537303217,
+      "annualised_return_pct": 8.973409455633707,
+      "max_drawdown": 80.30999999999949,
+      "max_drawdown_pct": 1.4701628876774226,
+      "max_drawdown_duration_days": 47.44864583333333,
+      "end_balance": 5448.35,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 6.103683837244718,
+      "recovery_factor": 5.582741875233506,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 111,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.751912,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 1.164805,
+        "ci_lower_status": "finite",
+        "median": 1.782355,
+        "median_status": "finite",
+        "ci_upper": 2.691452,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.499957,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.11812,
+        "ci_lower_status": "finite",
+        "median": 0.522063,
+        "median_status": "finite",
+        "ci_upper": 1.01773,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 448.35,
+      "drop_best_1": 388.79,
+      "drop_worst_1": 476.37,
+      "drop_best_3": 301.23,
+      "drop_worst_3": 519.95,
+      "drop_best_5": 219.32,
+      "drop_worst_5": 556.64,
+      "top3_share_of_gross_profit": 14.1
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 84.55,
+      "p95_max_dd": 133.34,
+      "worst_max_dd": 234.04,
+      "median_final": 5448.35,
+      "p05_final": 5448.35,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.014871944330553867,
+    "within_batch_trial_count": 7,
+    "within_batch_daily_SR_variance": 0.000539750386113459,
+    "within_batch_expected_max_sr": 0.03221827736390081,
+    "within_batch_daily_dsr": 0.9812549113937098,
+    "within_batch_bonferroni": 0.10410361031387708
+  },
+  "2025_portfolio_funded": {
+    "expectancy": 4.1092957746478875,
+    "omega_zero": 1.7125830402500974,
+    "ratios": {
+      "profit_factor": 1.7125830402500974,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.4912159214024286,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 701.1999999999999,
+      "gross_loss_unrounded": 409.44
+    },
+    "closed_balance": {
+      "years": 0.5804243668720055,
+      "annualised_return_pct": 10.264243357135841,
+      "max_drawdown": 80.30999999999949,
+      "max_drawdown_pct": 1.5135495762400326,
+      "max_drawdown_duration_days": 47.44864583333333,
+      "end_balance": 5291.76,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 6.781570632548639,
+      "recovery_factor": 3.6329224256008197,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 71,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.712583,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 1.006077,
+        "ci_lower_status": "finite",
+        "median": 1.715793,
+        "median_status": "finite",
+        "ci_upper": 2.908045,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.491216,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.004619,
+        "ci_lower_status": "finite",
+        "median": 0.496112,
+        "median_status": "finite",
+        "ci_upper": 1.190515,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 291.76,
+      "drop_best_1": 232.2,
+      "drop_worst_1": 315.11,
+      "drop_best_3": 144.64,
+      "drop_worst_3": 353.89,
+      "drop_best_5": 66.41,
+      "drop_worst_5": 386.41,
+      "top3_share_of_gross_profit": 21.0
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 77.29,
+      "p95_max_dd": 126.1,
+      "worst_max_dd": 192.13,
+      "median_final": 5291.76,
+      "p05_final": 5291.76,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.059975849355042306
+  },
+  "2025_portfolio_funded_mask3": {
+    "expectancy": 4.27375,
+    "omega_zero": 1.7108477571599356,
+    "ratios": {
+      "profit_factor": 1.7108477571599356,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.4605132273728678,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 329.15,
+      "gross_loss_unrounded": 192.39
+    },
+    "closed_balance": {
+      "years": 0.5804243668720055,
+      "annualised_return_pct": 4.7588847177119895,
+      "max_drawdown": 54.659999999999854,
+      "max_drawdown_pct": 1.060700147481174,
+      "max_drawdown_duration_days": 51.46232638888889,
+      "end_balance": 5136.76,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 4.486550444074916,
+      "recovery_factor": 2.502012440541536,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 32,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.710848,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.79457,
+        "ci_lower_status": "finite",
+        "median": 1.714962,
+        "median_status": "finite",
+        "ci_upper": 3.731122,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.460513,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.156828,
+        "ci_lower_status": "finite",
+        "median": 0.462731,
+        "median_status": "finite",
+        "ci_upper": 1.431861,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 136.76,
+      "drop_best_1": 99.06,
+      "drop_worst_1": 160.11,
+      "drop_best_3": 40.18,
+      "drop_worst_3": 198.89,
+      "drop_best_5": -2.48,
+      "drop_worst_5": 226.84,
+      "top3_share_of_gross_profit": 29.3
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 55.47,
+      "p95_max_dd": 91.82,
+      "worst_max_dd": 138.68,
+      "median_final": 5136.76,
+      "p05_final": 5136.76,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.0730769400418898
+  },
+  "2025_portfolio_funded_mask3_phase_split_m01d01x3": {
+    "expectancy": 5.498684210526315,
+    "omega_zero": 1.948005988838982,
+    "ratios": {
+      "profit_factor": 1.948005988838982,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.5696110064941526,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 429.36,
+      "gross_loss_unrounded": 220.41
+    },
+    "closed_balance": {
+      "years": 0.7091033538672142,
+      "annualised_return_pct": 5.943466468878484,
+      "max_drawdown": 54.660000000000764,
+      "max_drawdown_pct": 1.046046323815079,
+      "max_drawdown_duration_days": 51.46232638888889,
+      "end_balance": 5208.95,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 5.68183868492728,
+      "recovery_factor": 3.8227222832052155,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 38,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.948006,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 1.035281,
+        "ci_lower_status": "finite",
+        "median": 1.997343,
+        "median_status": "finite",
+        "ci_upper": 3.887789,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.569611,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.02409,
+        "ci_lower_status": "finite",
+        "median": 0.58926,
+        "median_status": "finite",
+        "ci_upper": 1.538342,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 208.95,
+      "drop_best_1": 171.25,
+      "drop_worst_1": 236.97,
+      "drop_best_3": 107.24,
+      "drop_worst_3": 280.55,
+      "drop_best_5": 62.97,
+      "drop_worst_5": 313.48,
+      "top3_share_of_gross_profit": 23.7
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 57.48,
+      "p95_max_dd": 93.11,
+      "worst_max_dd": 165.31,
+      "median_final": 5208.95,
+      "p05_final": 5208.95,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.02945848079307699
+  },
+  "2025_portfolio_funded_mask5": {
+    "expectancy": 3.7023188405797103,
+    "omega_zero": 1.6239253614693239,
+    "ratios": {
+      "profit_factor": 1.6239253614693239,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.4362889577326626,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 664.9,
+      "gross_loss_unrounded": 409.44
+    },
+    "closed_balance": {
+      "years": 0.5585215605749486,
+      "annualised_return_pct": 9.33178916741749,
+      "max_drawdown": 80.3100000000004,
+      "max_drawdown_pct": 1.523975429667716,
+      "max_drawdown_duration_days": 47.44864583333333,
+      "end_balance": 5255.46,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 6.1233199602517026,
+      "recovery_factor": 3.1809239198107178,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 69,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.623925,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.933189,
+        "ci_lower_status": "finite",
+        "median": 1.650067,
+        "median_status": "finite",
+        "ci_upper": 2.803827,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.436289,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.050577,
+        "ci_lower_status": "finite",
+        "median": 0.454183,
+        "median_status": "finite",
+        "ci_upper": 1.156351,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 255.46,
+      "drop_best_1": 195.9,
+      "drop_worst_1": 278.81,
+      "drop_best_3": 108.34,
+      "drop_worst_3": 317.59,
+      "drop_best_5": 30.11,
+      "drop_worst_5": 350.11,
+      "top3_share_of_gross_profit": 22.1
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 81.56,
+      "p95_max_dd": 132.02,
+      "worst_max_dd": 204.06,
+      "median_final": 5255.46,
+      "p05_final": 5255.46,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.08565403717663878
+  },
+  "2025_portfolio_funded_mask5_phase_split_continuous": {
+    "expectancy": 4.1484768211920535,
+    "omega_zero": 1.5432957502168256,
+    "ratios": {
+      "profit_factor": 1.5432957502168256,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.3725047197534406,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 1779.42,
+      "gross_loss_unrounded": 1153.0
+    },
+    "closed_balance": {
+      "years": 1.5085557837097878,
+      "annualised_return_pct": 8.138649159529056,
+      "max_drawdown": 166.60999999999967,
+      "max_drawdown_pct": 3.055438390581153,
+      "max_drawdown_duration_days": 146.08637731481483,
+      "end_balance": 5626.42,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 2.663660044534906,
+      "recovery_factor": 3.759798331432695,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 151,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.543296,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 1.074094,
+        "ci_lower_status": "finite",
+        "median": 1.546535,
+        "median_status": "finite",
+        "ci_upper": 2.193402,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.372505,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.054108,
+        "ci_lower_status": "finite",
+        "median": 0.374651,
+        "median_status": "finite",
+        "ci_upper": 0.762438,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 626.42,
+      "drop_best_1": 566.57,
+      "drop_worst_1": 656.32,
+      "drop_best_3": 453.27,
+      "drop_worst_3": 708.13,
+      "drop_best_5": 364.04,
+      "drop_worst_5": 756.33,
+      "top3_share_of_gross_profit": 9.7
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 136.3,
+      "p95_max_dd": 218.14,
+      "worst_max_dd": 347.21,
+      "median_final": 5626.42,
+      "p05_final": 5626.42,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.0089051431218963
+  },
+  "2025_portfolio_funded_mask5_phase_split_m01d01x5": {
+    "expectancy": 4.384500000000001,
+    "omega_zero": 1.7689238661025488,
+    "ratios": {
+      "profit_factor": 1.7689238661025488,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.5278730528025326,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 806.9299999999998,
+      "gross_loss_unrounded": 456.1700000000001
+    },
+    "closed_balance": {
+      "years": 0.676249144421629,
+      "annualised_return_pct": 10.545822670337214,
+      "max_drawdown": 80.30999999999949,
+      "max_drawdown_pct": 1.496904979804541,
+      "max_drawdown_duration_days": 47.44864583333333,
+      "end_balance": 5350.76,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 7.0450849002548175,
+      "recovery_factor": 4.367575644378063,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 80,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.768924,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 1.110797,
+        "ci_lower_status": "finite",
+        "median": 1.774688,
+        "median_status": "finite",
+        "ci_upper": 2.851264,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.527873,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.082192,
+        "ci_lower_status": "finite",
+        "median": 0.528812,
+        "median_status": "finite",
+        "ci_upper": 1.180726,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 350.76,
+      "drop_best_1": 291.2,
+      "drop_worst_1": 374.11,
+      "drop_best_3": 203.64,
+      "drop_worst_3": 412.89,
+      "drop_best_5": 125.41,
+      "drop_worst_5": 445.41,
+      "top3_share_of_gross_profit": 18.2
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 77.45,
+      "p95_max_dd": 125.61,
+      "worst_max_dd": 221.17,
+      "median_final": 5350.76,
+      "p05_final": 5350.76,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.03875940142730922
+  },
+  "2025_portfolio_funded_mask5_phase_split_m04d01x5": {
+    "expectancy": 4.4577333333333335,
+    "omega_zero": 1.7924389665797578,
+    "ratios": {
+      "profit_factor": 1.7924389665797578,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.5393113215632089,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 756.2299999999999,
+      "gross_loss_unrounded": 421.90000000000003
+    },
+    "closed_balance": {
+      "years": 0.6324435318275154,
+      "annualised_return_pct": 10.776198620205877,
+      "max_drawdown": 80.3100000000004,
+      "max_drawdown_pct": 1.5015031858565988,
+      "max_drawdown_duration_days": 47.44864583333333,
+      "end_balance": 5334.33,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 7.176940230105552,
+      "recovery_factor": 4.16299340057276,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 75,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.792439,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 1.048976,
+        "ci_lower_status": "finite",
+        "median": 1.788317,
+        "median_status": "finite",
+        "ci_upper": 3.018187,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.539311,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.035111,
+        "ci_lower_status": "finite",
+        "median": 0.534378,
+        "median_status": "finite",
+        "ci_upper": 1.230744,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 334.33,
+      "drop_best_1": 274.77,
+      "drop_worst_1": 357.68,
+      "drop_best_3": 187.21,
+      "drop_worst_3": 396.46,
+      "drop_best_5": 108.98,
+      "drop_worst_5": 428.98,
+      "top3_share_of_gross_profit": 19.5
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 74.71,
+      "p95_max_dd": 121.2,
+      "worst_max_dd": 223.0,
+      "median_final": 5334.33,
+      "p05_final": 5334.33,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.03961824982079761
+  },
+  "2025_portfolio_funded_mask5_phase_split_m07d01x5": {
+    "expectancy": 6.04103448275862,
+    "omega_zero": 1.7572836517679604,
+    "ratios": {
+      "profit_factor": 1.7572836517679604,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.5562764119565266,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 406.53000000000003,
+      "gross_loss_unrounded": 231.34000000000003
+    },
+    "closed_balance": {
+      "years": 0.2518822724161533,
+      "annualised_return_pct": 14.651070813827005,
+      "max_drawdown": 80.3100000000004,
+      "max_drawdown_pct": 1.5475479333269178,
+      "max_drawdown_duration_days": 47.44864583333333,
+      "end_balance": 5175.19,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 9.467280785500543,
+      "recovery_factor": 2.1814219897895546,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 29,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.757284,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.776835,
+        "ci_lower_status": "finite",
+        "median": 1.788845,
+        "median_status": "finite",
+        "ci_upper": 3.799356,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.556276,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.185938,
+        "ci_lower_status": "finite",
+        "median": 0.579573,
+        "median_status": "finite",
+        "ci_upper": 1.732419,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 175.19,
+      "drop_best_1": 115.63,
+      "drop_worst_1": 198.54,
+      "drop_best_3": 28.07,
+      "drop_worst_3": 237.32,
+      "drop_best_5": -50.16,
+      "drop_worst_5": 269.84,
+      "top3_share_of_gross_profit": 36.2
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 72.3,
+      "p95_max_dd": 118.33,
+      "worst_max_dd": 179.8,
+      "median_final": 5175.19,
+      "p05_final": 5175.19,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.173299612800225
+  },
+  "2025_portfolio_funded_mask5_phase_split_m10d01x5": {
+    "expectancy": 6.613636363636363,
+    "omega_zero": 1.876770111479361,
+    "ratios": {
+      "profit_factor": 1.876770111479361,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.6192280981475549,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 311.45,
+      "gross_loss_unrounded": 165.95000000000002
+    },
+    "closed_balance": {
+      "years": 0.1943874058863792,
+      "annualised_return_pct": 15.900776121139051,
+      "max_drawdown": 80.3100000000004,
+      "max_drawdown_pct": 1.5564526600785764,
+      "max_drawdown_duration_days": 47.44864583333333,
+      "end_balance": 5145.5,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 10.21603581591509,
+      "recovery_factor": 1.8117295480014852,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 22,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.87677,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.688777,
+        "ci_lower_status": "finite",
+        "median": 1.872531,
+        "median_status": "finite",
+        "ci_upper": 4.283335,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.619228,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.259683,
+        "ci_lower_status": "finite",
+        "median": 0.618329,
+        "median_status": "finite",
+        "ci_upper": 1.925048,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 145.5,
+      "drop_best_1": 100.62,
+      "drop_worst_1": 168.85,
+      "drop_best_3": 17.41,
+      "drop_worst_3": 207.22,
+      "drop_best_5": -56.39,
+      "drop_worst_5": 234.84,
+      "top3_share_of_gross_profit": 41.1
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 58.43,
+      "p95_max_dd": 97.22,
+      "worst_max_dd": 154.75,
+      "median_final": 5145.5,
+      "p05_final": 5145.5,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.12027849321966103
+  },
+  "2025_portfolio_funded_mask6": {
+    "expectancy": 4.934590163934426,
+    "omega_zero": 1.7871806271084492,
+    "ratios": {
+      "profit_factor": 1.7871806271084492,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.5295342795531814,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 683.4,
+      "gross_loss_unrounded": 382.39000000000004
+    },
+    "closed_balance": {
+      "years": 0.5420944558521561,
+      "annualised_return_pct": 11.386949122699292,
+      "max_drawdown": 84.96000000000004,
+      "max_drawdown_pct": 1.6120555035870898,
+      "max_drawdown_duration_days": 45.06520833333333,
+      "end_balance": 5301.01,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 7.063621008930182,
+      "recovery_factor": 3.5429613935969853,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 61,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.787181,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.999229,
+        "ci_lower_status": "finite",
+        "median": 1.80177,
+        "median_status": "finite",
+        "ci_upper": 3.184516,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.529534,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.000581,
+        "ci_lower_status": "finite",
+        "median": 0.538795,
+        "median_status": "finite",
+        "ci_upper": 1.326972,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 301.01,
+      "drop_best_1": 241.45,
+      "drop_worst_1": 329.01,
+      "drop_best_3": 153.89,
+      "drop_worst_3": 369.92,
+      "drop_best_5": 77.89,
+      "drop_worst_5": 404.49,
+      "top3_share_of_gross_profit": 21.5
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 78.48,
+      "p95_max_dd": 128.15,
+      "worst_max_dd": 220.42,
+      "median_final": 5301.01,
+      "p05_final": 5301.01,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.0391278765849536
+  },
+  "2025_portfolio_funded_mask6_phase_split_m01d01x6": {
+    "expectancy": 4.822702702702703,
+    "omega_zero": 1.7270801075706952,
+    "ratios": {
+      "profit_factor": 1.7270801075706952,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.4888960324064908,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 847.72,
+      "gross_loss_unrounded": 490.84
+    },
+    "closed_balance": {
+      "years": 0.6954140999315537,
+      "annualised_return_pct": 10.422159380068791,
+      "max_drawdown": 84.96000000000004,
+      "max_drawdown_pct": 1.5951454706580357,
+      "max_drawdown_duration_days": 45.06520833333333,
+      "end_balance": 5356.88,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 6.533673305525797,
+      "recovery_factor": 4.200564971751411,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 74,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.72708,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 1.037183,
+        "ci_lower_status": "finite",
+        "median": 1.713772,
+        "median_status": "finite",
+        "ci_upper": 2.920331,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.488896,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.027731,
+        "ci_lower_status": "finite",
+        "median": 0.482992,
+        "median_status": "finite",
+        "ci_upper": 1.169195,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 356.88,
+      "drop_best_1": 297.32,
+      "drop_worst_1": 384.9,
+      "drop_best_3": 209.76,
+      "drop_worst_3": 435.67,
+      "drop_best_5": 129.38,
+      "drop_worst_5": 471.13,
+      "top3_share_of_gross_profit": 17.4
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 88.94,
+      "p95_max_dd": 144.61,
+      "worst_max_dd": 223.47,
+      "median_final": 5356.88,
+      "p05_final": 5356.88,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.023953159885977925
+  },
+  "2025_portfolio_funded_phase_split": {
+    "expectancy": 4.211951219512195,
+    "omega_zero": 1.713315020962845,
+    "ratios": {
+      "profit_factor": 1.713315020962845,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.4803671504742343,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 829.5699999999999,
+      "gross_loss_unrounded": 484.19
+    },
+    "closed_balance": {
+      "years": 0.6954140999315537,
+      "annualised_return_pct": 10.081441943788054,
+      "max_drawdown": 80.3100000000004,
+      "max_drawdown_pct": 1.4984075571534994,
+      "max_drawdown_duration_days": 47.44864583333333,
+      "end_balance": 5345.38,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 6.7281040432948735,
+      "recovery_factor": 4.300585232225107,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 82,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.713315,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 1.058487,
+        "ci_lower_status": "finite",
+        "median": 1.738382,
+        "median_status": "finite",
+        "ci_upper": 2.736035,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.480367,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.045411,
+        "ci_lower_status": "finite",
+        "median": 0.502092,
+        "median_status": "finite",
+        "ci_upper": 1.074848,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 345.38,
+      "drop_best_1": 285.82,
+      "drop_worst_1": 373.4,
+      "drop_best_3": 198.26,
+      "drop_worst_3": 416.98,
+      "drop_best_5": 120.03,
+      "drop_worst_5": 453.67,
+      "top3_share_of_gross_profit": 17.7
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 83.28,
+      "p95_max_dd": 137.61,
+      "worst_max_dd": 227.19,
+      "median_final": 5345.38,
+      "p05_final": 5345.38,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.04308201103510979
+  },
+  "2025_portfolio_funded_phase_split_continuous": {
+    "expectancy": 4.1027450980392155,
+    "omega_zero": 1.5315066637313508,
+    "ratios": {
+      "profit_factor": 1.5315066637313508,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.3632931535974083,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 1808.74,
+      "gross_loss_unrounded": 1181.02
+    },
+    "closed_balance": {
+      "years": 1.5277207392197125,
+      "annualised_return_pct": 8.048895348356893,
+      "max_drawdown": 166.61000000000058,
+      "max_drawdown_pct": 3.0584559579405046,
+      "max_drawdown_duration_days": 146.08637731481483,
+      "end_balance": 5627.72,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 2.6316858764828637,
+      "recovery_factor": 3.7676009843346607,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 153,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.531507,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 1.076177,
+        "ci_lower_status": "finite",
+        "median": 1.519277,
+        "median_status": "finite",
+        "ci_upper": 2.191657,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.363293,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.056178,
+        "ci_lower_status": "finite",
+        "median": 0.356432,
+        "median_status": "finite",
+        "ci_upper": 0.762308,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 627.72,
+      "drop_best_1": 567.87,
+      "drop_worst_1": 657.62,
+      "drop_best_3": 454.57,
+      "drop_worst_3": 712.24,
+      "drop_best_5": 365.34,
+      "drop_worst_5": 761.58,
+      "top3_share_of_gross_profit": 9.6
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 139.41,
+      "p95_max_dd": 224.07,
+      "worst_max_dd": 417.37,
+      "median_final": 5627.72,
+      "p05_final": 5627.72,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.009520928168398012
+  },
+  "2025_portfolio_funded_phase_split_m04d01x7": {
+    "expectancy": 4.211951219512195,
+    "omega_zero": 1.713315020962845,
+    "ratios": {
+      "profit_factor": 1.713315020962845,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.4803671504742343,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 829.5699999999999,
+      "gross_loss_unrounded": 484.19
+    },
+    "closed_balance": {
+      "years": 0.6954140999315537,
+      "annualised_return_pct": 10.081441943788054,
+      "max_drawdown": 80.3100000000004,
+      "max_drawdown_pct": 1.4984075571534994,
+      "max_drawdown_duration_days": 47.44864583333333,
+      "end_balance": 5345.38,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 6.7281040432948735,
+      "recovery_factor": 4.300585232225107,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 82,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.713315,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 1.058487,
+        "ci_lower_status": "finite",
+        "median": 1.738382,
+        "median_status": "finite",
+        "ci_upper": 2.736035,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.480367,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.045411,
+        "ci_lower_status": "finite",
+        "median": 0.502092,
+        "median_status": "finite",
+        "ci_upper": 1.074848,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 345.38,
+      "drop_best_1": 285.82,
+      "drop_worst_1": 373.4,
+      "drop_best_3": 198.26,
+      "drop_worst_3": 416.98,
+      "drop_best_5": 120.03,
+      "drop_worst_5": 453.67,
+      "top3_share_of_gross_profit": 17.7
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 83.28,
+      "p95_max_dd": 137.61,
+      "worst_max_dd": 227.19,
+      "median_final": 5345.38,
+      "p05_final": 5345.38,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.04308201103510979
+  },
+  "2025_portfolio_funded_phase_split_m07d01x7": {
+    "expectancy": 6.04103448275862,
+    "omega_zero": 1.7572836517679604,
+    "ratios": {
+      "profit_factor": 1.7572836517679604,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.5562764119565266,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 406.53000000000003,
+      "gross_loss_unrounded": 231.34000000000003
+    },
+    "closed_balance": {
+      "years": 0.2518822724161533,
+      "annualised_return_pct": 14.651070813827005,
+      "max_drawdown": 80.3100000000004,
+      "max_drawdown_pct": 1.5475479333269178,
+      "max_drawdown_duration_days": 47.44864583333333,
+      "end_balance": 5175.19,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 9.467280785500543,
+      "recovery_factor": 2.1814219897895546,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 29,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.757284,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.776835,
+        "ci_lower_status": "finite",
+        "median": 1.788845,
+        "median_status": "finite",
+        "ci_upper": 3.799356,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.556276,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.185938,
+        "ci_lower_status": "finite",
+        "median": 0.579573,
+        "median_status": "finite",
+        "ci_upper": 1.732419,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 175.19,
+      "drop_best_1": 115.63,
+      "drop_worst_1": 198.54,
+      "drop_best_3": 28.07,
+      "drop_worst_3": 237.32,
+      "drop_best_5": -50.16,
+      "drop_worst_5": 269.84,
+      "top3_share_of_gross_profit": 36.2
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 72.3,
+      "p95_max_dd": 118.33,
+      "worst_max_dd": 179.8,
+      "median_final": 5175.19,
+      "p05_final": 5175.19,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.173299612800225
+  },
+  "2025_portfolio_funded_phase_split_m10d01x7": {
+    "expectancy": 6.613636363636363,
+    "omega_zero": 1.876770111479361,
+    "ratios": {
+      "profit_factor": 1.876770111479361,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.6192280981475549,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 311.45,
+      "gross_loss_unrounded": 165.95000000000002
+    },
+    "closed_balance": {
+      "years": 0.1943874058863792,
+      "annualised_return_pct": 15.900776121139051,
+      "max_drawdown": 80.3100000000004,
+      "max_drawdown_pct": 1.5564526600785764,
+      "max_drawdown_duration_days": 47.44864583333333,
+      "end_balance": 5145.5,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 10.21603581591509,
+      "recovery_factor": 1.8117295480014852,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 22,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.87677,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.688777,
+        "ci_lower_status": "finite",
+        "median": 1.872531,
+        "median_status": "finite",
+        "ci_upper": 4.283335,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.619228,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.259683,
+        "ci_lower_status": "finite",
+        "median": 0.618329,
+        "median_status": "finite",
+        "ci_upper": 1.925048,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 145.5,
+      "drop_best_1": 100.62,
+      "drop_worst_1": 168.85,
+      "drop_best_3": 17.41,
+      "drop_worst_3": 207.22,
+      "drop_best_5": -56.39,
+      "drop_worst_5": 234.84,
+      "top3_share_of_gross_profit": 41.1
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 58.43,
+      "p95_max_dd": 97.22,
+      "worst_max_dd": 154.75,
+      "median_final": 5145.5,
+      "p05_final": 5145.5,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.12027849321966103
+  },
+  "2025_portfolio_mask3": {
+    "expectancy": 5.583269230769229,
+    "omega_zero": 2.0623902224824353,
+    "ratios": {
+      "profit_factor": 2.0623902224824353,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.6297745826087339,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 563.61,
+      "gross_loss_unrounded": 273.28000000000003
+    },
+    "closed_balance": {
+      "years": 0.999315537303217,
+      "annualised_return_pct": 5.810690497967292,
+      "max_drawdown": 54.660000000000764,
+      "max_drawdown_pct": 1.0300050689967863,
+      "max_drawdown_duration_days": 51.46232638888889,
+      "end_balance": 5290.33,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 5.6414193219717275,
+      "recovery_factor": 5.311562385656712,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 52,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 2.06239,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 1.13542,
+        "ci_lower_status": "finite",
+        "median": 2.032448,
+        "median_status": "finite",
+        "ci_upper": 3.942501,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.629775,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.094264,
+        "ci_lower_status": "finite",
+        "median": 0.62239,
+        "median_status": "finite",
+        "ci_upper": 1.503756,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 290.33,
+      "drop_best_1": 248.95,
+      "drop_worst_1": 318.35,
+      "drop_best_3": 175.15,
+      "drop_worst_3": 361.93,
+      "drop_best_5": 123.01,
+      "drop_worst_5": 394.86,
+      "top3_share_of_gross_profit": 20.4
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 58.52,
+      "p95_max_dd": 96.03,
+      "worst_max_dd": 164.5,
+      "median_final": 5290.33,
+      "p05_final": 5290.33,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.006441010927284825,
+    "within_batch_trial_count": 7,
+    "within_batch_daily_SR_variance": 0.000539750386113459,
+    "within_batch_expected_max_sr": 0.03221827736390081,
+    "within_batch_daily_dsr": 0.9662506346961335,
+    "within_batch_bonferroni": 0.04508707649099378
+  },
+  "2025_portfolio_mask3_phase_split_m01d01x3": {
+    "expectancy": 11.168846153846154,
+    "omega_zero": 2.062804230867767,
+    "ratios": {
+      "profit_factor": 2.062804230867767,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.6300023685627517,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 1127.24,
+      "gross_loss_unrounded": 546.46
+    },
+    "closed_balance": {
+      "years": 0.999315537303217,
+      "annualised_return_pct": 11.624001350157984,
+      "max_drawdown": 109.32000000000062,
+      "max_drawdown_pct": 1.9473995482432185,
+      "max_drawdown_duration_days": 51.46232638888889,
+      "end_balance": 5580.78,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 5.968986364736599,
+      "recovery_factor": 5.312660080497591,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 52,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 2.062804,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 1.13578,
+        "ci_lower_status": "finite",
+        "median": 2.032719,
+        "median_status": "finite",
+        "ci_upper": 3.943856,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.630002,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.094454,
+        "ci_lower_status": "finite",
+        "median": 0.622414,
+        "median_status": "finite",
+        "ci_upper": 1.5043,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 580.78,
+      "drop_best_1": 498.01,
+      "drop_worst_1": 636.81,
+      "drop_best_3": 350.41,
+      "drop_worst_3": 723.98,
+      "drop_best_5": 246.12,
+      "drop_worst_5": 789.84,
+      "top3_share_of_gross_profit": 20.4
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 117.04,
+      "p95_max_dd": 192.03,
+      "worst_max_dd": 328.9,
+      "median_final": 5580.78,
+      "p05_final": 5580.78,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.006430238562397107
+  },
+  "2025_portfolio_mask5": {
+    "expectancy": 3.829074074074074,
+    "omega_zero": 1.714391832363052,
+    "ratios": {
+      "profit_factor": 1.714391832363052,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.48662194350707066,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 992.41,
+      "gross_loss_unrounded": 578.87
+    },
+    "closed_balance": {
+      "years": 0.999315537303217,
+      "annualised_return_pct": 8.2766931553841,
+      "max_drawdown": 80.3100000000004,
+      "max_drawdown_pct": 1.4795913667474303,
+      "max_drawdown_duration_days": 47.44864583333333,
+      "end_balance": 5413.54,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 5.593904737075254,
+      "recovery_factor": 5.149296476154873,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 108,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.714392,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 1.102558,
+        "ci_lower_status": "finite",
+        "median": 1.73232,
+        "median_status": "finite",
+        "ci_upper": 2.633144,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.486622,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.073918,
+        "ci_lower_status": "finite",
+        "median": 0.500137,
+        "median_status": "finite",
+        "ci_upper": 1.032422,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 413.54,
+      "drop_best_1": 353.98,
+      "drop_worst_1": 436.89,
+      "drop_best_3": 266.42,
+      "drop_worst_3": 475.67,
+      "drop_best_5": 188.19,
+      "drop_worst_5": 509.81,
+      "top3_share_of_gross_profit": 14.8
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 82.17,
+      "p95_max_dd": 131.5,
+      "worst_max_dd": 224.54,
+      "median_final": 5413.54,
+      "p05_final": 5413.54,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.021223007946107764,
+    "within_batch_trial_count": 7,
+    "within_batch_daily_SR_variance": 0.000539750386113459,
+    "within_batch_expected_max_sr": 0.03221827736390081,
+    "within_batch_daily_dsr": 0.975150609774796,
+    "within_batch_bonferroni": 0.14856105562275435
+  },
+  "2025_portfolio_mask5_phase_split_m01d01x5": {
+    "expectancy": 8.15921052631579,
+    "omega_zero": 1.7719407444292297,
+    "ratios": {
+      "profit_factor": 1.7719407444292297,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.528410492291255,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 2135.1,
+      "gross_loss_unrounded": 1204.9499999999998
+    },
+    "closed_balance": {
+      "years": 0.999315537303217,
+      "annualised_return_pct": 18.61686043109397,
+      "max_drawdown": 206.90999999999985,
+      "max_drawdown_pct": 3.445611429085281,
+      "max_drawdown_duration_days": 51.46232638888889,
+      "end_balance": 5930.15,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 5.403064394883393,
+      "recovery_factor": 4.495432796868207,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 114,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.771941,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 1.190716,
+        "ci_lower_status": "finite",
+        "median": 1.783346,
+        "median_status": "finite",
+        "ci_upper": 2.751529,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.52841,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.139409,
+        "ci_lower_status": "finite",
+        "median": 0.534796,
+        "median_status": "finite",
+        "ci_upper": 1.081652,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 930.15,
+      "drop_best_1": 805.92,
+      "drop_worst_1": 976.85,
+      "drop_best_3": 597.03,
+      "drop_worst_3": 1054.42,
+      "drop_best_5": 436.28,
+      "drop_worst_5": 1115.18,
+      "top3_share_of_gross_profit": 15.6
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 164.75,
+      "p95_max_dd": 267.89,
+      "worst_max_dd": 417.09,
+      "median_final": 5930.15,
+      "p05_final": 5930.15,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.01158407858701897
+  },
+  "2025_portfolio_mask5_phase_split_m04d01x5": {
+    "expectancy": 9.902717391304348,
+    "omega_zero": 1.8933789640902938,
+    "ratios": {
+      "profit_factor": 1.8933789640902938,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.6089490423601003,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 1930.83,
+      "gross_loss_unrounded": 1019.7800000000001
+    },
+    "closed_balance": {
+      "years": 0.7529089664613279,
+      "annualised_return_pct": 24.896907156652397,
+      "max_drawdown": 206.91000000000076,
+      "max_drawdown_pct": 3.4566057404613946,
+      "max_drawdown_duration_days": 51.46232638888889,
+      "end_balance": 5911.05,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 7.202703757973019,
+      "recovery_factor": 4.403122130394841,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 92,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.893379,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 1.161107,
+        "ci_lower_status": "finite",
+        "median": 1.879139,
+        "median_status": "finite",
+        "ci_upper": 2.917342,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.608949,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.119033,
+        "ci_lower_status": "finite",
+        "median": 0.597073,
+        "median_status": "finite",
+        "ci_upper": 1.180529,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 911.05,
+      "drop_best_1": 786.82,
+      "drop_worst_1": 957.75,
+      "drop_best_3": 577.93,
+      "drop_worst_3": 1035.32,
+      "drop_best_5": 417.18,
+      "drop_worst_5": 1096.08,
+      "top3_share_of_gross_profit": 17.3
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 152.24,
+      "p95_max_dd": 247.2,
+      "worst_max_dd": 438.81,
+      "median_final": 5911.05,
+      "p05_final": 5911.05,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.012191242791745148
+  },
+  "2025_portfolio_mask5_phase_split_m07d01x5": {
+    "expectancy": 8.688253968253969,
+    "omega_zero": 1.7423441017712318,
+    "ratios": {
+      "profit_factor": 1.7423441017712318,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.5162814609934266,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 1284.7,
+      "gross_loss_unrounded": 737.34
+    },
+    "closed_balance": {
+      "years": 0.5037645448323066,
+      "annualised_return_pct": 22.901844110981546,
+      "max_drawdown": 206.90999999999985,
+      "max_drawdown_pct": 3.6802057542901028,
+      "max_drawdown_duration_days": 51.46232638888889,
+      "end_balance": 5547.36,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 6.222979268016286,
+      "recovery_factor": 2.6454013822434894,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 63,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.742344,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.971401,
+        "ci_lower_status": "finite",
+        "median": 1.80954,
+        "median_status": "finite",
+        "ci_upper": 3.13366,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.516281,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.021764,
+        "ci_lower_status": "finite",
+        "median": 0.555344,
+        "median_status": "finite",
+        "ci_upper": 1.350834,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 547.36,
+      "drop_best_1": 423.13,
+      "drop_worst_1": 594.06,
+      "drop_best_3": 214.24,
+      "drop_worst_3": 671.63,
+      "drop_best_5": 53.49,
+      "drop_worst_5": 728.05,
+      "top3_share_of_gross_profit": 25.9
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 153.1,
+      "p95_max_dd": 245.2,
+      "worst_max_dd": 394.71,
+      "median_final": 5547.36,
+      "p05_final": 5547.36,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.06441700547030604
+  },
+  "2025_portfolio_mask5_phase_split_m10d01x5": {
+    "expectancy": 12.947333333333331,
+    "omega_zero": 1.8302233621887356,
+    "ratios": {
+      "profit_factor": 1.8302233621887356,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.6166018189066901,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 856.2700000000001,
+      "gross_loss_unrounded": 467.8500000000001
+    },
+    "closed_balance": {
+      "years": 0.2518822724161533,
+      "annualised_return_pct": 34.5843399663781,
+      "max_drawdown": 206.90999999999985,
+      "max_drawdown_pct": 3.787271429355881,
+      "max_drawdown_duration_days": 51.46232638888889,
+      "end_balance": 5388.42,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 9.131729956904627,
+      "recovery_factor": 1.8772413126480123,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 30,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.830223,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.782582,
+        "ci_lower_status": "finite",
+        "median": 1.813972,
+        "median_status": "finite",
+        "ci_upper": 3.959775,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.616602,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.175471,
+        "ci_lower_status": "finite",
+        "median": 0.612217,
+        "median_status": "finite",
+        "ci_upper": 1.860567,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 388.42,
+      "drop_best_1": 264.19,
+      "drop_worst_1": 435.12,
+      "drop_best_3": 55.3,
+      "drop_worst_3": 512.69,
+      "drop_best_5": -105.45,
+      "drop_worst_5": 569.11,
+      "top3_share_of_gross_profit": 38.9
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 144.91,
+      "p95_max_dd": 237.66,
+      "worst_max_dd": 369.97,
+      "median_final": 5388.42,
+      "p05_final": 5388.42,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.13752518272705086
+  },
+  "2025_portfolio_mask6": {
+    "expectancy": 4.568349514563106,
+    "omega_zero": 1.7587029781196086,
+    "ratios": {
+      "profit_factor": 1.7587029781196086,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.5048416316876216,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 1090.73,
+      "gross_loss_unrounded": 620.1899999999999
+    },
+    "closed_balance": {
+      "years": 0.999315537303217,
+      "annualised_return_pct": 9.417540169130548,
+      "max_drawdown": 84.95999999999913,
+      "max_drawdown_pct": 1.5618163836303247,
+      "max_drawdown_duration_days": 58.22358796296297,
+      "end_balance": 5470.54,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 6.029863860974608,
+      "recovery_factor": 5.538370998116817,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 103,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.758703,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 1.121404,
+        "ci_lower_status": "finite",
+        "median": 1.767136,
+        "median_status": "finite",
+        "ci_upper": 2.684778,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.504842,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.085781,
+        "ci_lower_status": "finite",
+        "median": 0.511126,
+        "median_status": "finite",
+        "ci_upper": 1.026213,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 470.54,
+      "drop_best_1": 410.98,
+      "drop_worst_1": 498.56,
+      "drop_best_3": 323.42,
+      "drop_worst_3": 549.33,
+      "drop_best_5": 241.56,
+      "drop_worst_5": 584.79,
+      "top3_share_of_gross_profit": 13.5
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 91.54,
+      "p95_max_dd": 146.7,
+      "worst_max_dd": 233.34,
+      "median_final": 5470.54,
+      "p05_final": 5470.54,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.006603091347081663,
+    "within_batch_trial_count": 7,
+    "within_batch_daily_SR_variance": 0.000539750386113459,
+    "within_batch_expected_max_sr": 0.03221827736390081,
+    "within_batch_daily_dsr": 0.9764425441026882,
+    "within_batch_bonferroni": 0.046221639429571644
+  },
+  "2025_portfolio_mask6_phase_split_m01d01x6": {
+    "expectancy": 9.722231404958677,
+    "omega_zero": 1.7913824419778002,
+    "ratios": {
+      "profit_factor": 1.7913824419778002,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.522175499134227,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 2662.89,
+      "gross_loss_unrounded": 1486.5
+    },
+    "closed_balance": {
+      "years": 0.999315537303217,
+      "annualised_return_pct": 23.545678646920987,
+      "max_drawdown": 169.89999999999964,
+      "max_drawdown_pct": 2.7784500860191077,
+      "max_drawdown_duration_days": 65.23534722222222,
+      "end_balance": 6176.389999999999,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 8.4743932473002,
+      "recovery_factor": 6.924014125956459,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 121,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.791382,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 1.207136,
+        "ci_lower_status": "finite",
+        "median": 1.78737,
+        "median_status": "finite",
+        "ci_upper": 2.687737,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.522175,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.142129,
+        "ci_lower_status": "finite",
+        "median": 0.519832,
+        "median_status": "finite",
+        "ci_upper": 1.020578,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 1176.39,
+      "drop_best_1": 1052.16,
+      "drop_worst_1": 1241.92,
+      "drop_best_3": 829.78,
+      "drop_worst_3": 1353.94,
+      "drop_best_5": 654.66,
+      "drop_worst_5": 1435.77,
+      "top3_share_of_gross_profit": 13.0
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 198.76,
+      "p95_max_dd": 318.09,
+      "worst_max_dd": 522.63,
+      "median_final": 6176.39,
+      "p05_final": 6176.39,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.0024978924389663063
+  },
+  "2025_portfolio_phase_split_m04d01x7": {
+    "expectancy": 9.976489361702129,
+    "omega_zero": 1.8717059703851058,
+    "ratios": {
+      "profit_factor": 1.8717059703851058,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.5836072477922415,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 2013.6000000000001,
+      "gross_loss_unrounded": 1075.8099999999997
+    },
+    "closed_balance": {
+      "years": 0.7529089664613279,
+      "annualised_return_pct": 25.6478863724734,
+      "max_drawdown": 206.91000000000076,
+      "max_drawdown_pct": 3.4412332624275197,
+      "max_drawdown_duration_days": 51.46232638888889,
+      "end_balance": 5937.79,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 7.4531089340862735,
+      "recovery_factor": 4.532357063457526,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 94,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.871706,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 1.15967,
+        "ci_lower_status": "finite",
+        "median": 1.859703,
+        "median_status": "finite",
+        "ci_upper": 2.958307,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.583607,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.117878,
+        "ci_lower_status": "finite",
+        "median": 0.580381,
+        "median_status": "finite",
+        "ci_upper": 1.18336,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 937.79,
+      "drop_best_1": 813.56,
+      "drop_worst_1": 993.82,
+      "drop_best_3": 604.67,
+      "drop_worst_3": 1080.99,
+      "drop_best_5": 436.54,
+      "drop_worst_5": 1150.09,
+      "top3_share_of_gross_profit": 16.5
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 162.35,
+      "p95_max_dd": 265.73,
+      "worst_max_dd": 437.59,
+      "median_final": 5937.79,
+      "p05_final": 5937.79,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.010651363169403268
+  },
+  "2025_portfolio_phase_split_m07d01x7": {
+    "expectancy": 8.688253968253969,
+    "omega_zero": 1.7423441017712318,
+    "ratios": {
+      "profit_factor": 1.7423441017712318,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.5162814609934266,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 1284.7,
+      "gross_loss_unrounded": 737.34
+    },
+    "closed_balance": {
+      "years": 0.5037645448323066,
+      "annualised_return_pct": 22.901844110981546,
+      "max_drawdown": 206.90999999999985,
+      "max_drawdown_pct": 3.6802057542901028,
+      "max_drawdown_duration_days": 51.46232638888889,
+      "end_balance": 5547.36,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 6.222979268016286,
+      "recovery_factor": 2.6454013822434894,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 63,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.742344,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.971401,
+        "ci_lower_status": "finite",
+        "median": 1.80954,
+        "median_status": "finite",
+        "ci_upper": 3.13366,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.516281,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.021764,
+        "ci_lower_status": "finite",
+        "median": 0.555344,
+        "median_status": "finite",
+        "ci_upper": 1.350834,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 547.36,
+      "drop_best_1": 423.13,
+      "drop_worst_1": 594.06,
+      "drop_best_3": 214.24,
+      "drop_worst_3": 671.63,
+      "drop_best_5": 53.49,
+      "drop_worst_5": 728.05,
+      "top3_share_of_gross_profit": 25.9
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 153.1,
+      "p95_max_dd": 245.2,
+      "worst_max_dd": 394.71,
+      "median_final": 5547.36,
+      "p05_final": 5547.36,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.06441700547030604
+  },
+  "2025_portfolio_phase_split_m10d01x7": {
+    "expectancy": 12.947333333333331,
+    "omega_zero": 1.8302233621887356,
+    "ratios": {
+      "profit_factor": 1.8302233621887356,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.6166018189066901,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 856.2700000000001,
+      "gross_loss_unrounded": 467.8500000000001
+    },
+    "closed_balance": {
+      "years": 0.2518822724161533,
+      "annualised_return_pct": 34.5843399663781,
+      "max_drawdown": 206.90999999999985,
+      "max_drawdown_pct": 3.787271429355881,
+      "max_drawdown_duration_days": 51.46232638888889,
+      "end_balance": 5388.42,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 9.131729956904627,
+      "recovery_factor": 1.8772413126480123,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 30,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.830223,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.782582,
+        "ci_lower_status": "finite",
+        "median": 1.813972,
+        "median_status": "finite",
+        "ci_upper": 3.959775,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.616602,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.175471,
+        "ci_lower_status": "finite",
+        "median": 0.612217,
+        "median_status": "finite",
+        "ci_upper": 1.860567,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 388.42,
+      "drop_best_1": 264.19,
+      "drop_worst_1": 435.12,
+      "drop_best_3": 55.3,
+      "drop_worst_3": 512.69,
+      "drop_best_5": -105.45,
+      "drop_worst_5": 569.11,
+      "top3_share_of_gross_profit": 38.9
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 144.91,
+      "p95_max_dd": 237.66,
+      "worst_max_dd": 369.97,
+      "median_final": 5388.42,
+      "p05_final": 5388.42,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.13752518272705086
+  },
+  "2026_breakout": {
+    "expectancy": 8.857600000000001,
+    "omega_zero": 1.7727526521496373,
+    "ratios": {
+      "profit_factor": 1.7727526521496373,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.5320509920371229,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 508.00000000000006,
+      "gross_loss_unrounded": 286.56
+    },
+    "closed_balance": {
+      "years": 0.8323066392881588,
+      "annualised_return_pct": 5.34458194559666,
+      "max_drawdown": 103.00999999999931,
+      "max_drawdown_pct": 2.00573233277125,
+      "max_drawdown_duration_days": 109.9559375,
+      "end_balance": 5221.44,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 2.6646536321285894,
+      "recovery_factor": 2.149694204446185,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 25,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.772753,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.770638,
+        "ci_lower_status": "finite",
+        "median": 1.757781,
+        "median_status": "finite",
+        "ci_upper": 4.377005,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.532051,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.188123,
+        "ci_lower_status": "finite",
+        "median": 0.520816,
+        "median_status": "finite",
+        "ci_upper": 1.777355,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 221.44,
+      "drop_best_1": 174.54,
+      "drop_worst_1": 250.07,
+      "drop_best_3": 85.74,
+      "drop_worst_3": 304.17,
+      "drop_best_5": 1.65,
+      "drop_worst_5": 354.0,
+      "top3_share_of_gross_profit": 26.7
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 92.6,
+      "p95_max_dd": 149.47,
+      "worst_max_dd": 243.42,
+      "median_final": 5221.44,
+      "p05_final": 5221.44,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.06793856090610755,
+    "within_batch_trial_count": 7,
+    "within_batch_daily_SR_variance": 8.27885491535193e-05,
+    "within_batch_expected_max_sr": 0.012618013015197141,
+    "within_batch_daily_dsr": 0.8902755390991637,
+    "within_batch_bonferroni": 0.4755699263427528
+  },
+  "2026_breakout_funded_phase_split": {
+    "expectancy": 7.272500000000001,
+    "omega_zero": 1.6090871021775546,
+    "ratios": {
+      "profit_factor": 1.6090871021775546,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.4280125857075369,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 461.1,
+      "gross_loss_unrounded": 286.56
+    },
+    "closed_balance": {
+      "years": 0.7364818617385352,
+      "annualised_return_pct": 4.769214513213389,
+      "max_drawdown": 103.01000000000022,
+      "max_drawdown_pct": 2.024217509550239,
+      "max_drawdown_duration_days": 107.95820601851852,
+      "end_balance": 5174.54,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 2.3560780848462577,
+      "recovery_factor": 1.6943986020774648,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 24,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.609087,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.647587,
+        "ci_lower_status": "finite",
+        "median": 1.602756,
+        "median_status": "finite",
+        "ci_upper": 3.90098,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.428013,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.295222,
+        "ci_lower_status": "finite",
+        "median": 0.423238,
+        "median_status": "finite",
+        "ci_upper": 1.558086,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 174.54,
+      "drop_best_1": 129.32,
+      "drop_worst_1": 203.17,
+      "drop_best_3": 43.39,
+      "drop_worst_3": 257.27,
+      "drop_best_5": -38.34,
+      "drop_worst_5": 307.1,
+      "top3_share_of_gross_profit": 28.4
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 95.66,
+      "p95_max_dd": 153.25,
+      "worst_max_dd": 238.03,
+      "median_final": 5174.54,
+      "p05_final": 5174.54,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.10877541828924639
+  },
+  "2026_filtered": {
+    "expectancy": 6.505199999999999,
+    "omega_zero": 1.7199840623339826,
+    "ratios": {
+      "profit_factor": 1.7199840623339826,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.4700616692953129,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 388.51,
+      "gross_loss_unrounded": 225.88
+    },
+    "closed_balance": {
+      "years": 0.8323066392881588,
+      "annualised_return_pct": 3.9206304623134054,
+      "max_drawdown": 46.39000000000033,
+      "max_drawdown_pct": 0.9217478039194713,
+      "max_drawdown_duration_days": 102.88685185185186,
+      "end_balance": 5162.63,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 4.253474155991515,
+      "recovery_factor": 3.505712438025412,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 25,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.719984,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.771283,
+        "ci_lower_status": "finite",
+        "median": 1.76551,
+        "median_status": "finite",
+        "ci_upper": 4.322924,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.470062,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.180786,
+        "ci_lower_status": "finite",
+        "median": 0.491793,
+        "median_status": "finite",
+        "ci_upper": 1.601207,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 162.63,
+      "drop_best_1": 129.8,
+      "drop_worst_1": 192.53,
+      "drop_best_3": 67.53,
+      "drop_worst_3": 239.57,
+      "drop_best_5": 7.47,
+      "drop_worst_5": 279.77,
+      "top3_share_of_gross_profit": 24.5
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 72.18,
+      "p95_max_dd": 118.06,
+      "worst_max_dd": 183.51,
+      "median_final": 5162.63,
+      "p05_final": 5162.63,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.06343774529274727,
+    "within_batch_trial_count": 7,
+    "within_batch_daily_SR_variance": 8.27885491535193e-05,
+    "within_batch_expected_max_sr": 0.012618013015197141,
+    "within_batch_daily_dsr": 0.8725681474400561,
+    "within_batch_bonferroni": 0.44406421704923094
+  },
+  "2026_filtered_funded_phase_split": {
+    "expectancy": 6.605555555555556,
+    "omega_zero": 1.7429856901830902,
+    "ratios": {
+      "profit_factor": 1.7429856901830902,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.4920946535216466,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 278.92999999999995,
+      "gross_loss_unrounded": 160.03
+    },
+    "closed_balance": {
+      "years": 0.49007529089664614,
+      "annualised_return_pct": 4.9123656090324985,
+      "max_drawdown": 43.460000000000036,
+      "max_drawdown_pct": 0.8583267171471802,
+      "max_drawdown_duration_days": 66.91025462962963,
+      "end_balance": 5118.9,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 5.723188514228852,
+      "recovery_factor": 2.7358490566037714,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 18,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.742986,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.646995,
+        "ci_lower_status": "finite",
+        "median": 1.70357,
+        "median_status": "finite",
+        "ci_upper": 4.798139,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.492095,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.286166,
+        "ci_lower_status": "finite",
+        "median": 0.4666,
+        "median_status": "finite",
+        "ci_upper": 1.770333,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 118.9,
+      "drop_best_1": 87.23,
+      "drop_worst_1": 143.03,
+      "drop_best_3": 26.21,
+      "drop_worst_3": 186.49,
+      "drop_best_5": -32.72,
+      "drop_worst_5": 225.51,
+      "top3_share_of_gross_profit": 33.2
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 60.72,
+      "p95_max_dd": 101.07,
+      "worst_max_dd": 160.03,
+      "median_final": 5118.9,
+      "p05_final": 5118.9,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.10626926227598918
+  },
+  "2026_london": {
+    "expectancy": 3.596249999999999,
+    "omega_zero": 1.3665357256608979,
+    "ratios": {
+      "profit_factor": 1.3665357256608979,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.27151399893129013,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 643.5699999999999,
+      "gross_loss_unrounded": 470.95000000000005
+    },
+    "closed_balance": {
+      "years": 0.8323066392881588,
+      "annualised_return_pct": 4.162286421983381,
+      "max_drawdown": 145.60000000000036,
+      "max_drawdown_pct": 2.8851222015701796,
+      "max_drawdown_duration_days": 115.00107638888889,
+      "end_balance": 5172.62,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 1.442672487050332,
+      "recovery_factor": 1.1855769230769198,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 48,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.366536,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.74435,
+        "ci_lower_status": "finite",
+        "median": 1.345876,
+        "median_status": "finite",
+        "ci_upper": 2.509029,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.271514,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.21108,
+        "ci_lower_status": "finite",
+        "median": 0.257585,
+        "median_status": "finite",
+        "ci_upper": 0.983688,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 172.62,
+      "drop_best_1": 112.77,
+      "drop_worst_1": 199.22,
+      "drop_best_3": 14.68,
+      "drop_worst_3": 248.5,
+      "drop_best_5": -56.51,
+      "drop_worst_5": 292.43,
+      "top3_share_of_gross_profit": 24.5
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 116.91,
+      "p95_max_dd": 188.62,
+      "worst_max_dd": 300.28,
+      "median_final": 5172.62,
+      "p05_final": 5172.62,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.12772498506321583,
+    "within_batch_trial_count": 7,
+    "within_batch_daily_SR_variance": 8.27885491535193e-05,
+    "within_batch_expected_max_sr": 0.012618013015197141,
+    "within_batch_daily_dsr": 0.7984460104517221,
+    "within_batch_bonferroni": 0.8940748954425108
+  },
+  "2026_london_funded": {
+    "expectancy": 0.4899999999999996,
+    "omega_zero": 1.0532608695652173,
+    "ratios": {
+      "profit_factor": 1.0532608695652173,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.041808376578286545,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 29.07,
+      "gross_loss_unrounded": 27.6
+    },
+    "closed_balance": {
+      "years": 0.03285420944558522,
+      "annualised_return_pct": 0.8987456632337347,
+      "max_drawdown": 27.600000000000364,
+      "max_drawdown_pct": 0.5520000000000073,
+      "max_drawdown_duration_days": 10.564895833333333,
+      "end_balance": 5001.47,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 1.6281624333944256,
+      "recovery_factor": 0.05326086956521665,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {},
+    "ablation": {},
+    "monte_carlo_trade_order": {},
+    "weekly_one_sided_p": 0.4873500359034899
+  },
+  "2026_london_funded_phase_split": {
+    "expectancy": 5.75225,
+    "omega_zero": 1.6396008228164782,
+    "ratios": {
+      "profit_factor": 1.6396008228164782,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.4505739777319855,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 589.8299999999999,
+      "gross_loss_unrounded": 359.74
+    },
+    "closed_balance": {
+      "years": 0.6187542778918549,
+      "annualised_return_pct": 7.542027205616493,
+      "max_drawdown": 145.60000000000036,
+      "max_drawdown_pct": 2.8526366316944456,
+      "max_drawdown_duration_days": 115.00107638888889,
+      "end_balance": 5230.09,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 2.643879392776564,
+      "recovery_factor": 1.5802884615384576,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 40,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.639601,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.856745,
+        "ci_lower_status": "finite",
+        "median": 1.644508,
+        "median_status": "finite",
+        "ci_upper": 3.145333,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.450574,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.112508,
+        "ci_lower_status": "finite",
+        "median": 0.455273,
+        "median_status": "finite",
+        "ci_upper": 1.29212,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 230.09,
+      "drop_best_1": 170.24,
+      "drop_worst_1": 256.69,
+      "drop_best_3": 87.94,
+      "drop_worst_3": 305.97,
+      "drop_best_5": 21.63,
+      "drop_worst_5": 344.36,
+      "top3_share_of_gross_profit": 24.1
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 90.32,
+      "p95_max_dd": 146.4,
+      "worst_max_dd": 270.66,
+      "median_final": 5230.09,
+      "p05_final": 5230.09,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.03878255636476162
+  },
+  "2026_portfolio": {
+    "expectancy": 3.9766197183098595,
+    "omega_zero": 1.4051777334500526,
+    "ratios": {
+      "profit_factor": 1.4051777334500526,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.29154862210474664,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 979.1700000000001,
+      "gross_loss_unrounded": 696.8299999999999
+    },
+    "closed_balance": {
+      "years": 0.8323066392881588,
+      "annualised_return_pct": 6.822547315799779,
+      "max_drawdown": 166.61000000000058,
+      "max_drawdown_pct": 3.2654925188254453,
+      "max_drawdown_duration_days": 98.63773148148148,
+      "end_balance": 5282.34,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 2.0892858508993797,
+      "recovery_factor": 1.6946161694976234,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 71,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.405178,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.863192,
+        "ci_lower_status": "finite",
+        "median": 1.377879,
+        "median_status": "finite",
+        "ci_upper": 2.298482,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.291549,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.109273,
+        "ci_lower_status": "finite",
+        "median": 0.275996,
+        "median_status": "finite",
+        "ci_upper": 0.828966,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 282.34,
+      "drop_best_1": 222.49,
+      "drop_worst_1": 312.24,
+      "drop_best_3": 124.4,
+      "drop_worst_3": 364.05,
+      "drop_best_5": 46.53,
+      "drop_worst_5": 412.25,
+      "top3_share_of_gross_profit": 16.1
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 133.31,
+      "p95_max_dd": 221.24,
+      "worst_max_dd": 329.47,
+      "median_final": 5282.34,
+      "p05_final": 5282.34,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.058669034553271014,
+    "within_batch_trial_count": 7,
+    "within_batch_daily_SR_variance": 8.27885491535193e-05,
+    "within_batch_expected_max_sr": 0.012618013015197141,
+    "within_batch_daily_dsr": 0.883714881831944,
+    "within_batch_bonferroni": 0.4106832418728971
+  },
+  "2026_portfolio_funded": {
+    "expectancy": 8.369285714285715,
+    "omega_zero": 2.268622780424426,
+    "ratios": {
+      "profit_factor": 2.268622780424426,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.8086848775345747,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 209.52999999999997,
+      "gross_loss_unrounded": 92.35999999999999
+    },
+    "closed_balance": {
+      "years": 0.12867898699520877,
+      "annualised_return_pct": 19.72305912038839,
+      "max_drawdown": 53.090000000000146,
+      "max_drawdown_pct": 1.0551168896211427,
+      "max_drawdown_duration_days": 13.230613425925926,
+      "end_balance": 5117.17,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 18.692771686623537,
+      "recovery_factor": 2.2070069692974137,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 14,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 2.268623,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.001,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.789182,
+        "ci_lower_status": "finite",
+        "median": 2.277536,
+        "median_status": "finite",
+        "ci_upper": 8.86223,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.808685,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.001,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.170096,
+        "ci_lower_status": "finite",
+        "median": 0.812705,
+        "median_status": "finite",
+        "ci_upper": 3.052027,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 117.17,
+      "drop_best_1": 77.25,
+      "drop_worst_1": 136.82,
+      "drop_best_3": 19.51,
+      "drop_worst_3": 173.02,
+      "drop_best_5": -29.55,
+      "drop_worst_5": 199.68,
+      "top3_share_of_gross_profit": 46.6
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 38.1,
+      "p95_max_dd": 65.7,
+      "worst_max_dd": 92.36,
+      "median_final": 5117.17,
+      "p05_final": 5117.17,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.05243019309987457
+  },
+  "2026_portfolio_funded_mask3_phase_split_m01d01x3": {
+    "expectancy": 8.3175,
+    "omega_zero": 2.018573323808552,
+    "ratios": {
+      "profit_factor": 2.018573323808552,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.6529840204939736,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 395.6,
+      "gross_loss_unrounded": 195.98
+    },
+    "closed_balance": {
+      "years": 0.7364818617385352,
+      "annualised_return_pct": 5.459300875063422,
+      "max_drawdown": 43.460000000000036,
+      "max_drawdown_pct": 0.8514656729635165,
+      "max_drawdown_duration_days": 69.72662037037037,
+      "end_balance": 5199.62,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 6.411651166232443,
+      "recovery_factor": 4.593189139438561,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 24,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 2.018573,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.83447,
+        "ci_lower_status": "finite",
+        "median": 2.003427,
+        "median_status": "finite",
+        "ci_upper": 4.605668,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.652984,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.129856,
+        "ci_lower_status": "finite",
+        "median": 0.644771,
+        "median_status": "finite",
+        "ci_upper": 1.791511,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 199.62,
+      "drop_best_1": 159.7,
+      "drop_worst_1": 223.75,
+      "drop_best_3": 97.43,
+      "drop_worst_3": 267.21,
+      "drop_best_5": 37.37,
+      "drop_worst_5": 306.32,
+      "top3_share_of_gross_profit": 25.8
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 61.39,
+      "p95_max_dd": 102.38,
+      "worst_max_dd": 176.61,
+      "median_final": 5199.62,
+      "p05_final": 5199.62,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.027278280579077704
+  },
+  "2026_portfolio_funded_mask5": {
+    "expectancy": 7.892142857142858,
+    "omega_zero": 2.1962970983109575,
+    "ratios": {
+      "profit_factor": 2.1962970983109575,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.7625807981462419,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 202.85,
+      "gross_loss_unrounded": 92.35999999999999
+    },
+    "closed_balance": {
+      "years": 0.12867898699520877,
+      "annualised_return_pct": 18.513859665514396,
+      "max_drawdown": 53.090000000000146,
+      "max_drawdown_pct": 1.0551168896211427,
+      "max_drawdown_duration_days": 13.230613425925926,
+      "end_balance": 5110.49,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 17.546738041661058,
+      "recovery_factor": 2.0811828969674084,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 14,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 2.196297,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.001,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.767869,
+        "ci_lower_status": "finite",
+        "median": 2.202154,
+        "median_status": "finite",
+        "ci_upper": 8.344111,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.762581,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.001,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.183321,
+        "ci_lower_status": "finite",
+        "median": 0.768525,
+        "median_status": "finite",
+        "ci_upper": 2.955043,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 110.49,
+      "drop_best_1": 77.25,
+      "drop_worst_1": 130.14,
+      "drop_best_3": 19.51,
+      "drop_worst_3": 166.34,
+      "drop_best_5": -29.55,
+      "drop_worst_5": 193.0,
+      "top3_share_of_gross_profit": 44.9
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 38.1,
+      "p95_max_dd": 65.7,
+      "worst_max_dd": 92.36,
+      "median_final": 5110.49,
+      "p05_final": 5110.49,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.046589122038431616
+  },
+  "2026_portfolio_funded_mask5_phase_split_m01d01x5": {
+    "expectancy": 5.373728813559321,
+    "omega_zero": 1.5879680284850621,
+    "ratios": {
+      "profit_factor": 1.5879680284850621,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.40987675169032184,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 856.2800000000001,
+      "gross_loss_unrounded": 539.23
+    },
+    "closed_balance": {
+      "years": 0.6187542778918549,
+      "annualised_return_pct": 10.44661568680192,
+      "max_drawdown": 166.60999999999967,
+      "max_drawdown_pct": 3.2392150915810674,
+      "max_drawdown_duration_days": 93.97635416666667,
+      "end_balance": 5317.05,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 3.2250453864435737,
+      "recovery_factor": 1.902947001980677,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 59,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.587968,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.995561,
+        "ci_lower_status": "finite",
+        "median": 1.593142,
+        "median_status": "finite",
+        "ci_upper": 2.714932,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.409877,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.003418,
+        "ci_lower_status": "finite",
+        "median": 0.41491,
+        "median_status": "finite",
+        "ci_upper": 1.044951,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 317.05,
+      "drop_best_1": 257.2,
+      "drop_worst_1": 343.65,
+      "drop_best_3": 174.9,
+      "drop_worst_3": 392.99,
+      "drop_best_5": 108.59,
+      "drop_worst_5": 439.97,
+      "top3_share_of_gross_profit": 16.6
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 107.76,
+      "p95_max_dd": 175.98,
+      "worst_max_dd": 316.72,
+      "median_final": 5317.05,
+      "p05_final": 5317.05,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.024553806668677666
+  },
+  "2026_portfolio_funded_mask5_phase_split_m04d01x5": {
+    "expectancy": 4.869767441860467,
+    "omega_zero": 1.5465650448945503,
+    "ratios": {
+      "profit_factor": 1.5465650448945503,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.38376453886561823,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 592.5200000000001,
+      "gross_loss_unrounded": 383.12
+    },
+    "closed_balance": {
+      "years": 0.47091033538672145,
+      "annualised_return_pct": 9.103006292782007,
+      "max_drawdown": 166.60999999999967,
+      "max_drawdown_pct": 3.30845850179114,
+      "max_drawdown_duration_days": 93.97635416666667,
+      "end_balance": 5209.4,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 2.7514343274530426,
+      "recovery_factor": 1.2568273212892411,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 43,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.546565,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.84002,
+        "ci_lower_status": "finite",
+        "median": 1.528622,
+        "median_status": "finite",
+        "ci_upper": 2.905888,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.383765,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.127314,
+        "ci_lower_status": "finite",
+        "median": 0.37371,
+        "median_status": "finite",
+        "ci_upper": 1.10828,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 209.4,
+      "drop_best_1": 165.05,
+      "drop_worst_1": 234.61,
+      "drop_best_3": 98.74,
+      "drop_worst_3": 278.07,
+      "drop_best_5": 34.78,
+      "drop_worst_5": 317.09,
+      "top3_share_of_gross_profit": 18.7
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 92.91,
+      "p95_max_dd": 154.05,
+      "worst_max_dd": 254.62,
+      "median_final": 5209.4,
+      "p05_final": 5209.4,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.0691138065602735
+  },
+  "2026_portfolio_funded_mask5_phase_split_m07d01x5": {
+    "expectancy": 8.545384615384616,
+    "omega_zero": 2.222986734188364,
+    "ratios": {
+      "profit_factor": 2.222986734188364,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.7761715574485066,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 403.85,
+      "gross_loss_unrounded": 181.67
+    },
+    "closed_balance": {
+      "years": 0.23819301848049282,
+      "annualised_return_pct": 20.0248420163421,
+      "max_drawdown": 53.089999999999236,
+      "max_drawdown_pct": 1.032204628880717,
+      "max_drawdown_duration_days": 13.920069444444444,
+      "end_balance": 5222.18,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 19.400069962926118,
+      "recovery_factor": 4.184968920700757,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 26,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 2.222987,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 1.014022,
+        "ci_lower_status": "finite",
+        "median": 2.203081,
+        "median_status": "finite",
+        "ci_upper": 5.46885,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.776172,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.010876,
+        "ci_lower_status": "finite",
+        "median": 0.767304,
+        "median_status": "finite",
+        "ci_upper": 2.134879,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 222.18,
+      "drop_best_1": 188.94,
+      "drop_worst_1": 245.09,
+      "drop_best_3": 124.98,
+      "drop_worst_3": 285.29,
+      "drop_best_5": 64.61,
+      "drop_worst_5": 321.49,
+      "top3_share_of_gross_profit": 24.1
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 55.13,
+      "p95_max_dd": 91.37,
+      "worst_max_dd": 152.24,
+      "median_final": 5222.18,
+      "p05_final": 5222.18,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.007000177180885885
+  },
+  "2026_portfolio_funded_mask6": {
+    "expectancy": 10.463571428571429,
+    "omega_zero": 2.521183800623053,
+    "ratios": {
+      "profit_factor": 2.521183800623053,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.9580834366249688,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 242.79,
+      "gross_loss_unrounded": 96.3
+    },
+    "closed_balance": {
+      "years": 0.12867898699520877,
+      "annualised_return_pct": 25.15856686567203,
+      "max_drawdown": 57.030000000000655,
+      "max_drawdown_pct": 1.1303768715735023,
+      "max_drawdown_duration_days": 13.230613425925926,
+      "end_balance": 5146.49,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 22.256795497461752,
+      "recovery_factor": 2.5686480799578875,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 14,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 2.521184,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.001,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.839565,
+        "ci_lower_status": "finite",
+        "median": 2.536761,
+        "median_status": "finite",
+        "ci_upper": 9.739241,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.958083,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.001,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.125226,
+        "ci_lower_status": "finite",
+        "median": 0.963698,
+        "median_status": "finite",
+        "ci_upper": 3.496108,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 146.49,
+      "drop_best_1": 101.27,
+      "drop_worst_1": 170.08,
+      "drop_best_3": 24.16,
+      "drop_worst_3": 206.28,
+      "drop_best_5": -29.14,
+      "drop_worst_5": 232.94,
+      "top3_share_of_gross_profit": 50.4
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 42.04,
+      "p95_max_dd": 69.64,
+      "worst_max_dd": 96.3,
+      "median_final": 5146.49,
+      "p05_final": 5146.49,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.02667520475149382
+  },
+  "2026_portfolio_funded_mask6_phase_split_m01d01x6": {
+    "expectancy": 5.02515625,
+    "omega_zero": 1.4659461338973965,
+    "ratios": {
+      "profit_factor": 1.4659461338973965,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.3348572115200472,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 1011.84,
+      "gross_loss_unrounded": 690.23
+    },
+    "closed_balance": {
+      "years": 0.7255304585900069,
+      "annualised_return_pct": 8.971974763950655,
+      "max_drawdown": 177.71000000000004,
+      "max_drawdown_pct": 3.4471521375214107,
+      "max_drawdown_duration_days": 100.00195601851851,
+      "end_balance": 5321.61,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 2.6027208565275948,
+      "recovery_factor": 1.8097462157447524,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 64,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.465946,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.860493,
+        "ci_lower_status": "finite",
+        "median": 1.472235,
+        "median_status": "finite",
+        "ci_upper": 2.407217,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.334857,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.111391,
+        "ci_lower_status": "finite",
+        "median": 0.34037,
+        "median_status": "finite",
+        "ci_upper": 0.892571,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 321.61,
+      "drop_best_1": 261.76,
+      "drop_worst_1": 350.24,
+      "drop_best_3": 162.8,
+      "drop_worst_3": 404.34,
+      "drop_best_5": 74.87,
+      "drop_worst_5": 456.31,
+      "top3_share_of_gross_profit": 15.7
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 138.43,
+      "p95_max_dd": 224.43,
+      "worst_max_dd": 370.25,
+      "median_final": 5321.61,
+      "p05_final": 5321.61,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.05309259102018921
+  },
+  "2026_portfolio_funded_phase_split": {
+    "expectancy": 5.417031250000001,
+    "omega_zero": 1.5781539231218211,
+    "ratios": {
+      "profit_factor": 1.5781539231218211,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.40626943248365055,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 946.34,
+      "gross_loss_unrounded": 599.65
+    },
+    "closed_balance": {
+      "years": 0.7255304585900069,
+      "annualised_return_pct": 9.68045911020916,
+      "max_drawdown": 166.60999999999967,
+      "max_drawdown_pct": 3.2248199454561934,
+      "max_drawdown_duration_days": 93.97635416666667,
+      "end_balance": 5346.69,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 3.0018603438151743,
+      "recovery_factor": 2.080847488145974,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 64,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.578154,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.928686,
+        "ci_lower_status": "finite",
+        "median": 1.596514,
+        "median_status": "finite",
+        "ci_upper": 2.526462,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.406269,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.055264,
+        "ci_lower_status": "finite",
+        "median": 0.417651,
+        "median_status": "finite",
+        "ci_upper": 0.93901,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 346.69,
+      "drop_best_1": 286.84,
+      "drop_worst_1": 373.29,
+      "drop_best_3": 188.75,
+      "drop_worst_3": 422.63,
+      "drop_best_5": 110.88,
+      "drop_worst_5": 469.61,
+      "top3_share_of_gross_profit": 16.7
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 114.84,
+      "p95_max_dd": 185.4,
+      "worst_max_dd": 321.89,
+      "median_final": 5346.69,
+      "p05_final": 5346.69,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.022992328590284355
+  },
+  "2026_portfolio_funded_phase_split_m04d01x7": {
+    "expectancy": 5.025116279069769,
+    "omega_zero": 1.5640008352474422,
+    "ratios": {
+      "profit_factor": 1.5640008352474422,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.3960068842315319,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 599.2,
+      "gross_loss_unrounded": 383.12
+    },
+    "closed_balance": {
+      "years": 0.47091033538672145,
+      "annualised_return_pct": 9.400309780805701,
+      "max_drawdown": 166.60999999999967,
+      "max_drawdown_pct": 3.30845850179114,
+      "max_drawdown_duration_days": 93.97635416666667,
+      "end_balance": 5216.08,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 2.8412959617648346,
+      "recovery_factor": 1.296920953124065,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 43,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.564001,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.85075,
+        "ci_lower_status": "finite",
+        "median": 1.547053,
+        "median_status": "finite",
+        "ci_upper": 2.949198,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.396007,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.119492,
+        "ci_lower_status": "finite",
+        "median": 0.385386,
+        "median_status": "finite",
+        "ci_upper": 1.125018,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 216.08,
+      "drop_best_1": 171.73,
+      "drop_worst_1": 241.29,
+      "drop_best_3": 98.74,
+      "drop_worst_3": 284.75,
+      "drop_best_5": 34.78,
+      "drop_worst_5": 323.77,
+      "top3_share_of_gross_profit": 19.6
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 92.77,
+      "p95_max_dd": 153.54,
+      "worst_max_dd": 254.62,
+      "median_final": 5216.08,
+      "p05_final": 5216.08,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.06683812481764145
+  },
+  "2026_portfolio_funded_phase_split_m07d01x7": {
+    "expectancy": 8.802307692307693,
+    "omega_zero": 2.2597567017118956,
+    "ratios": {
+      "profit_factor": 2.2597567017118956,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.799507708334077,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 410.53000000000003,
+      "gross_loss_unrounded": 181.67
+    },
+    "closed_balance": {
+      "years": 0.23819301848049282,
+      "annualised_return_pct": 20.67072677482183,
+      "max_drawdown": 53.089999999999236,
+      "max_drawdown_pct": 1.032204628880717,
+      "max_drawdown_duration_days": 13.920069444444444,
+      "end_balance": 5228.86,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 20.02580321426806,
+      "recovery_factor": 4.3107929930307645,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 26,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 2.259757,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 1.017452,
+        "ci_lower_status": "finite",
+        "median": 2.23936,
+        "median_status": "finite",
+        "ci_upper": 5.524232,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.799508,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.013112,
+        "ci_lower_status": "finite",
+        "median": 0.794225,
+        "median_status": "finite",
+        "ci_upper": 2.182142,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 228.86,
+      "drop_best_1": 188.94,
+      "drop_worst_1": 251.77,
+      "drop_best_3": 124.98,
+      "drop_worst_3": 291.97,
+      "drop_best_5": 64.61,
+      "drop_worst_5": 328.17,
+      "top3_share_of_gross_profit": 25.3
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 55.13,
+      "p95_max_dd": 91.31,
+      "worst_max_dd": 152.24,
+      "median_final": 5228.86,
+      "p05_final": 5228.86,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.007804921764421258
+  },
+  "2026_portfolio_mask3": {
+    "expectancy": 7.790384615384616,
+    "omega_zero": 1.8967150699486455,
+    "ratios": {
+      "profit_factor": 1.8967150699486455,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.5740764803633995,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 428.43,
+      "gross_loss_unrounded": 225.88
+    },
+    "closed_balance": {
+      "years": 0.8323066392881588,
+      "annualised_return_pct": 4.886849130218778,
+      "max_drawdown": 46.39000000000033,
+      "max_drawdown_pct": 0.9217478039194713,
+      "max_drawdown_duration_days": 102.88685185185186,
+      "end_balance": 5202.55,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 5.301720394058806,
+      "recovery_factor": 4.366242724725126,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 26,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.896715,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.867624,
+        "ci_lower_status": "finite",
+        "median": 1.915625,
+        "median_status": "finite",
+        "ci_upper": 4.923032,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.574076,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.101837,
+        "ci_lower_status": "finite",
+        "median": 0.586196,
+        "median_status": "finite",
+        "ci_upper": 1.861778,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 202.55,
+      "drop_best_1": 162.63,
+      "drop_worst_1": 232.45,
+      "drop_best_3": 98.13,
+      "drop_worst_3": 279.49,
+      "drop_best_5": 37.11,
+      "drop_worst_5": 319.69,
+      "top3_share_of_gross_profit": 24.4
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 68.96,
+      "p95_max_dd": 113.98,
+      "worst_max_dd": 171.4,
+      "median_final": 5202.55,
+      "p05_final": 5202.55,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.03683954800134825,
+    "within_batch_trial_count": 7,
+    "within_batch_daily_SR_variance": 8.27885491535193e-05,
+    "within_batch_expected_max_sr": 0.012618013015197141,
+    "within_batch_daily_dsr": 0.9227235901483006,
+    "within_batch_bonferroni": 0.2578768360094377
+  },
+  "2026_portfolio_mask3_phase_split_m01d01x3": {
+    "expectancy": 12.290967741935487,
+    "omega_zero": 1.4497137798760695,
+    "ratios": {
+      "profit_factor": 1.4497137798760695,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.23216642788847527,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 1228.27,
+      "gross_loss_unrounded": 847.2500000000001
+    },
+    "closed_balance": {
+      "years": 0.8323066392881588,
+      "annualised_return_pct": 9.224668343765376,
+      "max_drawdown": 361.34999999999945,
+      "max_drawdown_pct": 6.778875646511688,
+      "max_drawdown_duration_days": 225.17341435185185,
+      "end_balance": 5381.02,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 1.3607962182507742,
+      "recovery_factor": 1.0544347585443494,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 31,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.449714,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.601884,
+        "ci_lower_status": "finite",
+        "median": 1.492463,
+        "median_status": "finite",
+        "ci_upper": 3.755304,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.232166,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.238546,
+        "ci_lower_status": "finite",
+        "median": 0.250816,
+        "median_status": "finite",
+        "ci_upper": 1.50662,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 381.02,
+      "drop_best_1": 112.38,
+      "drop_worst_1": 614.39,
+      "drop_best_3": -70.26,
+      "drop_worst_3": 776.5,
+      "drop_best_5": -199.26,
+      "drop_worst_5": 884.58,
+      "top3_share_of_gross_profit": 36.7
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 322.43,
+      "p95_max_dd": 488.0,
+      "worst_max_dd": 705.16,
+      "median_final": 5381.02,
+      "p05_final": 5381.02,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.20634986328010904
+  },
+  "2026_portfolio_mask5": {
+    "expectancy": 3.882535211267607,
+    "omega_zero": 1.395591464202173,
+    "ratios": {
+      "profit_factor": 1.395591464202173,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.2846507514677144,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 972.49,
+      "gross_loss_unrounded": 696.8299999999999
+    },
+    "closed_balance": {
+      "years": 0.8323066392881588,
+      "annualised_return_pct": 6.66026382797396,
+      "max_drawdown": 166.61000000000058,
+      "max_drawdown_pct": 3.2654925188254453,
+      "max_drawdown_duration_days": 98.63773148148148,
+      "end_balance": 5275.66,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 2.0395893696212077,
+      "recovery_factor": 1.6545225376628,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 71,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.395591,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.845319,
+        "ci_lower_status": "finite",
+        "median": 1.372471,
+        "median_status": "finite",
+        "ci_upper": 2.280251,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.284651,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.122431,
+        "ci_lower_status": "finite",
+        "median": 0.269443,
+        "median_status": "finite",
+        "ci_upper": 0.824187,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 275.66,
+      "drop_best_1": 215.81,
+      "drop_worst_1": 305.56,
+      "drop_best_3": 117.72,
+      "drop_worst_3": 357.37,
+      "drop_best_5": 46.53,
+      "drop_worst_5": 405.57,
+      "top3_share_of_gross_profit": 16.2
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 133.87,
+      "p95_max_dd": 221.53,
+      "worst_max_dd": 329.47,
+      "median_final": 5275.66,
+      "p05_final": 5275.66,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.06079360385153656,
+    "within_batch_trial_count": 7,
+    "within_batch_daily_SR_variance": 8.27885491535193e-05,
+    "within_batch_expected_max_sr": 0.012618013015197141,
+    "within_batch_daily_dsr": 0.878103855549498,
+    "within_batch_bonferroni": 0.42555522696075593
+  },
+  "2026_portfolio_mask5_phase_split_m01d01x5": {
+    "expectancy": 13.046753246753246,
+    "omega_zero": 1.687187906149531,
+    "ratios": {
+      "profit_factor": 1.687187906149531,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.47744679232300946,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 2466.4999999999995,
+      "gross_loss_unrounded": 1461.9
+    },
+    "closed_balance": {
+      "years": 0.8323066392881588,
+      "annualised_return_pct": 24.604749047302438,
+      "max_drawdown": 333.15999999999985,
+      "max_drawdown_pct": 5.949870076525371,
+      "max_drawdown_duration_days": 93.97635416666667,
+      "end_balance": 6004.599999999999,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 4.135342239552098,
+      "recovery_factor": 3.015367991355506,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 77,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.687188,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 1.000669,
+        "ci_lower_status": "finite",
+        "median": 1.687045,
+        "median_status": "finite",
+        "ci_upper": 2.747896,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.477447,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.0005,
+        "ci_lower_status": "finite",
+        "median": 0.477044,
+        "median_status": "finite",
+        "ci_upper": 1.083946,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 1004.6,
+      "drop_best_1": 816.51,
+      "drop_worst_1": 1072.92,
+      "drop_best_3": 585.33,
+      "drop_worst_3": 1185.93,
+      "drop_best_5": 375.04,
+      "drop_worst_5": 1284.61,
+      "top3_share_of_gross_profit": 17.0
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 247.28,
+      "p95_max_dd": 401.08,
+      "worst_max_dd": 666.18,
+      "median_final": 6004.6,
+      "p05_final": 6004.6,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.03330876787562865
+  },
+  "2026_portfolio_mask5_phase_split_m04d01x5": {
+    "expectancy": 11.640847457627117,
+    "omega_zero": 1.669940888429349,
+    "ratios": {
+      "profit_factor": 1.669940888429349,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.4603295901362857,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 1711.99,
+      "gross_loss_unrounded": 1025.18
+    },
+    "closed_balance": {
+      "years": 0.5859000684462696,
+      "annualised_return_pct": 24.568021581837975,
+      "max_drawdown": 333.15999999999985,
+      "max_drawdown_pct": 6.307865330218148,
+      "max_drawdown_duration_days": 93.97635416666667,
+      "end_balance": 5686.8099999999995,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 3.8948234142133034,
+      "recovery_factor": 2.0615019810301365,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 59,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.669941,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.983158,
+        "ci_lower_status": "finite",
+        "median": 1.694865,
+        "median_status": "finite",
+        "ci_upper": 2.838947,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.46033,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.013008,
+        "ci_lower_status": "finite",
+        "median": 0.476789,
+        "median_status": "finite",
+        "ci_upper": 1.09708,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 686.81,
+      "drop_best_1": 598.11,
+      "drop_worst_1": 737.23,
+      "drop_best_3": 455.75,
+      "drop_worst_3": 833.62,
+      "drop_best_5": 325.03,
+      "drop_worst_5": 920.55,
+      "top3_share_of_gross_profit": 13.5
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 197.83,
+      "p95_max_dd": 318.19,
+      "worst_max_dd": 536.61,
+      "median_final": 5686.81,
+      "p05_final": 5686.81,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.019003589496743953
+  },
+  "2026_portfolio_mask5_phase_split_m07d01x5": {
+    "expectancy": 19.646764705882354,
+    "omega_zero": 2.4228901290844806,
+    "ratios": {
+      "profit_factor": 2.4228901290844806,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.8954193495484757,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 1137.45,
+      "gross_loss_unrounded": 469.4599999999999
+    },
+    "closed_balance": {
+      "years": 0.33675564681724846,
+      "annualised_return_pct": 45.11652680900982,
+      "max_drawdown": 106.19999999999982,
+      "max_drawdown_pct": 1.9478054175401498,
+      "max_drawdown_duration_days": 13.95832175925926,
+      "end_balance": 5667.99,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 23.16274839505617,
+      "recovery_factor": 6.289924670433156,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 34,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 2.42289,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 1.21605,
+        "ci_lower_status": "finite",
+        "median": 2.426483,
+        "median_status": "finite",
+        "ci_upper": 5.139926,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.895419,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.164121,
+        "ci_lower_status": "finite",
+        "median": 0.902715,
+        "median_status": "finite",
+        "ci_upper": 2.042625,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 667.99,
+      "drop_best_1": 579.29,
+      "drop_worst_1": 713.81,
+      "drop_best_3": 446.67,
+      "drop_worst_3": 794.21,
+      "drop_best_5": 318.76,
+      "drop_worst_5": 868.29,
+      "top3_share_of_gross_profit": 19.5
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 117.43,
+      "p95_max_dd": 196.75,
+      "worst_max_dd": 310.3,
+      "median_final": 5667.99,
+      "p05_final": 5667.99,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.004111426185376363
+  },
+  "2026_portfolio_mask5_phase_split_m10d01x5": {
+    "expectancy": 16.81714285714286,
+    "omega_zero": 2.49904495097415,
+    "ratios": {
+      "profit_factor": 2.49904495097415,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.9501921906612876,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 196.25,
+      "gross_loss_unrounded": 78.53
+    },
+    "closed_balance": {
+      "years": 0.08487337440109514,
+      "annualised_return_pct": 31.545982541423406,
+      "max_drawdown": 55.1899999999996,
+      "max_drawdown_pct": 1.0901405390457488,
+      "max_drawdown_duration_days": 12.063912037037037,
+      "end_balance": 5117.72,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 28.93753732801927,
+      "recovery_factor": 2.132995107809401,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 7,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 2.499045,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.021,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.370177,
+        "ci_lower_status": "finite",
+        "median": 2.499045,
+        "median_status": "finite",
+        "ci_upper": 15.872524,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.950192,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.021,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.564586,
+        "ci_lower_status": "finite",
+        "median": 0.950192,
+        "median_status": "finite",
+        "ci_upper": 5.621286,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {},
+    "monte_carlo_trade_order": {
+      "median_max_dd": 55.19,
+      "p95_max_dd": 78.53,
+      "worst_max_dd": 78.53,
+      "median_final": 5117.72,
+      "p05_final": 5117.72,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.14565860282196905
+  },
+  "2026_portfolio_mask6": {
+    "expectancy": 4.303285714285715,
+    "omega_zero": 1.3976581167245317,
+    "ratios": {
+      "profit_factor": 1.3976581167245317,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.29060165485091083,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 1058.74,
+      "gross_loss_unrounded": 757.51
+    },
+    "closed_balance": {
+      "years": 0.8323066392881588,
+      "annualised_return_pct": 7.281683432722044,
+      "max_drawdown": 177.71000000000004,
+      "max_drawdown_pct": 3.4608336303211953,
+      "max_drawdown_duration_days": 100.00195601851851,
+      "end_balance": 5301.23,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 2.1040258534606995,
+      "recovery_factor": 1.6950649935287827,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 70,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.397658,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.86091,
+        "ci_lower_status": "finite",
+        "median": 1.387428,
+        "median_status": "finite",
+        "ci_upper": 2.244054,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.290602,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.111488,
+        "ci_lower_status": "finite",
+        "median": 0.281218,
+        "median_status": "finite",
+        "ci_upper": 0.821682,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 301.23,
+      "drop_best_1": 241.38,
+      "drop_worst_1": 329.86,
+      "drop_best_3": 140.74,
+      "drop_worst_3": 383.96,
+      "drop_best_5": 51.17,
+      "drop_worst_5": 435.93,
+      "top3_share_of_gross_profit": 15.2
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 149.44,
+      "p95_max_dd": 239.51,
+      "worst_max_dd": 375.86,
+      "median_final": 5301.23,
+      "p05_final": 5301.23,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.06814755250798273,
+    "within_batch_trial_count": 7,
+    "within_batch_daily_SR_variance": 8.27885491535193e-05,
+    "within_batch_expected_max_sr": 0.012618013015197141,
+    "within_batch_daily_dsr": 0.8738308824876666,
+    "within_batch_bonferroni": 0.4770328675558791
+  },
+  "2026_portfolio_mask6_phase_split_m01d01x6": {
+    "expectancy": 11.798536585365854,
+    "omega_zero": 1.4718194808171547,
+    "ratios": {
+      "profit_factor": 1.4718194808171547,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.28662726552421586,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 3018.0099999999998,
+      "gross_loss_unrounded": 2050.5299999999997
+    },
+    "closed_balance": {
+      "years": 0.8323066392881588,
+      "annualised_return_pct": 23.67982914231797,
+      "max_drawdown": 443.9400000000005,
+      "max_drawdown_pct": 8.132050103129806,
+      "max_drawdown_duration_days": 100.00195601851851,
+      "end_balance": 5967.4800000000005,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 2.9119138276342205,
+      "recovery_factor": 2.179303509483261,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 82,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.471819,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.872628,
+        "ci_lower_status": "finite",
+        "median": 1.453752,
+        "median_status": "finite",
+        "ci_upper": 2.508873,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.286627,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.07754,
+        "ci_lower_status": "finite",
+        "median": 0.285844,
+        "median_status": "finite",
+        "ci_upper": 0.951793,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 967.48,
+      "drop_best_1": 698.84,
+      "drop_worst_1": 1200.85,
+      "drop_best_3": 364.11,
+      "drop_worst_3": 1362.96,
+      "drop_best_5": 132.93,
+      "drop_worst_5": 1503.06,
+      "top3_share_of_gross_profit": 20.0
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 407.94,
+      "p95_max_dd": 644.27,
+      "worst_max_dd": 1009.74,
+      "median_final": 5967.48,
+      "p05_final": 5967.48,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.11450099440896438
+  },
+  "2026_portfolio_phase_split_m04d01x7": {
+    "expectancy": 12.777499999999998,
+    "omega_zero": 1.7478198950428216,
+    "ratios": {
+      "profit_factor": 1.7478198950428216,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.5095417838110873,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 1791.83,
+      "gross_loss_unrounded": 1025.18
+    },
+    "closed_balance": {
+      "years": 0.5859000684462696,
+      "annualised_return_pct": 27.567745432393213,
+      "max_drawdown": 333.15999999999985,
+      "max_drawdown_pct": 6.307865330218148,
+      "max_drawdown_duration_days": 93.97635416666667,
+      "end_balance": 5766.65,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 4.370376345913495,
+      "recovery_factor": 2.30114659623004,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 60,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.74782,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 1.037068,
+        "ci_lower_status": "finite",
+        "median": 1.748464,
+        "median_status": "finite",
+        "ci_upper": 2.988432,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.509542,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.029095,
+        "ci_lower_status": "finite",
+        "median": 0.508178,
+        "median_status": "finite",
+        "ci_upper": 1.164828,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 766.65,
+      "drop_best_1": 677.95,
+      "drop_worst_1": 817.07,
+      "drop_best_3": 522.22,
+      "drop_worst_3": 913.46,
+      "drop_best_5": 389.6,
+      "drop_worst_5": 1000.39,
+      "top3_share_of_gross_profit": 13.6
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 193.03,
+      "p95_max_dd": 313.14,
+      "worst_max_dd": 549.12,
+      "median_final": 5766.65,
+      "p05_final": 5766.65,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.01797636667463678
+  },
+  "2026_portfolio_phase_split_m07d01x7": {
+    "expectancy": 21.366571428571426,
+    "omega_zero": 2.5929578664848973,
+    "ratios": {
+      "profit_factor": 2.5929578664848973,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.9880179475684981,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 1217.29,
+      "gross_loss_unrounded": 469.46000000000004
+    },
+    "closed_balance": {
+      "years": 0.33675564681724846,
+      "annualised_return_pct": 51.27117675084052,
+      "max_drawdown": 106.19999999999982,
+      "max_drawdown_pct": 1.9478054175401498,
+      "max_drawdown_duration_days": 13.95832175925926,
+      "end_balance": 5747.83,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 26.322535243581985,
+      "recovery_factor": 7.041713747645963,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 35,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 2.592958,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 1.319719,
+        "ci_lower_status": "finite",
+        "median": 2.648572,
+        "median_status": "finite",
+        "ci_upper": 5.332778,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.988018,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.233817,
+        "ci_lower_status": "finite",
+        "median": 1.002105,
+        "median_status": "finite",
+        "ci_upper": 2.155914,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {
+      "net_pl": 747.83,
+      "drop_best_1": 659.13,
+      "drop_worst_1": 793.65,
+      "drop_best_3": 512.82,
+      "drop_worst_3": 874.05,
+      "drop_best_5": 382.1,
+      "drop_worst_5": 948.13,
+      "top3_share_of_gross_profit": 19.3
+    },
+    "monte_carlo_trade_order": {
+      "median_max_dd": 114.27,
+      "p95_max_dd": 189.48,
+      "worst_max_dd": 321.39,
+      "median_final": 5747.83,
+      "p05_final": 5747.83,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.005694645587024037
+  },
+  "2026_portfolio_phase_split_m10d01x7": {
+    "expectancy": 16.81714285714286,
+    "omega_zero": 2.49904495097415,
+    "ratios": {
+      "profit_factor": 2.49904495097415,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.9501921906612876,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 196.25,
+      "gross_loss_unrounded": 78.53
+    },
+    "closed_balance": {
+      "years": 0.08487337440109514,
+      "annualised_return_pct": 31.545982541423406,
+      "max_drawdown": 55.1899999999996,
+      "max_drawdown_pct": 1.0901405390457488,
+      "max_drawdown_duration_days": 12.063912037037037,
+      "end_balance": 5117.72,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 28.93753732801927,
+      "recovery_factor": 2.132995107809401,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "bootstrap": {
+      "n_trades": 7,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 2.499045,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.021,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.370177,
+        "ci_lower_status": "finite",
+        "median": 2.499045,
+        "median_status": "finite",
+        "ci_upper": 15.872524,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.950192,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.021,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.564586,
+        "ci_lower_status": "finite",
+        "median": 0.950192,
+        "median_status": "finite",
+        "ci_upper": 5.621286,
+        "ci_upper_status": "finite"
+      }
+    },
+    "ablation": {},
+    "monte_carlo_trade_order": {
+      "median_max_dd": 55.19,
+      "p95_max_dd": 78.53,
+      "worst_max_dd": 78.53,
+      "median_final": 5117.72,
+      "p05_final": 5117.72,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "weekly_one_sided_p": 0.14565860282196905
+  }
+}

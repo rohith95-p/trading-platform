@@ -1,0 +1,7558 @@
+{
+  "broker_evaluation_cap_False": {
+    "baskets": 289,
+    "net": -113.7,
+    "pf": 0.843,
+    "win_pct": 95.16,
+    "max_dd": 232.91,
+    "best_removed": -148.29,
+    "stops": 14,
+    "trades": [
+      {
+        "open": 1777644900000,
+        "close": 1777645056000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1777889700000,
+        "close": 1777890413000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1777910400000,
+        "close": 1777910438000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1777911300000,
+        "close": 1777911318000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1777912200000,
+        "close": 1777912250000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778022900000,
+        "close": 1778022933000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778054400000,
+        "close": 1778054445000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778136300000,
+        "close": 1778136346000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780017300000,
+        "close": 1780017912000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780442100000,
+        "close": 1780443863000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780572600000,
+        "close": 1780572843000,
+        "pnl": 2.1,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780573500000,
+        "close": 1780574668000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780618500000,
+        "close": 1780619426000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780623900000,
+        "close": 1780624002000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780664400000,
+        "close": 1780664471000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780666200000,
+        "close": 1780666205000,
+        "pnl": 2.16,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780667100000,
+        "close": 1780668163000,
+        "pnl": 2.57,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780668900000,
+        "close": 1780669175000,
+        "pnl": 2.2,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781016300000,
+        "close": 1781016304000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781019000000,
+        "close": 1781019004000,
+        "pnl": 2.1,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781021700000,
+        "close": 1781021751000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781046000000,
+        "close": 1781046156000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781046900000,
+        "close": 1781048746839,
+        "pnl": -50.946,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1781052300000,
+        "close": 1781052796000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781093700000,
+        "close": 1781093716000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781119800000,
+        "close": 1781119860000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781122500000,
+        "close": 1781122575000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781133300000,
+        "close": 1781133304000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781199900000,
+        "close": 1781199905000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781513100000,
+        "close": 1781513360000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781530200000,
+        "close": 1781531558000,
+        "pnl": 2.24,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781533800000,
+        "close": 1781534003000,
+        "pnl": 2.11,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781599500000,
+        "close": 1781599869000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781600400000,
+        "close": 1781600645000,
+        "pnl": 2.11,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781706600000,
+        "close": 1781706961000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781718300000,
+        "close": 1781719226000,
+        "pnl": 34.59,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781720100000,
+        "close": 1781720106000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781724600000,
+        "close": 1781724688000,
+        "pnl": 2.12,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781725500000,
+        "close": 1781725508000,
+        "pnl": 2.26,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781773200000,
+        "close": 1781773417000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781774100000,
+        "close": 1781774227000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781810100000,
+        "close": 1781811392000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781827200000,
+        "close": 1781827234000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781828100000,
+        "close": 1781828387000,
+        "pnl": 2.16,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781838900000,
+        "close": 1781838976000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781840700000,
+        "close": 1781843696707,
+        "pnl": -51.014,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1782090000000,
+        "close": 1782091276000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782091800000,
+        "close": 1782091804000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782123300000,
+        "close": 1782123323000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782179100000,
+        "close": 1782179617000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782201600000,
+        "close": 1782202754000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782258300000,
+        "close": 1782258339000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782269100000,
+        "close": 1782269313000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782270000000,
+        "close": 1782270013000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782270900000,
+        "close": 1782271817000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782299700000,
+        "close": 1782300622000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782304200000,
+        "close": 1782304399000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782305100000,
+        "close": 1782305122000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782306000000,
+        "close": 1782306212000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782306900000,
+        "close": 1782306904000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782307800000,
+        "close": 1782307803000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782393300000,
+        "close": 1782393324000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782441900000,
+        "close": 1782442214000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782442800000,
+        "close": 1782443172000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782483300000,
+        "close": 1782484206000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782727200000,
+        "close": 1782727806000,
+        "pnl": 2.16,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782742500000,
+        "close": 1782742608000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782780300000,
+        "close": 1782781605181,
+        "pnl": -50.538,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1782866700000,
+        "close": 1782867111000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782868500000,
+        "close": 1782869409000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782870300000,
+        "close": 1782870422000,
+        "pnl": 2.14,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782871200000,
+        "close": 1782872156000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782886500000,
+        "close": 1782886813000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782904500000,
+        "close": 1782907238939,
+        "pnl": -51.064,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1782996300000,
+        "close": 1782996316000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782998100000,
+        "close": 1782998119000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782999900000,
+        "close": 1783000868000,
+        "pnl": 2.37,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783040400000,
+        "close": 1783041649971,
+        "pnl": -50.2,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1783294200000,
+        "close": 1783294206000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783387800000,
+        "close": 1783387824000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783426500000,
+        "close": 1783426646000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783451700000,
+        "close": 1783452613000,
+        "pnl": 2.23,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783453500000,
+        "close": 1783453554000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783499400000,
+        "close": 1783499433000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783500300000,
+        "close": 1783500364000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783501200000,
+        "close": 1783502126000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783578600000,
+        "close": 1783578610000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783579500000,
+        "close": 1783580739000,
+        "pnl": 2.2,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783673100000,
+        "close": 1783675008000,
+        "pnl": 2.19,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783953000000,
+        "close": 1783954683000,
+        "pnl": 2.32,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784007900000,
+        "close": 1784008017000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784033100000,
+        "close": 1784033104000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784034000000,
+        "close": 1784034004000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784034900000,
+        "close": 1784035213000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784119500000,
+        "close": 1784121067000,
+        "pnl": 2.1,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784205900000,
+        "close": 1784205952000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784206800000,
+        "close": 1784206816000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784207700000,
+        "close": 1784207715000,
+        "pnl": 2.13,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784209500000,
+        "close": 1784209524000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784292300000,
+        "close": 1784292427000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784293200000,
+        "close": 1784293407000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784596500000,
+        "close": 1784597038000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784597400000,
+        "close": 1784597885000,
+        "pnl": 2.1,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784612700000,
+        "close": 1784613089000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784614500000,
+        "close": 1784614651000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784680200000,
+        "close": 1784680260000,
+        "pnl": 2.31,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784682900000,
+        "close": 1784682923000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784683800000,
+        "close": 1784683914000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784684700000,
+        "close": 1784684976000,
+        "pnl": 2.15,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784729700000,
+        "close": 1784729709000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784792700000,
+        "close": 1784795721000,
+        "pnl": 2.13,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784809800000,
+        "close": 1784811710724,
+        "pnl": -50.688,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1784862000000,
+        "close": 1784862252000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785111300000,
+        "close": 1785111348000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785198600000,
+        "close": 1785198845000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785200400000,
+        "close": 1785200676000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785202200000,
+        "close": 1785202220000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785203100000,
+        "close": 1785205215000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785232800000,
+        "close": 1785233233000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785233700000,
+        "close": 1785234766000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785328200000,
+        "close": 1785328266000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785333600000,
+        "close": 1785334701000,
+        "pnl": 2.29,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785348900000,
+        "close": 1785348981000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785349800000,
+        "close": 1785349886000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785350700000,
+        "close": 1785352215000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785420000000,
+        "close": 1785420004000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785465900000,
+        "close": 1785466114000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785485700000,
+        "close": 1785485966000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785486600000,
+        "close": 1785487263000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785487500000,
+        "close": 1785487661000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785490200000,
+        "close": 1785491240000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785502800000,
+        "close": 1785504132000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785505500000,
+        "close": 1785505562000,
+        "pnl": 2.12,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785506400000,
+        "close": 1785506405000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785802500000,
+        "close": 1785802830000,
+        "pnl": 2.11,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785844800000,
+        "close": 1785844809000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785897000000,
+        "close": 1785897010000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785897900000,
+        "close": 1785898350000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785898800000,
+        "close": 1785898863000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785899700000,
+        "close": 1785899770000,
+        "pnl": 2.13,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785930300000,
+        "close": 1785932220609,
+        "pnl": -50.697,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1785974400000,
+        "close": 1785974410000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785977100000,
+        "close": 1785978358000,
+        "pnl": 2.59,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786083300000,
+        "close": 1786083315000,
+        "pnl": 2.2,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786085100000,
+        "close": 1786085383000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786086000000,
+        "close": 1786086045000,
+        "pnl": 2.15,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786092300000,
+        "close": 1786092591000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786106700000,
+        "close": 1786107011000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786107600000,
+        "close": 1786107615000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786387500000,
+        "close": 1786387515000,
+        "pnl": 2.24,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786389300000,
+        "close": 1786390542000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786408200000,
+        "close": 1786408264000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786409100000,
+        "close": 1786409282000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786411800000,
+        "close": 1786412222000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786413600000,
+        "close": 1786413617000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786414500000,
+        "close": 1786414801000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786428000000,
+        "close": 1786428095000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786428900000,
+        "close": 1786429048000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786429800000,
+        "close": 1786429826000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786500900000,
+        "close": 1786500968000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786503600000,
+        "close": 1786503885000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786539600000,
+        "close": 1786539601000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786581900000,
+        "close": 1786581910000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786603500000,
+        "close": 1786603638000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786670100000,
+        "close": 1786671929000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786708800000,
+        "close": 1786709611000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786709700000,
+        "close": 1786709782000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786710600000,
+        "close": 1786710607000,
+        "pnl": 2.1,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786714200000,
+        "close": 1786715239000,
+        "pnl": 2.41,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786929300000,
+        "close": 1786929376000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786930200000,
+        "close": 1786930265000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787066100000,
+        "close": 1787066115000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787067000000,
+        "close": 1787067060000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787083200000,
+        "close": 1787086075368,
+        "pnl": -58.25,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1787143500000,
+        "close": 1787143507000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787144400000,
+        "close": 1787144404000,
+        "pnl": 2.12,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787145300000,
+        "close": 1787146543000,
+        "pnl": 2.33,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787147100000,
+        "close": 1787147157000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787166900000,
+        "close": 1787168269000,
+        "pnl": 2.34,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787169600000,
+        "close": 1787169861000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787171400000,
+        "close": 1787181813000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787228100000,
+        "close": 1787228133000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787229000000,
+        "close": 1787229585000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787238900000,
+        "close": 1787238917000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787239800000,
+        "close": 1787239830000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787301000000,
+        "close": 1787301545000,
+        "pnl": 2.23,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787301900000,
+        "close": 1787304092000,
+        "pnl": 2.13,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787331600000,
+        "close": 1787331943000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787616900000,
+        "close": 1787616920000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787664600000,
+        "close": 1787664604000,
+        "pnl": 2.15,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787736600000,
+        "close": 1787736662000,
+        "pnl": 2.26,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787824800000,
+        "close": 1787825714000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787927400000,
+        "close": 1787927403000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787933700000,
+        "close": 1787933723000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787934600000,
+        "close": 1787934603000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787935500000,
+        "close": 1787935503000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788133500000,
+        "close": 1788134109000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788142500000,
+        "close": 1788143095000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788143400000,
+        "close": 1788143433000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788144300000,
+        "close": 1788144320000,
+        "pnl": 2.12,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788251400000,
+        "close": 1788254069000,
+        "pnl": 2.77,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788267600000,
+        "close": 1788269370000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788313500000,
+        "close": 1788314851000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788315300000,
+        "close": 1788315389000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788355800000,
+        "close": 1788357935375,
+        "pnl": -50.742,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1788398100000,
+        "close": 1788398224000,
+        "pnl": 2.16,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788399000000,
+        "close": 1788402206000,
+        "pnl": 2.45,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788404400000,
+        "close": 1788407198000,
+        "pnl": 3.57,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788439500000,
+        "close": 1788439527000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788440400000,
+        "close": 1788440402000,
+        "pnl": 2.19,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788441300000,
+        "close": 1788441379000,
+        "pnl": 2.22,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788525900000,
+        "close": 1788526188000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788526800000,
+        "close": 1788527768000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788743700000,
+        "close": 1788744472000,
+        "pnl": 2.29,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788824700000,
+        "close": 1788824757000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788831000000,
+        "close": 1788831271000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788895800000,
+        "close": 1788900382760,
+        "pnl": -53.998,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1788933600000,
+        "close": 1788934877000,
+        "pnl": 2.26,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788960600000,
+        "close": 1788960966000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789043400000,
+        "close": 1789043402000,
+        "pnl": 2.12,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789044300000,
+        "close": 1789044340000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789045200000,
+        "close": 1789045202000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789065900000,
+        "close": 1789066279000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789066800000,
+        "close": 1789068292000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789107300000,
+        "close": 1789107661000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789131600000,
+        "close": 1789131685000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789132500000,
+        "close": 1789132539000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789133400000,
+        "close": 1789133407000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789134300000,
+        "close": 1789134327000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789135200000,
+        "close": 1789135204000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789378200000,
+        "close": 1789379669000,
+        "pnl": 2.1,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789390800000,
+        "close": 1789391897000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789460100000,
+        "close": 1789460161000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789461900000,
+        "close": 1789463129000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789527600000,
+        "close": 1789529533000,
+        "pnl": 2.7,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789555500000,
+        "close": 1789555939000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789585200000,
+        "close": 1789585208000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789586100000,
+        "close": 1789586116000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789587000000,
+        "close": 1789587009000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789646400000,
+        "close": 1789646552000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789647300000,
+        "close": 1789648530000,
+        "pnl": 2.19,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789712100000,
+        "close": 1789712132000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789713000000,
+        "close": 1789714253000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790035200000,
+        "close": 1790036116000,
+        "pnl": 2.22,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790055900000,
+        "close": 1790055921000,
+        "pnl": 2.1,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790064000000,
+        "close": 1790064119000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790163000000,
+        "close": 1790163933000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790173800000,
+        "close": 1790173808000,
+        "pnl": 2.19,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790242200000,
+        "close": 1790242291000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790243100000,
+        "close": 1790243261000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790331300000,
+        "close": 1790331395000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790332200000,
+        "close": 1790332380000,
+        "pnl": 2.19,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790556300000,
+        "close": 1790556320000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790557200000,
+        "close": 1790559590153,
+        "pnl": -50.508,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1790680500000,
+        "close": 1790681934000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790692200000,
+        "close": 1790692357000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790772300000,
+        "close": 1790772364000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790903700000,
+        "close": 1790903811000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790946000000,
+        "close": 1790946340000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790955900000,
+        "close": 1790956122000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790956800000,
+        "close": 1790956808000,
+        "pnl": 2.14,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791276300000,
+        "close": 1791277567000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791287100000,
+        "close": 1791289840000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791339300000,
+        "close": 1791339493000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791352800000,
+        "close": 1791353104000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791366300000,
+        "close": 1791370232000,
+        "pnl": 2.2,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791376200000,
+        "close": 1791376307000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791377100000,
+        "close": 1791377135000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791423900000,
+        "close": 1791423946000,
+        "pnl": 2.21,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791424800000,
+        "close": 1791427744000,
+        "pnl": 3.53,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791508500000,
+        "close": 1791511309369,
+        "pnl": -50.907,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1791981900000,
+        "close": 1791981952000,
+        "pnl": 2.26,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791982800000,
+        "close": 1791984627000,
+        "pnl": 2.67,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1792023300000,
+        "close": 1792026013000,
+        "pnl": 2.22,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1792026900000,
+        "close": 1792027561000,
+        "pnl": 2.1,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1792094400000,
+        "close": 1792094674000,
+        "pnl": 2.21,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1792419300000,
+        "close": 1792419440000,
+        "pnl": 2.14,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1792451700000,
+        "close": 1792452232000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1792458900000,
+        "close": 1792459837000,
+        "pnl": 2.1,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1792639800000,
+        "close": 1792643523596,
+        "pnl": -52.314,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1792720800000,
+        "close": 1792721018000,
+        "pnl": 2.21,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1792765800000,
+        "close": 1792765849000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1793023200000,
+        "close": 1793023208000,
+        "pnl": 2.11,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1793111400000,
+        "close": 1793114114672,
+        "pnl": -51.241,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1793362500000,
+        "close": 1793362564000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1793364300000,
+        "close": 1793364302000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1793366100000,
+        "close": 1793366115000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1793367900000,
+        "close": 1793367932000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1793368800000,
+        "close": 1793370627000,
+        "pnl": 2.18,
+        "reason": "Luna exit"
+      }
+    ]
+  },
+  "broker_evaluation_cap_True": {
+    "baskets": 282,
+    "net": -15.19,
+    "pf": 0.975,
+    "win_pct": 93.62,
+    "max_dd": 184.38,
+    "best_removed": -49.78,
+    "stops": 18,
+    "trades": [
+      {
+        "open": 1777644900000,
+        "close": 1777645056000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1777889700000,
+        "close": 1777890413000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1777910400000,
+        "close": 1777910438000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1777911300000,
+        "close": 1777911318000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1777912200000,
+        "close": 1777912250000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778022900000,
+        "close": 1778022933000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778054400000,
+        "close": 1778054445000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778136300000,
+        "close": 1778136346000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780017300000,
+        "close": 1780017912000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780442100000,
+        "close": 1780443863000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780572600000,
+        "close": 1780572843000,
+        "pnl": 2.1,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780573500000,
+        "close": 1780574668000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780618500000,
+        "close": 1780619426000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780623900000,
+        "close": 1780624002000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780664400000,
+        "close": 1780664471000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780666200000,
+        "close": 1780666205000,
+        "pnl": 2.16,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780667100000,
+        "close": 1780668163000,
+        "pnl": 2.57,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780668900000,
+        "close": 1780669175000,
+        "pnl": 2.2,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781016300000,
+        "close": 1781016304000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781019000000,
+        "close": 1781019004000,
+        "pnl": 2.1,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781021700000,
+        "close": 1781021751000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781046000000,
+        "close": 1781046156000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781046900000,
+        "close": 1781048746839,
+        "pnl": -50.946,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1781052300000,
+        "close": 1781052796000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781093700000,
+        "close": 1781093716000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781119800000,
+        "close": 1781119860000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781122500000,
+        "close": 1781122575000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781133300000,
+        "close": 1781133304000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781199900000,
+        "close": 1781199905000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781513100000,
+        "close": 1781513360000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781530200000,
+        "close": 1781531558000,
+        "pnl": 2.24,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781533800000,
+        "close": 1781534003000,
+        "pnl": 2.11,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781599500000,
+        "close": 1781599869000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781600400000,
+        "close": 1781600645000,
+        "pnl": 2.11,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781706600000,
+        "close": 1781706961000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781718300000,
+        "close": 1781719226000,
+        "pnl": 34.59,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781720100000,
+        "close": 1781720106000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781724600000,
+        "close": 1781724688000,
+        "pnl": 2.12,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781725500000,
+        "close": 1781725508000,
+        "pnl": 2.26,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781773200000,
+        "close": 1781773417000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781774100000,
+        "close": 1781774227000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781810100000,
+        "close": 1781811392000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781827200000,
+        "close": 1781827234000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781828100000,
+        "close": 1781828387000,
+        "pnl": 2.16,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781838900000,
+        "close": 1781838976000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781840700000,
+        "close": 1781843400017,
+        "pnl": -22.222,
+        "reason": "oversize"
+      },
+      {
+        "open": 1782090000000,
+        "close": 1782091276000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782091800000,
+        "close": 1782091804000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782123300000,
+        "close": 1782123323000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782179100000,
+        "close": 1782179617000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782201600000,
+        "close": 1782202754000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782258300000,
+        "close": 1782258339000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782269100000,
+        "close": 1782269313000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782270000000,
+        "close": 1782270013000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782270900000,
+        "close": 1782271817000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782299700000,
+        "close": 1782300622000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782304200000,
+        "close": 1782304399000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782305100000,
+        "close": 1782305122000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782306000000,
+        "close": 1782306212000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782306900000,
+        "close": 1782306904000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782307800000,
+        "close": 1782307803000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782393300000,
+        "close": 1782393324000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782441900000,
+        "close": 1782442214000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782442800000,
+        "close": 1782443172000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782483300000,
+        "close": 1782484206000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782727200000,
+        "close": 1782727806000,
+        "pnl": 2.16,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782742500000,
+        "close": 1782742608000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782780300000,
+        "close": 1782781605181,
+        "pnl": -50.538,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1782866700000,
+        "close": 1782867111000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782868500000,
+        "close": 1782869409000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782870300000,
+        "close": 1782870422000,
+        "pnl": 2.14,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782871200000,
+        "close": 1782872156000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782886500000,
+        "close": 1782886813000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782904500000,
+        "close": 1782907200078,
+        "pnl": -23.088,
+        "reason": "oversize"
+      },
+      {
+        "open": 1782996300000,
+        "close": 1782996316000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782998100000,
+        "close": 1782998119000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782999900000,
+        "close": 1783000868000,
+        "pnl": 2.37,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783040400000,
+        "close": 1783041649971,
+        "pnl": -50.2,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1783294200000,
+        "close": 1783294206000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783387800000,
+        "close": 1783387824000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783426500000,
+        "close": 1783426646000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783451700000,
+        "close": 1783452613000,
+        "pnl": 2.23,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783453500000,
+        "close": 1783453554000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783499400000,
+        "close": 1783499433000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783500300000,
+        "close": 1783500364000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783501200000,
+        "close": 1783502126000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783578600000,
+        "close": 1783578610000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783579500000,
+        "close": 1783580739000,
+        "pnl": 2.2,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783673100000,
+        "close": 1783675008000,
+        "pnl": 2.19,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783953000000,
+        "close": 1783954683000,
+        "pnl": 2.32,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784007900000,
+        "close": 1784008017000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784033100000,
+        "close": 1784033104000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784034000000,
+        "close": 1784034004000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784034900000,
+        "close": 1784035213000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784119500000,
+        "close": 1784121067000,
+        "pnl": 2.1,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784205900000,
+        "close": 1784205952000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784206800000,
+        "close": 1784206816000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784207700000,
+        "close": 1784207715000,
+        "pnl": 2.13,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784209500000,
+        "close": 1784209524000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784292300000,
+        "close": 1784292427000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784293200000,
+        "close": 1784293407000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784596500000,
+        "close": 1784597038000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784597400000,
+        "close": 1784597885000,
+        "pnl": 2.1,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784612700000,
+        "close": 1784613089000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784614500000,
+        "close": 1784614651000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784680200000,
+        "close": 1784680260000,
+        "pnl": 2.31,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784682900000,
+        "close": 1784682923000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784683800000,
+        "close": 1784683914000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784684700000,
+        "close": 1784684976000,
+        "pnl": 2.15,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784729700000,
+        "close": 1784729709000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784792700000,
+        "close": 1784795721000,
+        "pnl": 2.13,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784809800000,
+        "close": 1784811710724,
+        "pnl": -50.688,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1784862000000,
+        "close": 1784862252000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785111300000,
+        "close": 1785111348000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785198600000,
+        "close": 1785198845000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785200400000,
+        "close": 1785200676000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785202200000,
+        "close": 1785202220000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785203100000,
+        "close": 1785205215000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785232800000,
+        "close": 1785233233000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785233700000,
+        "close": 1785234766000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785328200000,
+        "close": 1785328266000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785333600000,
+        "close": 1785334701000,
+        "pnl": 2.29,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785348900000,
+        "close": 1785348981000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785349800000,
+        "close": 1785349886000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785350700000,
+        "close": 1785352215000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785420000000,
+        "close": 1785420004000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785465900000,
+        "close": 1785466114000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785485700000,
+        "close": 1785485966000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785486600000,
+        "close": 1785487263000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785487500000,
+        "close": 1785487661000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785490200000,
+        "close": 1785491240000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785502800000,
+        "close": 1785504132000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785505500000,
+        "close": 1785505562000,
+        "pnl": 2.12,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785506400000,
+        "close": 1785506405000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785802500000,
+        "close": 1785802830000,
+        "pnl": 2.11,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785844800000,
+        "close": 1785844809000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785897000000,
+        "close": 1785897010000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785897900000,
+        "close": 1785898350000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785898800000,
+        "close": 1785898863000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785899700000,
+        "close": 1785899770000,
+        "pnl": 2.13,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785930300000,
+        "close": 1785932220609,
+        "pnl": -50.697,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1785974400000,
+        "close": 1785974410000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785977100000,
+        "close": 1785978358000,
+        "pnl": 2.59,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786083300000,
+        "close": 1786083315000,
+        "pnl": 2.2,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786085100000,
+        "close": 1786085383000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786086000000,
+        "close": 1786086045000,
+        "pnl": 2.15,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786092300000,
+        "close": 1786092591000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786106700000,
+        "close": 1786107011000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786107600000,
+        "close": 1786107615000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786387500000,
+        "close": 1786387515000,
+        "pnl": 2.24,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786389300000,
+        "close": 1786390542000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786408200000,
+        "close": 1786408264000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786409100000,
+        "close": 1786409282000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786411800000,
+        "close": 1786412222000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786413600000,
+        "close": 1786413617000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786414500000,
+        "close": 1786414801000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786428000000,
+        "close": 1786428095000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786428900000,
+        "close": 1786429048000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786429800000,
+        "close": 1786429826000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786500900000,
+        "close": 1786500968000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786503600000,
+        "close": 1786503885000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786539600000,
+        "close": 1786539601000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786581900000,
+        "close": 1786581910000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786603500000,
+        "close": 1786603638000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786670100000,
+        "close": 1786671929000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786708800000,
+        "close": 1786709611000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786709700000,
+        "close": 1786709782000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786710600000,
+        "close": 1786710607000,
+        "pnl": 2.1,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786714200000,
+        "close": 1786715239000,
+        "pnl": 2.41,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786929300000,
+        "close": 1786929376000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786930200000,
+        "close": 1786930265000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787066100000,
+        "close": 1787066115000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787067000000,
+        "close": 1787067060000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787083200000,
+        "close": 1787085900088,
+        "pnl": -36.098,
+        "reason": "oversize"
+      },
+      {
+        "open": 1787143500000,
+        "close": 1787143507000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787144400000,
+        "close": 1787144404000,
+        "pnl": 2.12,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787145300000,
+        "close": 1787146543000,
+        "pnl": 2.33,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787147100000,
+        "close": 1787147157000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787166900000,
+        "close": 1787168269000,
+        "pnl": 2.34,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787169600000,
+        "close": 1787169861000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787171400000,
+        "close": 1787181813000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787228100000,
+        "close": 1787228133000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787229000000,
+        "close": 1787229585000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787238900000,
+        "close": 1787238917000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787239800000,
+        "close": 1787239830000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787301000000,
+        "close": 1787301545000,
+        "pnl": 2.23,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787301900000,
+        "close": 1787304092000,
+        "pnl": 2.13,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787331600000,
+        "close": 1787331943000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787616900000,
+        "close": 1787616920000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787664600000,
+        "close": 1787664604000,
+        "pnl": 2.15,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787736600000,
+        "close": 1787736662000,
+        "pnl": 2.26,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787824800000,
+        "close": 1787825714000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787927400000,
+        "close": 1787927403000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787933700000,
+        "close": 1787933723000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787934600000,
+        "close": 1787934603000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787935500000,
+        "close": 1787935503000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788133500000,
+        "close": 1788134109000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788142500000,
+        "close": 1788143095000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788143400000,
+        "close": 1788143433000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788144300000,
+        "close": 1788144320000,
+        "pnl": 2.12,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788251400000,
+        "close": 1788254069000,
+        "pnl": 2.77,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788267600000,
+        "close": 1788269370000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788313500000,
+        "close": 1788314851000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788315300000,
+        "close": 1788315389000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788355800000,
+        "close": 1788357935375,
+        "pnl": -50.742,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1788398100000,
+        "close": 1788398224000,
+        "pnl": 2.16,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788399000000,
+        "close": 1788402206000,
+        "pnl": 2.45,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788404400000,
+        "close": 1788407100348,
+        "pnl": -0.816,
+        "reason": "oversize"
+      },
+      {
+        "open": 1788525900000,
+        "close": 1788526188000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788526800000,
+        "close": 1788527768000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788743700000,
+        "close": 1788744472000,
+        "pnl": 2.29,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788824700000,
+        "close": 1788824757000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788831000000,
+        "close": 1788831271000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788895800000,
+        "close": 1788899400090,
+        "pnl": -22.622,
+        "reason": "oversize"
+      },
+      {
+        "open": 1788933600000,
+        "close": 1788934877000,
+        "pnl": 2.26,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788960600000,
+        "close": 1788960966000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789043400000,
+        "close": 1789043402000,
+        "pnl": 2.12,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789044300000,
+        "close": 1789044340000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789045200000,
+        "close": 1789045202000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789065900000,
+        "close": 1789066279000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789066800000,
+        "close": 1789068292000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789107300000,
+        "close": 1789107661000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789131600000,
+        "close": 1789131685000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789132500000,
+        "close": 1789132539000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789133400000,
+        "close": 1789133407000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789134300000,
+        "close": 1789134327000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789135200000,
+        "close": 1789135204000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789378200000,
+        "close": 1789379669000,
+        "pnl": 2.1,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789390800000,
+        "close": 1789391897000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789460100000,
+        "close": 1789460161000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789461900000,
+        "close": 1789463129000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789527600000,
+        "close": 1789529533000,
+        "pnl": 2.7,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789555500000,
+        "close": 1789555939000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789585200000,
+        "close": 1789585208000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789586100000,
+        "close": 1789586116000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789587000000,
+        "close": 1789587009000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789646400000,
+        "close": 1789646552000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789647300000,
+        "close": 1789648530000,
+        "pnl": 2.19,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789712100000,
+        "close": 1789712132000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789713000000,
+        "close": 1789714253000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790035200000,
+        "close": 1790036116000,
+        "pnl": 2.22,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790055900000,
+        "close": 1790055921000,
+        "pnl": 2.1,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790064000000,
+        "close": 1790064119000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790163000000,
+        "close": 1790163933000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790173800000,
+        "close": 1790173808000,
+        "pnl": 2.19,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790242200000,
+        "close": 1790242291000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790243100000,
+        "close": 1790243261000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790331300000,
+        "close": 1790331395000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790332200000,
+        "close": 1790332380000,
+        "pnl": 2.19,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790556300000,
+        "close": 1790556320000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790557200000,
+        "close": 1790559590153,
+        "pnl": -50.508,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1790680500000,
+        "close": 1790681934000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790692200000,
+        "close": 1790692357000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790772300000,
+        "close": 1790772364000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790903700000,
+        "close": 1790903811000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790946000000,
+        "close": 1790946340000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790955900000,
+        "close": 1790956122000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790956800000,
+        "close": 1790956808000,
+        "pnl": 2.14,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791276300000,
+        "close": 1791277567000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791287100000,
+        "close": 1791289840000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791339300000,
+        "close": 1791339493000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791352800000,
+        "close": 1791353104000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791366300000,
+        "close": 1791369900107,
+        "pnl": -12.921,
+        "reason": "oversize"
+      },
+      {
+        "open": 1791423900000,
+        "close": 1791423946000,
+        "pnl": 2.21,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791424800000,
+        "close": 1791427500316,
+        "pnl": -27.594,
+        "reason": "oversize"
+      },
+      {
+        "open": 1791508500000,
+        "close": 1791511200079,
+        "pnl": -46.315,
+        "reason": "oversize"
+      },
+      {
+        "open": 1791981900000,
+        "close": 1791981952000,
+        "pnl": 2.26,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791982800000,
+        "close": 1791984627000,
+        "pnl": 2.67,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1792023300000,
+        "close": 1792026000111,
+        "pnl": -3.594,
+        "reason": "oversize"
+      },
+      {
+        "open": 1792419300000,
+        "close": 1792419440000,
+        "pnl": 2.14,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1792451700000,
+        "close": 1792452232000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1792458900000,
+        "close": 1792459837000,
+        "pnl": 2.1,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1792639800000,
+        "close": 1792642500467,
+        "pnl": -13.658,
+        "reason": "oversize"
+      },
+      {
+        "open": 1792720800000,
+        "close": 1792721018000,
+        "pnl": 2.21,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1792765800000,
+        "close": 1792765849000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1793023200000,
+        "close": 1793023208000,
+        "pnl": 2.11,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1793111400000,
+        "close": 1793114100131,
+        "pnl": -34.921,
+        "reason": "oversize"
+      },
+      {
+        "open": 1793362500000,
+        "close": 1793362564000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1793364300000,
+        "close": 1793364302000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1793366100000,
+        "close": 1793366115000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1793367900000,
+        "close": 1793367932000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1793368800000,
+        "close": 1793370627000,
+        "pnl": 2.18,
+        "reason": "Luna exit"
+      }
+    ]
+  },
+  "evaluation_cap_False": {
+    "baskets": 343,
+    "net": -55.56,
+    "pf": 0.928,
+    "win_pct": 95.63,
+    "max_dd": 163.97,
+    "best_removed": -90.98,
+    "stops": 15,
+    "trades": [
+      {
+        "open": 1777617000000,
+        "close": 1777617309000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1777617900000,
+        "close": 1777617949000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1777622400000,
+        "close": 1777622485000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1777624200000,
+        "close": 1777624322000,
+        "pnl": 2.12,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1777644900000,
+        "close": 1777645056000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1777645800000,
+        "close": 1777645812000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1777889700000,
+        "close": 1777890413000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1777890600000,
+        "close": 1777890720000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1777910400000,
+        "close": 1777910436000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1777911300000,
+        "close": 1777911318000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1777912200000,
+        "close": 1777912250000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778022900000,
+        "close": 1778022933000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778027400000,
+        "close": 1778029663000,
+        "pnl": 2.36,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778054400000,
+        "close": 1778054450000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778136300000,
+        "close": 1778136348000,
+        "pnl": 2.35,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778137200000,
+        "close": 1778137341000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778138100000,
+        "close": 1778138144000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778479200000,
+        "close": 1778479307000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778506200000,
+        "close": 1778508029000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778540400000,
+        "close": 1778541082000,
+        "pnl": 2.11,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778541300000,
+        "close": 1778543558498,
+        "pnl": -50.614,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1778566500000,
+        "close": 1778567642000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778616000000,
+        "close": 1778616242000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778787900000,
+        "close": 1778788419000,
+        "pnl": 2.11,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778788800000,
+        "close": 1778788860000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778789700000,
+        "close": 1778791287000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778805000000,
+        "close": 1778806021000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778807700000,
+        "close": 1778807764000,
+        "pnl": 2.23,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778808600000,
+        "close": 1778808677000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778822100000,
+        "close": 1778822148000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778823000000,
+        "close": 1778824818367,
+        "pnl": -50.892,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1779065100000,
+        "close": 1779065151000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779146100000,
+        "close": 1779147153000,
+        "pnl": 2.22,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779197400000,
+        "close": 1779197404000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779198300000,
+        "close": 1779198303000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779326100000,
+        "close": 1779326452000,
+        "pnl": 2.24,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779327000000,
+        "close": 1779327000000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779327900000,
+        "close": 1779327960000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779385500000,
+        "close": 1779385547000,
+        "pnl": 2.32,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779386400000,
+        "close": 1779386521000,
+        "pnl": 2.21,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779664500000,
+        "close": 1779666726000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779759900000,
+        "close": 1779760039000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779878700000,
+        "close": 1779880979179,
+        "pnl": -51.426,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1779931800000,
+        "close": 1779931853000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779932700000,
+        "close": 1779932830000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779933600000,
+        "close": 1779933602000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779934500000,
+        "close": 1779934574000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779973200000,
+        "close": 1779973201000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779977700000,
+        "close": 1779977705000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779978600000,
+        "close": 1779978848000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779979500000,
+        "close": 1779979764000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780017300000,
+        "close": 1780017912000,
+        "pnl": 2.27,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780067700000,
+        "close": 1780067729000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780297200000,
+        "close": 1780297358000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780320600000,
+        "close": 1780320600000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780321500000,
+        "close": 1780322972000,
+        "pnl": 2.46,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780376400000,
+        "close": 1780379466000,
+        "pnl": 2.25,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780410600000,
+        "close": 1780410730000,
+        "pnl": 2.24,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780442100000,
+        "close": 1780443863000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780572600000,
+        "close": 1780572843000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780573500000,
+        "close": 1780574668000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780618500000,
+        "close": 1780619426000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780623900000,
+        "close": 1780624002000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780664400000,
+        "close": 1780664484000,
+        "pnl": 2.17,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780666200000,
+        "close": 1780666205000,
+        "pnl": 2.12,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780667100000,
+        "close": 1780668165000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780668900000,
+        "close": 1780669176000,
+        "pnl": 2.14,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781016300000,
+        "close": 1781016304000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781019000000,
+        "close": 1781019003000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781021700000,
+        "close": 1781021751000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781046000000,
+        "close": 1781046156000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781046900000,
+        "close": 1781048746804,
+        "pnl": -50.784,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1781052300000,
+        "close": 1781052796000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781093700000,
+        "close": 1781093717000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781119800000,
+        "close": 1781119870000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781122500000,
+        "close": 1781122575000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781133300000,
+        "close": 1781133564000,
+        "pnl": 2.13,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781199900000,
+        "close": 1781199905000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781513100000,
+        "close": 1781513360000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781530200000,
+        "close": 1781531558000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781533800000,
+        "close": 1781534003000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781599500000,
+        "close": 1781599869000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781600400000,
+        "close": 1781600645000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781706600000,
+        "close": 1781706961000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781718300000,
+        "close": 1781719231000,
+        "pnl": 35.42,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781720100000,
+        "close": 1781720106000,
+        "pnl": 2.14,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781724600000,
+        "close": 1781724689000,
+        "pnl": 2.12,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781725500000,
+        "close": 1781725508000,
+        "pnl": 2.53,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781773200000,
+        "close": 1781773446000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781774100000,
+        "close": 1781774228000,
+        "pnl": 2.26,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781810100000,
+        "close": 1781811385000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781827200000,
+        "close": 1781827234000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781828100000,
+        "close": 1781828387000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781838900000,
+        "close": 1781838976000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781840700000,
+        "close": 1781843696943,
+        "pnl": -52.139,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1782090000000,
+        "close": 1782091275000,
+        "pnl": 1.99,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782091800000,
+        "close": 1782091804000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782123300000,
+        "close": 1782123323000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782179100000,
+        "close": 1782179617000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782201600000,
+        "close": 1782202754000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782258300000,
+        "close": 1782258339000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782269100000,
+        "close": 1782269313000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782270000000,
+        "close": 1782270013000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782270900000,
+        "close": 1782271817000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782299700000,
+        "close": 1782300622000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782304200000,
+        "close": 1782304399000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782305100000,
+        "close": 1782305122000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782306000000,
+        "close": 1782306212000,
+        "pnl": 2.34,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782306900000,
+        "close": 1782306904000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782307800000,
+        "close": 1782307803000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782393300000,
+        "close": 1782393325000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782441900000,
+        "close": 1782442214000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782442800000,
+        "close": 1782443172000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782483300000,
+        "close": 1782484486000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782727200000,
+        "close": 1782727806000,
+        "pnl": 2.23,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782742500000,
+        "close": 1782742609000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782780300000,
+        "close": 1782780418000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782781200000,
+        "close": 1782782440000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782801900000,
+        "close": 1782802817000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782829800000,
+        "close": 1782830065000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782866700000,
+        "close": 1782867111000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782868500000,
+        "close": 1782869412000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782870300000,
+        "close": 1782870422000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782871200000,
+        "close": 1782872156000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782886500000,
+        "close": 1782886813000,
+        "pnl": 2.13,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782904500000,
+        "close": 1782907238886,
+        "pnl": -51.984,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1782996300000,
+        "close": 1782996316000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782998100000,
+        "close": 1782998119000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782999900000,
+        "close": 1783000528000,
+        "pnl": 2.11,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783040400000,
+        "close": 1783041641650,
+        "pnl": -50.224,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1783294200000,
+        "close": 1783294206000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783387800000,
+        "close": 1783387824000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783426500000,
+        "close": 1783426646000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783451700000,
+        "close": 1783452613000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783453500000,
+        "close": 1783453554000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783499400000,
+        "close": 1783499433000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783500300000,
+        "close": 1783500364000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783501200000,
+        "close": 1783502127000,
+        "pnl": 2.21,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783578600000,
+        "close": 1783578610000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783579500000,
+        "close": 1783580739000,
+        "pnl": 2.26,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783673100000,
+        "close": 1783675008000,
+        "pnl": 2.21,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783953000000,
+        "close": 1783954683000,
+        "pnl": 2.22,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783954800000,
+        "close": 1783954821000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784007900000,
+        "close": 1784008016000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784033100000,
+        "close": 1784033104000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784034000000,
+        "close": 1784034004000,
+        "pnl": 2.14,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784034900000,
+        "close": 1784035213000,
+        "pnl": 2.13,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784119500000,
+        "close": 1784121083000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784205900000,
+        "close": 1784205989000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784206800000,
+        "close": 1784206816000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784207700000,
+        "close": 1784207715000,
+        "pnl": 2.13,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784209500000,
+        "close": 1784209524000,
+        "pnl": 2.14,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784292300000,
+        "close": 1784292427000,
+        "pnl": 2.21,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784293200000,
+        "close": 1784293407000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784596500000,
+        "close": 1784597038000,
+        "pnl": 2.13,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784597400000,
+        "close": 1784597894000,
+        "pnl": 2.21,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784612700000,
+        "close": 1784613089000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784614500000,
+        "close": 1784614646000,
+        "pnl": 2.19,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784680200000,
+        "close": 1784680260000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784682900000,
+        "close": 1784682924000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784683800000,
+        "close": 1784683917000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784684700000,
+        "close": 1784684977000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784729700000,
+        "close": 1784729709000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784792700000,
+        "close": 1784795721000,
+        "pnl": 2.25,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784809800000,
+        "close": 1784811710685,
+        "pnl": -50.66,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1784862000000,
+        "close": 1784862252000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785111300000,
+        "close": 1785111348000,
+        "pnl": 2.1,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785198600000,
+        "close": 1785198845000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785200400000,
+        "close": 1785200676000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785202200000,
+        "close": 1785202220000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785203100000,
+        "close": 1785205215000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785232800000,
+        "close": 1785233232000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785233700000,
+        "close": 1785234766000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785328200000,
+        "close": 1785328265000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785333600000,
+        "close": 1785334701000,
+        "pnl": 2.24,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785348900000,
+        "close": 1785348981000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785349800000,
+        "close": 1785349886000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785350700000,
+        "close": 1785352133000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785420000000,
+        "close": 1785420004000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785465900000,
+        "close": 1785466114000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785485700000,
+        "close": 1785485966000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785486600000,
+        "close": 1785487263000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785487500000,
+        "close": 1785487671000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785490200000,
+        "close": 1785491240000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785502800000,
+        "close": 1785504124000,
+        "pnl": 2.11,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785505500000,
+        "close": 1785505562000,
+        "pnl": 2.12,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785506400000,
+        "close": 1785506405000,
+        "pnl": 2.25,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785802500000,
+        "close": 1785802830000,
+        "pnl": 2.11,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785844800000,
+        "close": 1785844808000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785897000000,
+        "close": 1785899297533,
+        "pnl": -50.563,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1785974400000,
+        "close": 1785974410000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785977100000,
+        "close": 1785978358000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786083300000,
+        "close": 1786083315000,
+        "pnl": 2.2,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786085100000,
+        "close": 1786085383000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786086000000,
+        "close": 1786086045000,
+        "pnl": 2.29,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786092300000,
+        "close": 1786092543000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786106700000,
+        "close": 1786107011000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786107600000,
+        "close": 1786107615000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786387500000,
+        "close": 1786387515000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786389300000,
+        "close": 1786390542000,
+        "pnl": 2.1,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786408200000,
+        "close": 1786408264000,
+        "pnl": 2.3,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786409100000,
+        "close": 1786409282000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786411801000,
+        "close": 1786412228000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786413600000,
+        "close": 1786413621000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786414500000,
+        "close": 1786414801000,
+        "pnl": 2.29,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786428000000,
+        "close": 1786428094000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786428900000,
+        "close": 1786429026000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786429800000,
+        "close": 1786429826000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786500900000,
+        "close": 1786501929000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786503600000,
+        "close": 1786503885000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786539600000,
+        "close": 1786539601000,
+        "pnl": 2.1,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786581900000,
+        "close": 1786581910000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786603500000,
+        "close": 1786603638000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786670100000,
+        "close": 1786671929000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786708800000,
+        "close": 1786709611000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786709700000,
+        "close": 1786709782000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786710600000,
+        "close": 1786711082000,
+        "pnl": 2.13,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786714200000,
+        "close": 1786715239000,
+        "pnl": 2.17,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786929300000,
+        "close": 1786929376000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786930200000,
+        "close": 1786930265000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787066100000,
+        "close": 1787066115000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787067000000,
+        "close": 1787067060000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787083200000,
+        "close": 1787086075333,
+        "pnl": -58.25,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1787143500000,
+        "close": 1787143508000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787144400000,
+        "close": 1787144404000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787145300000,
+        "close": 1787146543000,
+        "pnl": 2.15,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787147100000,
+        "close": 1787147157000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787166900000,
+        "close": 1787168269000,
+        "pnl": 2.29,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787169600000,
+        "close": 1787169861000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787171400000,
+        "close": 1787181813000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787228100000,
+        "close": 1787228133000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787229000000,
+        "close": 1787229585000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787238900000,
+        "close": 1787238912000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787239800000,
+        "close": 1787239830000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787301000000,
+        "close": 1787301545000,
+        "pnl": 2.23,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787301900000,
+        "close": 1787304095000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787331600000,
+        "close": 1787331942000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787616900000,
+        "close": 1787616920000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787664600000,
+        "close": 1787664604000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787736600000,
+        "close": 1787736662000,
+        "pnl": 2.12,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787824800000,
+        "close": 1787825714000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787927400000,
+        "close": 1787927403000,
+        "pnl": 2.15,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787933700000,
+        "close": 1787933723000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787934600000,
+        "close": 1787934602000,
+        "pnl": 2.13,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787935500000,
+        "close": 1787935503000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788133500000,
+        "close": 1788134109000,
+        "pnl": 2.28,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788142500000,
+        "close": 1788143095000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788143400000,
+        "close": 1788143433000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788144300000,
+        "close": 1788144320000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788251400000,
+        "close": 1788254069000,
+        "pnl": 2.22,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788267600000,
+        "close": 1788269370000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788313500000,
+        "close": 1788314851000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788315300000,
+        "close": 1788315389000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788355800000,
+        "close": 1788357935338,
+        "pnl": -50.567,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1788398100000,
+        "close": 1788398224000,
+        "pnl": 2.14,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788399000000,
+        "close": 1788402207000,
+        "pnl": 2.46,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788404400000,
+        "close": 1788407196000,
+        "pnl": 2.38,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788439500000,
+        "close": 1788439527000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788440400000,
+        "close": 1788440402000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788441300000,
+        "close": 1788441379000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788525900000,
+        "close": 1788526187000,
+        "pnl": 2.16,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788526800000,
+        "close": 1788527768000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788743700000,
+        "close": 1788744470000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788824700000,
+        "close": 1788824757000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788831000000,
+        "close": 1788831271000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788895800000,
+        "close": 1788900382721,
+        "pnl": -53.596,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1788933600000,
+        "close": 1788934876000,
+        "pnl": 2.1,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788960600000,
+        "close": 1788960966000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789043400000,
+        "close": 1789043402000,
+        "pnl": 2.42,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789044300000,
+        "close": 1789044340000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789045200000,
+        "close": 1789045202000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789065900000,
+        "close": 1789066279000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789066800000,
+        "close": 1789068292000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789107300000,
+        "close": 1789107661000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789131600000,
+        "close": 1789131685000,
+        "pnl": 2.15,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789132500000,
+        "close": 1789132539000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789133400000,
+        "close": 1789133406000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789134300000,
+        "close": 1789134327000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789135200000,
+        "close": 1789135204000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789378200000,
+        "close": 1789379669000,
+        "pnl": 2.1,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789390800000,
+        "close": 1789391897000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789460100000,
+        "close": 1789460161000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789461900000,
+        "close": 1789463127000,
+        "pnl": 2.2,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789527600000,
+        "close": 1789529533000,
+        "pnl": 2.7,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789555500000,
+        "close": 1789555939000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789556400000,
+        "close": 1789556476000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789585200000,
+        "close": 1789585208000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789586100000,
+        "close": 1789586116000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789587000000,
+        "close": 1789587009000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789646400000,
+        "close": 1789646552000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789647300000,
+        "close": 1789648533000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789712100000,
+        "close": 1789712132000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789713000000,
+        "close": 1789714287000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790034300000,
+        "close": 1790034601000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790055900000,
+        "close": 1790055921000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790064000000,
+        "close": 1790064119000,
+        "pnl": 2.17,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790163000000,
+        "close": 1790163933000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790173800000,
+        "close": 1790173808000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790242200000,
+        "close": 1790242291000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790243100000,
+        "close": 1790243261000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790331300000,
+        "close": 1790331395000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790332200000,
+        "close": 1790332380000,
+        "pnl": 2.19,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790556300000,
+        "close": 1790556319000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790557200000,
+        "close": 1790559030000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790559900000,
+        "close": 1790560234000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790577000000,
+        "close": 1790577166000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790578800000,
+        "close": 1790579775000,
+        "pnl": 2.13,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790680500000,
+        "close": 1790681905000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790692200000,
+        "close": 1790692357000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790772300000,
+        "close": 1790772364000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790903700000,
+        "close": 1790903811000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790946000000,
+        "close": 1790946340000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790955900000,
+        "close": 1790956122000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790956800000,
+        "close": 1790956808000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791276300000,
+        "close": 1791277567000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791287100000,
+        "close": 1791289841000,
+        "pnl": 3.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791339300000,
+        "close": 1791339489000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791352800000,
+        "close": 1791353104000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791366300000,
+        "close": 1791370236000,
+        "pnl": 3.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791376200000,
+        "close": 1791376307000,
+        "pnl": 2.14,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791377100000,
+        "close": 1791377130000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791423900000,
+        "close": 1791423946000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791424800000,
+        "close": 1791427744000,
+        "pnl": 3.4,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791508500000,
+        "close": 1791511309794,
+        "pnl": -50.835,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1791798300000,
+        "close": 1791798933000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791981900000,
+        "close": 1791981952000,
+        "pnl": 2.2,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791982800000,
+        "close": 1791984627000,
+        "pnl": 2.35,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1792023300000,
+        "close": 1792025435000,
+        "pnl": 2.56,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1792026000000,
+        "close": 1792028410000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1792094400000,
+        "close": 1792094674000,
+        "pnl": 2.28,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1792419300000,
+        "close": 1792419440000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1792451700000,
+        "close": 1792452232000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1792458900000,
+        "close": 1792459837000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1792639800000,
+        "close": 1792643523555,
+        "pnl": -52.256,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1792720800000,
+        "close": 1792721018000,
+        "pnl": 2.21,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1792765800000,
+        "close": 1792765849000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1793023200000,
+        "close": 1793023208000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1793111400000,
+        "close": 1793114114614,
+        "pnl": -50.833,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1793362500000,
+        "close": 1793362564000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1793364300000,
+        "close": 1793364302000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1793366100000,
+        "close": 1793366115000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1793367900000,
+        "close": 1793367931000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1793368800000,
+        "close": 1793370628000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      }
+    ]
+  },
+  "evaluation_cap_True": {
+    "baskets": 338,
+    "net": 70.1,
+    "pf": 1.111,
+    "win_pct": 94.67,
+    "max_dd": 143.49,
+    "best_removed": 34.67,
+    "stops": 18,
+    "trades": [
+      {
+        "open": 1777617000000,
+        "close": 1777617309000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1777617900000,
+        "close": 1777617949000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1777622400000,
+        "close": 1777622485000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1777624200000,
+        "close": 1777624322000,
+        "pnl": 2.12,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1777644900000,
+        "close": 1777645056000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1777645800000,
+        "close": 1777645812000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1777889700000,
+        "close": 1777890413000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1777890600000,
+        "close": 1777890720000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1777910400000,
+        "close": 1777910436000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1777911300000,
+        "close": 1777911318000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1777912200000,
+        "close": 1777912250000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778022900000,
+        "close": 1778022933000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778027400000,
+        "close": 1778029663000,
+        "pnl": 2.36,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778054400000,
+        "close": 1778054450000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778136300000,
+        "close": 1778136348000,
+        "pnl": 2.35,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778137200000,
+        "close": 1778137341000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778138100000,
+        "close": 1778138144000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778479200000,
+        "close": 1778479307000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778506200000,
+        "close": 1778508029000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778540400000,
+        "close": 1778541082000,
+        "pnl": 2.11,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778541300000,
+        "close": 1778543558498,
+        "pnl": -50.614,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1778566500000,
+        "close": 1778567642000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778616000000,
+        "close": 1778616242000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778787900000,
+        "close": 1778788419000,
+        "pnl": 2.11,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778788800000,
+        "close": 1778788860000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778789700000,
+        "close": 1778791287000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778805000000,
+        "close": 1778806021000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778807700000,
+        "close": 1778807764000,
+        "pnl": 2.23,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778808600000,
+        "close": 1778808677000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778822100000,
+        "close": 1778822148000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1778823000000,
+        "close": 1778824810003,
+        "pnl": -37.5,
+        "reason": "oversize"
+      },
+      {
+        "open": 1779065100000,
+        "close": 1779065151000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779146100000,
+        "close": 1779147153000,
+        "pnl": 2.22,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779197400000,
+        "close": 1779197404000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779198300000,
+        "close": 1779198303000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779326100000,
+        "close": 1779326452000,
+        "pnl": 2.24,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779327000000,
+        "close": 1779327000000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779327900000,
+        "close": 1779327960000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779385500000,
+        "close": 1779385547000,
+        "pnl": 2.32,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779386400000,
+        "close": 1779386521000,
+        "pnl": 2.21,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779664500000,
+        "close": 1779666726000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779759900000,
+        "close": 1779760039000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779878700000,
+        "close": 1779880979179,
+        "pnl": -51.426,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1779931800000,
+        "close": 1779931853000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779932700000,
+        "close": 1779932830000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779933600000,
+        "close": 1779933602000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779934500000,
+        "close": 1779934574000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779973200000,
+        "close": 1779973201000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779977700000,
+        "close": 1779977705000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779978600000,
+        "close": 1779978848000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1779979500000,
+        "close": 1779979764000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780017300000,
+        "close": 1780017912000,
+        "pnl": 2.27,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780067700000,
+        "close": 1780067729000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780297200000,
+        "close": 1780297358000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780320600000,
+        "close": 1780320600000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780321500000,
+        "close": 1780322972000,
+        "pnl": 2.46,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780376400000,
+        "close": 1780379466000,
+        "pnl": 2.25,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780410600000,
+        "close": 1780410730000,
+        "pnl": 2.24,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780442100000,
+        "close": 1780443863000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780572600000,
+        "close": 1780572843000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780573500000,
+        "close": 1780574668000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780618500000,
+        "close": 1780619426000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780623900000,
+        "close": 1780624002000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780664400000,
+        "close": 1780664484000,
+        "pnl": 2.17,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780666200000,
+        "close": 1780666205000,
+        "pnl": 2.12,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780667100000,
+        "close": 1780668165000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1780668900000,
+        "close": 1780669176000,
+        "pnl": 2.14,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781016300000,
+        "close": 1781016304000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781019000000,
+        "close": 1781019003000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781021700000,
+        "close": 1781021751000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781046000000,
+        "close": 1781046156000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781046900000,
+        "close": 1781048746804,
+        "pnl": -50.784,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1781052300000,
+        "close": 1781052796000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781093700000,
+        "close": 1781093717000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781119800000,
+        "close": 1781119870000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781122500000,
+        "close": 1781122575000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781133300000,
+        "close": 1781133564000,
+        "pnl": 2.13,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781199900000,
+        "close": 1781199905000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781513100000,
+        "close": 1781513360000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781530200000,
+        "close": 1781531558000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781533800000,
+        "close": 1781534003000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781599500000,
+        "close": 1781599869000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781600400000,
+        "close": 1781600645000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781706600000,
+        "close": 1781706961000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781718300000,
+        "close": 1781719231000,
+        "pnl": 35.42,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781720100000,
+        "close": 1781720106000,
+        "pnl": 2.14,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781724600000,
+        "close": 1781724689000,
+        "pnl": 2.12,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781725500000,
+        "close": 1781725508000,
+        "pnl": 2.53,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781773200000,
+        "close": 1781773446000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781774100000,
+        "close": 1781774228000,
+        "pnl": 2.26,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781810100000,
+        "close": 1781811385000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781827200000,
+        "close": 1781827234000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781828100000,
+        "close": 1781828387000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781838900000,
+        "close": 1781838976000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1781840700000,
+        "close": 1781843400125,
+        "pnl": -21.635,
+        "reason": "oversize"
+      },
+      {
+        "open": 1782090000000,
+        "close": 1782091275000,
+        "pnl": 1.99,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782091800000,
+        "close": 1782091804000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782123300000,
+        "close": 1782123323000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782179100000,
+        "close": 1782179617000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782201600000,
+        "close": 1782202754000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782258300000,
+        "close": 1782258339000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782269100000,
+        "close": 1782269313000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782270000000,
+        "close": 1782270013000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782270900000,
+        "close": 1782271817000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782299700000,
+        "close": 1782300622000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782304200000,
+        "close": 1782304399000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782305100000,
+        "close": 1782305122000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782306000000,
+        "close": 1782306212000,
+        "pnl": 2.34,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782306900000,
+        "close": 1782306904000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782307800000,
+        "close": 1782307803000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782393300000,
+        "close": 1782393325000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782441900000,
+        "close": 1782442214000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782442800000,
+        "close": 1782443172000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782483300000,
+        "close": 1782484486000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782727200000,
+        "close": 1782727806000,
+        "pnl": 2.23,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782742500000,
+        "close": 1782742609000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782780300000,
+        "close": 1782780418000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782781200000,
+        "close": 1782782440000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782801900000,
+        "close": 1782802817000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782829800000,
+        "close": 1782830065000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782866700000,
+        "close": 1782867111000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782868500000,
+        "close": 1782869412000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782870300000,
+        "close": 1782870422000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782871200000,
+        "close": 1782872156000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782886500000,
+        "close": 1782886813000,
+        "pnl": 2.13,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782904500000,
+        "close": 1782907200041,
+        "pnl": -23.088,
+        "reason": "oversize"
+      },
+      {
+        "open": 1782996300000,
+        "close": 1782996316000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782998100000,
+        "close": 1782998119000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1782999900000,
+        "close": 1783000528000,
+        "pnl": 2.11,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783040400000,
+        "close": 1783041641650,
+        "pnl": -50.224,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1783294200000,
+        "close": 1783294206000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783387800000,
+        "close": 1783387824000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783426500000,
+        "close": 1783426646000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783451700000,
+        "close": 1783452613000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783453500000,
+        "close": 1783453554000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783499400000,
+        "close": 1783499433000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783500300000,
+        "close": 1783500364000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783501200000,
+        "close": 1783502127000,
+        "pnl": 2.21,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783578600000,
+        "close": 1783578610000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783579500000,
+        "close": 1783580739000,
+        "pnl": 2.26,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783673100000,
+        "close": 1783675008000,
+        "pnl": 2.21,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783953000000,
+        "close": 1783954683000,
+        "pnl": 2.22,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1783954800000,
+        "close": 1783954821000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784007900000,
+        "close": 1784008016000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784033100000,
+        "close": 1784033104000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784034000000,
+        "close": 1784034004000,
+        "pnl": 2.14,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784034900000,
+        "close": 1784035213000,
+        "pnl": 2.13,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784119500000,
+        "close": 1784121083000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784205900000,
+        "close": 1784205989000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784206800000,
+        "close": 1784206816000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784207700000,
+        "close": 1784207715000,
+        "pnl": 2.13,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784209500000,
+        "close": 1784209524000,
+        "pnl": 2.14,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784292300000,
+        "close": 1784292427000,
+        "pnl": 2.21,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784293200000,
+        "close": 1784293407000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784596500000,
+        "close": 1784597038000,
+        "pnl": 2.13,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784597400000,
+        "close": 1784597894000,
+        "pnl": 2.21,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784612700000,
+        "close": 1784613089000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784614500000,
+        "close": 1784614646000,
+        "pnl": 2.19,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784680200000,
+        "close": 1784680260000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784682900000,
+        "close": 1784682924000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784683800000,
+        "close": 1784683917000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784684700000,
+        "close": 1784684977000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784729700000,
+        "close": 1784729709000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784792700000,
+        "close": 1784795721000,
+        "pnl": 2.25,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1784809800000,
+        "close": 1784811710685,
+        "pnl": -50.66,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1784862000000,
+        "close": 1784862252000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785111300000,
+        "close": 1785111348000,
+        "pnl": 2.1,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785198600000,
+        "close": 1785198845000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785200400000,
+        "close": 1785200676000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785202200000,
+        "close": 1785202220000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785203100000,
+        "close": 1785205215000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785232800000,
+        "close": 1785233232000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785233700000,
+        "close": 1785234766000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785328200000,
+        "close": 1785328265000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785333600000,
+        "close": 1785334701000,
+        "pnl": 2.24,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785348900000,
+        "close": 1785348981000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785349800000,
+        "close": 1785349886000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785350700000,
+        "close": 1785352133000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785420000000,
+        "close": 1785420004000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785465900000,
+        "close": 1785466114000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785485700000,
+        "close": 1785485966000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785486600000,
+        "close": 1785487263000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785487500000,
+        "close": 1785487671000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785490200000,
+        "close": 1785491240000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785502800000,
+        "close": 1785504124000,
+        "pnl": 2.11,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785505500000,
+        "close": 1785505562000,
+        "pnl": 2.12,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785506400000,
+        "close": 1785506405000,
+        "pnl": 2.25,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785802500000,
+        "close": 1785802830000,
+        "pnl": 2.11,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785844800000,
+        "close": 1785844808000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785897000000,
+        "close": 1785899297533,
+        "pnl": -50.563,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1785974400000,
+        "close": 1785974410000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1785977100000,
+        "close": 1785978358000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786083300000,
+        "close": 1786083315000,
+        "pnl": 2.2,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786085100000,
+        "close": 1786085383000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786086000000,
+        "close": 1786086045000,
+        "pnl": 2.29,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786092300000,
+        "close": 1786092543000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786106700000,
+        "close": 1786107011000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786107600000,
+        "close": 1786107615000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786387500000,
+        "close": 1786387515000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786389300000,
+        "close": 1786390542000,
+        "pnl": 2.1,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786408200000,
+        "close": 1786408264000,
+        "pnl": 2.3,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786409100000,
+        "close": 1786409282000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786411801000,
+        "close": 1786412228000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786413600000,
+        "close": 1786413621000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786414500000,
+        "close": 1786414801000,
+        "pnl": 2.29,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786428000000,
+        "close": 1786428094000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786428900000,
+        "close": 1786429026000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786429800000,
+        "close": 1786429826000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786500900000,
+        "close": 1786501929000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786503600000,
+        "close": 1786503885000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786539600000,
+        "close": 1786539601000,
+        "pnl": 2.1,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786581900000,
+        "close": 1786581910000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786603500000,
+        "close": 1786603638000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786670100000,
+        "close": 1786671929000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786708800000,
+        "close": 1786709611000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786709700000,
+        "close": 1786709782000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786710600000,
+        "close": 1786711082000,
+        "pnl": 2.13,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786714200000,
+        "close": 1786715239000,
+        "pnl": 2.17,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786929300000,
+        "close": 1786929376000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1786930200000,
+        "close": 1786930265000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787066100000,
+        "close": 1787066115000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787067000000,
+        "close": 1787067060000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787083200000,
+        "close": 1787085900048,
+        "pnl": -36.098,
+        "reason": "oversize"
+      },
+      {
+        "open": 1787143500000,
+        "close": 1787143508000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787144400000,
+        "close": 1787144404000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787145300000,
+        "close": 1787146543000,
+        "pnl": 2.15,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787147100000,
+        "close": 1787147157000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787166900000,
+        "close": 1787168269000,
+        "pnl": 2.29,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787169600000,
+        "close": 1787169861000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787171400000,
+        "close": 1787181813000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787228100000,
+        "close": 1787228133000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787229000000,
+        "close": 1787229585000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787238900000,
+        "close": 1787238912000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787239800000,
+        "close": 1787239830000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787301000000,
+        "close": 1787301545000,
+        "pnl": 2.23,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787301900000,
+        "close": 1787304095000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787331600000,
+        "close": 1787331942000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787616900000,
+        "close": 1787616920000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787664600000,
+        "close": 1787664604000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787736600000,
+        "close": 1787736662000,
+        "pnl": 2.12,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787824800000,
+        "close": 1787825714000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787927400000,
+        "close": 1787927403000,
+        "pnl": 2.15,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787933700000,
+        "close": 1787933723000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787934600000,
+        "close": 1787934602000,
+        "pnl": 2.13,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1787935500000,
+        "close": 1787935503000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788133500000,
+        "close": 1788134109000,
+        "pnl": 2.28,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788142500000,
+        "close": 1788143095000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788143400000,
+        "close": 1788143433000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788144300000,
+        "close": 1788144320000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788251400000,
+        "close": 1788254069000,
+        "pnl": 2.22,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788267600000,
+        "close": 1788269370000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788313500000,
+        "close": 1788314851000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788315300000,
+        "close": 1788315389000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788355800000,
+        "close": 1788357935338,
+        "pnl": -50.567,
+        "reason": "basket stop"
+      },
+      {
+        "open": 1788398100000,
+        "close": 1788398224000,
+        "pnl": 2.14,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788399000000,
+        "close": 1788402207000,
+        "pnl": 2.46,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788404400000,
+        "close": 1788407100310,
+        "pnl": -0.816,
+        "reason": "oversize"
+      },
+      {
+        "open": 1788525900000,
+        "close": 1788526187000,
+        "pnl": 2.16,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788526800000,
+        "close": 1788527768000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788743700000,
+        "close": 1788744470000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788824700000,
+        "close": 1788824757000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788831000000,
+        "close": 1788831271000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788895800000,
+        "close": 1788899400052,
+        "pnl": -22.22,
+        "reason": "oversize"
+      },
+      {
+        "open": 1788933600000,
+        "close": 1788934876000,
+        "pnl": 2.1,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1788960600000,
+        "close": 1788960966000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789043400000,
+        "close": 1789043402000,
+        "pnl": 2.42,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789044300000,
+        "close": 1789044340000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789045200000,
+        "close": 1789045202000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789065900000,
+        "close": 1789066279000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789066800000,
+        "close": 1789068292000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789107300000,
+        "close": 1789107661000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789131600000,
+        "close": 1789131685000,
+        "pnl": 2.15,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789132500000,
+        "close": 1789132539000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789133400000,
+        "close": 1789133406000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789134300000,
+        "close": 1789134327000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789135200000,
+        "close": 1789135204000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789378200000,
+        "close": 1789379669000,
+        "pnl": 2.1,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789390800000,
+        "close": 1789391897000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789460100000,
+        "close": 1789460161000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789461900000,
+        "close": 1789463127000,
+        "pnl": 2.2,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789527600000,
+        "close": 1789529533000,
+        "pnl": 2.7,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789555500000,
+        "close": 1789555939000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789556400000,
+        "close": 1789556476000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789585200000,
+        "close": 1789585208000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789586100000,
+        "close": 1789586116000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789587000000,
+        "close": 1789587009000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789646400000,
+        "close": 1789646552000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789647300000,
+        "close": 1789648533000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789712100000,
+        "close": 1789712132000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1789713000000,
+        "close": 1789714287000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790034300000,
+        "close": 1790034601000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790055900000,
+        "close": 1790055921000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790064000000,
+        "close": 1790064119000,
+        "pnl": 2.17,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790163000000,
+        "close": 1790163933000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790173800000,
+        "close": 1790173808000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790242200000,
+        "close": 1790242291000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790243100000,
+        "close": 1790243261000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790331300000,
+        "close": 1790331395000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790332200000,
+        "close": 1790332380000,
+        "pnl": 2.19,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790556300000,
+        "close": 1790556319000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790557200000,
+        "close": 1790559030000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790559900000,
+        "close": 1790560234000,
+        "pnl": 2.02,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790577000000,
+        "close": 1790577166000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790578800000,
+        "close": 1790579775000,
+        "pnl": 2.13,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790680500000,
+        "close": 1790681905000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790692200000,
+        "close": 1790692357000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790772300000,
+        "close": 1790772364000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790903700000,
+        "close": 1790903811000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790946000000,
+        "close": 1790946340000,
+        "pnl": 2.06,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790955900000,
+        "close": 1790956122000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1790956800000,
+        "close": 1790956808000,
+        "pnl": 2.07,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791276300000,
+        "close": 1791277567000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791287100000,
+        "close": 1791289841000,
+        "pnl": 3.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791339300000,
+        "close": 1791339489000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791352800000,
+        "close": 1791353104000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791366300000,
+        "close": 1791369900070,
+        "pnl": -12.529,
+        "reason": "oversize"
+      },
+      {
+        "open": 1791423900000,
+        "close": 1791423946000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791424800000,
+        "close": 1791427500277,
+        "pnl": -27.719,
+        "reason": "oversize"
+      },
+      {
+        "open": 1791508500000,
+        "close": 1791511200040,
+        "pnl": -45.811,
+        "reason": "oversize"
+      },
+      {
+        "open": 1791798300000,
+        "close": 1791798933000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791981900000,
+        "close": 1791981952000,
+        "pnl": 2.2,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1791982800000,
+        "close": 1791984627000,
+        "pnl": 2.35,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1792023300000,
+        "close": 1792025435000,
+        "pnl": 2.56,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1792026000000,
+        "close": 1792028410000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1792094400000,
+        "close": 1792094674000,
+        "pnl": 2.28,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1792419300000,
+        "close": 1792419440000,
+        "pnl": 2.08,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1792451700000,
+        "close": 1792452232000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1792458900000,
+        "close": 1792459837000,
+        "pnl": 2.04,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1792639800000,
+        "close": 1792642500426,
+        "pnl": -13.6,
+        "reason": "oversize"
+      },
+      {
+        "open": 1792720800000,
+        "close": 1792721018000,
+        "pnl": 2.21,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1792765800000,
+        "close": 1792765849000,
+        "pnl": 2.03,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1793023200000,
+        "close": 1793023208000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1793111400000,
+        "close": 1793114100091,
+        "pnl": -34.921,
+        "reason": "oversize"
+      },
+      {
+        "open": 1793362500000,
+        "close": 1793362564000,
+        "pnl": 2.0,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1793364300000,
+        "close": 1793364302000,
+        "pnl": 2.01,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1793366100000,
+        "close": 1793366115000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1793367900000,
+        "close": 1793367931000,
+        "pnl": 2.09,
+        "reason": "Luna exit"
+      },
+      {
+        "open": 1793368800000,
+        "close": 1793370628000,
+        "pnl": 2.05,
+        "reason": "Luna exit"
+      }
+    ]
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "name": "AsianRangeFilteredV6",
+  "phase": "funded",
+  "start": "2025-05-13T00:00:00+00:00",
+  "end_exclusive": "2026-01-01T00:00:00+00:00",
+  "unrestricted": {
+    "status": "active",
+    "time": null,
+    "entries": 35,
+    "closes": 35,
+    "balance": 5378.763000000003,
+    "equity": 5378.763000000003,
+    "minimum_equity": 4984.608,
+    "first_trade": "2025-05-23T07:15:00.801000+00:00",
+    "payout_anchor": 5000.0,
+    "next_payout_window": null,
+    "max_equity_drawdown_usd": 163.72700000000168,
+    "max_equity_drawdown_pct": 3.052159648043574,
+    "max_floating_loss": 46.701999999999316,
+    "max_used_margin_to_equity": 0.01659380794558184,
+    "overnight_resets": 1,
+    "peak_equity": 5420.651000000006,
+    "rule_events": [],
+    "protector_strikes": 0,
+    "qualifying_days": 18,
+    "deductions": 0.0,
+    "modeled_payouts": [],
+    "modeled_cash_received": 0.0
+  },
+  "atlas": {
+    "status": "active",
+    "time": null,
+    "entries": 35,
+    "closes": 35,
+    "balance": 5267.653000000003,
+    "equity": 5267.653000000003,
+    "minimum_equity": 4984.608,
+    "first_trade": "2025-05-23T07:15:00.801000+00:00",
+    "payout_anchor": 5109.866000000004,
+    "next_payout_window": "2025-06-30T13:54:57.881000+00:00",
+    "max_equity_drawdown_usd": 163.72700000000168,
+    "max_equity_drawdown_pct": 3.116715747955079,
+    "max_floating_loss": 46.701999999999316,
+    "max_used_margin_to_equity": 0.03389565700594681,
+    "overnight_resets": 1,
+    "peak_equity": 5309.5410000000065,
+    "rule_events": [],
+    "protector_strikes": 0,
+    "qualifying_days": 12,
+    "deductions": 0.0,
+    "modeled_payouts": [
+      {
+        "time": "2025-06-16T13:54:57.881000+00:00",
+        "gross": 111.11,
+        "modeled_cash": 100.0
+      }
+    ],
+    "modeled_cash_received": 100.0
+  },
+  "news_coverage": "Selected USD releases only; historical Atlas all-currency restrictions unverified.",
+  "payout_assumption": "Request USD 100 cash while flat, normal 90% split (50% after first Protector), immediate settlement and verified KYC assumed; no real payments."
+}

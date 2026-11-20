@@ -1,0 +1,18 @@
+{
+  "year": 2025,
+  "start": 1735689600,
+  "end": 1767225600,
+  "point": 0.001,
+  "inputs": {
+    "M1": {
+      "path": "C:\\projects\\ultra_core\\research\\data\\genesis\\2025_M1.npy",
+      "sha256": "ef2ace1573a2477cb5ed529b864f0f382a3b5b96e68e91876857da37ca39c85f",
+      "rows": 327369
+    },
+    "M5": {
+      "path": "C:\\projects\\ultra_core\\research\\data\\genesis\\2025_M5.npy",
+      "sha256": "64183c094c6286bea0a7d18de8d5d9fad113e849d5a591a2c8a5b984df8e6cb2",
+      "rows": 65351
+    }
+  }
+}

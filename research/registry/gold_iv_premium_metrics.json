@@ -1,0 +1,146 @@
+{
+  "input_sha256": "56608febc9c16b50962aadf25cfb181b1c26e072a1ffc93f61eb3139ef9be6c6",
+  "eras": {
+    "2011-2015": {
+      "trades": 206,
+      "net": -267.84,
+      "profit_factor": 0.841,
+      "win_pct": 44.2,
+      "expectancy": -1.3002,
+      "max_dd_usd": 388.75,
+      "max_dd_pct": 7.73,
+      "recovery_factor": -0.689,
+      "annualised_return_pct": -1.1,
+      "calmar_ratio": -0.142,
+      "omega_ratio": 0.841,
+      "sortino_ratio": -0.0627,
+      "sharpe_per_trade": -0.0485,
+      "skew": -1.337,
+      "kurtosis": 17.199,
+      "wins": 91,
+      "eligible": 1203,
+      "control_median": -179.06000000000057,
+      "bonferroni_p": 1.0,
+      "month_ci": [
+        -4.669496774193565,
+        1.977162284178989
+      ],
+      "monte_carlo": {
+        "median_max_dd": 507.96,
+        "p95_max_dd": 700.74,
+        "worst_max_dd": 949.03,
+        "median_final": 4732.16,
+        "p05_final": 4732.16,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 1.0
+      },
+      "ablation": {
+        "net_pl": -267.84,
+        "drop_best_1": -397.79,
+        "drop_worst_1": -92.57,
+        "drop_best_3": -541.09,
+        "drop_worst_3": 143.33,
+        "drop_best_5": -652.25,
+        "drop_worst_5": 256.61,
+        "top3_share_of_gross_profit": 19.3
+      },
+      "dsr": null,
+      "expected_max_sr": null,
+      "reason": "No complete calendar-aligned return series for the full search family"
+    },
+    "2016-2020": {
+      "trades": 282,
+      "net": -231.82,
+      "profit_factor": 0.884,
+      "win_pct": 50.4,
+      "expectancy": -0.8221,
+      "max_dd_usd": 640.97,
+      "max_dd_pct": 12.73,
+      "recovery_factor": -0.362,
+      "annualised_return_pct": -0.94,
+      "calmar_ratio": -0.074,
+      "omega_ratio": 0.884,
+      "sortino_ratio": -0.0535,
+      "sharpe_per_trade": -0.0394,
+      "skew": -0.254,
+      "kurtosis": 10.244,
+      "wins": 142,
+      "eligible": 1239,
+      "control_median": -203.52999999999804,
+      "bonferroni_p": 1.0,
+      "month_ci": [
+        -2.748606206547853,
+        1.0727778151326857
+      ],
+      "monte_carlo": {
+        "median_max_dd": 467.64,
+        "p95_max_dd": 657.67,
+        "worst_max_dd": 902.53,
+        "median_final": 4768.18,
+        "p05_final": 4768.18,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 1.0
+      },
+      "ablation": {
+        "net_pl": -231.82,
+        "drop_best_1": -319.87,
+        "drop_worst_1": -107.21,
+        "drop_best_3": -480.89,
+        "drop_worst_3": 31.89,
+        "drop_best_5": -606.93,
+        "drop_worst_5": 141.77,
+        "top3_share_of_gross_profit": 14.1
+      },
+      "dsr": null,
+      "expected_max_sr": null,
+      "reason": "No complete calendar-aligned return series for the full search family"
+    },
+    "2021-2025": {
+      "trades": 233,
+      "net": -440.77,
+      "profit_factor": 0.854,
+      "win_pct": 48.5,
+      "expectancy": -1.8917,
+      "max_dd_usd": 620.5,
+      "max_dd_pct": 12.11,
+      "recovery_factor": -0.71,
+      "annualised_return_pct": -1.83,
+      "calmar_ratio": -0.151,
+      "omega_ratio": 0.854,
+      "sortino_ratio": -0.0687,
+      "sharpe_per_trade": -0.0544,
+      "skew": -0.934,
+      "kurtosis": 8.059,
+      "wins": 113,
+      "eligible": 1240,
+      "control_median": 130.3229999999979,
+      "bonferroni_p": 1.0,
+      "month_ci": [
+        -5.536773978080564,
+        1.6838930385443407
+      ],
+      "monte_carlo": {
+        "median_max_dd": 758.06,
+        "p95_max_dd": 1042.22,
+        "worst_max_dd": 1544.91,
+        "median_final": 4559.23,
+        "p05_final": 4559.23,
+        "prob_50pct_drawdown": 0.0,
+        "prob_final_below_start": 1.0
+      },
+      "ablation": {
+        "net_pl": -440.77,
+        "drop_best_1": -563.32,
+        "drop_worst_1": -249.66,
+        "drop_best_3": -744.01,
+        "drop_worst_3": 0.82,
+        "drop_best_5": -896.52,
+        "drop_worst_5": 195.81,
+        "top3_share_of_gross_profit": 11.8
+      },
+      "dsr": null,
+      "expected_max_sr": null,
+      "reason": "No complete calendar-aligned return series for the full search family"
+    }
+  }
+}

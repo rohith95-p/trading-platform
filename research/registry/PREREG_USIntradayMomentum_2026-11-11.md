@@ -1,0 +1,3 @@
+# US opening move and late gold session
+
+Hypothesis transfer motivated by intraday momentum research: https://www.sciencedirect.com/science/article/pii/S1044028325000110 . XAUUSD only, not Chinese futures replication. Measure 08:30–09:00 New York price change from first M15 open to second close. Follow its sign from 15:30 open to 16:00 open. Require exact boundary records, skip zero signal, fixed .02 lots, modeled ECN spread/slippage/commission. One arm, no filters, stops or parameter sweep. Compare with shuffled daily directions within year on the same timestamps and side counts. Score 2005–11, 2012–18, 2019–2025. Existing PF and robustness criteria apply. No funded eligibility claims from a screen.

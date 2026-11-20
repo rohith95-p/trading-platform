@@ -1,0 +1,68 @@
+{
+  "name": "portfolio",
+  "phase": "evaluation",
+  "start": "2026-01-01T00:00:00+00:00",
+  "end_exclusive": "2026-11-01T00:00:00+00:00",
+  "unrestricted": {
+    "status": "active",
+    "time": null,
+    "entries": 124,
+    "closes": 124,
+    "balance": 5178.059999999882,
+    "equity": 5178.059999999882,
+    "minimum_equity": 4296.115999999922,
+    "first_trade": "2026-01-05T13:45:00.053000+00:00",
+    "payout_anchor": 5000.0,
+    "next_payout_window": null,
+    "max_equity_drawdown_usd": 842.0110000000705,
+    "max_equity_drawdown_pct": 16.387508522075684,
+    "max_floating_loss": 233.40600000000086,
+    "max_used_margin_to_equity": 0.055341865674819864,
+    "overnight_resets": 21,
+    "peak_equity": 5178.263999999883,
+    "rule_events": [],
+    "protector_strikes": 0,
+    "qualifying_days": 40,
+    "deductions": 0.0,
+    "modeled_payouts": [],
+    "modeled_cash_received": 0.0
+  },
+  "atlas": {
+    "status": "trailing_breach",
+    "time": "2026-02-03T01:15:00.477000+00:00",
+    "entries": 16,
+    "closes": 15,
+    "balance": 4809.670999999985,
+    "equity": 4623.462999999984,
+    "minimum_equity": 4623.462999999984,
+    "first_trade": "2026-01-05T13:45:00.053000+00:00",
+    "payout_anchor": 5000.0,
+    "next_payout_window": null,
+    "max_equity_drawdown_usd": 514.664000000008,
+    "max_equity_drawdown_pct": 10.016568294244356,
+    "max_floating_loss": 186.20800000000054,
+    "max_used_margin_to_equity": 0.03948599314660262,
+    "overnight_resets": 2,
+    "peak_equity": 5138.126999999992,
+    "rule_events": [
+      {
+        "time": "2026-02-03T01:15:00.477000+00:00",
+        "event": "trailing_breach",
+        "equity": 4623.463,
+        "balance": 4809.671,
+        "midnight_equity": 4739.447,
+        "peak": 5138.127,
+        "tickets": [
+          16
+        ]
+      }
+    ],
+    "protector_strikes": 0,
+    "qualifying_days": 3,
+    "deductions": 0.0,
+    "modeled_payouts": [],
+    "modeled_cash_received": 0.0
+  },
+  "news_coverage": "Selected USD releases only; historical Atlas all-currency restrictions unverified.",
+  "payout_assumption": "Request USD 100 cash while flat, normal 90% split (50% after first Protector), immediate settlement and verified KYC assumed; no real payments."
+}

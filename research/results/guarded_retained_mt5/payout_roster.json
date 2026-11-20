@@ -1,0 +1,28 @@
+{
+  "decision_as_of": "2026-11-20",
+  "symbol": "XAUUSD",
+  "program": "Atlas Access Standard 5000 USD",
+  "approved_for_funded_deployment": [],
+  "research_forward_demo": {
+    "strategies": ["AsianRangeFilteredV6", "LondonMomentumTightV6"],
+    "native_mask": 5,
+    "evaluation": {"leverage": 100, "lots": 0.02, "payout_guard": false},
+    "funded": {"leverage": 50, "lots": 0.01, "payout_guard": true, "max_positions": 1},
+    "status": "research_only",
+    "evidence": "2025_portfolio_funded_mask5_phase_split_continuous_audit.json"
+  },
+  "comparison_only": {
+    "additional_strategy": "AsianBreakoutV6",
+    "native_mask": 7,
+    "reason": "Matched the simpler portfolio's observed payout count, accelerated the 2026 January-start payout, and retained it under the $0.50 cost sensitivity."
+  },
+  "excluded": [
+    {"candidate": "NYSessionReversalV6", "reason": "Loss-making in the earlier 2026 evaluation."},
+    {"candidate": "original Luna EX5", "reason": "Historical account breaches, empty stops at submission and major under-three-minute profit deductions."},
+    {"candidate": "Luna two-level preset", "reason": "Lost money and failed to pass in the earlier constrained test."},
+    {"candidate": "Luna L2 four-level preset", "reason": "A native 0.02-lot order exceeded the loaded 0.01-lot parameter."},
+    {"candidate": "Luna signal follower", "reason": "Reduced PF in the joint portfolio and caused a trailing breach before the payout on the matched 2026 funded start."}
+  ],
+  "standalone_approval": [],
+  "evidence_index": "payout_decision.md"
+}

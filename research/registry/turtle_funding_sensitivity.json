@@ -1,0 +1,216 @@
+{
+  "source_sha256": "28d26993624025328582a81675efc168cb481d9597b5399da5670256093ed93c",
+  "caveat": "Uniform long USD/oz/calendar-day debit, short funding zero. Not historical or current Atlas rates. Fixed baskets only, no equity-dependent sizing or liquidation.",
+  "results": {
+    "1unit 2005-2011 base": {
+      "baskets": 35,
+      "long_ounce_nights": 2142.0,
+      "maximum_uniform_long_charge_for_pf_1_3": 0.07206554398368901,
+      "scenarios": {
+        "0.0": {
+          "net_usd": 530.9780439408123,
+          "profit_factor": 1.4312834444415397
+        },
+        "0.01": {
+          "net_usd": 509.55804394081224,
+          "profit_factor": 1.4128724236558756
+        },
+        "0.05": {
+          "net_usd": 423.8780439408122,
+          "profit_factor": 1.3401004378328576
+        },
+        "0.1": {
+          "net_usd": 316.7780439408123,
+          "profit_factor": 1.2500552993044418
+        },
+        "0.25": {
+          "net_usd": -4.521956059187637,
+          "profit_factor": 0.9966132894789251
+        },
+        "0.5155": {
+          "net_usd": -573.2229560591878,
+          "profit_factor": 0.6107765666179041
+        },
+        "1.0": {
+          "net_usd": -1611.0219560591875,
+          "profit_factor": 0.1685202274460531
+        }
+      }
+    },
+    "1unit 2012-2018 base": {
+      "baskets": 38,
+      "long_ounce_nights": 1060.0,
+      "maximum_uniform_long_charge_for_pf_1_3": null,
+      "scenarios": {
+        "0.0": {
+          "net_usd": 303.1308257182804,
+          "profit_factor": 1.2274136415453551
+        },
+        "0.01": {
+          "net_usd": 292.53082571828037,
+          "profit_factor": 1.2186608210837828
+        },
+        "0.05": {
+          "net_usd": 250.13082571828036,
+          "profit_factor": 1.1842789095522483
+        },
+        "0.1": {
+          "net_usd": 197.1308257182803,
+          "profit_factor": 1.1426675907519577
+        },
+        "0.25": {
+          "net_usd": 38.130825718280384,
+          "profit_factor": 1.0257529841750588
+        },
+        "0.5155": {
+          "net_usd": -243.2991742817196,
+          "profit_factor": 0.853865081612959
+        },
+        "1.0": {
+          "net_usd": -756.8691742817196,
+          "profit_factor": 0.6223492598790721
+        }
+      }
+    },
+    "1unit 2019-2025 base": {
+      "baskets": 28,
+      "long_ounce_nights": 2294.0,
+      "maximum_uniform_long_charge_for_pf_1_3": 1.3682772041060998,
+      "scenarios": {
+        "0.0": {
+          "net_usd": 3678.0619921308144,
+          "profit_factor": 4.873993033297714
+        },
+        "0.01": {
+          "net_usd": 3655.1219921308148,
+          "profit_factor": 4.84400078442518
+        },
+        "0.05": {
+          "net_usd": 3563.3619921308145,
+          "profit_factor": 4.724934731742687
+        },
+        "0.1": {
+          "net_usd": 3448.6619921308147,
+          "profit_factor": 4.578103433795028
+        },
+        "0.25": {
+          "net_usd": 3104.5619921308144,
+          "profit_factor": 4.126170054950224
+        },
+        "0.5155": {
+          "net_usd": 2495.5049921308146,
+          "profit_factor": 3.293506667821113
+        },
+        "1.0": {
+          "net_usd": 1384.0619921308148,
+          "profit_factor": 1.967845733777884
+        }
+      }
+    },
+    "4unit 2005-2011 base": {
+      "baskets": 38,
+      "long_ounce_nights": 7612.0,
+      "maximum_uniform_long_charge_for_pf_1_3": 0.2030429501784293,
+      "scenarios": {
+        "0.0": {
+          "net_usd": 2605.8239255995163,
+          "profit_factor": 1.7933849445500867
+        },
+        "0.01": {
+          "net_usd": 2529.7039255995164,
+          "profit_factor": 1.7676800023236152
+        },
+        "0.05": {
+          "net_usd": 2225.223925599516,
+          "profit_factor": 1.6665263965529404
+        },
+        "0.1": {
+          "net_usd": 1844.6239255995165,
+          "profit_factor": 1.5437136953397619
+        },
+        "0.25": {
+          "net_usd": 702.823925599517,
+          "profit_factor": 1.194894105458485
+        },
+        "0.5155": {
+          "net_usd": -1318.1620744004836,
+          "profit_factor": 0.6804432796596974
+        },
+        "1.0": {
+          "net_usd": -5006.176074400483,
+          "profit_factor": 0.14275917813977398
+        }
+      }
+    },
+    "4unit 2012-2018 base": {
+      "baskets": 42,
+      "long_ounce_nights": 3172.0,
+      "maximum_uniform_long_charge_for_pf_1_3": null,
+      "scenarios": {
+        "0.0": {
+          "net_usd": 1193.7069924276561,
+          "profit_factor": 1.281932309673093
+        },
+        "0.01": {
+          "net_usd": 1161.9869924276566,
+          "profit_factor": 1.2732711144054827
+        },
+        "0.05": {
+          "net_usd": 1035.106992427656,
+          "profit_factor": 1.239352135204754
+        },
+        "0.1": {
+          "net_usd": 876.5069924276564,
+          "profit_factor": 1.1985194450961758
+        },
+        "0.25": {
+          "net_usd": 400.70699242765636,
+          "profit_factor": 1.0854929157944613
+        },
+        "0.5155": {
+          "net_usd": -441.4590075723439,
+          "profit_factor": 0.9145801147809491
+        },
+        "1.0": {
+          "net_usd": -1978.2930075723436,
+          "profit_factor": 0.6790209634678784
+        }
+      }
+    },
+    "4unit 2019-2025 base": {
+      "baskets": 33,
+      "long_ounce_nights": 7510.0,
+      "maximum_uniform_long_charge_for_pf_1_3": 1.242311730222236,
+      "scenarios": {
+        "0.0": {
+          "net_usd": 11400.54967349816,
+          "profit_factor": 3.463760330755543
+        },
+        "0.01": {
+          "net_usd": 11325.44967349816,
+          "profit_factor": 3.4443294092038497
+        },
+        "0.05": {
+          "net_usd": 11025.04967349816,
+          "profit_factor": 3.3671113545320956
+        },
+        "0.1": {
+          "net_usd": 10649.54967349816,
+          "profit_factor": 3.2717117505802475
+        },
+        "0.25": {
+          "net_usd": 9523.04967349816,
+          "profit_factor": 2.9807062585626567
+        },
+        "0.5155": {
+          "net_usd": 7529.14467349816,
+          "profit_factor": 2.4585733119888795
+        },
+        "1.0": {
+          "net_usd": 3890.5496734981602,
+          "profit_factor": 1.6259561130169515
+        }
+      }
+    }
+  }
+}

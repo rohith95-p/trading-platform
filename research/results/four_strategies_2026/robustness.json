@@ -1,0 +1,506 @@
+{
+  "AsianBreakoutV6": {
+    "net": 386.2989999999582,
+    "wins": 15,
+    "trades": 31,
+    "ratio_metrics": {
+      "profit_factor": 1.3707839177457928,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.21852019672154485,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 1428.1429999999868,
+      "gross_loss_unrounded": 1041.8440000000285
+    },
+    "closed_balance": {
+      "years": 0.8323066392881588,
+      "annualised_return_pct": 9.353424303240597,
+      "max_drawdown": 370.2050000000072,
+      "max_drawdown_pct": 7.0198888475725845,
+      "max_drawdown_duration_days": 193.27181712962962,
+      "end_balance": 5386.298999999958,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 1.3324177214679018,
+      "recovery_factor": 1.043473210788484,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "omega_zero": 1.3707839177457928,
+    "expectancy": 12.461258064514869,
+    "monte_carlo_trade_order": {
+      "median_max_dd": 370.75,
+      "p95_max_dd": 574.85,
+      "worst_max_dd": 853.71,
+      "median_final": 5386.3,
+      "p05_final": 5386.3,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "ablation": {
+      "net_pl": 386.3,
+      "drop_best_1": 117.95,
+      "drop_worst_1": 619.74,
+      "drop_best_3": -122.3,
+      "drop_worst_3": 782.29,
+      "drop_best_5": -299.71,
+      "drop_worst_5": 911.55,
+      "top3_share_of_gross_profit": 35.6
+    },
+    "bootstrap": {
+      "n_trades": 31,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.370784,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.549406,
+        "ci_lower_status": "finite",
+        "median": 1.410189,
+        "median_status": "finite",
+        "ci_upper": 3.271946,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.21852,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.290847,
+        "ci_lower_status": "finite",
+        "median": 0.250108,
+        "median_status": "finite",
+        "ci_upper": 1.301713,
+        "ci_upper_status": "finite"
+      }
+    },
+    "weekly_one_sided_p": 0.22935984293964393,
+    "note": "Historical strategy selection involved more than these five outputs. A research-wide deflated Sharpe requires the original trial Sharpe distribution.",
+    "bonferroni_reported_series": 1.0
+  },
+  "AsianRangeFilteredV6": {
+    "net": 422.2179999999613,
+    "wins": 15,
+    "trades": 26,
+    "ratio_metrics": {
+      "profit_factor": 1.9318099559493427,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.5966095440241544,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 875.333999999982,
+      "gross_loss_unrounded": 453.1160000000205
+    },
+    "closed_balance": {
+      "years": 0.8323066392881588,
+      "annualised_return_pct": 10.230170619852306,
+      "max_drawdown": 93.03800000000501,
+      "max_drawdown_pct": 1.8366760344949746,
+      "max_drawdown_duration_days": 66.91025462962963,
+      "end_balance": 5422.217999999962,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 5.569937445536096,
+      "recovery_factor": 4.538124207312482,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "omega_zero": 1.9318099559493427,
+    "expectancy": 16.239153846152327,
+    "monte_carlo_trade_order": {
+      "median_max_dd": 138.47,
+      "p95_max_dd": 229.78,
+      "worst_max_dd": 377.16,
+      "median_final": 5422.22,
+      "p05_final": 5422.22,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "ablation": {
+      "net_pl": 422.22,
+      "drop_best_1": 319.65,
+      "drop_worst_1": 482.12,
+      "drop_best_3": 190.85,
+      "drop_worst_3": 576.5,
+      "drop_best_5": 69.52,
+      "drop_worst_5": 657.2,
+      "top3_share_of_gross_profit": 26.4
+    },
+    "bootstrap": {
+      "n_trades": 26,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.93181,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.849677,
+        "ci_lower_status": "finite",
+        "median": 1.952123,
+        "median_status": "finite",
+        "ci_upper": 4.835898,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.59661,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.115961,
+        "ci_lower_status": "finite",
+        "median": 0.614777,
+        "median_status": "finite",
+        "ci_upper": 1.837394,
+        "ci_upper_status": "finite"
+      }
+    },
+    "weekly_one_sided_p": 0.03605369098742715,
+    "note": "Historical strategy selection involved more than these five outputs. A research-wide deflated Sharpe requires the original trial Sharpe distribution.",
+    "bonferroni_reported_series": 0.21632214592456292
+  },
+  "LondonMomentumTightV6": {
+    "net": 476.1399999999384,
+    "wins": 21,
+    "trades": 51,
+    "ratio_metrics": {
+      "profit_factor": 1.455754118288858,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.3352505844572202,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 1520.8699999999822,
+      "gross_loss_unrounded": 1044.7300000000437
+    },
+    "closed_balance": {
+      "years": 0.8323066392881588,
+      "annualised_return_pct": 11.548548360584345,
+      "max_drawdown": 319.6760000000213,
+      "max_drawdown_pct": 6.082212881637046,
+      "max_drawdown_duration_days": 146.88896990740741,
+      "end_balance": 5476.1399999999385,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 1.8987412287805385,
+      "recovery_factor": 1.4894455636328867,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "omega_zero": 1.455754118288858,
+    "expectancy": 9.336078431371467,
+    "monte_carlo_trade_order": {
+      "median_max_dd": 251.26,
+      "p95_max_dd": 406.04,
+      "worst_max_dd": 620.0,
+      "median_final": 5476.14,
+      "p05_final": 5476.14,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "ablation": {
+      "net_pl": 476.14,
+      "drop_best_1": 288.87,
+      "drop_worst_1": 544.43,
+      "drop_best_3": 57.94,
+      "drop_worst_3": 648.35,
+      "drop_best_5": -137.3,
+      "drop_worst_5": 740.74,
+      "top3_share_of_gross_profit": 27.5
+    },
+    "bootstrap": {
+      "n_trades": 51,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.455754,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.767769,
+        "ci_lower_status": "finite",
+        "median": 1.477295,
+        "median_status": "finite",
+        "ci_upper": 2.585182,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.335251,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.187648,
+        "ci_lower_status": "finite",
+        "median": 0.350871,
+        "median_status": "finite",
+        "ci_upper": 1.044977,
+        "ci_upper_status": "finite"
+      }
+    },
+    "weekly_one_sided_p": 0.1328795337977459,
+    "note": "Historical strategy selection involved more than these five outputs. A research-wide deflated Sharpe requires the original trial Sharpe distribution.",
+    "bonferroni_reported_series": 0.7972772027864754
+  },
+  "NYSessionReversalV6": {
+    "net": -610.7420000000526,
+    "wins": 15,
+    "trades": 48,
+    "ratio_metrics": {
+      "profit_factor": 0.6525680153594324,
+      "profit_factor_status": "finite",
+      "sortino_ratio": -0.24475180125326665,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 1147.13299999999,
+      "gross_loss_unrounded": 1757.8750000000425
+    },
+    "closed_balance": {
+      "years": 0.8323066392881588,
+      "annualised_return_pct": -14.48908090362444,
+      "max_drawdown": 1092.3820000000464,
+      "max_drawdown_pct": 21.2886843048917,
+      "max_drawdown_duration_days": 295.36819444444444,
+      "end_balance": 4389.257999999947,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": -0.6806001111254747,
+      "recovery_factor": -0.5590919659972671,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "omega_zero": 0.6525680153594324,
+    "expectancy": -12.723791666667667,
+    "monte_carlo_trade_order": {
+      "median_max_dd": 797.06,
+      "p95_max_dd": 1034.0,
+      "worst_max_dd": 1283.45,
+      "median_final": 4389.26,
+      "p05_final": 4389.26,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 1.0
+    },
+    "ablation": {
+      "net_pl": -610.74,
+      "drop_best_1": -722.62,
+      "drop_worst_1": -386.12,
+      "drop_best_3": -917.59,
+      "drop_worst_3": -217.81,
+      "drop_best_5": -1093.48,
+      "drop_worst_5": -96.28,
+      "top3_share_of_gross_profit": 26.7
+    },
+    "bootstrap": {
+      "n_trades": 48,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 0.652568,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.3275,
+        "ci_lower_status": "finite",
+        "median": 0.649178,
+        "median_status": "finite",
+        "ci_upper": 1.236093,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": -0.244752,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.526976,
+        "ci_lower_status": "finite",
+        "median": -0.242584,
+        "median_status": "finite",
+        "ci_upper": 0.173969,
+        "ci_upper_status": "finite"
+      }
+    },
+    "weekly_one_sided_p": 0.8633474885225727,
+    "note": "Historical strategy selection involved more than these five outputs. A research-wide deflated Sharpe requires the original trial Sharpe distribution.",
+    "bonferroni_reported_series": 1.0
+  },
+  "portfolio": {
+    "net": 178.05999999984647,
+    "wins": 52,
+    "trades": 124,
+    "ratio_metrics": {
+      "profit_factor": 1.0516870873138593,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.03216021609832856,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 3623.0209999999524,
+      "gross_loss_unrounded": 3444.961000000107
+    },
+    "closed_balance": {
+      "years": 0.8323066392881588,
+      "annualised_return_pct": 4.293918418193474,
+      "max_drawdown": 753.0320000000929,
+      "max_drawdown_pct": 14.826062046305232,
+      "max_drawdown_duration_days": 286.96503472222224,
+      "end_balance": 5178.059999999845,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 0.28961961745354703,
+      "recovery_factor": 0.23645741482410376,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "omega_zero": 1.0516870873138593,
+    "expectancy": 1.4359677419343182,
+    "monte_carlo_trade_order": {
+      "median_max_dd": 687.65,
+      "p95_max_dd": 1059.61,
+      "worst_max_dd": 1628.4,
+      "median_final": 5178.06,
+      "p05_final": 5178.06,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "ablation": {
+      "net_pl": 178.06,
+      "drop_best_1": -9.21,
+      "drop_worst_1": 411.51,
+      "drop_best_3": -240.69,
+      "drop_worst_3": 734.58,
+      "drop_best_5": -458.72,
+      "drop_worst_5": 897.13,
+      "top3_share_of_gross_profit": 11.6
+    },
+    "bootstrap": {
+      "n_trades": 124,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.051687,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.696419,
+        "ci_lower_status": "finite",
+        "median": 1.046958,
+        "median_status": "finite",
+        "ci_upper": 1.576268,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.03216,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.197291,
+        "ci_lower_status": "finite",
+        "median": 0.028048,
+        "median_status": "finite",
+        "ci_upper": 0.348411,
+        "ci_upper_status": "finite"
+      }
+    },
+    "weekly_one_sided_p": 0.4182480809523685,
+    "note": "Historical strategy selection involved more than these five outputs. A research-wide deflated Sharpe requires the original trial Sharpe distribution.",
+    "bonferroni_reported_series": 1.0
+  },
+  "retained_portfolio": {
+    "net": 850.3999999998923,
+    "wins": 38,
+    "trades": 82,
+    "ratio_metrics": {
+      "profit_factor": 1.449036425070141,
+      "profit_factor_status": "finite",
+      "sortino_ratio": 0.26388321825151645,
+      "sortino_status": "finite",
+      "gross_profit_unrounded": 2744.232999999963,
+      "gross_loss_unrounded": 1893.8330000000706
+    },
+    "closed_balance": {
+      "years": 0.8323066392881588,
+      "annualised_return_pct": 20.770160723904908,
+      "max_drawdown": 472.6550000000452,
+      "max_drawdown_pct": 8.575828738530024,
+      "max_drawdown_duration_days": 181.96479166666666,
+      "end_balance": 5850.399999999892,
+      "closed_balance_nonpositive": false,
+      "calmar_ratio": 2.421942106957829,
+      "recovery_factor": 1.7991981466393268,
+      "metric_notes": [
+        "closed_balance_reconstructed_from_net_trades_no_cashflows_assumed",
+        "CAGR_extrapolates_less_than_one_calendar_year_not_evidence_of_annual_performance"
+      ]
+    },
+    "omega_zero": 1.449036425070141,
+    "expectancy": 10.370731707315828,
+    "monte_carlo_trade_order": {
+      "median_max_dd": 391.83,
+      "p95_max_dd": 607.75,
+      "worst_max_dd": 965.04,
+      "median_final": 5850.4,
+      "p05_final": 5850.4,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "ablation": {
+      "net_pl": 850.4,
+      "drop_best_1": 582.05,
+      "drop_worst_1": 1083.85,
+      "drop_best_3": 275.18,
+      "drop_worst_3": 1246.39,
+      "drop_best_5": 57.15,
+      "drop_worst_5": 1374.58,
+      "top3_share_of_gross_profit": 21.0
+    },
+    "bootstrap": {
+      "n_trades": 82,
+      "n_resamples": 1000,
+      "confidence_level": 0.95,
+      "quantile_method": "empirical_inverse_cdf_includes_unbounded_mass; undefined_0_over_0_mass_disclosed",
+      "interval_scope": "conditional_on_defined_ratio; unbounded_outcomes_retained; undefined_mass_reported_separately",
+      "basis": "IID_trade_PnL_bootstrap_not_serial_dependence_or_annualized_return_inference",
+      "profit_factor": {
+        "observed": 1.449036,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": 0.848075,
+        "ci_lower_status": "finite",
+        "median": 1.45761,
+        "median_status": "finite",
+        "ci_upper": 2.474938,
+        "ci_upper_status": "finite"
+      },
+      "sortino_ratio": {
+        "observed": 0.263883,
+        "observed_status": "finite",
+        "unbounded_fraction": 0.0,
+        "undefined_fraction": 0.0,
+        "ci_lower": -0.091196,
+        "ci_lower_status": "finite",
+        "median": 0.279278,
+        "median_status": "finite",
+        "ci_upper": 0.911981,
+        "ci_upper_status": "finite"
+      }
+    },
+    "weekly_one_sided_p": 0.12789318325978188,
+    "note": "Historical strategy selection involved more than these five outputs. A research-wide deflated Sharpe requires the original trial Sharpe distribution.",
+    "bonferroni_reported_series": 0.7673590995586913
+  }
+}

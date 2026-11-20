@@ -1,0 +1,75 @@
+{
+  "comparison": "Native archive-built minute counts, UTC times, bid OHLC, and first bid/ask spread vs separate cached and hashed Standard M1 extraction. All 10 monthly sources match.",
+  "months": [
+    {
+      "month": "2026-01",
+      "minutes": 28729,
+      "quotes": 13431248,
+      "source_verified": "922ec2c19e1277dae28bbf284e90aa9c3214bb3329db9fbabc1111b6e7172133",
+      "independent_m1_sha256": "6dacecc13239bee2319e129fb06395b75145e83a3703904f2219b48b68bae3f4"
+    },
+    {
+      "month": "2026-02",
+      "minutes": 27379,
+      "quotes": 8007912,
+      "source_verified": "f9c543de40af4d4eeec1c636295a16d1c88665b967189a1ec8869fadc4715425",
+      "independent_m1_sha256": "49227a7ed6a5489d1721e79f4a4002f1a1a8795a54dd10cd2382546da0016507"
+    },
+    {
+      "month": "2026-03",
+      "minutes": 30406,
+      "quotes": 12360568,
+      "source_verified": "429602a452abd85c2ab5b434cc1ea9bda8a7e3a778ffdec7db3e293321542486",
+      "independent_m1_sha256": "7cc24d8fd1f3cefcf2905323cb7a9eec473e410c1b75ebd329b7acbb5cfcfb4b"
+    },
+    {
+      "month": "2026-04",
+      "minutes": 28898,
+      "quotes": 6875952,
+      "source_verified": "89c5fced768b469991295fc0502f8c99749373f3933e7740013490d51096af9c",
+      "independent_m1_sha256": "df88a0aad336367386b6401966564b0a7c42413a3b2c774ba839f924c411f3bd"
+    },
+    {
+      "month": "2026-05",
+      "minutes": 28773,
+      "quotes": 6023835,
+      "source_verified": "498e0392d15e06593962b151f0afe0bc253e4e7fc946e181828c4330ad5e2e42",
+      "independent_m1_sha256": "dcb2c216bec9bf0f306ac90d28f6bac5503a53db041205c502bfcb54834ca898"
+    },
+    {
+      "month": "2026-06",
+      "minutes": 30073,
+      "quotes": 8038573,
+      "source_verified": "1104ff552ea3c966b01e6086f533ecffecb0fc0f7abcceb5044e3982f828cfda",
+      "independent_m1_sha256": "6d9da990ed6f5bee2a8bd4e3b3d7ee78046f41eeea3a0800a9210621fb45ffc8"
+    },
+    {
+      "month": "2026-07",
+      "minutes": 31332,
+      "quotes": 6739207,
+      "source_verified": "c704fb3ec1fe6898aa3c1e4c572dcc40e294b6aac914f1bad41227a5bbdc63b1",
+      "independent_m1_sha256": "3c04f750810adace6aac74d11abddd350af977d0ee8fb487074458ff4aaa70de"
+    },
+    {
+      "month": "2026-08",
+      "minutes": 29049,
+      "quotes": 6493208,
+      "source_verified": "baa514c5a9422a0726164f0a6cbe0785dcd74da553951afe8ad31783c5902f2b",
+      "independent_m1_sha256": "cc2da557c65b599d0f04717f3d5ad4ea9d7bede237b307be51bb0128ad04f25e"
+    },
+    {
+      "month": "2026-09",
+      "minutes": 30157,
+      "quotes": 6593803,
+      "source_verified": "2f85861bfc1cbacb5fabc241832a58a6552159ceee84f25952bfc0706a500df8",
+      "independent_m1_sha256": "169532310d4e33b4805020ec9d90f6b6e069dc13938a71e87ddaf31eefb35261"
+    },
+    {
+      "month": "2026-10",
+      "minutes": 30192,
+      "quotes": 5914197,
+      "source_verified": "f9066c09dc1d8d6e55b5a89dda37f33994fd69a605c96eccf29ead9c05278feb",
+      "independent_m1_sha256": "572c0d8bacaaea00c23c6c4edb9b5831aa2375017f74ab1cfa563326517f8092"
+    }
+  ]
+}

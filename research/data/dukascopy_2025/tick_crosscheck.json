@@ -1,0 +1,6 @@
+{
+  "status": "not_verified",
+  "reason": "Raw tick archive returned HTTP 429 Too Many Requests; no repeated requests made",
+  "url": "https://datafeed.dukascopy.com/datafeed/XAUUSD/2025/09/01/12h_ticks.bi5",
+  "scope": "Chart snapshot validation succeeded, but independent tick aggregation is not certified"
+}

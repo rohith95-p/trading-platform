@@ -1,0 +1,414 @@
+{
+  "input_sha256": "7132368ef74b14883d2a84045c37f158db70a97e38d7a728486845d942baa3cf",
+  "input_snapshot": "research\\data\\selection_inputs\\7132368ef74b14883d2a84045c37f158db70a97e38d7a728486845d942baa3cf.csv",
+  "runner_sha256": "824b3ef120d8e6a54baabfcf6bbe7483ffcbcfb779fa82331da8c979da6dae48",
+  "protocol_sha256": "229e44b6c74b50aad5ca94153890d10d6f98fce4b7a02f00bd956f9d56228f76",
+  "caveat": "Retrospective causal diagnostic on a post-hoc candidate universe; daily PF is not trade PF. No Atlas survival/payout claim.",
+  "candidate_arms": [
+    "auction_follow",
+    "auction_fade",
+    "cot_follow",
+    "cot_fade",
+    "orb_target_1",
+    "orb_target_2",
+    "gld_creations",
+    "gold_iv_premium",
+    "miners_residual",
+    "paxg_flow",
+    "us_intraday_momentum"
+  ],
+  "decisions": [
+    {
+      "month": "2023-01",
+      "choice": "paxg_flow",
+      "training_days": 252,
+      "training_end": "2022-12-30",
+      "scores": {
+        "paxg_flow": 0.11994958414461485
+      }
+    },
+    {
+      "month": "2023-02",
+      "choice": "paxg_flow",
+      "training_days": 252,
+      "training_end": "2023-01-31",
+      "scores": {
+        "gld_creations": 0.0648929793471442,
+        "paxg_flow": 0.13266007060807702
+      }
+    },
+    {
+      "month": "2023-03",
+      "choice": "paxg_flow",
+      "training_days": 252,
+      "training_end": "2023-02-28",
+      "scores": {
+        "miners_residual": 0.03968732947469771,
+        "paxg_flow": 0.13009112567863995
+      }
+    },
+    {
+      "month": "2023-04",
+      "choice": "paxg_flow",
+      "training_days": 252,
+      "training_end": "2023-03-31",
+      "scores": {
+        "cot_fade": 0.06673573742446123,
+        "miners_residual": 0.039472177906767096,
+        "paxg_flow": 0.13409709843101925
+      }
+    },
+    {
+      "month": "2023-05",
+      "choice": "cot_fade",
+      "training_days": 252,
+      "training_end": "2023-04-28",
+      "scores": {
+        "cot_fade": 0.07730141194621244,
+        "paxg_flow": 0.05871232214059711
+      }
+    },
+    {
+      "month": "2023-06",
+      "choice": "cot_fade",
+      "training_days": 252,
+      "training_end": "2023-05-31",
+      "scores": {
+        "cot_fade": 0.09100044361777104,
+        "paxg_flow": 0.06475032173089414
+      }
+    },
+    {
+      "month": "2023-07",
+      "choice": "cot_fade",
+      "training_days": 252,
+      "training_end": "2023-06-30",
+      "scores": {
+        "cot_fade": 0.09472716805748282,
+        "paxg_flow": 0.09125465827998175
+      }
+    },
+    {
+      "month": "2023-08",
+      "choice": "paxg_flow",
+      "training_days": 252,
+      "training_end": "2023-07-31",
+      "scores": {
+        "cot_fade": 0.0890240499569998,
+        "miners_residual": 0.058675040370780786,
+        "paxg_flow": 0.12157140966524153
+      }
+    },
+    {
+      "month": "2023-09",
+      "choice": "cot_fade",
+      "training_days": 252,
+      "training_end": "2023-08-31",
+      "scores": {
+        "cot_fade": 0.1187819808278144,
+        "miners_residual": 0.060866467347747026,
+        "paxg_flow": 0.11130395806993917
+      }
+    },
+    {
+      "month": "2023-10",
+      "choice": "paxg_flow",
+      "training_days": 252,
+      "training_end": "2023-09-29",
+      "scores": {
+        "cot_fade": 0.10206404610907635,
+        "paxg_flow": 0.10778787993935907
+      }
+    },
+    {
+      "month": "2023-11",
+      "choice": "paxg_flow",
+      "training_days": 252,
+      "training_end": "2023-10-31",
+      "scores": {
+        "cot_fade": 0.06656766618051099,
+        "paxg_flow": 0.08428840877695845
+      }
+    },
+    {
+      "month": "2023-12",
+      "choice": "cot_fade",
+      "training_days": 252,
+      "training_end": "2023-11-30",
+      "scores": {
+        "cot_fade": 0.07278188223923686,
+        "paxg_flow": 0.05655018811525834
+      }
+    },
+    {
+      "month": "2024-01",
+      "choice": "cot_fade",
+      "training_days": 252,
+      "training_end": "2023-12-29",
+      "scores": {
+        "cot_fade": 0.08542519532030092,
+        "paxg_flow": 0.06444898026655396
+      }
+    },
+    {
+      "month": "2024-02",
+      "choice": "cot_fade",
+      "training_days": 252,
+      "training_end": "2024-01-31",
+      "scores": {
+        "cot_fade": 0.07372643327311723,
+        "gld_creations": 0.06981496097828797,
+        "paxg_flow": 0.05586059514456168
+      }
+    },
+    {
+      "month": "2024-03",
+      "choice": "gld_creations",
+      "training_days": 252,
+      "training_end": "2024-02-29",
+      "scores": {
+        "cot_fade": 0.07372643327311723,
+        "gld_creations": 0.07650573585218101
+      }
+    },
+    {
+      "month": "2024-04",
+      "choice": "cot_fade",
+      "training_days": 252,
+      "training_end": "2024-03-29",
+      "scores": {
+        "cot_fade": 0.09542715677380481
+      }
+    },
+    {
+      "month": "2024-05",
+      "choice": "paxg_flow",
+      "training_days": 252,
+      "training_end": "2024-04-30",
+      "scores": {
+        "paxg_flow": 0.05184802104638882
+      }
+    },
+    {
+      "month": "2024-06",
+      "choice": null,
+      "training_days": 252,
+      "training_end": "2024-05-31",
+      "scores": {}
+    },
+    {
+      "month": "2024-07",
+      "choice": null,
+      "training_days": 252,
+      "training_end": "2024-06-28",
+      "scores": {}
+    },
+    {
+      "month": "2024-08",
+      "choice": null,
+      "training_days": 252,
+      "training_end": "2024-07-31",
+      "scores": {}
+    },
+    {
+      "month": "2024-09",
+      "choice": null,
+      "training_days": 252,
+      "training_end": "2024-08-30",
+      "scores": {}
+    },
+    {
+      "month": "2024-10",
+      "choice": null,
+      "training_days": 252,
+      "training_end": "2024-09-30",
+      "scores": {}
+    },
+    {
+      "month": "2024-11",
+      "choice": null,
+      "training_days": 252,
+      "training_end": "2024-10-31",
+      "scores": {}
+    },
+    {
+      "month": "2024-12",
+      "choice": null,
+      "training_days": 252,
+      "training_end": "2024-11-29",
+      "scores": {}
+    },
+    {
+      "month": "2025-01",
+      "choice": null,
+      "training_days": 252,
+      "training_end": "2024-12-31",
+      "scores": {}
+    },
+    {
+      "month": "2025-02",
+      "choice": null,
+      "training_days": 252,
+      "training_end": "2025-01-31",
+      "scores": {}
+    },
+    {
+      "month": "2025-03",
+      "choice": null,
+      "training_days": 252,
+      "training_end": "2025-02-28",
+      "scores": {}
+    },
+    {
+      "month": "2025-04",
+      "choice": null,
+      "training_days": 252,
+      "training_end": "2025-03-31",
+      "scores": {}
+    },
+    {
+      "month": "2025-05",
+      "choice": null,
+      "training_days": 252,
+      "training_end": "2025-04-30",
+      "scores": {}
+    },
+    {
+      "month": "2025-06",
+      "choice": null,
+      "training_days": 252,
+      "training_end": "2025-05-30",
+      "scores": {}
+    },
+    {
+      "month": "2025-07",
+      "choice": null,
+      "training_days": 252,
+      "training_end": "2025-06-30",
+      "scores": {}
+    },
+    {
+      "month": "2025-08",
+      "choice": null,
+      "training_days": 252,
+      "training_end": "2025-07-31",
+      "scores": {}
+    },
+    {
+      "month": "2025-09",
+      "choice": null,
+      "training_days": 252,
+      "training_end": "2025-08-29",
+      "scores": {}
+    },
+    {
+      "month": "2025-10",
+      "choice": "miners_residual",
+      "training_days": 252,
+      "training_end": "2025-09-30",
+      "scores": {
+        "miners_residual": 0.04639818797990727
+      }
+    },
+    {
+      "month": "2025-11",
+      "choice": null,
+      "training_days": 252,
+      "training_end": "2025-10-31",
+      "scores": {}
+    },
+    {
+      "month": "2025-12",
+      "choice": null,
+      "training_days": 252,
+      "training_end": "2025-11-28",
+      "scores": {}
+    }
+  ],
+  "selected": {
+    "observation": "daily_realized_cash_pnl",
+    "days": 783,
+    "active_days": 102,
+    "profitable_days": 45,
+    "net_usd": -310.65399999999994,
+    "daily_profit_factor": 0.7011120240608184,
+    "annualized_daily_sharpe": -0.5400518605444068,
+    "annualized_daily_sortino": -0.7224892881834539,
+    "omega_zero_threshold": 0.7011120240608184,
+    "realized_balance_max_dd_usd": 380.47199999999884,
+    "realized_balance_max_dd_pct": 7.555958922744793,
+    "recovery_factor": -0.8164963518997479,
+    "calmar": -0.27041788146534174
+  },
+  "equal_allocation_diagnostic": {
+    "observation": "daily_realized_cash_pnl",
+    "days": 783,
+    "active_days": 774,
+    "profitable_days": 259,
+    "net_usd": -301.85709090910603,
+    "daily_profit_factor": 0.7000532969107498,
+    "annualized_daily_sharpe": -1.9500222657594464,
+    "annualized_daily_sortino": -2.8353479407014297,
+    "omega_zero_threshold": 0.7000532969107498,
+    "realized_balance_max_dd_usd": 322.41618181818285,
+    "realized_balance_max_dd_pct": 6.433362676005261,
+    "recovery_factor": -0.9362343081133858,
+    "calmar": -0.30841766269160537
+  },
+  "yearly": {
+    "2023": {
+      "observation": "daily_realized_cash_pnl",
+      "days": 260,
+      "active_days": 58,
+      "profitable_days": 30,
+      "net_usd": 31.917999999997864,
+      "daily_profit_factor": 1.0989012351034577,
+      "annualized_daily_sharpe": 0.25274493896346417,
+      "annualized_daily_sortino": 0.3477089278320716,
+      "omega_zero_threshold": 1.0989012351034577,
+      "realized_balance_max_dd_usd": 134.14999999999873,
+      "realized_balance_max_dd_pct": 2.672864497824225,
+      "recovery_factor": 0.2379276928810896,
+      "calmar": 0.23145861803364617
+    },
+    "2024": {
+      "observation": "daily_realized_cash_pnl",
+      "days": 262,
+      "active_days": 39,
+      "profitable_days": 14,
+      "net_usd": -214.88200000000032,
+      "daily_profit_factor": 0.46115151211193506,
+      "annualized_daily_sharpe": -1.7491612158957148,
+      "annualized_daily_sortino": -2.0041303555341035,
+      "omega_zero_threshold": 0.46115151211193506,
+      "realized_balance_max_dd_usd": 256.77399999999943,
+      "realized_balance_max_dd_pct": 5.131916397253736,
+      "recovery_factor": -0.8368526408437023,
+      "calmar": -0.8061412918352518
+    },
+    "2025": {
+      "observation": "daily_realized_cash_pnl",
+      "days": 261,
+      "active_days": 5,
+      "profitable_days": 1,
+      "net_usd": -127.68999999999747,
+      "daily_profit_factor": 0.5982822626313531,
+      "annualized_daily_sharpe": -0.45312150213306523,
+      "annualized_daily_sortino": -0.6251813835754725,
+      "omega_zero_threshold": 0.5982822626313531,
+      "realized_balance_max_dd_usd": 162.11799999999857,
+      "realized_balance_max_dd_pct": 3.2423599999999713,
+      "recovery_factor": -0.7876361662492666,
+      "calmar": -0.7608141316536274
+    }
+  },
+  "month_block_bootstrap": {
+    "draws": 5000,
+    "net_percentiles_2_5_50_97_5": [
+      -743.6572999999906,
+      -298.10999999999643,
+      39.03179999999869
+    ],
+    "conditional_fraction_negative": 0.9516
+  }
+}

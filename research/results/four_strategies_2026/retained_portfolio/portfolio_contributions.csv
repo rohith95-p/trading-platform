@@ -1,0 +1,4 @@
+strategy,standalone_count,standalone_net,portfolio_count,portfolio_net,same_entry_count,standalone_only_count,portfolio_only_count,standalone_only_net,portfolio_only_net
+ASIAN_RANGE_FILTERED_V6,26,422.218,26,422.218,26,0,0,0,0
+ASIAN_BREAKOUT_V6,31,386.299,5,-47.958,5,26,0,434.257,0
+LONDON_MOMENTUM_TIGHT_V6,51,476.14,51,476.14,51,0,0,0,0

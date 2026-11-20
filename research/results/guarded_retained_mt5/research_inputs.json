@@ -1,0 +1,33 @@
+{
+  "instrument": "XAUUSDm.L48",
+  "underlying": "Exness Standard XAUUSDm quotes",
+  "mode": "100% real ticks native MT5, isolated tester only",
+  "timeframe": "M15",
+  "deposit_usd": 5000,
+  "evaluation_leverage": 100,
+  "funded_leverage": 50,
+  "source_hashes": {
+    "research/mt5_retained/RetainedAtlas.mq5": "09b4f822ea702cb0e26a1da48e749938efe77f3bb5775d89bcf383ffcc97566d",
+    "research/mt5_retained/NativeSignals.mqh": "2f47233b85ee85505611af82172a91bf420f6f12c9a07f944a400a015c27c438",
+    "research/mt5_retained/RetainedNews.mqh": "6639b0f26c25841fac0e311090320d660936ab3549aa09a28e506366fbb4f034",
+    "research/mt5_retained/run_tester.ps1": "d53c7c45f0f87b79f099cb86af66a9279c6974c00c7b588571e4e60fba46a9dd",
+    "scripts/research/guarded_retained_native.py": "25a05017b715c18fbcf6a184e701189a6897d521255cb212888c38d67eb940fa",
+    "scripts/research/guarded_retained_attempt.py": "906ce03add9e3a4a6629f3e754bd59ccdb08792ada5eb44001c5a9ff13b11178",
+    "scripts/research/four_atlas_lifecycle.py": "dda8dd871db0b82ac6d84c851f0b99f548c2e27a302d0987ab4a9991f02aa84e",
+    "scripts/research/retained_native_account.py": "078bee8b4bcfcfb6bfc4de333900af41c9ed4f16c9015ec4bf7de45b383e29dc",
+    "research/results/luna_four_year_20261120/tick_coverage.json": "890661019c456ff4ce4882cbc58905fba71076f4f8253d7c26f51dfb31d08a49"
+  },
+  "compiled_source_note": "Export was upgraded to accept a unique result ID after original batch launches; trade rules were unchanged.",
+  "evaluation_regular_lots": 0.02,
+  "funded_guard_lots": 0.01,
+  "uniform_both_phases_lots": 0.01,
+  "single_position_guard": true,
+  "guarded_stop_risk_plus_allowance_limit_usd": 35,
+  "initial_risk_allowance_usd": 5,
+  "guarded_floating_loss_liquidation_threshold_usd": 60,
+  "window_end_exclusive": {
+    "2025": "2026-01-01",
+    "2026": "2026-11-01"
+  },
+  "outside_history": "Unavailable historical Atlas-specific tick costs, exact sessions and all-currency news coverage."
+}

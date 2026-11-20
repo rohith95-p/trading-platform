@@ -1,0 +1,236 @@
+{
+  "instrument": "XAU/USD",
+  "start": 1734220800,
+  "end": 1767225600,
+  "rows": 369312,
+  "bid_rows": 369312,
+  "ask_rows": 369312,
+  "unmatched_bid": 0,
+  "unmatched_ask": 0,
+  "crossed_extrema_rows": 0,
+  "median_open_spread": 0.5799999999999272,
+  "gaps_over_3_days": [
+    {
+      "before": 1744923480,
+      "after": 1745186400,
+      "seconds": 262920
+    }
+  ],
+  "path": "C:\\projects\\ultra_core\\research\\data\\dukascopy_2025\\XAUUSD_M1_bidask.npy",
+  "sha256": "71b2a48870e0b53bf8e634fb3ebc8589dd88d44a828559e618d2b0dd104328f8",
+  "pages": {
+    "B": [
+      {
+        "url": "https://freeserv.dukascopy.com/2.0/index.php?path=chart%2Fjson3&instrument=XAU%2FUSD&offer_side=B&interval=1MIN&splits=true&stocks=true&time_direction=P&timestamp=1767225600000&jsonp=_callbacks____0",
+        "file": "C:\\projects\\ultra_core\\research\\data\\dukascopy_2025\\B_1767225600000.response.gz",
+        "sha256": "cf4889c9b200f5c88b32ca6abe36336dc801bbc82987069db7677a7a03605589",
+        "rows": 30000,
+        "oldest_ms": 1764551100000,
+        "newest_ms": 1767218280000
+      },
+      {
+        "url": "https://freeserv.dukascopy.com/2.0/index.php?path=chart%2Fjson3&instrument=XAU%2FUSD&offer_side=B&interval=1MIN&splits=true&stocks=true&time_direction=P&timestamp=1764551099999&jsonp=_callbacks____0",
+        "file": "C:\\projects\\ultra_core\\research\\data\\dukascopy_2025\\B_1764551099999.response.gz",
+        "sha256": "fa8148fcd62cccadeb4f6314dd31f5db27eb61065312b806bfce7e8b6203b2bb",
+        "rows": 30000,
+        "oldest_ms": 1761786180000,
+        "newest_ms": 1764551040000
+      },
+      {
+        "url": "https://freeserv.dukascopy.com/2.0/index.php?path=chart%2Fjson3&instrument=XAU%2FUSD&offer_side=B&interval=1MIN&splits=true&stocks=true&time_direction=P&timestamp=1761786179999&jsonp=_callbacks____0",
+        "file": "C:\\projects\\ultra_core\\research\\data\\dukascopy_2025\\B_1761786179999.response.gz",
+        "sha256": "3ba248bca025a32e642ea408a06567c953425be533ea954101e3a2976f78b6dc",
+        "rows": 30000,
+        "oldest_ms": 1759215780000,
+        "newest_ms": 1761786120000
+      },
+      {
+        "url": "https://freeserv.dukascopy.com/2.0/index.php?path=chart%2Fjson3&instrument=XAU%2FUSD&offer_side=B&interval=1MIN&splits=true&stocks=true&time_direction=P&timestamp=1759215779999&jsonp=_callbacks____0",
+        "file": "C:\\projects\\ultra_core\\research\\data\\dukascopy_2025\\B_1759215779999.response.gz",
+        "sha256": "99b88d19902dde7d8f1b32bc29c877d76416be9af55dff82c57c96d3e0a65718",
+        "rows": 30000,
+        "oldest_ms": 1756463520000,
+        "newest_ms": 1759215720000
+      },
+      {
+        "url": "https://freeserv.dukascopy.com/2.0/index.php?path=chart%2Fjson3&instrument=XAU%2FUSD&offer_side=B&interval=1MIN&splits=true&stocks=true&time_direction=P&timestamp=1756463519999&jsonp=_callbacks____0",
+        "file": "C:\\projects\\ultra_core\\research\\data\\dukascopy_2025\\B_1756463519999.response.gz",
+        "sha256": "7c747ba4dbb4d239bdb5b2e9d3195fa7ec07c9ceca61fc49ff0cb7f6c74095d8",
+        "rows": 30000,
+        "oldest_ms": 1753892460000,
+        "newest_ms": 1756463460000
+      },
+      {
+        "url": "https://freeserv.dukascopy.com/2.0/index.php?path=chart%2Fjson3&instrument=XAU%2FUSD&offer_side=B&interval=1MIN&splits=true&stocks=true&time_direction=P&timestamp=1753892459999&jsonp=_callbacks____0",
+        "file": "C:\\projects\\ultra_core\\research\\data\\dukascopy_2025\\B_1753892459999.response.gz",
+        "sha256": "df79a5d5d4e3ebe2cf8ee704a7fe40be5da9daf178759d574f970775cf82c4b4",
+        "rows": 30000,
+        "oldest_ms": 1751307480000,
+        "newest_ms": 1753892400000
+      },
+      {
+        "url": "https://freeserv.dukascopy.com/2.0/index.php?path=chart%2Fjson3&instrument=XAU%2FUSD&offer_side=B&interval=1MIN&splits=true&stocks=true&time_direction=P&timestamp=1751307479999&jsonp=_callbacks____0",
+        "file": "C:\\projects\\ultra_core\\research\\data\\dukascopy_2025\\B_1751307479999.response.gz",
+        "sha256": "d2664c46c0858ccadf3f14bda8bbcfb486d9cc1d3c0b4964aadcab123479e888",
+        "rows": 30000,
+        "oldest_ms": 1748558820000,
+        "newest_ms": 1751307420000
+      },
+      {
+        "url": "https://freeserv.dukascopy.com/2.0/index.php?path=chart%2Fjson3&instrument=XAU%2FUSD&offer_side=B&interval=1MIN&splits=true&stocks=true&time_direction=P&timestamp=1748558819999&jsonp=_callbacks____0",
+        "file": "C:\\projects\\ultra_core\\research\\data\\dukascopy_2025\\B_1748558819999.response.gz",
+        "sha256": "b9d9c3769deaeee641ce5ee4fb978dccfd29bc8c0475796a119af8a8860b6cb2",
+        "rows": 30000,
+        "oldest_ms": 1745979240000,
+        "newest_ms": 1748558760000
+      },
+      {
+        "url": "https://freeserv.dukascopy.com/2.0/index.php?path=chart%2Fjson3&instrument=XAU%2FUSD&offer_side=B&interval=1MIN&splits=true&stocks=true&time_direction=P&timestamp=1745979239999&jsonp=_callbacks____0",
+        "file": "C:\\projects\\ultra_core\\research\\data\\dukascopy_2025\\B_1745979239999.response.gz",
+        "sha256": "c0960e1ea227c7e64ec947e78ad3f51f7eceb4e41eec2a3d2a3576dd99faa205",
+        "rows": 30000,
+        "oldest_ms": 1743147840000,
+        "newest_ms": 1745979180000
+      },
+      {
+        "url": "https://freeserv.dukascopy.com/2.0/index.php?path=chart%2Fjson3&instrument=XAU%2FUSD&offer_side=B&interval=1MIN&splits=true&stocks=true&time_direction=P&timestamp=1743147839999&jsonp=_callbacks____0",
+        "file": "C:\\projects\\ultra_core\\research\\data\\dukascopy_2025\\B_1743147839999.response.gz",
+        "sha256": "c132242cf42c73f1c923f3542ad757258604f089fac61fcdeca35d1392249ec4",
+        "rows": 30000,
+        "oldest_ms": 1740580920000,
+        "newest_ms": 1743147780000
+      },
+      {
+        "url": "https://freeserv.dukascopy.com/2.0/index.php?path=chart%2Fjson3&instrument=XAU%2FUSD&offer_side=B&interval=1MIN&splits=true&stocks=true&time_direction=P&timestamp=1740580919999&jsonp=_callbacks____0",
+        "file": "C:\\projects\\ultra_core\\research\\data\\dukascopy_2025\\B_1740580919999.response.gz",
+        "sha256": "81dca9f26d74ccd0caee8b95be08c735b1dae1b76ff01d13006fcd0120c4cee0",
+        "rows": 30000,
+        "oldest_ms": 1738000860000,
+        "newest_ms": 1740580860000
+      },
+      {
+        "url": "https://freeserv.dukascopy.com/2.0/index.php?path=chart%2Fjson3&instrument=XAU%2FUSD&offer_side=B&interval=1MIN&splits=true&stocks=true&time_direction=P&timestamp=1738000859999&jsonp=_callbacks____0",
+        "file": "C:\\projects\\ultra_core\\research\\data\\dukascopy_2025\\B_1738000859999.response.gz",
+        "sha256": "c3f08782647dbe6e68b5fdc577f652d02ccb63c704a4aa6f01a30b75df514f0b",
+        "rows": 30000,
+        "oldest_ms": 1735063140000,
+        "newest_ms": 1738000800000
+      },
+      {
+        "url": "https://freeserv.dukascopy.com/2.0/index.php?path=chart%2Fjson3&instrument=XAU%2FUSD&offer_side=B&interval=1MIN&splits=true&stocks=true&time_direction=P&timestamp=1735063139999&jsonp=_callbacks____0",
+        "file": "C:\\projects\\ultra_core\\research\\data\\dukascopy_2025\\B_1735063139999.response.gz",
+        "sha256": "0721ff63011fe4c3415b4894be562ed7f5971c0790c27786a83074c2488297d5",
+        "rows": 30000,
+        "oldest_ms": 1732296000000,
+        "newest_ms": 1735063080000
+      }
+    ],
+    "A": [
+      {
+        "url": "https://freeserv.dukascopy.com/2.0/index.php?path=chart%2Fjson3&instrument=XAU%2FUSD&offer_side=A&interval=1MIN&splits=true&stocks=true&time_direction=P&timestamp=1767225600000&jsonp=_callbacks____0",
+        "file": "C:\\projects\\ultra_core\\research\\data\\dukascopy_2025\\A_1767225600000.response.gz",
+        "sha256": "f24a6b6783074940326f37ab5c570bb67a69c82bbfff0caffe25c16983803a90",
+        "rows": 30000,
+        "oldest_ms": 1764551100000,
+        "newest_ms": 1767218280000
+      },
+      {
+        "url": "https://freeserv.dukascopy.com/2.0/index.php?path=chart%2Fjson3&instrument=XAU%2FUSD&offer_side=A&interval=1MIN&splits=true&stocks=true&time_direction=P&timestamp=1764551099999&jsonp=_callbacks____0",
+        "file": "C:\\projects\\ultra_core\\research\\data\\dukascopy_2025\\A_1764551099999.response.gz",
+        "sha256": "4453b8cb73824ecbcd0c838acc5d518aab2a1015d119d8a827a6e1ba27492d5d",
+        "rows": 30000,
+        "oldest_ms": 1761786180000,
+        "newest_ms": 1764551040000
+      },
+      {
+        "url": "https://freeserv.dukascopy.com/2.0/index.php?path=chart%2Fjson3&instrument=XAU%2FUSD&offer_side=A&interval=1MIN&splits=true&stocks=true&time_direction=P&timestamp=1761786179999&jsonp=_callbacks____0",
+        "file": "C:\\projects\\ultra_core\\research\\data\\dukascopy_2025\\A_1761786179999.response.gz",
+        "sha256": "5117af860837879f3ed90bb6a99903d159ec313de3fa73ab1bf9a8ef8f6f5bf1",
+        "rows": 30000,
+        "oldest_ms": 1759215780000,
+        "newest_ms": 1761786120000
+      },
+      {
+        "url": "https://freeserv.dukascopy.com/2.0/index.php?path=chart%2Fjson3&instrument=XAU%2FUSD&offer_side=A&interval=1MIN&splits=true&stocks=true&time_direction=P&timestamp=1759215779999&jsonp=_callbacks____0",
+        "file": "C:\\projects\\ultra_core\\research\\data\\dukascopy_2025\\A_1759215779999.response.gz",
+        "sha256": "29b6a7cc9ce587d49ed4eaa4683e36fbcfeba212c5481419c0ef2d4db8bc009f",
+        "rows": 30000,
+        "oldest_ms": 1756463520000,
+        "newest_ms": 1759215720000
+      },
+      {
+        "url": "https://freeserv.dukascopy.com/2.0/index.php?path=chart%2Fjson3&instrument=XAU%2FUSD&offer_side=A&interval=1MIN&splits=true&stocks=true&time_direction=P&timestamp=1756463519999&jsonp=_callbacks____0",
+        "file": "C:\\projects\\ultra_core\\research\\data\\dukascopy_2025\\A_1756463519999.response.gz",
+        "sha256": "20857ac2bfedef4525d74b1377c36d46649211c33902371c3563c89666b91bfb",
+        "rows": 30000,
+        "oldest_ms": 1753892460000,
+        "newest_ms": 1756463460000
+      },
+      {
+        "url": "https://freeserv.dukascopy.com/2.0/index.php?path=chart%2Fjson3&instrument=XAU%2FUSD&offer_side=A&interval=1MIN&splits=true&stocks=true&time_direction=P&timestamp=1753892459999&jsonp=_callbacks____0",
+        "file": "C:\\projects\\ultra_core\\research\\data\\dukascopy_2025\\A_1753892459999.response.gz",
+        "sha256": "30fe5ef53aa12736904fd0d7514d3dd2f487d52bc3be31634b43cc14e162b893",
+        "rows": 30000,
+        "oldest_ms": 1751307480000,
+        "newest_ms": 1753892400000
+      },
+      {
+        "url": "https://freeserv.dukascopy.com/2.0/index.php?path=chart%2Fjson3&instrument=XAU%2FUSD&offer_side=A&interval=1MIN&splits=true&stocks=true&time_direction=P&timestamp=1751307479999&jsonp=_callbacks____0",
+        "file": "C:\\projects\\ultra_core\\research\\data\\dukascopy_2025\\A_1751307479999.response.gz",
+        "sha256": "511b564c51c3167d0dcdadae816cc30234125646220b7aaaef8da4234561f91c",
+        "rows": 30000,
+        "oldest_ms": 1748558820000,
+        "newest_ms": 1751307420000
+      },
+      {
+        "url": "https://freeserv.dukascopy.com/2.0/index.php?path=chart%2Fjson3&instrument=XAU%2FUSD&offer_side=A&interval=1MIN&splits=true&stocks=true&time_direction=P&timestamp=1748558819999&jsonp=_callbacks____0",
+        "file": "C:\\projects\\ultra_core\\research\\data\\dukascopy_2025\\A_1748558819999.response.gz",
+        "sha256": "8cf3fd981c1df2ff9424ca9dfc77b659150234fc4e1cc8af762ebba35ea81b1d",
+        "rows": 30000,
+        "oldest_ms": 1745979240000,
+        "newest_ms": 1748558760000
+      },
+      {
+        "url": "https://freeserv.dukascopy.com/2.0/index.php?path=chart%2Fjson3&instrument=XAU%2FUSD&offer_side=A&interval=1MIN&splits=true&stocks=true&time_direction=P&timestamp=1745979239999&jsonp=_callbacks____0",
+        "file": "C:\\projects\\ultra_core\\research\\data\\dukascopy_2025\\A_1745979239999.response.gz",
+        "sha256": "2636b9ec5552e70156e7665ebef3a010d17674cf3ee6f104cb32e11e20cfd9b7",
+        "rows": 30000,
+        "oldest_ms": 1743147840000,
+        "newest_ms": 1745979180000
+      },
+      {
+        "url": "https://freeserv.dukascopy.com/2.0/index.php?path=chart%2Fjson3&instrument=XAU%2FUSD&offer_side=A&interval=1MIN&splits=true&stocks=true&time_direction=P&timestamp=1743147839999&jsonp=_callbacks____0",
+        "file": "C:\\projects\\ultra_core\\research\\data\\dukascopy_2025\\A_1743147839999.response.gz",
+        "sha256": "e3f0c5af2e840322f106076f9cfdf6f71f316fc957a3e5627acdb38f1cf8cdc4",
+        "rows": 30000,
+        "oldest_ms": 1740580920000,
+        "newest_ms": 1743147780000
+      },
+      {
+        "url": "https://freeserv.dukascopy.com/2.0/index.php?path=chart%2Fjson3&instrument=XAU%2FUSD&offer_side=A&interval=1MIN&splits=true&stocks=true&time_direction=P&timestamp=1740580919999&jsonp=_callbacks____0",
+        "file": "C:\\projects\\ultra_core\\research\\data\\dukascopy_2025\\A_1740580919999.response.gz",
+        "sha256": "5064300b3f1d13025cbcadbc396be12a41eede04c5283107e0ef28517cd4a476",
+        "rows": 30000,
+        "oldest_ms": 1738000860000,
+        "newest_ms": 1740580860000
+      },
+      {
+        "url": "https://freeserv.dukascopy.com/2.0/index.php?path=chart%2Fjson3&instrument=XAU%2FUSD&offer_side=A&interval=1MIN&splits=true&stocks=true&time_direction=P&timestamp=1738000859999&jsonp=_callbacks____0",
+        "file": "C:\\projects\\ultra_core\\research\\data\\dukascopy_2025\\A_1738000859999.response.gz",
+        "sha256": "e1c24251ef44b5adbffa4fd65e8a1cf2612e46ae36307fd82998cd79ae9b565e",
+        "rows": 30000,
+        "oldest_ms": 1735063140000,
+        "newest_ms": 1738000800000
+      },
+      {
+        "url": "https://freeserv.dukascopy.com/2.0/index.php?path=chart%2Fjson3&instrument=XAU%2FUSD&offer_side=A&interval=1MIN&splits=true&stocks=true&time_direction=P&timestamp=1735063139999&jsonp=_callbacks____0",
+        "file": "C:\\projects\\ultra_core\\research\\data\\dukascopy_2025\\A_1735063139999.response.gz",
+        "sha256": "06a11650aa1993d0e0d5550e62465e6902dc8596f8f5ad38c17e14f773c1576b",
+        "rows": 30000,
+        "oldest_ms": 1732296000000,
+        "newest_ms": 1735063080000
+      }
+    ]
+  },
+  "caveat": "One provider, public chart endpoint; not broker-specific Atlas ticks. No interpolation, no old-source splice, no strategy outcome selection."
+}

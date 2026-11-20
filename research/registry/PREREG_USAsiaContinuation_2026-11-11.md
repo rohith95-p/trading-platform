@@ -1,0 +1,3 @@
+# Prior US session and next Asian session
+
+Inspired by Wenling Wei, SSRN 7257240, specifically continuation into Asia. This is a transfer of the published hypothesis. Buy XAUUSD Tuesday–Friday at 00:15 UTC when the prior calendar day's 23:45 M15 close exceeds its 14:30 UTC open. Exit at 08:00 UTC. The delay ensures the deciding candle is complete. Exact boundary quotes required, no interpolation. Use fixed 0.02 lots, modeled ECN costs. Historical eras 2005–11, 2012–18, 2019–2025. Split the last era at 2024-07-22 to identify overlap with the paper. Same-side control buys the same number of Asian sessions within each calendar year. One arm only, no parameter search. Apply existing PF and uncertainty gates before stop design or Atlas replay.

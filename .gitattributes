@@ -1,0 +1,5 @@
+# Full research evidence stays in Git. Source archives used by the VPS updater
+# omit the largest generated research dumps.
+/research/results/genesis_2026-11-11 export-ignore
+/research/registry/chandelier_zlsma.json export-ignore
+/research/registry/chandelier_zlsma_bidask2025.json export-ignore

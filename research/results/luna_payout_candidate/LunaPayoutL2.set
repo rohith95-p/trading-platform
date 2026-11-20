@@ -1,0 +1,55 @@
+licensekey=-
+sectionaize0=*****************************************************
+TradingSettings===== Automatic Trade Setting ====
+AIDecision=false
+Magic=547970
+OrderCmt=XAUBOT PRO EA Generator
+ECN_Mode=false
+Debug=false
+sectionaize6=*****************************************************
+levelsiiii===== Multi-Level Strategy Setting ====
+AllowHedging=true
+MaximumSymbols=2
+LotSizeWay=4
+LotSizingValueFixed=0.01
+MaximumLot=0.01
+MaximumSpread=30.0
+MaximumSlippage=10
+FirstTP=200.0
+BreakEvenAfterThisLevel=0
+PermitBUYSELL=0
+DrawdownCalculation=1
+MaximumDrawdown=1.0
+DrawDownMax=1
+MaximumProfit=20.0
+TradingSettings1===== Symbol And Strategy Setting ====
+Symbols=
+HourToStartTrading=0
+HourToStopTrading=23
+GridSL=1500.0
+HiddenStopLoss=false
+MaximumTrades=4
+TradeDistance=150
+SecondLevelTrade=1.0
+ThirdLevelTrade=2.0
+Auto_Normalize_Broker=true
+Reference_Tick_Size=0.01
+Reference_Tick_Value=0.01
+Reference_Contract_Size=1.0
+Auto_Scale_Lots=false
+Use_Cooldown_After_Basket=true
+Cooldown_Minutes=120
+sectionaize2=*****************************************************
+calInputs===== Calendar Settings ====
+NewsOn1=true
+UseAutoTimeZone=true
+TimeZone=3
+DisplayLines=false
+LineStyle=3
+PreferCurrency1=USD,AUD,CAD,GBP,NZD
+timeInputs====== News Time Settings =====
+BeforeHigh=60
+AfterHigh=60
+BeforeMedium=60
+AfterMedium=60
+ShowPanel=true

@@ -1,0 +1,2 @@
+CS	0	22:25:58.199	Trade	2026.02.19 06:30:00   market sell 0.02 XAUUSDm.L48 (5001.027 / 5001.267)
+CS	0	22:25:58.200	Trade	2026.02.19 06:30:05   position modified [#232 sell 0.02 XAUUSDm.L48 5001.027 sl: 5010.977 tp: 4998.839]

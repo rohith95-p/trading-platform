@@ -1,0 +1,2558 @@
+{
+  "1unit 2005-2011 base": {
+    "trades": 35,
+    "net": -573.22,
+    "profit_factor": 0.611,
+    "win_pct": 28.6,
+    "expectancy": -16.3778,
+    "max_dd_usd": 788.56,
+    "max_dd_pct": 15.77,
+    "recovery_factor": -0.727,
+    "closed_balance_nonpositive": false,
+    "first_nonpositive_after_trade": null,
+    "annualised_return_pct": -1.72,
+    "calmar_ratio": -0.109,
+    "omega_ratio": 0.611,
+    "sortino_ratio": -0.3028,
+    "sharpe_per_trade": -0.1969,
+    "skew": 1.803,
+    "kurtosis": 6.066,
+    "wins": 10,
+    "swap_usd": -1104.2009999999998,
+    "diagnostics": {
+      "ambiguous_entry_bars": 0,
+      "new_unit_stop_bars": 0,
+      "unit_fills": 35
+    },
+    "observation": "basket_cash_pnl",
+    "maximum_units": 1,
+    "ablation": {
+      "net_pl": -573.22,
+      "drop_best_1": -848.5,
+      "drop_worst_1": -484.33,
+      "drop_best_3": -1192.89,
+      "drop_worst_3": -313.16,
+      "drop_best_5": -1328.11,
+      "drop_worst_5": -146.66,
+      "top3_share_of_gross_profit": 68.9
+    },
+    "monte_carlo": {
+      "median_max_dd": 791.01,
+      "p95_max_dd": 1067.67,
+      "worst_max_dd": 1377.64,
+      "median_final": 4426.78,
+      "p05_final": 4426.78,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 1.0
+    },
+    "basket_records": [
+      {
+        "time": 1108471500,
+        "entry_time": 1107432900,
+        "pnl": -19.99904479941376,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1111139100,
+        "entry_time": 1110553200,
+        "pnl": -25.99244785009656,
+        "swap": -7.217,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1118417400,
+        "entry_time": 1115910000,
+        "pnl": -10.953999999999901,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1120227300,
+        "entry_time": 1119008700,
+        "pnl": -32.16835865057167,
+        "swap": -14.434,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1124461800,
+        "entry_time": 1123771500,
+        "pnl": -23.21539952880245,
+        "swap": -8.248,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1130854500,
+        "entry_time": 1126179900,
+        "pnl": -35.54799999999985,
+        "swap": -55.67399999999999,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1139848200,
+        "entry_time": 1132182900,
+        "pnl": 27.967000000000297,
+        "swap": -91.75899999999999,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1149136200,
+        "entry_time": 1143697500,
+        "pnl": 56.17300000000016,
+        "swap": -64.95299999999999,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1151605800,
+        "entry_time": 1150250400,
+        "pnl": -77.35555919056134,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1159428600,
+        "entry_time": 1158254100,
+        "pnl": -55.280750487188534,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1161262800,
+        "entry_time": 1159969500,
+        "pnl": -56.80943410257516,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1166200200,
+        "entry_time": 1164582000,
+        "pnl": -64.25281519878774,
+        "swap": -19.589,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1172853000,
+        "entry_time": 1169719200,
+        "pnl": -51.58999999999977,
+        "swap": -37.116,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1177635600,
+        "entry_time": 1176723000,
+        "pnl": -46.65484986914083,
+        "swap": -11.341,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1183981500,
+        "entry_time": 1181310300,
+        "pnl": -20.753999999999742,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1205970300,
+        "entry_time": 1189077300,
+        "pnl": 275.2810000000002,
+        "swap": -201.045,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1211291100,
+        "entry_time": 1209482100,
+        "pnl": -86.69146563237865,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1217407500,
+        "entry_time": 1215715500,
+        "pnl": -88.89399999999995,
+        "swap": -20.619999999999997,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1221665400,
+        "entry_time": 1218195000,
+        "pnl": 26.64600000000012,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1227276900,
+        "entry_time": 1224691200,
+        "pnl": -82.75399999999996,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1237386600,
+        "entry_time": 1232723700,
+        "pnl": -50.34799999999981,
+        "swap": -55.67399999999999,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1240494300,
+        "entry_time": 1239974100,
+        "pnl": -84.47822380031204,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1245041100,
+        "entry_time": 1243574100,
+        "pnl": -83.47694929823116,
+        "swap": -17.526999999999997,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1261064700,
+        "entry_time": 1251899100,
+        "pnl": 165.83999999999992,
+        "swap": -109.28599999999999,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1265103900,
+        "entry_time": 1264697100,
+        "pnl": -80.70854641407033,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1266300900,
+        "entry_time": 1265292900,
+        "pnl": -81.43980599291655,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1278010800,
+        "entry_time": 1270646100,
+        "pnl": 16.05100000000033,
+        "swap": -87.63499999999999,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1281096000,
+        "entry_time": 1280237400,
+        "pnl": -75.7952473256949,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1294384500,
+        "entry_time": 1284467400,
+        "pnl": 79.04100000000041,
+        "swap": -118.56499999999998,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1297169100,
+        "entry_time": 1295937900,
+        "pnl": -71.61693005797025,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1300188600,
+        "entry_time": 1298989800,
+        "pnl": -83.02429090881205,
+        "swap": -14.434,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1308925800,
+        "entry_time": 1300973400,
+        "pnl": 37.17400000000002,
+        "swap": -94.85199999999999,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1310966100,
+        "entry_time": 1310555700,
+        "pnl": -82.93283695166619,
+        "swap": -5.154999999999999,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1316756700,
+        "entry_time": 1310966100,
+        "pnl": 178.55099999999987,
+        "swap": -69.077,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1325281500,
+        "entry_time": 1323878400,
+        "pnl": 36.788000000000174,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "boundary"
+      }
+    ]
+  },
+  "1unit 2005-2011 stress": {
+    "trades": 35,
+    "net": -583.11,
+    "profit_factor": 0.605,
+    "win_pct": 28.6,
+    "expectancy": -16.6603,
+    "max_dd_usd": 797.09,
+    "max_dd_pct": 15.94,
+    "recovery_factor": -0.732,
+    "closed_balance_nonpositive": false,
+    "first_nonpositive_after_trade": null,
+    "annualised_return_pct": -1.76,
+    "calmar_ratio": -0.11,
+    "omega_ratio": 0.605,
+    "sortino_ratio": -0.3074,
+    "sharpe_per_trade": -0.2008,
+    "skew": 1.805,
+    "kurtosis": 6.082,
+    "wins": 10,
+    "swap_usd": -1103.1699999999998,
+    "diagnostics": {
+      "ambiguous_entry_bars": 0,
+      "new_unit_stop_bars": 0,
+      "unit_fills": 35
+    },
+    "observation": "basket_cash_pnl",
+    "maximum_units": 1
+  },
+  "1unit 2005-2011 frictionless": {
+    "trades": 35,
+    "net": 542.27,
+    "profit_factor": 1.442,
+    "win_pct": 34.3,
+    "expectancy": 15.4934,
+    "max_dd_usd": 354.21,
+    "max_dd_pct": 6.61,
+    "recovery_factor": 1.531,
+    "closed_balance_nonpositive": false,
+    "first_nonpositive_after_trade": null,
+    "annualised_return_pct": 1.48,
+    "calmar_ratio": 0.224,
+    "omega_ratio": 1.442,
+    "sortino_ratio": 0.3192,
+    "sharpe_per_trade": 0.1248,
+    "skew": 1.921,
+    "kurtosis": 6.682,
+    "wins": 12,
+    "swap_usd": 0.0,
+    "diagnostics": {
+      "ambiguous_entry_bars": 0,
+      "new_unit_stop_bars": 0,
+      "unit_fills": 35
+    },
+    "observation": "basket_cash_pnl",
+    "maximum_units": 1
+  },
+  "1unit 2012-2018 base": {
+    "trades": 38,
+    "net": -243.3,
+    "profit_factor": 0.854,
+    "win_pct": 28.9,
+    "expectancy": -6.4026,
+    "max_dd_usd": 988.86,
+    "max_dd_pct": 17.59,
+    "recovery_factor": -0.246,
+    "closed_balance_nonpositive": false,
+    "first_nonpositive_after_trade": null,
+    "annualised_return_pct": -0.71,
+    "calmar_ratio": -0.04,
+    "omega_ratio": 0.854,
+    "sortino_ratio": -0.1115,
+    "sharpe_per_trade": -0.0499,
+    "skew": 3.537,
+    "kurtosis": 18.068,
+    "wins": 11,
+    "swap_usd": -546.43,
+    "diagnostics": {
+      "ambiguous_entry_bars": 0,
+      "new_unit_stop_bars": 0,
+      "unit_fills": 38
+    },
+    "observation": "basket_cash_pnl",
+    "maximum_units": 1,
+    "ablation": {
+      "net_pl": -243.3,
+      "drop_best_1": -891.73,
+      "drop_worst_1": -118.02,
+      "drop_best_3": -1164.99,
+      "drop_worst_3": 103.8,
+      "drop_best_5": -1419.04,
+      "drop_worst_5": 285.52,
+      "top3_share_of_gross_profit": 64.8
+    },
+    "monte_carlo": {
+      "median_max_dd": 819.28,
+      "p95_max_dd": 1128.47,
+      "worst_max_dd": 1410.5,
+      "median_final": 4756.7,
+      "p05_final": 4756.7,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 1.0
+    },
+    "basket_records": [
+      {
+        "time": 1330533000,
+        "entry_time": 1329933600,
+        "pnl": -112.13219606367666,
+        "swap": -7.217,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1338969600,
+        "entry_time": 1333537200,
+        "pnl": -3.0539999999999234,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1350309600,
+        "entry_time": 1345557600,
+        "pnl": 134.6210000000002,
+        "swap": -56.705,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1358874900,
+        "entry_time": 1355853600,
+        "pnl": -47.09399999999943,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1374444900,
+        "entry_time": 1360933200,
+        "pnl": 648.426,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1378969200,
+        "entry_time": 1377469800,
+        "pnl": -125.28259288394594,
+        "swap": -18.558,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1382445900,
+        "entry_time": 1381494600,
+        "pnl": -109.68276785951758,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1389713400,
+        "entry_time": 1384974000,
+        "pnl": -6.793999999999706,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1395665100,
+        "entry_time": 1392079500,
+        "pnl": 36.71500000000005,
+        "swap": -42.270999999999994,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1403190000,
+        "entry_time": 1401201000,
+        "pnl": -60.03253758235707,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1405343700,
+        "entry_time": 1404176400,
+        "pnl": -71.02951682370262,
+        "swap": -13.402999999999999,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1413378000,
+        "entry_time": 1409732100,
+        "pnl": 46.426000000000094,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1417455900,
+        "entry_time": 1414738800,
+        "pnl": -49.87400000000009,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1423666800,
+        "entry_time": 1421111700,
+        "pnl": -57.29299999999961,
+        "swap": -29.898999999999997,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1427355000,
+        "entry_time": 1425661200,
+        "pnl": -74.21368098727208,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1432643400,
+        "entry_time": 1431611100,
+        "pnl": -78.64516886405134,
+        "swap": -12.372,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1434617100,
+        "entry_time": 1433507400,
+        "pnl": -58.660730732654265,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1439991900,
+        "entry_time": 1435832100,
+        "pnl": 71.68600000000032,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1446420600,
+        "entry_time": 1444784400,
+        "pnl": -81.81530548868916,
+        "swap": -18.558,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1452078900,
+        "entry_time": 1446816600,
+        "pnl": 24.16600000000033,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1459125000,
+        "entry_time": 1453778100,
+        "pnl": 131.9440000000006,
+        "swap": -63.922,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1463663700,
+        "entry_time": 1461936600,
+        "pnl": -99.90406330877516,
+        "swap": -20.619999999999997,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1465164900,
+        "entry_time": 1464372900,
+        "pnl": -73.91289854121243,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1466507700,
+        "entry_time": 1466056800,
+        "pnl": -73.35870335326499,
+        "swap": -5.154999999999999,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1472088600,
+        "entry_time": 1466739000,
+        "pnl": -48.37599999999956,
+        "swap": -63.922,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1478060100,
+        "entry_time": 1475583300,
+        "pnl": 21.06600000000042,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1483629300,
+        "entry_time": 1478875500,
+        "pnl": 122.10599999999994,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1488897900,
+        "entry_time": 1486405800,
+        "pnl": -59.95299999999946,
+        "swap": -29.898999999999997,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1493840700,
+        "entry_time": 1491529500,
+        "pnl": -67.75999999999956,
+        "swap": -26.805999999999997,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1496931300,
+        "entry_time": 1496762100,
+        "pnl": -50.187713553005715,
+        "swap": -2.062,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1500341400,
+        "entry_time": 1499434200,
+        "pnl": -47.7550630283011,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1506501900,
+        "entry_time": 1503046800,
+        "pnl": -57.77399999999994,
+        "swap": -41.239999999999995,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1514358900,
+        "entry_time": 1512625500,
+        "pnl": -48.52123521129972,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1518064200,
+        "entry_time": 1514569500,
+        "pnl": -32.004999999999754,
+        "swap": -42.270999999999994,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1528979400,
+        "entry_time": 1525185000,
+        "pnl": -10.133999999999851,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1539268200,
+        "entry_time": 1529073000,
+        "pnl": 138.64600000000036,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1541771100,
+        "entry_time": 1539587700,
+        "pnl": -59.64899999999963,
+        "swap": -25.775,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1546282800,
+        "entry_time": 1544106600,
+        "pnl": 45.79300000000038,
+        "swap": -25.775,
+        "units": 1,
+        "side": 1,
+        "reason": "boundary"
+      }
+    ]
+  },
+  "1unit 2012-2018 stress": {
+    "trades": 38,
+    "net": -253.9,
+    "profit_factor": 0.848,
+    "win_pct": 28.9,
+    "expectancy": -6.6816,
+    "max_dd_usd": 996.7,
+    "max_dd_pct": 17.74,
+    "recovery_factor": -0.255,
+    "closed_balance_nonpositive": false,
+    "first_nonpositive_after_trade": null,
+    "annualised_return_pct": -0.74,
+    "calmar_ratio": -0.042,
+    "omega_ratio": 0.848,
+    "sortino_ratio": -0.116,
+    "sharpe_per_trade": -0.0521,
+    "skew": 3.541,
+    "kurtosis": 18.092,
+    "wins": 11,
+    "swap_usd": -546.43,
+    "diagnostics": {
+      "ambiguous_entry_bars": 0,
+      "new_unit_stop_bars": 0,
+      "unit_fills": 38
+    },
+    "observation": "basket_cash_pnl",
+    "maximum_units": 1
+  },
+  "1unit 2012-2018 frictionless": {
+    "trades": 37,
+    "net": 454.55,
+    "profit_factor": 1.355,
+    "win_pct": 35.1,
+    "expectancy": 12.2853,
+    "max_dd_usd": 550.75,
+    "max_dd_pct": 9.45,
+    "recovery_factor": 0.825,
+    "closed_balance_nonpositive": false,
+    "first_nonpositive_after_trade": null,
+    "annualised_return_pct": 1.25,
+    "calmar_ratio": 0.132,
+    "omega_ratio": 1.355,
+    "sortino_ratio": 0.2505,
+    "sharpe_per_trade": 0.0855,
+    "skew": 3.588,
+    "kurtosis": 18.215,
+    "wins": 13,
+    "swap_usd": 0.0,
+    "diagnostics": {
+      "ambiguous_entry_bars": 0,
+      "new_unit_stop_bars": 0,
+      "unit_fills": 37
+    },
+    "observation": "basket_cash_pnl",
+    "maximum_units": 1
+  },
+  "1unit 2019-2025 base": {
+    "trades": 28,
+    "net": 2495.5,
+    "profit_factor": 3.294,
+    "win_pct": 42.9,
+    "expectancy": 89.1252,
+    "max_dd_usd": 513.84,
+    "max_dd_pct": 9.97,
+    "recovery_factor": 4.857,
+    "closed_balance_nonpositive": false,
+    "first_nonpositive_after_trade": null,
+    "annualised_return_pct": 5.95,
+    "calmar_ratio": 0.597,
+    "omega_ratio": 3.294,
+    "sortino_ratio": 1.5303,
+    "sharpe_per_trade": 0.258,
+    "skew": 3.282,
+    "kurtosis": 13.96,
+    "wins": 12,
+    "swap_usd": -1182.557,
+    "diagnostics": {
+      "ambiguous_entry_bars": 0,
+      "new_unit_stop_bars": 0,
+      "unit_fills": 28
+    },
+    "observation": "basket_cash_pnl",
+    "maximum_units": 1,
+    "ablation": {
+      "net_pl": 2495.5,
+      "drop_best_1": 888.64,
+      "drop_worst_1": 2635.31,
+      "drop_best_3": -253.29,
+      "drop_worst_3": 2870.83,
+      "drop_best_5": -680.57,
+      "drop_worst_5": 3043.38,
+      "top3_share_of_gross_profit": 76.7
+    },
+    "monte_carlo": {
+      "median_max_dd": 410.68,
+      "p95_max_dd": 656.64,
+      "worst_max_dd": 1058.41,
+      "median_final": 7495.5,
+      "p05_final": 7495.5,
+      "prob_50pct_drawdown": 0.0,
+      "prob_final_below_start": 0.0
+    },
+    "basket_records": [
+      {
+        "time": 1551459600,
+        "entry_time": 1546404300,
+        "pnl": -23.831999999999937,
+        "swap": -59.797999999999995,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1557753300,
+        "entry_time": 1555416900,
+        "pnl": -30.13399999999985,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1568832300,
+        "entry_time": 1559583000,
+        "pnl": 208.92900000000026,
+        "swap": -110.317,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1576159200,
+        "entry_time": 1573215300,
+        "pnl": -50.11399999999987,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1584028800,
+        "entry_time": 1577754000,
+        "pnl": 15.094000000000193,
+        "swap": -74.232,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1585012500,
+        "entry_time": 1584353700,
+        "pnl": -139.8013292262088,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1591361100,
+        "entry_time": 1586790000,
+        "pnl": -83.77699999999984,
+        "swap": -54.642999999999994,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1600698600,
+        "entry_time": 1592918100,
+        "pnl": 181.65600000000055,
+        "swap": -92.78999999999999,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1608193800,
+        "entry_time": 1606142700,
+        "pnl": -62.15399999999983,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1617889500,
+        "entry_time": 1613661300,
+        "pnl": 27.86600000000015,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1623867300,
+        "entry_time": 1620314100,
+        "pnl": 14.575000000000173,
+        "swap": -42.270999999999994,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1629184500,
+        "entry_time": 1628462700,
+        "pnl": -85.41878750851203,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1637673300,
+        "entry_time": 1636551000,
+        "pnl": -100.22357633985351,
+        "swap": -13.402999999999999,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1648557000,
+        "entry_time": 1644605100,
+        "pnl": 34.12,
+        "swap": -47.425999999999995,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1654878600,
+        "entry_time": 1652193900,
+        "pnl": -47.57399999999945,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1659615300,
+        "entry_time": 1656675000,
+        "pnl": -2.394000000000069,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1664896500,
+        "entry_time": 1663248600,
+        "pnl": -87.12712412417824,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1675971900,
+        "entry_time": 1668144600,
+        "pnl": 111.65400000000014,
+        "swap": -92.78999999999999,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1684413900,
+        "entry_time": 1679063400,
+        "pnl": -40.58599999999959,
+        "swap": -63.922,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1689666300,
+        "entry_time": 1686805200,
+        "pnl": -63.4120000000001,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1693318500,
+        "entry_time": 1692213300,
+        "pnl": -75.52509809167651,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1697201100,
+        "entry_time": 1695822300,
+        "pnl": -60.69834774128851,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1705503600,
+        "entry_time": 1697635800,
+        "pnl": 22.5390000000003,
+        "swap": -93.821,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1717764300,
+        "entry_time": 1709559900,
+        "pnl": 353.9909999999994,
+        "swap": -97.945,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1721659500,
+        "entry_time": 1721141100,
+        "pnl": -135.3027448374675,
+        "swap": -6.186,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1731332700,
+        "entry_time": 1723812300,
+        "pnl": 218.34899999999908,
+        "swap": -89.69699999999999,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1747226700,
+        "entry_time": 1737508500,
+        "pnl": 787.9459999999993,
+        "swap": -115.472,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1767218400,
+        "entry_time": 1756496700,
+        "pnl": 1606.8599999999985,
+        "swap": -127.844,
+        "units": 1,
+        "side": 1,
+        "reason": "boundary"
+      }
+    ]
+  },
+  "1unit 2019-2025 stress": {
+    "trades": 28,
+    "net": 2485.37,
+    "profit_factor": 3.277,
+    "win_pct": 42.9,
+    "expectancy": 88.7632,
+    "max_dd_usd": 519.8,
+    "max_dd_pct": 10.09,
+    "recovery_factor": 4.781,
+    "closed_balance_nonpositive": false,
+    "first_nonpositive_after_trade": null,
+    "annualised_return_pct": 5.93,
+    "calmar_ratio": 0.588,
+    "omega_ratio": 3.277,
+    "sortino_ratio": 1.521,
+    "sharpe_per_trade": 0.257,
+    "skew": 3.284,
+    "kurtosis": 13.968,
+    "wins": 12,
+    "swap_usd": -1182.557,
+    "diagnostics": {
+      "ambiguous_entry_bars": 0,
+      "new_unit_stop_bars": 0,
+      "unit_fills": 28
+    },
+    "observation": "basket_cash_pnl",
+    "maximum_units": 1
+  },
+  "1unit 2019-2025 frictionless": {
+    "trades": 28,
+    "net": 3688.2,
+    "profit_factor": 4.894,
+    "win_pct": 50.0,
+    "expectancy": 131.7214,
+    "max_dd_usd": 226.49,
+    "max_dd_pct": 4.12,
+    "recovery_factor": 16.284,
+    "closed_balance_nonpositive": false,
+    "first_nonpositive_after_trade": null,
+    "annualised_return_pct": 8.21,
+    "calmar_ratio": 1.993,
+    "omega_ratio": 4.894,
+    "sortino_ratio": 2.4312,
+    "sharpe_per_trade": 0.3494,
+    "skew": 3.004,
+    "kurtosis": 12.392,
+    "wins": 14,
+    "swap_usd": 0.0,
+    "diagnostics": {
+      "ambiguous_entry_bars": 0,
+      "new_unit_stop_bars": 0,
+      "unit_fills": 28
+    },
+    "observation": "basket_cash_pnl",
+    "maximum_units": 1
+  },
+  "4unit 2005-2011 base": {
+    "trades": 38,
+    "net": -1318.16,
+    "profit_factor": 0.68,
+    "win_pct": 18.4,
+    "expectancy": -34.6885,
+    "max_dd_usd": 1661.07,
+    "max_dd_pct": 32.43,
+    "recovery_factor": -0.794,
+    "closed_balance_nonpositive": false,
+    "first_nonpositive_after_trade": null,
+    "annualised_return_pct": -4.28,
+    "calmar_ratio": -0.132,
+    "omega_ratio": 0.68,
+    "sortino_ratio": -0.2427,
+    "sharpe_per_trade": -0.1316,
+    "skew": 2.435,
+    "kurtosis": 9.44,
+    "wins": 7,
+    "swap_usd": -3923.986,
+    "diagnostics": {
+      "ambiguous_entry_bars": 0,
+      "new_unit_stop_bars": 0,
+      "unit_fills": 111
+    },
+    "observation": "basket_cash_pnl",
+    "maximum_units": 4,
+    "ablation": {
+      "net_pl": -1318.16,
+      "drop_best_1": -2367.17,
+      "drop_worst_1": -970.82,
+      "drop_best_3": -3560.78,
+      "drop_worst_3": -363.16,
+      "drop_best_5": -3967.16,
+      "drop_worst_5": 83.92,
+      "top3_share_of_gross_profit": 79.9
+    },
+    "monte_carlo": {
+      "median_max_dd": 2192.08,
+      "p95_max_dd": 3088.82,
+      "worst_max_dd": 3934.47,
+      "median_final": 3681.84,
+      "p05_final": 3681.84,
+      "prob_50pct_drawdown": 0.094,
+      "prob_final_below_start": 1.0
+    },
+    "basket_records": [
+      {
+        "time": 1108135800,
+        "entry_time": 1107432900,
+        "pnl": -44.96035079868121,
+        "swap": 0.0,
+        "units": 3,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1111139100,
+        "entry_time": 1110553200,
+        "pnl": -25.99244785009656,
+        "swap": -7.217,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1117799100,
+        "entry_time": 1115910000,
+        "pnl": -42.68914785992436,
+        "swap": 0.0,
+        "units": 4,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1120026600,
+        "entry_time": 1119008700,
+        "pnl": -65.3202689879279,
+        "swap": -26.805999999999997,
+        "units": 3,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1124181000,
+        "entry_time": 1123771500,
+        "pnl": -46.51314893980565,
+        "swap": -14.433999999999997,
+        "units": 3,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1130854500,
+        "entry_time": 1126179900,
+        "pnl": -151.30582524843166,
+        "swap": -200.01399999999995,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1139848200,
+        "entry_time": 1132182900,
+        "pnl": 79.41019562240734,
+        "swap": -358.78799999999995,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1149136200,
+        "entry_time": 1143697500,
+        "pnl": 165.6983502056379,
+        "swap": -255.688,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1150907400,
+        "entry_time": 1150250400,
+        "pnl": -135.35972858348225,
+        "swap": 0.0,
+        "units": 2,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1159428600,
+        "entry_time": 1158254100,
+        "pnl": -55.280750487188534,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1160950500,
+        "entry_time": 1159969500,
+        "pnl": -105.55885852564337,
+        "swap": 0.0,
+        "units": 2,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1165607100,
+        "entry_time": 1164582000,
+        "pnl": -98.24917659787866,
+        "swap": -20.619999999999997,
+        "units": 2,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1172849400,
+        "entry_time": 1169719200,
+        "pnl": -214.42623265578706,
+        "swap": -118.565,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1177587000,
+        "entry_time": 1176723000,
+        "pnl": -77.7627372709965,
+        "swap": -16.496,
+        "units": 2,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1182266100,
+        "entry_time": 1181310300,
+        "pnl": -75.53773671179871,
+        "swap": 0.0,
+        "units": 3,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1183981500,
+        "entry_time": 1182864600,
+        "pnl": -32.69133141057325,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1205970300,
+        "entry_time": 1189077300,
+        "pnl": 1049.0127638386498,
+        "swap": -803.149,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1210935600,
+        "entry_time": 1209482100,
+        "pnl": -195.0182976728517,
+        "swap": 0.0,
+        "units": 3,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1216792800,
+        "entry_time": 1215715500,
+        "pnl": -232.65039271502138,
+        "swap": -46.394999999999996,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1221665400,
+        "entry_time": 1218195000,
+        "pnl": -10.358259161556617,
+        "swap": 0.0,
+        "units": 4,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1225287000,
+        "entry_time": 1224691200,
+        "pnl": -346.7070097218979,
+        "swap": 0.0,
+        "units": 3,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1237386600,
+        "entry_time": 1232723700,
+        "pnl": -347.34454424818364,
+        "swap": -212.38599999999997,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1240494300,
+        "entry_time": 1239974100,
+        "pnl": -84.47822380031204,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1244442600,
+        "entry_time": 1243574100,
+        "pnl": -174.62688592102057,
+        "swap": -27.836999999999996,
+        "units": 3,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1261064700,
+        "entry_time": 1251899100,
+        "pnl": 583.2337312225947,
+        "swap": -435.082,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1265103900,
+        "entry_time": 1264697100,
+        "pnl": -80.70854641407033,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1265903100,
+        "entry_time": 1265292900,
+        "pnl": -183.2020634840623,
+        "swap": 0.0,
+        "units": 3,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1271662200,
+        "entry_time": 1270646100,
+        "pnl": -180.80867073571088,
+        "swap": -34.022999999999996,
+        "units": 3,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1278010800,
+        "entry_time": 1272393000,
+        "pnl": -131.45543425423588,
+        "swap": -249.502,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1281096000,
+        "entry_time": 1280237400,
+        "pnl": -75.7952473256949,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1294384500,
+        "entry_time": 1284467400,
+        "pnl": 240.67887458152427,
+        "swap": -466.01199999999994,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1296749700,
+        "entry_time": 1295937900,
+        "pnl": -161.1005926304328,
+        "swap": 0.0,
+        "units": 3,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1299768300,
+        "entry_time": 1298989800,
+        "pnl": -174.38165454482726,
+        "swap": -21.651,
+        "units": 3,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1308925800,
+        "entry_time": 1300973400,
+        "pnl": 78.39987131800757,
+        "swap": -337.137,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1310966100,
+        "entry_time": 1310555700,
+        "pnl": -184.74363314124872,
+        "swap": -11.341,
+        "units": 3,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1316756700,
+        "entry_time": 1310966100,
+        "pnl": 610.3747324403481,
+        "swap": -260.84299999999996,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1324463400,
+        "entry_time": 1323878400,
+        "pnl": -260.95117096227125,
+        "swap": 0.0,
+        "units": 2,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1325281500,
+        "entry_time": 1325091600,
+        "pnl": -128.9922249680389,
+        "swap": 0.0,
+        "units": 3,
+        "side": -1,
+        "reason": "boundary"
+      }
+    ]
+  },
+  "4unit 2005-2011 stress": {
+    "trades": 38,
+    "net": -1350.16,
+    "profit_factor": 0.672,
+    "win_pct": 18.4,
+    "expectancy": -35.5305,
+    "max_dd_usd": 1674.2,
+    "max_dd_pct": 32.75,
+    "recovery_factor": -0.806,
+    "closed_balance_nonpositive": false,
+    "first_nonpositive_after_trade": null,
+    "annualised_return_pct": -4.4,
+    "calmar_ratio": -0.134,
+    "omega_ratio": 0.672,
+    "sortino_ratio": -0.2486,
+    "sharpe_per_trade": -0.1357,
+    "skew": 2.437,
+    "kurtosis": 9.486,
+    "wins": 7,
+    "swap_usd": -3905.4279999999994,
+    "diagnostics": {
+      "ambiguous_entry_bars": 0,
+      "new_unit_stop_bars": 0,
+      "unit_fills": 111
+    },
+    "observation": "basket_cash_pnl",
+    "maximum_units": 4
+  },
+  "4unit 2005-2011 frictionless": {
+    "trades": 38,
+    "net": 2639.68,
+    "profit_factor": 1.798,
+    "win_pct": 23.7,
+    "expectancy": 69.4652,
+    "max_dd_usd": 1101.43,
+    "max_dd_pct": 15.82,
+    "recovery_factor": 2.397,
+    "closed_balance_nonpositive": false,
+    "first_nonpositive_after_trade": null,
+    "annualised_return_pct": 6.24,
+    "calmar_ratio": 0.395,
+    "omega_ratio": 1.798,
+    "sortino_ratio": 0.5815,
+    "sharpe_per_trade": 0.1652,
+    "skew": 2.567,
+    "kurtosis": 9.94,
+    "wins": 9,
+    "swap_usd": 0.0,
+    "diagnostics": {
+      "ambiguous_entry_bars": 0,
+      "new_unit_stop_bars": 0,
+      "unit_fills": 113
+    },
+    "observation": "basket_cash_pnl",
+    "maximum_units": 4
+  },
+  "4unit 2012-2018 base": {
+    "trades": 42,
+    "net": -441.46,
+    "profit_factor": 0.915,
+    "win_pct": 26.2,
+    "expectancy": -10.5109,
+    "max_dd_usd": 2881.6,
+    "max_dd_pct": 41.46,
+    "recovery_factor": -0.153,
+    "closed_balance_nonpositive": false,
+    "first_nonpositive_after_trade": null,
+    "annualised_return_pct": -1.31,
+    "calmar_ratio": -0.032,
+    "omega_ratio": 0.915,
+    "sortino_ratio": -0.0684,
+    "sharpe_per_trade": -0.024,
+    "skew": 4.512,
+    "kurtosis": 25.622,
+    "wins": 11,
+    "swap_usd": -1635.1659999999993,
+    "diagnostics": {
+      "ambiguous_entry_bars": 0,
+      "new_unit_stop_bars": 0,
+      "unit_fills": 135
+    },
+    "observation": "basket_cash_pnl",
+    "maximum_units": 4,
+    "ablation": {
+      "net_pl": -441.46,
+      "drop_best_1": -2931.2,
+      "drop_worst_1": -143.3,
+      "drop_best_3": -3872.08,
+      "drop_worst_3": 407.77,
+      "drop_best_5": -4669.12,
+      "drop_worst_5": 884.27,
+      "top3_share_of_gross_profit": 72.6
+    },
+    "monte_carlo": {
+      "median_max_dd": 2609.42,
+      "p95_max_dd": 3562.69,
+      "worst_max_dd": 4636.21,
+      "median_final": 4558.54,
+      "p05_final": 4558.54,
+      "prob_50pct_drawdown": 0.2466,
+      "prob_final_below_start": 1.0
+    },
+    "basket_records": [
+      {
+        "time": 1330531200,
+        "entry_time": 1329933600,
+        "pnl": -249.92669114327262,
+        "swap": -15.465,
+        "units": 3,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1334239200,
+        "entry_time": 1333537200,
+        "pnl": -191.51616323061273,
+        "swap": 0.0,
+        "units": 2,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1338572700,
+        "entry_time": 1336482000,
+        "pnl": -212.88796758569995,
+        "swap": 0.0,
+        "units": 4,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1350309600,
+        "entry_time": 1345557600,
+        "pnl": 421.17573957840045,
+        "swap": -221.665,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1357107300,
+        "entry_time": 1355853600,
+        "pnl": -172.2418111963382,
+        "swap": 0.0,
+        "units": 4,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1357712100,
+        "entry_time": 1357292700,
+        "pnl": -134.07972388393512,
+        "swap": 0.0,
+        "units": 2,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1374444900,
+        "entry_time": 1360933200,
+        "pnl": 2489.740505717395,
+        "swap": 0.0,
+        "units": 4,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1378074600,
+        "entry_time": 1377469800,
+        "pnl": -255.02883398887784,
+        "swap": -16.496,
+        "units": 3,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1381996800,
+        "entry_time": 1381494600,
+        "pnl": -191.9323437541558,
+        "swap": 0.0,
+        "units": 2,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1386681300,
+        "entry_time": 1384974000,
+        "pnl": -214.35750844736617,
+        "swap": 0.0,
+        "units": 4,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1388709900,
+        "entry_time": 1387438200,
+        "pnl": -202.69250443806408,
+        "swap": 0.0,
+        "units": 3,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1395665100,
+        "entry_time": 1392079500,
+        "pnl": 36.781767706904134,
+        "swap": -163.92899999999997,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1402642800,
+        "entry_time": 1401201000,
+        "pnl": -150.00634395589285,
+        "swap": 0.0,
+        "units": 4,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1405343700,
+        "entry_time": 1404176400,
+        "pnl": -117.84090444147986,
+        "swap": -17.526999999999997,
+        "units": 2,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1413378000,
+        "entry_time": 1409732100,
+        "pnl": 106.7182556617615,
+        "swap": 0.0,
+        "units": 4,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1415986200,
+        "entry_time": 1414738800,
+        "pnl": -142.56912045941252,
+        "swap": 0.0,
+        "units": 4,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1423239300,
+        "entry_time": 1421111700,
+        "pnl": -296.0412685386293,
+        "swap": -91.759,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1426869900,
+        "entry_time": 1425661200,
+        "pnl": -166.94328222136295,
+        "swap": 0.0,
+        "units": 3,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1432643400,
+        "entry_time": 1431611100,
+        "pnl": -78.64516886405134,
+        "swap": -12.372,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1434617100,
+        "entry_time": 1433507400,
+        "pnl": -58.660730732654265,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1439991900,
+        "entry_time": 1435832100,
+        "pnl": 207.79401808199304,
+        "swap": 0.0,
+        "units": 4,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1446057900,
+        "entry_time": 1444784400,
+        "pnl": -184.03343734955143,
+        "swap": -43.302,
+        "units": 3,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1452078900,
+        "entry_time": 1446816600,
+        "pnl": 4.2312665553879185,
+        "swap": 0.0,
+        "units": 4,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1459125000,
+        "entry_time": 1453778100,
+        "pnl": 450.39439879280116,
+        "swap": -241.25399999999996,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1463637600,
+        "entry_time": 1461936600,
+        "pnl": -179.45461079035647,
+        "swap": -41.239999999999995,
+        "units": 2,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1465164900,
+        "entry_time": 1464372900,
+        "pnl": -73.91289854121243,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1466110800,
+        "entry_time": 1466056800,
+        "pnl": -118.82398086821388,
+        "swap": 0.0,
+        "units": 2,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1466759700,
+        "entry_time": 1466739000,
+        "pnl": -181.36415094246084,
+        "swap": 0.0,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1472088600,
+        "entry_time": 1466760600,
+        "pnl": -298.15549056547536,
+        "swap": -246.409,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1478060100,
+        "entry_time": 1475583300,
+        "pnl": 0.21159458761005112,
+        "swap": 0.0,
+        "units": 4,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1483629300,
+        "entry_time": 1478875500,
+        "pnl": 375.86163345825094,
+        "swap": 0.0,
+        "units": 4,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1488556800,
+        "entry_time": 1486405800,
+        "pnl": -212.9591646164061,
+        "swap": -64.953,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1493654400,
+        "entry_time": 1491529500,
+        "pnl": -205.3844122383144,
+        "swap": -88.666,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1496931300,
+        "entry_time": 1496762100,
+        "pnl": -50.187713553005715,
+        "swap": -2.062,
+        "units": 1,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1500037200,
+        "entry_time": 1499434200,
+        "pnl": -83.55886029952684,
+        "swap": 0.0,
+        "units": 2,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1505997000,
+        "entry_time": 1503046800,
+        "pnl": -226.58002420162322,
+        "swap": -109.286,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1513769400,
+        "entry_time": 1512625500,
+        "pnl": -121.22808802825082,
+        "swap": 0.0,
+        "units": 4,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1518064200,
+        "entry_time": 1514569500,
+        "pnl": -181.31402054325522,
+        "swap": -154.64999999999998,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1528979400,
+        "entry_time": 1525185000,
+        "pnl": -71.92179537384752,
+        "swap": 0.0,
+        "units": 3,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1539268200,
+        "entry_time": 1529073000,
+        "pnl": 490.48585558648915,
+        "swap": 0.0,
+        "units": 4,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1540958400,
+        "entry_time": 1539587700,
+        "pnl": -143.856824265889,
+        "swap": -29.899,
+        "units": 3,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1546282800,
+        "entry_time": 1544106600,
+        "pnl": 143.25179575985814,
+        "swap": -74.232,
+        "units": 4,
+        "side": 1,
+        "reason": "boundary"
+      }
+    ]
+  },
+  "4unit 2012-2018 stress": {
+    "trades": 42,
+    "net": -438.92,
+    "profit_factor": 0.914,
+    "win_pct": 23.8,
+    "expectancy": -10.4504,
+    "max_dd_usd": 2868.49,
+    "max_dd_pct": 41.3,
+    "recovery_factor": -0.153,
+    "closed_balance_nonpositive": false,
+    "first_nonpositive_after_trade": null,
+    "annualised_return_pct": -1.3,
+    "calmar_ratio": -0.032,
+    "omega_ratio": 0.914,
+    "sortino_ratio": -0.0685,
+    "sharpe_per_trade": -0.024,
+    "skew": 4.535,
+    "kurtosis": 25.799,
+    "wins": 10,
+    "swap_usd": -1610.4219999999996,
+    "diagnostics": {
+      "ambiguous_entry_bars": 0,
+      "new_unit_stop_bars": 0,
+      "unit_fills": 135
+    },
+    "observation": "basket_cash_pnl",
+    "maximum_units": 4
+  },
+  "4unit 2012-2018 frictionless": {
+    "trades": 42,
+    "net": 1022.52,
+    "profit_factor": 1.231,
+    "win_pct": 26.2,
+    "expectancy": 24.3458,
+    "max_dd_usd": 1770.7,
+    "max_dd_pct": 24.61,
+    "recovery_factor": 0.577,
+    "closed_balance_nonpositive": false,
+    "first_nonpositive_after_trade": null,
+    "annualised_return_pct": 2.69,
+    "calmar_ratio": 0.109,
+    "omega_ratio": 1.231,
+    "sortino_ratio": 0.1847,
+    "sharpe_per_trade": 0.0546,
+    "skew": 4.172,
+    "kurtosis": 22.581,
+    "wins": 11,
+    "swap_usd": 0.0,
+    "diagnostics": {
+      "ambiguous_entry_bars": 0,
+      "new_unit_stop_bars": 0,
+      "unit_fills": 135
+    },
+    "observation": "basket_cash_pnl",
+    "maximum_units": 4
+  },
+  "4unit 2019-2025 base": {
+    "trades": 33,
+    "net": 7529.14,
+    "profit_factor": 2.459,
+    "win_pct": 24.2,
+    "expectancy": 228.1559,
+    "max_dd_usd": 3548.25,
+    "max_dd_pct": 67.51,
+    "recovery_factor": 2.122,
+    "closed_balance_nonpositive": false,
+    "first_nonpositive_after_trade": null,
+    "annualised_return_pct": 14.02,
+    "calmar_ratio": 0.208,
+    "omega_ratio": 2.459,
+    "sortino_ratio": 1.147,
+    "sharpe_per_trade": 0.1859,
+    "skew": 3.8,
+    "kurtosis": 17.692,
+    "wins": 8,
+    "swap_usd": -3871.4049999999993,
+    "diagnostics": {
+      "ambiguous_entry_bars": 0,
+      "new_unit_stop_bars": 0,
+      "unit_fills": 119
+    },
+    "observation": "basket_cash_pnl",
+    "maximum_units": 4,
+    "ablation": {
+      "net_pl": 7529.14,
+      "drop_best_1": 1337.23,
+      "drop_worst_1": 7921.55,
+      "drop_best_3": -2913.99,
+      "drop_worst_3": 8577.06,
+      "drop_best_5": -4217.93,
+      "drop_worst_5": 9170.13,
+      "top3_share_of_gross_profit": 82.3
+    },
+    "monte_carlo": {
+      "median_max_dd": 2073.43,
+      "p95_max_dd": 3309.88,
+      "worst_max_dd": 4599.09,
+      "median_final": 12529.14,
+      "p05_final": 12529.14,
+      "prob_50pct_drawdown": 0.0504,
+      "prob_final_below_start": 0.0
+    },
+    "basket_records": [
+      {
+        "time": 1551459600,
+        "entry_time": 1546404300,
+        "pnl": -139.02653722347608,
+        "swap": -213.41699999999997,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1557753300,
+        "entry_time": 1555416900,
+        "pnl": -104.22715298639739,
+        "swap": 0.0,
+        "units": 3,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1560254400,
+        "entry_time": 1559583000,
+        "pnl": -128.77468239289624,
+        "swap": -26.805999999999997,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1568832300,
+        "entry_time": 1560492900,
+        "pnl": 628.0225599582508,
+        "swap": -384.563,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1576159200,
+        "entry_time": 1573215300,
+        "pnl": -119.22537644440865,
+        "swap": 0.0,
+        "units": 2,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1584028800,
+        "entry_time": 1577754000,
+        "pnl": -12.642633087816705,
+        "swap": -291.77299999999997,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1584457200,
+        "entry_time": 1584353700,
+        "pnl": -349.42832306552214,
+        "swap": 0.0,
+        "units": 4,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1587468600,
+        "entry_time": 1586790000,
+        "pnl": -392.4083730324575,
+        "swap": -22.682,
+        "units": 3,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1590579900,
+        "entry_time": 1589557500,
+        "pnl": -241.98076310016614,
+        "swap": -21.651,
+        "units": 2,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1600698600,
+        "entry_time": 1592918100,
+        "pnl": 597.294737206091,
+        "swap": -340.22999999999996,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1607354100,
+        "entry_time": 1606142700,
+        "pnl": -295.4203994296224,
+        "swap": 0.0,
+        "units": 4,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1617889500,
+        "entry_time": 1613661300,
+        "pnl": -52.48726340157853,
+        "swap": 0.0,
+        "units": 4,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1623867300,
+        "entry_time": 1620314100,
+        "pnl": -70.6339026112116,
+        "swap": -155.68099999999998,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1628851500,
+        "entry_time": 1628462700,
+        "pnl": -213.47196877127885,
+        "swap": 0.0,
+        "units": 4,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1637591400,
+        "entry_time": 1636551000,
+        "pnl": -263.3444408496334,
+        "swap": -49.488,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1648557000,
+        "entry_time": 1644605100,
+        "pnl": 30.932299163707228,
+        "swap": -180.425,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1653299100,
+        "entry_time": 1652193900,
+        "pnl": -292.7283188657432,
+        "swap": 0.0,
+        "units": 4,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1659615300,
+        "entry_time": 1656675000,
+        "pnl": -156.10374294527745,
+        "swap": 0.0,
+        "units": 4,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1664810100,
+        "entry_time": 1663248600,
+        "pnl": -217.74281031044507,
+        "swap": 0.0,
+        "units": 4,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1675971900,
+        "entry_time": 1668144600,
+        "pnl": 315.83501248334966,
+        "swap": -326.82699999999994,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1679408100,
+        "entry_time": 1679063400,
+        "pnl": -267.1800678487525,
+        "swap": -13.403,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1681893900,
+        "entry_time": 1680616800,
+        "pnl": -306.0761256708051,
+        "swap": -37.116,
+        "units": 3,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1683290700,
+        "entry_time": 1683151200,
+        "pnl": -212.0973173059718,
+        "swap": -4.124,
+        "units": 2,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1689165900,
+        "entry_time": 1686805200,
+        "pnl": -257.6474733138323,
+        "swap": 0.0,
+        "units": 4,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1693318500,
+        "entry_time": 1692213300,
+        "pnl": -75.52509809167651,
+        "swap": 0.0,
+        "units": 1,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1697195700,
+        "entry_time": 1695822300,
+        "pnl": -151.67086935322212,
+        "swap": 0.0,
+        "units": 4,
+        "side": -1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1699518600,
+        "entry_time": 1697635800,
+        "pnl": -287.8071125483284,
+        "swap": -86.60399999999998,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1702055700,
+        "entry_time": 1701047700,
+        "pnl": -256.6926923445363,
+        "swap": -42.270999999999994,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1717764300,
+        "entry_time": 1709559900,
+        "pnl": 1283.2395475916878,
+        "swap": -390.74899999999997,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1721369700,
+        "entry_time": 1721141100,
+        "pnl": -297.6491758843007,
+        "swap": -8.248,
+        "units": 3,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1731332700,
+        "entry_time": 1723812300,
+        "pnl": 675.919995104342,
+        "swap": -326.827,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1747226700,
+        "entry_time": 1737508500,
+        "pnl": 2967.9752595262753,
+        "swap": -448.485,
+        "units": 4,
+        "side": 1,
+        "reason": "stop_or_channel"
+      },
+      {
+        "time": 1767218400,
+        "entry_time": 1756496700,
+        "pnl": 6191.917883343814,
+        "swap": -500.0349999999999,
+        "units": 4,
+        "side": 1,
+        "reason": "boundary"
+      }
+    ]
+  },
+  "4unit 2019-2025 stress": {
+    "trades": 33,
+    "net": 7493.33,
+    "profit_factor": 2.453,
+    "win_pct": 24.2,
+    "expectancy": 227.0707,
+    "max_dd_usd": 3557.53,
+    "max_dd_pct": 67.81,
+    "recovery_factor": 2.106,
+    "closed_balance_nonpositive": false,
+    "first_nonpositive_after_trade": null,
+    "annualised_return_pct": 13.98,
+    "calmar_ratio": 0.206,
+    "omega_ratio": 2.453,
+    "sortino_ratio": 1.1464,
+    "sharpe_per_trade": 0.1853,
+    "skew": 3.806,
+    "kurtosis": 17.731,
+    "wins": 8,
+    "swap_usd": -3863.1569999999997,
+    "diagnostics": {
+      "ambiguous_entry_bars": 0,
+      "new_unit_stop_bars": 0,
+      "unit_fills": 119
+    },
+    "observation": "basket_cash_pnl",
+    "maximum_units": 4
+  },
+  "4unit 2019-2025 frictionless": {
+    "trades": 32,
+    "net": 11749.29,
+    "profit_factor": 3.591,
+    "win_pct": 34.4,
+    "expectancy": 367.1654,
+    "max_dd_usd": 2124.74,
+    "max_dd_pct": 33.4,
+    "recovery_factor": 5.53,
+    "closed_balance_nonpositive": false,
+    "first_nonpositive_after_trade": null,
+    "annualised_return_pct": 18.85,
+    "calmar_ratio": 0.564,
+    "omega_ratio": 3.591,
+    "sortino_ratio": 1.961,
+    "sharpe_per_trade": 0.2679,
+    "skew": 3.409,
+    "kurtosis": 15.036,
+    "wins": 11,
+    "swap_usd": 0.0,
+    "diagnostics": {
+      "ambiguous_entry_bars": 0,
+      "new_unit_stop_bars": 0,
+      "unit_fills": 115
+    },
+    "observation": "basket_cash_pnl",
+    "maximum_units": 4
+  }
+}

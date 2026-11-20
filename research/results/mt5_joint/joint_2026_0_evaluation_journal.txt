@@ -1,0 +1,1 @@
+DF	0	22:21:56.770	Core 01	2026.10.30 20:57:59   JOINT_COUNTS accepted=516 same_blocked=0 opposite_blocked=0 ignored_adds=207 max_positions=1

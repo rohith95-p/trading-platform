@@ -1,0 +1,29 @@
+{
+  "core_result_sha256": "e5c271e3c44be16d0d251e83a450ecffb8b9b0f2499ca302b0ede9b8a3e78b3d",
+  "results": {
+    "2015-2018": {
+      "benchmark": "uncapped_fixed_2oz_buy_hold",
+      "net_usd": -1319.8189999999997,
+      "swap_usd": -1504.2289999999998,
+      "core_net_usd": -541.31,
+      "caveat": "No stops, margin liquidation or Atlas floors. Difference is dollar P&L, not risk-adjusted alpha.",
+      "core_minus_hold_usd": 778.5089999999998
+    },
+    "2019-2021": {
+      "benchmark": "uncapped_fixed_2oz_buy_hold",
+      "net_usd": -37.103999999999814,
+      "swap_usd": -1127.914,
+      "core_net_usd": -224.3,
+      "caveat": "No stops, margin liquidation or Atlas floors. Difference is dollar P&L, not risk-adjusted alpha.",
+      "core_minus_hold_usd": -187.1960000000002
+    },
+    "2022-2025": {
+      "benchmark": "uncapped_fixed_2oz_buy_hold",
+      "net_usd": 3471.5349999999994,
+      "swap_usd": -1504.2289999999998,
+      "core_net_usd": 2568.28,
+      "caveat": "No stops, margin liquidation or Atlas floors. Difference is dollar P&L, not risk-adjusted alpha.",
+      "core_minus_hold_usd": -903.2549999999992
+    }
+  }
+}

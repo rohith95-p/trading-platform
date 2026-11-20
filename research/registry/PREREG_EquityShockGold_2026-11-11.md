@@ -1,0 +1,3 @@
+# Equity shock and delayed gold demand
+
+Exploratory historical screen on existing daily gold, SPX and VIX data through 2025. Following an SPX loss of at least 1% and a VIX increase, enter at the next available gold close and exit one close later. Test long safe-haven demand and its short liquidation counterpart. No parameter search. Compare with random exposure on the same number of sessions within each era, 2,000 draws, same side and 4 bp round trip per signal. Adjacent trades close and reopen. Reset at era boundaries. Require positive net mean and above 97.5th percentile of matched-count controls in each of 2000–2011, 2012–2018 and 2019–2025. Dates are shared observation dates; proxy only. No forward holdout. Failure closes this specification.

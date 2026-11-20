@@ -1,0 +1,430 @@
+{
+  "metrics": {
+    "Period": "M15 (2026.09.18 - 2026.11.01)",
+    "Leverage": "1:50",
+    "History Quality": "100% real ticks",
+    "Ticks": "8409336",
+    "Total Net Profit": "68.25",
+    "Gross Profit": "246.48",
+    "Equity Drawdown Maximal": "57.82 (1.15%)",
+    "Gross Loss": "-178.23",
+    "Equity Drawdown Relative": "1.15% (57.82)",
+    "Profit Factor": "1.38",
+    "Total Trades": "64",
+    "Profit Trades (% of total)": "42 (65.62%)"
+  },
+  "raw": {
+    "trades": 64,
+    "wins": 42,
+    "win_rate_pct": 65.625,
+    "net": 68.25,
+    "pf": 1.3829321663019696,
+    "gross_profit": 246.48000000000002,
+    "gross_loss": 178.23
+  },
+  "ecn": {
+    "trades": 64,
+    "wins": 42,
+    "win_rate_pct": 65.625,
+    "net": 63.551999999968544,
+    "pf": 1.3532570329564453,
+    "gross_profit": 243.4549999999834,
+    "gross_loss": 179.9030000000148
+  },
+  "native": {
+    "name": "joint_2026_7_funded",
+    "phase": "funded",
+    "start": "2026-09-18T00:00:00+00:00",
+    "end_exclusive": "2026-11-01T00:00:00+00:00",
+    "unrestricted": {
+      "status": "active",
+      "time": null,
+      "entries": 64,
+      "closes": 64,
+      "balance": 5068.250000000001,
+      "equity": 5068.250000000001,
+      "minimum_equity": 4951.376000000001,
+      "first_trade": "2026-09-18T06:15:01.371000+00:00",
+      "payout_anchor": 5000.0,
+      "next_payout_window": null,
+      "max_equity_drawdown_usd": 59.14499999999862,
+      "max_equity_drawdown_pct": 1.1804161682986385,
+      "max_floating_loss": 30.01000000000022,
+      "max_used_margin_to_equity": 0.0088134730490246,
+      "overnight_resets": 1,
+      "peak_equity": 5081.292,
+      "rule_events": [],
+      "protector_strikes": 0,
+      "qualifying_days": 3,
+      "deductions": 0.0,
+      "modeled_payouts": [],
+      "modeled_cash_received": 0.0
+    },
+    "atlas": {
+      "status": "active",
+      "time": null,
+      "entries": 64,
+      "closes": 64,
+      "balance": 5023.360000000001,
+      "equity": 5023.360000000001,
+      "minimum_equity": 4944.976000000001,
+      "first_trade": "2026-09-18T06:15:01.371000+00:00",
+      "payout_anchor": 5000.0,
+      "next_payout_window": "2026-10-16T00:00:00+00:00",
+      "max_equity_drawdown_usd": 63.48499999999876,
+      "max_equity_drawdown_pct": 1.267555043355609,
+      "max_floating_loss": 30.01000000000022,
+      "max_used_margin_to_equity": 0.017634237341704165,
+      "overnight_resets": 1,
+      "peak_equity": 5055.776000000001,
+      "rule_events": [
+        {
+          "time": "2026-09-18T06:15:33.255000+00:00",
+          "event": "profit_deduction",
+          "amount": 2.06,
+          "ticket": 2
+        },
+        {
+          "time": "2026-09-22T05:45:22.068000+00:00",
+          "event": "profit_deduction",
+          "amount": 2.32,
+          "ticket": 12
+        },
+        {
+          "time": "2026-09-22T08:02:00.095000+00:00",
+          "event": "profit_deduction",
+          "amount": 2.02,
+          "ticket": 14
+        },
+        {
+          "time": "2026-09-23T14:30:09.051000+00:00",
+          "event": "profit_deduction",
+          "amount": 2.17,
+          "ticket": 24
+        },
+        {
+          "time": "2026-09-24T09:31:32.121000+00:00",
+          "event": "profit_deduction",
+          "amount": 1.91,
+          "ticket": 26
+        },
+        {
+          "time": "2026-09-24T09:47:42.785000+00:00",
+          "event": "profit_deduction",
+          "amount": 1.7,
+          "ticket": 28
+        },
+        {
+          "time": "2026-09-25T10:16:36.488000+00:00",
+          "event": "profit_deduction",
+          "amount": 1.99,
+          "ticket": 30
+        },
+        {
+          "time": "2026-09-28T00:45:20.059000+00:00",
+          "event": "profit_deduction",
+          "amount": 1.92,
+          "ticket": 34
+        },
+        {
+          "time": "2026-09-28T06:32:47.346000+00:00",
+          "event": "profit_deduction",
+          "amount": 2.01,
+          "ticket": 40
+        },
+        {
+          "time": "2026-09-30T12:46:05.008000+00:00",
+          "event": "profit_deduction",
+          "amount": 2.55,
+          "ticket": 50
+        },
+        {
+          "time": "2026-10-02T01:16:52.147000+00:00",
+          "event": "profit_deduction",
+          "amount": 2.31,
+          "ticket": 52
+        },
+        {
+          "time": "2026-10-02T16:00:09.980000+00:00",
+          "event": "profit_deduction",
+          "amount": 2.46,
+          "ticket": 58
+        },
+        {
+          "time": "2026-10-07T12:31:48.002000+00:00",
+          "event": "profit_deduction",
+          "amount": 2.49,
+          "ticket": 70
+        },
+        {
+          "time": "2026-10-07T12:45:31.019000+00:00",
+          "event": "profit_deduction",
+          "amount": 1.99,
+          "ticket": 72
+        },
+        {
+          "time": "2026-10-08T01:45:47.654000+00:00",
+          "event": "profit_deduction",
+          "amount": 2.07,
+          "ticket": 74
+        },
+        {
+          "time": "2026-10-14T12:45:53.010000+00:00",
+          "event": "profit_deduction",
+          "amount": 2.49,
+          "ticket": 84
+        },
+        {
+          "time": "2026-10-23T14:30:50.093000+00:00",
+          "event": "profit_deduction",
+          "amount": 1.77,
+          "ticket": 112
+        },
+        {
+          "time": "2026-10-26T14:00:09.100000+00:00",
+          "event": "profit_deduction",
+          "amount": 2.37,
+          "ticket": 116
+        },
+        {
+          "time": "2026-10-30T12:45:03.032000+00:00",
+          "event": "profit_deduction",
+          "amount": 1.54,
+          "ticket": 122
+        },
+        {
+          "time": "2026-10-30T13:15:16.041000+00:00",
+          "event": "profit_deduction",
+          "amount": 1.97,
+          "ticket": 124
+        },
+        {
+          "time": "2026-10-30T13:45:32.115000+00:00",
+          "event": "profit_deduction",
+          "amount": 2.78,
+          "ticket": 126
+        }
+      ],
+      "protector_strikes": 0,
+      "qualifying_days": 3,
+      "deductions": 44.89,
+      "modeled_payouts": [],
+      "modeled_cash_received": 0.0
+    },
+    "news_coverage": "Selected USD releases only; historical Atlas all-currency restrictions unverified.",
+    "payout_assumption": "Request USD 100 cash while flat, normal 90% split (50% after first Protector), immediate settlement and verified KYC assumed; no real payments."
+  },
+  "ecn_path": {
+    "name": "joint_2026_7_funded",
+    "phase": "funded",
+    "start": "2026-09-18T00:00:00+00:00",
+    "end_exclusive": "2026-11-01T00:00:00+00:00",
+    "unrestricted": {
+      "status": "active",
+      "time": null,
+      "entries": 64,
+      "closes": 64,
+      "balance": 5063.551999999972,
+      "equity": 5063.551999999972,
+      "minimum_equity": 4950.705999999994,
+      "first_trade": "2026-09-18T06:15:01.371000+00:00",
+      "payout_anchor": 5000.0,
+      "next_payout_window": null,
+      "max_equity_drawdown_usd": 59.60200000000441,
+      "max_equity_drawdown_pct": 1.1895875463146066,
+      "max_floating_loss": 30.06500000000051,
+      "max_used_margin_to_equity": 0.008813890004014457,
+      "overnight_resets": 1,
+      "peak_equity": 5078.813999999982,
+      "rule_events": [],
+      "protector_strikes": 0,
+      "qualifying_days": 3,
+      "deductions": 0.0,
+      "modeled_payouts": [],
+      "modeled_cash_received": 0.0
+    },
+    "atlas": {
+      "status": "active",
+      "time": null,
+      "entries": 64,
+      "closes": 64,
+      "balance": 5020.221999999981,
+      "equity": 5020.221999999981,
+      "minimum_equity": 4944.529999999995,
+      "first_trade": "2026-09-18T06:15:01.371000+00:00",
+      "payout_anchor": 5000.0,
+      "next_payout_window": "2026-10-16T00:00:00+00:00",
+      "max_equity_drawdown_usd": 64.3150000000087,
+      "max_equity_drawdown_pct": 1.2737988701215341,
+      "max_floating_loss": 30.06500000000051,
+      "max_used_margin_to_equity": 0.0176347956975256,
+      "overnight_resets": 1,
+      "peak_equity": 5054.48499999999,
+      "rule_events": [
+        {
+          "time": "2026-09-18T06:15:33.255000+00:00",
+          "event": "profit_deduction",
+          "amount": 1.9819999999998255,
+          "ticket": 2
+        },
+        {
+          "time": "2026-09-22T05:45:22.068000+00:00",
+          "event": "profit_deduction",
+          "amount": 2.2489999999996506,
+          "ticket": 12
+        },
+        {
+          "time": "2026-09-22T08:02:00.095000+00:00",
+          "event": "profit_deduction",
+          "amount": 1.944999999998654,
+          "ticket": 14
+        },
+        {
+          "time": "2026-09-23T14:30:09.051000+00:00",
+          "event": "profit_deduction",
+          "amount": 2.1019999999988066,
+          "ticket": 24
+        },
+        {
+          "time": "2026-09-24T09:31:32.121000+00:00",
+          "event": "profit_deduction",
+          "amount": 1.8379999999986831,
+          "ticket": 26
+        },
+        {
+          "time": "2026-09-24T09:47:42.785000+00:00",
+          "event": "profit_deduction",
+          "amount": 1.6319999999994617,
+          "ticket": 28
+        },
+        {
+          "time": "2026-09-25T10:16:36.488000+00:00",
+          "event": "profit_deduction",
+          "amount": 1.9149999999998182,
+          "ticket": 30
+        },
+        {
+          "time": "2026-09-28T00:45:20.059000+00:00",
+          "event": "profit_deduction",
+          "amount": 1.8379999999995928,
+          "ticket": 34
+        },
+        {
+          "time": "2026-09-28T06:32:47.346000+00:00",
+          "event": "profit_deduction",
+          "amount": 1.9389999999992507,
+          "ticket": 40
+        },
+        {
+          "time": "2026-09-30T12:46:05.008000+00:00",
+          "event": "profit_deduction",
+          "amount": 2.4759999999995124,
+          "ticket": 50
+        },
+        {
+          "time": "2026-10-02T01:16:52.147000+00:00",
+          "event": "profit_deduction",
+          "amount": 2.236999999999025,
+          "ticket": 52
+        },
+        {
+          "time": "2026-10-02T16:00:09.980000+00:00",
+          "event": "profit_deduction",
+          "amount": 2.379999999999054,
+          "ticket": 58
+        },
+        {
+          "time": "2026-10-07T12:31:48.002000+00:00",
+          "event": "profit_deduction",
+          "amount": 2.4129999999998653,
+          "ticket": 70
+        },
+        {
+          "time": "2026-10-07T12:45:31.019000+00:00",
+          "event": "profit_deduction",
+          "amount": 1.916000000000022,
+          "ticket": 72
+        },
+        {
+          "time": "2026-10-08T01:45:47.654000+00:00",
+          "event": "profit_deduction",
+          "amount": 2.002999999999556,
+          "ticket": 74
+        },
+        {
+          "time": "2026-10-14T12:45:53.010000+00:00",
+          "event": "profit_deduction",
+          "amount": 2.414000000000069,
+          "ticket": 84
+        },
+        {
+          "time": "2026-10-23T14:30:50.093000+00:00",
+          "event": "profit_deduction",
+          "amount": 1.6920000000003166,
+          "ticket": 112
+        },
+        {
+          "time": "2026-10-26T14:00:09.100000+00:00",
+          "event": "profit_deduction",
+          "amount": 2.2939999999997234,
+          "ticket": 116
+        },
+        {
+          "time": "2026-10-30T12:45:03.032000+00:00",
+          "event": "profit_deduction",
+          "amount": 1.4669999999999528,
+          "ticket": 122
+        },
+        {
+          "time": "2026-10-30T13:15:16.041000+00:00",
+          "event": "profit_deduction",
+          "amount": 1.8940000000000874,
+          "ticket": 124
+        },
+        {
+          "time": "2026-10-30T13:45:32.115000+00:00",
+          "event": "profit_deduction",
+          "amount": 2.7040000000000326,
+          "ticket": 126
+        }
+      ],
+      "protector_strikes": 0,
+      "qualifying_days": 3,
+      "deductions": 43.329999999990974,
+      "modeled_payouts": [],
+      "modeled_cash_received": 0.0
+    },
+    "news_coverage": "Selected USD releases only; historical Atlas all-currency restrictions unverified.",
+    "payout_assumption": "Request USD 100 cash while flat, normal 90% split (50% after first Protector), immediate settlement and verified KYC assumed; no real payments."
+  },
+  "exact_millisecond_deals": true,
+  "contributions": {
+    "ASIAN_RANGE_FILTERED_V6": {
+      "trades": 3,
+      "wins": 2,
+      "win_rate_pct": 66.66666666666666,
+      "net": 26.5,
+      "pf": 2.3486005089058524,
+      "gross_profit": 46.15,
+      "gross_loss": 19.65
+    },
+    "LONDON_MOMENTUM_TIGHT_V6": {
+      "trades": 9,
+      "wins": 5,
+      "win_rate_pct": 55.55555555555556,
+      "net": 63.99,
+      "pf": 2.0483289646133684,
+      "gross_profit": 125.03,
+      "gross_loss": 61.04
+    },
+    "LUNA_BASKET_SOURCE": {
+      "trades": 52,
+      "wins": 35,
+      "win_rate_pct": 67.3076923076923,
+      "net": -22.240000000000002,
+      "pf": 0.7719909780602832,
+      "gross_profit": 75.30000000000001,
+      "gross_loss": 97.53999999999999
+    }
+  }
+}

@@ -1,0 +1,5 @@
+CS	0	22:16:44.616	Tester	  MaximumLot=0.01
+CS	0	22:16:44.616	Tester	  MaximumDrawdown=1.0
+CS	0	22:16:44.616	Tester	  GridSL=1500.0
+CS	0	22:16:44.616	Tester	  HiddenStopLoss=false
+CS	0	22:16:44.616	Tester	  MaximumTrades=4

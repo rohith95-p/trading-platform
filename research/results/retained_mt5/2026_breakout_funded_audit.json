@@ -1,0 +1,215 @@
+{
+  "year": 2026,
+  "roster": "breakout",
+  "phase": "funded",
+  "mt5": {
+    "Period": "M15 (2026.02.05 - 2026.11.01)",
+    "Leverage": "1:50",
+    "History Quality": "100% real ticks",
+    "Ticks": "64261994",
+    "Total Net Profit": "306.51",
+    "Gross Profit": "1 068.86",
+    "Equity Drawdown Maximal": "296.32 (5.80%)",
+    "Gross Loss": "-762.35",
+    "Equity Drawdown Relative": "5.80% (296.32)",
+    "Profit Factor": "1.40",
+    "Total Trades": "27",
+    "Profit Trades (% of total)": "13 (48.15%)"
+  },
+  "native_after_terminal_charges": {
+    "trades": 27,
+    "wins": 13,
+    "win_rate_pct": 48.148148148148145,
+    "net": 306.51,
+    "pf": 1.4020594215255462,
+    "gross_profit": 1068.8600000000001,
+    "gross_loss": 762.35
+  },
+  "standardized_ecn": {
+    "trades": 27,
+    "wins": 13,
+    "win_rate_pct": 48.148148148148145,
+    "net": 302.7359999999602,
+    "pf": 1.3958885837582709,
+    "gross_profit": 1067.435999999986,
+    "gross_loss": 764.7000000000261
+  },
+  "python": {
+    "trades": 27,
+    "wins": 13,
+    "win_rate_pct": 48.148148148148145,
+    "net": 302.4599999999622,
+    "pf": 1.3960746106824016,
+    "gross_profit": 1066.1039999999875,
+    "gross_loss": 763.6440000000256
+  },
+  "fill_comparison": {
+    "matched_entry_minute_direction_strategy": 27,
+    "native_only": 0,
+    "python_only": 0,
+    "matches_exit_same_minute": 26,
+    "matched_native_net": 306.50999999999993,
+    "matched_python_net": 302.4599999999622,
+    "max_abs_entry_price_delta": 0.020000000000436557
+  },
+  "exact_fill_ms": 54,
+  "fill_count": 54,
+  "multi_rollover_positions_with_swap": 0,
+  "timing": "Exact tick milliseconds resolved at the closest bid/ask fill price among same-ms quotes; missing milliseconds require an ordered quote in the same second.",
+  "native": {
+    "name": "breakout",
+    "phase": "funded",
+    "start": "2026-02-05T00:00:00+00:00",
+    "end_exclusive": "2026-11-01T00:00:00+00:00",
+    "unrestricted": {
+      "status": "active",
+      "time": null,
+      "entries": 27,
+      "closes": 27,
+      "balance": 5306.51,
+      "equity": 5306.51,
+      "minimum_equity": 4815.659999999999,
+      "first_trade": "2026-02-19T07:15:00.099000+00:00",
+      "payout_anchor": 5000.0,
+      "next_payout_window": null,
+      "max_equity_drawdown_usd": 305.27400000000216,
+      "max_equity_drawdown_pct": 5.9612953418263555,
+      "max_floating_loss": 100.15400000000045,
+      "max_used_margin_to_equity": 0.020459494125117664,
+      "overnight_resets": 2,
+      "peak_equity": 5306.512,
+      "rule_events": [],
+      "protector_strikes": 0,
+      "qualifying_days": 13,
+      "deductions": 0.0,
+      "modeled_payouts": [],
+      "modeled_cash_received": 0.0
+    },
+    "atlas": {
+      "status": "inactivity_breach",
+      "time": "2026-10-28T07:15:00.084000+00:00",
+      "entries": 26,
+      "closes": 26,
+      "balance": 5147.43,
+      "equity": 5147.43,
+      "minimum_equity": 4815.659999999999,
+      "first_trade": "2026-02-19T07:15:00.099000+00:00",
+      "payout_anchor": 5000.0,
+      "next_payout_window": "2026-03-05T00:00:00+00:00",
+      "max_equity_drawdown_usd": 305.27400000000216,
+      "max_equity_drawdown_pct": 5.9612953418263555,
+      "max_floating_loss": 100.15400000000045,
+      "max_used_margin_to_equity": 0.04091898825023533,
+      "overnight_resets": 2,
+      "peak_equity": 5147.43,
+      "rule_events": [
+        {
+          "event": "native_protector_liquidation",
+          "strike": 1,
+          "time": "2026-03-23T07:36:41.115000+00:00"
+        },
+        {
+          "time": "2026-08-07T12:30:04.979000+00:00",
+          "event": "profit_deduction",
+          "amount": 84.7,
+          "ticket": 34
+        },
+        {
+          "time": "2026-10-28T07:15:00.084000+00:00",
+          "event": "inactivity_breach",
+          "equity": 5147.43,
+          "balance": 5147.43,
+          "midnight_equity": 5147.43,
+          "peak": 5147.43
+        }
+      ],
+      "protector_strikes": 1,
+      "qualifying_days": 11,
+      "deductions": 84.7,
+      "modeled_payouts": [],
+      "modeled_cash_received": 0.0
+    },
+    "news_coverage": "Selected USD releases only; historical Atlas all-currency restrictions unverified.",
+    "payout_assumption": "Request USD 100 cash while flat, normal 90% split (50% after first Protector), immediate settlement and verified KYC assumed; no real payments."
+  },
+  "standardized_ecn_path": {
+    "name": "breakout",
+    "phase": "funded",
+    "start": "2026-02-05T00:00:00+00:00",
+    "end_exclusive": "2026-11-01T00:00:00+00:00",
+    "unrestricted": {
+      "status": "active",
+      "time": null,
+      "entries": 27,
+      "closes": 27,
+      "balance": 5302.735999999968,
+      "equity": 5302.735999999968,
+      "minimum_equity": 4814.560999999988,
+      "first_trade": "2026-02-19T07:15:00.099000+00:00",
+      "payout_anchor": 5000.0,
+      "next_payout_window": null,
+      "max_equity_drawdown_usd": 305.85700000000816,
+      "max_equity_drawdown_pct": 5.973281868785095,
+      "max_floating_loss": 100.26400000000103,
+      "max_used_margin_to_equity": 0.02046065066004505,
+      "overnight_resets": 2,
+      "peak_equity": 5302.735999999968,
+      "rule_events": [],
+      "protector_strikes": 0,
+      "qualifying_days": 13,
+      "deductions": 0.0,
+      "modeled_payouts": [],
+      "modeled_cash_received": 0.0
+    },
+    "atlas": {
+      "status": "inactivity_breach",
+      "time": "2026-10-28T07:15:00.084000+00:00",
+      "entries": 26,
+      "closes": 26,
+      "balance": 5143.877999999969,
+      "equity": 5143.877999999969,
+      "minimum_equity": 4814.560999999988,
+      "first_trade": "2026-02-19T07:15:00.099000+00:00",
+      "payout_anchor": 5000.0,
+      "next_payout_window": "2026-03-05T00:00:00+00:00",
+      "max_equity_drawdown_usd": 305.85700000000816,
+      "max_equity_drawdown_pct": 5.973281868785095,
+      "max_floating_loss": 100.26400000000103,
+      "max_used_margin_to_equity": 0.0409213013200901,
+      "overnight_resets": 2,
+      "peak_equity": 5143.877999999969,
+      "rule_events": [
+        {
+          "event": "protector_liquidation",
+          "strike": 1,
+          "time": "2026-03-23T07:36:41.115000+00:00",
+          "equity": 4956.199999999995,
+          "tickets": [
+            8
+          ]
+        },
+        {
+          "time": "2026-08-07T12:30:04.979000+00:00",
+          "event": "profit_deduction",
+          "amount": 84.58599999999905,
+          "ticket": 34
+        },
+        {
+          "time": "2026-10-28T07:15:00.084000+00:00",
+          "event": "inactivity_breach",
+          "equity": 5143.878,
+          "balance": 5143.878,
+          "midnight_equity": 5143.878,
+          "peak": 5143.878
+        }
+      ],
+      "protector_strikes": 1,
+      "qualifying_days": 11,
+      "deductions": 84.58599999999905,
+      "modeled_payouts": [],
+      "modeled_cash_received": 0.0
+    },
+    "news_coverage": "Selected USD releases only; historical Atlas all-currency restrictions unverified.",
+    "payout_assumption": "Request USD 100 cash while flat, normal 90% split (50% after first Protector), immediate settlement and verified KYC assumed; no real payments."
+  }
+}
