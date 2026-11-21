@@ -3,7 +3,7 @@ import json
 from types import SimpleNamespace
 
 from scripts.december_observer import START
-from scripts.december_telegram import EA_STATUS, fill_messages, report, snapshot
+from scripts.december_telegram import EA_STATUS, fill_messages, format_samples, report, snapshot
 
 
 def deal(ticket, position, entry, magic, profit=0, symbol="XAUUSDm"):
@@ -51,7 +51,7 @@ def test_pass_remains_visible_when_order_permission_is_off(tmp_path):
     api = SimpleNamespace(terminal_info=lambda: terminal, account_info=lambda: account,
                           history_deals_get=lambda *args: [])
     assert snapshot(api, now, 123, "Demo")[0] == "evaluation_passed"
-    assert snapshot(api, now, 124, "Demo") == ("account_identity_refused", None, [])
+    assert snapshot(api, now, 124, "Demo") == ("account_identity_refused", None, [], [])
 
 
 def test_eval_launch_alert_is_sent_while_market_is_closed(tmp_path):
@@ -62,3 +62,26 @@ def test_eval_launch_alert_is_sent_while_market_is_closed(tmp_path):
     assert report("awaiting_market", None, [], now, ledger, path, lambda alert: sent.append(alert) or True)
     assert sent[0].lines[0] == "Evaluation started. Waiting for the XAUUSD market to open."
     assert json.loads(path.read_text())["state"] == "awaiting_market"
+
+
+def test_reports_breach_and_real_retry_even_between_polls(tmp_path):
+    path = tmp_path / "ledger.json"
+    now = datetime.fromtimestamp(START + 100, tz=timezone.utc)
+    breach = (str(START + 11), "1", "daily_loss_breach", "4970.00", "4720.00", "4750.00", "1", str(START))
+    restart = (str(START + 50), "2", "retry_started", "5000.00", "5000.00", "0.00", "0", str(START + 50))
+    sent = []
+    ledger = {"state": "active", "fills": []}
+    send = lambda alert: sent.append(alert) or True
+    assert report("active", None, [], now, ledger, path, send, [breach, restart])
+    assert [a.headline for a in sent] == [
+        "XAUUSD demo · Evaluation account breached", "XAUUSD demo · Fresh evaluation started",
+    ]
+    assert report("active", None, [], now, json.loads(path.read_text()), path, send, [breach, restart])
+    assert len(sent) == 2
+
+
+def test_format_test_is_labeled_and_fits_in_one_message():
+    alert = format_samples(datetime.fromtimestamp(START, tz=timezone.utc))
+    assert "TEST ONLY" in alert.headline
+    assert "No trade, breach or reset occurred." in alert.lines[0]
+    assert len(alert.html()) < 4096
