@@ -103,31 +103,50 @@ def _alerts_disabled() -> bool:
     return bool("PYTEST_CURRENT_TEST" in os.environ or os.environ.get("ULTRA_DISABLE_ALERTS") == "1")
 
 
-def _telegram(text: str, parse_html: bool = False, silent: bool = False) -> bool:
+def _telegram_request(method: str, fields: dict, attempts: int = 1) -> bool:
     if _alerts_disabled():
         return False
     token = os.environ.get("ULTRA_ALERT_TELEGRAM_TOKEN") or os.environ.get("TELEGRAM_BOT_TOKEN")
     chat = os.environ.get("ULTRA_ALERT_TELEGRAM_CHAT") or os.environ.get("TELEGRAM_CHAT_ID")
     if not token or not chat:
         return False
-    fields = {"chat_id": chat, "text": text}
+    data = urllib.parse.urlencode({**fields, "chat_id": chat}).encode()
+    for attempt in range(attempts):
+        try:
+            req = urllib.request.Request(f"https://api.telegram.org/bot{token}/{method}", data=data)
+            with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
+                return json.load(r).get("ok") is True
+        except (OSError, ValueError, AttributeError) as error:
+            if attempt + 1 < attempts:
+                _time.sleep(1.0)
+                continue
+            log.warning("Telegram %s failed (%s, HTTP %s)", method,
+                        type(error).__name__, getattr(error, "code", "-"))
+            return False
+    return False
+
+
+def _telegram(text: str, parse_html: bool = False, silent: bool = False) -> bool:
+    fields = {"text": text}
     if parse_html:
         fields["parse_mode"] = "HTML"
     if silent:
         fields["disable_notification"] = "true"
-    data = urllib.parse.urlencode(fields).encode()
-    req = urllib.request.Request(
-        f"https://api.telegram.org/bot{token}/sendMessage", data=data)
-    for attempt in range(2):
-        try:
-            with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
-                return bool(200 <= getattr(r, 'status', 500) < 300)
-        except (urllib.error.URLError, OSError, ValueError) as e:
-            if attempt == 0:
-                _time.sleep(1.0)
-                continue
-            log.warning(f"telegram alert failed: {e}")
-            return False
+    return _telegram_request("sendMessage", fields, attempts=2)
+
+
+def telegram_chat_accessible() -> bool:
+    """Check the configured recipient without posting a message."""
+    return _telegram_request("getChat", {})
+
+
+def notify_telegram(alert: Alert) -> bool:
+    """Send only to Telegram and confirm the API acknowledged the message."""
+    return _telegram_request("sendMessage", {
+        "text": alert.html(),
+        "parse_mode": "HTML",
+        "disable_notification": "true" if LEVELS[alert.severity].silent else "false",
+    })
 
 
 def _webhook(text: str, severity: str) -> bool:
