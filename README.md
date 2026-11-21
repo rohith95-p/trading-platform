@@ -45,4 +45,6 @@ GitHub CI runs the Python suite and checks recorded research provenance. Native 
 
 ## VPS staging
 
+The December forward test uses a separate Git checkout on the existing Windows VPS. The native EA runs the Atlas evaluation on a pinned MT5 demo account. The observer records quotes to reconcile fills and replay funding. [December data, validation, and payout plan](docs/DECEMBER_FORWARD_TEST.md) · [Existing VPS layout](docs/VPS_WINDOWS_SETUP.md)
+
 The updater prepares a pinned release from a local GitHub revision ZIP, the exact 40-character commit, and the verified SHA-256 of that ZIP. Activation is a separate operations step. Preserve account state and review the documented migration before an upgrade. Store credentials in the local `.env.local` file. [Staging commands](docs/OPS_RUNBOOK.md#stage-a-pinned-vps-release) · [Atlas state recovery](docs/ATLAS_STATE_RECOVERY.md) · [Deployment readiness](docs/DEPLOYMENT_READINESS.md)

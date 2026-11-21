@@ -5,12 +5,19 @@
 #include "NativeSignals.mqh"
 #include "RetainedNews.mqh"
 
+#ifndef RETAINED_PRE_ENTRY
+#define RETAINED_PRE_ENTRY(lots,price) true
+#endif
+#ifndef RETAINED_DEFAULT_MASK
+#define RETAINED_DEFAULT_MASK 7
+#endif
+
 // Roster 0 is the shared account. The other options run one independent account.
 input int Roster=0;
 input bool FundedProtector=false;
 input bool PayoutGuard=false;
 input string RecordID="";
-input int Mask=7; // Bit 0 filtered, bit 1 breakout, bit 2 London.
+input int Mask=RETAINED_DEFAULT_MASK; // Bit 0 filtered, bit 1 breakout, bit 2 London.
 
 CTrade orders;
 const int leg_magic[3]={7320,7311,7324};
@@ -199,6 +206,7 @@ void OnTick()
       if(!OrderCalcProfit(direction>0 ? ORDER_TYPE_BUY : ORDER_TYPE_SELL,_Symbol,lots,px,sl,risk)
          || MathAbs(risk)+5.>35.) return;
    }
+   if(!RETAINED_PRE_ENTRY(lots,px)) return;
    orders.SetExpertMagicNumber(chosen);
    bool ok=direction>0 ? orders.Buy(lots,_Symbol,0.,sl,tp,"Retained") :
                          orders.Sell(lots,_Symbol,0.,sl,tp,"Retained");

@@ -18,7 +18,9 @@ class ReadOnlyTerminal:
         self._terminal = terminal
 
     def __getattr__(self, name):
-        if name not in {"initialize", "shutdown", "account_info", "terminal_info", "symbol_info", "symbol_info_tick", "positions_get", "orders_get"}:
+        if name not in {"initialize", "shutdown", "account_info", "terminal_info", "symbol_info",
+                        "symbol_info_tick", "positions_get", "orders_get", "copy_rates_from_pos",
+                        "copy_ticks_range"}:
             raise PermissionError("Operation unavailable in read-only demo preflight")
         return getattr(self._terminal, name)
 

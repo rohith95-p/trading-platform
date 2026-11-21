@@ -1,0 +1,24 @@
+# December 2026 XAUUSD forward test
+
+Measure whether Asian Range Filtered plus London Momentum Tight can survive the published $5K Atlas Access rules and yield positive cash after fees on future prices. The VPS observer reads one pinned Exness demo terminal and journals UTC health, raw candidate signals and ordered bid/ask ticks. The separate native `DecemberAccessDemo` EA is the order path. It places broker demo orders only on the explicitly pinned MT5 demo account. It records the evaluation balance and equity relative to a fresh virtual $5,000.
+
+## Data contract
+
+- Keep the December window fixed at 00:00 UTC December 1 through 00:00 UTC January 1, 2027. Save ordered ticks by completed UTC hour. Preserve distinct quotes with the same timestamp, reject crossed or invalid quotes and retry failed downloads. Store the raw capture privately on the VPS.
+- Mark an empty hour explicitly. Reconcile empty hours and unexpected gaps against the broker session calendar before replay. Leave outcomes indeterminate where an unobserved interval could change an entry, stop, equity peak or UTC-reset equity.
+- Require ordered finite M15/D1 data, the expected closed M15 bar and UTC alignment for raw signal checks. Scan reports describe feed health and raw strategy candidates. They carry no execution or payout outcome.
+- The native backtests used fixed 0.02 lots at 1:100 during evaluation and a fresh 1:50 account with one 0.01-lot position, visible stop, and existing risk controls once funded. The observed VPS demo had 1:200 leverage. Carry the tested assumptions in the replay, including an explicit spread/commission/swap policy. [Frozen portfolio](../research/results/guarded_retained_mt5/payout_roster.json) · [Native reports](../research/results/guarded_retained_mt5/report.md)
+
+## Atlas replay and decision
+
+Reconcile the archived quote capture and warm-up history, then run the retained strategies in native MT5 and pass the deals through the project’s Atlas accounts audit. The evaluation requires $150 in closed profit, a 5% daily loss limit, 10% equity trailing drawdown and fewer than 30 inactive days. Start any funded continuation on a fresh $5,000 simulated account. Test 3% daily loss, 6% equity trailing drawdown, the $100 floating-loss Protector, margin and visible stops. Verify the complete applicable high-impact news calendar and apply short-trade and news deductions before treating any funded result as eligible. Use the 28-day first window, three qualifying 0.5% days, lifetime best-day consistency at 20% of cycle profit and the actual checkout fee or a labeled published-fee scenario. [Atlas Access rules](https://help.atlasfunded.com/access) · [Restricted news](https://help.atlasfunded.com/news-trading)
+
+Report pass or breach date, closed P&L, execution costs, profit factor, floating drawdown, time to any eligible payout, and hypothetical cash after fees. Carry incomplete attempts forward when the 28-day window extends beyond December. An evaluation pass alone remains insufficient for a purchase decision. [MT5 tester runner](../research/mt5_retained/run_tester.ps1) · [Account ledger and audit](../scripts/research/four_atlas_lifecycle.py)
+
+## VPS verification
+
+Use a separate pinned Git checkout and an isolated output directory. Check the revision, observer process, newest status timestamp and completed tick files. Check the trading loop and watchdog separately because their status refers to the legacy runtime. The read-only observer emits local status and has no Telegram sender. On weekends, an old quote can coexist with a healthy observer heartbeat.
+
+The December EA shares the native retained signal code and defaults to the two-strategy mask on XAUUSDm M15. Its evaluation clock starts on December 1 UTC. It checks the exact demo login/server, contract, newest quote clock, closed-profit target, daily and trailing equity losses, inactivity and projected 1:100 margin. It stops entries on a pass or breach. A restart following the beginning of the evaluation requires state reconciliation before orders can resume. Missing exposed midnight equity and disconnection with an open trade block entries. Open trades retain their attached broker stops after a block. Check `UltraCore_December2026_status.csv` in MT5's common files and read native deal history for fills.
+
+The funded phase remains an independent replay because it needs a fresh $5,000 state, the complete Atlas news calendar and research accounting for deductions, Protector and payouts. The fitted Exness demo does not certify an Atlas-funded account.
