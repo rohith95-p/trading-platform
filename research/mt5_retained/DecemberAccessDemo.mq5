@@ -1,5 +1,5 @@
 #property strict
-#property description "December 2026 Atlas Access evaluation on one pinned MT5 demo account."
+#property description "November 21 to December 15 Atlas Access evaluation on one pinned MT5 demo account."
 
 bool DecemberEntryAllowed(const double lots,const double price);
 #define RETAINED_PRE_ENTRY(lots,price) DecemberEntryAllowed(lots,price)
@@ -15,10 +15,11 @@ bool DecemberEntryAllowed(const double lots,const double price);
 input long ExpectedDemoLogin=0;
 input string ExpectedDemoServer="";
 
-const datetime trial_start=D'2026.12.01 00:00:00';
-const datetime trial_end=D'2027.01.01 00:00:00';
+const datetime trial_start=D'2026.11.20 18:30:00'; // November 21 at 00:00 IST.
+const datetime launch_deadline=D'2026.11.21 18:30:00';
+const datetime trial_end=D'2026.12.15 18:30:00'; // December 16 at 00:00 IST.
 const double initial=5000.0;
-string state="waiting_for_december", latch_key;
+string state="waiting_for_start", latch_key;
 bool started=false;
 double starting_balance=0., peak=initial, day_anchor=initial;
 datetime last_tick=0, last_entry=0;
@@ -112,6 +113,32 @@ bool DecemberEntryAllowed(const double lots,const double price)
    return volume*price*100.0/100.0<equity;
 }
 
+void StartEvaluation(const datetime now)
+{
+   if(state!="waiting_for_start" || now<trial_start) return;
+   if(now>=trial_end)
+   {
+      state="window_complete";
+      return;
+   }
+   if(now>=launch_deadline || !TerminalInfoInteger(TERMINAL_CONNECTED)
+      || PositionsTotal()!=0 || OrdersTotal()!=0 || AccountInfoDouble(ACCOUNT_CREDIT)!=0.)
+   {
+      state="initial_account_state_unverified";
+      return;
+   }
+   if(GlobalVariableSet(latch_key,now)==0)
+   {
+      state="run_identity_persistence_failed";
+      return;
+   }
+   GlobalVariablesFlush();
+   starting_balance=AccountInfoDouble(ACCOUNT_BALANCE);
+   last_entry=now;
+   started=true;
+   state="awaiting_market";
+}
+
 int OnInit()
 {
    if(MQLInfoInteger(MQL_TESTER) || !CorrectAccount() || _Symbol!="XAUUSDm"
@@ -124,8 +151,9 @@ int OnInit()
    orders.SetAsyncMode(false);
    orders.SetTypeFillingBySymbol(_Symbol);
    orders.SetDeviationInPoints(20);
-   latch_key=StringFormat("UltraCore_Dec26_%I64d",ExpectedDemoLogin);
+   latch_key=StringFormat("UltraCore_AccessNov21_26_%I64d",ExpectedDemoLogin);
    if(GlobalVariableCheck(latch_key)) state="restart_reconciliation_required";
+   StartEvaluation(TimeGMT());
    EventSetTimer(30);
    Status();
    return INIT_SUCCEEDED;
@@ -133,6 +161,10 @@ int OnInit()
 
 void OnTimer()
 {
+   datetime now=TimeGMT();
+   if(CorrectAccount()) StartEvaluation(now);
+   if(now>=trial_end && (state=="active" || state=="awaiting_market"))
+      state="window_complete";
    if(started && state=="active" && PositionsTotal()>0 && !TerminalInfoInteger(TERMINAL_CONNECTED))
       state="exposure_during_connection_loss";
    Status();
@@ -144,34 +176,26 @@ void OnTick()
    if(!CorrectAccount() || now<trial_start) return;
    if(now>=trial_end)
    {
-      if(state=="active")
+      if(state=="active" || state=="awaiting_market")
       {
          state="window_complete";
          Status();
       }
       return;
    }
-   if(!started && state=="waiting_for_december")
+   if(state=="awaiting_market")
    {
-      if(now-trial_start>60 || MathAbs((long)TimeGMT()-(long)now)>5
-         || PositionsTotal()!=0 || OrdersTotal()!=0
-         || AccountInfoDouble(ACCOUNT_CREDIT)!=0. || GlobalVariableCheck(latch_key))
+      if(!TerminalInfoInteger(TERMINAL_CONNECTED) || MathAbs((long)TimeGMT()-(long)now)>5)
+         return;
+      if(PositionsTotal()!=0 || OrdersTotal()!=0 || AccountInfoDouble(ACCOUNT_CREDIT)!=0.
+         || AccountInfoDouble(ACCOUNT_BALANCE)!=starting_balance)
       {
          state="initial_account_state_unverified";
          Status();
          return;
       }
-      if(GlobalVariableSet(latch_key,now)==0)
-      {
-         state="run_identity_persistence_failed";
-         Status();
-         return;
-      }
-      GlobalVariablesFlush();
-      starting_balance=AccountInfoDouble(ACCOUNT_BALANCE);
-      last_entry=trial_start;
-      started=true;
       state="active";
+      Status();
    }
    if(!Observe(now)) return;
    int previous=PositionsTotal();

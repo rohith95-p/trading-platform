@@ -19,11 +19,12 @@ from src.core.alerts import Alert, CRITICAL, INFO, TRADE, WARN, ist_stamp, notif
 STRATEGIES = {7320: "Asian Range Filtered", 7324: "London Momentum Tight"}
 EA_STATUS = "UltraCore_December2026_status.csv"
 STATES = {
-    "waiting_for_december": (INFO, "Waiting for the December test window"),
+    "waiting_for_start": (INFO, "Waiting for the scheduled start"),
+    "awaiting_market": (INFO, "Evaluation started. Waiting for the XAUUSD market to open."),
     "active": (INFO, "Evaluation active"),
     "evaluation_passed": (INFO, "Evaluation target reached. New entries stopped."),
-    "window_complete": (INFO, "December entry window closed"),
-    "after_window": (INFO, "December entry window closed"),
+    "window_complete": (INFO, "Evaluation entry window closed"),
+    "after_window": (INFO, "Evaluation entry window closed"),
     "daily_loss_breach": (CRITICAL, "Daily equity loss limit breached"),
     "trailing_equity_breach": (CRITICAL, "Trailing equity loss limit breached"),
     "inactivity_breach": (CRITICAL, "30-day inactivity limit breached"),
@@ -31,7 +32,7 @@ STATES = {
     "pending_orders_refused": (CRITICAL, "Unexpected pending orders. Entries blocked."),
     "foreign_position_refused": (CRITICAL, "Unexpected position. Entries blocked."),
     "restart_reconciliation_required": (CRITICAL, "EA restarted. Account reconciliation required."),
-    "initial_account_state_unverified": (CRITICAL, "December start could not be verified. Entries blocked."),
+    "initial_account_state_unverified": (CRITICAL, "Evaluation start could not be verified. Entries blocked."),
     "run_identity_persistence_failed": (CRITICAL, "EA run identity could not be saved. Entries blocked."),
     "exposure_during_connection_loss": (CRITICAL, "Connection lost with exposure. Entries blocked."),
     "account_identity_refused": (CRITICAL, "Expected demo account could not be verified"),
@@ -73,10 +74,10 @@ def snapshot(api, now, login, server):
     if ts < START:
         return state, stats, []
     deals = api.history_deals_get(START, ts + 1)
-    if state in {"waiting_for_december", "active"}:
+    if state in {"waiting_for_start", "awaiting_market", "active"}:
         if ts >= END:
             state = "after_window"
-        elif state == "waiting_for_december" and ts >= START + 120:
+        elif state == "waiting_for_start" and ts >= START + 120:
             state = "ea_start_unconfirmed"
         elif not (terminal.trade_allowed and account.trade_allowed and account.trade_expert):
             state = "trade_permission_disabled"
@@ -104,7 +105,7 @@ def fill_messages(deals):
         cash = d.profit + d.commission + d.swap + d.fee
         stamp = ist_stamp(datetime.fromtimestamp(d.time_msc / 1000, tz=timezone.utc))
         yield str(d.ticket), Alert(
-            f"December demo · {action}",
+            f"XAUUSD demo · {action}",
             (f"XAUUSD · {STRATEGIES[entry.magic]}",
              f"{side} position · {d.volume:.2f} lots · fill {d.price:.3f}",
              f"Cash impact of this fill {cash:+.2f} USD",
@@ -133,7 +134,9 @@ def report(state, stats, deals, now, ledger, ledger_path, send=notify_telegram):
                       f"Equity peak ${peak} · UTC daily anchor ${anchor} · open positions {count}"))
     if state == "evaluation_passed":
         lines.append("Funded and payout checks are separate.")
-    if not send(Alert("December demo · Atlas Access", lines, severity)):
+    if state == "awaiting_market":
+        lines.append("Demo evaluation runs 21 Nov through 15 Dec 2026 IST.")
+    if not send(Alert("XAUUSD demo · Atlas Access", lines, severity)):
         return False
     ledger["state"] = state
     write_json(ledger_path, ledger)

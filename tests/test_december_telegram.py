@@ -44,11 +44,21 @@ def test_reports_only_confirmed_sends_and_does_not_repost(tmp_path):
 def test_pass_remains_visible_when_order_permission_is_off(tmp_path):
     files = tmp_path / "Files"
     files.mkdir()
-    (files / EA_STATUS).write_text("2026.12.01 00:00:05,evaluation_passed,5150.00,5150.00,5000.00,0")
+    now = datetime.fromtimestamp(START + 10, tz=timezone.utc)
+    (files / EA_STATUS).write_text(f"{now:%Y.%m.%d %H:%M:%S},evaluation_passed,5150.00,5150.00,5000.00,0")
     terminal = SimpleNamespace(connected=True, commondata_path=tmp_path, trade_allowed=False)
     account = SimpleNamespace(trade_mode=0, login=123, server="Demo")
     api = SimpleNamespace(terminal_info=lambda: terminal, account_info=lambda: account,
                           history_deals_get=lambda *args: [])
-    now = datetime.fromtimestamp(START + 10, tz=timezone.utc)
     assert snapshot(api, now, 123, "Demo")[0] == "evaluation_passed"
     assert snapshot(api, now, 124, "Demo") == ("account_identity_refused", None, [])
+
+
+def test_eval_launch_alert_is_sent_while_market_is_closed(tmp_path):
+    path = tmp_path / "ledger.json"
+    now = datetime.fromtimestamp(START + 10, tz=timezone.utc)
+    ledger = {"state": None, "fills": []}
+    sent = []
+    assert report("awaiting_market", None, [], now, ledger, path, lambda alert: sent.append(alert) or True)
+    assert sent[0].lines[0] == "Evaluation started. Waiting for the XAUUSD market to open."
+    assert json.loads(path.read_text())["state"] == "awaiting_market"

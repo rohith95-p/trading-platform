@@ -20,9 +20,11 @@ from src.strategies.london_momentum_tight import LondonMomentumTightV6
 
 SYMBOL = "XAUUSDm"
 SCAN_MINUTES = {435: AsianRangeFilteredV6, 735: LondonMomentumTightV6}
-START = int(datetime(2026, 12, 1, tzinfo=timezone.utc).timestamp())
-END = int(datetime(2027, 1, 1, tzinfo=timezone.utc).timestamp())
 HOUR = 3600
+START = int(datetime(2026, 11, 20, 18, 30, tzinfo=timezone.utc).timestamp())
+END = int(datetime(2026, 12, 15, 18, 30, tzinfo=timezone.utc).timestamp())
+CAPTURE_START = START // HOUR * HOUR
+CAPTURE_END = (END + HOUR - 1) // HOUR * HOUR
 
 
 def capture_hour(api, directory, start, ticks_all):
@@ -134,7 +136,7 @@ def main():
     ticks = args.output / "ticks"
     ticks.mkdir(exist_ok=True)
     collected = {int(p.stem) for p in ticks.glob("*.npy") if p.stem.isdigit()}
-    next_hour = START
+    next_hour = CAPTURE_START
     if not api.initialize(str(args.terminal.resolve()), timeout=5000):
         raise SystemExit("The selected MT5 terminal refused a read-only connection")
     try:
@@ -144,7 +146,7 @@ def main():
                 event = inspect(api, now, args.expected_login, args.expected_server,
                                 mt5.TIMEFRAME_M15, mt5.TIMEFRAME_D1)
                 for _ in range(6):
-                    if next_hour + HOUR > min(int(now.timestamp()), END) or not event.get("demo_verified"):
+                    if next_hour + HOUR > min(int(now.timestamp()), CAPTURE_END) or not event.get("demo_verified"):
                         break
                     if next_hour not in collected:
                         event.update(captured_hour=next_hour,
